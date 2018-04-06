@@ -1,5 +1,5 @@
 
-<nav class="navbar justify-content-between navbar-expand-lg navbar_fondo" style="padding:0rem 1rem;">
+<nav class="navbar justify-content-between navbar-expand-lg navbar_fondo">
 	<span class="navbar-brand"> <img
 		src="${pageContext.request.contextPath}/img/carrito_gris.png">
 	</span>

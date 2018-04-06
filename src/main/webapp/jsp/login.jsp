@@ -9,7 +9,7 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/generic.css" />
 	
 <title>Login</title>
-<body class="loginfondo">
+<body>
 
 <div class="container-fluid">
 	<div class="row center">
@@ -21,15 +21,15 @@
 					<br>
 					
 					<form action="Login" method="post">					
-					<div class="col-md-12 paddingtext">
-						<input type="text" name="user" class="form-control input_login" placeholder="Usuario">
+					<div class="col-md-12">
+						<input type="text" name="user" class="form-control input_login" placeholder="User">
 					</div>
-						<div class="col-md-12 paddingtext">
-							<input type="password" name="pass" class="form-control input_login" placeholder="Contraseña">
+						<div class="col-md-12 padding_pass">
+							<input type="password" name="pass" class="form-control input_login" placeholder="Password">
 						</div>
 					<br><br>
 						<div class="center">
-							<button type="submit" class="btn btn-primary">&emsp;Iniciar sesión&emsp;</button>
+							<button type="submit" class="btn blogin">&emsp;Iniciar sesión&emsp;</button>
 						</div>	
 					</form>
 					<div class="center">

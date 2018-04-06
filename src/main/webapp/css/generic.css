@@ -2,41 +2,66 @@
 .login{
 	background:white;
 	min-width:270px;
-	width:270px;
-	height:380px;
+	width:264px;
+	height:375px;
 	border-radius: 10px 10px 10px 10px;
 	-moz-border-radius: 10px 10px 10px 10px;
 	-webkit-border-radius: 10px 10px 10px 10px;
 	border: 0px solid #000000;
 	margin-top:13%;
+	padding-left:25px;
+	padding-right:25px;
 }
+input.form-control.input_login{
+	border-right:0px;
+	border-left:0px;
+	border-top:0px;
+	border-bottom:1px solid black;
+	padding-bottom:0px;
+	font-size:15px;
+	border-radius:0px;
+	font-family: "Helvetica";
+}
+input.form-control.input_login::placeholder{
+	color:#AFADAD;
+	font-family: "Helvetica";
+}
+
+.loginfondo {background:gray; height:100%;}
+.padding_pass{padding-top:15px;}
+
+.btn.blogin{
+background:#00427F;
+border-radius: .30rem;
+padding: 0;
+font-size:12px;
+color:white;
+font-family: "Helvetica";
+}
+
+.btn.blogin:hover{
+background:#3E72A1;
+}
+
+.btn.blogin:active{
+background:#64DEF1;
+}
+
+
 
 a.links{
 	font-size:13px;
 	text-decoration: underline;
+	color:#00427F;
 }
-.input_login{
-	border-right:0px;
-	border-left:0px;
-	border-top:0px;
-}
-.loginfondo {background:gray; height:100%;}
-
 /* ------------------------------  NAVBAR / HEADERS   */
 
 .custom-toggler .navbar-toggler-icon {
 background-image: url('https://mdbootstrap.com/img/svg/hamburger7.svg?color=0069ac');
 }
-
 .navbar_fondo{
 	background-color:#ffffff;
-}
- a.nav-link{
-	font-size: 15px;
-	color:darkblue;
-	text-align:center;
-	border-top:4px solid #fff;
-	border-bottom:4px solid #fff;
+	padding:0rem 0rem;
 }
 li.nav-item{
 	width:120px;
@@ -46,15 +71,26 @@ li.nav-item{
 	li.nav-item{width:auto;}
 	a.nav-link{text-align:left;}
 } 
-
-
-a.resaltado{
-	border-top:4px solid #3e72a1;
-	border-bottom:4px solid #3e72a1;
+a.nav-link{
+	font-size: 15px;
+	color:darkblue;
+	text-align:center;
+	border-top:4px solid #fff;
+	border-bottom:4px solid #fff;
+	height:51px;
+	line-height:25px;;
 }
-.navbar-brand {
-	padding-top:0px;
-	padding-bottom:0px;
+a.nav-link:hover{
+	border-top:4px solid #3e72a1;
+	border-bottom:4px solid #cce0f4;
+	background:#cce0f4;
+}
+a.nav-link.resaltado{
+	border-bottom:4px solid #40bcd8;
+	color:#40bcd8;	
+}
+.navbar-brand{
+	padding:0px;
 }
 /* --------------------------- GENERICOS --------------------*/
 html{
@@ -99,7 +135,7 @@ html{
 	
 }
 body{
-	background: linear-gradient(#006aae, #c9def3);
+	background: linear-gradient(#005B97,#0075BE,#1E9CD7,#CCE0F4);
 	font-family: "Helvetica";
 }
 

@@ -1,0 +1,25 @@
+td{
+	border-top:1px solid gray;
+	background:white;
+	text-align:center;
+	color:#1f3d7a;
+	font-size:13px;
+	padding-top:6px;
+	padding-bottom:6px;
+	padding-left:12px;
+}
+th{
+	text-align:center;
+	padding-top:5px;
+	padding-bottom:5px;
+	color:#1f3d7a;
+}
+.tabla_container{
+	 padding-right:0px; 
+	 padding-left:0px; 
+	 height:80%; 
+	 overflow-x:scroll;
+}
+table{
+	width:100%;
+}

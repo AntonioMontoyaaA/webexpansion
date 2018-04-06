@@ -1,0 +1,127 @@
+/* ---------------------------------  LOGIN*/
+.login{
+	background:white;
+	min-width:270px;
+	width:270px;
+	height:380px;
+	border-radius: 10px 10px 10px 10px;
+	-moz-border-radius: 10px 10px 10px 10px;
+	-webkit-border-radius: 10px 10px 10px 10px;
+	border: 0px solid #000000;
+	margin-top:13%;
+}
+
+a.links{
+	font-size:13px;
+	text-decoration: underline;
+}
+.input_login{
+	border-right:0px;
+	border-left:0px;
+	border-top:0px;
+}
+.loginfondo {background:gray; height:100%;}
+
+/* ------------------------------  NAVBAR / HEADERS   */
+
+.custom-toggler .navbar-toggler-icon {
+background-image: url('https://mdbootstrap.com/img/svg/hamburger7.svg?color=0069ac');
+}
+
+.navbar_fondo{
+	background-color:#ffffff;
+}
+ a.nav-link{
+	font-size: 15px;
+	color:darkblue;
+	text-align:center;
+	border-top:4px solid #fff;
+	border-bottom:4px solid #fff;
+}
+li.nav-item{
+	width:120px;
+}
+
+ @media (max-width: 1200px) {
+	li.nav-item{width:auto;}
+	a.nav-link{text-align:left;}
+} 
+
+
+a.resaltado{
+	border-top:4px solid #3e72a1;
+	border-bottom:4px solid #3e72a1;
+}
+.navbar-brand {
+	padding-top:0px;
+	padding-bottom:0px;
+}
+/* --------------------------- GENERICOS --------------------*/
+html{
+	padding-left:7%;
+	padding-right:7%;
+	background:#f3f3f3;
+}
+ @media (max-width: 1200px) {
+ 	html{
+	padding:0px;
+	}
+} 
+.center{
+	text-align:center;
+	align:center;
+	justify-content: center;
+	float:center;
+}
+.left{
+	text-align:left;
+	align:left;
+}
+.right{
+	text-align:right;
+	align:right;
+}
+
+.titulo{
+	font-weight:bold;
+	color:white;
+	font-size:12px;
+	padding-top:4px;
+	padding-bottom:4px;
+	padding-left:12px;
+	
+}
+.titulogrande{
+	color:white;
+	font-size:22px;
+	padding-top:3px;
+	padding-left:12px;
+	
+}
+body{
+	background: linear-gradient(#006aae, #c9def3);
+	font-family: "Helvetica";
+}
+
+/* ---------------------------------------- ESTILOS DE MENU PRINCIPAL*/
+.menupr_estilos{
+	border-radius: 8px 8px 8px 8px;
+	-moz-border-radius: 8px 8px 8px 8px;
+	-webkit-border-radius: 8px 8px 8px 8px;
+	border: 0px solid #000000;
+	background:white;
+}
+.padding_p{
+	padding:5px;
+} 
+.margen_p{
+	margin-top:5px;
+	margin-bottom:5px;
+}
+.abs-center-x {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+}
+
+/* ----------------------------------- ESTILOS PARA EL MAPA */

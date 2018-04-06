@@ -1,0 +1,3 @@
+$(function(){
+	$('#idagenda').addClass('resaltado');
+});

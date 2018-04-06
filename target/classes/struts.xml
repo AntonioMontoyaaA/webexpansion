@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+ 
+<struts>
+
+	<constant name="struts.devMode" value="false" />
+	<constant name="struts.multipart.saveDir" value="javax.servlet.context.tempdir" />
+	<constant name="struts.action.excludePattern" value="/Login" />
+	<constant name="struts.convention.result.path" value="/"></constant>
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	
+	<package name="user" namespace="/" extends="struts-default">
+		
+		<action name="dashboard">
+			<result>jsp/dashboard.jsp</result>
+		</action>
+		<action name="asignadas">
+			<result>jsp/asignadas.jsp</result>
+		</action> 
+		<action name="asignadas_detalle">
+			<result>jsp/asignadas_detalle.jsp</result>
+		</action> 
+		<action name="autorizadas">
+			<result>jsp/autorizadas.jsp</result>
+		</action> 
+		<action name="rechazadas">
+			<result>jsp/rechazadas.jsp</result>
+		</action>
+		<action name="agenda">
+			<result>jsp/agenda.jsp</result>
+		</action>
+		<action name="localizador">
+			<result>jsp/localizador.jsp</result>
+		</action>
+		
+		<!--
+		<action name="Welcome" class="com.mkyong.user.action.WelcomeUserAction">
+			<result name="SUCCESS">welcome_user.jsp</result>
+		</action> -->
+	</package>
+	
+</struts>

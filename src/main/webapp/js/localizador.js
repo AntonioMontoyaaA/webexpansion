@@ -1,0 +1,3 @@
+$(function(){
+	$('#idlocalizador').addClass('resaltado');
+});

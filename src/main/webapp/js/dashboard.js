@@ -1,0 +1,3 @@
+$(function(){
+		$('#iddashboard').addClass('resaltado');
+});

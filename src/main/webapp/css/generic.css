@@ -131,8 +131,8 @@ html{
 	color:white;
 	font-size:22px;
 	padding-top:3px;
-	padding-left:12px;
-	
+	padding-left:15px;
+	padding-right:5px;
 }
 body{
 	background: linear-gradient(#005B97,#0075BE,#1E9CD7,#CCE0F4);

@@ -13,7 +13,7 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/tablas.css" />
 
 	
-<title>Asignadas</title>
+<title>Rechazadas</title>
 </head>
 <body>
 <%--  <c:forEach var="permisos" items="${permisos}">
@@ -23,9 +23,9 @@
 
 <div class="container-fluid">
 	<div class="row padding_p">
-		<div class="col-lg-12 titulo">Dashboard Expansión > Asignadas </div>
+		<div class="col-lg-12 titulo">Dashboard Expansión > Rechazadas </div>
 	
-		<div class="col-lg-12 titulogrande">MD ASIGNADAS</div>
+		<div class="col-lg-12 titulogrande">MD RECHAZADAS</div>
 		<div class="col-lg-12">
 		<div class="row padding_p">
 			<div class="col-lg-12 menupr_estilos tabla_container">

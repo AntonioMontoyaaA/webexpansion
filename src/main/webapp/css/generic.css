@@ -67,6 +67,10 @@ background-image: url('https://mdbootstrap.com/img/svg/hamburger7.svg?color=0069
 	border-bottom:4px solid #00427F;
 	height:47px;
 }
+@media (max-width: 991px) {
+	.navbar_borde{height:auto;}
+}
+
 li.nav-item{
 	width:120px;
 }

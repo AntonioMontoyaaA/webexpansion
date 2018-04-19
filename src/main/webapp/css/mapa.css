@@ -1,6 +1,32 @@
-#map{
-	height:100%;
+@media (max-height: 500px) {
+#map{height:80%;}
 }
+@media (min-height: 500px) {
+#map{height:89%;}
+}
+@media (min-height: 600px) {
+#map{height:90%;}
+}
+@media (min-height: 690px) {
+#map{height:91.5%;}
+}
+@media (min-height: 800px) {
+#map{height:92%;}
+}
+@media (min-height: 900px) {
+#map{height:93%;}
+} 
+@media (min-height: 1020px) {
+#map{height:94%;}
+}
+@media (min-height: 1200px) {
+#map{height:94.5%;}
+}
+@media (min-height: 1300px) {
+#map{height:95%;}
+}
+
+
 .modal.left .modal-dialog{
 		position: fixed;
 		margin: auto;

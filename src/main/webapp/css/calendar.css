@@ -10,6 +10,16 @@
 .sel_jefe{
 }
 /* -------------------------------- CALENDARIO */
+.margen_cal_titulo{  /*equivalente a padding_p pero sin padding inferior*/
+	padding-left:7px;
+	padding-right:7px;
+	padding-top:5px;
+} 
+.margen_cal{ /*equivalente a padding_p pero sin padding inferior*/
+	padding-left:7px;
+	padding-right:7px;
+	padding-top:5px;
+} 
 .calendario_grande{
 	width:100%;
 }
@@ -31,7 +41,6 @@ th{
 td{
 	border-top:1px solid #a6a6a6;
 	border-left:1px solid #a6a6a6;
-	height:100px;
 }
 
 @media(max-width: 1348px){
@@ -46,6 +55,7 @@ td{
 }
 .table{
 	margin-bottom:0px;
+	height:81%;
 }
 .he{
 	background:#104d84;
@@ -95,6 +105,7 @@ span.titulo_agenda{
 .fazul{
 	background:#125087;
 }
+
 .datepicker table tr td.active.active,
  .datepicker table tr td.active.highlighted.active,
   .datepicker table tr td.active.highlighted:active,
@@ -105,7 +116,11 @@ span.titulo_agenda{
     background-position: center;
     border-color: #125087;
 }
-
+/*centrar datepicker*/
+.table-condensed{  				
+	text-align:center;
+	margin:0 auto;
+}
 .datepicker .datepicker-switch {
     text-align: left;
     font-size:13px;
@@ -115,11 +130,6 @@ span.titulo_agenda{
     font-weight:normal;
 }
 
-/* .datepicker table tr td.today {
-    color: #000;
-    background-color: #ffdb99;
-    border-color: #ffb733;
-} */
 .datepicker table tr td, .datepicker table tr th {
 	font-size:11px;
     text-align: center;
@@ -142,13 +152,24 @@ span.titulo_agenda{
     cursor: pointer;
     border-radius: 4px;
 }
+
 @media(max-width: 767px){
 .datepicker table tr td, .datepicker table tr th {
-	font-size:13px;}
+	font-size:15px;
+	}
+.table-condensed{  				
+	text-align:center;
+	margin:0 auto;
+	width:70%;
+	min-width:250px;
 }
+}
+
+
 .calendario{
-	min-width:200px;
+	min-width:160px;
 }
+
 .dia{
 	font-size:16px;
 	border:1px solid black;

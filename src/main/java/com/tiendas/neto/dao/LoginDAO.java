@@ -35,13 +35,13 @@ public class LoginDAO {
        return result;
    }
 	
-	public List<Usuario> permisosDao(String user) {
+	public List<Usuario> permisosDao(String user, String pass) {
 		List<Usuario> lista=new ArrayList();
 		String json="";
 		try { 
-			URL url = new URL("http://167.99.109.141:8080/JavaRestMovil/rest/TestLogin/validaUsuario2WS");
+			URL url = new URL("http://206.189.68.177/vokse/login");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			conn.setRequestMethod("GET");
+			conn.setRequestMethod("POST");
 			conn.setRequestProperty("Accept", "application/json");
 
 			if (conn.getResponseCode() != 200) {

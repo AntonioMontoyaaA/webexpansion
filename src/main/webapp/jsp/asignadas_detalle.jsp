@@ -23,61 +23,61 @@
 	<div class="col-lg-12 titulo">Dashboard Expansión > Asignadas > Nombre MD</div>
 	
 	<div class="col-lg-12">
-	<div class="row padding_p">
+	<div class="row divs_p">
 		<div class="col-lg-12 menupr_estilos" style="height:80px;"></div>
 	</div>
 	</div>
 	
 		<div class="col-lg-4 col-12">
-		<div class="row padding_p">
+		<div class="row divs_p">
 			<div class="col-lg-12 menupr_estilos" style="height:300px;"></div>
 		</div>
 		</div>
 		
 		<div class="col-lg-4 col-6">
-		<div class="row padding_p">
+		<div class="row divs_p">
 			<div class="col-lg-12 menupr_estilos" style="height:300px;"></div>
 		</div>
 		</div>
 		
 		<div class="col-lg-4 col-6">
-		<div class="row padding_p">
+		<div class="row divs_p">
 			<div class="col-lg-12 menupr_estilos" style="height:300px;"></div>
 		</div>
 		</div>
 		
 		<div class="col-lg-12">
-		<div class="row padding_p">
+		<div class="row divs_p">
 			<div class="col-lg-12 menupr_estilos" style="height:300px;"></div>
 		</div>
 		</div>
 		
 		<div class="col-lg-8 col-12">
-		<div class="row padding_p">
+		<div class="row divs_p">
 			<div class="col-lg-12 menupr_estilos" style="height:300px;"></div>
 		</div>
 		</div>
 		
 		<div class="col-lg-4 col-12">
-		<div class="row padding_p">
+		<div class="row divs_p">
 			<div class="col-lg-12 menupr_estilos" style="height:300px;"></div>
 		</div>
 		</div>
 		
 		<div class="col-lg-4">
-		<div class="row padding_p">
+		<div class="row divs_p">
 			<div class="col-lg-12 menupr_estilos" style="height:300px;"></div>
 		</div>
 		</div>
 		
 		<div class="col-lg-4">
-		<div class="row padding_p">
+		<div class="row divs_p">
 			<div class="col-lg-12 menupr_estilos" style="height:300px;"></div>
 		</div>
 		</div>
 		
 		<div class="col-lg-4">
-		<div class="row padding_p">
+		<div class="row divs_p">
 			<div class="col-lg-12 menupr_estilos" style="height:300px;"></div>
 		</div>
 		</div>

@@ -24,30 +24,30 @@
 	<div class="col-lg-12 titulo">Dashboard Expansión</div>
 	
 		<div class="col-lg-8">
-		<div class="row padding_p">
+		<div class="row divs_p">
 		<div class="col-lg-12 menupr_estilos" style="height:300px;"></div>
 		</div>
-		<div class="row padding_p">	
+		<div class="row divs_p">	
 			<div class="col-lg-12 menupr_estilos" style="height:300px;"></div>
 		</div>
 		</div>
 		
 		<div class="col-lg-4 ">
-		<div class="row padding_p">
+		<div class="row divs_p">
 			<div class="col-lg-12 menupr_estilos" style="height:150px;"></div>
 		</div>
 		
 		<div class="row">
-			<div class="col-lg-6 col-md-4 col-6 padding_p">
+			<div class="col-lg-6 col-md-4 col-6 divs_p">
 				<div class="col-lg-12 menupr_estilos" style="height:150px;"></div>
 			</div>
-			<div class="col-lg-6 col-md-4 col-6 padding_p">
+			<div class="col-lg-6 col-md-4 col-6 divs_p">
 				<div class="col-lg-12 menupr_estilos" style="height:150px;"></div>
 			</div>
-			<div class="col-lg-6 col-md-4 col-6 padding_p">
+			<div class="col-lg-6 col-md-4 col-6 divs_p">
 				<div class="col-lg-12 menupr_estilos" style="height:150px;"></div>
 			</div>
-			<div class="col-lg-6 col-md-4 col-6 padding_p">
+			<div class="col-lg-6 col-md-4 col-6 divs_p">
 				<div class="col-lg-12 menupr_estilos" style="height:150px;"></div>
 			</div>	
 		</div>

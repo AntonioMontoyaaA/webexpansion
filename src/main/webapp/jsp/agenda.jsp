@@ -20,7 +20,7 @@
 <%@ include file="/jsp/generic/header.jsp" %>
 
 <div class="container-fluid">
-	<div class="row padding_p">
+	<div class="row margen_cal_titulo">
 		<div class="col-lg-12 titulo">Dashboard Expansión > Agenda </div>
 	
 		<div class="col-lg-12 titulogrande">AGENDA
@@ -31,13 +31,13 @@
 		
 		</div>
 		<div class="col-lg-12">
-		<div class="row padding_p">
+		<div class="row margen_cal">
 		<div class="col-lg-12 menupr_estilos">
 			
     <div class="row"><span class="titulo_agenda">Marzo 2018</span></div>
     
      <div class="row">
-     <div class="col-lg-2 col-md-12 calendario">
+     <div class="col-xl-2 col-lg-3 col-md-12 calendario">
      <div class="row">
  	 <div class="col-lg-12 col-md-4 fazul">
  		<div class="form-group">
@@ -67,7 +67,7 @@
     </div>
     </div>
     
-    <div class="col-lg-10 d-none d-sm-block nopadd">
+    <div class="col-xl-10 col-lg-9 d-none d-sm-block nopadd">
   	<table class="table calendario_grande">
   		<thead>
   			<tr>

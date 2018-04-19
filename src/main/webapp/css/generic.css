@@ -63,6 +63,10 @@ background-image: url('https://mdbootstrap.com/img/svg/hamburger7.svg?color=0069
 	background-color:#ffffff;
 	padding:0rem 0rem;
 }
+.navbar_borde{
+	border-bottom:4px solid #00427F;
+	height:47px;
+}
 li.nav-item{
 	width:120px;
 }
@@ -75,14 +79,12 @@ a.nav-link{
 	font-size: 15px;
 	color:darkblue;
 	text-align:center;
-	border-top:4px solid #fff;
-	border-bottom:4px solid #fff;
+	border-bottom:4px solid #00427F;
 	height:51px;
-	line-height:25px;;
+	line-height:47px;;
 }
 a.nav-link:hover{
-	border-top:4px solid #3e72a1;
-	border-bottom:4px solid #cce0f4;
+	border-bottom:4px solid #00427F;
 	background:#cce0f4;
 }
 a.nav-link.resaltado{
@@ -92,17 +94,7 @@ a.nav-link.resaltado{
 .navbar-brand{
 	padding:0px;
 }
-/* --------------------------- GENERICOS --------------------*/
-html{
-	padding-left:7%;
-	padding-right:7%;
-	background:#f3f3f3;
-}
- @media (max-width: 1200px) {
- 	html{
-	padding:0px;
-	}
-} 
+/* --------------------------- GENERICOS --------------------*/ 
 .center{
 	text-align:center;
 	align:center;
@@ -122,8 +114,6 @@ html{
 	font-weight:bold;
 	color:white;
 	font-size:12px;
-	padding-top:4px;
-	padding-bottom:4px;
 	padding-left:12px;
 	
 }
@@ -131,7 +121,7 @@ html{
 	color:white;
 	font-size:22px;
 	padding-top:3px;
-	padding-left:15px;
+	padding-left:12px;
 	padding-right:5px;
 }
 body{
@@ -148,12 +138,16 @@ body{
 	background:white;
 }
 .padding_p{
-	padding:5px;
+	padding-left:7px;
+	padding-right:7px;
+	padding-bottom:5px;
+	padding-top:5px;
 } 
-.margen_p{
-	margin-top:5px;
-	margin-bottom:5px;
-}
+.divs_p{
+	padding-left:7px;
+	padding-right:7px;
+	padding-bottom:12px;
+} 
 .abs-center-x {
         position: absolute;
         left: 50%;

@@ -48,9 +48,8 @@ public class Login  extends HttpServlet {
     	try {
         HttpSession sesion = request.getSession();
 
-    	permisos=comprueba.permisosDao(user);
+    	permisos=comprueba.permisosDao(user,pass);
     	sesion.setAttribute("permisos", permisos);
-    	System.out.println("usario: "+user);
     	
     	}catch(Exception e){
     		e.printStackTrace();

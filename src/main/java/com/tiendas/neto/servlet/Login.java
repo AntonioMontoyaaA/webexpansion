@@ -14,7 +14,8 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 
 import com.tiendas.neto.dao.LoginDAO;
-import com.tiendas.neto.vo.Usuario;
+import com.tiendas.neto.vo.UsuarioLoginVO;
+import com.tiendas.neto.vo.UsuarioVO;
 
 public class Login  extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -35,35 +36,37 @@ public class Login  extends HttpServlet {
 	}
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	List<Usuario> permisos=new ArrayList();
+    	UsuarioLoginVO usuario=new UsuarioLoginVO();
+    	int codigo;
+    	String permisos;
     	LoginDAO comprueba= new LoginDAO();
+    	
     	String result="";
     	user=request.getParameter("user");
     	pass=request.getParameter("pass"); 
-    	try{
-    	result=comprueba.loginDao(user,pass);
-    	}catch(Exception e){
-    		e.printStackTrace();
-		}
-    	try {
-        HttpSession sesion = request.getSession();
-
-    	permisos=comprueba.permisosDao(user,pass);
-    	sesion.setAttribute("permisos", permisos);
     	
+    	try{
+    	usuario=comprueba.comprueba_login(user,pass);
+    	codigo=usuario.getCodigo();
+    	
+			if (codigo == 200) {
+				try {
+					HttpSession sesion = request.getSession();
+					sesion.setAttribute("usr", usuario);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				response.setContentType("text/html;charset=UTF-8");
+				RequestDispatcher despachador = getServletContext().getRequestDispatcher("/jsp/dashboard.jsp");
+				despachador.include(request, response);
+				System.out.println("login");
+			} else {
+				RequestDispatcher despachador = getServletContext().getRequestDispatcher("/jsp/dashboard.jsp");
+				despachador.include(request, response);
+				System.out.println("error");
+			}
     	}catch(Exception e){
     		e.printStackTrace();
-    	}
-		
-		response.setContentType("text/html;charset=UTF-8");
-		if(result=="success") {
-		RequestDispatcher despachador = getServletContext().getRequestDispatcher("/jsp/dashboard.jsp");
-        despachador.include(request, response);
 		}
-		else {
-		RequestDispatcher despachador = getServletContext().getRequestDispatcher("/jsp/dashboard.jsp");
-        despachador.include(request, response);
-		}
-
 	}
 }

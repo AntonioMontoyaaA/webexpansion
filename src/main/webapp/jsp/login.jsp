@@ -22,10 +22,10 @@
 					
 					<form action="Login" method="post">					
 					<div class="col-md-12">
-						<input type="text" name="user" value="100001" class="form-control input_login" placeholder="User">
+						<input type="text" name="user" value="327320" class="form-control input_login" placeholder="User">
 					</div>
 						<div class="col-md-12 padding_pass">
-							<input type="password" name="pass" value="123456" class="form-control input_login" placeholder="Password">
+							<input type="password" name="pass" value="327320" class="form-control input_login" placeholder="Password">
 						</div>
 					<br><br>
 						<div class="center">

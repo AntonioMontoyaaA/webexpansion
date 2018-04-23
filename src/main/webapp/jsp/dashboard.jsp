@@ -19,9 +19,9 @@
 <%@ include file="/jsp/generic/header.jsp" %>
 
 <div class="container-fluid menupr_fondo">
-
 	<div class="row padding_p">
-	<div class="col-lg-12 titulo">Dashboard Expansión</div>
+	<div class="col-lg-12 titulo">Dashboard Expansión 
+	</div>
 	
 		<div class="col-lg-8">
 		<div class="row divs_p">

@@ -1,6 +1,6 @@
 package com.tiendas.neto.vo;
 
-public class Usuario {
+public class UsuarioVO {
 	
 	private String usuario;
 	private String contra;

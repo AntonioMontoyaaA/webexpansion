@@ -1,6 +1,6 @@
 package com.tiendas.neto.vo;
 
-public class ServiceResponse {
+public class ServiceResponseVO {
 	private boolean success;
 	private String mensaje;
 	private Object result;

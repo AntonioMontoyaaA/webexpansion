@@ -17,7 +17,14 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
-import com.tiendas.neto.vo.Usuario;
+import com.tiendas.neto.vo.UsuarioLoginVO;
+import com.tiendas.neto.vo.UsuarioVO;
+
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 
 public class LoginDAO {
@@ -25,47 +32,34 @@ public class LoginDAO {
 	private static final Logger logger = Logger.getLogger(LoginDAO.class);
 	
 	@SuppressWarnings("unused")
-	public String loginDao(String user, String pass) {
-		 String result="";
-       try {
-           Gson gson = new Gson();
-           String jsonInString = "{\"usuario\":\""+user+"\",\"contra\":\""+pass+"\"}";
-           result="success";  
-       } catch (Exception e){}
-       return result;
-   }
-	
-	public List<Usuario> permisosDao(String user, String pass) {
-		List<Usuario> lista=new ArrayList();
-		String json="";
-		try { 
-			URL url = new URL("http://206.189.68.177/vokse/login");
-			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			conn.setRequestMethod("POST");
-			conn.setRequestProperty("Accept", "application/json");
-
-			if (conn.getResponseCode() != 200) {
-				throw new RuntimeException("Failed : HTTP error code : "
-						+ conn.getResponseCode());
-			}
-			BufferedReader br = new BufferedReader(new InputStreamReader(
-				(conn.getInputStream()), "UTF-8"));
-
-			String output;
-			while ((output = br.readLine()) != null) {
-				json="["+output+"]";
-			}
-			conn.disconnect();
-    	   
-    	   Gson gson = new Gson();
-			Type listType = new TypeToken<List<Usuario>>(){}.getType();
-			 lista = (List<Usuario>) gson.fromJson(json, listType);
-  
-       } catch (Exception e) {
-    	   e.printStackTrace();
-       }
-	return lista;
-   }
-	 
-	  
+	public UsuarioLoginVO comprueba_login(String user, String pass) {
+		String respuesta="";
+		 UsuarioLoginVO userLogin=null;
+		
+		final OkHttpClient client = new OkHttpClient();
+		FormBody.Builder formBuilder = new FormBody.Builder()
+		 .add("usuarioId", user)
+         .add("contrasena", pass)
+         .add("numTelefono", "")
+         .add("tipoLog", "2");
+		
+		 RequestBody formBody = formBuilder.build();
+		 Request request = new Request.Builder()
+				 .url("http://206.189.68.177/vokse/login")
+                 .post(formBody)
+                 .build();
+		
+		 try{
+		 Response response = client.newCall(request).execute();
+		 respuesta = response.body().string();
+		 
+		 Gson gson = new Gson();
+		 String jsonInString = respuesta;
+		 userLogin = gson.fromJson(jsonInString, UsuarioLoginVO.class);
+		 }
+		 catch (Exception e){	 
+			 logger.error(e);
+		 }
+	return userLogin;
+   }  
 }

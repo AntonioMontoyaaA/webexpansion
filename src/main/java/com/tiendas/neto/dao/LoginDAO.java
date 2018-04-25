@@ -60,7 +60,7 @@ public class LoginDAO {
 		
 		 RequestBody formBody = formBuilder.build();
 		 Request request = new Request.Builder()
-				 .url("http://206.189.68.177/vokse/login")
+				 .url("http://206.189.68.177/voksedesapi/login")
                  .post(formBody)
                  .build();
 		

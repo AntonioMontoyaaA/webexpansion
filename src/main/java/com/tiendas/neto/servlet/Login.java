@@ -37,6 +37,7 @@ public class Login  extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	UsuarioLoginVO usuario=new UsuarioLoginVO();
+    	
     	int codigo;
     	String permisos;
     	LoginDAO comprueba= new LoginDAO();

@@ -1,10 +1,7 @@
 package com.tiendas.neto.dao;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.Properties;
-
 import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import com.google.gson.Gson;
 import com.tiendas.neto.singleton.SingletonProperties;
 import com.tiendas.neto.vo.UsuarioLoginVO;
@@ -14,15 +11,15 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-
 public class LoginDAO {
-	private static final Logger logger = Logger.getLogger(LoginDAO.class);
 	SingletonProperties sp=SingletonProperties.getInstancia();
+	Expansionlog elog=new Expansionlog();
 	
-	public UsuarioLoginVO comprueba_login(String user, String pass) {
+	public UsuarioLoginVO comprueba_login(String user, String pass) {    
 		String respuesta="";
+
 		UsuarioLoginVO userLogin=null;
-		
+	try{
 		final OkHttpClient client = new OkHttpClient();
 		FormBody.Builder formBuilder = new FormBody.Builder()
 		 .add("usuarioId", user)
@@ -36,7 +33,6 @@ public class LoginDAO {
                  .post(formBody)
                  .build();
 		
-		 try{
 		 Response response = client.newCall(request).execute();
 		 respuesta = response.body().string();
 		 
@@ -44,8 +40,10 @@ public class LoginDAO {
 		 String jsonInString = respuesta;
 		 userLogin = gson.fromJson(jsonInString, UsuarioLoginVO.class);
 		 }
-		 catch (Exception e){	 
-			 logger.error(e);
+		 catch (Exception e){
+			String clase  ="clase: "+ new String (Thread.currentThread().getStackTrace()[1].getClassName());	
+			String metodo ="metodo: "+ new String (Thread.currentThread().getStackTrace()[1].getMethodName());
+			elog.error(clase,metodo,e+"",user, pass);  
 		 }
 	return userLogin;
    }  

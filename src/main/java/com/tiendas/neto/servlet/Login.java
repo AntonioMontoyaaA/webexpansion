@@ -13,15 +13,17 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
+import com.tiendas.neto.dao.Expansionlog;
 import com.tiendas.neto.dao.LoginDAO;
 import com.tiendas.neto.vo.UsuarioLoginVO;
 import com.tiendas.neto.vo.UsuarioVO;
 
 public class Login  extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-	private Logger log = Logger.getLogger(this.getClass());
+	Expansionlog elog=new Expansionlog();
+
 	private String user;
 	private String pass;
+	
 	/**
      * @see HttpServlet#HttpServlet()
      */
@@ -37,7 +39,6 @@ public class Login  extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	UsuarioLoginVO usuario=new UsuarioLoginVO();
-    	
     	int codigo;
     	String permisos;
     	LoginDAO comprueba= new LoginDAO();
@@ -67,7 +68,14 @@ public class Login  extends HttpServlet {
 				System.out.println("error");
 			}
     	}catch(Exception e){
-    		e.printStackTrace();
+    	String clase  ="clase: "+ new String (Thread.currentThread().getStackTrace()[1].getClassName());	
+    	String metodo ="metodo: "+ new String (Thread.currentThread().getStackTrace()[1].getMethodName());
+    	
+    	elog.error(clase, metodo, e+"", user, pass);
+		RequestDispatcher despachador = getServletContext().getRequestDispatcher("/jsp/dashboard.jsp");
+		despachador.include(request, response);
+		System.out.println("fatal error");
+
 		}
 	}
 }

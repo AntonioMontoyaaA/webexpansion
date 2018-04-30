@@ -17,7 +17,7 @@ import com.opensymphony.xwork2.interceptor.ParameterNameAware;
 
 public class ExpansionAction extends ActionSupport implements SessionAware, ParameterNameAware{
 	protected Map<String, Object> session ;
-	private static final Logger logger = Logger.getLogger(ExpansionAction.class);
+	private static final Logger log = Logger.getLogger(ExpansionAction.class);
 	private static final long serialVersionUID = 1L;
 
 	

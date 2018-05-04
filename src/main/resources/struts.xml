@@ -5,7 +5,7 @@
  
 <struts>
 
-	<constant name="struts.devMode" value="false" />
+	<constant name="struts.devMode" value="true" />
 	<constant name="struts.multipart.saveDir" value="javax.servlet.context.tempdir" />
 	<constant name="struts.action.excludePattern" value="/Login" />
 	<constant name="struts.convention.result.path" value="/"></constant>
@@ -35,10 +35,34 @@
 			<result>jsp/localizador.jsp</result>
 		</action>
 		
-		<!--
-		<action name="Welcome" class="com.mkyong.user.action.WelcomeUserAction">
-			<result name="SUCCESS">welcome_user.jsp</result>
-		</action> -->
+
+	</package>
+	
+	<package name="default" namespace="/" extends="struts-default">
+		<action name = "asignadas_info" 
+         		class = "com.tiendas.neto.action.AsignadasInfoAction" 
+         		method = "execute">
+         	<result name = "success">jsp/autorizadas.jsp</result>
+      	</action>
+      	
+      	<action name = "memoria_detalle" 
+         		class = "com.tiendas.neto.action.DetalleMemoriaAsignadaAction" 
+         		method = "execute">
+         	<result name = "success">jsp/asignadas_detalle.jsp</result>
+      	</action>
+      	
+      	<action name = "memoria_detalle_x_id" 
+         		class = "com.tiendas.neto.action.DetalleMemoriaXIdAction" 
+         		method = "execute">
+         	<result name = "success">jsp/asignadas_detalle.jsp</result>
+      	</action>
+      	
+      	<action name = "DashboardGeneralAction" 
+         		class = "com.tiendas.neto.action.DashboardGeneralAction" 
+         		method = "execute">
+         	<result name = "success">jsp/dashboard.jsp</result>
+      	</action>
+      	
 	</package>
 	
 </struts>

@@ -34,7 +34,7 @@
 		<div class="row margen_cal">
 		<div class="col-lg-12 menupr_estilos">
 			
-    <div class="row"><span class="titulo_agenda">Marzo 2018</span></div>
+    <div class="row cabecera"><span class="negrita azul">Marzo 2018</span></div>
     
      <div class="row">
      <div class="col-xl-2 col-lg-3 col-md-12 calendario">

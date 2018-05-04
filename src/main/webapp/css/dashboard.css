@@ -1,0 +1,101 @@
+ /*alineacion de titulos*/
+.fecha{
+	margin-left:40%;
+	color:#00437e;
+	font-size:11px;
+	margin-right:5px;
+}
+@media (max-width: 1530px) {
+	.fecha{margin-left:30%;}
+}
+@media (max-width: 1330px) {
+	.fecha{margin-left:20%;}
+}
+@media (max-width: 1190px) {
+	.fecha{margin-left:10%;}
+}
+@media (max-width: 1090px) {
+	.fecha{margin-left:0;}
+}
+span.estilo_info{
+	font-size:15px;
+	padding-right:8px;
+}
+span.estilo_dato{
+	font-size:15px;
+	padding-right:15px;
+}
+.p_cabecera{
+	margin-bottom:0.1em !important;	
+}
+/* ----------------------------------------- DESPLEGABLE ---------------------- */
+.desp{
+	font-size:12px;
+	font-family:"Helvetica";
+	background-color:white;
+	color:#00437e;
+	border-color:#00437e;
+	height:25px !important;
+	padding:0;
+	margin-left:8px;
+}
+.filtro{
+	min-width:100px !important;
+	width:100px !important;
+}
+.filtros{
+	width:150px;
+}
+.rechargue{
+	width:27px;
+}
+.rechargue:hover{
+	background-color:#E3E3E3;
+}
+
+/* ------------------------------------------- GRAFICAS --------------*/
+
+table{
+	display:none;
+}
+.highcharts-credits{
+	display:none;
+}
+.highcharts-title{
+	display:none;
+}
+.highcharts-button{
+	display:none;
+}
+.highcharts-axis-title{
+	display:none;
+}
+.highcharts-point{
+	width:13px;
+}
+#container{
+	padding-top:25px;
+	padding-right:10px;
+	min-width: 200px;
+	height: 250;
+	margin: 0 auto;
+}
+#container_sm1{
+	display:none;
+	padding-top:25px;
+	height: 250;
+	margin: 0 auto;
+}
+#container_sm2{
+	display:none;
+	padding-top:25px;
+	height: 250;
+	margin: 0 auto;
+}
+
+
+@media (max-width: 500px) {
+	#container{display:none;}
+	#container_sm1{display:block;}
+	#container_sm2{display:block;}
+}

@@ -1,3 +1,209 @@
+/* ---------------------------------  INICIA ESTILOS GENERALES */
+html {
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif
+}
+.loadingPagina {
+	position: absolute;
+    padding: 0px;
+    margin: 0px;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background: rgba(19, 17, 17, 0.7);
+	z-index: 100;
+}
+.mensajes_modal {
+	position: absolute;
+    padding: 0px;
+    margin: 0px;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background: rgba(19, 17, 17, 0.7);
+	z-index: 100;
+	display: none;
+    justify-content: center;
+    align-items: center;
+}
+.mensaje {
+	height: 25%;
+    width: 35%;
+}
+#tituloMensaje {
+	color: #FFFFFF;
+	font-family: sans-serif;
+	font-size: 20px;
+	display: table-cell;
+	vertical-align: middle;
+	padding-top: 5px;
+}
+#descripcionMensaje {
+	color: #616161;
+	font-family: sans-serif;
+	font-size: 18px;
+	display: table-cell;
+	vertical-align: middle;
+}
+#botonesMensaje {
+	display: flex;
+    vertical-align: middle;
+    text-align: center;
+    justify-content: center;
+    color: #FFFFFF;
+}
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 40%;
+  margin-left: 10%;
+  transform: translate3d(-50%, -50%, 0);
+}
+.dot {
+  width: 24px;
+  height: 24px;
+  background: #3ac;
+  border-radius: 100%;
+  display: inline-block;
+  animation: slide 1s infinite;
+}
+.dot:nth-child(1) {
+  animation-delay: 0.1s;
+  background: #32aacc;
+}
+.dot:nth-child(2) {
+  animation-delay: 0.2s;
+  background: #64aacc;
+}
+.dot:nth-child(3) {
+  animation-delay: 0.3s;
+  background: #96aacc;
+}
+.dot:nth-child(4) {
+  animation-delay: 0.4s;
+  background: #c8aacc;
+}
+.dot:nth-child(5) {
+  animation-delay: 0.5s;
+  background: #faaacc;
+}
+@-moz-keyframes slide {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@-webkit-keyframes slide {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@-o-keyframes slide {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes slide {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.fechaInicialCalendario {
+	width: 87px;
+	height: 21px;
+	border-radius: 4px 4px 4px 4px;
+    -moz-border-radius: 4px 4px 4px 4px;
+    -webkit-border-radius: 4px 4px 4px 4px;
+    border: 0px solid #000000;
+    background-color: white;
+    font-size: 12px;
+    padding-left: 8px;
+    background-image: url(../img/iconosFLECHITA.png);
+    background-position: right;
+    background-repeat: no-repeat;
+    background-origin: content-box;
+    padding-right: 4px;
+    cursor: pointer;
+}
+
+.buscadorAsignadas {
+	width: 30px;
+	position: relative; 
+	float: left;
+    border-radius: 4px 4px 4px 4px;
+    -moz-border-radius: 4px 4px 4px 4px;
+    -webkit-border-radius: 4px 4px 4px 4px;
+    border: 0px solid #000000;
+    background-color: white;
+    font-size: 12px;
+    padding-left: 3px;
+    background-image: url(../img/iconos_search.png);
+    background-size: 13px 13px;
+    background-position: left;
+    background-repeat: no-repeat;
+    background-origin: content-box;
+}
+
+.buscadorAsignadasInput {
+	width: 120px;
+    height: 20px;
+    border-radius: 4px 4px 4px 4px;
+    -moz-border-radius: 4px 4px 4px 4px;
+    -webkit-border-radius: 4px 4px 4px 4px;
+    border: 0px solid #000000;
+    background-color: white;
+    padding-left: 7px;
+    margin-left: 15px;
+}
+.sangria_cuerpo {
+	padding-left: 15px;
+}
+
+.sangria_doble_cuerpo {
+	padding-left: 30px;
+}
+/* ---------------------------------  FIN ESTILOS GENERALES */
+
+/* ---------------------------------  INICIO ESTILOS TABLAS */
+.dataTables_info {
+	height: 30px;
+	background-color: #E8E9E8;
+	border-top: 1px solid #d6d6d6;
+	border-bottom: 1px solid #d6d6d6;
+	text-align: right;
+	padding-right: 10px;
+	padding-top: 3px;
+}
+/* ---------------------------------  FIN ESTILOS TABLAS */
+
 /* ---------------------------------  LOGIN*/
 .login{
 	background:white;
@@ -113,7 +319,6 @@ a.nav-link.resaltado{
 	text-align:right;
 	align:right;
 }
-
 .titulo{
 	font-weight:bold;
 	color:white;
@@ -132,7 +337,21 @@ body{
 	background: linear-gradient(#005B97,#0075BE,#1E9CD7,#CCE0F4);
 	font-family: "Helvetica";
 }
-
+.negrita{
+	margin-bottom:5px;
+	color:#00437e;
+	font-weight:bold;
+}
+span.azul{
+	color:#00437e;
+}
+.azul{
+	color:#00437e;
+}
+ .cabecera{
+ 	padding-top:10px;
+ 	padding-left:15px;
+ }
 /* ---------------------------------------- ESTILOS DE MENU PRINCIPAL*/
 .menupr_estilos{
 	border-radius: 8px 8px 8px 8px;
@@ -158,4 +377,12 @@ body{
         transform: translateX(-50%);
 }
 
-/* ----------------------------------- ESTILOS PARA EL MAPA */
+/* ----------------------------------- ESTILOS ELIMINACION DE FOCUS POR DEFAULT */
+.btn:focus, .btn.focus {
+  outline: 0;
+  box-shadow: none;
+}
+.form-control:focus, .form-control.focus{
+  outline: 0;
+  box-shadow: none;
+}

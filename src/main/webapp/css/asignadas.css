@@ -1,0 +1,158 @@
+.izquierda {
+	text-align: left;
+	padding-left: 5px;
+}
+
+.derecha {
+	text-align: right;
+	padding-right: 8px;
+}
+.ui-datepicker-trigger {
+	display: none !important;
+}
+
+.oculto {
+	display : none;	
+}
+
+.detalleMemoriaAsignadaAction {
+	display: none;
+}
+
+span.circulo {
+  background: transparent;
+  border: 2px solid #00427F;
+  border-radius: 0.9em;
+  -moz-border-radius: 0.9em;
+  -webkit-border-radius: 0.9em;
+  color: #00427F;
+  display: inline-block;
+  line-height: 1.6em;
+  margin-right: 15px;
+  text-align: center;
+  width: 1.8em;
+  font-size: 26px; 
+}
+
+.tituloDetalleMd {
+	font-weight: bold;
+	font-size: 14px;
+	color: #00427F;
+}
+
+.subtituloDetalleMd {
+	font-weight: normal;
+	font-size: 14px;
+	color: #00427F;
+}
+
+.subtituloIconos {
+	font-weight: normal;
+	font-size: 12px;
+	color: #00427F;
+}
+
+.footerDetalleMd {
+	font-weight: normal;
+	font-size: 10px;
+	color: #00427F;
+}
+
+#containerProgreso {
+	margin: 0 auto;
+  	width: 200px;
+  	height: 200px;
+}
+
+@media (max-height: 500px) {
+#map{height:50%;}
+}
+@media (min-height: 500px) {
+#map{height:59%;}
+}
+@media (min-height: 600px) {
+#map{height:50%;}
+}
+@media (min-height: 690px) {
+#map{height:51.5%;}
+}
+@media (min-height: 800px) {
+#map{height:52%;}
+}
+@media (min-height: 900px) {
+#map{height:53%;}
+} 
+@media (min-height: 1020px) {
+#map{height:54%;}
+}
+@media (min-height: 1200px) {
+#map{height:54.5%;}
+}
+@media (min-height: 1300px) {
+#map{height:55%;}
+}
+
+@media (max-height: 500px) {
+#mapaZonificacion{height:60%;}
+}
+@media (min-height: 500px) {
+#mapaZonificacion{height:69%;}
+}
+@media (min-height: 600px) {
+#mapaZonificacion{height:60%;}
+}
+@media (min-height: 690px) {
+#mapaZonificacion{height:61.5%;}
+}
+@media (min-height: 800px) {
+#mapaZonificacion{height:62%;}
+}
+@media (min-height: 900px) {
+#mapaZonificacion{height:63%;}
+} 
+@media (min-height: 1020px) {
+#mapaZonificacion{height:64%;}
+}
+@media (min-height: 1200px) {
+#mapaZonificacion{height:64.5%;}
+}
+@media (min-height: 1300px) {
+#mapaZonificacion{height:65%;}
+}
+
+.highcharts-credits {
+	display: none;
+}
+
+.highcharts-button-box {
+	display:none;
+}
+
+.highcharts-legend {
+	font-size: 1px !important;
+}
+
+
+.modal.left .modal-dialog{
+		position: fixed;
+		margin: auto;
+		width: 320px;
+		height: 90%;
+		-webkit-transform: translate3d(0%, 0, 0);
+		    -ms-transform: translate3d(0%, 0, 0);
+		     -o-transform: translate3d(0%, 0, 0);
+		        transform: translate3d(0%, 0, 0);
+	}
+	.modal.left .modal-content{
+		height: 90%;
+		overflow-y: auto;
+	}
+Left
+	.modal.left.fade .modal-dialog{
+		left: -320px;
+		-webkit-transition: opacity 0.3s linear, left 0.3s ease-out;
+		   -moz-transition: opacity 0.3s linear, left 0.3s ease-out;
+		     -o-transition: opacity 0.3s linear, left 0.3s ease-out;
+		        transition: opacity 0.3s linear, left 0.3s ease-out;
+	}
+

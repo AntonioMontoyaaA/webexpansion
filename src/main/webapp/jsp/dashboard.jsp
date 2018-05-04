@@ -10,6 +10,7 @@
  -->  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/generic.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/dashboard.css" />	
 <title>Dashboard</title>
 </head>
 <body>
@@ -22,49 +23,94 @@
 	<div class="row padding_p">
 	<div class="col-lg-12 titulo">Dashboard Expansión 
 	</div>
-	
 		<div class="col-lg-8">
+<!-- PROGRESO GENERAL DE AREAS  -->	
 		<div class="row divs_p">
-		<div class="col-lg-12 menupr_estilos" style="height:300px;">
-		
-<div id="container" style="min-width: 200px; height: 300px; margin: 0 auto"></div>
-<table id="datatable" style="display:none">
-    <thead>
-        <tr>
-            <th></th>
-            <th>Jane</th>
-            <th>John</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <th>Apples</th>
-            <td>3</td>
-            <td>4</td>
-        </tr>
-        <tr>
-            <th>Pears</th>
-            <td>2</td>
-            <td>2</td>
-        </tr>
-        <tr>
-            <th>Plums</th>
-            <td>5</td>
-            <td>11</td>
-        </tr>
-        <tr>
-            <th>Bananas</th>
-            <td>1</td>
-            <td>1</td>
-        </tr>
-    </tbody>
-</table>
-		
+		<div class="col-lg-12 menupr_estilos">
+			<div class="row cabecera">
+				<div class="col-lg-5">
+					<span class="azul negrita">Progreso General de áreas</span>
+				</div>
+				<div class="col-lg-7 text-right">
+					<form class="form-inline p_cabecera">
+					<span class="fecha">Hoy 04 de Mayo del 2018 12:22PM</span>
+  					
+  						<select class="form-control form-inline desp filtro">
+  						<option selected>Mes</option>
+    					<option>Día</option>
+    					<option>Semana</option>
+    					<option>Año</option>
+  						</select>
+							&nbsp;
+  						<button class="btn desp rechargue" type="button">
+  								<img src="${pageContext.request.contextPath}/img/refresh_sf.png" />
+  						</button>
+  					</form>
+				</div>
+			
+			<div class="col-lg-12 p_cabecera">
+				<span class="azul estilo_info">MD TOTALES</span><span class="azul negrita estilo_dato">17</span>
+				<span class="azul estilo_info">ASIGNADAS</span><span class="azul negrita estilo_dato">10</span>
+				<span class="azul estilo_info">ATRASADAS</span><span class="azul negrita estilo_dato">2</span>
+				<span class="azul estilo_info">AUTORIZADAS</span><span class="azul negrita estilo_dato">2</span>
+				<span class="azul estilo_info">RECHAZADAS</span><span class="azul negrita estilo_dato">5</span>
+			</div>
+			
+			<div class="col-lg-12">
+				<span class="azul estilo_info">MARZO 2018</span>
+			</div>
+			
+			</div>
+				<div id="container"></div>
+				<table id="datatable"></table>
+				
+				<div id="container_sm1"></div>
+				<table id="datatable_sm1"></table>
+				<div id="container_sm2"></div>
+				<table id="datatable_sm2"></table>
 		</div>
 		</div>
+<!-- FIN PROGRESO GENERAL DE AREAS -->
+<!-- PROGRESO SEMANAL -->
 		<div class="row divs_p">	
-			<div class="col-lg-12 menupr_estilos" style="height:300px;"></div>
+					<div class="col-lg-12 menupr_estilos">
+			<div class="row cabecera">
+				<div class="col-lg-5">
+					<span class="azul negrita">Progreso Semanal</span>
+				</div>
+				<div class="col-lg-7 text-right">
+					<form class="form-inline p_cabecera">
+					<span class="fecha">Hoy 04 de Mayo del 2018 12:22PM</span>
+  					
+  						<select class="form-control form-inline desp filtro">
+  						<option selected>Semana</option>
+    					<option></option>
+    					<option></option>
+    					<option></option>
+  						</select>
+							&nbsp;
+  						<button class="btn desp rechargue" type="button">
+  								<img src="${pageContext.request.contextPath}/img/refresh_sf.png" />
+  						</button>
+  					</form>
+				</div>
+			
+			<div class="col-lg-12">
+				<span class="azul estilo_info">MARZO - ABRIL 2018</span>
+			</div>
+			
+			</div>
+				<div id="container"></div>
+				<table id="datatable"></table>
+				
+				<div id="container_sm1"></div>
+				<table id="datatable_sm1"></table>
+				<div id="container_sm2"></div>
+				<table id="datatable_sm2"></table>
 		</div>
+			
+		</div>
+<!-- FIN PROGRESO SEMANAL -->
 		</div>
 		
 		<div class="col-lg-4 ">
@@ -92,21 +138,19 @@
 </div>
 	
 
-
+<jsp:include page="/jsp/generic/loading.jsp" />
+<jsp:include page="/jsp/generic/mensajes.jsp" />
 		
 
-	<script	src="${pageContext.request.contextPath}/js/jquery/jquery.min.js"></script>	
+	<script	src="${pageContext.request.contextPath}/js/jquery/jquery.min.js"></script>
+	<script	src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.bundle.min.js" type="text/javascript"></script>
 	<script	src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 	<script	src="${pageContext.request.contextPath}/highcharts/highcharts.js"></script>
+	<script	src="${pageContext.request.contextPath}/js/utiles/utiles.js"></script>
 	<script	src="${pageContext.request.contextPath}/js/dashboard.js"></script>
 	<script	src="${pageContext.request.contextPath}/highcharts/js/modules/data.js"></script>
 	<script	src="${pageContext.request.contextPath}/highcharts/js/modules/exporting.js"></script>
 	<script	src="${pageContext.request.contextPath}/highcharts/js/modules/export-data.js"></script>
-	
-	
-	
-	
-	
 	
 	</body>
 </html>

@@ -14,7 +14,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.interceptor.ParameterNameAware;
 import com.tiendas.neto.vo.AsignadasVO;
 import com.tiendas.neto.vo.MemoriaAsignadaVO;
-
+//este es un comentario de prueba
 public class AsignadasInfoAction extends ActionSupport implements SessionAware, ParameterNameAware {
 	protected Map<String, Object> session ;
 	private static final Logger logger = Logger.getLogger(ExpansionAction.class);

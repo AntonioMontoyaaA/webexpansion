@@ -20,7 +20,7 @@ function progGeneral_Tablas(){
 	if(data.codigo == 404){
 		console.log("*** ENTRA A ERROR ***");	
 	}
-	
+	//prueba de cambio :)
 	if(data.codigo==200) {
 		console.log("*** ENTRA A DATOS ***");
 		//cargaMensajeModal('MD ASIGNADAS', 'Se consultaron exitosamente los datos', TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ERROR, redireccionaConsulta);

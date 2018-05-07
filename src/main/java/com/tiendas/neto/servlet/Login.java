@@ -95,7 +95,7 @@ public class Login  extends HttpServlet {
          .add("contrasena", pass)
          .add("numTelefono", "")
          .add("tipoLog", "2");
-		
+		//prueba de cambio
 		 RequestBody formBody = formBuilder.build();
 		 Request request = new Request.Builder()
 				 .url(sp.getPropiedad("login"))
@@ -104,7 +104,6 @@ public class Login  extends HttpServlet {
 		
 		 Response response = client.newCall(request).execute();
 		 respuesta = response.body().string();
-		 System.out.println(respuesta);
 		 Gson gson = new Gson();
 		 String jsonInString = respuesta;
 		 userLogin = gson.fromJson(jsonInString, UsuarioLoginVO.class);

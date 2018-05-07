@@ -34,7 +34,7 @@ function inicializaCalendarios() {
 function creatabla(){
 	
 	invocarJSONServiceAction("asignadas_info", 
-				{'variable1': 'valor1', 'variable2': 'valor2'}, 
+				{'variable1': 'valor1', 'mdId': 'valor2'}, 
 				'obtieneMdsResponse', 
 				function() {
 					//Funcion de error

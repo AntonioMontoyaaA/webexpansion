@@ -29,16 +29,35 @@ public class DashboardGeneralAction extends ActionSupport implements SessionAwar
 	SingletonProperties sp=SingletonProperties.getInstancia();
 	Expansionlog elog=new Expansionlog();
 	
+	private String tipoConsulta;
+	private String fechaConsulta;
+	
+	public String getTipoConsulta() {
+		return tipoConsulta;
+	}
+
+	public void setTipoConsulta(String tipoConsulta) {
+		this.tipoConsulta = tipoConsulta;
+	}
+
+	public String getFechaConsulta() {
+		return fechaConsulta;
+	}
+
+	public void setFechaConsulta(String fechaConsulta) {
+		this.fechaConsulta = fechaConsulta;
+	}
+	
 	@Override
 	public String execute() throws Exception{
 		String respuesta="";
-
 		UsuarioLoginVO userLogin=null;
-	try{
+	
+		try{
 		final OkHttpClient client = new OkHttpClient();
 		FormBody.Builder formBuilder = new FormBody.Builder()
-		 .add("tipoConsulta", "2")
-         .add("fechaConsulta", "23/04/2018");
+		 .add("tipoConsulta", getTipoConsulta())
+         .add("fechaConsulta", getFechaConsulta());
 		
 		 RequestBody formBody = formBuilder.build();
 		 Request request = new Request.Builder()

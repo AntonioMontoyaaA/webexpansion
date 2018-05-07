@@ -106,11 +106,13 @@ function cargaMensajeModal(titulo, descripcionMensaje, tipoMensaje, estatusMensa
 	};
 	
 	
-	$("#mensajes_modal").css('display','flex');
+	//$("#mensajes_modal").css('display','flex');
+	$("#mensajes_modal").modal('show');
 }
 
 function cierraMensajeModal() {
-	$("#mensajes_modal").css('display','none');
+	//$("#mensajes_modal").css('display','none');
+	$("#mensajes_modal").modal('hide');
 }
 
 function errorSesionCaduca(){

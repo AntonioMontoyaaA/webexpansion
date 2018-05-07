@@ -25,7 +25,7 @@ function progGeneral_Tablas(){
 		console.log("*** ENTRA A DATOS ***");
 		//cargaMensajeModal('MD ASIGNADAS', 'Se consultaron exitosamente los datos', TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ERROR, redireccionaConsulta);
 		//var resultados = data.listaAsignadas
-		cargaMensajeModal("Dashboard", "Se consultó exitosamente", TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ERROR, funcion_prueba);
+		cargaMensajeModal("Dashboard", "Se consult\u00F3 exitosamente", TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ERROR, funcion_prueba);
 
 	}
 };	

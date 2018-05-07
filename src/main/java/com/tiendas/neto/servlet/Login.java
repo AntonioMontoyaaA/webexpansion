@@ -13,14 +13,21 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
+import com.google.gson.Gson;
 import com.tiendas.neto.dao.Expansionlog;
-import com.tiendas.neto.dao.LoginDAO;
+import com.tiendas.neto.singleton.SingletonProperties;
 import com.tiendas.neto.vo.UsuarioLoginVO;
 import com.tiendas.neto.vo.UsuarioVO;
 
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
 public class Login  extends HttpServlet {
 	Expansionlog elog=new Expansionlog();
-
+	SingletonProperties sp=SingletonProperties.getInstancia();
 	private String user;
 	private String pass;
 	
@@ -40,15 +47,12 @@ public class Login  extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	UsuarioLoginVO usuario=new UsuarioLoginVO();
     	int codigo;
-    	String permisos;
-    	LoginDAO comprueba= new LoginDAO();
     	
-    	String result="";
     	user=request.getParameter("user");
     	pass=request.getParameter("pass"); 
     	
     	try{
-    	usuario=comprueba.comprueba_login(user,pass);
+    	usuario=comprueba_login(user,pass);
     	codigo=usuario.getCodigo();
     	
 			if (codigo == 200) {
@@ -78,4 +82,40 @@ public class Login  extends HttpServlet {
 
 		}
 	}
+	
+//------------------------------ CONEXION AL SERVICIO ------------------------------
+	public UsuarioLoginVO comprueba_login(String user, String pass) {    
+		String respuesta="";
+
+		UsuarioLoginVO userLogin=null;
+	try{
+		final OkHttpClient client = new OkHttpClient();
+		FormBody.Builder formBuilder = new FormBody.Builder()
+		 .add("usuarioId", user)
+         .add("contrasena", pass)
+         .add("numTelefono", "")
+         .add("tipoLog", "2");
+		
+		 RequestBody formBody = formBuilder.build();
+		 Request request = new Request.Builder()
+				 .url(sp.getPropiedad("login"))
+                 .post(formBody)
+                 .build();
+		
+		 Response response = client.newCall(request).execute();
+		 respuesta = response.body().string();
+		 System.out.println(respuesta);
+		 Gson gson = new Gson();
+		 String jsonInString = respuesta;
+		 userLogin = gson.fromJson(jsonInString, UsuarioLoginVO.class);
+		 }
+		 catch (Exception e){
+			String clase  ="clase: "+ new String (Thread.currentThread().getStackTrace()[1].getClassName());	
+			String metodo ="metodo: "+ new String (Thread.currentThread().getStackTrace()[1].getMethodName());
+			elog.error(clase,metodo,e+"",user, pass);  
+		 }
+	return userLogin;
+	
+   } 
+    
 }

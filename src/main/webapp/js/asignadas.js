@@ -1,4 +1,3 @@
-var tablaMemoriasAsignadas = null;
 
 $(function(){
 	$('#idasignadas').addClass('resaltado');
@@ -50,36 +49,38 @@ function creatabla(){
 	obtieneMdsResponse = function( data ) {
 		
 		
-		if(data == null || data.error == true || data.vacia == true) {
-			console.log("*** ENTRA A ERROR ***");
-			
-			
-		}
-		
-		if(!data.vacia) {
-			console.log("*** ENTRA A DATOS ***");
-			//cargaMensajeModal('MD ASIGNADAS', 'Se consultaron exitosamente los datos', TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ERROR, redireccionaConsulta);
-			
-			var resultados = data.listaAsignadas
+		if(data.codigo == 404) {
+			cargaMensajeModal('MD ASIGNADAS', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
+		} else {
+			var resultados = data.mds
 			
 			var datosMemoriasAsignadas = new Array();
 			var total = 0;
+			var spanRojo = "";
 			
 			for( var i = 0 ; i < resultados.length; i++){
 				
+				if(resultados[i].mdVencida) {
+					spanRojo = "color: #FF5B16";
+				} else {
+					spanRojo = "";
+				}
 				datosMemoriasAsignadas[i] = new Array();	 	 		 			 
-				datosMemoriasAsignadas[i][0]=resultados[i].nombreMd; 
-				datosMemoriasAsignadas[i][1]=resultados[i].categoria;
-				datosMemoriasAsignadas[i][2]=resultados[i].puntuacion;
-				datosMemoriasAsignadas[i][3]=resultados[i].creador;
-				datosMemoriasAsignadas[i][4]=resultados[i].fechaCreacion;
-				datosMemoriasAsignadas[i][5]=resultados[i].fechaVencimiento;
-				datosMemoriasAsignadas[i][6]="<div><img src='img/iconos_COMENTARIOS.png'></div>"
-				datosMemoriasAsignadas[i][7]=resultados[i].mdId;
+				datosMemoriasAsignadas[i][0] = "<span style='" + spanRojo + "'>" + resultados[i].nombreMd + "</span>"; 
+				datosMemoriasAsignadas[i][1] = "<span style='" + spanRojo + "'>" + resultados[i].categoria + "</span>";
+				datosMemoriasAsignadas[i][2] = "<span style='" + spanRojo + "'>" + resultados[i].puntuacion + "</span>";
+				datosMemoriasAsignadas[i][3] = "<span style='" + spanRojo + "'>" + resultados[i].creador + "</span>";
+				datosMemoriasAsignadas[i][4] = "<span style='" + spanRojo + "'>" + resultados[i].fechaCreacion + "</span>";
+				datosMemoriasAsignadas[i][5] = "<span style='" + spanRojo + "'>" + resultados[i].fechaVencimiento + "</span>";
+				datosMemoriasAsignadas[i][6] = "<div><img src='img/iconos_COMENTARIOS.png'></div>"
+				datosMemoriasAsignadas[i][7] = resultados[i].mdId;
 			 }
 			
-			 initTablaMemoriasAsignadas('DivTablaAsignadas', datosMemoriasAsignadas, 'tablaMemoriasAsignadas');
 			
+
+			
+			 initTablaMemoriasAsignadas('DivTablaAsignadas', datosMemoriasAsignadas, 'tablaMemoriasAsignadas');
+			 
 			$("#tablaMemoriasAsignadas tr").click(function() {
 				var nombreMd = $(this).find("td:eq(0)").html();
 				var mdId = $(this).find("td:eq(7)").html();
@@ -97,7 +98,7 @@ function obtieneDetalleMd(nombreMd, mdId) {
 }
 
 function ejecutaBusquedaAsignadas() {
-	tablaMemoriasAsignadas.DataTable().fnFilter($("#buscadorAsignadas").val());
+	$("#tablaMemoriasAsignadas").dataTable().fnFilter($("#buscadorAsignadas").val());
 }
 
 

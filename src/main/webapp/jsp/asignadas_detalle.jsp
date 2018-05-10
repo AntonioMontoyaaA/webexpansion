@@ -25,7 +25,50 @@
 	
 	<div class="col-lg-12">
 	<div class="row divs_p">
-		<div class="col-lg-12 menupr_estilos" style="height:30px;"></div>
+		<div class="col-lg-12 menupr_estilos" style="height:30px;padding-top: 5px;">
+			<div style="width: 37%; position: relative; float: left; cursor: pointer;"><span class="tituloDetalleMd">Seguimiento de autorización</span></div>
+			
+			<div id="gerenteExpansionDiv" style="width: 15%; position: relative; float: left; cursor: pointer;">
+				<div id="" class="circuloSeguimiento circuloSeguimientoAprobado">&nbsp;&nbsp;&nbsp;</div>
+				<div style="position: relative; float: left;">
+					<span class="subtituloDetalleMd">&nbsp;&nbsp;
+						<a id="gerenteExpansionSegPop" tabindex="0" class="" role="" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="">Gerente de expansión</a>
+					</span>
+				</div>
+			</div>
+			<div style="width: 12%; position: relative; float: left; cursor: pointer;">
+				<div class="circuloSeguimiento">&nbsp;&nbsp;&nbsp;</div>
+				<div style="position: relative; float: left;">
+					<span class="subtituloDetalleMd">&nbsp;&nbsp;
+						<a id="expansionSegPop" tabindex="0" class="" role="" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="">Expansión</a>
+					</span>
+				</div>
+			</div>
+			<div style="width: 12%; position: relative; float: left; cursor: pointer;;">
+				<div class="circuloSeguimiento">&nbsp;&nbsp;&nbsp;</div>
+				<div style="position: relative; float: left;">
+					<span class="subtituloDetalleMd">&nbsp;&nbsp;
+						<a id="gestoriaSegPop" tabindex="0" class="" role="" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="">Gestoría</a>
+					</span>
+				</div>
+			</div>
+			<div style="width: 12%; position: relative; float: left; cursor: pointer;">
+				<div class="circuloSeguimiento">&nbsp;&nbsp;&nbsp;</div>
+				<div style="position: relative; float: left;">
+					<span class="subtituloDetalleMd">&nbsp;&nbsp;
+						<a id="construccionSegPop" tabindex="0" class="" role="" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="">Construcción</a>
+					</span>
+				</div>
+			</div>
+			<div style="width: 12%; position: relative; float: left;cursor: pointer;">
+				<div class="circuloSeguimiento">&nbsp;&nbsp;&nbsp;</div>
+				<div style="position: relative; float: left;">
+					<span class="subtituloDetalleMd">&nbsp;&nbsp;
+						<a id="operacionesSegPop" tabindex="0" class="" role="" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="">Operaciones</a>
+					</span>
+				</div>
+			</div>
+		</div>
 	</div>
 	</div>
 	
@@ -60,19 +103,25 @@
 		<div class="row divs_p">
 			<div class="col-lg-12 menupr_estilos" style="height:300px;">
 				<div style="width: 100%;position: relative; float: left;text-align: left">
-					<span class="tituloDetalleMd">1) Datos del sitio</span><br/>
-					<span class="tituloDetalleMd sangria_cuerpo">Calle</span><br/>
-					<span id="calleMd" class="subtituloDetalleMd sangria_doble_cuerpo">---</span><br/>
-					<span class="tituloDetalleMd sangria_cuerpo">Colonia</span><br/>
-					<span id="coloniaMd" class="subtituloDetalleMd sangria_doble_cuerpo">---</span><br/>
-					<span class="tituloDetalleMd sangria_cuerpo">Municipio</span><br/>
-					<span id="municipioMd" class="subtituloDetalleMd sangria_doble_cuerpo">---</span><br/>
-					<span class="tituloDetalleMd sangria_cuerpo">Ciudad</span><br/>
-					<span id="ciudadMd" class="subtituloDetalleMd sangria_doble_cuerpo">---</span><br/>
-					<span class="tituloDetalleMd sangria_cuerpo">Estado</span><br/>
-					<span id="estadoMd" class="subtituloDetalleMd sangria_doble_cuerpo">---</span><br/>
-					<span class="tituloDetalleMd sangria_cuerpo">Código postal</span><br/>
-					<span id="codiPostalMd" class="subtituloDetalleMd sangria_doble_cuerpo">---</span><br/>
+					<div style="width: 80%; position: relative; float: left;"><span class="tituloDetalleMd">1) Datos del sitio</span></div>
+					<div style="width: 20%; position: relative; float: left;text-align: right; padding-right: 15px;">
+						<img id="autoriza1" title="Autoriza punto" class="sin_autorizar" onclick="autorizaPantalla(1);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
+						<img id="rechaza1" title="Rechaza punto" class="sin_autorizar" onclick="rechazaPantalla(1);" style="cursor: pointer;" src="img/rechaza_mark.png">
+					</div>
+				</div>
+				<div style="width: 100%;position: relative; float: left;text-align: left">
+						<span class="tituloDetalleMd sangria_cuerpo">Calle</span><br/>
+						<span id="calleMd" class="subtituloDetalleMd sangria_doble_cuerpo">---</span><br/>
+						<span class="tituloDetalleMd sangria_cuerpo">Colonia</span><br/>
+						<span id="coloniaMd" class="subtituloDetalleMd sangria_doble_cuerpo">---</span><br/>
+						<span class="tituloDetalleMd sangria_cuerpo">Municipio</span><br/>
+						<span id="municipioMd" class="subtituloDetalleMd sangria_doble_cuerpo">---</span><br/>
+						<span class="tituloDetalleMd sangria_cuerpo">Ciudad</span><br/>
+						<span id="ciudadMd" class="subtituloDetalleMd sangria_doble_cuerpo">---</span><br/>
+						<span class="tituloDetalleMd sangria_cuerpo">Estado</span><br/>
+						<span id="estadoMd" class="subtituloDetalleMd sangria_doble_cuerpo">---</span><br/>
+						<span class="tituloDetalleMd sangria_cuerpo">Código postal</span><br/>
+						<span id="codiPostalMd" class="subtituloDetalleMd sangria_doble_cuerpo">---</span><br/>
 				</div>
 			</div>
 		</div>
@@ -82,7 +131,13 @@
 		<div class="row divs_p">
 			<div class="col-lg-12 menupr_estilos" style="height:300px;">
 				<div style="width: 100%;position: relative; float: left;text-align: left">
-					<span class="tituloDetalleMd">2) Datos del propietario</span><br/><br/>
+					<div style="width: 80%; position: relative; float: left;"><span class="tituloDetalleMd">1) Datos del propietario</span></div>
+					<div style="width: 20%; position: relative; float: left;text-align: right; padding-right: 15px;">
+						<img id="autoriza2" title="Autoriza punto" class="sin_autorizar" onclick="autorizaPantalla(2);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
+						<img id="rechaza2" title="Rechaza punto" class="sin_autorizar" onclick="rechazaPantalla(2);" style="cursor: pointer;" src="img/rechaza_mark.png">
+					</div>
+				</div>
+				<div style="width: 100%;position: relative; float: left;text-align: left">
 					<span class="tituloDetalleMd sangria_cuerpo">Número propietario</span><br/>
 					<span id="propietarioId" class="subtituloDetalleMd sangria_doble_cuerpo">---</span><br/>
 					<span class="tituloDetalleMd sangria_cuerpo">Nombre</span><br/>
@@ -101,8 +156,14 @@
 		<div class="row divs_p">
 			<div class="col-lg-12 menupr_estilos" style="height:300px;">
 				<div style="width: 100%;position: relative; float: left;text-align: left">
-					<div style="width: 80%; position: relative; float: left;"><span class="tituloDetalleMd">3) Superficie</span></div>
-					<div style="width: 20%; position: relative; float: left;text-align: right; padding-right: 15px;"><span id="puntosSuperficie" class="tituloDetalleMd">---</span>?</div>
+					<div style="width: 85%; position: relative; float: left;"><span class="tituloDetalleMd">3) Superficie</span></div>
+					<div style="width: 15%; position: relative; float: left;text-align: right; padding-right: 15px;">
+						<div style="width: 45%; position: relative; float: left;padding-top: 5px;"><span class="tituloDetalleMd">Puntos: </span> <span id="puntosSuperficie" class="tituloDetalleMd">---</span></div>
+						<div style="width: 45%; position: relative; float: left;padding-right: 8px;padding-top: 2px;">
+							<img id="autoriza3" title="Autoriza punto" class="sin_autorizar" onclick="autorizaPantalla(3);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
+							<img id="rechaza3" title="Rechaza punto" class="sin_autorizar" onclick="rechazaPantalla(3);" style="cursor: pointer;" src="img/rechaza_mark.png"></div>
+						<div style="width: 10%; position: relative; float: left;padding-top: 3px;"><a id="superficieTip" tabindex="0" class="question_mark" role="" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="">&nbsp;&nbsp;&nbsp;&nbsp;</a></div>
+					</div>
 				</div>
 				<div style="width: 100%;position: relative; float: left;text-align: left">
 					<div style="width: 33%; height: 80%; position: relative; float: left;">
@@ -159,8 +220,14 @@
 		<div class="row divs_p">
 			<div class="col-lg-12 menupr_estilos" style="height:300px;">
 				<div style="width: 100%;position: relative; float: left;text-align: left">
-					<div style="width: 80%; position: relative; float: left;"><span class="tituloDetalleMd">4) Zonificación</span></div>
-					<div style="width: 20%; position: relative; float: left;text-align: right; padding-right: 15px;"><span id="puntosZonificacion" class="tituloDetalleMd">---</span>?</div>
+					<div style="width: 75%; position: relative; float: left;"><span class="tituloDetalleMd">4) Zonificación</span></div>
+					<div style="width: 25%; position: relative; float: left;text-align: right; padding-right: 15px;">
+						<div style="width: 45%; position: relative; float: left;padding-top: 5px;"><span class="tituloDetalleMd">Puntos: </span> <span id="puntosZonificacion" class="tituloDetalleMd">---</span></div>
+						<div style="width: 45%; position: relative; float: left;padding-right: 8px;padding-top: 2px;">
+							<img id="autoriza4" title="Autoriza punto" class="sin_autorizar" onclick="autorizaPantalla(4);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
+							<img id="rechaza4" title="Rechaza punto" class="sin_autorizar" onclick="rechazaPantalla(4);" style="cursor: pointer;" src="img/rechaza_mark.png"></div>
+						<div style="width: 10%; position: relative; float: left;padding-top: 3px;"><a id="zonificacionTip" tabindex="0" class="question_mark" role="" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="">&nbsp;&nbsp;&nbsp;&nbsp;</a></div>
+					</div>
 				</div>
 				<div style="width: 100%;position: relative; float: left;text-align: left">
 					<div id="mapaZonificacion" style="width: 70%; height: 85%; position: relative; float: left;"></div>
@@ -199,8 +266,14 @@
 		<div class="row divs_p">
 			<div class="col-lg-12 menupr_estilos" style="height:300px;">
 				<div style="width: 100%;position: relative; float: left;text-align: left">
-					<div style="width: 70%; position: relative; float: left;"><span class="tituloDetalleMd">5) Construcción</span></div>
-					<div style="width: 30%; position: relative; float: left;text-align: right; padding-right: 15px;"><span id="puntosConstruccion" class="tituloDetalleMd">---</span>?</div>
+					<div style="width: 50%; position: relative; float: left;"><span class="tituloDetalleMd">5) Construcción</span></div>
+					<div style="width: 50%; position: relative; float: left;text-align: right; padding-right: 15px;">
+						<div style="width: 45%; position: relative; float: left;padding-top: 5px;"><span class="tituloDetalleMd">Puntos: </span> <span id="puntosConstruccion" class="tituloDetalleMd">---</span></div>
+						<div style="width: 45%; position: relative; float: left;padding-right: 8px;padding-top: 2px;">
+							<img id="autoriza5" title="Autoriza punto" class="sin_autorizar" onclick="autorizaPantalla(5);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
+							<img id="rechaza5" title="Rechaza punto" class="sin_autorizar" onclick="rechazaPantalla(5);" style="cursor: pointer;" src="img/rechaza_mark.png"></div>
+						<div style="width: 10%; position: relative; float: left;padding-top: 3px;"><a id="construccionTip" tabindex="0" class="question_mark" role="" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="">&nbsp;&nbsp;&nbsp;&nbsp;</a></div>
+					</div>
 				</div>
 				<div id="factoresConstruccion" style="width: 100%; height: 150px;  overflow-y: scroll; position: relative; float: left;text-align: left">
 				</div>
@@ -216,8 +289,14 @@
 		<div class="row divs_p">
 			<div class="col-lg-12 menupr_estilos" style="height:300px;">
 				<div style="width: 100%;position: relative; float: left;text-align: left">
-					<div style="width: 70%; position: relative; float: left;"><span class="tituloDetalleMd">6) Generalidades del sitio</span></div>
-					<div style="width: 30%; position: relative; float: left;text-align: right; padding-right: 15px;"><span id="puntuacionGeneralidadesSitio" class="tituloDetalleMd">---</span>?</div>
+					<div style="width: 50%; position: relative; float: left;"><span class="tituloDetalleMd">6) Generalidades del sitio</span></div>
+					<div style="width: 50%; position: relative; float: left;text-align: right; padding-right: 15px;">
+						<div style="width: 45%; position: relative; float: left;padding-top: 5px;"><span class="tituloDetalleMd">Puntos: </span> <span id="puntosGeneralidades" class="tituloDetalleMd">---</span></div>
+						<div style="width: 45%; position: relative; float: left;padding-right: 8px;padding-top: 2px;">
+							<img id="autoriza6" title="Autoriza punto" class="sin_autorizar" onclick="autorizaPantalla(6);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
+							<img id="rechaza6" title="Rechaza punto" class="sin_autorizar" onclick="rechazaPantalla(6);" style="cursor: pointer;" src="img/rechaza_mark.png"></div>
+						<div style="width: 10%; position: relative; float: left;padding-top: 3px;"><a id="generalidadesTip" tabindex="0" class="question_mark" role="" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="">&nbsp;&nbsp;&nbsp;&nbsp;</a></div>
+					</div>
 				</div>
 				<div style="width: 100%;position: relative; float: left;text-align: left">
 					<br/><span class="tituloDetalleMd sangria_cuerpo">Renta</span><br/>
@@ -239,8 +318,14 @@
 		<div class="row divs_p">
 			<div class="col-lg-12 menupr_estilos" style="height:300px;">
 				<div style="width: 100%;position: relative; float: left;text-align: left">
-					<div style="width: 70%; position: relative; float: left;"><span class="tituloDetalleMd">7)  Flujo peatonal</span></div>
-					<div style="width: 30%; position: relative; float: left;text-align: right; padding-right: 15px;"><span id="puntuacionConteos" class="tituloDetalleMd">---</span>?</div>
+					<div style="width: 50%; position: relative; float: left;"><span class="tituloDetalleMd">7)  Flujo peatonal</span></div>
+					<div style="width: 50%; position: relative; float: left;text-align: right; padding-right: 15px;">
+						<div style="width: 45%; position: relative; float: left;padding-top: 5px;"><span class="tituloDetalleMd">Puntos: </span> <span id="puntosConteos" class="tituloDetalleMd">---</span></div>
+						<div style="width: 45%; position: relative; float: left;padding-right: 8px;padding-top: 2px;">
+							<img id="autoriza7" title="Autoriza punto" class="sin_autorizar" onclick="autorizaPantalla(7);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
+							<img id="rechaza7" title="Rechaza punto" class="sin_autorizar" onclick="rechazaPantalla(7);" style="cursor: pointer;" src="img/rechaza_mark.png"></div>
+						<div style="width: 10%; position: relative; float: left;padding-top: 3px;"><a id="conteosTip" tabindex="0" class="question_mark" role="" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="">&nbsp;&nbsp;&nbsp;&nbsp;</a></div>
+					</div>
 				</div>
 				<div style="width: 100%;position: relative; float: left;text-align: left">
 					<span class="subtituloDetalleMd sangria_doble_cuerpo">PROMEDIO: </span><span id="promedioConteos" class="tituloDetalleMd sangria_cuerpo">---</span><br/>
@@ -275,17 +360,17 @@
 
 <s:textfield name="mdId" label="" cssStyle="display: none"></s:textfield>
 <s:textfield name="nombreMd" label="" cssStyle="display: none"></s:textfield>
-	
-
 
 <jsp:include page="/jsp/generic/loading.jsp" />
 <jsp:include page="/jsp/generic/mensajes.jsp" />
+<jsp:include page="/jsp/generic/modalAutorizacion.jsp" />
 
 		
 
 
 	<!-- Bootstrap core JavaScript -->
-	<script	src="${pageContext.request.contextPath}/js/jquery/jquery.min.js"></script>	
+	<script	src="${pageContext.request.contextPath}/js/jquery/jquery.min.js"></script>
+	<script	src="${pageContext.request.contextPath}/js/jquery/popper.js"></script>
 	<script	src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 	<script	src="${pageContext.request.contextPath}/highcharts/highcharts.js"></script>
 	<script	src="${pageContext.request.contextPath}/highcharts/js/modules/data.js"></script>

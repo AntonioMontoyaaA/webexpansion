@@ -106,6 +106,7 @@ public class Login  extends HttpServlet {
 		 Gson gson = new Gson();
 		 String jsonInString = respuesta;
 		 userLogin = gson.fromJson(jsonInString, UsuarioLoginVO.class);
+		 userLogin.getPerfil().setNumeroEmpleado(Integer.parseInt(user));
 		 }
 		 catch (Exception e){
 			String clase  ="clase: "+ new String (Thread.currentThread().getStackTrace()[1].getClassName());	

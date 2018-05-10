@@ -103,7 +103,7 @@
 
 	<!-- Bootstrap core JavaScript -->
 	<script	src="${pageContext.request.contextPath}/js/jquery/jquery.min.js"></script>
-	<script	src="${pageContext.request.contextPath}/js/jquery/jquery-ui.js"></script>		
+	<script	src="${pageContext.request.contextPath}/js/jquery/jquery-ui.js"></script>
 	<script src="${pageContext.request.contextPath}/DataTable/js/jquery.dataTables.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/jquery/jquery.ui.datepicker-es.js"></script>
 	<script	src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>

@@ -2,6 +2,9 @@ var PRIMER_HORARIO_CONTEO	=	1;
 var SEGUNDO_HORARIO_CONTEO	=	2;
 var TERCER_HORARIO_CONTEO	=	3;
 
+var AUTORIZA_MODULO			= 1;
+var RECHAZA_MODULO			= 0;
+
 $(function(){
 	$('#idasignadas').addClass('resaltado');
 	
@@ -12,13 +15,135 @@ $(function(){
 		  strokeWidth: 2,
 		  easing: 'easeInOut',
 		  duration: 1400,
-		  color: '#FF0000',
 		  trailColor: '#eee',
+		  color: '#FF0000',
 		  trailWidth: 1,
 		  svgStyle: null
 		});
 	
-	bar.animate(0.375);
+	bar.animate(0.9, {
+	    from: {color: '#000000', width: 5},
+	    to: {color: "#00FF00", width: 5} });
+	
+	
+	//$('#example').popover();
+	
+	//$('[data-toggle="popover"]').popover()
+	
+	
+	
+	//$("#mensaje1").attr("data-content", "<div style='width: 200px; height; 100px; background: #FF0000;'>Test del 1</div>");
+	//$("#mensaje2").attr("data-content", "<div style='width: 200px; height; 100px; background: #FF0000;'>Test del 2</div>");
+	var contentPopGerente = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 17px;">Autorización Gerente de Expansión<br/></span></div>' + 
+				   '<div style="width: 60%; position: relative; float: left; margin-top: 10px;"><span style="color: #FFF;font-size: 12px;font-weight: bold;">Autorizó</span></div>' +
+				   '<div style="width: 40%; position: relative; float: left; margin-top: 10px;"><span style="color: #FFF;font-size: 12px;font-weight: bold;">Fecha autorización</span></div>' +
+				   '<div style="width: 60%; position: relative; float: left"><span style="color: #FFF;font-size: 10px;">Mariana Guadalupe Ramirez Rodriguez</span></div>' +
+				   '<div style="width: 40%; position: relative; float: left"><span style="color: #FFF;font-size: 10px;">02/04/2018</span></div>' +
+				   '<div style="width: 60%; position: relative; float: left"><span style="color: #FFF;font-size: 12px;font-weight: bold;">Fecha límite</span></div>' +
+				   '<div style="width: 40%; position: relative; float: left"><span style="color: #FFF;font-size: 12px;font-weight: bold;">Días vencidos</span></div>' + 
+				   '<div style="width: 60%; position: relative; float: left"><span style="color: #FFF;font-size: 10px;">02/04/2018</span></div>' +
+				   '<div style="width: 40%; position: relative; float: left"><span style="color: #FFF;font-size: 10px;">+2</span></div></div>';
+	
+	var contentPopExpansion = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 17px;">Autorización Expansión<br/></span></div>' + 
+	   '<div style="width: 60%; position: relative; float: left; margin-top: 10px;"><span style="color: #FFF;font-size: 12px;font-weight: bold;">Autorizó</span></div>' +
+	   '<div style="width: 40%; position: relative; float: left; margin-top: 10px;"><span style="color: #FFF;font-size: 12px;font-weight: bold;">Fecha autorización</span></div>' +
+	   '<div style="width: 60%; position: relative; float: left"><span style="color: #FFF;font-size: 10px;">Mariana Guadalupe Ramirez Rodriguez</span></div>' +
+	   '<div style="width: 40%; position: relative; float: left"><span style="color: #FFF;font-size: 10px;">02/04/2018</span></div>' +
+	   '<div style="width: 60%; position: relative; float: left"><span style="color: #FFF;font-size: 12px;font-weight: bold;">Fecha límite</span></div>' +
+	   '<div style="width: 40%; position: relative; float: left"><span style="color: #FFF;font-size: 12px;font-weight: bold;">Días vencidos</span></div>' + 
+	   '<div style="width: 60%; position: relative; float: left"><span style="color: #FFF;font-size: 10px;">02/04/2018</span></div>' +
+	   '<div style="width: 40%; position: relative; float: left"><span style="color: #FFF;font-size: 10px;">+2</span></div></div>';
+	
+	var contentPopGestoria = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 17px;">Autorización Gestoría<br/></span></div>' + 
+	   '<div style="width: 60%; position: relative; float: left; margin-top: 10px;"><span style="color: #FFF;font-size: 12px;font-weight: bold;">Autorizó</span></div>' +
+	   '<div style="width: 40%; position: relative; float: left; margin-top: 10px;"><span style="color: #FFF;font-size: 12px;font-weight: bold;">Fecha autorización</span></div>' +
+	   '<div style="width: 60%; position: relative; float: left"><span style="color: #FFF;font-size: 10px;">Mariana Guadalupe Ramirez Rodriguez</span></div>' +
+	   '<div style="width: 40%; position: relative; float: left"><span style="color: #FFF;font-size: 10px;">02/04/2018</span></div>' +
+	   '<div style="width: 60%; position: relative; float: left"><span style="color: #FFF;font-size: 12px;font-weight: bold;">Fecha límite</span></div>' +
+	   '<div style="width: 40%; position: relative; float: left"><span style="color: #FFF;font-size: 12px;font-weight: bold;">Días vencidos</span></div>' + 
+	   '<div style="width: 60%; position: relative; float: left"><span style="color: #FFF;font-size: 10px;">02/04/2018</span></div>' +
+	   '<div style="width: 40%; position: relative; float: left"><span style="color: #FFF;font-size: 10px;">+2</span></div></div>';
+	
+	var contentPopConstruccion = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 17px;">Autorización Construcción<br/></span></div>' + 
+	   '<div style="width: 60%; position: relative; float: left; margin-top: 10px;"><span style="color: #FFF;font-size: 12px;font-weight: bold;">Autorizó</span></div>' +
+	   '<div style="width: 40%; position: relative; float: left; margin-top: 10px;"><span style="color: #FFF;font-size: 12px;font-weight: bold;">Fecha autorización</span></div>' +
+	   '<div style="width: 60%; position: relative; float: left"><span style="color: #FFF;font-size: 10px;">Mariana Guadalupe Ramirez Rodriguez</span></div>' +
+	   '<div style="width: 40%; position: relative; float: left"><span style="color: #FFF;font-size: 10px;">02/04/2018</span></div>' +
+	   '<div style="width: 60%; position: relative; float: left"><span style="color: #FFF;font-size: 12px;font-weight: bold;">Fecha límite</span></div>' +
+	   '<div style="width: 40%; position: relative; float: left"><span style="color: #FFF;font-size: 12px;font-weight: bold;">Días vencidos</span></div>' + 
+	   '<div style="width: 60%; position: relative; float: left"><span style="color: #FFF;font-size: 10px;">02/04/2018</span></div>' +
+	   '<div style="width: 40%; position: relative; float: left"><span style="color: #FFF;font-size: 10px;">+2</span></div></div>';
+	
+	var contentPopOperaciones = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 17px;">Autorización Operaciones<br/></span></div>' + 
+	   '<div style="width: 60%; position: relative; float: left; margin-top: 10px;"><span style="color: #FFF;font-size: 12px;font-weight: bold;">Autorizó</span></div>' +
+	   '<div style="width: 40%; position: relative; float: left; margin-top: 10px;"><span style="color: #FFF;font-size: 12px;font-weight: bold;">Fecha autorización</span></div>' +
+	   '<div style="width: 60%; position: relative; float: left"><span style="color: #FFF;font-size: 10px;">Mariana Guadalupe Ramirez Rodriguez</span></div>' +
+	   '<div style="width: 40%; position: relative; float: left"><span style="color: #FFF;font-size: 10px;">02/04/2018</span></div>' +
+	   '<div style="width: 60%; position: relative; float: left"><span style="color: #FFF;font-size: 12px;font-weight: bold;">Fecha límite</span></div>' +
+	   '<div style="width: 40%; position: relative; float: left"><span style="color: #FFF;font-size: 12px;font-weight: bold;">Días vencidos</span></div>' + 
+	   '<div style="width: 60%; position: relative; float: left"><span style="color: #FFF;font-size: 10px;">02/04/2018</span></div>' +
+	   '<div style="width: 40%; position: relative; float: left"><span style="color: #FFF;font-size: 10px;">+2</span></div></div>';
+	
+	var contentPopSuperficie = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 17px;">Ponderación<br/></span></div>' + 
+	   '<div style="width: 60%; position: relative; float: left; margin-top: 10px;"><span style="color: #FFF;font-size: 12px;font-weight: normal;">Frente mts MIN:</span></div>' +
+	   '<div style="width: 40%; position: relative; float: left; margin-top: 10px;"><span style="color: #FFF;font-size: 12px;font-weight: bold;">15 mts</span></div>' +
+	   '<div style="width: 60%; position: relative; float: left; margin-top: 10px;"><span style="color: #FFF;font-size: 12px;font-weight: normal;">Profundidad mts MIN:</span></div>' +
+	   '<div style="width: 40%; position: relative; float: left; margin-top: 10px;"><span style="color: #FFF;font-size: 12px;font-weight: bold;">15 mts</span></div>' +
+	   '<div style="width: 60%; position: relative; float: left; margin-top: 10px;"><span style="color: #FFF;font-size: 12px;font-weight: normal;">Total MIN:</span></div>' +
+	   '<div style="width: 40%; position: relative; float: left; margin-top: 10px;"><span style="color: #FFF;font-size: 12px;font-weight: bold;">300 mts<super>2</super></span></div></div>';
+	
+	$("#gerenteExpansionSegPop").popover({
+		html: true, 
+		content : contentPopGerente
+	});
+	$("#expansionSegPop").popover({
+		html: true, 
+		content : contentPopExpansion
+	});
+	$("#gestoriaSegPop").popover({
+		html: true, 
+		content : contentPopGestoria
+	});
+	$("#construccionSegPop").popover({
+		html: true, 
+		content : contentPopConstruccion
+	});
+	$("#operacionesSegPop").popover({
+		html: true, 
+		content : contentPopOperaciones
+	});
+	
+	
+	
+	$("#superficieTip").popover({
+		html: true, 
+		content : contentPopSuperficie
+	});
+	$("#zonificacionTip").popover({
+		html: true, 
+		content : contentPopSuperficie
+	});
+	$("#construccionTip").popover({
+		html: true, 
+		content : contentPopSuperficie
+	});
+	$("#generalidadesTip").popover({
+		html: true, 
+		content : contentPopSuperficie
+	});
+	$("#conteosTip").popover({
+		html: true, 
+		content : contentPopSuperficie
+	});
+	
+	$('.popover-dismiss').popover({
+		  trigger: 'focus'
+		});
+		
+	
+	$("#btnModalAutorizacion").click(function() {
+		$("#modal_autorizacion").modal("hide");
+	});
 });
 
 function buscaDetalleMD(mdId) {
@@ -104,9 +229,9 @@ function buscaDetalleMD(mdId) {
 			$("#amortizacion").text('$' + formato(data.generalidadesSitio.amortizacion, true) + " al mes");
 			$("#tiempoAmortizacion").text(data.generalidadesSitio.tiempoAmortizacion + " meses");
 			$("#periodoGracia").text(data.generalidadesSitio.periodoGracia);
-			$("#puntuacionGeneralidadesSitio").text(data.generalidadesSitio.puntos);
+			$("#puntosGeneralidades").text(data.generalidadesSitio.puntos);
 			/* Datos de los conteos */
-			$("#puntuacionConteos").text(data.flujoPeatonal.puntos);
+			$("#puntosConteos").text(data.flujoPeatonal.puntos);
 			$("#promedioConteos").text(data.flujoPeatonal.promedio);
 			var conteo1 = new Array();
 			var conteo2 = new Array();
@@ -141,7 +266,10 @@ function buscaDetalleMD(mdId) {
 			promedio.push(suma2 / conteo2.length);
 			promedio.push(suma3 / conteo3.length);
 			
-			initMap(data.latitud, data.longitud, listaCompetencias, listaGeneradores);
+			setTimeout(function () {
+				initMap(data.latitud, data.longitud, listaCompetencias, listaGeneradores);
+			}, 500);
+			
 			
 			cargaFlujoPeatonal(categorias, fecha1, conteo1, fecha2, conteo2, fecha3, conteo3, promedio);
 		
@@ -203,6 +331,24 @@ function cargaFlujoPeatonal(categorias, fecha1, conteo1, fecha2, conteo2, fecha3
 
 	    }]
 	});
+}
+
+function autorizaPantalla(modulo) {
+	$("#tituloModalAutorizacion").text("¿Estás seguro de autorizar este punto?");
+	$("#tipoAutorizacion").val(AUTORIZA_MODULO);
+	$("#moduloId").val(modulo);
+	$("#mdIdAutorizacion").val($("#mdId").val());
+	$("#comboMotivos").hide();
+	$("#modal_autorizacion").modal("show");
+}
+
+function rechazaPantalla(modulo) {
+	$("#tituloModalAutorizacion").text("¿Estás seguro de rechazar este punto?");
+	$("#tipoAutorizacion").val(RECHAZA_MODULO);
+	$("#moduloId").val(modulo);
+	$("#mdIdAutorizacion").val($("#mdId").val());
+	$("#comboMotivos").show();
+	$("#modal_autorizacion").modal("show");
 }
 
 function initMap(latitudSitio, longitudSitio, listaCompetencias, listaGeneradores) {

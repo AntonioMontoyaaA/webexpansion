@@ -57,11 +57,8 @@
          	<result name = "success">jsp/asignadas_detalle.jsp</result>
       	</action>
       	
-      	<action name = "DashboardGeneralAction" 
-         		class = "com.tiendas.neto.action.DashboardGeneralAction" 
-         		method = "execute">
-         	<result name = "success">jsp/dashboard.jsp</result>
-      	</action>
+      	<action name = "DashboardGeneralAction" class="com.tiendas.neto.action.DashboardGeneralAction"
+      	 method = "execute" />
       	
 	</package>
 	

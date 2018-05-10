@@ -33,16 +33,19 @@
 				</div>
 				<div class="col-lg-7 text-right">
 					<form class="form-inline p_cabecera">
-					<span class="fecha">Hoy 04 de Mayo del 2018 12:22PM</span>
+					<span class="fecha" id="fechahoy"></span>
   					
-  						<select class="form-control form-inline desp filtro">
-  						<option selected>Mes</option>
-    					<option>Día</option>
-    					<option>Semana</option>
-    					<option>Año</option>
+  						<select class="form-control form-inline desp filtro" onchange="progGeneral();" id="opcion">
+    					<option value="1">Día</option>
+    					<option value="2">Semana</option>
+    					<option value="3" selected>Mes</option>
+    					<option value="4">Bimestre</option>
+    					<option value="5">Trimestre</option>
+    					<option value="6">Semestre</option>
+    					<option value="7">Año</option>
   						</select>
 							&nbsp;
-  						<button class="btn desp rechargue" type="button">
+  						<button class="btn desp rechargue" type="button" onclick="progGeneral();">
   								<img src="${pageContext.request.contextPath}/img/refresh_sf.png" />
   						</button>
   					</form>
@@ -61,13 +64,9 @@
 			</div>
 			
 			</div>
-				<div id="container"></div>
-				<table id="datatable"></table>
-				
+				<div id="container"></div>				
 				<div id="container_sm1"></div>
-				<table id="datatable_sm1"></table>
 				<div id="container_sm2"></div>
-				<table id="datatable_sm2"></table>
 		</div>
 		</div>
 <!-- FIN PROGRESO GENERAL DE AREAS -->
@@ -80,16 +79,19 @@
 				</div>
 				<div class="col-lg-7 text-right">
 					<form class="form-inline p_cabecera">
-					<span class="fecha">Hoy 04 de Mayo del 2018 12:22PM</span>
+					<span class="fecha" id="fechahoy"></span>
   					
   						<select class="form-control form-inline desp filtro">
-  						<option selected>Semana</option>
-    					<option></option>
-    					<option></option>
-    					<option></option>
+    					<option>Día</option>
+    					<option selected>Semana</option>
+    					<option>Mes</option>
+    					<option>Bimestre</option>
+    					<option>Trimestre</option>
+    					<option>Semestre</option>
+    					<option>Año</option>
   						</select>
 							&nbsp;
-  						<button class="btn desp rechargue" type="button">
+  						<button class="btn desp rechargue" type="button" onclick="">
   								<img src="${pageContext.request.contextPath}/img/refresh_sf.png" />
   						</button>
   					</form>
@@ -100,36 +102,114 @@
 			</div>
 			
 			</div>
-				<div id="container"></div>
-				<table id="datatable"></table>
-				
-				<div id="container_sm1"></div>
-				<table id="datatable_sm1"></table>
-				<div id="container_sm2"></div>
-				<table id="datatable_sm2"></table>
+				<div id="container_psemanal"></div>
 		</div>
 			
 		</div>
 <!-- FIN PROGRESO SEMANAL -->
-		</div>
-		
+		</div>	
 		<div class="col-lg-4 ">
 		<div class="row divs_p">
-			<div class="col-lg-12 menupr_estilos" style="height:150px;"></div>
+<!-- PLAN APERTURA MENSUAL -->	
+			<div class="col-lg-12 menupr_estilos">
+				<div class="row cabecera">
+				<div class="col-lg-10 col-md-10">
+					<span class="azul negrita">Plan Apertura Mensual</span>
+				</div>
+				<div class="col-lg-2 col-md-2 text-right">
+					<form class="form-inline p_cabecera">
+  						<button class="btn desp rechargue" type="button">
+  								<img src="${pageContext.request.contextPath}/img/refresh_sf.png" />
+  						</button>
+  					</form>
+				</div>
+			<div class="col-lg-12 p_cabecera">
+				<span class="azul estilo_info">METAS</span><span class="azul negrita estilo_dato">15</span>
+				<span class="azul estilo_info">TIENDAS ABIERTAS</span><span class="azul negrita estilo_dato">14</span>
+				<span class="azul estilo_info">ABRIL</span><span class="azul negrita estilo_dato">2</span>
+			</div>
+			</div>	
+			
+			<div id="container_apmensual"></div>
+			
+		</div>
+<!--FIN PLAN APERTURA MENSUAL -->	
 		</div>
 		
 		<div class="row">
 			<div class="col-lg-6 col-md-4 col-6 divs_p">
-				<div class="col-lg-12 menupr_estilos" style="height:150px;"></div>
+				<div class="col-lg-12 menupr_estilos">
+				<div class="row cabecera">
+					<div class="col-lg-10 col-md-10">
+						<span class="azul negrita">Asignadas</span>
+					</div>
+				</div>	
+				<div id="container_asignadas"></div>
+				<div class="row resumen_pie">
+					<div class="col-xl-7 col-lg-12 col-md-6 col-sm-6">
+						<span class="resumen_personales_punto resumen_personales">0</span><span class="resumen_personales azul">&nbsp;Personales</span>
+					</div>
+					<div class="col-xl-5 col-lg-12 col-md-6 col-sm-6">
+						<span class="resumen_area azul">&nbsp;Área</span><span class="resumen_area_punto resumen_area">0</span>
+					</div>
+				</div>
+				</div>
+			</div>
+			
+			<div class="col-lg-6 col-md-4 col-6 divs_p">
+				<div class="col-lg-12 menupr_estilos">
+				<div class="row cabecera">
+					<div class="col-lg-10 col-md-10">
+						<span class="azul negrita">Atrasadas</span>
+					</div>
+				</div>	
+				<div id="container_atrasadas"></div>
+				<div class="row resumen_pie">
+					<div class="col-xl-7 col-lg-12 col-md-6 col-sm-6">
+						<span class="resumen_personales_punto resumen_personales">0</span><span class="resumen_personales azul">&nbsp;Personales</span>
+					</div>
+					<div class="col-xl-5 col-lg-12 col-md-6 col-sm-6">
+						<span class="resumen_area azul">&nbsp;Área</span><span class="resumen_area_punto resumen_area">0</span>
+					</div>
+				</div>
+				</div>
 			</div>
 			<div class="col-lg-6 col-md-4 col-6 divs_p">
-				<div class="col-lg-12 menupr_estilos" style="height:150px;"></div>
+				<div class="col-lg-12 menupr_estilos">
+				<div class="row cabecera">
+					<div class="col-lg-10 col-md-10">
+						<span class="azul negrita">Autorizadas</span>
+					</div>
+				</div>	
+				<div id="container_autorizadas"></div>
+				<div class="row resumen_pie">
+					<div class="col-xl-7 col-lg-12 col-md-6 col-sm-6">
+						<span class="resumen_personales_punto resumen_personales">0</span><span class="resumen_personales azul">&nbsp;Personales</span>
+					</div>
+					<div class="col-xl-5 col-lg-12 col-md-6 col-sm-6">
+						<span class="resumen_area azul">&nbsp;Área</span><span class="resumen_area_punto resumen_area">0</span>
+					</div>
+				</div>
+				</div>
 			</div>
 			<div class="col-lg-6 col-md-4 col-6 divs_p">
-				<div class="col-lg-12 menupr_estilos" style="height:150px;"></div>
-			</div>
-			<div class="col-lg-6 col-md-4 col-6 divs_p">
-				<div class="col-lg-12 menupr_estilos" style="height:150px;"></div>
+				<div class="col-lg-12 menupr_estilos">
+				<div class="row cabecera">
+					<div class="col-lg-10 col-md-10">
+						<span class="azul negrita">Rechazadas</span>
+					</div>
+				</div>	
+				<div id="container_rechazadas"></div>
+				<div class="row resumen_pie">
+					<div class="col-xl-7 col-lg-12 col-md-6 col-sm-6">
+						<span class="resumen_personales_punto resumen_personales">0</span><span class="resumen_personales azul">&nbsp;Personales</span>
+					</div>
+					<div class="col-xl-5 col-lg-12 col-md-6 col-sm-6">
+						<span class="resumen_area azul">&nbsp;Área</span><span class="resumen_area_punto resumen_area">0</span>
+					</div>
+				</div>
+				
+				</div>
 			</div>	
 		</div>
 		</div>
@@ -137,12 +217,13 @@
 	</div>
 </div>
 	
-
 <jsp:include page="/jsp/generic/loading.jsp" />
 <jsp:include page="/jsp/generic/mensajes.jsp" />
-		
+
 
 	<script	src="${pageContext.request.contextPath}/js/jquery/jquery.min.js"></script>
+	<script	src="${pageContext.request.contextPath}/bootstrap/js/popper.min.js" type="text/javascript"></script>
+	<script	src="${pageContext.request.contextPath}/bootstrap/js/tooltip.min.js" type="text/javascript"></script>
 	<script	src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.bundle.min.js" type="text/javascript"></script>
 	<script	src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 	<script	src="${pageContext.request.contextPath}/highcharts/highcharts.js"></script>

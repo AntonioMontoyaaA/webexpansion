@@ -8,7 +8,7 @@
 @media (max-width: 1530px) {
 	.fecha{margin-left:30%;}
 }
-@media (max-width: 1330px) {
+@media (max-width: 1350px) {
 	.fecha{margin-left:20%;}
 }
 @media (max-width: 1190px) {
@@ -18,11 +18,11 @@
 	.fecha{margin-left:0;}
 }
 span.estilo_info{
-	font-size:15px;
+	font-size:14px;
 	padding-right:8px;
 }
 span.estilo_dato{
-	font-size:15px;
+	font-size:14px;
 	padding-right:15px;
 }
 .p_cabecera{
@@ -54,30 +54,18 @@ span.estilo_dato{
 }
 
 /* ------------------------------------------- GRAFICAS --------------*/
-
+/* ------------------------------------------- GRAFICA PROGRESO GENERAL DE AREAS --------------*/
 table{
 	display:none;
 }
-.highcharts-credits{
-	display:none;
-}
-.highcharts-title{
-	display:none;
-}
-.highcharts-button{
-	display:none;
-}
-.highcharts-axis-title{
-	display:none;
-}
-.highcharts-point{
+#container .highcharts-point{
 	width:13px;
 }
+
 #container{
 	padding-top:25px;
-	padding-right:10px;
 	min-width: 200px;
-	height: 250;
+	height: 35%;
 	margin: 0 auto;
 }
 #container_sm1{
@@ -93,9 +81,67 @@ table{
 	margin: 0 auto;
 }
 
-
-@media (max-width: 500px) {
+#container_psemanal{
+	padding-top:25px;
+	min-width: 200px;
+	height: 35%;
+	margin: 0 auto;
+}
+#container_apmensual{
+	min-width: 200px;
+	height: 27%;
+	margin: 0 auto;
+}
+#container_asignadas,#container_atrasadas,#container_autorizadas,#container_rechazadas{
+	min-width: 100px;
+	height: 19%;
+	max-width: auto;
+	margin: 0 auto
+}
+/* ESTILOS DE LA SECCION DE RESUMEN, CIRCULOS*/
+.numero_grande{
+	font-size:2.5em;
+	font-weight:bold;
+}
+.numero_chico{
+	font-size:0.8em;
+}
+.resumen_personales{
+	 float:left;
+	 text-align:left;
+	 font-size:10px;
+}
+.resumen_area{
+	float:right;
+	text-align:right;
+	font-size:10px;
+	padding-bottom:5px;
+}
+.resumen_personales_punto{
+	text-align:center !important;
+	width:15px;
+	height:15px;
+	background-image:url(../img/circulo_azul_p.png);
+	background-position: left; 
+	background-repeat: no-repeat;
+	color:white;
+}
+.resumen_area_punto{
+	text-align:center !important;
+	width:15px;
+	height:15px;
+	background-image:url(../img/circulo_azulc_p.png);
+	background-position: left; 
+	background-repeat: no-repeat;
+	color:white;
+}
+/*-----------------------------------*/
+@media (max-width: 576px) {
 	#container{display:none;}
 	#container_sm1{display:block;}
 	#container_sm2{display:block;}
+	#container_psemanal{height: auto;}
+	#container_apmensual{height: 200px;}
+	.numero_grande{font-size:1.5em}
+	.numero_chico{font-size:0.6em}
 }

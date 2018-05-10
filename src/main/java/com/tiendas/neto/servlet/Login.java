@@ -95,7 +95,6 @@ public class Login  extends HttpServlet {
          .add("contrasena", pass)
          .add("numTelefono", "")
          .add("tipoLog", "2");
-		//prueba de cambio
 		 RequestBody formBody = formBuilder.build();
 		 Request request = new Request.Builder()
 				 .url(sp.getPropiedad("login"))

@@ -34,6 +34,9 @@
 		<action name="localizador">
 			<result>jsp/localizador.jsp</result>
 		</action>
+		<action name="mensajes_historial">
+			<result>jsp/mensajes_historial.jsp</result>
+		</action>
 		
 
 	</package>
@@ -58,7 +61,10 @@
       	</action>
       	
       	<action name = "DashboardGeneralAction" class="com.tiendas.neto.action.DashboardGeneralAction"
-      	 method = "execute" />
+      	 method = "execute"></action>
+      	 
+      	<action name = "MensajeHistorialAction" class="com.tiendas.neto.action.MensajeHistorialAction"
+      	 method = "execute"></action>
       	
 	</package>
 	

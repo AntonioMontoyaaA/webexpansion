@@ -222,8 +222,6 @@
 
 
 	<script	src="${pageContext.request.contextPath}/js/jquery/jquery.min.js"></script>
-	<script	src="${pageContext.request.contextPath}/bootstrap/js/popper.min.js" type="text/javascript"></script>
-	<script	src="${pageContext.request.contextPath}/bootstrap/js/tooltip.min.js" type="text/javascript"></script>
 	<script	src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.bundle.min.js" type="text/javascript"></script>
 	<script	src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 	<script	src="${pageContext.request.contextPath}/highcharts/highcharts.js"></script>

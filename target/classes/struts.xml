@@ -34,6 +34,9 @@
 		<action name="localizador">
 			<result>jsp/localizador.jsp</result>
 		</action>
+		<action name="mensajes_historial">
+			<result>jsp/mensajes_historial.jsp</result>
+		</action>
 		
 
 	</package>
@@ -43,6 +46,11 @@
          		class = "com.tiendas.neto.action.AsignadasInfoAction" 
          		method = "execute">
          	<result name = "success">jsp/autorizadas.jsp</result>
+      	</action>
+      	
+      	<action name = "excelAsignadasAction" 
+         		class = "com.tiendas.neto.action.excel.ExcelAsignadasAction" 
+         		method = "execute">
       	</action>
       	
       	<action name = "memoria_detalle" 
@@ -58,7 +66,10 @@
       	</action>
       	
       	<action name = "DashboardGeneralAction" class="com.tiendas.neto.action.DashboardGeneralAction"
-      	 method = "execute" />
+      	 method = "execute"></action>
+      	 
+      	<action name = "MensajeHistorialAction" class="com.tiendas.neto.action.MensajeHistorialAction"
+      	 method = "execute"></action>
       	
 	</package>
 	

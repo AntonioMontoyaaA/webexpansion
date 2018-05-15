@@ -25,69 +25,25 @@
 
 <div class="container-fluid">
 	<div class="row padding_p">
-		<div class="col-lg-12 titulo">Dashboard Expansión > Asignadas </div>
-	
-		<div class="col-lg-12 titulogrande">
-			<div style="width: 80%; position: relative; float: left;">MD ASIGNADAS</div>
-			<div style="width: 20%; position: relative; float: left; padding-top: 5px;">
-				<div style="position: relative; float: left;margin-right: 10px;cursor: pointer"><img src="${pageContext.request.contextPath}/img/iconos_DOWNLOAD.png"></div>
-				<div style="position: relative; float: left;margin-right: 10px;"><input type="text" class="fechaInicialCalendario" readonly id="datepicker1"/></div>
-				<div class="buscadorAsignadas"><input placeholder="Buscar MD" id="buscadorAsignadas" class="buscadorAsignadasInput" onkeyup="ejecutaBusquedaAsignadas()" type="text" /></div>
-			</div>
+		<div class="col-lg-5 titulo">Dashboard Expansión > Asignadas </div>
+		<div class="col-lg-2 titulo" style="background: #FFFFFF; color: #1f3d7a;text-align: center; border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">
+			<span class="punto"></span>
+			<span style="padding-left: 5px;">A tiempo</span><span style="padding-left: 20px;">&nbsp;</span>
+			<span class="punto" style="background-color: #FF5B16"></span>
+			<span style="padding-left: 5px;">Vencidas</span></div>
+		<div class="col-lg-5 titulo">&nbsp;</div>
+		<div class="col-lg-9 titulogrande">MD ASIGNADAS</div>
+		<div class="col-lg-3" style="padding-top: 5px;">
+			<div id="descargaExcelAsignadas" style="position: relative; float: left;margin-right: 10px;cursor: pointer"><img src="${pageContext.request.contextPath}/img/iconos_DOWNLOAD.png"></div>
+			<div style="position: relative; float: left;margin-right: 10px;"><input type="text" class="fechaInicialCalendario" readonly id="datepicker1"/></div>
+			<div class="buscadorAsignadas"><input placeholder="Buscar MD" id="buscadorAsignadas" class="buscadorAsignadasInput" onkeyup="ejecutaBusquedaAsignadas()" type="text" /></div>
 		</div>
 		<div class="col-lg-12">
 			<div class="row padding_p">
 				<div class="col-lg-12 menupr_estilos tabla_container">
-			
 					<!--Tabla-->
     				<div id="DivTablaAsignadas" style="padding-top: 3px;position: relative;float: left;width: 99%; left: 5px;">
     				</div>
-			
-			<!--  
-			<table id="example" class="row-border">
-        <thead>
-            <tr>
-                <th>Nombre MD</th>
-                <th>Categoría</th>
-                <th>Puntuación</th>
-                <th>Creador</th>
-                <th>Fecha de creación</th>
-                <th>Fecha de vencimiento</th>
-                <th>Mensajes</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="left"><a href="asignadas_detalle">MD Oaxaca Centro</a></td>
-                <td>A</td>
-               <td class="left">27 puntos . . .</td>
-                <td>Juan de la Cruz</td>
-                <td>10/03/2018</td>
-                <td>06/04/2018</td>
-                <td>*</td>
-            </tr>
-            <tr>
-                <td class="left"><a href="asignadas_detalle">MD Chilpancingo</a></td>
-               <td>A</td>
-                <td class="left">27 puntos . . .</td>
-                <td>Antonio Montoya</td>
-                <td>25/02/2018</td>
-                <td>08/04/2018</td>
-                <td>*</td>
-            </tr>
-            <tr>
-               <td class="left"><a href="asignadas_detalle">MD Morelos Sur</a></td>
-                <td>A</td>
-                <td class="left">27 puntos . . .</td>
-                <td>Omar Perez</td>
-                <td>03/01/2018</td>
-                <td>08/04/2018</td>
-                <td>*</td>
-            </tr>
-        </tbody>
-    </table>
-     -->
-			
 				</div>
 			</div>
 		</div>
@@ -96,9 +52,14 @@
 
 <jsp:include page="/jsp/generic/loading.jsp" />
 <jsp:include page="/jsp/generic/mensajes.jsp" />
-<form action='memoria_detalle'  id="detalleMemoriaAsignadaAction" method="get">
+<form action='memoria_detalle'  id="detalleMemoriaAsignadaAction" method="post">
 	<input type="hidden" name="mdId" id="mdId" value=""/>
 	<input type="hidden" name="nombreMd" id="nombreMd" value=""/>
+</form>
+
+<form style="display: hidden" action="./excelAsignadasAction" method="POST" id="form">
+	<input type="hidden" id="datos" name="datos" value=""/>
+	<input type="submit" id="submitBotonAsignadas" style="display:none" />
 </form>
 
 	<!-- Bootstrap core JavaScript -->

@@ -1,8 +1,18 @@
+var datosExcel = "";
 
 $(function(){
 	$('#idasignadas').addClass('resaltado');
 	inicializaCalendarios();
 	creatabla();
+	
+	$( "#datepicker1").change(function() {
+		creatabla();
+	});
+	
+	$("#descargaExcelAsignadas").click(function() {
+		$("#datos").val(JSON.stringify(datosExcel));
+		$("#submitBotonAsignadas").click();
+	});
 	
 });
 
@@ -21,8 +31,6 @@ function inicializaCalendarios() {
         onClose: function( selectedDate ) {
 			var date = $(this).datepicker('getDate');			
 			var endDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-	
-			$("#datepicker2").datepicker( "option", "minDate", selectedDate );
         }
 	});
 	
@@ -33,7 +41,7 @@ function inicializaCalendarios() {
 function creatabla(){
 	
 	invocarJSONServiceAction("asignadas_info", 
-				{'variable1': 'valor1', 'mdId': 'valor2'}, 
+				{'fechaConsulta': $( "#datepicker1").val()}, 
 				'obtieneMdsResponse', 
 				function() {
 					//Funcion de error
@@ -49,14 +57,25 @@ function creatabla(){
 	obtieneMdsResponse = function( data ) {
 		
 		
-		if(data.codigo == 404) {
+		if(data.codigo != 200) {
 			cargaMensajeModal('MD ASIGNADAS', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
+			$("#descargaExcelAsignadas").hide();
+			initTablaMemoriasAsignadas('DivTablaAsignadas', 0, 'tablaMemoriasAsignadas');
 		} else {
-			var resultados = data.mds
+			var resultados = data.mds;
+			datosExcel = data;
+			$("#descargaExcelAsignadas").show();
 			
 			var datosMemoriasAsignadas = new Array();
 			var total = 0;
 			var spanRojo = "";
+			var puntuacionEnTiempoA = "<img src='img/icono_estrella_azul.png'>&nbsp;&nbsp;&nbsp;<img src='img/icono_estrella_azul.png'>&nbsp;&nbsp;&nbsp;<img src='img/icono_estrella_azul.png'>";
+			var puntuacionEnTiempoB = "<img src='img/icono_estrella_azul.png'>&nbsp;&nbsp;&nbsp;<img src='img/icono_estrella_azul.png'>";
+			var puntuacionEnTiempoC = "<img src='img/icono_estrella_azul.png'>";
+			var puntuacionVencidaA = "<img src='img/icono_estrella_roja.png'>&nbsp;&nbsp;&nbsp;<img src='img/icono_estrella_roja.png'>&nbsp;&nbsp;&nbsp;<img src='img/icono_estrella_roja.png'>";
+			var puntuacionVencidaB = "<img src='img/icono_estrella_roja.png'>&nbsp;&nbsp;&nbsp;<img src='img/icono_estrella_roja.png'>";
+			var puntuacionVencidaC = "<img src='img/icono_estrella_roja.png'>";
+			var estrellas = "";
 			
 			for( var i = 0 ; i < resultados.length; i++){
 				
@@ -65,19 +84,33 @@ function creatabla(){
 				} else {
 					spanRojo = "";
 				}
+				
+				if(resultados[i].categoria == 'A' && resultados[i].mdVencida) {
+					estrellas = puntuacionVencidaA;
+				} else {
+					estrellas = puntuacionEnTiempoA;
+				}
+				if(resultados[i].categoria == 'B' && resultados[i].mdVencida) {
+					estrellas = puntuacionVencidaB;
+				} else {
+					estrellas = puntuacionEnTiempoB;
+				}
+				if(resultados[i].categoria == 'C' && resultados[i].mdVencida) {
+					estrellas = puntuacionVencidaC;
+				} else {
+					estrellas = puntuacionEnTiempoC;
+				}
+				
 				datosMemoriasAsignadas[i] = new Array();	 	 		 			 
 				datosMemoriasAsignadas[i][0] = "<span style='" + spanRojo + "'>" + resultados[i].nombreMd + "</span>"; 
 				datosMemoriasAsignadas[i][1] = "<span style='" + spanRojo + "'>" + resultados[i].categoria + "</span>";
-				datosMemoriasAsignadas[i][2] = "<span style='" + spanRojo + "'>" + resultados[i].puntuacion + "</span>";
+				datosMemoriasAsignadas[i][2] = "<span style='" + spanRojo + "'>" + resultados[i].puntuacion + "</span>" + estrellas;
 				datosMemoriasAsignadas[i][3] = "<span style='" + spanRojo + "'>" + resultados[i].creador + "</span>";
 				datosMemoriasAsignadas[i][4] = "<span style='" + spanRojo + "'>" + resultados[i].fechaCreacion + "</span>";
 				datosMemoriasAsignadas[i][5] = "<span style='" + spanRojo + "'>" + resultados[i].fechaVencimiento + "</span>";
 				datosMemoriasAsignadas[i][6] = "<div><img src='img/iconos_COMENTARIOS.png'></div>"
 				datosMemoriasAsignadas[i][7] = resultados[i].mdId;
 			 }
-			
-			
-
 			
 			 initTablaMemoriasAsignadas('DivTablaAsignadas', datosMemoriasAsignadas, 'tablaMemoriasAsignadas');
 			 

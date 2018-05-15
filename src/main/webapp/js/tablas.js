@@ -49,7 +49,7 @@ function initTablaMemoriasAsignadas(nombreDiv, datosDesgloseVenta, nombreTabla){
 }
 
 var idiomaEspanol = {
-	    "sEmptyTable":     "<div style='padding:10px; color:red; font-size:13px;'>No existen memorias</div>",
+	    "sEmptyTable":     "<div style='padding:10px; color:red; font-size:13px;'>No existen memorias descriptivas</div>",
 	    "sInfo":           "Totales: <b>_TOTAL_</b>",
 	    "sInfoEmpty":      "Totales: 0",
 	    "sInfoFiltered":   "(_TOTAL_ de _MAX_ memorias en total)",

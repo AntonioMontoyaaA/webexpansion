@@ -220,3 +220,11 @@ Left
   	background-repeat: no-repeat;
   	cursor: pointer;
 }
+
+.punto {
+    height: 10px;
+    width: 10px;
+    background-color: #1f3d7a;
+    border-radius: 50%;
+    display: inline-block;
+}

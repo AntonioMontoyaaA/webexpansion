@@ -33,17 +33,29 @@ public class AsignadasInfoAction extends ActionSupport implements SessionAware, 
 
 	
 	@Override
-	public String execute() throws Exception{
+	public String execute() throws Exception {
 		String respuesta="";
 		String fechaConsulta = ServletActionContext.getRequest().getParameter("fechaConsulta");
+		UsuarioLoginVO usuario = null;
+		String numeroEmpleado = null;
+		HttpSession usuarioSesion = ServletActionContext.getRequest().getSession();
+		usuario = (UsuarioLoginVO) usuarioSesion.getAttribute("usr");
 		
 		try {
-			HttpSession usuarioSesion = ServletActionContext.getRequest().getSession();
-			UsuarioLoginVO usuario = (UsuarioLoginVO) usuarioSesion.getAttribute("usr");
+			if(usuario != null) {
+				numeroEmpleado = String.valueOf(usuario.getPerfil().getNumeroEmpleado());
+			} else {
+				RespuestaVo respuestaVo = new RespuestaVo();
+				respuestaVo.setCodigo(501);
+				respuestaVo.setMensaje("Error en la sesión");
+				sendJSONObjectToResponse(respuestaVo);
+				
+				return null;
+			}
 			
 			final OkHttpClient client = new OkHttpClient();
 			FormBody.Builder formBuilder = new FormBody.Builder()
-			 .add("usuarioId", String.valueOf(usuario.getPerfil().getNumeroEmpleado()))
+			 .add("usuarioId", numeroEmpleado)
 	         .add("fechaConsulta", fechaConsulta)
 	         .add("areaId", "1");
 			
@@ -60,10 +72,10 @@ public class AsignadasInfoAction extends ActionSupport implements SessionAware, 
 				response2.setCharacterEncoding("UTF-8");
 				response2.getWriter().write(respuesta);
 			 }
-			 catch (Exception e){
+			 catch (Exception e) {
 				String clase  ="clase: "+ new String (Thread.currentThread().getStackTrace()[1].getClassName());	
 				String metodo ="metodo: "+ new String (Thread.currentThread().getStackTrace()[1].getMethodName());
-				elog.error(clase,metodo,e+"","", ""); 
+				elog.error(clase,metodo,e + "", "ID empleado: " + usuario.getPerfil().getNumeroEmpleado(), "Fecha consulta: " + fechaConsulta); 
 				
 				RespuestaVo respuestaVo = new RespuestaVo();
 				respuestaVo.setCodigo(404);

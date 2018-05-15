@@ -48,6 +48,11 @@
          	<result name = "success">jsp/autorizadas.jsp</result>
       	</action>
       	
+      	<action name = "excelAsignadasAction" 
+         		class = "com.tiendas.neto.action.excel.ExcelAsignadasAction" 
+         		method = "execute">
+      	</action>
+      	
       	<action name = "memoria_detalle" 
          		class = "com.tiendas.neto.action.DetalleMemoriaAsignadaAction" 
          		method = "execute">

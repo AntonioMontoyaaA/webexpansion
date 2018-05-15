@@ -36,7 +36,7 @@ function invocarJSONServiceAction(nombreAction, parametros, successFunction, err
 	
 	funcionSuccess = function redireccionarMenuEj(respuesta)
 	{
-		if (respuesta.error == true && respuesta.msg == "ssesi") {
+		if (respuesta.codigo == 501) {
 			try{
 				cierraLoading();
 			}

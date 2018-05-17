@@ -69,12 +69,12 @@ function creatabla(){
 			var datosMemoriasAsignadas = new Array();
 			var total = 0;
 			var spanRojo = "";
-			var puntuacionEnTiempoA = "<img src='img/icono_estrella_azul.png'>&nbsp;&nbsp;&nbsp;<img src='img/icono_estrella_azul.png'>&nbsp;&nbsp;&nbsp;<img src='img/icono_estrella_azul.png'>";
-			var puntuacionEnTiempoB = "<img src='img/icono_estrella_azul.png'>&nbsp;&nbsp;&nbsp;<img src='img/icono_estrella_azul.png'>";
-			var puntuacionEnTiempoC = "<img src='img/icono_estrella_azul.png'>";
-			var puntuacionVencidaA = "<img src='img/icono_estrella_roja.png'>&nbsp;&nbsp;&nbsp;<img src='img/icono_estrella_roja.png'>&nbsp;&nbsp;&nbsp;<img src='img/icono_estrella_roja.png'>";
-			var puntuacionVencidaB = "<img src='img/icono_estrella_roja.png'>&nbsp;&nbsp;&nbsp;<img src='img/icono_estrella_roja.png'>";
-			var puntuacionVencidaC = "<img src='img/icono_estrella_roja.png'>";
+			var puntuacionEnTiempoA = "<img class='estrellaPuntuacion' src='img/icono_estrella_azul.png'><img class='estrellaPuntuacion' src='img/icono_estrella_azul.png'><img class='estrellaPuntuacion' src='img/icono_estrella_azul.png'>";
+			var puntuacionEnTiempoB = "<img class='estrellaPuntuacion' src='img/icono_estrella_azul.png'><img class='estrellaPuntuacion' src='img/icono_estrella_azul.png'>";
+			var puntuacionEnTiempoC = "<img class='estrellaPuntuacion' src='img/icono_estrella_azul.png'>";
+			var puntuacionVencidaA = "<img class='estrellaPuntuacion' src='img/icono_estrella_roja.png'><img class='estrellaPuntuacion' src='img/icono_estrella_roja.png'><img class='estrellaPuntuacion' src='img/icono_estrella_roja.png'>";
+			var puntuacionVencidaB = "<img class='estrellaPuntuacion' src='img/icono_estrella_roja.png'><img class='estrellaPuntuacion' src='img/icono_estrella_roja.png'>";
+			var puntuacionVencidaC = "<img class='estrellaPuntuacion' src='img/icono_estrella_roja.png'>";
 			var estrellas = "";
 			
 			for( var i = 0 ; i < resultados.length; i++){
@@ -85,21 +85,14 @@ function creatabla(){
 					spanRojo = "";
 				}
 				
-				if(resultados[i].categoria == 'A' && resultados[i].mdVencida) {
-					estrellas = puntuacionVencidaA;
-				} else {
-					estrellas = puntuacionEnTiempoA;
-				}
-				if(resultados[i].categoria == 'B' && resultados[i].mdVencida) {
-					estrellas = puntuacionVencidaB;
-				} else {
-					estrellas = puntuacionEnTiempoB;
-				}
-				if(resultados[i].categoria == 'C' && resultados[i].mdVencida) {
-					estrellas = puntuacionVencidaC;
-				} else {
-					estrellas = puntuacionEnTiempoC;
-				}
+				switch(resultados[i].categoria) {
+					case 'A':	resultados[i].mdVencida ? estrellas = puntuacionVencidaA : estrellas = puntuacionEnTiempoA;
+								break;
+					case 'B':	resultados[i].mdVencida ? estrellas = puntuacionVencidaB : estrellas = puntuacionEnTiempoB;
+								break;
+					case 'C':	resultados[i].mdVencida ? estrellas = puntuacionVencidaC : estrellas = puntuacionEnTiempoC;
+								break;
+				};
 				
 				datosMemoriasAsignadas[i] = new Array();	 	 		 			 
 				datosMemoriasAsignadas[i][0] = "<span style='" + spanRojo + "'>" + resultados[i].nombreMd + "</span>"; 

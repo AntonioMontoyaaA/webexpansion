@@ -23,52 +23,59 @@
 	<div class="row padding_p">
 	<div class="col-lg-12 titulo">Dashboard Expansión > Asignadas > <span id="nombreMdTxt"></span></div>
 	
-	<div class="col-lg-12">
-	<div class="row divs_p">
-		<div class="col-lg-12 menupr_estilos" style="height:30px;padding-top: 5px;">
-			<div style="width: 37%; position: relative; float: left; cursor: pointer;"><span class="tituloDetalleMd">Seguimiento de autorización</span></div>
-			
-			<div id="gerenteExpansionDiv" style="width: 15%; position: relative; float: left; cursor: pointer;">
-				<div id="" class="circuloSeguimiento circuloSeguimientoAprobado">&nbsp;&nbsp;&nbsp;</div>
+	<div class="col-lg-12" style="padding-left: 20px;padding-right: 20px;">
+	<div class="row div_header menupr_estilos" style="margin-bottom: 10px;">
+		
+			<div class="col-lg-3" style="padding-top: 8px;"><span class="tituloDetalleMd">Seguimiento de autorización</span></div>
+			<div class="col-lg-9" style="padding-top: 8px">
+			<div class="row div_header menupr_estilos">
+			<div id="gerenteExpansionDiv" class="col-lg-3" >
+				<div id="circuloAutorizaGerenteExpansion" class="circuloSeguimiento">&nbsp;&nbsp;&nbsp;</div>
 				<div style="position: relative; float: left;">
 					<span class="subtituloDetalleMd">&nbsp;&nbsp;
 						<a id="gerenteExpansionSegPop" tabindex="0" class="" role="" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="">Gerente de expansión</a>
 					</span>
+					<img id="gerenteExpansionImg" src="img/iconos_reloj_atraso.png" style="width: 17px;display: none;">
 				</div>
 			</div>
-			<div style="width: 12%; position: relative; float: left; cursor: pointer;">
-				<div class="circuloSeguimiento">&nbsp;&nbsp;&nbsp;</div>
+			<div id="expansionDiv" class="col-lg-2">
+				<div id="circuloAutorizaExpansion" class="circuloSeguimiento">&nbsp;&nbsp;&nbsp;</div>
 				<div style="position: relative; float: left;">
 					<span class="subtituloDetalleMd">&nbsp;&nbsp;
 						<a id="expansionSegPop" tabindex="0" class="" role="" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="">Expansión</a>
 					</span>
+					<img id="expansionImg" src="img/iconos_reloj_atraso.png" style="width: 17px;display: none;">
 				</div>
 			</div>
-			<div style="width: 12%; position: relative; float: left; cursor: pointer;;">
-				<div class="circuloSeguimiento">&nbsp;&nbsp;&nbsp;</div>
+			<div id="gestoriaDiv" class="col-lg-2">
+				<div id="circuloAutorizaGestoria" class="circuloSeguimiento">&nbsp;&nbsp;&nbsp;</div>
 				<div style="position: relative; float: left;">
 					<span class="subtituloDetalleMd">&nbsp;&nbsp;
 						<a id="gestoriaSegPop" tabindex="0" class="" role="" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="">Gestoría</a>
 					</span>
+					<img id="gestoriaImg" src="img/iconos_reloj_atraso.png" style="width: 17px;display: none;">
 				</div>
 			</div>
-			<div style="width: 12%; position: relative; float: left; cursor: pointer;">
-				<div class="circuloSeguimiento">&nbsp;&nbsp;&nbsp;</div>
+			<div id="construccionDiv" class="col-lg-2">
+				<div id="circuloAutorizaConstruccion" class="circuloSeguimiento">&nbsp;&nbsp;&nbsp;</div>
 				<div style="position: relative; float: left;">
 					<span class="subtituloDetalleMd">&nbsp;&nbsp;
 						<a id="construccionSegPop" tabindex="0" class="" role="" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="">Construcción</a>
 					</span>
+					<img id="construccionImg" src="img/iconos_reloj_atraso.png" style="width: 17px;display: none;">
 				</div>
 			</div>
-			<div style="width: 12%; position: relative; float: left;cursor: pointer;">
-				<div class="circuloSeguimiento">&nbsp;&nbsp;&nbsp;</div>
+			<div id="operacionesDiv" class="col-lg-3">
+				<div id="circuloAutorizaOperaciones" class="circuloSeguimiento">&nbsp;&nbsp;&nbsp;</div>
 				<div style="position: relative; float: left;">
 					<span class="subtituloDetalleMd">&nbsp;&nbsp;
 						<a id="operacionesSegPop" tabindex="0" class="" role="" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="">Operaciones</a>
 					</span>
+					<img id="operacionesImg" src="img/iconos_reloj_atraso.png" style="width: 17px;display: none;">
 				</div>
 			</div>
-		</div>
+			</div>
+			</div>
 	</div>
 	</div>
 	
@@ -77,7 +84,7 @@
 			<div class="col-lg-12 menupr_estilos" style="height:300px;">
 				<div style="width: 50%;position: relative; float: left;text-align: center">
 					<span id="nombreMd" class="tituloDetalleMd">---</span><br/>
-					<span class="subtituloDetalleMd">Creado por <span id="creadorMd">---</span></span><br/>
+					<span class="subtituloDetalleMd" style="font-size: .7em;">Creado por <span id="creadorMd">---</span></span><br/>
 					<span class="tituloDetalleMd">CATEGORÍA</span><br/>
 					<span id="categoriaMd" class="circulo">---</span>
 				</div>
@@ -85,7 +92,7 @@
 					<span class="subtituloDetalleMd">Creada el <span id="fechaCreacion">---</span></span><br/>
 					<span class="tituloDetalleMd">PUNTUACIÓN</span><br/>
 					<span class="subtituloDetalleMd"><span id="puntuacionMd">---</span> puntos</span><br/>
-					<span id="estrellasMd" class="subtituloDetalleMd">★ ★ ★</span>
+					<span id="estrellasMd" class="subtituloDetalleMd"></span>
 				</div>
 				<div style="width: 100%;position: relative; float: left;text-align: center">
 					<span class="tituloDetalleMd">UBICACIÓN</span>
@@ -99,7 +106,7 @@
 		</div>
 		</div>
 		
-		<div class="col-lg-4 col-6">
+		<div class="col-lg-4">
 		<div class="row divs_p">
 			<div class="col-lg-12 menupr_estilos" style="height:300px;">
 				<div style="width: 100%;position: relative; float: left;text-align: left">
@@ -127,7 +134,7 @@
 		</div>
 		</div>
 		
-		<div class="col-lg-4 col-6">
+		<div class="col-lg-4">
 		<div class="row divs_p">
 			<div class="col-lg-12 menupr_estilos" style="height:300px;">
 				<div style="width: 100%;position: relative; float: left;text-align: left">
@@ -154,61 +161,46 @@
 		
 		<div class="col-lg-12">
 		<div class="row divs_p">
-			<div class="col-lg-12 menupr_estilos" style="height:300px;">
-				<div style="width: 100%;position: relative; float: left;text-align: left">
-					<div style="width: 85%; position: relative; float: left;"><span class="tituloDetalleMd">3) Superficie</span></div>
-					<div style="width: 15%; position: relative; float: left;text-align: right; padding-right: 15px;">
-						<div style="width: 45%; position: relative; float: left;padding-top: 5px;"><span class="tituloDetalleMd">Puntos: </span> <span id="puntosSuperficie" class="tituloDetalleMd">---</span></div>
-						<div style="width: 45%; position: relative; float: left;padding-right: 8px;padding-top: 2px;">
-							<img id="autoriza3" title="Autoriza punto" class="sin_autorizar" onclick="autorizaPantalla(3);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
-							<img id="rechaza3" title="Rechaza punto" class="sin_autorizar" onclick="rechazaPantalla(3);" style="cursor: pointer;" src="img/rechaza_mark.png"></div>
-						<div style="width: 10%; position: relative; float: left;padding-top: 3px;"><a id="superficieTip" tabindex="0" class="question_mark" role="" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="">&nbsp;&nbsp;&nbsp;&nbsp;</a></div>
+			<div class="col-lg-12 menupr_estilos">
+				<div class="row div_header_sub">
+					<div class="col-lg-10 col-5">
+						<span class="tituloDetalleMd">3) Superficie</span>
+					</div>
+					<div class="col-lg-2 col-7" style="text-align: right;">
+						<span class="tituloDetalleMd">Puntos: </span> <span id="puntosSuperficie" class="tituloDetalleMd">---</span>
+						<img id="autoriza3" title="Autoriza punto" class="sin_autorizar" onclick="autorizaPantalla(3);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
+						<img id="rechaza3" title="Rechaza punto" class="sin_autorizar" onclick="rechazaPantalla(3);" style="cursor: pointer;" src="img/rechaza_mark.png">
+						<a id="superficieTip" tabindex="0" class="question_mark" role="" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="">&nbsp;&nbsp;&nbsp;&nbsp;</a>
 					</div>
 				</div>
-				<div style="width: 100%;position: relative; float: left;text-align: left">
-					<div style="width: 33%; height: 80%; position: relative; float: left;">
-						<div style="width: 100%">
-							<span class="subtituloDetalleMd sangria_cuerpo">FRENTE</span>&nbsp;&nbsp;&nbsp;<span id="frenteMd" class="tituloDetalleMd sangria_cuerpo">---</span><br/>
-						</div>
-						<div style="width: 100%">
-							<span class="subtituloDetalleMd sangria_cuerpo">VISTA FRONTAL</span>
-						</div>
-						<div style="width: 100%; text-align: center;">
-							<img id="vistaFrontalMd" style="width: 90%; height: 80%" src="" />
-						</div>
-						<div style="width: 100%">
-							<div style="width: 50%; position: relative; float: left;text-align: left; padding-left: 15px;"><span id="fechaVistaFrontal" class="footerDetalleMd">---</span></div>
-							<div style="width: 50%; position: relative; float: left;text-align: right; padding-right: 15px;"><span id="horaVistaFrontal" class="footerDetalleMd">---</span></div>
+				<div class="row div_header_sub">
+					<div class="col-lg-4"><span class="subtituloDetalleMd sangria_cuerpo">FRENTE</span>&nbsp;&nbsp;&nbsp;<span id="frenteMd" class="tituloDetalleMd sangria_cuerpo">---</span></div>
+					<div class="col-lg-4"><span class="subtituloDetalleMd sangria_cuerpo">PROFUNDIDAD</span>&nbsp;&nbsp;&nbsp;<span id="profundidadMd" class="tituloDetalleMd sangria_cuerpo">---</span></div>
+					<div class="col-lg-4"><span class="subtituloDetalleMd sangria_cuerpo">TOTAL</span>&nbsp;&nbsp;&nbsp;<span id="tamanioTotalMd" class="tituloDetalleMd sangria_cuerpo">---</span></div>
+				</div>
+				<div class="row div_header_sub">
+					<div class="col-lg-4">
+						<div class="col-lg-12"><span class="subtituloDetalleMd sangria_cuerpo">VISTA FRONTAL</span></div>
+						<div class="col-lg-12" style="text-align: center;"><img id="vistaFrontalMd" style="width: 87%; height: 30%" src="img/no_imagen.png" /></div>
+						<div class="row div_bottom">
+							<div class="col-lg-6" style="text-align: left;"><span id="fechaVistaFrontal" class="footerDetalleMd">---</span></div>
+							<div class="col-lg-6" style="text-align: right;"><span id="horaVistaFrontal" class="footerDetalleMd">---</span></div>
 						</div>
 					</div>
-					<div style="width: 33%; height: 80%; position: relative; float: left;">
-						<div style="width: 100%">
-							<span class="subtituloDetalleMd sangria_cuerpo">PROFUNDIDAD</span>&nbsp;&nbsp;&nbsp;<span id="profundidadMd" class="tituloDetalleMd sangria_cuerpo">---</span><br/>
-						</div>
-						<div style="width: 100%">
-							<span class="subtituloDetalleMd sangria_cuerpo">LATERAL 1</span>
-						</div>
-						<div style="width: 100%; text-align: center;">
-							<img id="vistaLateral1Md" style="width: 90%; height: 80%" src="" />
-						</div>
-						<div style="width: 100%">
-							<div style="width: 50%; position: relative; float: left;text-align: left; padding-left: 15px;"><span id="fechaVistaLateral1" class="footerDetalleMd">---</span></div>
-							<div style="width: 50%; position: relative; float: left;text-align: right; padding-right: 15px;"><span id="horaVistaLateral1" class="footerDetalleMd">---</span></div>
+					<div class="col-lg-4">
+						<div class="col-lg-12"><span class="subtituloDetalleMd sangria_cuerpo">LATERAL 1</span></div>
+						<div class="col-lg-12" style="text-align: center;"><img id="vistaLateral1Md" style="width: 87%; height: 30%" src="img/no_imagen.png" /></div>
+						<div class="row div_bottom">
+							<div class="col-lg-6" style="text-align: left;"><span id="fechaVistaLateral1" class="footerDetalleMd">---</span></div>
+							<div class="col-lg-6" style="text-align: right;"><span id="horaVistaLateral1" class="footerDetalleMd">---</span></div>
 						</div>
 					</div>
-					<div style="width: 33%; height: 80%; position: relative; float: left;">
-						<div style="width: 100%">
-							<span class="subtituloDetalleMd sangria_cuerpo">TOTAL</span>&nbsp;&nbsp;&nbsp;<span id="tamanioTotalMd" class="tituloDetalleMd sangria_cuerpo">---</span><br/>
-						</div>
-						<div style="width: 100%">
-							<span class="subtituloDetalleMd sangria_cuerpo">LATERAL 2</span>
-						</div>
-						<div style="width: 100%; text-align: center;">
-							<img id="vistaLateral2Md" style="width: 90%; height: 80%" src="" />
-						</div>
-						<div style="width: 100%">
-							<div style="width: 50%; position: relative; float: left;text-align: left; padding-left: 15px;"><span id="fechaVistaLateral2" class="footerDetalleMd">---</span></div>
-							<div style="width: 50%; position: relative; float: left;text-align: right; padding-right: 15px;"><span id="horaVistaLateral2" class="footerDetalleMd">---</span></div>
+					<div class="col-lg-4">
+						<div class="col-lg-12"><span class="subtituloDetalleMd sangria_cuerpo">LATERAL 2</span></div>
+						<div class="col-lg-12" style="text-align: center;"><img id="vistaLateral2Md" style="width: 87%; height: 30%" src="img/no_imagen.png" /></div>
+						<div class="row div_bottom">
+							<div class="col-lg-6" style="text-align: left;"><span id="fechaVistaLateral2" class="footerDetalleMd">---</span></div>
+							<div class="col-lg-6" style="text-align: right;"><span id="horaVistaLateral2" class="footerDetalleMd">---</span></div>
 						</div>
 					</div>
 				</div>
@@ -219,19 +211,20 @@
 		<div class="col-lg-8 col-12">
 		<div class="row divs_p">
 			<div class="col-lg-12 menupr_estilos" style="height:300px;">
-				<div style="width: 100%;position: relative; float: left;text-align: left">
-					<div style="width: 75%; position: relative; float: left;"><span class="tituloDetalleMd">4) Zonificación</span></div>
-					<div style="width: 25%; position: relative; float: left;text-align: right; padding-right: 15px;">
-						<div style="width: 45%; position: relative; float: left;padding-top: 5px;"><span class="tituloDetalleMd">Puntos: </span> <span id="puntosZonificacion" class="tituloDetalleMd">---</span></div>
-						<div style="width: 45%; position: relative; float: left;padding-right: 8px;padding-top: 2px;">
-							<img id="autoriza4" title="Autoriza punto" class="sin_autorizar" onclick="autorizaPantalla(4);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
-							<img id="rechaza4" title="Rechaza punto" class="sin_autorizar" onclick="rechazaPantalla(4);" style="cursor: pointer;" src="img/rechaza_mark.png"></div>
-						<div style="width: 10%; position: relative; float: left;padding-top: 3px;"><a id="zonificacionTip" tabindex="0" class="question_mark" role="" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="">&nbsp;&nbsp;&nbsp;&nbsp;</a></div>
+				<div class="row div_header_sub">
+					<div class="col-lg-8 col-5">
+						<span class="tituloDetalleMd">4) Zonificación</span>
+					</div>
+					<div class="col-lg-4 col-7" style="text-align: right;">
+						<span class="tituloDetalleMd">Puntos: </span> <span id="puntosZonificacion" class="tituloDetalleMd">---</span>
+						<img id="autoriza4" title="Autoriza punto" class="sin_autorizar" onclick="autorizaPantalla(4);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
+						<img id="rechaza4" title="Rechaza punto" class="sin_autorizar" onclick="rechazaPantalla(4);" style="cursor: pointer;" src="img/rechaza_mark.png">
+						<a id="zonificacionTip" tabindex="0" class="question_mark" role="" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="">&nbsp;&nbsp;&nbsp;&nbsp;</a>
 					</div>
 				</div>
-				<div style="width: 100%;position: relative; float: left;text-align: left">
-					<div id="mapaZonificacion" style="width: 70%; height: 85%; position: relative; float: left;"></div>
-					<div style="width: 30%; position: relative; float: left;padding: 3px;">
+				<div class="row div_header_sub">
+					<div class="col-lg-9 col-6"><div id="mapaZonificacion" style="width: 100%; height: 85%; position: relative; float: left;"></div></div>
+					<div class="col-lg-3 col-6">
 						<div style="width: 100%;text-align: center;">
 							<span class="subtituloDetalleMd">COMPETENCIA</span><br/>
 							<div>
@@ -265,14 +258,15 @@
 		<div class="col-lg-4 col-12">
 		<div class="row divs_p">
 			<div class="col-lg-12 menupr_estilos" style="height:300px;">
-				<div style="width: 100%;position: relative; float: left;text-align: left">
-					<div style="width: 50%; position: relative; float: left;"><span class="tituloDetalleMd">5) Construcción</span></div>
-					<div style="width: 50%; position: relative; float: left;text-align: right; padding-right: 15px;">
-						<div style="width: 45%; position: relative; float: left;padding-top: 5px;"><span class="tituloDetalleMd">Puntos: </span> <span id="puntosConstruccion" class="tituloDetalleMd">---</span></div>
-						<div style="width: 45%; position: relative; float: left;padding-right: 8px;padding-top: 2px;">
-							<img id="autoriza5" title="Autoriza punto" class="sin_autorizar" onclick="autorizaPantalla(5);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
-							<img id="rechaza5" title="Rechaza punto" class="sin_autorizar" onclick="rechazaPantalla(5);" style="cursor: pointer;" src="img/rechaza_mark.png"></div>
-						<div style="width: 10%; position: relative; float: left;padding-top: 3px;"><a id="construccionTip" tabindex="0" class="question_mark" role="" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="">&nbsp;&nbsp;&nbsp;&nbsp;</a></div>
+				<div class="row div_header_sub">
+					<div class="col-lg-6 col-5">
+						<span class="tituloDetalleMd">5) Construcción</span>
+					</div>
+					<div class="col-lg-6 col-7" style="text-align: right;">
+						<span class="tituloDetalleMd">Puntos: </span> <span id="puntosConstruccion" class="tituloDetalleMd">---</span>
+						<img id="autoriza5" title="Autoriza punto" class="sin_autorizar" onclick="autorizaPantalla(5);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
+						<img id="rechaza5" title="Rechaza punto" class="sin_autorizar" onclick="rechazaPantalla(5);" style="cursor: pointer;" src="img/rechaza_mark.png">
+						<a id="construccionTip" tabindex="0" class="question_mark" role="" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="">&nbsp;&nbsp;&nbsp;&nbsp;</a>
 					</div>
 				</div>
 				<div id="factoresConstruccion" style="width: 100%; height: 150px;  overflow-y: scroll; position: relative; float: left;text-align: left">
@@ -288,27 +282,30 @@
 		<div class="col-lg-4">
 		<div class="row divs_p">
 			<div class="col-lg-12 menupr_estilos" style="height:300px;">
-				<div style="width: 100%;position: relative; float: left;text-align: left">
-					<div style="width: 50%; position: relative; float: left;"><span class="tituloDetalleMd">6) Generalidades del sitio</span></div>
-					<div style="width: 50%; position: relative; float: left;text-align: right; padding-right: 15px;">
-						<div style="width: 45%; position: relative; float: left;padding-top: 5px;"><span class="tituloDetalleMd">Puntos: </span> <span id="puntosGeneralidades" class="tituloDetalleMd">---</span></div>
-						<div style="width: 45%; position: relative; float: left;padding-right: 8px;padding-top: 2px;">
-							<img id="autoriza6" title="Autoriza punto" class="sin_autorizar" onclick="autorizaPantalla(6);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
-							<img id="rechaza6" title="Rechaza punto" class="sin_autorizar" onclick="rechazaPantalla(6);" style="cursor: pointer;" src="img/rechaza_mark.png"></div>
-						<div style="width: 10%; position: relative; float: left;padding-top: 3px;"><a id="generalidadesTip" tabindex="0" class="question_mark" role="" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="">&nbsp;&nbsp;&nbsp;&nbsp;</a></div>
+				<div class="row div_header_sub">
+					<div class="col-lg-6 col-5">
+						<span class="tituloDetalleMd">6) Generalidades del sitio</span>
+					</div>
+					<div class="col-lg-6 col-7" style="text-align: right;">
+						<span class="tituloDetalleMd">Puntos: </span> <span id="puntosGeneralidades" class="tituloDetalleMd">---</span>
+						<img id="autoriza6" title="Autoriza punto" class="sin_autorizar" onclick="autorizaPantalla(6);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
+						<img id="rechaza6" title="Rechaza punto" class="sin_autorizar" onclick="rechazaPantalla(6);" style="cursor: pointer;" src="img/rechaza_mark.png">
+						<a id="generalidadesTip" tabindex="0" class="question_mark" role="" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="">&nbsp;&nbsp;&nbsp;&nbsp;</a>
 					</div>
 				</div>
-				<div style="width: 100%;position: relative; float: left;text-align: left">
-					<br/><span class="tituloDetalleMd sangria_cuerpo">Renta</span><br/>
-					<span id="montoRenta" class="subtituloDetalleMd sangria_cuerpo">---</span><br/>
-					<span class="tituloDetalleMd sangria_cuerpo">Disponibilidad</span><br/>
-					<span id="disponibilidad" class="subtituloDetalleMd sangria_cuerpo">---</span><br/>
-					<span class="tituloDetalleMd sangria_cuerpo">Amortización</span><br/>
-					<span id="amortizacion" class="subtituloDetalleMd sangria_cuerpo">---</span><br/>
-					<span class="tituloDetalleMd sangria_cuerpo">Tiempo de amortización</span><br/>
-					<span id="tiempoAmortizacion" class="subtituloDetalleMd sangria_cuerpo">---</span><br/>
-					<span class="tituloDetalleMd sangria_cuerpo">Periodo de gracia</span><br/>
-					<span id="periodoGracia" class="subtituloDetalleMd sangria_cuerpo">---</span><br/>
+				<div class="row div_header_sub">
+					<div class="col-lg-12">
+						<span class="tituloDetalleMd sangria_cuerpo">Renta</span><br/>
+						<span id="montoRenta" class="subtituloDetalleMd sangria_cuerpo">---</span><br/>
+						<span class="tituloDetalleMd sangria_cuerpo">Disponibilidad</span><br/>
+						<span id="disponibilidad" class="subtituloDetalleMd sangria_cuerpo">---</span><br/>
+						<span class="tituloDetalleMd sangria_cuerpo">Amortización</span><br/>
+						<span id="amortizacion" class="subtituloDetalleMd sangria_cuerpo">---</span><br/>
+						<span class="tituloDetalleMd sangria_cuerpo">Tiempo de amortización</span><br/>
+						<span id="tiempoAmortizacion" class="subtituloDetalleMd sangria_cuerpo">---</span><br/>
+						<span class="tituloDetalleMd sangria_cuerpo">Periodo de gracia</span><br/>
+						<span id="periodoGracia" class="subtituloDetalleMd sangria_cuerpo">---</span><br/>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -317,21 +314,22 @@
 		<div class="col-lg-4">
 		<div class="row divs_p">
 			<div class="col-lg-12 menupr_estilos" style="height:300px;">
-				<div style="width: 100%;position: relative; float: left;text-align: left">
-					<div style="width: 50%; position: relative; float: left;"><span class="tituloDetalleMd">7)  Flujo peatonal</span></div>
-					<div style="width: 50%; position: relative; float: left;text-align: right; padding-right: 15px;">
-						<div style="width: 45%; position: relative; float: left;padding-top: 5px;"><span class="tituloDetalleMd">Puntos: </span> <span id="puntosConteos" class="tituloDetalleMd">---</span></div>
-						<div style="width: 45%; position: relative; float: left;padding-right: 8px;padding-top: 2px;">
-							<img id="autoriza7" title="Autoriza punto" class="sin_autorizar" onclick="autorizaPantalla(7);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
-							<img id="rechaza7" title="Rechaza punto" class="sin_autorizar" onclick="rechazaPantalla(7);" style="cursor: pointer;" src="img/rechaza_mark.png"></div>
-						<div style="width: 10%; position: relative; float: left;padding-top: 3px;"><a id="conteosTip" tabindex="0" class="question_mark" role="" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="">&nbsp;&nbsp;&nbsp;&nbsp;</a></div>
+				<div class="row div_header_sub">
+					<div class="col-lg-6 col-5">
+						<span class="tituloDetalleMd">7)  Flujo peatonal</span>
+					</div>
+					<div class="col-lg-6 col-7" style="text-align: right;">
+						<span class="tituloDetalleMd">Puntos: </span> <span id="puntosConteos" class="tituloDetalleMd">---</span>
+						<img id="autoriza7" title="Autoriza punto" class="sin_autorizar" onclick="autorizaPantalla(7);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
+						<img id="rechaza7" title="Rechaza punto" class="sin_autorizar" onclick="rechazaPantalla(7);" style="cursor: pointer;" src="img/rechaza_mark.png">
+						<a id="conteosTip" tabindex="0" class="question_mark" role="" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="">&nbsp;&nbsp;&nbsp;&nbsp;</a>
 					</div>
 				</div>
-				<div style="width: 100%;position: relative; float: left;text-align: left">
+				<div class="row div_header_sub">
 					<span class="subtituloDetalleMd sangria_doble_cuerpo">PROMEDIO: </span><span id="promedioConteos" class="tituloDetalleMd sangria_cuerpo">---</span><br/>
 				</div>
-				<div style="width: 100%;position: relative; float: left;text-align: left">
-					<div id="contenedorFlujoPeatonal" style="min-width: 310px; height: 250px; margin: 0 auto"></div>
+				<div class="row div_header_sub">
+					<div class="col-lg-12"><div id="contenedorFlujoPeatonal" style="width: 100%; height: 70%; margin: 0 auto"></div></div>
 				</div>
 			</div>
 		</div>
@@ -358,8 +356,10 @@
 	</div>
 </div>
 
-<s:textfield name="mdId" label="" cssStyle="display: none"></s:textfield>
-<s:textfield name="nombreMd" label="" cssStyle="display: none"></s:textfield>
+<div style="display: none;">
+	<s:textfield name="mdId" label="" cssStyle="display: none"></s:textfield>
+	<s:textfield name="nombreMd" label="" cssStyle="display: none"></s:textfield>
+</div>
 
 <jsp:include page="/jsp/generic/loading.jsp" />
 <jsp:include page="/jsp/generic/mensajes.jsp" />

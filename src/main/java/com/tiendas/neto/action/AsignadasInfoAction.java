@@ -38,12 +38,14 @@ public class AsignadasInfoAction extends ActionSupport implements SessionAware, 
 		String fechaConsulta = ServletActionContext.getRequest().getParameter("fechaConsulta");
 		UsuarioLoginVO usuario = null;
 		String numeroEmpleado = null;
+		int puestoId = 0;
 		HttpSession usuarioSesion = ServletActionContext.getRequest().getSession();
 		usuario = (UsuarioLoginVO) usuarioSesion.getAttribute("usr");
 		
 		try {
 			if(usuario != null) {
 				numeroEmpleado = String.valueOf(usuario.getPerfil().getNumeroEmpleado());
+				puestoId = usuario.getPerfil().getPuestoId();
 			} else {
 				RespuestaVo respuestaVo = new RespuestaVo();
 				respuestaVo.setCodigo(501);
@@ -56,6 +58,7 @@ public class AsignadasInfoAction extends ActionSupport implements SessionAware, 
 			final OkHttpClient client = new OkHttpClient();
 			FormBody.Builder formBuilder = new FormBody.Builder()
 			 .add("usuarioId", numeroEmpleado)
+			 .add("puestoId", String.valueOf(puestoId))
 	         .add("fechaConsulta", fechaConsulta)
 	         .add("areaId", "1");
 			

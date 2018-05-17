@@ -71,7 +71,7 @@ public class DetalleMemoriaXIdAction extends ActionSupport implements SessionAwa
 			final OkHttpClient client = new OkHttpClient();
 			FormBody.Builder formBuilder = new FormBody.Builder()
 			 .add("usuarioId", numeroEmpleado)
-	         .add("mdId", "180511182328");
+	         .add("mdId", mdId);
 			
 			 RequestBody formBody = formBuilder.build();
 			 Request request = new Request.Builder()

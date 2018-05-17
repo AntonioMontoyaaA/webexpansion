@@ -12,12 +12,12 @@ $(function(){
 	buscaDetalleMD($("#mdId").val());
 	
 	var bar = new ProgressBar.Circle(containerProgreso, {
-		  strokeWidth: 2,
+		  strokeWidth: 4,
 		  easing: 'easeInOut',
 		  duration: 1400,
 		  trailColor: '#eee',
-		  color: '#FF0000',
-		  trailWidth: 1,
+		  color: '#A3D9FF',
+		  trailWidth: 2,
 		  svgStyle: null
 		});
 	
@@ -34,16 +34,8 @@ $(function(){
 	
 	//$("#mensaje1").attr("data-content", "<div style='width: 200px; height; 100px; background: #FF0000;'>Test del 1</div>");
 	//$("#mensaje2").attr("data-content", "<div style='width: 200px; height; 100px; background: #FF0000;'>Test del 2</div>");
-	var contentPopGerente = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 17px;">Autorización Gerente de Expansión<br/></span></div>' + 
-				   '<div style="width: 60%; position: relative; float: left; margin-top: 10px;"><span style="color: #FFF;font-size: 12px;font-weight: bold;">Autorizó</span></div>' +
-				   '<div style="width: 40%; position: relative; float: left; margin-top: 10px;"><span style="color: #FFF;font-size: 12px;font-weight: bold;">Fecha autorización</span></div>' +
-				   '<div style="width: 60%; position: relative; float: left"><span style="color: #FFF;font-size: 10px;">Mariana Guadalupe Ramirez Rodriguez</span></div>' +
-				   '<div style="width: 40%; position: relative; float: left"><span style="color: #FFF;font-size: 10px;">02/04/2018</span></div>' +
-				   '<div style="width: 60%; position: relative; float: left"><span style="color: #FFF;font-size: 12px;font-weight: bold;">Fecha límite</span></div>' +
-				   '<div style="width: 40%; position: relative; float: left"><span style="color: #FFF;font-size: 12px;font-weight: bold;">Días vencidos</span></div>' + 
-				   '<div style="width: 60%; position: relative; float: left"><span style="color: #FFF;font-size: 10px;">02/04/2018</span></div>' +
-				   '<div style="width: 40%; position: relative; float: left"><span style="color: #FFF;font-size: 10px;">+2</span></div></div>';
 	
+	/*
 	var contentPopExpansion = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 17px;">Autorización Expansión<br/></span></div>' + 
 	   '<div style="width: 60%; position: relative; float: left; margin-top: 10px;"><span style="color: #FFF;font-size: 12px;font-weight: bold;">Autorizó</span></div>' +
 	   '<div style="width: 40%; position: relative; float: left; margin-top: 10px;"><span style="color: #FFF;font-size: 12px;font-weight: bold;">Fecha autorización</span></div>' +
@@ -84,18 +76,9 @@ $(function(){
 	   '<div style="width: 60%; position: relative; float: left"><span style="color: #FFF;font-size: 10px;">02/04/2018</span></div>' +
 	   '<div style="width: 40%; position: relative; float: left"><span style="color: #FFF;font-size: 10px;">+2</span></div></div>';
 	
-	var contentPopSuperficie = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 17px;">Ponderación<br/></span></div>' + 
-	   '<div style="width: 60%; position: relative; float: left; margin-top: 10px;"><span style="color: #FFF;font-size: 12px;font-weight: normal;">Frente mts MIN:</span></div>' +
-	   '<div style="width: 40%; position: relative; float: left; margin-top: 10px;"><span style="color: #FFF;font-size: 12px;font-weight: bold;">15 mts</span></div>' +
-	   '<div style="width: 60%; position: relative; float: left; margin-top: 10px;"><span style="color: #FFF;font-size: 12px;font-weight: normal;">Profundidad mts MIN:</span></div>' +
-	   '<div style="width: 40%; position: relative; float: left; margin-top: 10px;"><span style="color: #FFF;font-size: 12px;font-weight: bold;">15 mts</span></div>' +
-	   '<div style="width: 60%; position: relative; float: left; margin-top: 10px;"><span style="color: #FFF;font-size: 12px;font-weight: normal;">Total MIN:</span></div>' +
-	   '<div style="width: 40%; position: relative; float: left; margin-top: 10px;"><span style="color: #FFF;font-size: 12px;font-weight: bold;">300 mts<super>2</super></span></div></div>';
 	
-	$("#gerenteExpansionSegPop").popover({
-		html: true, 
-		content : contentPopGerente
-	});
+	
+	
 	$("#expansionSegPop").popover({
 		html: true, 
 		content : contentPopExpansion
@@ -111,30 +94,7 @@ $(function(){
 	$("#operacionesSegPop").popover({
 		html: true, 
 		content : contentPopOperaciones
-	});
-	
-	
-	
-	$("#superficieTip").popover({
-		html: true, 
-		content : contentPopSuperficie
-	});
-	$("#zonificacionTip").popover({
-		html: true, 
-		content : contentPopSuperficie
-	});
-	$("#construccionTip").popover({
-		html: true, 
-		content : contentPopSuperficie
-	});
-	$("#generalidadesTip").popover({
-		html: true, 
-		content : contentPopSuperficie
-	});
-	$("#conteosTip").popover({
-		html: true, 
-		content : contentPopSuperficie
-	});
+	});*/
 	
 	$('.popover-dismiss').popover({
 		  trigger: 'focus'
@@ -164,110 +124,230 @@ function buscaDetalleMD(mdId) {
 			});
 
 	obtieneDetalleMdResponse = function( data ) {
-	
-		if(data == null || data.error == true || data.vacia == true) {
-			console.log("*** ENTRA A ERROR DEL DETALLE ***");
-		}
-	
-		if(!data.vacia) {
+	 
+		if(data.codigo != 200) {
+			cargaMensajeModal('MD ASIGNADAS', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, redireccionaAsignadas);
+		} else {
+			/* Datos de áreas que ya han autorizado */
+			if(data.areasAutorizadas != undefined && data.areasAutorizadas.length > 0) {
+				for(var i = 0; i < data.areasAutorizadas.length; i++) {
+					if(data.areasAutorizadas[i].EXPANSION != undefined && data.areasAutorizadas[i].EXPANSION.length > 0 
+							&& data.areasAutorizadas[i].EXPANSION[0].puestosValida != undefined && data.areasAutorizadas[i].EXPANSION[0].puestosValida.length > 0) {
+						if(data.areasAutorizadas[i].EXPANSION[0].puestosValida[0] == 'GERENTE DE EXPANSION') {
+							
+							$("#gerenteExpansionDiv").css("cursor", "pointer");
+							$("#circuloAutorizaGerenteExpansion").addClass("circuloSeguimientoAprobado");
+							var contentPopGerente = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 17px;">Autorización Gerente de Expansión<br/></span></div>' + 
+							   '<div style="width: 60%; position: relative; float: left; margin-top: 10px;"><span style="color: #FFF;font-size: 12px;font-weight: bold;">Autorizó</span></div>' +
+							   '<div style="width: 40%; position: relative; float: left; margin-top: 10px;"><span style="color: #FFF;font-size: 12px;font-weight: bold;">Fecha autorización</span></div>' +
+							   '<div style="width: 60%; position: relative; float: left"><span style="color: #FFF;font-size: 10px;">' + data.areasAutorizadas[i].EXPANSION[0].nombre + '</span></div>' +
+							   '<div style="width: 40%; position: relative; float: left"><span style="color: #FFF;font-size: 10px;">' + data.areasAutorizadas[i].EXPANSION[0].fechaAutorizacion + '</span></div>' +
+							   '<div style="width: 60%; position: relative; float: left"><span style="color: #FFF;font-size: 12px;font-weight: bold;">Fecha límite</span></div>' +
+							   '<div style="width: 40%; position: relative; float: left"><span style="color: #FFF;font-size: 12px;font-weight: bold;">Días vencidos</span></div>' + 
+							   '<div style="width: 60%; position: relative; float: left"><span style="color: #FFF;font-size: 10px;">' + data.areasAutorizadas[i].EXPANSION[0].fechaLimite + '</span></div>' +
+							   '<div style="width: 40%; position: relative; float: left"><span style="color: #FFF;font-size: 10px;">' + data.areasAutorizadas[i].EXPANSION[0].diasVencidos + '</span></div></div>';
+							
+							$("#gerenteExpansionSegPop").popover({
+								html: true, 
+								content : contentPopGerente
+							});
+							
+							if(data.areasAutorizadas[i].EXPANSION[0].diasVencidos > 0) {
+								$("#gerenteExpansionImg").css("display", "inline");
+							}
+						}
+					}
+				}
+				
+			}
 			/* Datos generales de la MD */
-			$("#nombreMd").text(data.nombreMd);
-			$("#creadorMd").text(data.creador);
-			$("#categoriaMd").text(data.categoria);
-			$("#fechaCreacion").text(data.fechaCreacion);
-			$("#puntuacionMd").text(data.puntuacion);
+			if(data.generales != undefined) {
+				$("#nombreMd").text(data.generales.nombreMd);
+				$("#creadorMd").text(data.generales.creador);
+				$("#categoriaMd").text(data.generales.categoria);
+				if(data.generales.categoria == 'A') {
+					$("#estrellasMd").html("<img class='estrellaPuntuacionDetalle' src='img/icono_estrella_azul.png'><img class='estrellaPuntuacionDetalle' src='img/icono_estrella_azul.png'><img class='estrellaPuntuacionDetalle' src='img/icono_estrella_azul.png'>");
+				} else if(data.generales.categoria == 'B') {
+					$("#estrellasMd").html("<img class='estrellaPuntuacionDetalle' src='img/icono_estrella_azul.png'><img class='estrellaPuntuacionDetalle' src='img/icono_estrella_azul.png'>");
+				} else {
+					$("#estrellasMd").html("<img class='estrellaPuntuacionDetalle' src='img/icono_estrella_azul.png'>");
+				}
+				$("#fechaCreacion").text(data.generales.fechaCreacion);
+				$("#puntuacionMd").text(data.generales.puntuacion);
+			}
 			/* Datos del sitio */
-			$("#calleMd").text(data.datosSitio.calle);
-			$("#coloniaMd").text(data.datosSitio.colonia);
-			$("#municipioMd").text(data.datosSitio.municipio);
-			$("#ciudadMd").text(data.datosSitio.ciudad);
-			$("#estadoMd").text(data.datosSitio.estado);
-			$("#codiPostalMd").text(data.datosSitio.codigoPostal);
-			/* Datos del propietario */
-			$("#propietarioId").text(data.datosPropietario.propietarioId);
-			$("#nombrePropietario").text(data.datosPropietario.nombrePropietario);
-			$("#telefonoPropietario").text(data.datosPropietario.telefono);
-			$("#emailPropietario").text(data.datosPropietario.email);
-			if(data.datosPropietario.rentaANeto) {
-				$("#rentaANeto").text("YA RENTA A NETO");
-			} else {
-				$("#rentaANeto").text("NO RENTA A NETO AÚN");
+			if(data.datosSitio != undefined) {
+				$("#calleMd").text(data.datosSitio.calle);
+				$("#coloniaMd").text(data.datosSitio.colonia);
+				$("#municipioMd").text(data.datosSitio.municipio);
+				$("#ciudadMd").text(data.datosSitio.ciudad);
+				$("#estadoMd").text(data.datosSitio.estado);
+				$("#codiPostalMd").text(data.datosSitio.codigoPostal);
+				/* Datos del propietario */
+				$("#propietarioId").text(data.datosPropietario.propietarioId);
+				$("#nombrePropietario").text(data.datosPropietario.nombre);
+				$("#telefonoPropietario").text(data.datosPropietario.telefono);
+				$("#emailPropietario").text(data.datosPropietario.email);
+				if(data.datosPropietario.rentaNeto) {
+					$("#rentaANeto").text("YA RENTA A NETO");
+				} else {
+					$("#rentaANeto").text("NO RENTA A NETO AÚN");
+				}
 			}
 			/* Datos de la superficie */
-			$("#puntosSuperficie").text(data.superficie.puntos);
-			$("#frenteMd").text(data.superficie.frente + " mts");
-			$("#profundidadMd").text(data.superficie.profundidad + " mts");
-			$("#tamanioTotalMd").text(data.superficie.total + " mts");
-			$("#vistaFrontalMd").attr("src", data.superficie.vistaFrontal.nombreFoto);
-			$("#fechaVistaFrontal").text(data.superficie.vistaFrontal.fecha);
-			$("#horaVistaFrontal").text(data.superficie.vistaFrontal.hora);
-			$("#vistaLateral1Md").attr("src", data.superficie.vistaFrontal.nombreFoto);
-			$("#fechaVistaLateral1").text(data.superficie.vistaFrontal.fecha);
-			$("#horaVistaLateral1").text(data.superficie.vistaFrontal.hora);
-			$("#vistaLateral2Md").attr("src", data.superficie.vistaFrontal.nombreFoto);
-			$("#fechaVistaLateral2").text(data.superficie.vistaFrontal.fecha);
-			$("#horaVistaLateral2").text(data.superficie.vistaFrontal.hora);
+			if(data.superficie != undefined) {
+				$("#puntosSuperficie").text(data.superficie.puntos);
+				$("#frenteMd").text(data.superficie.frente + " mts");
+				$("#profundidadMd").text(data.superficie.profundidad + " mts");
+				$("#tamanioTotalMd").html(data.superficie.total + " mts<sup>2</sup>");
+				$("#vistaFrontalMd").attr("src", data.superficie.vistaFrontal);
+				//$("#fechaVistaFrontal").text(data.superficie.vistaFrontal.fecha);
+				//$("#horaVistaFrontal").text(data.superficie.vistaFrontal.hora);
+				$("#vistaLateral1Md").attr("src", data.superficie.lateral1);
+				//$("#fechaVistaLateral1").text(data.superficie.vistaFrontal.fecha);
+				//$("#horaVistaLateral1").text(data.superficie.vistaFrontal.hora);
+				$("#vistaLateral2Md").attr("src", data.superficie.lateral2);
+				//$("#fechaVistaLateral2").text(data.superficie.vistaFrontal.fecha);
+				//$("#horaVistaLateral2").text(data.superficie.vistaFrontal.hora);
+				
+				var contentPopSuperficie = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 17px;">Ponderación<br/></span></div>' + 
+				   '<div style="width: 60%; position: relative; float: left; margin-top: 10px;"><span style="color: #FFF;font-size: 12px;font-weight: normal;">Frente mts MIN:</span></div>' +
+				   '<div style="width: 40%; position: relative; float: left; margin-top: 10px;"><span style="color: #FFF;font-size: 12px;font-weight: bold;">' + data.superficie.frente + '</span></div>' +
+				   '<div style="width: 60%; position: relative; float: left; margin-top: 10px;"><span style="color: #FFF;font-size: 12px;font-weight: normal;">Profundidad mts MIN:</span></div>' +
+				   '<div style="width: 40%; position: relative; float: left; margin-top: 10px;"><span style="color: #FFF;font-size: 12px;font-weight: bold;">' + data.superficie.profundidad + '</span></div>' +
+				   '<div style="width: 60%; position: relative; float: left; margin-top: 10px;"><span style="color: #FFF;font-size: 12px;font-weight: normal;">Total MIN:</span></div>' +
+				   '<div style="width: 40%; position: relative; float: left; margin-top: 10px;"><span style="color: #FFF;font-size: 12px;font-weight: bold;">' + data.superficie.total + 'mts<sup>2</sup></span></div></div>';
+				
+				$("#superficieTip").popover({
+					html: true, 
+					content : contentPopSuperficie
+				});
+			}
 			/* Datos de la zonificación */
-			$("#puntosZonificacion").text(data.zonificacion.puntos);
-			var listaCompetencias = data.zonificacion.listaCompetencias;
-			var listaGeneradores = data.zonificacion.listaGeneradores;
+			if(data.zonificacion != undefined) {
+				$("#puntosZonificacion").text(data.zonificacion.puntos);
+				var listaCompetencias = data.zonificacion.competencias;
+				var listaGeneradores = data.zonificacion.generadores;
+				
+				var contentPopZonificacion = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 17px;">Agrega tips para que tus buscadores encuentren sitios mejores</span></div></div>';
+				if(data.zonificacion.tips != undefined && data.zonificacion.tips.length > 0) {
+					contentPopZonificacion = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 17px;">' + data.zonificacion.tips[0] + '</span></div></div>';
+				}
+				$("#zonificacionTip").popover({
+					html: true, 
+					content : contentPopZonificacion
+				});
+				
+			}
 			/* Datos de la construcción */
-			var htmlFactores = "";
-			for(var i = 0; i < data.construccion.listaFactores.length; i++) {
-				htmlFactores += '<span class="subtituloDetalleMd sangria_cuerpo">' + data.construccion.listaFactores[i].factor + '</span><br/>';
-				
-				for(var j = 0; j < data.construccion.listaFactores[i].listaSubfactores.length; j++) {
-					htmlFactores += '<span class="subtituloDetalleMd sangria_doble_cuerpo">' + data.construccion.listaFactores[i].listaSubfactores[j].subfactor + '</span><br/>';
-				}
-			}
-			$("#factoresConstruccion").html(htmlFactores);
-			$("#condicionesGeneralesEstatus").text(data.construccion.condicionesGenerales);
-			$("#puntosConstruccion").text(data.construccion.puntos);
-			/* Datos de las generalidades del sitio */
-			$("#montoRenta").text('$' + formato(data.generalidadesSitio.renta, true) + " al mes");
-			$("#disponibilidad").text(data.generalidadesSitio.disponibilidad);
-			$("#amortizacion").text('$' + formato(data.generalidadesSitio.amortizacion, true) + " al mes");
-			$("#tiempoAmortizacion").text(data.generalidadesSitio.tiempoAmortizacion + " meses");
-			$("#periodoGracia").text(data.generalidadesSitio.periodoGracia);
-			$("#puntosGeneralidades").text(data.generalidadesSitio.puntos);
-			/* Datos de los conteos */
-			$("#puntosConteos").text(data.flujoPeatonal.puntos);
-			$("#promedioConteos").text(data.flujoPeatonal.promedio);
-			var conteo1 = new Array();
-			var conteo2 = new Array();
-			var conteo3 = new Array();
-			var promedio = new Array();
-			var fecha1 = "";
-			var fecha2 = "";
-			var fecha3 = "";
-			var suma1 = 0;
-			var suma2 = 0;
-			var suma3 = 0;
-			var categorias = new Array();
-			
-			for(var i = 0; i < data.flujoPeatonal.listaConteos.length; i++) {
-				categorias.indexOf(data.flujoPeatonal.listaConteos[i].horario) === -1 ? categorias.push(data.flujoPeatonal.listaConteos[i].horario) : console.log;
-				
-				if(data.flujoPeatonal.listaConteos[i].horarioId == PRIMER_HORARIO_CONTEO) {
-					conteo1.push(data.flujoPeatonal.listaConteos[i].totalPersonas);
-					fecha1 = data.flujoPeatonal.listaConteos[i].fecha;
-					suma1 += data.flujoPeatonal.listaConteos[i].totalPersonas;
-				} else if(data.flujoPeatonal.listaConteos[i].horarioId == SEGUNDO_HORARIO_CONTEO) {
-					conteo2.push(data.flujoPeatonal.listaConteos[i].totalPersonas);
-					fecha2 = data.flujoPeatonal.listaConteos[i].fecha
-					suma2 += data.flujoPeatonal.listaConteos[i].totalPersonas;
+			if(data.construccion != undefined) {
+				var htmlFactores = "";
+				var condicionesGeneralesLocal = "";
+				if(data.construccion.factores.length > 0) {
+					for(var i = 0; i < data.construccion.factores.length; i++) {
+						if(data.construccion.factores[i].nivelId == 3) {
+							condicionesGeneralesLocal = data.construccion.factores[i].nombreFactor
+						} else {
+							htmlFactores += '<img style="padding-right: 10px;" src="img/icono_factor.png"/><span class="subtituloDetalleMd sangria_cuerpo">' + data.construccion.factores[i].nombreFactor + '</span><br/>';
+							
+							for(var j = 0; j < data.construccion.factores[i].subfactores.length; j++) {
+								htmlFactores += '<img class="sangria_cuerpo" src="img/icono_subfactor.png"/><span class="subtituloDetalleMd sangria_cuerpo">' + data.construccion.factores[i].subfactores[j].nombre + '</span><br/>';
+							}
+						}
+					}
+					$("#factoresConstruccion").html(htmlFactores);
+					$("#condicionesGeneralesEstatus").html('<img style="padding-right: 10px;" src="img/icono_factor.png"/>' + condicionesGeneralesLocal);
+					$("#puntosConstruccion").text(data.construccion.puntos);
 				} else {
-					conteo3.push(data.flujoPeatonal.listaConteos[i].totalPersonas);
-					fecha3 = data.flujoPeatonal.listaConteos[i].fecha;
-					suma3 += data.flujoPeatonal.listaConteos[i].totalPersonas;
+					$("#factoresConstruccion").html('<span class="subtituloDetalleMd sangria_doble_cuerpo" style="color: #FF0000;">Sin resultados</span>');
+					$("#condicionesGeneralesEstatus").text('---');
+					$("#puntosConstruccion").text("---");
 				}
+				
+				var contentPopConstruccion = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 17px;">Agrega tips para que tus buscadores encuentren sitios mejores</span></div></div>';
+				if(data.construccion.tips != undefined && data.construccion.tips.length > 0) {
+					contentPopConstruccion = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 17px;">' + data.construccion.tips[0] + '</span></div></div>';
+				}
+				$("#construccionTip").popover({
+					html: true, 
+					content : contentPopConstruccion
+				});
 			}
-			promedio.push(suma1 / conteo1.length);
-			promedio.push(suma2 / conteo2.length);
-			promedio.push(suma3 / conteo3.length);
+			/* Datos de las generalidades del sitio */
+			if(data.generalidades != undefined) {
+				$("#montoRenta").text('$' + formato(data.generalidades.renta, true) + " al mes");
+				$("#disponibilidad").text(data.generalidades.disponibilidad);
+				$("#amortizacion").text(data.generalidades.periodoAmortizacion);
+				$("#tiempoAmortizacion").text(data.generalidades.periodoAmortizacion);
+				$("#periodoGracia").text('$' + formato(data.generalidades.periodoGracia, true));
+				$("#puntosGeneralidades").text(data.generalidades.puntos);
+				
+				var contentPopGeneralidades = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 17px;">Agrega tips para que tus buscadores encuentren sitios mejores</span></div></div>';
+				if(data.generalidades.tips != undefined && data.generalidades.tips.length > 0) {
+					contentPopGeneralidades = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 17px;">' + data.generalidades.tips[0] + '</span></div></div>';
+				}
+				$("#generalidadesTip").popover({
+					html: true, 
+					content : contentPopGeneralidades
+				});
+			}
+			/* Datos de los conteos */
+			if(data.flujoPeatonal != undefined) {
+				$("#puntosConteos").text(data.flujoPeatonal.puntos);
+				var conteo1 = new Array();
+				var conteo2 = new Array();
+				var conteo3 = new Array();
+				var promedio = new Array();
+				var fecha1 = "";
+				var fecha2 = "";
+				var fecha3 = "";
+				var suma1 = 0;
+				var suma2 = 0;
+				var suma3 = 0;
+				var categorias = new Array();
+				var listaDetalleId = new Array();
+				
+				for(var i = 0; i < data.flujoPeatonal.conteos.length; i++) {
+					
+					if(listaDetalleId.length == 0) {
+						listaDetalleId.push(data.flujoPeatonal.conteos[i].detalleId);
+						categorias.push(data.flujoPeatonal.conteos[i].horaInicio + "-" + data.flujoPeatonal.conteos[i].horaFinal);
+					} else if(!listaDetalleId.includes(data.flujoPeatonal.conteos[i].detalleId)) {
+						listaDetalleId.push(data.flujoPeatonal.conteos[i].detalleId);
+						categorias.push(data.flujoPeatonal.conteos[i].horaInicio + "-" + data.flujoPeatonal.conteos[i].horaFinal);
+					}
+					
+					if(data.flujoPeatonal.conteos[i].detalleId == PRIMER_HORARIO_CONTEO) {
+						conteo1.push(data.flujoPeatonal.conteos[i].total);
+						fecha1 = data.flujoPeatonal.conteos[i].fecha;
+						suma1 += data.flujoPeatonal.conteos[i].total;
+					} else if(data.flujoPeatonal.conteos[i].detalleId  == SEGUNDO_HORARIO_CONTEO) {
+						conteo2.push(data.flujoPeatonal.conteos[i].total);
+						fecha2 = data.flujoPeatonal.conteos[i].fecha
+						suma2 += data.flujoPeatonal.conteos[i].total;
+					} else {
+						conteo3.push(data.flujoPeatonal.conteos[i].total);
+						fecha3 = data.flujoPeatonal.conteos[i].fecha;
+						suma3 += data.flujoPeatonal.conteos[i].total;
+					}
+				}
+				promedio.push(suma1 / conteo1.length);
+				promedio.push(suma2 / conteo2.length);
+				promedio.push(suma3 / conteo3.length);
+				$("#promedioConteos").text(Math.trunc((suma1 + suma2 + suma3)/(conteo1.length + conteo2.length + conteo3.length)));
+				
+				var contentPopConteos = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 17px;">Agrega tips para que tus buscadores encuentren sitios mejores</span></div></div>';
+				if(data.flujoPeatonal.tips != undefined && data.flujoPeatonal.tips.length > 0) {
+					contentPopConteos = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 17px;">' + data.flujoPeatonal.tips[0] + '</span></div></div>';
+				}
+				$("#conteosTip").popover({
+					html: true, 
+					content : contentPopConteos
+				});
+			}
 			
 			setTimeout(function () {
-				initMap(data.latitud, data.longitud, listaCompetencias, listaGeneradores);
+				initMap(Number(data.generales.latitud), Number(data.generales.longitud), listaCompetencias, listaGeneradores);
 			}, 500);
 			
 			
@@ -277,11 +357,29 @@ function buscaDetalleMD(mdId) {
 	}
 }
 
+function redireccionaAsignadas() {
+	window.history.back();
+}
+
 function cargaFlujoPeatonal(categorias, fecha1, conteo1, fecha2, conteo2, fecha3, conteo3, promedio) {
 	Highcharts.chart('contenedorFlujoPeatonal', {
 	    chart: {
 	        type: 'column'
 	    },
+	    legend: {
+            itemStyle: {
+               fontSize:'7px',
+               font: '7pt Helvetica, sans-serif',
+               color: '#00427F'
+            },
+            itemHoverStyle: {
+               color: '#000'
+            },
+            itemHiddenStyle: {
+               color: '#444'
+            }
+         
+        },
 	    title: {
 	        text: ''
 	    },
@@ -315,20 +413,19 @@ function cargaFlujoPeatonal(categorias, fecha1, conteo1, fecha2, conteo2, fecha3
 	    series: [{
 	        name: fecha1,
 	        data: conteo1,
-	        color: '#FF0000'
-
+	        color: '#A8DCD1'
 	    }, {
 	        name: fecha2,
-	        data: conteo2
-
+	        data: conteo2,
+	        color: '#40BCD8'
 	    }, {
 	        name: fecha3,
-	        data: conteo3
-
+	        data: conteo3,
+	        color: '#A3D9FF'
 	    }, {
 	        name: 'Promedio',
-	        data: promedio
-
+	        data: promedio,
+	        color: '#F1E3F3'
 	    }]
 	});
 }

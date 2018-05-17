@@ -11,6 +11,9 @@ $(function(){
 	
 	$("#botonMensajeAceptar").unbind("click");
 	$("#botonMensajeAceptar").click(function() {
+		if(funcionEvalSi != null) {
+			eval(funcionEvalSi)();
+		}
 		cierraMensajeModal();
 	});
 	

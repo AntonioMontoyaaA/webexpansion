@@ -70,6 +70,7 @@ public class UsuarioLoginVO {
 		private String nombre;
 		private String telefono;
 		private int numeroEmpleado;
+		private int puestoId;
 
 		public List<Zonasxusuario> getZonasxusuario() {
 		return zonasxusuario;
@@ -182,6 +183,15 @@ public class UsuarioLoginVO {
 		public void setNumeroEmpleado(int numeroEmpleado) {
 			this.numeroEmpleado = numeroEmpleado;
 		}
+
+		public int getPuestoId() {
+			return puestoId;
+		}
+
+		public void setPuestoId(int puestoId) {
+			this.puestoId = puestoId;
+		}
+		
 		}
 	
 	public class Perfilesxusuario {

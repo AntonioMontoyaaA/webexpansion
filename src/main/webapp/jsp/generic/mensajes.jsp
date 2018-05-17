@@ -25,10 +25,9 @@
        <div id="descripcionMensaje">---</div>
       </div>
       <div class="modal-footer" style="background: #C9C9C9; justify-content: center; color: #FFFFFF;">
-        <button type="button" class="btn" id="botonMensajeSi"  style="width: 70px; height: 30px; background: #2E7D32; padding-top: 4px; margin-right: 20px; cursor: pointer;">Si</button>
-        <button type="button" class="btn" id="botonMensajeNo" style="width: 70px; height: 30px; background: #B71C1C; padding-top: 4px; margin-right: 20px; cursor: pointer;">No</button>
-        <button type="button" class="btn" id="botonMensajeAceptar" style="width: 100px; height: 30px; background: #01579B; padding-top: 4px; cursor: pointer;">Aceptar</button>
-        
+        <button type="button" class="btn" id="botonMensajeSi"  style="width: 70px; height: 30px; background: #2E7D32; padding-top: 4px; margin-right: 20px; cursor: pointer;color: #FFFFFF;">Si</button>
+        <button type="button" class="btn" id="botonMensajeNo" style="width: 70px; height: 30px; background: #B71C1C; padding-top: 4px; margin-right: 20px; cursor: pointer;color: #FFFFFF;">No</button>
+        <button type="button" class="btn" id="botonMensajeAceptar" style="width: 100px; height: 30px; background: #01579B; padding-top: 4px; cursor: pointer;color: #FFFFFF;">Aceptar</button>
       </div>
     </div>
   </div>

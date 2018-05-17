@@ -39,6 +39,7 @@ public class AsignadasInfoAction extends ActionSupport implements SessionAware, 
 		UsuarioLoginVO usuario = null;
 		String numeroEmpleado = null;
 		int puestoId = 0;
+		int areaId = 0;
 		HttpSession usuarioSesion = ServletActionContext.getRequest().getSession();
 		usuario = (UsuarioLoginVO) usuarioSesion.getAttribute("usr");
 		
@@ -46,6 +47,9 @@ public class AsignadasInfoAction extends ActionSupport implements SessionAware, 
 			if(usuario != null) {
 				numeroEmpleado = String.valueOf(usuario.getPerfil().getNumeroEmpleado());
 				puestoId = usuario.getPerfil().getPuestoId();
+				if(usuario.getPerfil().getAreasxpuesto().size() > 0) {
+					areaId = usuario.getPerfil().getAreasxpuesto().get(0).getAreaId();
+				}
 			} else {
 				RespuestaVo respuestaVo = new RespuestaVo();
 				respuestaVo.setCodigo(501);
@@ -60,7 +64,7 @@ public class AsignadasInfoAction extends ActionSupport implements SessionAware, 
 			 .add("usuarioId", numeroEmpleado)
 			 .add("puestoId", String.valueOf(puestoId))
 	         .add("fechaConsulta", fechaConsulta)
-	         .add("areaId", "1");
+	         .add("areaId", String.valueOf(areaId));
 			
 			 RequestBody formBody = formBuilder.build();
 			 Request request = new Request.Builder()

@@ -66,10 +66,13 @@
       	</action>
       	
       	<action name = "DashboardGeneralAction" class="com.tiendas.neto.action.DashboardGeneralAction"
-      	 method = "execute"></action>
+      	 method = "execute"/>
+      	<action name = "DashboardPlanAperturaMAction" class="com.tiendas.neto.action.DashboardPlanAperturaMAction"
+      	 method = "execute"/>
       	 
       	<action name = "MensajeHistorialAction" class="com.tiendas.neto.action.MensajeHistorialAction"
-      	 method = "execute"></action>
+      	 method = "execute"/>
+      	
       	
 	</package>
 	

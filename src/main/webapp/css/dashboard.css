@@ -1,18 +1,18 @@
  /*alineacion de titulos*/
 .fecha{
-	margin-left:40%;
+	margin-left:33%;
 	color:#00437e;
 	font-size:11px;
 	margin-right:5px;
 }
 @media (max-width: 1530px) {
-	.fecha{margin-left:30%;}
+	.fecha{margin-left:25%;}
 }
 @media (max-width: 1350px) {
-	.fecha{margin-left:20%;}
+	.fecha{margin-left:13%;}
 }
 @media (max-width: 1190px) {
-	.fecha{margin-left:10%;}
+	.fecha{margin-left:5%;}
 }
 @media (max-width: 1090px) {
 	.fecha{margin-left:0;}

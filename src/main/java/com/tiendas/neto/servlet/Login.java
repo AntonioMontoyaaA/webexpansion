@@ -59,6 +59,7 @@ public class Login  extends HttpServlet {
 				try {
 					HttpSession sesion = request.getSession();
 					sesion.setAttribute("usr", usuario);
+					sesion.setAttribute("usuario", user);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -67,7 +68,7 @@ public class Login  extends HttpServlet {
 				despachador.include(request, response);
 				System.out.println("login");
 			} else {
-				RequestDispatcher despachador = getServletContext().getRequestDispatcher("/jsp/dashboard.jsp");
+				RequestDispatcher despachador = getServletContext().getRequestDispatcher("/jsp/errorSesion.jsp");
 				despachador.include(request, response);
 				System.out.println("error");
 			}
@@ -76,7 +77,7 @@ public class Login  extends HttpServlet {
     	String metodo ="metodo: "+ new String (Thread.currentThread().getStackTrace()[1].getMethodName());
     	
     	elog.error(clase, metodo, e+"", user, pass);
-		RequestDispatcher despachador = getServletContext().getRequestDispatcher("/jsp/dashboard.jsp");
+		RequestDispatcher despachador = getServletContext().getRequestDispatcher("/jsp/errorSesion.jsp");
 		despachador.include(request, response);
 		System.out.println("fatal error");
 

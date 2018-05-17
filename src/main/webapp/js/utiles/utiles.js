@@ -8,6 +8,7 @@ var TIPO_ESTATUS_EXITO		= 2;
 var funcionEvalSi			= "";
 
 $(function(){
+	popover();
 	mueveReloj();
 	$("#botonMensajeAceptar").unbind("click");
 	$("#botonMensajeAceptar").click(function() {
@@ -157,4 +158,8 @@ function mueveReloj(){
      //La función se tendrá que llamar así misma para que sea dinámica, 
      //de esta forma:
      setTimeout(mueveReloj,60000)
+}
+
+function popover(){
+	 $('#avisos').popover({ html : true });
 }

@@ -481,7 +481,7 @@ function Resumen_grafica(data){
 	    	 style: {
 	             color: '#00437e'
 	         },
-	        text: '<span class="numero_grande">'+6+'</span><br><span class="numero_chico">de '+sum_totales+'</span>',
+	        text: '<span class="numero_grande">'+sum_asignadas+'</span><br><span class="numero_chico">de '+sum_totales+'</span>',
 	        align: 'center',
 	        verticalAlign: 'middle',
 	        y: 5
@@ -517,19 +517,19 @@ function Resumen_grafica(data){
 	        data: [{
 	                name: 'Personales',
 	                color: '#00427F',
-	                y: 1, //poner la resta de num max - personales - area
+	                y: 0, 
 	                dataLabels: {
 	                    enabled: false}
 	        	},{
 		            name: 'Area',
 		            color: '#64DEF1',
-		            y: 5, //poner la resta de num max - personales - area
+		            y: sum_asignadas, 
 		            dataLabels: {
 		                    enabled: false}
 	        	},{
 	                name: 'Faltantes',
 	                color: '#C9C9C9',
-	                y: sum_totales-1-5, //poner la resta de num max - personales - area
+	                y: sum_totales-sum_asignadas, 
 	                dataLabels: {
 	                    enabled: false}
 	            }]
@@ -556,7 +556,7 @@ function Resumen_grafica(data){
 	    	 style: {
 	             color: '#00437e'
 	         },
-	        text: '<span class="numero_grande">'+9+'</span><br><span class="numero_chico">de '+sum_asignadas+'</span>',
+	        text: '<span class="numero_grande">'+sum_atrasadas+'</span><br><span class="numero_chico">de '+sum_asignadas+'</span>',
 	        align: 'center',
 	        verticalAlign: 'middle',
 	        y: 5
@@ -592,19 +592,19 @@ function Resumen_grafica(data){
 	        data: [{
                 name: 'Personales',
                 color: '#00427F',
-                y: 1, //poner la resta de num max - personales - area
+                y: 0,
                 dataLabels: {
                     enabled: false}
         	},{
 	            name: 'Area',
 	            color: '#64DEF1',
-	            y: 5, //poner la resta de num max - personales - area
+	            y: sum_atrasadas,
 	            dataLabels: {
 	                    enabled: false}
         	},{
                 name: 'Faltantes',
                 color: '#C9C9C9',
-                y: sum_asignadas-1-5, //poner la resta de num max - personales - area
+                y: sum_asignadas-sum_atrasadas, 
                 dataLabels: {
                     enabled: false}
             }]
@@ -630,7 +630,7 @@ function Resumen_grafica(data){
 	    	 style: {
 	             color: '#00437e'
 	         },
-	        text: '<span class="numero_grande">'+10+'</span><br><span class="numero_chico">de '+sum_totales+'</span>',
+	        text: '<span class="numero_grande">'+sum_autorizadas+'</span><br><span class="numero_chico">de '+sum_totales+'</span>',
 	        align: 'center',
 	        verticalAlign: 'middle',
 	        y: 5
@@ -666,19 +666,19 @@ function Resumen_grafica(data){
 	        data: [{
                 name: 'Personales',
                 color: '#00427F',
-                y: 1, //poner la resta de num max - personales - area
+                y: 0, 
                 dataLabels: {
                     enabled: false}
         	},{
 	            name: 'Area',
 	            color:'#64DEF1', 
-	            y: 5, //poner la resta de num max - personales - area
+	            y: sum_autorizadas, 
 	            dataLabels: {
 	                    enabled: false}
         	},{
                 name: 'Faltantes',
                 color:'#C9C9C9',
-                y: sum_totales-1-5, //poner la resta de num max - personales - area
+                y: sum_totales-sum_autorizadas, 
                 dataLabels: {
                     enabled: false}
             }]
@@ -704,7 +704,7 @@ function Resumen_grafica(data){
 	    	 style: {
 	             color: '#00437e'
 	         },
-	        text: '<span class="numero_grande">'+2+'</span><br><span class="numero_chico">de '+sum_totales+'</span>',
+	        text: '<span class="numero_grande">'+sum_rechazadas+'</span><br><span class="numero_chico">de '+sum_totales+'</span>',
 	        align: 'center',
 	        verticalAlign: 'middle',
 	        y: 5
@@ -740,19 +740,19 @@ function Resumen_grafica(data){
 	        data: [{
                 name: 'Personales',
                 color: '#00427F',
-                y: 1, //poner la resta de num max - personales - area
+                y: 0, 
                 dataLabels: {
                     enabled: false}
         	},{
 	            name: 'Area',
 	            color: '#64DEF1',
-	            y: 5, //poner la resta de num max - personales - area
+	            y: sum_rechazadas, 
 	            dataLabels: {
 	                    enabled: false}
         	},{
                 name: 'Faltantes',
                 color: '#C9C9C9',
-                y: sum_totales-1-5, //poner la resta de num max - personales - area
+                y: sum_totales-sum_rechazadas, 
                 dataLabels: {
                     enabled: false}
             }]

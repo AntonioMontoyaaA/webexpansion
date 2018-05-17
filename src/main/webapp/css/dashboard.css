@@ -145,3 +145,38 @@ table{
 	.numero_grande{font-size:1.5em}
 	.numero_chico{font-size:0.6em}
 }
+/* ---------------------------  POPOVER */
+.popover{
+	background:#ededed;
+	border: 1px solid #ededed;
+	width:300px;
+}
+.popover_titulo{
+	padding-left:10px;
+	padding-top:3px;
+	padding-bottom:5px;
+	font-weight:bold;
+}
+.popover_opcion{
+	border-top:1.5px solid #e1e1e1;
+	padding-left:10px;
+	padding-top:3px;
+	padding-bottom:5px;
+}
+.popover-body {
+    padding: 0;
+}
+.bs-popover-auto[x-placement^=bottom] .arrow::after, .bs-popover-bottom .arrow::after {
+    top: 0px;
+    border-bottom-color:#ededed;
+}
+.popover_opcion a:hover{
+	text-decoration:none;
+	color:#40BCD8;
+	font-size:11px;
+}
+.popover_opcion a{
+	text-decoration:none;
+	color:#00437e;
+	font-size:11px;
+}

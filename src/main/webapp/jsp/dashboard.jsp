@@ -212,7 +212,6 @@
 			</div>	
 		</div>
 		</div>
-	
 	</div>
 </div>
 	
@@ -221,7 +220,7 @@
 
 
 	<script	src="${pageContext.request.contextPath}/js/jquery/jquery.min.js"></script>
-	<script	src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.bundle.min.js" type="text/javascript"></script>
+	<script	src="${pageContext.request.contextPath}/js/jquery/popper.js"></script>
 	<script	src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 	<script	src="${pageContext.request.contextPath}/highcharts/highcharts.js"></script>
 	<script	src="${pageContext.request.contextPath}/js/utiles/utiles.js"></script>

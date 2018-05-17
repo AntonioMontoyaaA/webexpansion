@@ -21,12 +21,15 @@
 					
 		<form class="form-inline my-2 my-lg-0" style="padding-bottom:20px;">
 			<span class="mr-sm-2 azul" style="font-size:11px;" id="fecha_header"></span>
-			<span class="mr-sm-2"><img src="img/web_AVISOS.png"></span>
+			<span class="mr-sm-2"><a id="avisos" data-toggle="popover" data-placement="bottom"
+			data-content="
+				<div class='popover_titulo azul'>Avisos</div>
+				<div class='popover_opcion azul'><a href='asignadas'> Tienes 1 nueva MD</a></div>
+				<div class='popover_opcion azul'><a href='agenda'>Reunión con Juan de la Cruz</a></div>
+				<div class='popover_opcion azul'><a href='asignadas'>Tienes 4 MDs proximas a vencer</a></div>
+			"><img src="img/web_AVISOS.png"></a></span>
 		&nbsp;<span class="my-2 my-sm-0"> <img src="img/usuario.png" style="padding-right:15px;"></span>
-			
 		</form>
-		</div>
-	
-	
+		</div>	
 </nav>
 

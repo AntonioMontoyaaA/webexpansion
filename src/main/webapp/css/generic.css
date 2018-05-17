@@ -278,7 +278,7 @@ background-image: url('https://mdbootstrap.com/img/svg/hamburger7.svg?color=0069
 }
 .navbar_borde{
 	border-bottom:4px solid #00427F;
-	height:47px;
+	height:52px;
 }
 @media (max-width: 991px) {
 	.navbar_borde{height:auto;}
@@ -297,8 +297,8 @@ a.nav-link{
 	color:darkblue;
 	text-align:center;
 	border-bottom:4px solid #00427F;
-	height:51px;
-	line-height:47px;;
+	height:56px;
+	line-height:57px;;
 }
 a.nav-link:hover{
 	border-bottom:4px solid #00427F;
@@ -309,7 +309,7 @@ a.nav-link.resaltado{
 	color:#40bcd8;	
 }
 .navbar-brand{
-	padding:0px;
+	padding-left:20px;
 }
 /* --------------------------- GENERICOS --------------------*/ 
 .center{

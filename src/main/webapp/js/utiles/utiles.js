@@ -8,7 +8,7 @@ var TIPO_ESTATUS_EXITO		= 2;
 var funcionEvalSi			= "";
 
 $(function(){
-	
+	mueveReloj();
 	$("#botonMensajeAceptar").unbind("click");
 	$("#botonMensajeAceptar").click(function() {
 		if(funcionEvalSi != null) {
@@ -141,4 +141,20 @@ function formato(cnt, cents) {
                         + cnt.substring(cnt.length - (4 * i + 3));
 
 	return (((sgn) ? '' : '-') + cnt);// + ( cents ?  '.' + cvs : '');
+}
+
+
+function mueveReloj(){
+	var f=new Date();
+    var mesesarr = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");	
+	mes = mesesarr[f.getMonth()];
+	dia = f.getDate();
+	año = f.getFullYear();
+	
+	fecha_header=dia+' de '+mes+' del '+año+' '+f.getHours()+':'+f.getMinutes()+' hrs';
+     $('#fecha_header').text(fecha_header);
+
+     //La función se tendrá que llamar así misma para que sea dinámica, 
+     //de esta forma:
+     setTimeout(mueveReloj,60000)
 }

@@ -1,18 +1,39 @@
 //-------- CARGA AL INICIO
+var usuario;
+var fecha; 
+var mes;
+var dia;
+var año;
+var fecha_entera;
 $(function(){
 		$('#iddashboard').addClass('resaltado'); //para el efecto de header
-		$('.fecha').text('Hoy 04 de Mayo del 2018 12:22PM');
+		usuario=$('#usuario').val();
+		$('#usuario').val('');
+		cargafechas();
+		$('#mes_actual').text(mes);
+		
 		progGeneral();
 		progSemanal();
 		AperturaMensual();
-		Resumen();
-					
 });
+function cargafechas(){
+	var f=new Date();
+	var mesesarr = new Array ("ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE");
+	var mesint = new Array ("01","02","03","04","05","06","07","08","09","10","11","12");
+	
+	mes = mesesarr[f.getMonth()];
+	dia = f.getDate();
+	año = f.getFullYear();
+	fecha = f.getDate() + "/" + mesint[f.getMonth()] + "/" + f.getFullYear();
+	fecha_entera='HOY '+dia+' DE '+mes+' DEL '+año+' '+f.getHours()+':'+f.getMinutes()+' HRS';
+}
 
 // ---------------------- CONSULTAS AL ACTION
 function progGeneral(){
+	cargafechas();
+	$('#fecha_pg').text(fecha_entera);
 	invocarJSONServiceAction("DashboardGeneralAction", 
-			{'tipoConsulta': $('#opcion').val(), 'fechaConsulta': '23/04/2018'}, 
+			{'tipoConsulta': $('#opcion').val(), 'fechaConsulta': fecha}, 
 			'obtieneDashboardResponse', 
 			function() {
 				//Funcion de error
@@ -24,27 +45,86 @@ function progGeneral(){
 			});
 
 	obtieneDashboardResponse = function( data ) {
-	if(data.codigo == 404){
-		console.log("*** ENTRA A ERROR ***");	
-	}
+	if(data.codigo != 200){
+		cargaMensajeModal('MD ASIGNADAS', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
+		}
 	if(data.codigo==200) {
 		console.log("*** ENTRA A DATOS ***");
 		progGeneral_grafica(data);
+		Resumen_grafica(data);
+		
+		if($('#opcion').val()=="1")
+			$('#pg_fecha').text(dia+' DE '+mes);
+		if($('#opcion').val()=="2")
+			$('#pg_fecha').text('SEMANA');
+		if($('#opcion').val()=="3")
+			$('#pg_fecha').text(mes+' '+año);
+		if($('#opcion').val()=="4")
+			$('#pg_fecha').text('BIMESTRE');
+		if($('#opcion').val()=="5")
+			$('#pg_fecha').text('TRIMESTRE');
+		if($('#opcion').val()=="6")
+			$('#pg_fecha').text('SEMESTRE');
+		if($('#opcion').val()=="7")
+			$('#pg_fecha').text('AÑO '+año);
 	}
 };	
 }
 function progSemanal(){
+	cargafechas();
+	$('#fecha_ps').text(fecha_entera);
 	progSemanal_grafica();
+
 }
 function AperturaMensual(){
-	AperturaMensual_grafica();
+	invocarJSONServiceAction("DashboardPlanAperturaMAction", 
+			{'usuarioId': usuario, 'fecha':fecha}, 
+			'obtieneResponse', 
+			function() {
+				//Funcion de error
+				cierraLoading();
+			},
+			function() {
+				//Función al finalizar}
+				cierraLoading();
+			});
+
+	obtieneResponse = function( data ) {
+	if(data.codigo != 200){
+		cargaMensajeModal('DASHBOARD', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
+	}
+	if(data.codigo==200){
+		AperturaMensual_grafica(data);
+	}
+};	
 }
-function Resumen(){
-	Resumen_grafica();
-}
+
 
 // ------------------------------- ARMA GRAFICA PROGRESO GENERAL
 function progGeneral_grafica(data){
+var E=data.areas.EXPANSION;
+var G=data.areas.GESTORIA;
+var C=data.areas.CONSTRUCCION;
+var O=data.areas.OPERACIONES;
+	
+var sumaE=E.asignadas+E.atrasadas+E.autorizadas+E.rechazadas
+var sumaG=G.asignadas+G.atrasadas+G.autorizadas+G.rechazadas
+var sumaC=C.asignadas+C.atrasadas+C.autorizadas+C.rechazadas
+var sumaO=O.asignadas+O.atrasadas+O.autorizadas+O.rechazadas
+
+var sum_asignadas=E.asignadas+G.asignadas+C.asignadas+O.asignadas;
+var sum_atrasadas=E.atrasadas+G.atrasadas+C.atrasadas+O.atrasadas;
+var sum_autorizadas=E.autorizadas+G.autorizadas+C.autorizadas+O.autorizadas;
+var sum_rechazadas=E.rechazadas+G.rechazadas+C.rechazadas+O.rechazadas;
+var sum_totales= sum_asignadas + sum_atrasadas + sum_autorizadas + sum_rechazadas;
+
+$('#sum_asignadas').text(sum_asignadas);
+$('#sum_atrasadas').text(sum_atrasadas);
+$('#sum_autorizadas').text(sum_autorizadas);
+$('#sum_rechazadas').text(sum_rechazadas);
+$('#sum_totales').text(sum_totales);
+
+
 	Highcharts.chart('container', {
 	    chart: {
 	        type: 'column'
@@ -67,29 +147,29 @@ function progGeneral_grafica(data){
 	    },
 	    xAxis: {
 	        categories: [
-	            'Expansion',
-	            'Gestoría',
-	            'Construcción',
-	            'Operaciones'
+	            'Expansion <br>'+sumaE,
+	            'Gestoría <br>'+sumaG,
+	            'Construcción <br>'+sumaC,
+	            'Operaciones <br>'+sumaO
 	        ],
 	        crosshair: true },
 	  
 	        series: [{
 	        name: 'Asignadas',
 	        color: '#CCE0F4',
-	        data: [data.areas.EXPANSION.asignadas, data.areas.GESTORIA.asignadas, data.areas.CONSTRUCCION.asignadas, data.areas.OPERACIONES.asignadas]
+	        data: [E.asignadas, G.asignadas, C.asignadas, O.asignadas]
 	    }, {
 	        name: 'Atrasadas',
 	        color: '#005B97',
-	        data: [data.areas.EXPANSION.atrasadas, data.areas.GESTORIA.atrasadas, data.areas.CONSTRUCCION.atrasadas, data.areas.OPERACIONES.atrasadas]
+	        data: [E.atrasadas, G.atrasadas, C.atrasadas, O.atrasadas]
 	    }, {
 	        name: 'Autorizadas',
 	        color: '#64DEF1',
-	        data: [data.areas.EXPANSION.autorizadas, data.areas.GESTORIA.autorizadas, data.areas.CONSTRUCCION.autorizadas, data.areas.OPERACIONES.autorizadas]
+	        data: [E.autorizadas, G.autorizadas, C.autorizadas, O.autorizadas]
 	    },{
 	        name: 'Rechazadas',
 	        color: '#FF5B16',
-	        data: [data.areas.EXPANSION.rechazadas, data.areas.GESTORIA.rechazadas, data.areas.CONSTRUCCION.rechazadas, data.areas.OPERACIONES.rechazadas]
+	        data: [E.rechazadas, G.rechazadas, C.rechazadas, O.rechazadas]
 	    }],
 	    tooltip: {
 	        formatter: function () {
@@ -244,7 +324,59 @@ function progSemanal_grafica(){
 	});
 }
 //---------------------------------  ARMA GRAFICA PLAN DE APERTURA MENSUAL
-function AperturaMensual_grafica(){
+function AperturaMensual_grafica(data){
+var	datos=data.meses;
+
+if(mes=="ENERO"){
+	$('#metas').text(datos.Enero.plan);
+	$('#t_abiertas').text(datos.Enero.real);
+}
+if(mes=="FEBRERO"){
+	$('#metas').text(datos.Febrero.plan);
+	$('#t_abiertas').text(datos.Febrero.real);
+}
+if(mes=="MARZO"){
+	$('#metas').text(datos.Marzo.plan);
+	$('#t_abiertas').text(datos.Marzo.real);
+}
+if(mes=="ABRIL"){
+	$('#metas').text(datos.Abril.plan);
+	$('#t_abiertas').text(datos.Abril.real);
+}
+if(mes=="MAYO"){
+	$('#metas').text(datos.Mayo.plan);
+	$('#t_abiertas').text(datos.Mayo.real);
+}
+if(mes=="JUNIO"){
+	$('#metas').text(datos.Junio.plan);
+	$('#t_abiertas').text(datos.Junio.real);
+}
+if(mes=="JULIO"){
+	$('#metas').text(datos.Julio.plan);
+	$('#t_abiertas').text(datos.Julio.real);
+}
+if(mes=="AGOSTO"){
+	$('#metas').text(datos.Agosto.plan);
+	$('#t_abiertas').text(datos.Agosto.real);
+}
+if(mes=="SEPTIEMBRE"){
+	$('#metas').text(datos.Septiembre.plan);
+	$('#t_abiertas').text(datos.Septiembre.real);
+}
+if(mes=="OCTUBRE"){
+	$('#metas').text(datos.Octubre.plan);
+	$('#t_abiertas').text(datos.Octubre.real);
+}
+if(mes=="NOVIEMBRE"){
+	$('#metas').text(datos.Noviembre.plan);
+	$('#t_abiertas').text(datos.Noviembre.real);
+}
+if(mes=="DICIEMBRE"){
+	$('#metas').text(datos.Diciembre.plan);
+	$('#t_abiertas').text(datos.Diciembre.real);
+}
+
+	
 	Highcharts.chart('container_apmensual', {
 	    chart: {
 	        type: 'column'
@@ -285,17 +417,50 @@ function AperturaMensual_grafica(){
 	    series: [{
 		        name: 'Faltante',
 		        color: '#C9C9C9',
-		        data: [15-10,15-3,15-4, 15-7, 15-2,15-3,15-3,15-3,15-3,15-3,15-3,15-3]
+		        data: [datos.Enero.plan - datos.Enero.real,
+		        	datos.Febrero.plan - datos.Febrero.real,
+		        	datos.Marzo.plan - datos.Marzo.real,
+		        	datos.Abril.plan - datos.Abril.real,
+		        	datos.Mayo.plan - datos.Mayo.real,
+		        	datos.Junio.plan - datos.Junio.real,
+		        	datos.Julio.plan - datos.Julio.real,
+		        	datos.Agosto.plan - datos.Agosto.real,
+		        	datos.Septiembre.plan - datos.Septiembre.real,
+		        	datos.Octubre.plan - datos.Octubre.real,
+		        	datos.Noviembre.plan - datos.Noviembre.real,
+		        	datos.Diciembre.plan - datos.Diciembre.real]
 		    },{
 		    	name: 'Aperturas',
 		    	color: '#40BCD8',
-		    	data: [10, 3, 4, 7, 2,3,3,3,3,3,3,3]
+		    	data: [datos.Enero.real,
+		    		datos.Febrero.real,
+		    		datos.Marzo.real,
+		    		datos.Abril.real,
+		    		datos.Mayo.real,
+		    		datos.Junio.real,
+		    		datos.Julio.real,
+		    		datos.Agosto.real,
+		    		datos.Septiembre.real,
+		    		datos.Octubre.real,
+		    		datos.Noviembre.real,
+		    		datos.Diciembre.real]
 		    }]
 	});
 }
 //---------------------------------  ARMA GRAFICA RESUMEN
 // ASIGNADAS
-function Resumen_grafica(){
+function Resumen_grafica(data){
+	var E=data.areas.EXPANSION;
+	var G=data.areas.GESTORIA;
+	var C=data.areas.CONSTRUCCION;
+	var O=data.areas.OPERACIONES;
+
+	var sum_asignadas=E.asignadas+G.asignadas+C.asignadas+O.asignadas;
+	var sum_atrasadas=E.atrasadas+G.atrasadas+C.atrasadas+O.atrasadas;
+	var sum_autorizadas=E.autorizadas+G.autorizadas+C.autorizadas+O.autorizadas;
+	var sum_rechazadas=E.rechazadas+G.rechazadas+C.rechazadas+O.rechazadas;
+	var sum_totales= sum_asignadas + sum_atrasadas + sum_autorizadas + sum_rechazadas;
+	
 	Highcharts.chart('container_asignadas', {
 	    chart: {
 	    	events: {
@@ -316,7 +481,7 @@ function Resumen_grafica(){
 	    	 style: {
 	             color: '#00437e'
 	         },
-	        text: '<span class="numero_grande">'+6+'</span><br><span class="numero_chico">de '+17+'</span>',
+	        text: '<span class="numero_grande">'+6+'</span><br><span class="numero_chico">de '+sum_totales+'</span>',
 	        align: 'center',
 	        verticalAlign: 'middle',
 	        y: 5
@@ -364,7 +529,7 @@ function Resumen_grafica(){
 	        	},{
 	                name: 'Faltantes',
 	                color: '#C9C9C9',
-	                y: 17-1-5, //poner la resta de num max - personales - area
+	                y: sum_totales-1-5, //poner la resta de num max - personales - area
 	                dataLabels: {
 	                    enabled: false}
 	            }]
@@ -375,7 +540,7 @@ function Resumen_grafica(){
 	Highcharts.chart('container_atrasadas', {
 	    chart: {
 	    	events: {
-                click: function () {location.href = 'asignadas'}
+                click: function () {location.href = 'atrasadas'}
             },
 	        plotBackgroundColor: null,
 	        plotBorderWidth: 0,
@@ -391,7 +556,7 @@ function Resumen_grafica(){
 	    	 style: {
 	             color: '#00437e'
 	         },
-	        text: '<span class="numero_grande">'+9+'</span><br><span class="numero_chico">de '+17+'</span>',
+	        text: '<span class="numero_grande">'+9+'</span><br><span class="numero_chico">de '+sum_asignadas+'</span>',
 	        align: 'center',
 	        verticalAlign: 'middle',
 	        y: 5
@@ -439,7 +604,7 @@ function Resumen_grafica(){
         	},{
                 name: 'Faltantes',
                 color: '#C9C9C9',
-                y: 17-1-5, //poner la resta de num max - personales - area
+                y: sum_asignadas-1-5, //poner la resta de num max - personales - area
                 dataLabels: {
                     enabled: false}
             }]
@@ -465,7 +630,7 @@ function Resumen_grafica(){
 	    	 style: {
 	             color: '#00437e'
 	         },
-	        text: '<span class="numero_grande">'+10+'</span><br><span class="numero_chico">de '+17+'</span>',
+	        text: '<span class="numero_grande">'+10+'</span><br><span class="numero_chico">de '+sum_totales+'</span>',
 	        align: 'center',
 	        verticalAlign: 'middle',
 	        y: 5
@@ -513,7 +678,7 @@ function Resumen_grafica(){
         	},{
                 name: 'Faltantes',
                 color:'#C9C9C9',
-                y: 17-1-5, //poner la resta de num max - personales - area
+                y: sum_totales-1-5, //poner la resta de num max - personales - area
                 dataLabels: {
                     enabled: false}
             }]
@@ -539,7 +704,7 @@ function Resumen_grafica(){
 	    	 style: {
 	             color: '#00437e'
 	         },
-	        text: '<span class="numero_grande">'+2+'</span><br><span class="numero_chico">de '+17+'</span>',
+	        text: '<span class="numero_grande">'+2+'</span><br><span class="numero_chico">de '+sum_totales+'</span>',
 	        align: 'center',
 	        verticalAlign: 'middle',
 	        y: 5
@@ -587,7 +752,7 @@ function Resumen_grafica(){
         	},{
                 name: 'Faltantes',
                 color: '#C9C9C9',
-                y: 17-1-5, //poner la resta de num max - personales - area
+                y: sum_totales-1-5, //poner la resta de num max - personales - area
                 dataLabels: {
                     enabled: false}
             }]

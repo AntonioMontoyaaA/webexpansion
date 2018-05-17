@@ -14,11 +14,10 @@
 <title>Dashboard</title>
 </head>
 <body>
-<%--  <c:forEach var="permisos" items="${permisos}">
-     	  			 <c:out value="${permisos.codigo}"/> </c:forEach>  --%>
-<%-- <p>Student First Name: <c:out value="${login.contra}"/></p> --%>
-<%@ include file="/jsp/generic/header.jsp" %>
+<input type="hidden" id="usuario" value=<%= session.getAttribute( "usuario" ) %>>
 
+
+<%@ include file="/jsp/generic/header.jsp" %>
 <div class="container-fluid menupr_fondo">
 	<div class="row padding_p">
 	<div class="col-lg-12 titulo">Dashboard Expansión 
@@ -33,7 +32,7 @@
 				</div>
 				<div class="col-lg-7 text-right">
 					<form class="form-inline p_cabecera">
-					<span class="fecha" id="fechahoy"></span>
+					<span class="fecha" id="fecha_pg"></span>
   					
   						<select class="form-control form-inline desp filtro" onchange="progGeneral();" id="opcion">
     					<option value="1">Día</option>
@@ -52,15 +51,15 @@
 				</div>
 			
 			<div class="col-lg-12 p_cabecera">
-				<span class="azul estilo_info">MD TOTALES</span><span class="azul negrita estilo_dato">17</span>
-				<span class="azul estilo_info">ASIGNADAS</span><span class="azul negrita estilo_dato">10</span>
-				<span class="azul estilo_info">ATRASADAS</span><span class="azul negrita estilo_dato">2</span>
-				<span class="azul estilo_info">AUTORIZADAS</span><span class="azul negrita estilo_dato">2</span>
-				<span class="azul estilo_info">RECHAZADAS</span><span class="azul negrita estilo_dato">5</span>
+				<span class="azul estilo_info">MD TOTALES</span><span class="azul negrita estilo_dato" id="sum_totales"></span>
+				<span class="azul estilo_info">ASIGNADAS</span><span class="azul negrita estilo_dato" id="sum_asignadas"></span>
+				<span class="azul estilo_info">ATRASADAS</span><span class="azul negrita estilo_dato" id="sum_atrasadas"></span>
+				<span class="azul estilo_info">AUTORIZADAS</span><span class="azul negrita estilo_dato" id="sum_autorizadas"></span>
+				<span class="azul estilo_info">RECHAZADAS</span><span class="azul negrita estilo_dato" id="sum_rechazadas"></span>
 			</div>
 			
 			<div class="col-lg-12">
-				<span class="azul estilo_info">MARZO 2018</span>
+				<span class="azul estilo_info" id="pg_fecha">MARZO 2018</span>
 			</div>
 			
 			</div>
@@ -79,7 +78,7 @@
 				</div>
 				<div class="col-lg-7 text-right">
 					<form class="form-inline p_cabecera">
-					<span class="fecha" id="fechahoy"></span>
+					<span class="fecha" id="fecha_ps"></span>
   					
   						<select class="form-control form-inline desp filtro">
     					<option>Día</option>
@@ -118,15 +117,15 @@
 				</div>
 				<div class="col-lg-2 col-md-2 text-right">
 					<form class="form-inline p_cabecera">
-  						<button class="btn desp rechargue" type="button">
+  						<button class="btn desp rechargue" type="button" onclick="AperturaMensual();">
   								<img src="${pageContext.request.contextPath}/img/refresh_sf.png" />
   						</button>
   					</form>
 				</div>
 			<div class="col-lg-12 p_cabecera">
-				<span class="azul estilo_info">METAS</span><span class="azul negrita estilo_dato">15</span>
-				<span class="azul estilo_info">TIENDAS ABIERTAS</span><span class="azul negrita estilo_dato">14</span>
-				<span class="azul estilo_info">ABRIL</span><span class="azul negrita estilo_dato">2</span>
+				<span class="azul estilo_info">METAS</span><span class="azul negrita estilo_dato" id="metas"></span>
+				<span class="azul estilo_info">TIENDAS ABIERTAS</span><span class="azul negrita estilo_dato" id="t_abiertas"></span>
+				<span class="azul estilo_info" id="mes_actual"></span>
 			</div>
 			</div>	
 			

@@ -39,7 +39,10 @@ public class DashboardGeneralAction extends ExpansionAction{
 	@Override
 	public String execute() throws Exception{
 		String respuesta="";
-	
+		HttpServletResponse response2 = ServletActionContext.getResponse();
+		response2.setContentType("application/json");
+		response2.setCharacterEncoding("UTF-8");
+		
 		try{
 		final OkHttpClient client = new OkHttpClient();
 		FormBody.Builder formBuilder = new FormBody.Builder()
@@ -54,16 +57,14 @@ public class DashboardGeneralAction extends ExpansionAction{
 		
 		 Response response = client.newCall(request).execute();
 		 respuesta = response.body().string();
-		 HttpServletResponse response2 = ServletActionContext.getResponse();
-			response2.setContentType("application/json");
-			response2.setCharacterEncoding("UTF-8");
-			response2.getWriter().write(respuesta);
+		 response2.getWriter().write(respuesta);
 		 }
 		 catch (Exception e){
 			String clase  ="clase: "+ new String (Thread.currentThread().getStackTrace()[1].getClassName());	
 			String metodo ="metodo: "+ new String (Thread.currentThread().getStackTrace()[1].getMethodName());
 			elog.error(clase,metodo,e+"","", ""); 
 			e.printStackTrace();
+			response2.getWriter().write("error");
 		 }
 		
 		return null;

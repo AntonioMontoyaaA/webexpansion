@@ -37,8 +37,6 @@
 		<action name="mensajes_historial">
 			<result>jsp/mensajes_historial.jsp</result>
 		</action>
-		
-
 	</package>
 	
 	<package name="default" namespace="/" extends="struts-default">
@@ -72,6 +70,11 @@
       	 
       	<action name = "MensajeHistorialAction" class="com.tiendas.neto.action.MensajeHistorialAction"
       	 method = "execute"/>
+      	 
+      	 <action name = "Logout" class="com.tiendas.neto.filtros.Logout"
+      	 method = "execute">
+      	 <result name = "SUCCESS">jsp/login.jsp</result>
+      	 </action>
       	
       	
 	</package>

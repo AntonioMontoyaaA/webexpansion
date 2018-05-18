@@ -161,5 +161,10 @@ function mueveReloj(){
 }
 
 function popover(){
-	 $('#avisos').popover({ html : true });
+	 $('#avisos').popover({ html : true }).addClass('avisos');;
+	 $('#perfil').popover({ html : true });
+	 
+	/* $('.popover-dismiss').popover({
+		  trigger: 'focus'
+		});*/
 }

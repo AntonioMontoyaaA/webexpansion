@@ -101,23 +101,32 @@ function creatabla(){
 				datosMemoriasAsignadas[i][3] = "<span style='" + spanRojo + "'>" + resultados[i].creador + "</span>";
 				datosMemoriasAsignadas[i][4] = "<span style='" + spanRojo + "'>" + resultados[i].fechaCreacion + "</span>";
 				datosMemoriasAsignadas[i][5] = "<span style='" + spanRojo + "'>" + resultados[i].fechaVencimiento + "</span>";
-				datosMemoriasAsignadas[i][6] = "<div><img src='img/iconos_COMENTARIOS.png'></div>"
+				datosMemoriasAsignadas[i][6] = "<div><img src='img/iconos_COMENTARIOS.png'></div>";
 				datosMemoriasAsignadas[i][7] = resultados[i].mdId;
 			 }
 			
 			 initTablaMemoriasAsignadas('DivTablaAsignadas', datosMemoriasAsignadas, 'tablaMemoriasAsignadas');
 			 
-			$("#tablaMemoriasAsignadas tr").click(function() {
-				var nombreMd = $(this).find("td:eq(0)").html();
-				var mdId = $(this).find("td:eq(7)").html();
+			$("#tablaMemoriasAsignadas tr td").not(":eq(6)").click(function() {
+				var nombreMd = $(this).parent().find("td:eq(0) span").html();
+				var mdId = $(this).parent().find("td:eq(7)").html();
 				obtieneDetalleMd(nombreMd, mdId);
+			});
+			
+			$("#tablaMemoriasAsignadas tr td:eq(6)").click(function() {
+				var mdId = $(this).parent().find("td:eq(7)").html();
+				muestraChatXMd(mdId);
 			});
 		}
 	};	
 }
 
+function muestraChatXMd(mdId) {
+	$("#mdId").val(mdId);
+	$("#chatPorMd").submit();
+}
+
 function obtieneDetalleMd(nombreMd, mdId) {
-	console.log("*** Detalle de la MD: " + mdId);
 	$("#nombreMd").val(nombreMd);
 	$("#mdId").val(mdId);
 	$("#detalleMemoriaAsignadaAction").submit();

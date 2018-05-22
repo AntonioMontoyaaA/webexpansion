@@ -82,31 +82,31 @@ span.circulo {
 }
 
 @media (max-height: 500px) {
-#map{height:50%;}
+#map{height:45%;}
 }
 @media (min-height: 500px) {
-#map{height:59%;}
-}
-@media (min-height: 600px) {
-#map{height:50%;}
-}
-@media (min-height: 690px) {
-#map{height:51.5%;}
-}
-@media (min-height: 800px) {
-#map{height:52%;}
-}
-@media (min-height: 900px) {
-#map{height:53%;}
-} 
-@media (min-height: 1020px) {
 #map{height:54%;}
 }
+@media (min-height: 600px) {
+#map{height:45%;}
+}
+@media (min-height: 690px) {
+#map{height:46.5%;}
+}
+@media (min-height: 800px) {
+#map{height:47%;}
+}
+@media (min-height: 900px) {
+#map{height:48%;}
+} 
+@media (min-height: 1020px) {
+#map{height:49%;}
+}
 @media (min-height: 1200px) {
-#map{height:54.5%;}
+#map{height:49.5%;}
 }
 @media (min-height: 1300px) {
-#map{height:55%;}
+#map{height:50%;}
 }
 
 @media (max-height: 500px) {

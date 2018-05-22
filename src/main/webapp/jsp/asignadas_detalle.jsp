@@ -181,7 +181,7 @@
 				<div class="row div_header_sub">
 					<div class="col-lg-4">
 						<div class="col-lg-12"><span class="subtituloDetalleMd sangria_cuerpo">VISTA FRONTAL</span></div>
-						<div class="col-lg-12" style="text-align: center;"><img id="vistaFrontalMd" style="width: 87%; height: 30%" src="img/no_imagen.png" /></div>
+						<div class="col-lg-12" style="text-align: center;"><img id="vistaFrontalMd" style="width: 87%; height: 28%" src="img/no_imagen.png" /></div>
 						<div class="row div_bottom">
 							<div class="col-lg-6" style="text-align: left;"><span id="fechaVistaFrontal" class="footerDetalleMd">---</span></div>
 							<div class="col-lg-6" style="text-align: right;"><span id="horaVistaFrontal" class="footerDetalleMd">---</span></div>
@@ -189,7 +189,7 @@
 					</div>
 					<div class="col-lg-4">
 						<div class="col-lg-12"><span class="subtituloDetalleMd sangria_cuerpo">LATERAL 1</span></div>
-						<div class="col-lg-12" style="text-align: center;"><img id="vistaLateral1Md" style="width: 87%; height: 30%" src="img/no_imagen.png" /></div>
+						<div class="col-lg-12" style="text-align: center;"><img id="vistaLateral1Md" style="width: 87%; height: 28%" src="img/no_imagen.png" /></div>
 						<div class="row div_bottom">
 							<div class="col-lg-6" style="text-align: left;"><span id="fechaVistaLateral1" class="footerDetalleMd">---</span></div>
 							<div class="col-lg-6" style="text-align: right;"><span id="horaVistaLateral1" class="footerDetalleMd">---</span></div>
@@ -197,7 +197,7 @@
 					</div>
 					<div class="col-lg-4">
 						<div class="col-lg-12"><span class="subtituloDetalleMd sangria_cuerpo">LATERAL 2</span></div>
-						<div class="col-lg-12" style="text-align: center;"><img id="vistaLateral2Md" style="width: 87%; height: 30%" src="img/no_imagen.png" /></div>
+						<div class="col-lg-12" style="text-align: center;"><img id="vistaLateral2Md" style="width: 87%; height: 28%" src="img/no_imagen.png" /></div>
 						<div class="row div_bottom">
 							<div class="col-lg-6" style="text-align: left;"><span id="fechaVistaLateral2" class="footerDetalleMd">---</span></div>
 							<div class="col-lg-6" style="text-align: right;"><span id="horaVistaLateral2" class="footerDetalleMd">---</span></div>

@@ -57,6 +57,10 @@
 	<input type="hidden" name="nombreMd" id="nombreMd" value=""/>
 </form>
 
+<form action='mensajes_historial'  id="chatPorMd" method="post">
+	<input type="hidden" name="mdId" id="mdId" value=""/>
+</form>
+
 <form style="display: hidden" action="./excelAsignadasAction" method="POST" id="form">
 	<input type="hidden" id="datos" name="datos" value=""/>
 	<input type="submit" id="submitBotonAsignadas" style="display:none" />

@@ -14,13 +14,14 @@
 <title>Dashboard</title>
 </head>
 <body>
-<input type="hidden" id="usuario" value=<%= session.getAttribute( "usuario" ) %>>
-
+<input type="hidden" id="perfil" value="${usr.perfil.perfilesxusuario[0].perfilid}">
+<input type="hidden" id="area" value="${usr.perfil.areasxpuesto[0].areaNom}">
+<input type="hidden" id="areaId" value="${usr.perfil.areasxpuesto[0].areaId}">
 
 <%@ include file="/jsp/generic/header.jsp" %>
 <div class="container-fluid menupr_fondo">
 	<div class="row padding_p">
-	<div class="col-lg-12 titulo">Dashboard Expansión 
+	<div class="col-lg-12 titulo" id="nombrePerfil">
 	</div>
 		<div class="col-lg-8">
 <!-- PROGRESO GENERAL DE AREAS  -->	
@@ -52,7 +53,7 @@
 			
 			<div class="col-lg-12 p_cabecera">
 				<span class="azul estilo_info">MD TOTALES</span><span class="azul negrita estilo_dato" id="sum_totales"></span>
-				<span class="azul estilo_info">ASIGNADAS</span><span class="azul negrita estilo_dato" id="sum_asignadas"></span>
+				<span class="azul estilo_info">EN PROCESO</span><span class="azul negrita estilo_dato" id="sum_asignadas"></span>
 				<span class="azul estilo_info">ATRASADAS</span><span class="azul negrita estilo_dato" id="sum_atrasadas"></span>
 				<span class="azul estilo_info">AUTORIZADAS</span><span class="azul negrita estilo_dato" id="sum_autorizadas"></span>
 				<span class="azul estilo_info">RECHAZADAS</span><span class="azul negrita estilo_dato" id="sum_rechazadas"></span>
@@ -140,17 +141,24 @@
 				<div class="col-lg-12 menupr_estilos">
 				<div class="row cabecera">
 					<div class="col-lg-10 col-md-10">
-						<span class="azul negrita">Asignadas</span>
+						<span class="azul negrita">En Proceso</span>
 					</div>
 				</div>	
-				<div id="container_asignadas"></div>
+				<div id="container_proceso"></div>
 				<div class="row resumen_pie">
-					<div class="col-xl-7 col-lg-12 col-md-6 col-sm-6">
-						<span class="resumen_personales_punto resumen_personales">0</span><span class="resumen_personales azul">&nbsp;Personales</span>
-					</div>
-					<div class="col-xl-5 col-lg-12 col-md-6 col-sm-6">
-						<span class="resumen_area azul">&nbsp;Área</span><span class="resumen_area_punto resumen_area">0</span>
-					</div>
+				
+				<div class="col-6 analista">
+				<div style="position:relative; float:left; width:80px;">
+					<div class="circulo_punto" style="background:#00427F;" id="proceso_p"></div>
+					<span  class="resumen_personales">Personales</span>
+				</div>
+				</div>
+				<div class="col-6 analista">
+				<div style="position:relative; float:right; width:50px;">
+					<div class="circulo_punto" style="background:#64DEF1;" id="proceso_a"></div>
+					<span  class="resumen_personales">Area</span>
+				</div>
+				</div>
 				</div>
 				</div>
 			</div>
@@ -164,12 +172,19 @@
 				</div>	
 				<div id="container_atrasadas"></div>
 				<div class="row resumen_pie">
-					<div class="col-xl-7 col-lg-12 col-md-6 col-sm-6">
-						<span class="resumen_personales_punto resumen_personales">0</span><span class="resumen_personales azul">&nbsp;Personales</span>
-					</div>
-					<div class="col-xl-5 col-lg-12 col-md-6 col-sm-6">
-						<span class="resumen_area azul">&nbsp;Área</span><span class="resumen_area_punto resumen_area">0</span>
-					</div>
+				
+				<div class="col-6 analista">
+				<div style="position:relative; float:left; width:80px;">
+					<div class="circulo_punto" style="background:#00427F;" id="atrasadas_p"></div>
+					<span  class="resumen_personales">Personales</span>
+				</div>
+				</div>
+				<div class="col-6 analista">
+				<div style="position:relative; float:right; width:50px;">
+					<div class="circulo_punto" style="background:#64DEF1;" id="atrasadas_a"></div>
+					<span  class="resumen_personales">Area</span>
+				</div>
+				</div>
 				</div>
 				</div>
 			</div>
@@ -182,12 +197,19 @@
 				</div>	
 				<div id="container_autorizadas"></div>
 				<div class="row resumen_pie">
-					<div class="col-xl-7 col-lg-12 col-md-6 col-sm-6">
-						<span class="resumen_personales_punto resumen_personales">0</span><span class="resumen_personales azul">&nbsp;Personales</span>
-					</div>
-					<div class="col-xl-5 col-lg-12 col-md-6 col-sm-6">
-						<span class="resumen_area azul">&nbsp;Área</span><span class="resumen_area_punto resumen_area">0</span>
-					</div>
+				
+				<div class="col-6 analista">
+				<div style="position:relative; float:left; width:80px;">
+					<div class="circulo_punto" style="background:#00427F;" id="autorizadas_p"></div>
+					<span  class="resumen_personales">Personales</span>
+				</div>
+				</div>
+				<div class="col-6 analista">
+				<div style="position:relative; float:right; width:50px;">
+					<div class="circulo_punto" style="background:#64DEF1;" id="autorizadas_a"></div>
+					<span  class="resumen_personales">Area</span>
+				</div>
+				</div>
 				</div>
 				</div>
 			</div>
@@ -200,16 +222,58 @@
 				</div>	
 				<div id="container_rechazadas"></div>
 				<div class="row resumen_pie">
-					<div class="col-xl-7 col-lg-12 col-md-6 col-sm-6">
-						<span class="resumen_personales_punto resumen_personales">0</span><span class="resumen_personales azul">&nbsp;Personales</span>
-					</div>
-					<div class="col-xl-5 col-lg-12 col-md-6 col-sm-6">
-						<span class="resumen_area azul">&nbsp;Área</span><span class="resumen_area_punto resumen_area">0</span>
-					</div>
+				
+				<div class="col-6 analista">
+				<div style="position:relative; float:left; width:80px;">
+					<div class="circulo_punto" style="background:#00427F;" id="rechazadas_p"></div>
+					<span  class="resumen_personales">Personales</span>
+				</div>
+				</div>
+				<div class="col-6 analista">
+				<div style="position:relative; float:right; width:50px;">
+					<div class="circulo_punto" style="background:#64DEF1;" id="rechazadas_a"></div>
+					<span  class="resumen_personales">Area</span>
+				</div>
+				</div>
 				</div>
 				
 				</div>
 			</div>	
+			
+			
+			<div class="col-12 divs_p">
+				<div class="col-lg-12 menupr_estilos dir_general">	
+					<div class="row resumen_pie">
+					
+					<div class="col-3">
+					<div  style="min-width:110px;">
+						<div class="circulo_punto" style="background:#006dac;"></div>
+						<span  class="resumen_personales">Expansión</span>
+					</div>
+					</div>
+					<div class="col-3">
+					<div style="min-width:110px;">
+						<div class="circulo_punto"  style="background:#194377;"></div>
+						<span  class="resumen_personales">Gestoría</span>
+					</div>
+					</div>
+					<div class="col-3">
+					<div style="min-width:120px;">
+						<div class="circulo_punto"  style="background:#97dfcf;"></div>
+						<span class="resumen_personales">Construcción</span>
+					</div>
+					</div>
+					<div class="col-3">
+					<div style="min-width:120px;">
+						<div class="circulo_punto"  style="background:#07c0d7;"></div>
+						<span  class="resumen_personales">Operaciones</span>
+					</div>
+					</div>
+					
+				</div>
+				</div>
+			</div>	
+			
 		</div>
 		</div>
 	</div>

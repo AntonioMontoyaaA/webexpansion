@@ -37,8 +37,6 @@
 		<action name="mensajes_historial">
 			<result>jsp/mensajes_historial.jsp</result>
 		</action>
-		
-
 	</package>
 	
 	<package name="default" namespace="/" extends="struts-default">
@@ -66,10 +64,18 @@
       	</action>
       	
       	<action name = "DashboardGeneralAction" class="com.tiendas.neto.action.DashboardGeneralAction"
-      	 method = "execute"></action>
+      	 method = "execute"/>
+      	<action name = "DashboardPlanAperturaMAction" class="com.tiendas.neto.action.DashboardPlanAperturaMAction"
+      	 method = "execute"/>
       	 
       	<action name = "MensajeHistorialAction" class="com.tiendas.neto.action.MensajeHistorialAction"
-      	 method = "execute"></action>
+      	 method = "execute"/>
+      	 
+      	 <action name = "Logout" class="com.tiendas.neto.filtros.Logout"
+      	 method = "execute">
+      	 <result name = "SUCCESS">jsp/login.jsp</result>
+      	 </action>
+      	
       	
 	</package>
 	

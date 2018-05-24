@@ -89,12 +89,12 @@ table{
 }
 #container_apmensual{
 	min-width: 200px;
-	height: 27%;
+	height: 22%;
 	margin: 0 auto;
 }
-#container_asignadas,#container_atrasadas,#container_autorizadas,#container_rechazadas{
+#container_proceso,#container_atrasadas,#container_autorizadas,#container_rechazadas{
 	min-width: 100px;
-	height: 19%;
+	height: 21%;
 	max-width: auto;
 	margin: 0 auto
 }
@@ -107,33 +107,13 @@ table{
 	font-size:0.8em;
 }
 .resumen_personales{
+	margin-top:6px;
 	 float:left;
 	 text-align:left;
 	 font-size:10px;
 }
-.resumen_area{
-	float:right;
-	text-align:right;
-	font-size:10px;
-	padding-bottom:5px;
-}
-.resumen_personales_punto{
-	text-align:center !important;
-	width:15px;
-	height:15px;
-	background-image:url(../img/circulo_azul_p.png);
-	background-position: left; 
-	background-repeat: no-repeat;
-	color:white;
-}
-.resumen_area_punto{
-	text-align:center !important;
-	width:15px;
-	height:15px;
-	background-image:url(../img/circulo_azulc_p.png);
-	background-position: left; 
-	background-repeat: no-repeat;
-	color:white;
+.analista{
+	display:none;
 }
 /*-----------------------------------*/
 @media (max-width: 576px) {
@@ -144,6 +124,21 @@ table{
 	#container_apmensual{height: 200px;}
 	.numero_grande{font-size:1.5em}
 	.numero_chico{font-size:0.6em}
+}
+/* ----------------------- puntos*/
+.circulo_punto{
+	padding-top:1px;
+	text-align:center;
+	margin:5px;
+	font-size:9.5px;
+     width: 15px;
+     height: 15px;
+     -moz-border-radius: 50%;
+     -webkit-border-radius: 50%;
+     border-radius: 50%;
+     color:white;
+     position: relative;
+     float: left;
 }
 /* ---------------------------  POPOVER */
 .popover{
@@ -186,3 +181,7 @@ table{
 	color:#00437e;
 	font-size:11px;
 }
+.dir_general{
+	display:none;
+}
+

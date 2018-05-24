@@ -59,7 +59,6 @@ public class Login  extends HttpServlet {
 				try {
 					HttpSession sesion = request.getSession();
 					sesion.setAttribute("usr", usuario);
-					sesion.setAttribute("usuario", user);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

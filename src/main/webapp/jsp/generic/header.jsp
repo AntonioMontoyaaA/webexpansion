@@ -12,7 +12,7 @@
 				<div class="navbar-collapse collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav mr-auto ml-auto mt-2 mt-lg-0" >
 						<li class="nav-item"><a id="iddashboard" class="nav-link" href="dashboard">Dashboard</a></li>
-						<li class="nav-item"><a id="idasignadas" class="nav-link" href="asignadas">Asignadas</a></li>
+						<li class="nav-item"><a id="idasignadas" class="nav-link" href="asignadas">En Proceso</a></li>
 						<li class="nav-item"><a id="idautorizadas" class="nav-link" href="autorizadas">Autorizadas</a></li>
 						<li class="nav-item"><a id="idrechazadas" class="nav-link" href="rechazadas">Rechazadas</a></li>
 						<li class="nav-item"><a id="idagenda" class="nav-link" href="agenda">Agenda</a></li>	

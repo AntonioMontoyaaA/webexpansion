@@ -1,21 +1,26 @@
 //-------- CARGA AL INICIO
-var usuario;
 var fecha; 
 var mes;
 var dia;
 var año;
 var fecha_entera;
+var perfil;
+var area;
+var areaId;
+
 $(function(){
-		$('#iddashboard').addClass('resaltado'); //para el efecto de header
-		usuario=$('#usuario').val();
-		$('#usuario').val('');
+		$('#iddashboard').addClass('resaltado'); //resalta en el header
+		perfil=$('#perfil').val();
+		area= $('#area').val();
+		areaId=$('#areaId').val();
+		
 		cargafechas();
-		$('#mes_actual').text(mes);
 		
 		progGeneral();
 		progSemanal();
 		AperturaMensual();
 });
+
 function cargafechas(){
 	var f=new Date();
 	var mesesarr = new Array ("ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE");
@@ -26,8 +31,8 @@ function cargafechas(){
 	año = f.getFullYear();
 	fecha = f.getDate() + "/" + mesint[f.getMonth()] + "/" + f.getFullYear();
 	fecha_entera='HOY '+dia+' DE '+mes+' DEL '+año+' '+f.getHours()+':'+f.getMinutes()+' HRS';
+	$('#mes_actual').text(mes);
 }
-
 // ---------------------- CONSULTAS AL ACTION
 function progGeneral(){
 	cargafechas();
@@ -50,8 +55,20 @@ function progGeneral(){
 		}
 	if(data.codigo==200) {
 		console.log("*** ENTRA A DATOS ***");
-		progGeneral_grafica(data);
-		Resumen_grafica(data);
+		
+	if(perfil==3){
+	  $('.dir_general').show();
+	  $('#container_proceso,#container_atrasadas,#container_autorizadas,#container_rechazadas').css('height','22%');
+		Resumen_grafica_dirGeneral(data);	
+	}
+	if(perfil==4){
+		$('#container_proceso,#container_atrasadas,#container_autorizadas,#container_rechazadas').css('height','24%');
+		Resumen_grafica_dirArea(data);
+	}
+	if(perfil==5){
+		$('.analista').show();
+		Resumen_grafica_analista(data);
+	}
 		
 		if($('#opcion').val()=="1")
 			$('#pg_fecha').text(dia+' DE '+mes);
@@ -78,7 +95,7 @@ function progSemanal(){
 }
 function AperturaMensual(){
 	invocarJSONServiceAction("DashboardPlanAperturaMAction", 
-			{'usuarioId': usuario, 'fecha':fecha}, 
+			{'fecha':fecha}, 
 			'obtieneResponse', 
 			function() {
 				//Funcion de error
@@ -100,187 +117,6 @@ function AperturaMensual(){
 }
 
 
-// ------------------------------- ARMA GRAFICA PROGRESO GENERAL
-function progGeneral_grafica(data){
-var E=data.areas.EXPANSION;
-var G=data.areas.GESTORIA;
-var C=data.areas.CONSTRUCCION;
-var O=data.areas.OPERACIONES;
-	
-var sumaE=E.asignadas+E.atrasadas+E.autorizadas+E.rechazadas
-var sumaG=G.asignadas+G.atrasadas+G.autorizadas+G.rechazadas
-var sumaC=C.asignadas+C.atrasadas+C.autorizadas+C.rechazadas
-var sumaO=O.asignadas+O.atrasadas+O.autorizadas+O.rechazadas
-
-var sum_asignadas=E.asignadas+G.asignadas+C.asignadas+O.asignadas;
-var sum_atrasadas=E.atrasadas+G.atrasadas+C.atrasadas+O.atrasadas;
-var sum_autorizadas=E.autorizadas+G.autorizadas+C.autorizadas+O.autorizadas;
-var sum_rechazadas=E.rechazadas+G.rechazadas+C.rechazadas+O.rechazadas;
-var sum_totales= sum_asignadas + sum_atrasadas + sum_autorizadas + sum_rechazadas;
-
-$('#sum_asignadas').text(sum_asignadas);
-$('#sum_atrasadas').text(sum_atrasadas);
-$('#sum_autorizadas').text(sum_autorizadas);
-$('#sum_rechazadas').text(sum_rechazadas);
-$('#sum_totales').text(sum_totales);
-
-
-	Highcharts.chart('container', {
-	    chart: {
-	        type: 'column'
-	    },  
-	    credits: {
-	        enabled: false
-	    },
-	    exporting: {
-	        enabled: false
-	    },
-	    title: {
-	        text: null,
-	    },
-	    yAxis: {
-	        allowDecimals: false,
-	        title: {
-	        	 offset: 0,
-	        	 text: null
-	        }
-	    },
-	    xAxis: {
-	        categories: [
-	            'Expansion <br>'+sumaE,
-	            'Gestoría <br>'+sumaG,
-	            'Construcción <br>'+sumaC,
-	            'Operaciones <br>'+sumaO
-	        ],
-	        crosshair: true },
-	  
-	        series: [{
-	        name: 'Asignadas',
-	        color: '#CCE0F4',
-	        data: [E.asignadas, G.asignadas, C.asignadas, O.asignadas]
-	    }, {
-	        name: 'Atrasadas',
-	        color: '#005B97',
-	        data: [E.atrasadas, G.atrasadas, C.atrasadas, O.atrasadas]
-	    }, {
-	        name: 'Autorizadas',
-	        color: '#64DEF1',
-	        data: [E.autorizadas, G.autorizadas, C.autorizadas, O.autorizadas]
-	    },{
-	        name: 'Rechazadas',
-	        color: '#FF5B16',
-	        data: [E.rechazadas, G.rechazadas, C.rechazadas, O.rechazadas]
-	    }],
-	    tooltip: {
-	        formatter: function () {
-	            return '<b>' + this.series.name + '</b><br/>' +
-	                this.point.y + ' ' + this.point.name.toLowerCase();
-	        }
-	    }
-	});
-	
-Highcharts.chart('container_sm1', {
-    chart: {
-        type: 'column'
-    }, 
-    credits: {
-        enabled: false
-    },
-    exporting: {
-        enabled: false
-    },
-    title: {
-        text: '',
-    },
-    yAxis: {
-        allowDecimals: false,
-        title: {
-        	 offset: 0,
-        	 text: null
-        }
-    },
-    xAxis: {
-        categories: [
-            'Expansion',
-            'Gestoría',
-        ],
-        crosshair: true },
-        series: [{
-        name: 'Asignadas',
-        color: '#CCE0F4',
-        data: [data.areas.EXPANSION.asignadas, data.areas.GESTORIA.asignadas]
-    }, {
-        name: 'Atrasadas',
-        color: '#005B97',
-        data: [data.areas.EXPANSION.atrasadas, data.areas.GESTORIA.atrasadas]
-    }, {
-        name: 'Autorizadas',
-        color: '#64DEF1',
-        data: [data.areas.EXPANSION.autorizadas, data.areas.GESTORIA.autorizadas]
-    },{
-        name: 'Rechazadas',
-        color: '#FF5B16',
-        data: [data.areas.EXPANSION.rechazadas, data.areas.GESTORIA.rechazadas]
-    }],
-    tooltip: {
-        formatter: function () {
-            return '<b>' + this.series.name + '</b><br/>' +
-                this.point.y + ' ' + this.point.name.toLowerCase();
-        }
-    }
-});
-
-Highcharts.chart('container_sm2', {
-    chart: {
-        type: 'column'
-    },  
-    exporting: {
-        enabled: false
-    },
-    title: {
-        text: '',
-    },
-    credits: {
-        enabled: false
-    },
-    yAxis: {
-        allowDecimals: false,
-        title: {
-        	 offset: 0,
-        	 text: null
-        }
-    },
-    xAxis: {
-        categories: [
-            'Construcción',
-            'Operaciones'
-        ],
-        crosshair: true },
-        series: [{
-        name: 'Asignadas',
-        color: '#CCE0F4',
-        data: [data.areas.CONSTRUCCION.asignadas, data.areas.OPERACIONES.asignadas]
-    }, {
-        name: 'Atrasadas',
-        color: '#005B97',
-        data: [data.areas.CONSTRUCCION.atrasadas, data.areas.OPERACIONES.atrasadas]
-    }, {
-        name: 'Autorizadas',
-        color: '#64DEF1',
-        data: [data.areas.CONSTRUCCION.autorizadas, data.areas.OPERACIONES.autorizadas]
-    },{
-        name: 'Rechazadas',
-        color: '#FF5B16',
-        data: [data.areas.CONSTRUCCION.rechazadas, data.areas.OPERACIONES.rechazadas]
-    }],
-    tooltip: {
-        formatter: function () {
-            return '<b>' + this.series.name + '</b><br/>' +
-                this.point.y + ' ' + this.point.name;
-        }
-    }
-});
-}
 //-------------------------   ARMA GRAFICA PROGRESO SEMANAAL
 function progSemanal_grafica(){
 	Highcharts.chart('container_psemanal', {
@@ -449,19 +285,203 @@ if(mes=="DICIEMBRE"){
 }
 //---------------------------------  ARMA GRAFICA RESUMEN
 // ASIGNADAS
-function Resumen_grafica(data){
+function Resumen_grafica_analista(data){
+	$('#nombrePerfil').text('DASHBOARD ANALISTA '+area);
+	if(areaId==1)
+		var actual=data.areas.EXPANSION;
+	if(areaId==2)
+		var actual=data.areas.GESTORIA;
+	if(areaId==3)
+		var actual=data.areas.CONSTRUCCION;
+	if(areaId==4)
+		var actual=data.areas.OPERACIONES;
+	
+	
 	var E=data.areas.EXPANSION;
 	var G=data.areas.GESTORIA;
 	var C=data.areas.CONSTRUCCION;
 	var O=data.areas.OPERACIONES;
+		
+	var sumaE=E.total;
+	var sumaG=G.total;
+	var sumaC=C.total;
+	var sumaO=O.total;
 
-	var sum_asignadas=E.asignadas+G.asignadas+C.asignadas+O.asignadas;
-	var sum_atrasadas=E.atrasadas+G.atrasadas+C.atrasadas+O.atrasadas;
-	var sum_autorizadas=E.autorizadas+G.autorizadas+C.autorizadas+O.autorizadas;
-	var sum_rechazadas=E.rechazadas+G.rechazadas+C.rechazadas+O.rechazadas;
-	var sum_totales= sum_asignadas + sum_atrasadas + sum_autorizadas + sum_rechazadas;
+	var sum_asignadas=actual.asignadas;
+	var sum_atrasadas=actual.atrasadas;
+	var sum_autorizadas=actual.autorizadas;
+	var sum_rechazadas=actual.rechazadas;
+	var sum_totales= sum_asignadas + sum_autorizadas + sum_rechazadas;
+
+	$('#sum_asignadas').text(sum_asignadas);
+	$('#sum_atrasadas').text(sum_atrasadas);
+	$('#sum_autorizadas').text(sum_autorizadas);
+	$('#sum_rechazadas').text(sum_rechazadas);
+	$('#sum_totales').text(sum_totales);
 	
-	Highcharts.chart('container_asignadas', {
+	$('#proceso_p').text(actual.asignadasUsuario);
+	$('#proceso_a').text(sum_asignadas-actual.asignadasUsuario);
+	
+	$('#atrasadas_p').text(actual.atrasadasUsuario);
+	$('#atrasadas_a').text(sum_atrasadas-actual.atrasadasUsuario);
+	
+	$('#autorizadas_p').text(actual.autorizadasUsuario);
+	$('#autorizadas_a').text(sum_autorizadas-actual.autorizadasUsuario);
+	
+	$('#rechazadas_p').text(actual.rechazadasUsuario);
+	$('#rechazadas_a').text(sum_rechazadas-actual.rechazadasUsuario);
+
+//GRAFICA PANTALLA GRANDE
+		Highcharts.chart('container', {
+		    chart: {
+		        type: 'column'
+		    },  
+		    credits: {
+		        enabled: false
+		    },
+		    exporting: {
+		        enabled: false
+		    },
+		    title: {
+		        text: null,
+		    },
+		    yAxis: {
+		        allowDecimals: false,
+		        title: {
+		        	 offset: 0,
+		        	 text: null
+		        }
+		    },
+		    xAxis: {
+		        categories: [
+		            'Expansion <br>'+sumaE,
+		            'Gestoría <br>'+sumaG,
+		            'Construcción <br>'+sumaC,
+		            'Operaciones <br>'+sumaO
+		        ],
+		        crosshair: true },
+		  
+		        series: [{
+		        name: 'En proceso',
+		        color: '#CCE0F4',
+		        data: [E.asignadas, G.asignadas, C.asignadas, O.asignadas]
+		    }, {
+		        name: 'Atrasadas',
+		        color: '#005B97',
+		        data: [E.atrasadas, G.atrasadas, C.atrasadas, O.atrasadas]
+		    }, {
+		        name: 'Autorizadas',
+		        color: '#64DEF1',
+		        data: [E.autorizadas, G.autorizadas, C.autorizadas, O.autorizadas]
+		    },{
+		        name: 'Rechazadas',
+		        color: '#FF5B16',
+		        data: [E.rechazadas, G.rechazadas, C.rechazadas, O.rechazadas]
+		    }],
+		    tooltip:{
+		    	headerFormat:''
+		    }
+		    
+		});
+// GRAFICA PANTALLA CHICA 1
+	Highcharts.chart('container_sm1', {
+	    chart: {
+	        type: 'column'
+	    }, 
+	    credits: {
+	        enabled: false
+	    },
+	    exporting: {
+	        enabled: false
+	    },
+	    title: {
+	        text: '',
+	    },
+	    yAxis: {
+	        allowDecimals: false,
+	        title: {
+	        	 offset: 0,
+	        	 text: null
+	        }
+	    },
+	    xAxis: {
+	        categories: [
+	            'Expansion',
+	            'Gestoría',
+	        ],
+	        crosshair: true },
+	        series: [{
+	        name: 'En proceso',
+	        color: '#CCE0F4',
+	        data: [data.areas.EXPANSION.asignadas, data.areas.GESTORIA.asignadas]
+	    }, {
+	        name: 'Atrasadas',
+	        color: '#005B97',
+	        data: [data.areas.EXPANSION.atrasadas, data.areas.GESTORIA.atrasadas]
+	    }, {
+	        name: 'Autorizadas',
+	        color: '#64DEF1',
+	        data: [data.areas.EXPANSION.autorizadas, data.areas.GESTORIA.autorizadas]
+	    },{
+	        name: 'Rechazadas',
+	        color: '#FF5B16',
+	        data: [data.areas.EXPANSION.rechazadas, data.areas.GESTORIA.rechazadas]
+	    }],
+	    tooltip:{
+	    	headerFormat:''
+	    }
+	});
+// GRAFICA PANTALLA CHICA 2
+	Highcharts.chart('container_sm2', {
+	    chart: {
+	        type: 'column'
+	    },  
+	    exporting: {
+	        enabled: false
+	    },
+	    title: {
+	        text: '',
+	    },
+	    credits: {
+	        enabled: false
+	    },
+	    yAxis: {
+	        allowDecimals: false,
+	        title: {
+	        	 offset: 0,
+	        	 text: null
+	        }
+	    },
+	    xAxis: {
+	        categories: [
+	            'Construcción',
+	            'Operaciones'
+	        ],
+	        crosshair: true },
+	        series: [{
+	        name: 'En proceso',
+	        color: '#CCE0F4',
+	        data: [data.areas.CONSTRUCCION.asignadas, data.areas.OPERACIONES.asignadas]
+	    }, {
+	        name: 'Atrasadas',
+	        color: '#005B97',
+	        data: [data.areas.CONSTRUCCION.atrasadas, data.areas.OPERACIONES.atrasadas]
+	    }, {
+	        name: 'Autorizadas',
+	        color: '#64DEF1',
+	        data: [data.areas.CONSTRUCCION.autorizadas, data.areas.OPERACIONES.autorizadas]
+	    },{
+	        name: 'Rechazadas',
+	        color: '#FF5B16',
+	        data: [data.areas.CONSTRUCCION.rechazadas, data.areas.OPERACIONES.rechazadas]
+	    }],
+	    tooltip:{
+	    	headerFormat:''
+	    }
+	});
+// ********************** RESUMEN GENERAL
+//************** ASIGNADAS
+		Highcharts.chart('container_proceso', {
 	    chart: {
 	    	events: {
                 click: function () {location.href = 'asignadas'}
@@ -501,7 +521,7 @@ function Resumen_grafica(data){
 	            }
 	        },
 	        pie: {
-	        	size: "135%",
+	        	size: "123%",
 	            dataLabels: {
 	                enabled: false
 	            },
@@ -512,18 +532,18 @@ function Resumen_grafica(data){
 	    },
 	    series: [{
 	        type: 'pie',
-	        name: 'Asignadas',
+	        name: 'En proceso',
 	        innerSize: '80%',
 	        data: [{
 	                name: 'Personales',
 	                color: '#00427F',
-	                y: 0, 
+	                y: actual.asignadasUsuario, 
 	                dataLabels: {
 	                    enabled: false}
 	        	},{
 		            name: 'Area',
 		            color: '#64DEF1',
-		            y: sum_asignadas, 
+		            y: sum_asignadas-actual.asignadasUsuario, 
 		            dataLabels: {
 		                    enabled: false}
 	        	},{
@@ -536,7 +556,7 @@ function Resumen_grafica(data){
 	    }]
 	    
 	});
-// ATRASADAS
+// *************** ATRASADAS
 	Highcharts.chart('container_atrasadas', {
 	    chart: {
 	    	events: {
@@ -576,7 +596,7 @@ function Resumen_grafica(data){
 	            }
 	        },
 	        pie: {
-	        	size: "135%",
+	        	size: "123%",
 	            dataLabels: {
 	                enabled: false
 	            },
@@ -587,18 +607,18 @@ function Resumen_grafica(data){
 	    },
 	    series: [{
 	        type: 'pie',
-	        name: 'Asignadas',
+	        name: 'Atrasadas',
 	        innerSize: '80%',
 	        data: [{
                 name: 'Personales',
                 color: '#00427F',
-                y: 0,
+                y: actual.atrasadasUsuario,
                 dataLabels: {
                     enabled: false}
         	},{
 	            name: 'Area',
 	            color: '#64DEF1',
-	            y: sum_atrasadas,
+	            y: sum_atrasadas-actual.atrasadasUsuario,
 	            dataLabels: {
 	                    enabled: false}
         	},{
@@ -610,7 +630,7 @@ function Resumen_grafica(data){
             }]
 	    }]
 	});
-// AUTORIZADAS	
+// ***************************** AUTORIZADAS	
 	Highcharts.chart('container_autorizadas', {
 	    chart: {
 	    	events: {
@@ -650,7 +670,7 @@ function Resumen_grafica(data){
 	            }
 	        },
 	        pie: {
-	        	size: "135%",
+	        	size: "123%",
 	            dataLabels: {
 	                enabled: false
 	            },
@@ -661,18 +681,18 @@ function Resumen_grafica(data){
 	    },
 	    series: [{
 	        type: 'pie',
-	        name: 'Asignadas',
+	        name: 'Autorizadas',
 	        innerSize: '80%',
 	        data: [{
                 name: 'Personales',
                 color: '#00427F',
-                y: 0, 
+                y: actual.autorizadasUsuario, 
                 dataLabels: {
                     enabled: false}
         	},{
 	            name: 'Area',
 	            color:'#64DEF1', 
-	            y: sum_autorizadas, 
+	            y: sum_autorizadas-actual.autorizadasUsuario, 
 	            dataLabels: {
 	                    enabled: false}
         	},{
@@ -684,7 +704,7 @@ function Resumen_grafica(data){
             }]
 	    }]
 	});
-// RECHAZADAS	
+// ************************************ RECHAZADAS	
 	Highcharts.chart('container_rechazadas', {
 	    chart: {
 	    	events: {
@@ -724,7 +744,7 @@ function Resumen_grafica(data){
 	            }
 	        },
 	        pie: {
-	        	size: "135%",
+	        	size: "123%",
 	            dataLabels: {
 	                enabled: false
 	            },
@@ -740,10 +760,469 @@ function Resumen_grafica(data){
 	        data: [{
                 name: 'Personales',
                 color: '#00427F',
-                y: 0, 
+                y: actual.rechazadasUsuario, 
                 dataLabels: {
                     enabled: false}
         	},{
+	            name: 'Area',
+	            color: '#64DEF1',
+	            y: sum_rechazadas-actual.rechazadasUsuario, 
+	            dataLabels: {
+	                    enabled: false}
+        	},{
+                name: 'Faltantes',
+                color: '#C9C9C9',
+                y: sum_totales-sum_rechazadas, 
+                dataLabels: {
+                    enabled: false}
+            }]
+	    }]
+	});
+}
+
+function Resumen_grafica_dirArea(data){
+	$('#nombrePerfil').text('DASHBOARD '+area);
+	
+	if(areaId==1)
+		var actual=data.areas.EXPANSION;
+	if(areaId==2)
+		var actual=data.areas.GESTORIA;
+	if(areaId==3)
+		var actual=data.areas.CONSTRUCCION;
+	if(areaId==4)
+		var actual=data.areas.OPERACIONES;
+	
+	
+	var E=data.areas.EXPANSION;
+	var G=data.areas.GESTORIA;
+	var C=data.areas.CONSTRUCCION;
+	var O=data.areas.OPERACIONES;
+		
+	var sumaE=E.total;
+	var sumaG=G.total;
+	var sumaC=C.total;
+	var sumaO=O.total;
+
+	var sum_asignadas=actual.asignadas;
+	var sum_atrasadas=actual.atrasadas;
+	var sum_autorizadas=actual.autorizadas;
+	var sum_rechazadas=actual.rechazadas;
+	var sum_totales= sum_asignadas + sum_autorizadas + sum_rechazadas;
+
+	$('#sum_asignadas').text(sum_asignadas);
+	$('#sum_atrasadas').text(sum_atrasadas);
+	$('#sum_autorizadas').text(sum_autorizadas);
+	$('#sum_rechazadas').text(sum_rechazadas);
+	$('#sum_totales').text(sum_totales);
+
+//GRAFICA PANTALLA GRANDE
+		Highcharts.chart('container', {
+		    chart: {
+		        type: 'column'
+		    },  
+		    credits: {
+		        enabled: false
+		    },
+		    exporting: {
+		        enabled: false
+		    },
+		    title: {
+		        text: null,
+		    },
+		    yAxis: {
+		        allowDecimals: false,
+		        title: {
+		        	 offset: 0,
+		        	 text: null
+		        }
+		    },
+		    xAxis: {
+		        categories: [
+		            'Expansion <br>'+sumaE,
+		            'Gestoría <br>'+sumaG,
+		            'Construcción <br>'+sumaC,
+		            'Operaciones <br>'+sumaO
+		        ],
+		        crosshair: true },
+		  
+		        series: [{
+		        name: 'En proceso',
+		        color: '#CCE0F4',
+		        data: [E.asignadas, G.asignadas, C.asignadas, O.asignadas]
+		    }, {
+		        name: 'Atrasadas',
+		        color: '#005B97',
+		        data: [E.atrasadas, G.atrasadas, C.atrasadas, O.atrasadas]
+		    }, {
+		        name: 'Autorizadas',
+		        color: '#64DEF1',
+		        data: [E.autorizadas, G.autorizadas, C.autorizadas, O.autorizadas]
+		    },{
+		        name: 'Rechazadas',
+		        color: '#FF5B16',
+		        data: [E.rechazadas, G.rechazadas, C.rechazadas, O.rechazadas]
+		    }],
+		    tooltip:{
+		    	headerFormat:''
+		    }
+		});
+// GRAFICA PANTALLA CHICA 1
+	Highcharts.chart('container_sm1', {
+	    chart: {
+	        type: 'column'
+	    }, 
+	    credits: {
+	        enabled: false
+	    },
+	    exporting: {
+	        enabled: false
+	    },
+	    title: {
+	        text: '',
+	    },
+	    yAxis: {
+	        allowDecimals: false,
+	        title: {
+	        	 offset: 0,
+	        	 text: null
+	        }
+	    },
+	    xAxis: {
+	        categories: [
+	            'Expansion',
+	            'Gestoría',
+	        ],
+	        crosshair: true },
+	        series: [{
+	        name: 'En proceso',
+	        color: '#CCE0F4',
+	        data: [data.areas.EXPANSION.asignadas, data.areas.GESTORIA.asignadas]
+	    }, {
+	        name: 'Atrasadas',
+	        color: '#005B97',
+	        data: [data.areas.EXPANSION.atrasadas, data.areas.GESTORIA.atrasadas]
+	    }, {
+	        name: 'Autorizadas',
+	        color: '#64DEF1',
+	        data: [data.areas.EXPANSION.autorizadas, data.areas.GESTORIA.autorizadas]
+	    },{
+	        name: 'Rechazadas',
+	        color: '#FF5B16',
+	        data: [data.areas.EXPANSION.rechazadas, data.areas.GESTORIA.rechazadas]
+	    }],
+	    tooltip:{
+	    	headerFormat:''
+	    }
+	});
+// GRAFICA PANTALLA CHICA 2
+	Highcharts.chart('container_sm2', {
+	    chart: {
+	        type: 'column'
+	    },  
+	    exporting: {
+	        enabled: false
+	    },
+	    title: {
+	        text: '',
+	    },
+	    credits: {
+	        enabled: false
+	    },
+	    yAxis: {
+	        allowDecimals: false,
+	        title: {
+	        	 offset: 0,
+	        	 text: null
+	        }
+	    },
+	    xAxis: {
+	        categories: [
+	            'Construcción',
+	            'Operaciones'
+	        ],
+	        crosshair: true },
+	        series: [{
+	        name: 'En proceso',
+	        color: '#CCE0F4',
+	        data: [data.areas.CONSTRUCCION.asignadas, data.areas.OPERACIONES.asignadas]
+	    }, {
+	        name: 'Atrasadas',
+	        color: '#005B97',
+	        data: [data.areas.CONSTRUCCION.atrasadas, data.areas.OPERACIONES.atrasadas]
+	    }, {
+	        name: 'Autorizadas',
+	        color: '#64DEF1',
+	        data: [data.areas.CONSTRUCCION.autorizadas, data.areas.OPERACIONES.autorizadas]
+	    },{
+	        name: 'Rechazadas',
+	        color: '#FF5B16',
+	        data: [data.areas.CONSTRUCCION.rechazadas, data.areas.OPERACIONES.rechazadas]
+	    }],
+	    tooltip:{
+	    	headerFormat:''
+	    }
+	});
+// ********************** RESUMEN GENERAL
+//************** ASIGNADAS
+		Highcharts.chart('container_proceso', {
+	    chart: {
+	    	events: {
+                click: function () {location.href = 'asignadas'}
+            },
+	        plotBackgroundColor: null,
+	        plotBorderWidth: 0,
+	        plotShadow: false
+	    },
+	    
+	    exporting: {
+	        enabled: false
+	    },
+	    credits: {
+	        enabled: false
+	    },
+	    title: {
+	    	 style: {
+	             color: '#00437e'
+	         },
+	        text: '<span class="numero_grande">'+sum_asignadas+'</span><br><span class="numero_chico">de '+sum_totales+'</span>',
+	        align: 'center',
+	        verticalAlign: 'middle',
+	        y: 5
+	    },
+	    tooltip: {
+	    	// pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+	    },
+	    plotOptions: {
+	    	series: {
+	            states: {
+	                hover: {
+	                    halo: {
+	                        size: 5
+	                    }
+
+	                }
+	            }
+	        },
+	        pie: {
+	        	size: "123%",
+	            dataLabels: {
+	                enabled: false
+	            },
+	            startAngle: -180,
+	            endAngle: 180,
+	            center: ['50%', '50%']
+	        }
+	    },
+	    series: [{
+	        type: 'pie',
+	        name: 'En proceso',
+	        innerSize: '80%',
+	        data: [{
+		            name: 'Area',
+		            color: '#64DEF1',
+		            y: sum_asignadas, 
+		            dataLabels: {
+		                    enabled: false}
+	        	},{
+	                name: 'Faltantes',
+	                color: '#C9C9C9',
+	                y: sum_totales-sum_asignadas, 
+	                dataLabels: {
+	                    enabled: false}
+	            }]
+	    }]
+	    
+	});
+// *************** ATRASADAS
+	Highcharts.chart('container_atrasadas', {
+	    chart: {
+	    	events: {
+                click: function () {location.href = 'atrasadas'}
+            },
+	        plotBackgroundColor: null,
+	        plotBorderWidth: 0,
+	        plotShadow: false
+	    },
+	    exporting: {
+	        enabled: false
+	    },
+	    credits: {
+	        enabled: false
+	    },
+	    title: {
+	    	 style: {
+	             color: '#00437e'
+	         },
+	        text: '<span class="numero_grande">'+sum_atrasadas+'</span><br><span class="numero_chico">de '+sum_asignadas+'</span>',
+	        align: 'center',
+	        verticalAlign: 'middle',
+	        y: 5
+	    },
+	    tooltip: {
+	    	// pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+	    },
+	    plotOptions: {
+	    	series: {
+	            states: {
+	                hover: {
+	                    halo: {
+	                        size: 5
+	                    }
+
+	                }
+	            }
+	        },
+	        pie: {
+	        	size: "123%",
+	            dataLabels: {
+	                enabled: false
+	            },
+	            startAngle: -180,
+	            endAngle: 180,
+	            center: ['50%', '50%']
+	        }
+	    },
+	    series: [{
+	        type: 'pie',
+	        name: 'Atrasadas',
+	        innerSize: '80%',
+	        data: [{
+	            name: 'Area',
+	            color: '#64DEF1',
+	            y: sum_atrasadas,
+	            dataLabels: {
+	                    enabled: false}
+        	},{
+                name: 'Faltantes',
+                color: '#C9C9C9',
+                y: sum_asignadas-sum_atrasadas, 
+                dataLabels: {
+                    enabled: false}
+            }]
+	    }]
+	});
+// ***************************** AUTORIZADAS	
+	Highcharts.chart('container_autorizadas', {
+	    chart: {
+	    	events: {
+                click: function () {location.href = 'autorizadas'}
+            },
+	        plotBackgroundColor: null,
+	        plotBorderWidth: 0,
+	        plotShadow: false
+	    },
+	    exporting: {
+	        enabled: false
+	    },
+	    credits: {
+	        enabled: false
+	    },
+	    title: {
+	    	 style: {
+	             color: '#00437e'
+	         },
+	        text: '<span class="numero_grande">'+sum_autorizadas+'</span><br><span class="numero_chico">de '+sum_totales+'</span>',
+	        align: 'center',
+	        verticalAlign: 'middle',
+	        y: 5
+	    },
+	    tooltip: {
+	    	// pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+	    },
+	    plotOptions: {
+	    	series: {
+	            states: {
+	                hover: {
+	                    halo: {
+	                        size: 5
+	                    }
+
+	                }
+	            }
+	        },
+	        pie: {
+	        	size: "123%",
+	            dataLabels: {
+	                enabled: false
+	            },
+	            startAngle: -180,
+	            endAngle: 180,
+	            center: ['50%', '50%']
+	        }
+	    },
+	    series: [{
+	        type: 'pie',
+	        name: 'Autorizadas',
+	        innerSize: '80%',
+	        data: [{
+	            name: 'Area',
+	            color:'#64DEF1', 
+	            y: sum_autorizadas, 
+	            dataLabels: {
+	                    enabled: false}
+        	},{
+                name: 'Faltantes',
+                color:'#C9C9C9',
+                y: sum_totales-sum_autorizadas, 
+                dataLabels: {
+                    enabled: false}
+            }]
+	    }]
+	});
+// ************************************ RECHAZADAS	
+	Highcharts.chart('container_rechazadas', {
+	    chart: {
+	    	events: {
+                click: function () {location.href = 'rechazadas'}
+            },
+	        plotBackgroundColor: null,
+	        plotBorderWidth: 0,
+	        plotShadow: false
+	    },
+	    exporting: {
+	        enabled: false
+	    },
+	    credits: {
+	        enabled: false
+	    },
+	    title: {
+	    	 style: {
+	             color: '#00437e'
+	         },
+	        text: '<span class="numero_grande">'+sum_rechazadas+'</span><br><span class="numero_chico">de '+sum_totales+'</span>',
+	        align: 'center',
+	        verticalAlign: 'middle',
+	        y: 5
+	    },
+	    tooltip: {
+	    	// pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+	    },
+	    plotOptions: {
+	    	series: {
+	            states: {
+	                hover: {
+	                    halo: {
+	                        size: 5
+	                    }
+
+	                }
+	            }
+	        },
+	        pie: {
+	        	size: "123%",
+	            dataLabels: {
+	                enabled: false
+	            },
+	            startAngle: -180,
+	            endAngle: 180,
+	            center: ['50%', '50%']
+	        }
+	    },
+	    series: [{
+	        type: 'pie',
+	        name: 'Rechazadas',
+	        innerSize: '80%',
+	        data: [{
 	            name: 'Area',
 	            color: '#64DEF1',
 	            y: sum_rechazadas, 
@@ -751,6 +1230,528 @@ function Resumen_grafica(data){
 	                    enabled: false}
         	},{
                 name: 'Faltantes',
+                color: '#C9C9C9',
+                y: sum_totales-sum_rechazadas, 
+                dataLabels: {
+                    enabled: false}
+            }]
+	    }]
+	});
+	
+}
+
+function Resumen_grafica_dirGeneral(data){
+	$('#nombrePerfil').text('DASHBOARD DIRECTOR GENERAL');
+	
+	var E=data.areas.EXPANSION;
+	var G=data.areas.GESTORIA;
+	var C=data.areas.CONSTRUCCION;
+	var O=data.areas.OPERACIONES;
+		
+	var sumaE=E.total;
+	var sumaG=G.total;
+	var sumaC=C.total;
+	var sumaO=O.total;
+
+	var sum_asignadas=E.asignadas+G.asignadas+C.asignadas+O.asignadas;
+	var sum_atrasadas=E.atrasadas+G.atrasadas+C.atrasadas+O.atrasadas;
+	var sum_autorizadas=E.autorizadas+G.autorizadas+C.autorizadas+O.autorizadas;
+	var sum_rechazadas=E.rechazadas+G.rechazadas+C.rechazadas+O.rechazadas;
+	var sum_totales= sum_asignadas + sum_autorizadas + sum_rechazadas;
+
+	$('#sum_asignadas').text(sum_asignadas);
+	$('#sum_atrasadas').text(sum_atrasadas);
+	$('#sum_autorizadas').text(sum_autorizadas);
+	$('#sum_rechazadas').text(sum_rechazadas);
+	$('#sum_totales').text(sum_totales);
+
+//GRAFICA PANTALLA GRANDE
+		Highcharts.chart('container', {
+		    chart: {
+		        type: 'column'
+		    },  
+		    credits: {
+		        enabled: false
+		    },
+		    exporting: {
+		        enabled: false
+		    },
+		    title: {
+		        text: null,
+		    },
+		    yAxis: {
+		        allowDecimals: false,
+		        title: {
+		        	 offset: 0,
+		        	 text: null
+		        }
+		    },
+		    xAxis: {
+		        categories: [
+		            'Expansion <br>'+sumaE,
+		            'Gestoría <br>'+sumaG,
+		            'Construcción <br>'+sumaC,
+		            'Operaciones <br>'+sumaO
+		        ],
+		        crosshair: true },
+		  
+		        series: [{
+		        name: 'En proceso',
+		        color: '#CCE0F4',
+		        data: [E.asignadas, G.asignadas, C.asignadas, O.asignadas]
+		    }, {
+		        name: 'Atrasadas',
+		        color: '#005B97',
+		        data: [E.atrasadas, G.atrasadas, C.atrasadas, O.atrasadas]
+		    }, {
+		        name: 'Autorizadas',
+		        color: '#64DEF1',
+		        data: [E.autorizadas, G.autorizadas, C.autorizadas, O.autorizadas]
+		    },{
+		        name: 'Rechazadas',
+		        color: '#FF5B16',
+		        data: [E.rechazadas, G.rechazadas, C.rechazadas, O.rechazadas]
+		    }],
+		    tooltip:{
+		    	headerFormat:''
+		    }
+		});
+// GRAFICA PANTALLA CHICA 1
+	Highcharts.chart('container_sm1', {
+	    chart: {
+	        type: 'column'
+	    }, 
+	    credits: {
+	        enabled: false
+	    },
+	    exporting: {
+	        enabled: false
+	    },
+	    title: {
+	        text: '',
+	    },
+	    yAxis: {
+	        allowDecimals: false,
+	        title: {
+	        	 offset: 0,
+	        	 text: null
+	        }
+	    },
+	    xAxis: {
+	        categories: [
+	            'Expansion',
+	            'Gestoría',
+	        ],
+	        crosshair: true },
+	        series: [{
+	        name: 'En proceso',
+	        color: '#CCE0F4',
+	        data: [data.areas.EXPANSION.asignadas, data.areas.GESTORIA.asignadas]
+	    }, {
+	        name: 'Atrasadas',
+	        color: '#005B97',
+	        data: [data.areas.EXPANSION.atrasadas, data.areas.GESTORIA.atrasadas]
+	    }, {
+	        name: 'Autorizadas',
+	        color: '#64DEF1',
+	        data: [data.areas.EXPANSION.autorizadas, data.areas.GESTORIA.autorizadas]
+	    },{
+	        name: 'Rechazadas',
+	        color: '#FF5B16',
+	        data: [data.areas.EXPANSION.rechazadas, data.areas.GESTORIA.rechazadas]
+	    }],
+	    tooltip:{
+	    	headerFormat:''
+	    }
+	});
+// GRAFICA PANTALLA CHICA 2
+	Highcharts.chart('container_sm2', {
+	    chart: {
+	        type: 'column'
+	    },  
+	    exporting: {
+	        enabled: false
+	    },
+	    title: {
+	        text: '',
+	    },
+	    credits: {
+	        enabled: false
+	    },
+	    yAxis: {
+	        allowDecimals: false,
+	        title: {
+	        	 offset: 0,
+	        	 text: null
+	        }
+	    },
+	    xAxis: {
+	        categories: [
+	            'Construcción',
+	            'Operaciones'
+	        ],
+	        crosshair: true },
+	        series: [{
+	        name: 'En proceso',
+	        color: '#CCE0F4',
+	        data: [data.areas.CONSTRUCCION.asignadas, data.areas.OPERACIONES.asignadas]
+	    }, {
+	        name: 'Atrasadas',
+	        color: '#005B97',
+	        data: [data.areas.CONSTRUCCION.atrasadas, data.areas.OPERACIONES.atrasadas]
+	    }, {
+	        name: 'Autorizadas',
+	        color: '#64DEF1',
+	        data: [data.areas.CONSTRUCCION.autorizadas, data.areas.OPERACIONES.autorizadas]
+	    },{
+	        name: 'Rechazadas',
+	        color: '#FF5B16',
+	        data: [data.areas.CONSTRUCCION.rechazadas, data.areas.OPERACIONES.rechazadas]
+	    }],
+	    tooltip:{
+	    	headerFormat:''
+	    }
+	});
+// ********************** RESUMEN GENERAL
+//************** ASIGNADAS
+		Highcharts.chart('container_proceso', {
+	    chart: {
+	    	events: {
+                click: function () {location.href = 'asignadas'}
+            },
+	        plotBackgroundColor: null,
+	        plotBorderWidth: 0,
+	        plotShadow: false
+	    },
+	    
+	    exporting: {
+	        enabled: false
+	    },
+	    credits: {
+	        enabled: false
+	    },
+	    title: {
+	    	 style: {
+	             color: '#00437e'
+	         },
+	        text: '<span class="numero_grande">'+sum_asignadas+'</span><br><span class="numero_chico">de '+sum_totales+'</span>',
+	        align: 'center',
+	        verticalAlign: 'middle',
+	        y: 5
+	    },
+	    tooltip: {
+	    	// pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+	    },
+	    plotOptions: {
+	    	series: {
+	            states: {
+	                hover: {
+	                    halo: {
+	                        size: 5
+	                    }
+
+	                }
+	            }
+	        },
+	        pie: {
+	        	size: "123%",
+	            dataLabels: {
+	                enabled: false
+	            },
+	            startAngle: -180,
+	            endAngle: 180,
+	            center: ['50%', '50%']
+	        }
+	    },
+	    series: [{
+	        type: 'pie',
+	        name: 'En proceso',
+	        innerSize: '80%',
+	        data: [{
+		            name: 'Expansión',
+		            color: '#006dac',
+		            y: E.asignadas, 
+		            dataLabels: {
+		                    enabled: false}
+	        	},{
+		            name: 'Gestoría',
+		            color: '#194377',
+		            y: G.asignadas, 
+		            dataLabels: {
+		                    enabled: false}
+	        	},{
+		            name: 'Construcción',
+		            color: '#97dfcf',
+		            y: C.asignadas, 
+		            dataLabels: {
+		                    enabled: false}
+	        	},{
+		            name: 'Operaciones',
+		            color: '#07c0d7',
+		            y: O.asignadas, 
+		            dataLabels: {
+		                    enabled: false}
+	        	},{
+	                name: '-',
+	                color: '#C9C9C9',
+	                y: sum_totales-sum_asignadas, 
+	                dataLabels: {
+	                    enabled: false}
+	            }]
+	    }]
+	    
+	});
+// *************** ATRASADAS
+	Highcharts.chart('container_atrasadas', {
+	    chart: {
+	    	events: {
+                click: function () {location.href = 'atrasadas'}
+            },
+	        plotBackgroundColor: null,
+	        plotBorderWidth: 0,
+	        plotShadow: false
+	    },
+	    exporting: {
+	        enabled: false
+	    },
+	    credits: {
+	        enabled: false
+	    },
+	    title: {
+	    	 style: {
+	             color: '#00437e'
+	         },
+	        text: '<span class="numero_grande">'+sum_atrasadas+'</span><br><span class="numero_chico">de '+sum_asignadas+'</span>',
+	        align: 'center',
+	        verticalAlign: 'middle',
+	        y: 5
+	    },
+	    tooltip: {
+	    	// pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+	    },
+	    plotOptions: {
+	    	series: {
+	            states: {
+	                hover: {
+	                    halo: {
+	                        size: 5
+	                    }
+
+	                }
+	            }
+	        },
+	        pie: {
+	        	size: "123%",
+	            dataLabels: {
+	                enabled: false
+	            },
+	            startAngle: -180,
+	            endAngle: 180,
+	            center: ['50%', '50%']
+	        }
+	    },
+	    series: [{
+	        type: 'pie',
+	        name: 'Atrasadas',
+	        innerSize: '80%',
+	        data: [{
+	            name: 'Expansión',
+	            color: '#006dac',
+	            y: E.atrasadas, 
+	            dataLabels: {
+	                    enabled: false}
+        	},{
+	            name: 'Gestoría',
+	            color: '#194377',
+	            y: G.atrasadas, 
+	            dataLabels: {
+	                    enabled: false}
+        	},{
+	            name: 'Construcción',
+	            color: '#97dfcf',
+	            y: C.atrasadas, 
+	            dataLabels: {
+	                    enabled: false}
+        	},{
+	            name: 'Operaciones',
+	            color: '#07c0d7',
+	            y: O.atrasadas, 
+	            dataLabels: {
+	                    enabled: false}
+        	},{
+                name: '-',
+                color: '#C9C9C9',
+                y: sum_totales-sum_atrasadas, 
+                dataLabels: {
+                    enabled: false}
+            }]	        
+	    }]
+	});
+// ***************************** AUTORIZADAS	
+	Highcharts.chart('container_autorizadas', {
+	    chart: {
+	    	events: {
+                click: function () {location.href = 'autorizadas'}
+            },
+	        plotBackgroundColor: null,
+	        plotBorderWidth: 0,
+	        plotShadow: false
+	    },
+	    exporting: {
+	        enabled: false
+	    },
+	    credits: {
+	        enabled: false
+	    },
+	    title: {
+	    	 style: {
+	             color: '#00437e'
+	         },
+	        text: '<span class="numero_grande">'+sum_autorizadas+'</span><br><span class="numero_chico">de '+sum_totales+'</span>',
+	        align: 'center',
+	        verticalAlign: 'middle',
+	        y: 5
+	    },
+	    tooltip: {
+	    	// pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+	    },
+	    plotOptions: {
+	    	series: {
+	            states: {
+	                hover: {
+	                    halo: {
+	                        size: 5
+	                    }
+
+	                }
+	            }
+	        },
+	        pie: {
+	        	size: "123%",
+	            dataLabels: {
+	                enabled: false
+	            },
+	            startAngle: -180,
+	            endAngle: 180,
+	            center: ['50%', '50%']
+	        }
+	    },
+	    series: [{
+	        type: 'pie',
+	        name: 'Autorizadas',
+	        innerSize: '80%',
+	        data: [{
+	            name: 'Expansión',
+	            color: '#006dac',
+	            y: E.autorizadas, 
+	            dataLabels: {
+	                    enabled: false}
+        	},{
+	            name: 'Gestoría',
+	            color: '#194377',
+	            y: G.autorizadas, 
+	            dataLabels: {
+	                    enabled: false}
+        	},{
+	            name: 'Construcción',
+	            color: '#97dfcf',
+	            y: C.autorizadas, 
+	            dataLabels: {
+	                    enabled: false}
+        	},{
+	            name: 'Operaciones',
+	            color: '#07c0d7',
+	            y: O.autorizadas, 
+	            dataLabels: {
+	                    enabled: false}
+        	},{
+                name: '-',
+                color: '#C9C9C9',
+                y: sum_totales-sum_autorizadas, 
+                dataLabels: {
+                    enabled: false}
+            }]
+	    }]
+	});
+// ************************************ RECHAZADAS	
+	Highcharts.chart('container_rechazadas', {
+	    chart: {
+	    	events: {
+                click: function () {location.href = 'rechazadas'}
+            },
+	        plotBackgroundColor: null,
+	        plotBorderWidth: 0,
+	        plotShadow: false
+	    },
+	    exporting: {
+	        enabled: false
+	    },
+	    credits: {
+	        enabled: false
+	    },
+	    title: {
+	    	 style: {
+	             color: '#00437e'
+	         },
+	        text: '<span class="numero_grande">'+sum_rechazadas+'</span><br><span class="numero_chico">de '+sum_totales+'</span>',
+	        align: 'center',
+	        verticalAlign: 'middle',
+	        y: 5
+	    },
+	    tooltip: {
+	    	// pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+	    },
+	    plotOptions: {
+	    	series: {
+	            states: {
+	                hover: {
+	                    halo: {
+	                        size: 5
+	                    }
+
+	                }
+	            }
+	        },
+	        pie: {
+	        	size: "123%",
+	            dataLabels: {
+	                enabled: false
+	            },
+	            startAngle: -180,
+	            endAngle: 180,
+	            center: ['50%', '50%']
+	        }
+	    },
+	    series: [{
+	        type: 'pie',
+	        name: 'Rechazadas',
+	        innerSize: '80%',
+	        data: [{
+	            name: 'Expansión',
+	            color: '#006dac',
+	            y: E.rechazadas, 
+	            dataLabels: {
+	                    enabled: false}
+        	},{
+	            name: 'Gestoría',
+	            color: '#194377',
+	            y: G.rechazadas, 
+	            dataLabels: {
+	                    enabled: false}
+        	},{
+	            name: 'Construcción',
+	            color: '#97dfcf',
+	            y: C.rechazadas, 
+	            dataLabels: {
+	                    enabled: false}
+        	},{
+	            name: 'Operaciones',
+	            color: '#07c0d7',
+	            y: O.rechazadas, 
+	            dataLabels: {
+	                    enabled: false}
+        	},{
+                name: '-',
                 color: '#C9C9C9',
                 y: sum_totales-sum_rechazadas, 
                 dataLabels: {

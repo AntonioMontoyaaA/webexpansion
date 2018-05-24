@@ -26,3 +26,42 @@ tbody tr:hover{
 table{
 	width:100%;
 }
+
+.ui-datepicker-trigger {
+	display: none !important;
+}
+.detalleMemoriaAutorizadaAction {
+	display: none;
+}
+
+/* estilos comunes de elementos de la tabla*/
+
+.buscador {
+	width: 30px;
+	position: relative; 
+	float: left;
+    border-radius: 4px 4px 4px 4px;
+    -moz-border-radius: 4px 4px 4px 4px;
+    -webkit-border-radius: 4px 4px 4px 4px;
+    border: 0px solid #000000;
+    background-color: white;
+    font-size: 12px;
+    padding-left: 3px;
+    background-image: url(../img/iconos_search.png);
+    background-size: 13px 13px;
+    background-position: left;
+    background-repeat: no-repeat;
+    background-origin: content-box;
+}
+
+.buscadorInput {
+	width: 120px;
+    height: 20px;
+    border-radius: 4px 4px 4px 4px;
+    -moz-border-radius: 4px 4px 4px 4px;
+    -webkit-border-radius: 4px 4px 4px 4px;
+    border: 0px solid #000000;
+    background-color: white;
+    padding-left: 7px;
+    margin-left: 15px;
+}

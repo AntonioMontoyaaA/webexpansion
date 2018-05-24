@@ -1,11 +1,14 @@
 package com.tiendas.neto.action;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 
 import com.tiendas.neto.dao.Expansionlog;
 import com.tiendas.neto.singleton.SingletonProperties;
+import com.tiendas.neto.vo.RespuestaVo;
+import com.tiendas.neto.vo.UsuarioLoginVO;
 
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
@@ -18,15 +21,8 @@ public class DashboardPlanAperturaMAction extends ExpansionAction {
 	SingletonProperties sp=SingletonProperties.getInstancia();
 	Expansionlog elog=new Expansionlog();
 	
-	private String usuarioId;
 	private String fecha;
 	
-	public String getUsuarioId() {
-		return usuarioId;
-	}
-	public void setUsuarioId(String usuarioId) {
-		this.usuarioId = usuarioId;
-	}
 	public String getFecha() {
 		return fecha;
 	}
@@ -37,6 +33,22 @@ public class DashboardPlanAperturaMAction extends ExpansionAction {
 	
 	@Override
 	public String execute() throws Exception{
+		
+		HttpSession usuarioSesion = ServletActionContext.getRequest().getSession();
+		UsuarioLoginVO usuario = (UsuarioLoginVO) usuarioSesion.getAttribute("usr");
+		String numeroEmpleado = null;
+		
+		if(usuario != null) {
+			numeroEmpleado = String.valueOf(usuario.getPerfil().getNumeroEmpleado());
+		} else {
+			RespuestaVo respuestaVo = new RespuestaVo();
+			respuestaVo.setCodigo(501);
+			respuestaVo.setMensaje("Error en la sesión");
+			sendJSONObjectToResponse(respuestaVo);
+			return null;
+		}
+		
+		
 		String respuesta="";
 		 HttpServletResponse response2 = ServletActionContext.getResponse();
 			response2.setContentType("application/json");
@@ -45,7 +57,7 @@ public class DashboardPlanAperturaMAction extends ExpansionAction {
 		try{
 		final OkHttpClient client = new OkHttpClient();
 		FormBody.Builder formBuilder = new FormBody.Builder()
-		 .add("usuarioId", getUsuarioId())
+		 .add("usuarioId", numeroEmpleado)
 		 .add("fecha", getFecha());
 		
 		 RequestBody formBody = formBuilder.build();

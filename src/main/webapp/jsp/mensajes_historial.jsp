@@ -133,6 +133,8 @@
 
 
 	<script	src="js/jquery/jquery.min.js"></script>
+	<script	src="js/jquery/popper.js"></script>
+	<script	src="js/utiles/utiles.js"></script>
 	<script	src="bootstrap/js/bootstrap.bundle.min.js" type="text/javascript"></script>
 	<script	src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 	<script	src="js/utiles/utiles.js"></script>

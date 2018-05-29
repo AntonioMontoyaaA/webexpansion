@@ -40,6 +40,7 @@
 	</package>
 	
 	<package name="default" namespace="/" extends="struts-default">
+	
 		<action name = "asignadas_info" 
          		class = "com.tiendas.neto.action.AsignadasInfoAction" 
          		method = "execute">
@@ -63,9 +64,19 @@
          	<result name = "success">jsp/asignadas_detalle.jsp</result>
       	</action>
       	
+      	<action name = "autorizadas_info" 
+         	class = "com.tiendas.neto.action.AutorizadasInfoAction" 
+         	method = "execute" />
+         		
+	    <action name = "excelAutorizadasAction" 
+         	class = "com.tiendas.neto.action.excel.ExcelAutorizadasAction" 
+         	method = "execute" />
+      	
       	<action name = "DashboardGeneralAction" class="com.tiendas.neto.action.DashboardGeneralAction"
       	 method = "execute"/>
       	<action name = "DashboardPlanAperturaMAction" class="com.tiendas.neto.action.DashboardPlanAperturaMAction"
+      	 method = "execute"/>
+      	<action name = "DashboardPSemanalAction" class="com.tiendas.neto.action.DashboardPSemanalAction"
       	 method = "execute"/>
       	 
       	<action name = "MensajeHistorialAction" class="com.tiendas.neto.action.MensajeHistorialAction"

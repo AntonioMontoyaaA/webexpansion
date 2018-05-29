@@ -20,7 +20,7 @@ tbody tr:hover{
 .tabla_container{
 	 padding-right:0px; 
 	 padding-left:0px; 
-	 height:80%; 
+	 min-height:80%; 
 	 overflow-x:scroll;
 }
 table{
@@ -64,4 +64,10 @@ table{
     background-color: white;
     padding-left: 7px;
     margin-left: 15px;
+}
+#descargaExcel{
+	display:none;
+}
+.oculto {
+	display : none;	
 }

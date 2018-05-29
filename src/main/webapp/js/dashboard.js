@@ -10,7 +10,7 @@ var areaId;
 
 $(function(){
 		$('#iddashboard').addClass('resaltado'); //resalta en el header
-		perfil=$('#perfil').val();
+		perfil=$('#perfil_usuario').val();
 		area= $('#area').val();
 		areaId=$('#areaId').val();
 		
@@ -51,10 +51,13 @@ function progGeneral(){
 
 	obtieneDashboardResponse = function( data ) {
 	if(data.codigo != 200){
-		cargaMensajeModal('MD ASIGNADAS', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
+		cargaMensajeModal('DASHBOARD ', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
 		}
 	if(data.codigo==200) {
 		console.log("*** ENTRA A DATOS ***");
+	
+	//perfil=4; //dir_area
+	//perfil=3; //dir_general
 		
 	if(perfil==3){
 	  $('.dir_general').show();
@@ -70,19 +73,19 @@ function progGeneral(){
 		Resumen_grafica_analista(data);
 	}
 		
-		if($('#opcion').val()=="1")
+		if($('#opcion').val()=="0")
 			$('#pg_fecha').text(dia+' DE '+mes);
-		if($('#opcion').val()=="2")
+		if($('#opcion').val()=="1")
 			$('#pg_fecha').text('SEMANA');
-		if($('#opcion').val()=="3")
+		if($('#opcion').val()=="2")
 			$('#pg_fecha').text(mes+' '+año);
-		if($('#opcion').val()=="4")
+		if($('#opcion').val()=="3")
 			$('#pg_fecha').text('BIMESTRE');
-		if($('#opcion').val()=="5")
+		if($('#opcion').val()=="4")
 			$('#pg_fecha').text('TRIMESTRE');
-		if($('#opcion').val()=="6")
+		if($('#opcion').val()=="5")
 			$('#pg_fecha').text('SEMESTRE');
-		if($('#opcion').val()=="7")
+		if($('#opcion').val()=="6")
 			$('#pg_fecha').text('AÑO '+año);
 	}
 };	
@@ -90,9 +93,31 @@ function progGeneral(){
 function progSemanal(){
 	cargafechas();
 	$('#fecha_ps').text(fecha_entera);
-	progSemanal_grafica();
 
+	invocarJSONServiceAction("DashboardPSemanalAction", 
+			{'tipoConsulta': $('#opcion_historial').val(), 'fechaConsulta': fecha,
+				'num': "10"}, 
+			'obtieneDashboardResponseSemanal', 
+			function() {
+				//Funcion de error
+				cierraLoading();
+			},
+			function() {
+				//Función al finalizar
+				cierraLoading();
+			});
+
+	obtieneDashboardResponseSemanal = function( data ) {
+	if(data.codigo != 200){
+		cargaMensajeModal('DASHBOARD ', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
+		}
+	if(data.codigo==200) {
+		console.log("*** ENTRA A DATOS ***");
+		progSemanal_grafica(data);
+	}
+};	
 }
+
 function AperturaMensual(){
 	invocarJSONServiceAction("DashboardPlanAperturaMAction", 
 			{'fecha':fecha}, 
@@ -118,7 +143,57 @@ function AperturaMensual(){
 
 
 //-------------------------   ARMA GRAFICA PROGRESO SEMANAAL
-function progSemanal_grafica(){
+function progSemanal_grafica(data){
+	var arreglo=Object.keys(data.historial).sort();
+	var ejex=[];
+	var nuevacadena;
+	
+	if($('#opcion_historial').val()=="0"){
+		for(i=0;i<arreglo.length;i++){
+			cadenaaño=arreglo[i].substring(4,8);
+			cadenames=arreglo[i].substring(9,11);
+			cadenadia=arreglo[i].substring(12,14);
+			nuevacadena=cadenadia+"/"+cadenames+"/"+cadenaaño;
+			ejex.push(nuevacadena);
+		}
+	}
+	if($('#opcion_historial').val()=="1"){
+		for(i=0;i<arreglo.length;i++){
+			nuevacadena="Semana "+arreglo[i].substring(7);
+			ejex.push(nuevacadena);
+		}
+	}
+	
+	if($('#opcion_historial').val()=="2"){
+		for(i=0;i<arreglo.length;i++){
+			cadenaaño=arreglo[i].substring(4,8);
+			cadenames=arreglo[i].substring(9,11);
+			nuevacadena=cadenames+"/"+cadenaaño;
+			ejex.push(nuevacadena);
+		}
+	}
+	
+	if($('#opcion_historial').val()=="6"){
+		for(i=0;i<arreglo.length;i++){
+			cadenaaño=arreglo[i].substring(4,8);
+			nuevacadena=cadenaaño;
+			ejex.push(nuevacadena);
+		}
+	}
+	
+	var atrasadas=[];
+	var autorizadas=[];
+	var rechazadas=[];
+	var asignadas=[];
+	
+	
+	for(i=0;i<arreglo.length;i++){
+		atrasadas.push(eval(data.historial[arreglo[i]]["atrasadas"]));
+		autorizadas.push(eval(data.historial[arreglo[i]]["autorizadas"]));
+		rechazadas.push(eval(data.historial[arreglo[i]]["rechazadas"]));	
+		asignadas.push(eval(data.historial[arreglo[i]]["asignadas"]));
+	}
+	
 	Highcharts.chart('container_psemanal', {
 		title: {
 	        text: null,
@@ -130,7 +205,7 @@ function progSemanal_grafica(){
 	        enabled: false
 	    },
 	    xAxis: {
-	        categories: ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4', 'Semana 5', 'Semana 6', 'Semana 7', 'Semana 8']
+	        categories: ejex
 	    },
 	    yAxis: {
 	        title: {
@@ -146,15 +221,15 @@ function progSemanal_grafica(){
 	    series: [{
 	        name: 'Asignadas',
 	        color: '#64DEF1',
-	        data: [1, 3, 1, 5, 3, 2, 2, 5]
+	        data: asignadas
 	    }, {
 	        name: 'Autorizadas',
 	        color: '#CCE0F4',
-	        data: [1, 2, 2, 1, 4, 2, 1, 3]
+	        data: autorizadas
 	    }, {
 	        name: 'Rechazadas',
 	        color: '#FF5B16',
-	        data: [1, 1, 1, 2, 4, 1, 3, 1]
+	        data: rechazadas
 	    }],
 
 	});

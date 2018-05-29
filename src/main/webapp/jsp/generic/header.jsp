@@ -21,7 +21,7 @@
 					
 		<form class="form-inline my-2 my-lg-0" style="padding-bottom:20px;">
 			<span class="mr-sm-2 azul" style="font-size:11px;" id="fecha_header"></span>
-			<span class="mr-sm-2"><a id="avisos" tabindex="0" class="" role="" data-toggle="popover" data-trigger="focus" data-placement="bottom"
+		<span class="mr-sm-2"><a id="avisos" tabindex="0" class="" role="" data-toggle="popover" data-trigger="focus" data-placement="bottom"
 			data-content="
 				<div class='popover_titulo azul'>Avisos</div>
 				<div class='popover_opcion azul'><a href='asignadas'> Tienes 1 nueva MD</a></div>
@@ -29,6 +29,7 @@
 				<div class='popover_opcion azul'><a href='asignadas'>Tienes 4 MDs proximas a vencer</a></div>
 			"><img src="img/web_AVISOS.png"></a></span>
 		&nbsp;
+		
 		<span class="my-2 my-sm-0"><a id="perfil" tabindex="0" class="" role="" data-toggle="popover" data-trigger="focus" data-placement="bottom"
 		data-content="
 		<div class='popover_logout azul'><a href='Logout'> Cerrar Sesión</a></div>

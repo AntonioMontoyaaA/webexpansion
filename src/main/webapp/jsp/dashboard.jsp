@@ -14,7 +14,7 @@
 <title>Dashboard</title>
 </head>
 <body>
-<input type="hidden" id="perfil" value="${usr.perfil.perfilesxusuario[0].perfilid}">
+<input type="hidden" id="perfil_usuario" value="${usr.perfil.perfilesxusuario[0].perfilid}">
 <input type="hidden" id="area" value="${usr.perfil.areasxpuesto[0].areaNom}">
 <input type="hidden" id="areaId" value="${usr.perfil.areasxpuesto[0].areaId}">
 
@@ -36,13 +36,13 @@
 					<span class="fecha" id="fecha_pg"></span>
   					
   						<select class="form-control form-inline desp filtro" onchange="progGeneral();" id="opcion">
-    					<option value="1">Día</option>
-    					<option value="2">Semana</option>
-    					<option value="3" selected>Mes</option>
-    					<option value="4">Bimestre</option>
-    					<option value="5">Trimestre</option>
-    					<option value="6">Semestre</option>
-    					<option value="7">Año</option>
+    					<option value="0">Día</option>
+    					<option value="1">Semana</option>
+    					<option value="2" selected>Mes</option>
+    					<option value="3">Bimestre</option>
+    					<option value="4">Trimestre</option>
+    					<option value="5">Semestre</option>
+    					<option value="6">Año</option>
   						</select>
 							&nbsp;
   						<button class="btn desp rechargue" type="button" onclick="progGeneral();">
@@ -81,17 +81,16 @@
 					<form class="form-inline p_cabecera">
 					<span class="fecha" id="fecha_ps"></span>
   					
-  						<select class="form-control form-inline desp filtro">
-    					<option>Día</option>
-    					<option selected>Semana</option>
-    					<option>Mes</option>
-    					<option>Bimestre</option>
-    					<option>Trimestre</option>
-    					<option>Semestre</option>
-    					<option>Año</option>
+  						<select class="form-control form-inline desp filtro" onchange="progSemanal()" id="opcion_historial">
+    					<option value="0">Día</option>
+    					<option value="1" selected>Semana</option>
+    					<option value="2" >Mes</option>
+    					<!-- <option value="3">Bimestre</option>
+    					<option value="4">Trimestre</option>
+    					<option value="5">Semestre</option> -->
+    					<option value="6">Año</option>
   						</select>
-							&nbsp;
-  						<button class="btn desp rechargue" type="button" onclick="">
+  						<button class="btn desp rechargue" type="button" onclick="progSemanal();">
   								<img src="${pageContext.request.contextPath}/img/refresh_sf.png" />
   						</button>
   					</form>
@@ -285,9 +284,9 @@
 
 	<script	src="${pageContext.request.contextPath}/js/jquery/jquery.min.js"></script>
 	<script	src="${pageContext.request.contextPath}/js/jquery/popper.js"></script>
+	<script	src="${pageContext.request.contextPath}/js/utiles/utiles.js"></script>
 	<script	src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 	<script	src="${pageContext.request.contextPath}/highcharts/highcharts.js"></script>
-	<script	src="${pageContext.request.contextPath}/js/utiles/utiles.js"></script>
 	<script	src="${pageContext.request.contextPath}/js/dashboard.js"></script>
 	<script	src="${pageContext.request.contextPath}/highcharts/js/modules/data.js"></script>
 	<script	src="${pageContext.request.contextPath}/highcharts/js/modules/exporting.js"></script>

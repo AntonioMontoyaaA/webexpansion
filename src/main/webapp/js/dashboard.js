@@ -113,6 +113,22 @@ function progSemanal(){
 		}
 	if(data.codigo==200) {
 		console.log("*** ENTRA A DATOS ***");
+		
+		if($('#opcion_historial').val()=="0")
+			$('#titulo_prog').text('Progreso Diario');
+		if($('#opcion_historial').val()=="1")
+			$('#titulo_prog').text('Progreso Semanal');
+		if($('#opcion_historial').val()=="2")
+			$('#titulo_prog').text('Progreso Mensual');
+		if($('#opcion_historial').val()=="3")
+			$('#titulo_prog').text('Progreso Bimestral');
+		if($('#opcion_historial').val()=="4")
+			$('#titulo_prog').text('Progreso Trimestral');
+		if($('#opcion_historial').val()=="5")
+			$('#titulo_prog').text('Progreso Semestral');
+		if($('#opcion_historial').val()=="6")
+			$('#titulo_prog').text('Progreso Anual');
+		
 		progSemanal_grafica(data);
 	}
 };	
@@ -181,18 +197,20 @@ function progSemanal_grafica(data){
 		}
 	}
 	
-	var atrasadas=[];
+
 	var autorizadas=[];
 	var rechazadas=[];
 	var asignadas=[];
 	
 	
 	for(i=0;i<arreglo.length;i++){
-		atrasadas.push(eval(data.historial[arreglo[i]]["atrasadas"]));
 		autorizadas.push(eval(data.historial[arreglo[i]]["autorizadas"]));
 		rechazadas.push(eval(data.historial[arreglo[i]]["rechazadas"]));	
 		asignadas.push(eval(data.historial[arreglo[i]]["asignadas"]));
 	}
+	console.log(autorizadas);
+	console.log(rechazadas);
+	console.log(asignadas);
 	
 	Highcharts.chart('container_psemanal', {
 		title: {

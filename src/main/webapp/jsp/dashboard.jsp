@@ -75,7 +75,7 @@
 					<div class="col-lg-12 menupr_estilos">
 			<div class="row cabecera">
 				<div class="col-lg-5">
-					<span class="azul negrita">Progreso Semanal</span>
+					<span class="azul negrita" id="titulo_prog"></span>
 				</div>
 				<div class="col-lg-7 text-right">
 					<form class="form-inline p_cabecera">

@@ -95,6 +95,7 @@ public class DetalleMemoriaXIdAction extends ActionSupport implements SessionAwa
 				sendJSONObjectToResponse(respuestaVo);
 			 }
 		
+		
 		return null;
 	}
 	

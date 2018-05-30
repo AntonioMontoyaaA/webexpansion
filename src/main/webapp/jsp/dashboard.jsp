@@ -75,7 +75,7 @@
 					<div class="col-lg-12 menupr_estilos">
 			<div class="row cabecera">
 				<div class="col-lg-5">
-					<span class="azul negrita" id="titulo_prog"></span>
+					<span class="azul negrita" id="titulo_historial"></span>
 				</div>
 				<div class="col-lg-7 text-right">
 					<form class="form-inline p_cabecera">
@@ -85,9 +85,9 @@
     					<option value="0">Día</option>
     					<option value="1" selected>Semana</option>
     					<option value="2" >Mes</option>
-    					<!-- <option value="3">Bimestre</option>
+    					<option value="3">Bimestre</option>
     					<option value="4">Trimestre</option>
-    					<option value="5">Semestre</option> -->
+    					<option value="5">Semestre</option>
     					<option value="6">Año</option>
   						</select>
   						<button class="btn desp rechargue" type="button" onclick="progSemanal();">
@@ -97,7 +97,7 @@
 				</div>
 			
 			<div class="col-lg-12">
-				<span class="azul estilo_info">MARZO - ABRIL 2018</span>
+				<span class="azul estilo_info" id=sub_historial></span>
 			</div>
 			
 			</div>

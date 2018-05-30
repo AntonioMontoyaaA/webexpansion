@@ -74,8 +74,8 @@
 	<script	src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 	<script	src="${pageContext.request.contextPath}/js/asignadas.js"></script>
 	<script	src="${pageContext.request.contextPath}/js/tablas.js"></script>
-	<script	src="${pageContext.request.contextPath}/js/utiles/utiles.js"></script>
 	<script src="${pageContext.request.contextPath}/js/jquery/popper.js"></script>
-    
+	<script	src="${pageContext.request.contextPath}/js/utiles/utiles.js"></script>
+	
 	</body>
 </html>

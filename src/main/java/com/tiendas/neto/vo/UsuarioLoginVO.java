@@ -3,7 +3,7 @@ package com.tiendas.neto.vo;
 import java.util.List;
 
 public class UsuarioLoginVO {
-
+//clase usuarioVO
 	private String mensaje;
 	private Integer codigo;
 	private Perfil perfil;

@@ -196,8 +196,8 @@ function progSemanal_grafica(data){
 			nuevacadena=cadenames+"/"+cadenaaño;
 			ejex.push(nuevacadena);
 		}
-		$('#sub_historial').text(mesesarr[parseInt(arreglo[0].substring(9,11))]+" "+arreglo[0].substring(4,8)+
-				" - "+mesesarr[parseInt(arreglo[arreglo.length-1].substring(9,11))]+" "+arreglo[arreglo.length-1].substring(4,8));
+		$('#sub_historial').text(mesesarr[parseInt(arreglo[0].substring(9,11))-1]+" "+arreglo[0].substring(4,8)+
+				" - "+mesesarr[parseInt(arreglo[arreglo.length-1].substring(9,11))-1]+" "+arreglo[arreglo.length-1].substring(4,8));
 	}
 	if($('#opcion_historial').val()=="3"){
 		for(i=0;i<arreglo.length;i++){
@@ -209,8 +209,8 @@ function progSemanal_grafica(data){
 			nuevacadena=cadenames+"/"+cadenaaño+"<br>"+cadenames2+"/"+cadenaaño2;
 			ejex.push(nuevacadena);
 		}
-		$('#sub_historial').text(mesesarr[parseInt(arreglo[0].substring(22,24))]+" "+arreglo[0].substring(17,21)+
-				" - "+mesesarr[parseInt(arreglo[arreglo.length-1].substring(14,16))]+" "+arreglo[arreglo.length-1].substring(9,13));
+		$('#sub_historial').text(mesesarr[parseInt(arreglo[0].substring(22,24))-1]+" "+arreglo[0].substring(17,21)+
+				" - "+mesesarr[parseInt(arreglo[arreglo.length-1].substring(14,16))-1]+" "+arreglo[arreglo.length-1].substring(9,13));
 	}
 	if($('#opcion_historial').val()=="4"){
 		for(i=0;i<arreglo.length;i++){
@@ -222,8 +222,8 @@ function progSemanal_grafica(data){
 			nuevacadena=cadenames+"/"+cadenaaño+"<br>"+cadenames2+"/"+cadenaaño2;
 			ejex.push(nuevacadena);
 		}
-		$('#sub_historial').text(mesesarr[parseInt(arreglo[0].substring(23,25))]+" "+arreglo[0].substring(18,22)+
-				" - "+mesesarr[parseInt(arreglo[arreglo.length-1].substring(15,17))]+" "+arreglo[arreglo.length-1].substring(10,14));
+		$('#sub_historial').text(mesesarr[parseInt(arreglo[0].substring(23,25))-1]+" "+arreglo[0].substring(18,22)+
+				" - "+mesesarr[parseInt(arreglo[arreglo.length-1].substring(15,17))-1]+" "+arreglo[arreglo.length-1].substring(10,14));
 	}
 	if($('#opcion_historial').val()=="5"){
 		for(i=0;i<arreglo.length;i++){
@@ -235,8 +235,8 @@ function progSemanal_grafica(data){
 			nuevacadena=cadenames+"/"+cadenaaño+"<br>"+cadenames2+"/"+cadenaaño2;
 			ejex.push(nuevacadena);
 		}
-		$('#sub_historial').text(mesesarr[parseInt(arreglo[0].substring(22,24))]+" "+arreglo[0].substring(17,21)+
-				" - "+mesesarr[parseInt(arreglo[arreglo.length-1].substring(14,16))]+" "+arreglo[arreglo.length-1].substring(9,13));
+		$('#sub_historial').text(mesesarr[parseInt(arreglo[0].substring(22,24))-1]+" "+arreglo[0].substring(17,21)+
+				" - "+mesesarr[parseInt(arreglo[arreglo.length-1].substring(14,16))-1]+" "+arreglo[arreglo.length-1].substring(9,13));
 	}
 	if($('#opcion_historial').val()=="6"){
 		for(i=0;i<arreglo.length;i++){
@@ -244,11 +244,10 @@ function progSemanal_grafica(data){
 			nuevacadena=cadenaaño;
 			ejex.push(nuevacadena);
 		}
+		
+		$('#sub_historial').text(arreglo[0].substring(4,8)+" - "+arreglo[arreglo.length-1].substring(4,8));
 	}
 	
-	
-	
-
 	var autorizadas=[];
 	var rechazadas=[];
 	var asignadas=[];

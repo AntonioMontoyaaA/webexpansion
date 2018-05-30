@@ -7,6 +7,7 @@ var fecha_entera;
 var perfil;
 var area;
 var areaId;
+mesesarr = new Array ("ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE");
 
 $(function(){
 		$('#iddashboard').addClass('resaltado'); //resalta en el header
@@ -23,7 +24,6 @@ $(function(){
 
 function cargafechas(){
 	var f=new Date();
-	var mesesarr = new Array ("ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE");
 	var mesint = new Array ("01","02","03","04","05","06","07","08","09","10","11","12");
 	
 	mes = mesesarr[f.getMonth()];
@@ -114,20 +114,27 @@ function progSemanal(){
 	if(data.codigo==200) {
 		console.log("*** ENTRA A DATOS ***");
 		
-		if($('#opcion_historial').val()=="0")
-			$('#titulo_prog').text('Progreso Diario');
-		if($('#opcion_historial').val()=="1")
-			$('#titulo_prog').text('Progreso Semanal');
-		if($('#opcion_historial').val()=="2")
-			$('#titulo_prog').text('Progreso Mensual');
-		if($('#opcion_historial').val()=="3")
-			$('#titulo_prog').text('Progreso Bimestral');
-		if($('#opcion_historial').val()=="4")
-			$('#titulo_prog').text('Progreso Trimestral');
-		if($('#opcion_historial').val()=="5")
-			$('#titulo_prog').text('Progreso Semestral');
-		if($('#opcion_historial').val()=="6")
-			$('#titulo_prog').text('Progreso Anual');
+		if($('#opcion_historial').val()=="0"){
+			$('#titulo_historial').text('Progreso Diario');
+		}
+		if($('#opcion_historial').val()=="1"){
+			$('#titulo_historial').text('Progreso Semanal');
+		}
+		if($('#opcion_historial').val()=="2"){
+			$('#titulo_historial').text('Progreso Mensual');
+		}
+		if($('#opcion_historial').val()=="3"){
+			$('#titulo_historial').text('Progreso Bimestral');
+		}
+		if($('#opcion_historial').val()=="4"){
+			$('#titulo_historial').text('Progreso Trimestral');
+		}
+		if($('#opcion_historial').val()=="5"){
+			$('#titulo_historial').text('Progreso Semestral');
+		}
+		if($('#opcion_historial').val()=="6"){
+			$('#titulo_historial').text('Progreso Anual');
+		}
 		
 		progSemanal_grafica(data);
 	}
@@ -169,15 +176,17 @@ function progSemanal_grafica(data){
 			cadenaaño=arreglo[i].substring(4,8);
 			cadenames=arreglo[i].substring(9,11);
 			cadenadia=arreglo[i].substring(12,14);
-			nuevacadena=cadenadia+"/"+cadenames+"/"+cadenaaño;
+			nuevacadena=cadenadia+"/"+cadenames+"<br>"+cadenaaño;
 			ejex.push(nuevacadena);
 		}
+		$('#sub_historial').text(mes);
 	}
 	if($('#opcion_historial').val()=="1"){
 		for(i=0;i<arreglo.length;i++){
-			nuevacadena="Semana "+arreglo[i].substring(7);
+			nuevacadena="Semana "+arreglo[i].substring(7,9)+"<br>"+arreglo[i].substring(10);
 			ejex.push(nuevacadena);
 		}
+		$('#sub_historial').text(mes);
 	}
 	
 	if($('#opcion_historial').val()=="2"){
@@ -187,8 +196,48 @@ function progSemanal_grafica(data){
 			nuevacadena=cadenames+"/"+cadenaaño;
 			ejex.push(nuevacadena);
 		}
+		$('#sub_historial').text(mesesarr[parseInt(arreglo[0].substring(9,11))]+" "+arreglo[0].substring(4,8)+
+				" - "+mesesarr[parseInt(arreglo[arreglo.length-1].substring(9,11))]+" "+arreglo[arreglo.length-1].substring(4,8));
 	}
-	
+	if($('#opcion_historial').val()=="3"){
+		for(i=0;i<arreglo.length;i++){
+			cadenaaño2=arreglo[i].substring(9,13);
+			cadenames2=arreglo[i].substring(14,16);
+			cadenaaño=arreglo[i].substring(17,21);
+			cadenames=arreglo[i].substring(22,24);
+			
+			nuevacadena=cadenames+"/"+cadenaaño+"<br>"+cadenames2+"/"+cadenaaño2;
+			ejex.push(nuevacadena);
+		}
+		$('#sub_historial').text(mesesarr[parseInt(arreglo[0].substring(22,24))]+" "+arreglo[0].substring(17,21)+
+				" - "+mesesarr[parseInt(arreglo[arreglo.length-1].substring(14,16))]+" "+arreglo[arreglo.length-1].substring(9,13));
+	}
+	if($('#opcion_historial').val()=="4"){
+		for(i=0;i<arreglo.length;i++){
+			cadenaaño2=arreglo[i].substring(10,14);
+			cadenames2=arreglo[i].substring(15,17);
+			cadenaaño=arreglo[i].substring(18,22);
+			cadenames=arreglo[i].substring(23,25);
+			
+			nuevacadena=cadenames+"/"+cadenaaño+"<br>"+cadenames2+"/"+cadenaaño2;
+			ejex.push(nuevacadena);
+		}
+		$('#sub_historial').text(mesesarr[parseInt(arreglo[0].substring(23,25))]+" "+arreglo[0].substring(18,22)+
+				" - "+mesesarr[parseInt(arreglo[arreglo.length-1].substring(15,17))]+" "+arreglo[arreglo.length-1].substring(10,14));
+	}
+	if($('#opcion_historial').val()=="5"){
+		for(i=0;i<arreglo.length;i++){
+			cadenaaño2=arreglo[i].substring(9,13);
+			cadenames2=arreglo[i].substring(14,16);
+			cadenaaño=arreglo[i].substring(17,21);
+			cadenames=arreglo[i].substring(22,24);
+			
+			nuevacadena=cadenames+"/"+cadenaaño+"<br>"+cadenames2+"/"+cadenaaño2;
+			ejex.push(nuevacadena);
+		}
+		$('#sub_historial').text(mesesarr[parseInt(arreglo[0].substring(22,24))]+" "+arreglo[0].substring(17,21)+
+				" - "+mesesarr[parseInt(arreglo[arreglo.length-1].substring(14,16))]+" "+arreglo[arreglo.length-1].substring(9,13));
+	}
 	if($('#opcion_historial').val()=="6"){
 		for(i=0;i<arreglo.length;i++){
 			cadenaaño=arreglo[i].substring(4,8);
@@ -196,6 +245,8 @@ function progSemanal_grafica(data){
 			ejex.push(nuevacadena);
 		}
 	}
+	
+	
 	
 
 	var autorizadas=[];
@@ -208,9 +259,6 @@ function progSemanal_grafica(data){
 		rechazadas.push(eval(data.historial[arreglo[i]]["rechazadas"]));	
 		asignadas.push(eval(data.historial[arreglo[i]]["asignadas"]));
 	}
-	console.log(autorizadas);
-	console.log(rechazadas);
-	console.log(asignadas);
 	
 	Highcharts.chart('container_psemanal', {
 		title: {

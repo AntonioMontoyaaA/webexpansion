@@ -97,7 +97,7 @@ function creatabla(){
 				datosMemoriasAsignadas[i] = new Array();	 	 		 			 
 				datosMemoriasAsignadas[i][0] = "<span style='" + spanRojo + "'>" + resultados[i].nombreMd + "</span>"; 
 				datosMemoriasAsignadas[i][1] = "<span style='" + spanRojo + "'>" + resultados[i].categoria + "</span>";
-				datosMemoriasAsignadas[i][2] = "<span style='" + spanRojo + "'>" + resultados[i].puntuacion + "</span>" + estrellas;
+				datosMemoriasAsignadas[i][2] = "<span style='" + spanRojo + "'>" + resultados[i].puntuacion + " puntos</span>" + estrellas;
 				datosMemoriasAsignadas[i][3] = "<span style='" + spanRojo + "'>" + resultados[i].creador + "</span>";
 				datosMemoriasAsignadas[i][4] = "<span style='" + spanRojo + "'>" + resultados[i].fechaCreacion + "</span>";
 				datosMemoriasAsignadas[i][5] = "<span style='" + spanRojo + "'>" + resultados[i].fechaVencimiento + "</span>";

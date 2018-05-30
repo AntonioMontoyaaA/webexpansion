@@ -13,7 +13,7 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/generic.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/tablas.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/asignadas.css" />
-
+	
 	
 <title>Asignadas</title>
 </head>
@@ -75,6 +75,7 @@
 	<script	src="${pageContext.request.contextPath}/js/asignadas.js"></script>
 	<script	src="${pageContext.request.contextPath}/js/tablas.js"></script>
 	<script	src="${pageContext.request.contextPath}/js/utiles/utiles.js"></script>
-	
+	<script src="${pageContext.request.contextPath}/js/jquery/popper.js"></script>
+    
 	</body>
 </html>

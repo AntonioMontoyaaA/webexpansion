@@ -29,7 +29,7 @@ public class DetalleMemoriaXIdAction extends ActionSupport implements SessionAwa
 	@SuppressWarnings("unused")
 	private static final Logger logger = Logger.getLogger(ExpansionAction.class);
 	private static final long serialVersionUID = 1L;
-	SingletonProperties sp=SingletonProperties.getInstancia();
+	SingletonProperties sp = SingletonProperties.getInstancia();
 	Expansionlog elog=new Expansionlog();
 
 	@Override

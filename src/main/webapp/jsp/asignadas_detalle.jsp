@@ -138,7 +138,7 @@
 		<div class="row divs_p">
 			<div class="col-lg-12 menupr_estilos" style="height:300px;">
 				<div style="width: 100%;position: relative; float: left;text-align: left">
-					<div style="width: 80%; position: relative; float: left;"><span class="tituloDetalleMd">1) Datos del propietario</span></div>
+					<div style="width: 80%; position: relative; float: left;"><span class="tituloDetalleMd">2) Datos del propietario</span></div>
 					<div style="width: 20%; position: relative; float: left;text-align: right; padding-right: 15px;">
 						<img id="autoriza2" title="Autoriza punto" class="sin_autorizar" onclick="autorizaPantalla(2);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
 						<img id="rechaza2" title="Rechaza punto" class="sin_autorizar" onclick="rechazaPantalla(2);" style="cursor: pointer;" src="img/rechaza_mark.png">

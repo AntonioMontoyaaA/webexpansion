@@ -5,12 +5,48 @@ var TERCER_HORARIO_CONTEO	=	3;
 var AUTORIZA_MODULO			= 1;
 var RECHAZA_MODULO			= 0;
 
+var PROGRESO_ATENCION = 0;
+var MOTIVOS_RECHAZO = {};
+
 $(function(){
 	$('#idasignadas').addClass('resaltado');
 	
 	$("#nombreMdTxt").text($("#nombreMd").val());
 	buscaDetalleMD($("#mdId").val());
+	MOTIVOS_RECHAZO = {};
 	
+	$('.popover-dismiss').popover({
+		  trigger: 'focus'
+		});
+		
+	$("#btnModalAutorizacion").click(function() {
+		$("#modal_autorizacion").modal("hide");
+	});
+});
+
+function validaEstatusAtencion(estatus, idObjetos){
+	$('#autoriza' + idObjetos).removeClass('autorizado');
+	$('#rechaza' + idObjetos).removeClass('autorizado');
+	$('#autoriza' + idObjetos).addClass('sin_autorizar');
+	$('#rechaza' + idObjetos).addClass('sin_autorizar');
+	
+	if(estatus == 2){// pendiente atencion
+		$('#autoriza'  + idObjetos).addClass('sin_autorizar');
+		$('#rechaza'  + idObjetos).addClass('sin_autorizar');
+	}else if(estatus == 1){ //autorizado
+		$('#autoriza' + idObjetos).removeClass('sin_autorizar');
+		$('#autoriza' + idObjetos).addClass('autorizado');
+		PROGRESO_ATENCION++;
+	}else if(estatus == 0){//rechazado
+		$('#rechaza' + idObjetos).removeClass('sin_autorizar');
+		$('#rechaza' + idObjetos).addClass('autorizado');
+	}else{//desconocido
+		$('#autoriza' + idObjetos).addClass('sin_autorizar');
+		$('#rechaza' + idObjetos).addClass('sin_autorizar');
+	}
+}
+
+function dibujaGraficaAutorizaciones(){
 	var bar = new ProgressBar.Circle(containerProgreso, {
 		  strokeWidth: 4,
 		  easing: 'easeInOut',
@@ -21,20 +57,11 @@ $(function(){
 		  svgStyle: null
 		});
 	
-	bar.animate(0.9, {
+	progreso = PROGRESO_ATENCION/7;
+	bar.animate(progreso, {
 	    from: {color: '#000000', width: 5},
 	    to: {color: "#00FF00", width: 5} });
-	
-	
-	$('.popover-dismiss').popover({
-		  trigger: 'focus'
-		});
-		
-	
-	$("#btnModalAutorizacion").click(function() {
-		$("#modal_autorizacion").modal("hide");
-	});
-});
+}
 
 function buscaDetalleMD(mdId) {
 	cargaLoading();
@@ -58,6 +85,8 @@ function buscaDetalleMD(mdId) {
 		if(data.codigo != 200) {
 			cargaMensajeModal('MD ASIGNADAS', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, redireccionaAsignadas);
 		} else {
+			PROGRESO_ATENCION = 0;
+			MOTIVOS_RECHAZO = {};
 			/* Datos de áreas que ya han autorizado */
 			if(data.areasAutorizadas != undefined && data.areasAutorizadas.length > 0) {
 				for(var i = 0; i < data.areasAutorizadas.length; i++) {
@@ -123,6 +152,9 @@ function buscaDetalleMD(mdId) {
 				} else {
 					$("#rentaANeto").text("NO RENTA A NETO AÚN");
 				}
+				
+				validaEstatusAtencion(data.datosSitio.estatus, 1);
+				validaEstatusAtencion(data.datosPropietario.estatus, 2);
 			}
 			/* Datos de la superficie */
 			if(data.superficie != undefined) {
@@ -152,6 +184,8 @@ function buscaDetalleMD(mdId) {
 					html: true, 
 					content : contentPopSuperficie
 				});
+				
+				validaEstatusAtencion(data.superficie.estatus, 3);
 			}
 			/* Datos de la zonificación */
 			if(data.zonificacion != undefined) {
@@ -168,6 +202,8 @@ function buscaDetalleMD(mdId) {
 					content : contentPopZonificacion
 				});
 				
+				validaEstatusAtencion(data.zonificacion.estatus, 4);
+
 			}
 			/* Datos de la construcción */
 			if(data.construccion != undefined) {
@@ -203,6 +239,8 @@ function buscaDetalleMD(mdId) {
 					html: true, 
 					content : contentPopConstruccion
 				});
+				
+				validaEstatusAtencion(data.construccion.estatus, 5);
 			}
 			/* Datos de las generalidades del sitio */
 			if(data.generalidades != undefined) {
@@ -221,6 +259,8 @@ function buscaDetalleMD(mdId) {
 					html: true, 
 					content : contentPopGeneralidades
 				});
+				
+				validaEstatusAtencion(data.generalidades.estatus, 6);
 			}
 			/* Datos de los conteos */
 			if(data.flujoPeatonal != undefined) {
@@ -275,6 +315,8 @@ function buscaDetalleMD(mdId) {
 					html: true, 
 					content : contentPopConteos
 				});
+				
+				validaEstatusAtencion(data.flujoPeatonal.estatus, 7);
 			}
 			
 			setTimeout(function () {
@@ -283,7 +325,7 @@ function buscaDetalleMD(mdId) {
 			
 			
 			cargaFlujoPeatonal(categorias, fecha1, conteo1, fecha2, conteo2, fecha3, conteo3, promedio);
-		
+			dibujaGraficaAutorizaciones();
 		}
 	}
 }
@@ -371,6 +413,19 @@ function autorizaPantalla(modulo) {
 }
 
 function rechazaPantalla(modulo) {
+	cargaLoading();
+	buscaMotivosRechazo(modulo);
+
+}
+
+function buscaMotivosRechazo(modulo){
+	if(MOTIVOS_RECHAZO[modulo] == undefined){ //no se han consultado los motivos de rechazo
+		consultaMotivosRechazo(modulo);
+	}else{//ya se consultaron los motivos
+		
+		
+	}
+	
 	$("#tituloModalAutorizacion").text("¿Estás seguro de rechazar este punto?");
 	$("#tipoAutorizacion").val(RECHAZA_MODULO);
 	$("#moduloId").val(modulo);
@@ -378,6 +433,46 @@ function rechazaPantalla(modulo) {
 	$("#comboMotivos").show();
 	$("#modal_autorizacion").modal("show");
 }
+
+function consultaMotivosRechazo(modulo){
+	invocarJSONServiceAction("motivosRechazo", 
+			{'modulo': modulo,
+			'tipoModulo': 2}, 
+			'almacenaMotivosRechazo', 
+			function() {
+				//Funcion de error
+				
+				cierraLoading();
+			},
+			function() {
+				//Función al finalizar
+				
+				cierraLoading();
+			});
+
+	almacenaMotivosRechazo = function(data){
+		if(data.codigo != 200){
+			cargaMensajeModal('MD ASIGNADAS', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, redireccionaAsignadas);
+		}else{
+			if(data.motivos != undefined){
+				motivos = {};
+				$.each(data.motivos(function(){
+					if(motivos[this.motivoId] != undefined){
+						motivos[this.motivoId] = new MotivoRechazo(this.motivoId, this.descripcion, this.rechazoDefinitvo == 1)
+					}
+				}));
+				
+				MOTIVOS_RECHAZO[modulo] = motivos;
+			}
+		}
+	}
+}
+
+MotivoRechazo = function(id, nombre, isDefinitivo){
+	this.id = id;
+	this.nombre = nombre;
+	this.isDefinitivo = isDefinitivo;
+};
 
 function initMap(latitudSitio, longitudSitio, listaCompetencias, listaGeneradores) {
 	var myLatLng = {lat: latitudSitio, lng: longitudSitio};

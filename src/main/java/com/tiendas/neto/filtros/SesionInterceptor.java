@@ -20,8 +20,6 @@ public class SesionInterceptor extends AbstractInterceptor {
             
             UsuarioLoginVO usuario = (UsuarioLoginVO) session.get("usr");
 
-            String loginId = (String) session.get("loginId");
-
             if (usuario == null) 
             {
             	System.out.println("**** NO HAy sESION ****");

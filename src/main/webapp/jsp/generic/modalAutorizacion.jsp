@@ -22,6 +22,7 @@
         <input type="hidden" id="tipoAutorizacion" />
         <input type="hidden" id="moduloId" />
         <input type="hidden" id="mdIdAutorizacion" />
+        <input type="hidden" id="finaliza" />
       </div>
     </div>
   </div>

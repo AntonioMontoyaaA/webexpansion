@@ -19,10 +19,10 @@ $(function(){
 		  trigger: 'focus'
 		});
 		
-	$("#btnModalAutorizacion").click(function() {
-		$("#modal_autorizacion").modal("hide");
-	});
+	funcionesAutorizacion();
 });
+
+
 
 function validaEstatusAtencion(estatus, idObjetos){
 	$('#autoriza' + idObjetos).removeClass('autorizado');
@@ -406,10 +406,13 @@ function cargaFlujoPeatonal(categorias, fecha1, conteo1, fecha2, conteo2, fecha3
 function autorizaPantalla(modulo) {
 	$("#tituloModalAutorizacion").text("¿Estás seguro de autorizar este punto?");
 	$("#tipoAutorizacion").val(AUTORIZA_MODULO);
+	$("#finaliza").val(0);
 	$("#moduloId").val(modulo);
 	$("#mdIdAutorizacion").val($("#mdId").val());
 	$("#comboMotivos").hide();
+	$('#detalleMensajeModal textarea').val();
 	$("#modal_autorizacion").modal("show");
+	
 }
 
 function rechazaPantalla(modulo) {
@@ -422,16 +425,63 @@ function buscaMotivosRechazo(modulo){
 	if(MOTIVOS_RECHAZO[modulo] == undefined){ //no se han consultado los motivos de rechazo
 		consultaMotivosRechazo(modulo);
 	}else{//ya se consultaron los motivos
-		
-		
+		cargaComboMotivos(modulo);
 	}
+
+}
+
+function cargaComboMotivos(modulo){
+	strCombo = '<select id="motivoRechazo" class="motivoRechazo">' + 
+				'<option value="0" disabled>SELECCIONA EL MOTIVO DE RECHAZO</option>';
+	$.each(MOTIVOS_RECHAZO[modulo], function(){
+		strCombo += '<option value="' + this.id + '">' + this.nombre + '</option>' 
+	});
+	
+	strCombo += '</select>';
+	
+	$("#comboMotivos").html(strCombo);
+	$('#motivoRechazo').val(0);
 	
 	$("#tituloModalAutorizacion").text("¿Estás seguro de rechazar este punto?");
 	$("#tipoAutorizacion").val(RECHAZA_MODULO);
+	$("#finaliza").val(0);
 	$("#moduloId").val(modulo);
 	$("#mdIdAutorizacion").val($("#mdId").val());
 	$("#comboMotivos").show();
+	$('#detalleMensajeModal textarea').val();
 	$("#modal_autorizacion").modal("show");
+}
+
+function funcionesAutorizacion(){
+	$("#btnModalAutorizacion").click(function() {
+		$("#modal_autorizacion").modal("hide");
+		
+		cargaLoading();
+		
+		invocarJSONServiceAction("autorizaMd", 
+				{'modulo': $("#moduloId").val(),
+				 'md': $("#mdIdAutorizacion").val(),
+				 'validacion':$("#tipoAutorizacion").val(),
+				 'motivo': $('#motivoRechazo').val(),
+				 'finaliza' : $("#finaliza").val(),
+				 'comentario': $('#detalleMensajeModal textarea').val()
+				 }, 
+				'responseAutorizacion', 
+				function() {
+					cierraLoading();
+				},
+				function() {
+					cierraLoading();
+				});
+	});
+}
+
+function responseAutorizacion(data){
+	if(data.codigo != 200){
+		cargaMensajeModal('MD ASIGNADAS', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, redireccionaAsignadas);
+	}else{
+		
+	}
 }
 
 function consultaMotivosRechazo(modulo){
@@ -440,13 +490,9 @@ function consultaMotivosRechazo(modulo){
 			'tipoModulo': 2}, 
 			'almacenaMotivosRechazo', 
 			function() {
-				//Funcion de error
-				
 				cierraLoading();
 			},
 			function() {
-				//Función al finalizar
-				
 				cierraLoading();
 			});
 
@@ -456,13 +502,15 @@ function consultaMotivosRechazo(modulo){
 		}else{
 			if(data.motivos != undefined){
 				motivos = {};
-				$.each(data.motivos(function(){
-					if(motivos[this.motivoId] != undefined){
+				$.each(data.motivos, function(){
+					if(motivos[this.motivoId] == undefined){
 						motivos[this.motivoId] = new MotivoRechazo(this.motivoId, this.descripcion, this.rechazoDefinitvo == 1)
 					}
-				}));
+				});
 				
 				MOTIVOS_RECHAZO[modulo] = motivos;
+				
+				cargaComboMotivos(modulo);
 			}
 		}
 	}

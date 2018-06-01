@@ -3,7 +3,7 @@ var datosExcel = "";
 $(function(){
 	$('#idasignadas').addClass('resaltado');
 	inicializaCalendarios();
-	//creatabla();
+	creatabla(); //TODO remove
 	
 	$( "#datepicker1").change(function() {
 		creatabla();
@@ -35,7 +35,7 @@ function inicializaCalendarios() {
 	});
 	
 	$("#datepicker1").datepicker.dateFormat = 'dd/MM/yy';
-	//$("#datepicker1").val(FECHA_HOY);
+	$("#datepicker1").val('01/05/2018'); //TODO remove
 }
 
 function creatabla(){

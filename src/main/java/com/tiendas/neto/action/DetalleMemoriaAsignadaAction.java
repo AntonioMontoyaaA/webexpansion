@@ -12,11 +12,10 @@ import org.apache.struts2.interceptor.SessionAware;
 import com.google.gson.Gson;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.interceptor.ParameterNameAware;
-import com.tiendas.neto.vo.AsignadasVO;
-import com.tiendas.neto.vo.MemoriaAsignadaVO;
 
 public class DetalleMemoriaAsignadaAction extends ActionSupport implements SessionAware, ParameterNameAware {
 	protected Map<String, Object> session ;
+	@SuppressWarnings("unused")
 	private static final Logger logger = Logger.getLogger(ExpansionAction.class);
 	private static final long serialVersionUID = 1L;
 	

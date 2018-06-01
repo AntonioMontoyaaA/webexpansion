@@ -146,14 +146,14 @@
 				<div id="container_proceso"></div>
 				<div class="row resumen_pie">
 				
-				<div class="col-6 analista">
-				<div style="position:relative; float:left; width:80px;">
+				<div class="col-xl-6 analista">
+				<div class="div_left">
 					<div class="circulo_punto" style="background:#00427F;" id="proceso_p"></div>
 					<span  class="resumen_personales">Personales</span>
 				</div>
 				</div>
-				<div class="col-6 analista">
-				<div style="position:relative; float:right; width:50px;">
+				<div class="col-xl-6 analista">
+				<div  class="div_right">
 					<div class="circulo_punto" style="background:#64DEF1;" id="proceso_a"></div>
 					<span  class="resumen_personales">Area</span>
 				</div>
@@ -172,14 +172,14 @@
 				<div id="container_atrasadas"></div>
 				<div class="row resumen_pie">
 				
-				<div class="col-6 analista">
-				<div style="position:relative; float:left; width:80px;">
+				<div class="col-xl-6 analista">
+				<div class="div_left">
 					<div class="circulo_punto" style="background:#00427F;" id="atrasadas_p"></div>
 					<span  class="resumen_personales">Personales</span>
 				</div>
 				</div>
-				<div class="col-6 analista">
-				<div style="position:relative; float:right; width:50px;">
+				<div class="col-xl-6 analista">
+				<div class="div_right">
 					<div class="circulo_punto" style="background:#64DEF1;" id="atrasadas_a"></div>
 					<span  class="resumen_personales">Area</span>
 				</div>
@@ -197,14 +197,14 @@
 				<div id="container_autorizadas"></div>
 				<div class="row resumen_pie">
 				
-				<div class="col-6 analista">
-				<div style="position:relative; float:left; width:80px;">
+				<div class="col-xl-6 analista">
+				<div class="div_left">
 					<div class="circulo_punto" style="background:#00427F;" id="autorizadas_p"></div>
 					<span  class="resumen_personales">Personales</span>
 				</div>
 				</div>
-				<div class="col-6 analista">
-				<div style="position:relative; float:right; width:50px;">
+				<div class="col-xl-6 analista">
+				<div class="div_right">
 					<div class="circulo_punto" style="background:#64DEF1;" id="autorizadas_a"></div>
 					<span  class="resumen_personales">Area</span>
 				</div>
@@ -222,14 +222,14 @@
 				<div id="container_rechazadas"></div>
 				<div class="row resumen_pie">
 				
-				<div class="col-6 analista">
-				<div style="position:relative; float:left; width:80px;">
+				<div class="col-xl-6 analista">
+				<div class="div_left">
 					<div class="circulo_punto" style="background:#00427F;" id="rechazadas_p"></div>
 					<span  class="resumen_personales">Personales</span>
 				</div>
 				</div>
-				<div class="col-6 analista">
-				<div style="position:relative; float:right; width:50px;">
+				<div class="col-xl-6 analista">
+				<div class="div_right">
 					<div class="circulo_punto" style="background:#64DEF1;" id="rechazadas_a"></div>
 					<span  class="resumen_personales">Area</span>
 				</div>

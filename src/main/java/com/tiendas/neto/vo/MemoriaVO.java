@@ -2,7 +2,7 @@ package com.tiendas.neto.vo;
 
 import java.io.Serializable;
 
-public class MemoriaAutorizadaVO implements Serializable {
+public class MemoriaVO implements Serializable {
 	
 	/**
 	 * 
@@ -16,7 +16,8 @@ public class MemoriaAutorizadaVO implements Serializable {
 	private String fechaCreacion;
 	private String autorizador;
 	private String fechaAutorizacion;
-	private String tipoAutorizacion;
+	private String mdVencida;
+	
 	
 	public long getMdId() {
 		return mdId;
@@ -66,14 +67,14 @@ public class MemoriaAutorizadaVO implements Serializable {
 	public void setFechaAutorizacion(String fechaAutorizacion) {
 		this.fechaAutorizacion = fechaAutorizacion;
 	}
-	public String getTipoAutorizacion() {
-		return tipoAutorizacion;
-	}
-	public void setTipoAutorizacion(String tipoAutorizacion) {
-		this.tipoAutorizacion = tipoAutorizacion;
-	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	public String getMdVencida() {
+		return mdVencida;
+	}
+	public void setMdVencida(String mdVencida) {
+		this.mdVencida = mdVencida;
 	}
 	
 }

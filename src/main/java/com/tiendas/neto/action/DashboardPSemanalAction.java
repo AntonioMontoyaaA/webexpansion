@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
-import org.apache.struts2.interceptor.SessionAware;
 
 import com.tiendas.neto.dao.Expansionlog;
 import com.tiendas.neto.singleton.SingletonProperties;
@@ -67,7 +66,7 @@ public class DashboardPSemanalAction extends ExpansionAction{
 		} else {
 			RespuestaVo respuestaVo = new RespuestaVo();
 			respuestaVo.setCodigo(501);
-			respuestaVo.setMensaje("Error en la sesión");
+			respuestaVo.setMensaje("Error en la sesiï¿½n");
 			sendJSONObjectToResponse(respuestaVo);
 			return null;
 		}

@@ -26,6 +26,7 @@ import okhttp3.Response;
 //este es un comentario de prueba
 public class AsignadasInfoAction extends ActionSupport implements SessionAware, ParameterNameAware {
 	protected Map<String, Object> session ;
+	@SuppressWarnings("unused")
 	private static final Logger logger = Logger.getLogger(ExpansionAction.class);
 	private static final long serialVersionUID = 1L;
 	SingletonProperties sp=SingletonProperties.getInstancia();

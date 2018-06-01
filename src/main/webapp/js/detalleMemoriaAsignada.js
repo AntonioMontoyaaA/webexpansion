@@ -452,6 +452,7 @@ function cargaComboMotivos(modulo){
 	$("#modal_autorizacion").modal("show");
 }
 
+
 function funcionesAutorizacion(){
 	$("#btnModalAutorizacion").click(function() {
 		$("#modal_autorizacion").modal("hide");

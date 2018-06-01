@@ -19,11 +19,12 @@ import com.tiendas.neto.action.ExpansionAction;
 import com.tiendas.neto.dao.Expansionlog;
 import com.tiendas.neto.reportes.excel.CreaExcelMemoriasAsignadas;
 import com.tiendas.neto.reportes.excel.CreaExcelMemoriasAutorizadas;
+import com.tiendas.neto.reportes.excel.CreaExcelMemoriasRechazadas;
 import com.tiendas.neto.singleton.SingletonProperties;
 import com.tiendas.neto.vo.MemoriaAsignadaVO;
 import com.tiendas.neto.vo.MemoriaVO;
 
-public class ExcelAutorizadasAction extends ExpansionAction {
+public class ExcelRechazadasAction extends ExpansionAction {
 	/**
 	 * 
 	 */
@@ -58,11 +59,11 @@ public class ExcelAutorizadasAction extends ExpansionAction {
 	        	listaMemorias.add(memoria);
 	        }
 	        
-	        CreaExcelMemoriasAutorizadas excelCreator = new CreaExcelMemoriasAutorizadas();
+	        CreaExcelMemoriasRechazadas excelCreator = new CreaExcelMemoriasRechazadas();
 	        HSSFWorkbook workbook = excelCreator.createWorkbook(listaMemorias);
 	        
 	        response.setContentType("application/vnd.ms-excel");
-			response.setHeader("Content-Disposition", "attachment; filename=" + "MDsAutorizadas_"+ new SimpleDateFormat("yyMMddHHmmss").format(new Date())+ ".xls");
+			response.setHeader("Content-Disposition", "attachment; filename=" + "MDsRechazadas_"+ new SimpleDateFormat("yyMMddHHmmss").format(new Date())+ ".xls");
 			response.setHeader("Pragma", "No-cache");
 			response.setDateHeader("Expires", 0);
 	        

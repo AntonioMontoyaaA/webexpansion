@@ -70,14 +70,24 @@
          	<result name = "success">jsp/asignadas_detalle.jsp</result>
       	</action>
       	
-      	<action name = "autorizadas_info" 
-         	class = "com.tiendas.neto.action.AutorizadasInfoAction" 
+<!-- **********  autorizadas y rechazadas      -->
+      <action name = "autorizadas_info" 
+         	class = "com.tiendas.neto.action.Autorizadas_RechazadasInfoAction" 
+         	method = "execute" />
+         	
+        <action name = "rechazadas_info" 
+         	class = "com.tiendas.neto.action.Autorizadas_RechazadasInfoAction" 
          	method = "execute" />
          		
 	    <action name = "excelAutorizadasAction" 
          	class = "com.tiendas.neto.action.excel.ExcelAutorizadasAction" 
          	method = "execute" />
-      	
+         	
+         <action name = "excelRechazadasAction" 
+         	class = "com.tiendas.neto.action.excel.ExcelRechazadasAction" 
+         	method = "execute" />
+      
+  <!-- *******fin******* -->    	
       	<action name = "DashboardGeneralAction" class="com.tiendas.neto.action.DashboardGeneralAction"
       	 method = "execute"/>
       	<action name = "DashboardPlanAperturaMAction" class="com.tiendas.neto.action.DashboardPlanAperturaMAction"

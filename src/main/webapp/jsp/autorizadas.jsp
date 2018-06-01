@@ -21,7 +21,7 @@
 
 <div class="container-fluid">
 	<div class="row padding_p">
-		<div class="col-lg-12 titulo">Dashboard Expansión > Autorizadas </div>
+		<div class="col-lg-12 titulo">DASHBOARD ${usr.perfil.areasxpuesto[0].areaNom} > AUTORIZADAS </div>
 		<div class="col-lg-9 titulogrande">MD AUTORIZADAS</div>
 		<div class="col-lg-3" style="padding-top: 5px;">
 			<div id="descargaExcel" style="position: relative; float: left;margin-right: 10px;cursor: pointer"><img src="${pageContext.request.contextPath}/img/iconos_DOWNLOAD.png"></div>
@@ -43,12 +43,7 @@
 <jsp:include page="/jsp/generic/loading.jsp" />
 <jsp:include page="/jsp/generic/mensajes.jsp" />
 
-<form action='memoria_detalle'  id="detalleMemoriaAutorizadaAction" method="post">
-	<input type="hidden" name="mdId" id="mdId" value=""/>
-	<input type="hidden" name="nombreMd" id="nombreMd" value=""/>
-</form>
-
-<form style="display: hidden" action="./excelAutorizadasAction" method="POST" id="form">
+<form style="display: hidden" action="excelAutorizadasAction" method="POST" id="form">
 	<input type="hidden" id="datos" name="datos" value=""/>
 	<input type="submit" id="submitBotonAutorizadas" style="display:none" />
 </form>

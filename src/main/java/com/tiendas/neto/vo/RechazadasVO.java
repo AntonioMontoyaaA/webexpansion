@@ -2,7 +2,7 @@ package com.tiendas.neto.vo;
 
 import java.io.Serializable;
 
-public class AutorizadasVO implements Serializable {
+public class RechazadasVO implements Serializable {
 	
 	/**
 	 * 
@@ -10,7 +10,7 @@ public class AutorizadasVO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int codigo;
 	private String mensaje;
-	private MemoriaVO[] listaAutorizadas;
+	private MemoriaVO[] listaRechazadas;
 	public int getCodigo() {
 		return codigo;
 	}
@@ -25,13 +25,14 @@ public class AutorizadasVO implements Serializable {
 		this.mensaje = mensaje;
 	}
 
-	public MemoriaVO[] getListaAutorizadas() {
-		return listaAutorizadas;
+	public MemoriaVO[] getListaRechazadas() {
+		return listaRechazadas;
 	}
 
-	public void setListaAutorizadas(MemoriaVO[] listaAutorizadas) {
-		this.listaAutorizadas = listaAutorizadas;
+	public void setListaRechazadas(MemoriaVO[] listaRechazadas) {
+		this.listaRechazadas = listaRechazadas;
 	}
+
 	
 	
 	

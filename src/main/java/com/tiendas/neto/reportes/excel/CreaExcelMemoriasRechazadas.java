@@ -15,12 +15,12 @@ import org.apache.poi.hssf.util.HSSFColor;
 import com.tiendas.neto.vo.MemoriaAsignadaVO;
 import com.tiendas.neto.vo.MemoriaVO;
 
-public class CreaExcelMemoriasAutorizadas {
+public class CreaExcelMemoriasRechazadas {
 	
 	public HSSFWorkbook createWorkbook(List<MemoriaVO> listaMemorias) throws Exception {
 
         HSSFWorkbook wb = new HSSFWorkbook();
-        HSSFSheet sheet = wb.createSheet("Memorias autorizadas");
+        HSSFSheet sheet = wb.createSheet("Memorias rechazadas");
 
         sheet.setColumnWidth(0, 4000);
         sheet.setColumnWidth(1, 8000);

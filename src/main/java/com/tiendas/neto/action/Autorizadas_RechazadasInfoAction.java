@@ -15,21 +15,21 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class AutorizadasInfoAction extends ExpansionAction{
-
+public class Autorizadas_RechazadasInfoAction extends ExpansionAction{
 	private static final long serialVersionUID = 1L;
 	SingletonProperties sp=SingletonProperties.getInstancia();
 	Expansionlog elog=new Expansionlog();
 	
 	private String fechaConsulta;
-	private String cadena;
+	private String tipoConsulta;
 	
-	public String getCadena() {
-		return cadena;
+	public String getTipoConsulta() {
+		return tipoConsulta;
 	}
-	public void setCadena(String cadena) {
-		this.cadena = cadena;
-	}	
+	public void setTipoConsulta(String tipoConsulta) {
+		this.tipoConsulta = tipoConsulta;
+	}
+		
 	public String getFechaConsulta() {
 		return fechaConsulta;
 	}
@@ -68,11 +68,12 @@ public class AutorizadasInfoAction extends ExpansionAction{
 			 .add("usuarioId", numeroEmpleado)
 			 .add("puestoId", String.valueOf(puestoId))
 	         .add("fechaConsulta", getFechaConsulta())
+	         .add("tipoConsulta", getTipoConsulta())
 	         .add("areaId", String.valueOf(areaId));
 			
 			 RequestBody formBody = formBuilder.build();
 			 Request request = new Request.Builder()
-					 .url(sp.getPropiedad("mdsAsignadas"))
+					 .url(sp.getPropiedad("mdsEstatus"))
 	                 .post(formBody)
 	                 .build();
 			
@@ -82,8 +83,7 @@ public class AutorizadasInfoAction extends ExpansionAction{
 			 HttpServletResponse response2 = ServletActionContext.getResponse();
 				response2.setContentType("application/json");
 				response2.setCharacterEncoding("UTF-8");
-				//response2.getWriter().write(respuesta);
-				response2.getWriter().write(getCadena());
+				response2.getWriter().write(respuesta);
 			 }
 			 catch (Exception e) {
 				String clase  ="clase: "+ new String (Thread.currentThread().getStackTrace()[1].getClassName());	

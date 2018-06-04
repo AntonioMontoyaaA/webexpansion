@@ -5,7 +5,6 @@ var TERCER_HORARIO_CONTEO	=	3;
 var AUTORIZA_MODULO			= 1;
 var RECHAZA_MODULO			= 0;
 
-var PROGRESO_ATENCION = 0;
 var TOTAL_ATENCIONES = 0;
 var MOTIVOS_RECHAZO = {};
 var FACTORES = {};
@@ -29,13 +28,13 @@ $(function(){
 });
 
 function inicializaFactores(){
-	FACTORES[1] = new FactorAutorizacion(1,'Datos del sitio');
-	FACTORES[2] = new FactorAutorizacion(2,'Datos del propietario');
-	FACTORES[3] = new FactorAutorizacion(3,'Superficie');
-	FACTORES[4] = new FactorAutorizacion(4,'Zonificacion');
-	FACTORES[5] = new FactorAutorizacion(5,'Construccion');
-	FACTORES[6] = new FactorAutorizacion(6,'Generalidades');
-	FACTORES[7] = new FactorAutorizacion(7,'Flujo peatonal');
+	FACTORES[1] = new FactorAutorizacion(1,'Datos del sitio',false);
+	FACTORES[2] = new FactorAutorizacion(2,'Datos del propietario',false);
+	FACTORES[3] = new FactorAutorizacion(3,'Superficie',false);
+	FACTORES[4] = new FactorAutorizacion(4,'Zonificacion',false);
+	FACTORES[5] = new FactorAutorizacion(5,'Construccion',false);
+	FACTORES[6] = new FactorAutorizacion(6,'Generalidades',false);
+	FACTORES[7] = new FactorAutorizacion(7,'Flujo peatonal',false);
 }
 
 function validaEstatusAtencion(estatus, idObjetos){
@@ -59,15 +58,15 @@ function validaEstatusAtencion(estatus, idObjetos){
 		}else if(estatus == 1){ //autorizado
 			$('#autoriza' + idObjetos).removeClass('sin_autorizar');
 			$('#autoriza' + idObjetos).addClass('autorizado');
-			PROGRESO_ATENCION++;
+			FACTORES[idObjetos].atendido = true;
 		}else if(estatus == 0){//rechazado
 			$('#rechaza' + idObjetos).removeClass('sin_autorizar');
 			$('#rechaza' + idObjetos).addClass('autorizado');
-			PROGRESO_ATENCION++;
+			FACTORES[idObjetos].atendido = true;
 		}else if(estatus == 3){//rechazado con motivo definitivo
 			$('#rechaza' + idObjetos).removeClass('sin_autorizar');
 			$('#rechaza' + idObjetos).addClass('autorizado');
-			PROGRESO_ATENCION++;
+			FACTORES[idObjetos].atendido = true;
 			FACTORES[idObjetos].motivoRechazoDefinitivo =  true;
 		}else{//desconocido
 			$('#autoriza' + idObjetos).addClass('sin_autorizar');
@@ -81,8 +80,14 @@ function validaEstatusAtencion(estatus, idObjetos){
 
 function dibujaGraficaAutorizaciones(){
 	$('#containerProgreso').html('');
-	if(PROGRESO_ATENCION > TOTAL_ATENCIONES)
-		PROGRESO_ATENCION = TOTAL_ATENCIONES;
+	$('#autoriza8').hide();
+	$('#rechaza8').hide();
+	atendidos = 0;
+	
+	for(i in FACTORES){
+		if(FACTORES[i].atendido)
+			atendidos++;
+	}
 	
 	var bar = new ProgressBar.Circle(containerProgreso, {
 		  strokeWidth: 4,
@@ -94,17 +99,17 @@ function dibujaGraficaAutorizaciones(){
 		  svgStyle: null
 		});
 	
-	progreso = PROGRESO_ATENCION/TOTAL_ATENCIONES;
+	progreso = atendidos/TOTAL_ATENCIONES;
 	bar.animate(progreso, {
 	    from: {color: '#000000', width: 5},
 	    to: {color: "#00FF00", width: 5} });
 	
-	if(PROGRESO_ATENCION == TOTAL_ATENCIONES){
+	if(atendidos == TOTAL_ATENCIONES){
 		
 		motivoDefinitivo = false;
 		
-		for(factor in FACTORES){
-			if(factor.motivoRechazoDefinitivo){
+		for(i in FACTORES){
+			if(FACTORES[i].motivoRechazoDefinitivo){
 				motivoDefinitivo = true;
 				break;
 			}
@@ -143,7 +148,6 @@ function buscaDetalleMD(mdId) {
 		if(data.codigo != 200) {
 			cargaMensajeModal('MD ASIGNADAS', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, redireccionaAsignadas);
 		} else {
-			PROGRESO_ATENCION = 0;
 			MOTIVOS_RECHAZO = {};
 			$("#mdIdAutorizacion").val(mdId);
 			ESTATUS_FINALIZA_MD = -1;
@@ -649,9 +653,7 @@ function responseAutorizacion(data){
 		}
 		
 		
-		FACTORES[moduloEjecutado].motivoRechazoDefinitivo =  true;
-		
-		PROGRESO_ATENCION++;
+		FACTORES[moduloEjecutado].atendido = true;
 		dibujaGraficaAutorizaciones();
 	}
 }
@@ -731,10 +733,10 @@ Permiso = function(
 	this.permiteAutorizar = permiteAutorizar;
 }
 
-FactorAutorizacion = function(id, nombre){
+FactorAutorizacion = function(id, nombre, atendido){
 	this.id = id;
 	this.nombre = nombre;
-	
+	this.atendido = atendido;
 	this.motivoRechazoDefinitivo;
 };
 

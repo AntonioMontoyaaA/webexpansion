@@ -45,6 +45,7 @@
 
 <form style="display: hidden" action="excelAutorizadasAction" method="POST" id="form">
 	<input type="hidden" id="datos" name="datos" value=""/>
+	<input type="hidden" name="perfil_usuario" id="perfil_usuario" value="${usr.perfil.perfilesxusuario[0].perfilid}">
 	<input type="submit" id="submitBotonAutorizadas" style="display:none" />
 </form>
 

@@ -24,12 +24,13 @@ import com.tiendas.neto.vo.MemoriaAsignadaVO;
 import com.tiendas.neto.vo.MemoriaVO;
 
 public class ExcelAutorizadasAction extends ExpansionAction {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	SingletonProperties sp=SingletonProperties.getInstancia();
 	Expansionlog elog=new Expansionlog();
+	
+	/**
+	 * 
+	 */
 
 	@Override
 	public String execute() throws Exception {
@@ -40,6 +41,7 @@ public class ExcelAutorizadasAction extends ExpansionAction {
 	public void procesar(HttpServletRequest request, HttpServletResponse response)  {
 		try {
 	        String datos = request.getParameter("datos");
+	        String perfil = request.getParameter("perfil_usuario");
 	        JSONObject jsonObj = new JSONObject(datos);
 	       
 	        List<MemoriaVO> listaMemorias = new ArrayList<MemoriaVO>();
@@ -57,9 +59,16 @@ public class ExcelAutorizadasAction extends ExpansionAction {
 	        	memoria.setMdVencida(array.getJSONObject(i).getString("mdVencida"));
 	        	listaMemorias.add(memoria);
 	        }
-	        
+	        HSSFWorkbook workbook=null;
 	        CreaExcelMemoriasAutorizadas excelCreator = new CreaExcelMemoriasAutorizadas();
-	        HSSFWorkbook workbook = excelCreator.createWorkbook(listaMemorias);
+	        
+	        if(perfil.equals("5")) {
+	        	System.out.println("entro al metodo");
+		     workbook = excelCreator.createWorkbookDirGeneral(listaMemorias);
+	        }
+	        else {
+	         workbook = excelCreator.createWorkbook(listaMemorias);
+	        }
 	        
 	        response.setContentType("application/vnd.ms-excel");
 			response.setHeader("Content-Disposition", "attachment; filename=" + "MDsAutorizadas_"+ new SimpleDateFormat("yyMMddHHmmss").format(new Date())+ ".xls");

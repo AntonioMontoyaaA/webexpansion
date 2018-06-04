@@ -3,57 +3,57 @@ package com.tiendas.neto.vo;
 import java.util.List;
 
 public class UsuarioLoginVO {
-//clase usuarioVO
+	// clase usuarioVO
 	private String mensaje;
 	private Integer codigo;
 	private Perfil perfil;
 
 	public String getMensaje() {
-	return mensaje;
+		return mensaje;
 	}
 
 	public void setMensaje(String mensaje) {
-	this.mensaje = mensaje;
+		this.mensaje = mensaje;
 	}
 
 	public Integer getCodigo() {
-	return codigo;
+		return codigo;
 	}
 
 	public void setCodigo(Integer codigo) {
-	this.codigo = codigo;
+		this.codigo = codigo;
 	}
 
 	public Perfil getPerfil() {
-	return perfil;
+		return perfil;
 	}
 
 	public void setPerfil(Perfil perfil) {
-	this.perfil = perfil;
+		this.perfil = perfil;
 	}
-	
+
 	public class Areasxpuesto {
 
 		private Integer areaId;
 		private String areaNom;
 
 		public Integer getAreaId() {
-		return areaId;
+			return areaId;
 		}
 
 		public void setAreaId(Integer areaId) {
-		this.areaId = areaId;
+			this.areaId = areaId;
 		}
 
 		public String getAreaNom() {
-		return areaNom;
+			return areaNom;
 		}
 
 		public void setAreaNom(String areaNom) {
-		this.areaNom = areaNom;
+			this.areaNom = areaNom;
 		}
-		}
-	
+	}
+
 	public class Perfil {
 
 		private List<Zonasxusuario> zonasxusuario = null;
@@ -73,107 +73,107 @@ public class UsuarioLoginVO {
 		private int puestoId;
 
 		public List<Zonasxusuario> getZonasxusuario() {
-		return zonasxusuario;
+			return zonasxusuario;
 		}
 
 		public void setZonasxusuario(List<Zonasxusuario> zonasxusuario) {
-		this.zonasxusuario = zonasxusuario;
+			this.zonasxusuario = zonasxusuario;
 		}
 
 		public Integer getRealMes() {
-		return realMes;
+			return realMes;
 		}
 
 		public void setRealMes(Integer realMes) {
-		this.realMes = realMes;
+			this.realMes = realMes;
 		}
 
 		public Integer getRealSemana() {
-		return realSemana;
+			return realSemana;
 		}
 
 		public void setRealSemana(Integer realSemana) {
-		this.realSemana = realSemana;
+			this.realSemana = realSemana;
 		}
 
 		public String getCorreo() {
-		return correo;
+			return correo;
 		}
 
 		public void setCorreo(String correo) {
-		this.correo = correo;
+			this.correo = correo;
 		}
 
 		public Integer getNumAutorizar() {
-		return numAutorizar;
+			return numAutorizar;
 		}
 
 		public void setNumAutorizar(Integer numAutorizar) {
-		this.numAutorizar = numAutorizar;
+			this.numAutorizar = numAutorizar;
 		}
 
 		public Integer getPlanSemana() {
-		return planSemana;
+			return planSemana;
 		}
 
 		public void setPlanSemana(Integer planSemana) {
-		this.planSemana = planSemana;
+			this.planSemana = planSemana;
 		}
 
 		public List<Areasxpuesto> getAreasxpuesto() {
-		return areasxpuesto;
+			return areasxpuesto;
 		}
 
 		public void setAreasxpuesto(List<Areasxpuesto> areasxpuesto) {
-		this.areasxpuesto = areasxpuesto;
+			this.areasxpuesto = areasxpuesto;
 		}
 
 		public Integer getPlanMes() {
-		return planMes;
+			return planMes;
 		}
 
 		public void setPlanMes(Integer planMes) {
-		this.planMes = planMes;
+			this.planMes = planMes;
 		}
 
 		public String getApellidoM() {
-		return apellidoM;
+			return apellidoM;
 		}
 
 		public void setApellidoM(String apellidoM) {
-		this.apellidoM = apellidoM;
+			this.apellidoM = apellidoM;
 		}
 
 		public String getApellidoP() {
-		return apellidoP;
+			return apellidoP;
 		}
 
 		public void setApellidoP(String apellidoP) {
-		this.apellidoP = apellidoP;
+			this.apellidoP = apellidoP;
 		}
 
 		public List<Perfilesxusuario> getPerfilesxusuario() {
-		return perfilesxusuario;
+			return perfilesxusuario;
 		}
 
 		public void setPerfilesxusuario(List<Perfilesxusuario> perfilesxusuario) {
-		this.perfilesxusuario = perfilesxusuario;
+			this.perfilesxusuario = perfilesxusuario;
 		}
 
 		public String getNombre() {
-		return nombre;
+			return nombre;
 		}
 
 		public void setNombre(String nombre) {
-		this.nombre = nombre;
+			this.nombre = nombre;
 		}
 
 		public String getTelefono() {
-		return telefono;
+			return telefono;
 		}
 
 		public void setTelefono(String telefono) {
-		this.telefono = telefono;
+			this.telefono = telefono;
 		}
 
 		public int getNumeroEmpleado() {
@@ -191,9 +191,9 @@ public class UsuarioLoginVO {
 		public void setPuestoId(int puestoId) {
 			this.puestoId = puestoId;
 		}
-		
-		}
-	
+
+	}
+
 	public class Perfilesxusuario {
 
 		private Integer perfilid;
@@ -201,31 +201,31 @@ public class UsuarioLoginVO {
 		private String nombreperfil;
 
 		public Integer getPerfilid() {
-		return perfilid;
+			return perfilid;
 		}
 
 		public void setPerfilid(Integer perfilid) {
-		this.perfilid = perfilid;
+			this.perfilid = perfilid;
 		}
 
 		public List<Permiso> getPermisos() {
-		return permisos;
+			return permisos;
 		}
 
 		public void setPermisos(List<Permiso> permisos) {
-		this.permisos = permisos;
+			this.permisos = permisos;
 		}
 
 		public String getNombreperfil() {
-		return nombreperfil;
+			return nombreperfil;
 		}
 
 		public void setNombreperfil(String nombreperfil) {
-		this.nombreperfil = nombreperfil;
+			this.nombreperfil = nombreperfil;
 		}
 
-		}
-	
+	}
+
 	public class Zonasxusuario {
 
 		private String fECHAREGISTRO;
@@ -234,37 +234,38 @@ public class UsuarioLoginVO {
 		private Integer uSUARIOREGISTRAID;
 
 		public String getFECHAREGISTRO() {
-		return fECHAREGISTRO;
+			return fECHAREGISTRO;
 		}
 
 		public void setFECHAREGISTRO(String fECHAREGISTRO) {
-		this.fECHAREGISTRO = fECHAREGISTRO;
+			this.fECHAREGISTRO = fECHAREGISTRO;
 		}
 
 		public Integer getZONAID() {
-		return zONAID;
+			return zONAID;
 		}
 
 		public void setZONAID(Integer zONAID) {
-		this.zONAID = zONAID;
+			this.zONAID = zONAID;
 		}
 
 		public Integer getESTATUS() {
-		return eSTATUS;
+			return eSTATUS;
 		}
 
 		public void setESTATUS(Integer eSTATUS) {
-		this.eSTATUS = eSTATUS;
+			this.eSTATUS = eSTATUS;
 		}
 
 		public Integer getUSUARIOREGISTRAID() {
-		return uSUARIOREGISTRAID;
+			return uSUARIOREGISTRAID;
 		}
 
 		public void setUSUARIOREGISTRAID(Integer uSUARIOREGISTRAID) {
-		this.uSUARIOREGISTRAID = uSUARIOREGISTRAID;
+			this.uSUARIOREGISTRAID = uSUARIOREGISTRAID;
 		}
-		}
+	}
+
 	public class Permiso {
 
 		private Integer bLOQUEASEGUIMIENTO;
@@ -278,94 +279,97 @@ public class UsuarioLoginVO {
 		private Integer pERMITERECHAZAR;
 		private Integer pERMITEAUTORIZAR;
 
+		public String toJSON() {
+		 return "{'BLOQUEASEGUIMIENTO': " + bLOQUEASEGUIMIENTO
+		 		+ ",'FIESTATUS': " + fIESTATUS
+		 		+ ",'FIMODULOID': " + fIMODULOID
+		 		+ ",'PERMITEEDITAR': " + pERMITEEDITAR
+		 		+ ",'FISUBMODULO': " + fISUBMODULO
+		 		+ ",'PERMITECOMENTAR': " + pERMITECOMENTAR
+		 		+ ",'PERMITERECHAZAR': " + pERMITERECHAZAR
+		 		+ ",'PERMITEAUTORIZAR': " + pERMITEAUTORIZAR
+		 		+ "}"; 
+		}
+		
 		public Integer getBLOQUEASEGUIMIENTO() {
-		return bLOQUEASEGUIMIENTO;
+			return bLOQUEASEGUIMIENTO;
 		}
 
 		public void setBLOQUEASEGUIMIENTO(Integer bLOQUEASEGUIMIENTO) {
-		this.bLOQUEASEGUIMIENTO = bLOQUEASEGUIMIENTO;
+			this.bLOQUEASEGUIMIENTO = bLOQUEASEGUIMIENTO;
 		}
 
 		public Integer getFIESTATUS() {
-		return fIESTATUS;
+			return fIESTATUS;
 		}
 
 		public void setFIESTATUS(Integer fIESTATUS) {
-		this.fIESTATUS = fIESTATUS;
+			this.fIESTATUS = fIESTATUS;
 		}
 
 		public String getFDFECHAREGISTRO() {
-		return fDFECHAREGISTRO;
+			return fDFECHAREGISTRO;
 		}
 
 		public void setFDFECHAREGISTRO(String fDFECHAREGISTRO) {
-		this.fDFECHAREGISTRO = fDFECHAREGISTRO;
+			this.fDFECHAREGISTRO = fDFECHAREGISTRO;
 		}
 
 		public Integer getFIMODULOID() {
-		return fIMODULOID;
+			return fIMODULOID;
 		}
 
 		public void setFIMODULOID(Integer fIMODULOID) {
-		this.fIMODULOID = fIMODULOID;
+			this.fIMODULOID = fIMODULOID;
 		}
 
 		public Integer getPERMITEEDITAR() {
-		return pERMITEEDITAR;
+			return pERMITEEDITAR;
 		}
 
 		public void setPERMITEEDITAR(Integer pERMITEEDITAR) {
-		this.pERMITEEDITAR = pERMITEEDITAR;
+			this.pERMITEEDITAR = pERMITEEDITAR;
 		}
 
 		public Integer getFIUSUARIOREGISTRA() {
-		return fIUSUARIOREGISTRA;
+			return fIUSUARIOREGISTRA;
 		}
 
 		public void setFIUSUARIOREGISTRA(Integer fIUSUARIOREGISTRA) {
-		this.fIUSUARIOREGISTRA = fIUSUARIOREGISTRA;
+			this.fIUSUARIOREGISTRA = fIUSUARIOREGISTRA;
 		}
 
 		public String getFISUBMODULO() {
-		return fISUBMODULO;
+			return fISUBMODULO;
 		}
 
 		public void setFISUBMODULO(String fISUBMODULO) {
-		this.fISUBMODULO = fISUBMODULO;
+			this.fISUBMODULO = fISUBMODULO;
 		}
 
 		public Integer getPERMITECOMENTAR() {
-		return pERMITECOMENTAR;
+			return pERMITECOMENTAR;
 		}
 
 		public void setPERMITECOMENTAR(Integer pERMITECOMENTAR) {
-		this.pERMITECOMENTAR = pERMITECOMENTAR;
+			this.pERMITECOMENTAR = pERMITECOMENTAR;
 		}
 
 		public Integer getPERMITERECHAZAR() {
-		return pERMITERECHAZAR;
+			return pERMITERECHAZAR;
 		}
 
 		public void setPERMITERECHAZAR(Integer pERMITERECHAZAR) {
-		this.pERMITERECHAZAR = pERMITERECHAZAR;
+			this.pERMITERECHAZAR = pERMITERECHAZAR;
 		}
 
 		public Integer getPERMITEAUTORIZAR() {
-		return pERMITEAUTORIZAR;
+			return pERMITEAUTORIZAR;
 		}
 
 		public void setPERMITEAUTORIZAR(Integer pERMITEAUTORIZAR) {
-		this.pERMITEAUTORIZAR = pERMITEAUTORIZAR;
+			this.pERMITEAUTORIZAR = pERMITEAUTORIZAR;
 		}
 
-		}
 	}
-
-
-	
-	
-
-	
-	
-
-
+}

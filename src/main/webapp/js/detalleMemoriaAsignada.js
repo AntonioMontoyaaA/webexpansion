@@ -6,12 +6,16 @@ var AUTORIZA_MODULO			= 1;
 var RECHAZA_MODULO			= 0;
 
 var PROGRESO_ATENCION = 0;
+var TOTAL_ATENCIONES = 0;
 var MOTIVOS_RECHAZO = {};
+var FACTORES = {};
+var PERMISOS = {};
 
 $(function(){
 	$('#idasignadas').addClass('resaltado');
 	
 	$("#nombreMdTxt").text($("#nombreMd").val());
+	parseaPermisos();
 	buscaDetalleMD($("#mdId").val());
 	MOTIVOS_RECHAZO = {};
 	
@@ -21,8 +25,6 @@ $(function(){
 		
 	funcionesAutorizacion();
 });
-
-
 
 function validaEstatusAtencion(estatus, idObjetos){
 	$('#autoriza' + idObjetos).removeClass('autorizado');
@@ -40,6 +42,7 @@ function validaEstatusAtencion(estatus, idObjetos){
 	}else if(estatus == 0){//rechazado
 		$('#rechaza' + idObjetos).removeClass('sin_autorizar');
 		$('#rechaza' + idObjetos).addClass('autorizado');
+		PROGRESO_ATENCION++;
 	}else{//desconocido
 		$('#autoriza' + idObjetos).addClass('sin_autorizar');
 		$('#rechaza' + idObjetos).addClass('sin_autorizar');
@@ -57,7 +60,7 @@ function dibujaGraficaAutorizaciones(){
 		  svgStyle: null
 		});
 	
-	progreso = PROGRESO_ATENCION/7;
+	progreso = PROGRESO_ATENCION/TOTAL_ATENCIONES;
 	bar.animate(progreso, {
 	    from: {color: '#000000', width: 5},
 	    to: {color: "#00FF00", width: 5} });
@@ -163,14 +166,14 @@ function buscaDetalleMD(mdId) {
 				$("#profundidadMd").text(data.superficie.profundidad + " mts");
 				$("#tamanioTotalMd").html(data.superficie.total + " mts<sup>2</sup>");
 				$("#vistaFrontalMd").attr("src", data.superficie.vistaFrontal);
-				//$("#fechaVistaFrontal").text(data.superficie.vistaFrontal.fecha);
-				//$("#horaVistaFrontal").text(data.superficie.vistaFrontal.hora);
+				$("#fechaVistaFrontal").text(data.superficie.fechaFrontal);
+				$("#horaVistaFrontal").text(data.superficie.horaFrontal);
 				$("#vistaLateral1Md").attr("src", data.superficie.lateral1);
-				//$("#fechaVistaLateral1").text(data.superficie.vistaFrontal.fecha);
-				//$("#horaVistaLateral1").text(data.superficie.vistaFrontal.hora);
+				$("#fechaVistaLateral1").text(data.superficie.fechaLateral1);
+				$("#horaVistaLateral1").text(data.superficie.horaLateral1);
 				$("#vistaLateral2Md").attr("src", data.superficie.lateral2);
-				//$("#fechaVistaLateral2").text(data.superficie.vistaFrontal.fecha);
-				//$("#horaVistaLateral2").text(data.superficie.vistaFrontal.hora);
+				$("#fechaVistaLateral2").text(data.superficie.fechaLateral2);
+				$("#horaVistaLateral2").text(data.superficie.horaLateral2);
 				
 				var contentPopSuperficie = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 17px;">Ponderación<br/></span></div>' + 
 				   '<div style="width: 60%; position: relative; float: left; margin-top: 10px;"><span style="color: #FFF;font-size: 12px;font-weight: normal;">Frente mts MIN:</span></div>' +
@@ -403,22 +406,24 @@ function cargaFlujoPeatonal(categorias, fecha1, conteo1, fecha2, conteo2, fecha3
 	});
 }
 
-function autorizaPantalla(modulo) {
-	$("#tituloModalAutorizacion").text("¿Estás seguro de autorizar este punto?");
-	$("#tipoAutorizacion").val(AUTORIZA_MODULO);
-	$("#finaliza").val(0);
-	$("#moduloId").val(modulo);
-	$("#mdIdAutorizacion").val($("#mdId").val());
-	$("#comboMotivos").hide();
-	$('#detalleMensajeModal textarea').val();
-	$("#modal_autorizacion").modal("show");
-	
+function autorizaPantalla(modulo, elemento) {
+	if($(elemento).hasClass('sin_autorizar')){
+		$("#tituloModalAutorizacion").text("¿Estás seguro de autorizar este punto?");
+		$("#tipoAutorizacion").val(AUTORIZA_MODULO);
+		$("#finaliza").val(0);
+		$("#moduloId").val(modulo);
+		$("#mdIdAutorizacion").val($("#mdId").val());
+		$("#comboMotivos").hide();
+		$('#detalleMensajeModal textarea').val();
+		$("#modal_autorizacion").modal("show");
+	}
 }
 
-function rechazaPantalla(modulo) {
-	cargaLoading();
-	buscaMotivosRechazo(modulo);
-
+function rechazaPantalla(modulo, elemento) {
+	if($(elemento).hasClass('sin_autorizar')){
+		cargaLoading();
+		buscaMotivosRechazo(modulo);
+	}
 }
 
 function buscaMotivosRechazo(modulo){
@@ -517,10 +522,65 @@ function consultaMotivosRechazo(modulo){
 	}
 }
 
+function parseaPermisos(){
+	PERMISOS = {};
+	$('.permisos_detalleMd').each(function(){
+		a = JSON.parse($(this).val().replaceAll("'",'"'));
+		
+		if(PERMISOS[a.FIMODULOID] == undefined){
+			PERMISOS[a.FIMODULOID] = new Permiso(
+					a.BLOQUEASEGUIMIENTO,
+					a.FIESTATUS,
+					a.FIMODULOID,
+					a.FISUBMODULO,
+					a.PERMITEEDITAR,
+					a.PERMITECOMENTAR,
+					a.PERMITERECHAZAR,
+					a.PERMITEAUTORIZAR
+			);
+			
+			if(a.PERMITEAUTORIZAR == 1)
+				TOTAL_ATENCIONES++;
+		}
+	});
+}
+
+Permiso = function(
+		bloqueaSeguimiento,
+		estatus,
+		modulo,
+		submodulo,
+		permiteEditar,
+		permiteComentar,
+		permiteRechazar,
+		permiteAutorizar){
+	
+	this.bloqueaSeguimiento = bloqueaSeguimiento;
+	this.estatu = estatus;
+	this.modulo = modulo;
+	this.submodulo = submodulo;
+	this.permiteEditar = permiteEditar;
+	this.permiteComentar = permiteComentar;
+	this.permiteRechazar = permiteRechazar;
+	this.permiteAutorizar = permiteAutorizar;
+}
+
+FactorAutorizacion = function(id, nombre){
+	this.id = id;
+	this.nombre = nombre;
+	
+	this.motivoRechazo;
+};
+
 MotivoRechazo = function(id, nombre, isDefinitivo){
 	this.id = id;
 	this.nombre = nombre;
 	this.isDefinitivo = isDefinitivo;
+};
+
+String.prototype.replaceAll = function(search, replacement) {
+    var target = this;
+    return target.replace(new RegExp(search, 'g'), replacement);
 };
 
 function initMap(latitudSitio, longitudSitio, listaCompetencias, listaGeneradores) {

@@ -14,9 +14,19 @@
 <title>Asignadas</title>
 </head>
 <body>
-<%--  <c:forEach var="permisos" items="${permisos}">
-     	  			 <c:out value="${permisos.codigo}"/> </c:forEach>  --%>
-<%-- <p>Student First Name: <c:out value="${login.contra}"/></p> --%>
+	<c:forEach var="permiso" items="${usr.perfil.perfilesxusuario[0].permisos}">
+    	<input type="hidden" class="permisos_detalleMd" rel="${permiso.getFIMODULOID()}" value="${permiso.toJSON()}">
+    </c:forEach> 
+    
+    <c:forTokens items = "{'BLOQUEASEGUIMIENTO': 0,'FIESTATUS': 1,'FIMODULOID': 1,'PERMITEEDITAR': 0,'FISUBMODULO': -1,'PERMITECOMENTAR': 0,'PERMITERECHAZAR': 0,'PERMITEAUTORIZAR': 1}#
+{'BLOQUEASEGUIMIENTO': 0,'FIESTATUS': 1,'FIMODULOID': 2,'PERMITEEDITAR': 0,'FISUBMODULO': -1,'PERMITECOMENTAR': 1,'PERMITERECHAZAR': 1,'PERMITEAUTORIZAR': 1}#
+{'BLOQUEASEGUIMIENTO': 0,'FIESTATUS': 1,'FIMODULOID': 3,'PERMITEEDITAR': 0,'FISUBMODULO': -1,'PERMITECOMENTAR': 1,'PERMITERECHAZAR': 0,'PERMITEAUTORIZAR': 0}#
+{'BLOQUEASEGUIMIENTO': 0,'FIESTATUS': 1,'FIMODULOID': 4,'PERMITEEDITAR': 0,'FISUBMODULO': -1,'PERMITECOMENTAR': 1,'PERMITERECHAZAR': 1,'PERMITEAUTORIZAR': 1}#
+{'BLOQUEASEGUIMIENTO': 0,'FIESTATUS': 1,'FIMODULOID': 5,'PERMITEEDITAR': 1,'FISUBMODULO': 1,'PERMITECOMENTAR': 1,'PERMITERECHAZAR': 1,'PERMITEAUTORIZAR': 1}#
+{'BLOQUEASEGUIMIENTO': 0,'FIESTATUS': 1,'FIMODULOID': 6,'PERMITEEDITAR': 1,'FISUBMODULO': 2,'PERMITECOMENTAR': 1,'PERMITERECHAZAR': 1,'PERMITEAUTORIZAR': 1}#
+{'BLOQUEASEGUIMIENTO': 0,'FIESTATUS': 1,'FIMODULOID': 7,'PERMITEEDITAR': 0,'FISUBMODULO': -1,'PERMITECOMENTAR': 1,'PERMITERECHAZAR': 1,'PERMITEAUTORIZAR': 1}" delims = "#" var = "json">
+    	<input type="hidden" class="permisos_detalleMd" value="${json}">
+    </c:forTokens>
 <%@ include file="/jsp/generic/header.jsp" %>
 
 <div class="container-fluid">
@@ -112,8 +122,8 @@
 				<div style="width: 100%;position: relative; float: left;text-align: left">
 					<div style="width: 80%; position: relative; float: left;"><span class="tituloDetalleMd">1) Datos del sitio</span></div>
 					<div style="width: 20%; position: relative; float: left;text-align: right; padding-right: 15px;">
-						<img id="autoriza1" title="Autoriza punto" class="sin_autorizar" onclick="autorizaPantalla(1);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
-						<img id="rechaza1" title="Rechaza punto" class="sin_autorizar" onclick="rechazaPantalla(1);" style="cursor: pointer;" src="img/rechaza_mark.png">
+						<img id="autoriza1" title="Autoriza punto" class="sin_autorizar" onclick="autorizaPantalla(1, this);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
+						<img id="rechaza1" title="Rechaza punto" class="sin_autorizar" onclick="rechazaPantalla(1, this);" style="cursor: pointer;" src="img/rechaza_mark.png">
 					</div>
 				</div>
 				<div style="width: 100%;position: relative; float: left;text-align: left">
@@ -140,8 +150,8 @@
 				<div style="width: 100%;position: relative; float: left;text-align: left">
 					<div style="width: 80%; position: relative; float: left;"><span class="tituloDetalleMd">2) Datos del propietario</span></div>
 					<div style="width: 20%; position: relative; float: left;text-align: right; padding-right: 15px;">
-						<img id="autoriza2" title="Autoriza punto" class="sin_autorizar" onclick="autorizaPantalla(2);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
-						<img id="rechaza2" title="Rechaza punto" class="sin_autorizar" onclick="rechazaPantalla(2);" style="cursor: pointer;" src="img/rechaza_mark.png">
+						<img id="autoriza2" title="Autoriza punto" class="sin_autorizar" onclick="autorizaPantalla(2, this);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
+						<img id="rechaza2" title="Rechaza punto" class="sin_autorizar" onclick="rechazaPantalla(2, this);" style="cursor: pointer;" src="img/rechaza_mark.png">
 					</div>
 				</div>
 				<div style="width: 100%;position: relative; float: left;text-align: left">
@@ -168,8 +178,8 @@
 					</div>
 					<div class="col-lg-2 col-7" style="text-align: right;">
 						<span class="tituloDetalleMd">Puntos: </span> <span id="puntosSuperficie" class="tituloDetalleMd">---</span>
-						<img id="autoriza3" title="Autoriza punto" class="sin_autorizar" onclick="autorizaPantalla(3);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
-						<img id="rechaza3" title="Rechaza punto" class="sin_autorizar" onclick="rechazaPantalla(3);" style="cursor: pointer;" src="img/rechaza_mark.png">
+						<img id="autoriza3" title="Autoriza punto" class="sin_autorizar" onclick="autorizaPantalla(3, this);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
+						<img id="rechaza3" title="Rechaza punto" class="sin_autorizar" onclick="rechazaPantalla(3, this);" style="cursor: pointer;" src="img/rechaza_mark.png">
 						<a id="superficieTip" tabindex="0" class="question_mark" role="" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="">&nbsp;&nbsp;&nbsp;&nbsp;</a>
 					</div>
 				</div>
@@ -183,24 +193,24 @@
 						<div class="col-lg-12"><span class="subtituloDetalleMd sangria_cuerpo">VISTA FRONTAL</span></div>
 						<div class="col-lg-12" style="text-align: center;"><img id="vistaFrontalMd" style="width: 87%; height: 28%" src="img/no_imagen.png" /></div>
 						<div class="row div_bottom">
-							<div class="col-lg-6" style="text-align: left;"><span id="fechaVistaFrontal" class="footerDetalleMd">---</span></div>
-							<div class="col-lg-6" style="text-align: right;"><span id="horaVistaFrontal" class="footerDetalleMd">---</span></div>
+							<div class="col-lg-6" style="text-align: right;"><span id="fechaVistaFrontal" class="footerDetalleMd">---</span></div>
+							<div class="col-lg-6" style="text-align: left;"><span id="horaVistaFrontal" class="footerDetalleMd">---</span></div>
 						</div>
 					</div>
 					<div class="col-lg-4">
 						<div class="col-lg-12"><span class="subtituloDetalleMd sangria_cuerpo">LATERAL 1</span></div>
 						<div class="col-lg-12" style="text-align: center;"><img id="vistaLateral1Md" style="width: 87%; height: 28%" src="img/no_imagen.png" /></div>
 						<div class="row div_bottom">
-							<div class="col-lg-6" style="text-align: left;"><span id="fechaVistaLateral1" class="footerDetalleMd">---</span></div>
-							<div class="col-lg-6" style="text-align: right;"><span id="horaVistaLateral1" class="footerDetalleMd">---</span></div>
+							<div class="col-lg-6" style="text-align: right;"><span id="fechaVistaLateral1" class="footerDetalleMd">---</span></div>
+							<div class="col-lg-6" style="text-align: left;"><span id="horaVistaLateral1" class="footerDetalleMd">---</span></div>
 						</div>
 					</div>
 					<div class="col-lg-4">
 						<div class="col-lg-12"><span class="subtituloDetalleMd sangria_cuerpo">LATERAL 2</span></div>
 						<div class="col-lg-12" style="text-align: center;"><img id="vistaLateral2Md" style="width: 87%; height: 28%" src="img/no_imagen.png" /></div>
 						<div class="row div_bottom">
-							<div class="col-lg-6" style="text-align: left;"><span id="fechaVistaLateral2" class="footerDetalleMd">---</span></div>
-							<div class="col-lg-6" style="text-align: right;"><span id="horaVistaLateral2" class="footerDetalleMd">---</span></div>
+							<div class="col-lg-6" style="text-align: right;"><span id="fechaVistaLateral2" class="footerDetalleMd">---</span></div>
+							<div class="col-lg-6" style="text-align: left;"><span id="horaVistaLateral2" class="footerDetalleMd">---</span></div>
 						</div>
 					</div>
 				</div>
@@ -217,8 +227,8 @@
 					</div>
 					<div class="col-lg-4 col-7" style="text-align: right;">
 						<span class="tituloDetalleMd">Puntos: </span> <span id="puntosZonificacion" class="tituloDetalleMd">---</span>
-						<img id="autoriza4" title="Autoriza punto" class="sin_autorizar" onclick="autorizaPantalla(4);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
-						<img id="rechaza4" title="Rechaza punto" class="sin_autorizar" onclick="rechazaPantalla(4);" style="cursor: pointer;" src="img/rechaza_mark.png">
+						<img id="autoriza4" title="Autoriza punto" class="sin_autorizar" onclick="autorizaPantalla(4, this);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
+						<img id="rechaza4" title="Rechaza punto" class="sin_autorizar" onclick="rechazaPantalla(4, this);" style="cursor: pointer;" src="img/rechaza_mark.png">
 						<a id="zonificacionTip" tabindex="0" class="question_mark" role="" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="">&nbsp;&nbsp;&nbsp;&nbsp;</a>
 					</div>
 				</div>
@@ -264,8 +274,8 @@
 					</div>
 					<div class="col-lg-6 col-7" style="text-align: right;">
 						<span class="tituloDetalleMd">Puntos: </span> <span id="puntosConstruccion" class="tituloDetalleMd">---</span>
-						<img id="autoriza5" title="Autoriza punto" class="sin_autorizar" onclick="autorizaPantalla(5);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
-						<img id="rechaza5" title="Rechaza punto" class="sin_autorizar" onclick="rechazaPantalla(5);" style="cursor: pointer;" src="img/rechaza_mark.png">
+						<img id="autoriza5" title="Autoriza punto" class="sin_autorizar" onclick="autorizaPantalla(5, this);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
+						<img id="rechaza5" title="Rechaza punto" class="sin_autorizar" onclick="rechazaPantalla(5, this);" style="cursor: pointer;" src="img/rechaza_mark.png">
 						<a id="construccionTip" tabindex="0" class="question_mark" role="" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="">&nbsp;&nbsp;&nbsp;&nbsp;</a>
 					</div>
 				</div>
@@ -288,8 +298,8 @@
 					</div>
 					<div class="col-lg-6 col-7" style="text-align: right;">
 						<span class="tituloDetalleMd">Puntos: </span> <span id="puntosGeneralidades" class="tituloDetalleMd">---</span>
-						<img id="autoriza6" title="Autoriza punto" class="sin_autorizar" onclick="autorizaPantalla(6);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
-						<img id="rechaza6" title="Rechaza punto" class="sin_autorizar" onclick="rechazaPantalla(6);" style="cursor: pointer;" src="img/rechaza_mark.png">
+						<img id="autoriza6" title="Autoriza punto" class="sin_autorizar" onclick="autorizaPantalla(6, this);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
+						<img id="rechaza6" title="Rechaza punto" class="sin_autorizar" onclick="rechazaPantalla(6, this);" style="cursor: pointer;" src="img/rechaza_mark.png">
 						<a id="generalidadesTip" tabindex="0" class="question_mark" role="" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="">&nbsp;&nbsp;&nbsp;&nbsp;</a>
 					</div>
 				</div>
@@ -320,8 +330,8 @@
 					</div>
 					<div class="col-lg-6 col-7" style="text-align: right;">
 						<span class="tituloDetalleMd">Puntos: </span> <span id="puntosConteos" class="tituloDetalleMd">---</span>
-						<img id="autoriza7" title="Autoriza punto" class="sin_autorizar" onclick="autorizaPantalla(7);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
-						<img id="rechaza7" title="Rechaza punto" class="sin_autorizar" onclick="rechazaPantalla(7);" style="cursor: pointer;" src="img/rechaza_mark.png">
+						<img id="autoriza7" title="Autoriza punto" class="sin_autorizar" onclick="autorizaPantalla(7, this);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
+						<img id="rechaza7" title="Rechaza punto" class="sin_autorizar" onclick="rechazaPantalla(7, this);" style="cursor: pointer;" src="img/rechaza_mark.png">
 						<a id="conteosTip" tabindex="0" class="question_mark" role="" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="">&nbsp;&nbsp;&nbsp;&nbsp;</a>
 					</div>
 				</div>
@@ -338,9 +348,14 @@
 		<div class="col-lg-4">
 		<div class="row divs_p">
 			<div class="col-lg-12 menupr_estilos" style="height:300px;">
-				<div style="width: 100%;position: relative; float: left;text-align: left">
-					<div style="width: 70%; position: relative; float: left;"><span class="tituloDetalleMd">9)  Autorización final</span></div>
-					<div style="width: 30%; position: relative; float: left;text-align: right; padding-right: 15px;"></div>
+				<div class="row div_header_sub">
+					<div class="col-lg-6 col-5">
+						<span class="tituloDetalleMd">8) Autorizacón final</span>
+					</div>
+					<div class="col-lg-6 col-7" style="text-align: right;">
+						<img id="autoriza8" title="Autoriza punto" class="sin_autorizar" onclick="autorizaPantalla(8, this);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
+						<img id="rechaza8" title="Rechaza punto" class="sin_autorizar" onclick="rechazaPantalla(8, this);" style="cursor: pointer;" src="img/rechaza_mark.png">
+					</div>
 				</div>
 				<div style="width: 100%;position: relative; float: left;text-align: left; padding-top: 20px;">
 					<div id="containerProgreso"></div>

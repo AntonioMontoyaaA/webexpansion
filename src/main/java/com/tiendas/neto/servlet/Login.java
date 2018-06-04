@@ -1,8 +1,6 @@
 package com.tiendas.neto.servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,13 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.log4j.Logger;
-
 import com.google.gson.Gson;
 import com.tiendas.neto.dao.Expansionlog;
 import com.tiendas.neto.singleton.SingletonProperties;
 import com.tiendas.neto.vo.UsuarioLoginVO;
-import com.tiendas.neto.vo.UsuarioVO;
 
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
@@ -25,6 +20,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+@SuppressWarnings("serial")
 public class Login  extends HttpServlet {
 	Expansionlog elog=new Expansionlog();
 	SingletonProperties sp=SingletonProperties.getInstancia();

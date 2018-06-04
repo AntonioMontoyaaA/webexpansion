@@ -62,8 +62,7 @@ public class ExcelAutorizadasAction extends ExpansionAction {
 	        HSSFWorkbook workbook=null;
 	        CreaExcelMemoriasAutorizadas excelCreator = new CreaExcelMemoriasAutorizadas();
 	        
-	        if(perfil.equals("5")) {
-	        	System.out.println("entro al metodo");
+	        if(perfil.equals("3")) {
 		     workbook = excelCreator.createWorkbookDirGeneral(listaMemorias);
 	        }
 	        else {

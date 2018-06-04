@@ -14,13 +14,13 @@
 <title>Asignadas</title>
 </head>
 <body>
-	<c:forEach var="permiso" items="${usr.perfil.perfilesxusuario[0].permisos}">
+	<!--<c:forEach var="permiso" items="${usr.perfil.perfilesxusuario[0].permisos}">
     	<input type="hidden" class="permisos_detalleMd" rel="${permiso.getFIMODULOID()}" value="${permiso.toJSON()}">
-    </c:forEach> 
+    </c:forEach> -->
     
     <c:forTokens items = "{'BLOQUEASEGUIMIENTO': 0,'FIESTATUS': 1,'FIMODULOID': 1,'PERMITEEDITAR': 0,'FISUBMODULO': -1,'PERMITECOMENTAR': 0,'PERMITERECHAZAR': 0,'PERMITEAUTORIZAR': 1}#
-{'BLOQUEASEGUIMIENTO': 0,'FIESTATUS': 1,'FIMODULOID': 2,'PERMITEEDITAR': 0,'FISUBMODULO': -1,'PERMITECOMENTAR': 1,'PERMITERECHAZAR': 1,'PERMITEAUTORIZAR': 1}#
-{'BLOQUEASEGUIMIENTO': 0,'FIESTATUS': 1,'FIMODULOID': 3,'PERMITEEDITAR': 0,'FISUBMODULO': -1,'PERMITECOMENTAR': 1,'PERMITERECHAZAR': 0,'PERMITEAUTORIZAR': 0}#
+{'BLOQUEASEGUIMIENTO': 0,'FIESTATUS': 1,'FIMODULOID': 2,'PERMITEEDITAR': 0,'FISUBMODULO': -1,'PERMITECOMENTAR': 1,'PERMITERECHAZAR': 1,'PERMITEAUTORIZAR': 0}#
+{'BLOQUEASEGUIMIENTO': 0,'FIESTATUS': 1,'FIMODULOID': 3,'PERMITEEDITAR': 0,'FISUBMODULO': -1,'PERMITECOMENTAR': 1,'PERMITERECHAZAR': 0,'PERMITEAUTORIZAR': 1}#
 {'BLOQUEASEGUIMIENTO': 0,'FIESTATUS': 1,'FIMODULOID': 4,'PERMITEEDITAR': 0,'FISUBMODULO': -1,'PERMITECOMENTAR': 1,'PERMITERECHAZAR': 1,'PERMITEAUTORIZAR': 1}#
 {'BLOQUEASEGUIMIENTO': 0,'FIESTATUS': 1,'FIMODULOID': 5,'PERMITEEDITAR': 1,'FISUBMODULO': 1,'PERMITECOMENTAR': 1,'PERMITERECHAZAR': 1,'PERMITEAUTORIZAR': 1}#
 {'BLOQUEASEGUIMIENTO': 0,'FIESTATUS': 1,'FIMODULOID': 6,'PERMITEEDITAR': 1,'FISUBMODULO': 2,'PERMITECOMENTAR': 1,'PERMITERECHAZAR': 1,'PERMITEAUTORIZAR': 1}#
@@ -353,8 +353,8 @@
 						<span class="tituloDetalleMd">8) Autorizacón final</span>
 					</div>
 					<div class="col-lg-6 col-7" style="text-align: right;">
-						<img id="autoriza8" title="Autoriza punto" class="sin_autorizar" onclick="autorizaPantalla(8, this);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
-						<img id="rechaza8" title="Rechaza punto" class="sin_autorizar" onclick="rechazaPantalla(8, this);" style="cursor: pointer;" src="img/rechaza_mark.png">
+						<img id="autoriza8" title="Autoriza punto" class="sin_autorizar" onclick="finalizaMD(1);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
+						<img id="rechaza8" title="Rechaza punto" class="sin_autorizar" onclick="finalizaMD(0);" style="cursor: pointer;" src="img/rechaza_mark.png">
 					</div>
 				</div>
 				<div style="width: 100%;position: relative; float: left;text-align: left; padding-top: 20px;">

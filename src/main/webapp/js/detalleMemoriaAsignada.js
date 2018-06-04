@@ -10,11 +10,13 @@ var TOTAL_ATENCIONES = 0;
 var MOTIVOS_RECHAZO = {};
 var FACTORES = {};
 var PERMISOS = {};
+var ESTATUS_FINALIZA_MD = -1;
 
 $(function(){
 	$('#idasignadas').addClass('resaltado');
 	
 	$("#nombreMdTxt").text($("#nombreMd").val());
+	inicializaFactores();
 	parseaPermisos();
 	buscaDetalleMD($("#mdId").val());
 	MOTIVOS_RECHAZO = {};
@@ -26,30 +28,62 @@ $(function(){
 	funcionesAutorizacion();
 });
 
+function inicializaFactores(){
+	FACTORES[1] = new FactorAutorizacion(1,'Datos del sitio');
+	FACTORES[2] = new FactorAutorizacion(2,'Datos del propietario');
+	FACTORES[3] = new FactorAutorizacion(3,'Superficie');
+	FACTORES[4] = new FactorAutorizacion(4,'Zonificacion');
+	FACTORES[5] = new FactorAutorizacion(5,'Construccion');
+	FACTORES[6] = new FactorAutorizacion(6,'Generalidades');
+	FACTORES[7] = new FactorAutorizacion(7,'Flujo peatonal');
+}
+
 function validaEstatusAtencion(estatus, idObjetos){
-	$('#autoriza' + idObjetos).removeClass('autorizado');
-	$('#rechaza' + idObjetos).removeClass('autorizado');
-	$('#autoriza' + idObjetos).addClass('sin_autorizar');
-	$('#rechaza' + idObjetos).addClass('sin_autorizar');
 	
-	if(estatus == 2){// pendiente atencion
-		$('#autoriza'  + idObjetos).addClass('sin_autorizar');
-		$('#rechaza'  + idObjetos).addClass('sin_autorizar');
-	}else if(estatus == 1){ //autorizado
-		$('#autoriza' + idObjetos).removeClass('sin_autorizar');
-		$('#autoriza' + idObjetos).addClass('autorizado');
-		PROGRESO_ATENCION++;
-	}else if(estatus == 0){//rechazado
-		$('#rechaza' + idObjetos).removeClass('sin_autorizar');
-		$('#rechaza' + idObjetos).addClass('autorizado');
-		PROGRESO_ATENCION++;
-	}else{//desconocido
+	$('#autoriza8').hide();
+	$('#rechaza8').hide();
+	
+	if(PERMISOS[idObjetos] != undefined && PERMISOS[idObjetos].permiteAutorizar == 1){
+		
+		$('#autoriza' + idObjetos).show();
+		$('#rechaza' + idObjetos).show();
+		
+		$('#autoriza' + idObjetos).removeClass('autorizado');
+		$('#rechaza' + idObjetos).removeClass('autorizado');
 		$('#autoriza' + idObjetos).addClass('sin_autorizar');
 		$('#rechaza' + idObjetos).addClass('sin_autorizar');
+		
+		if(estatus == 2){// pendiente atencion
+			$('#autoriza'  + idObjetos).addClass('sin_autorizar');
+			$('#rechaza'  + idObjetos).addClass('sin_autorizar');
+		}else if(estatus == 1){ //autorizado
+			$('#autoriza' + idObjetos).removeClass('sin_autorizar');
+			$('#autoriza' + idObjetos).addClass('autorizado');
+			PROGRESO_ATENCION++;
+		}else if(estatus == 0){//rechazado
+			$('#rechaza' + idObjetos).removeClass('sin_autorizar');
+			$('#rechaza' + idObjetos).addClass('autorizado');
+			PROGRESO_ATENCION++;
+		}else if(estatus == 3){//rechazado con motivo definitivo
+			$('#rechaza' + idObjetos).removeClass('sin_autorizar');
+			$('#rechaza' + idObjetos).addClass('autorizado');
+			PROGRESO_ATENCION++;
+			FACTORES[idObjetos].motivoRechazoDefinitivo =  true;
+		}else{//desconocido
+			$('#autoriza' + idObjetos).addClass('sin_autorizar');
+			$('#rechaza' + idObjetos).addClass('sin_autorizar');
+		}
+	}else{
+		$('#autoriza' + idObjetos).hide();
+		$('#rechaza' + idObjetos).hide();
 	}
 }
 
 function dibujaGraficaAutorizaciones(){
+	$('#containerProgreso').html('');
+	if(PROGRESO_ATENCION > TOTAL_ATENCIONES)
+		PROGRESO_ATENCION = TOTAL_ATENCIONES;
+	
 	var bar = new ProgressBar.Circle(containerProgreso, {
 		  strokeWidth: 4,
 		  easing: 'easeInOut',
@@ -64,6 +98,27 @@ function dibujaGraficaAutorizaciones(){
 	bar.animate(progreso, {
 	    from: {color: '#000000', width: 5},
 	    to: {color: "#00FF00", width: 5} });
+	
+	if(PROGRESO_ATENCION == TOTAL_ATENCIONES){
+		
+		motivoDefinitivo = false;
+		
+		for(factor in FACTORES){
+			if(factor.motivoRechazoDefinitivo){
+				motivoDefinitivo = true;
+				break;
+			}
+		}
+		
+		$('#rechaza8').show();
+		if(!motivoDefinitivo)
+			$('#autoriza8').show();
+		
+	}else{
+
+		$('#autoriza8').hide();
+		$('#rechaza8').hide();
+	}
 }
 
 function buscaDetalleMD(mdId) {
@@ -90,6 +145,9 @@ function buscaDetalleMD(mdId) {
 		} else {
 			PROGRESO_ATENCION = 0;
 			MOTIVOS_RECHAZO = {};
+			$("#mdIdAutorizacion").val(mdId);
+			ESTATUS_FINALIZA_MD = -1;
+			
 			/* Datos de áreas que ya han autorizado */
 			if(data.areasAutorizadas != undefined && data.areasAutorizadas.length > 0) {
 				for(var i = 0; i < data.areasAutorizadas.length; i++) {
@@ -337,6 +395,10 @@ function redireccionaAsignadas() {
 	window.history.back();
 }
 
+function muestraPopAutorizacion(){
+	$("#modal_autorizacion").modal("show");
+}
+
 function cargaFlujoPeatonal(categorias, fecha1, conteo1, fecha2, conteo2, fecha3, conteo3, promedio) {
 	Highcharts.chart('contenedorFlujoPeatonal', {
 	    chart: {
@@ -414,7 +476,7 @@ function autorizaPantalla(modulo, elemento) {
 		$("#moduloId").val(modulo);
 		$("#mdIdAutorizacion").val($("#mdId").val());
 		$("#comboMotivos").hide();
-		$('#detalleMensajeModal textarea').val();
+		$('#detalleMensajeModal textarea').val('');
 		$("#modal_autorizacion").modal("show");
 	}
 }
@@ -453,33 +515,104 @@ function cargaComboMotivos(modulo){
 	$("#moduloId").val(modulo);
 	$("#mdIdAutorizacion").val($("#mdId").val());
 	$("#comboMotivos").show();
-	$('#detalleMensajeModal textarea').val();
+	$('#detalleMensajeModal textarea').val('');
 	$("#modal_autorizacion").modal("show");
 }
 
+function finalizaMD(estatus){
+	ESTATUS_FINALIZA_MD = estatus;
+	if(estatus == 1){
+		cargaMensajeModal('MD ASIGNADAS', 
+				'¿Est\u00e1s seguro de autorizar la MD?',
+				TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, actionfinalizaMD);
+	}else if(estatus == 0){
+		cargaMensajeModal('MD ASIGNADAS', 
+				'¿Est\u00e1s seguro de rechazar la MD?',
+				TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, actionfinalizaMD);
+	}
+}
+
+function actionfinalizaMD(){
+	cargaLoading();
+	
+	invocarJSONServiceAction("autorizaMd", 
+			{'modulo':0,
+			 'md': $("#mdIdAutorizacion").val(),
+			 'validacion': ESTATUS_FINALIZA_MD,
+			 'motivo': 0,
+			 'finaliza' : 1,
+			 'comentario': ' '
+			 }, 
+			'responseFinalizacion', 
+			function() {
+				cierraLoading();
+			},
+			function() {
+				cierraLoading();
+			});
+	
+	responseFinalizacion = function(data){
+		if(data.codigo != 200){
+			cargaMensajeModal('MD ASIGNADAS', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, redireccionaAsignadas);
+		}else{
+			if(ESTATUS_FINALIZA_MD == 1)
+				cargaMensajeModal('MD ASIGNADAS', 'Autorizaci\u00f3n exitosa', TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_EXITO, redireccionaAsignadas);
+			else if(ESTATUS_FINALIZA_MD == 0)
+				cargaMensajeModal('MD ASIGNADAS', 'Rechazo exitoso', TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_EXITO, redireccionaAsignadas);
+		}
+	}
+}
 
 function funcionesAutorizacion(){
 	$("#btnModalAutorizacion").click(function() {
-		$("#modal_autorizacion").modal("hide");
 		
-		cargaLoading();
+		if($("#tipoAutorizacion").val() == AUTORIZA_MODULO){
+			if($('#detalleMensajeModal textarea').val() == '')
+				$('#detalleMensajeModal textarea').val(' ');
+				
+			autoriza();
+		}else if($("#tipoAutorizacion").val() == RECHAZA_MODULO){
+			mensaje = '';
+			if($('#detalleMensajeModal textarea').val() == '')
+				mensaje += 'Porfavor escriba el motivo de rechazo';
+			if($('#motivoRechazo option:selected').val() == 0){
+				if(mensaje == '')
+					mensaje += 'Por favor selecciona el motivo de rechazo';
+				else
+					mensaje = 'Porfavor escriba y seleccione el motivo de rechazo';
+			}
+			
+			if(mensaje == '')
+				autoriza();
+			else{
+				$("#modal_autorizacion").modal("hide");
+				cargaMensajeModal('MD ASIGNADAS', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, muestraPopAutorizacion);
+			}
+		}
 		
-		invocarJSONServiceAction("autorizaMd", 
-				{'modulo': $("#moduloId").val(),
-				 'md': $("#mdIdAutorizacion").val(),
-				 'validacion':$("#tipoAutorizacion").val(),
-				 'motivo': $('#motivoRechazo').val(),
-				 'finaliza' : $("#finaliza").val(),
-				 'comentario': $('#detalleMensajeModal textarea').val()
-				 }, 
-				'responseAutorizacion', 
-				function() {
-					cierraLoading();
-				},
-				function() {
-					cierraLoading();
-				});
-	});
+	});	
+}
+
+function autoriza(){
+	$("#modal_autorizacion").modal("hide");
+	
+	cargaLoading();
+	
+	invocarJSONServiceAction("autorizaMd", 
+			{'modulo': $("#moduloId").val(),
+			 'md': $("#mdIdAutorizacion").val(),
+			 'validacion':$("#tipoAutorizacion").val(),
+			 'motivo': $('#motivoRechazo').val(),
+			 'finaliza' : $("#finaliza").val(),
+			 'comentario': $('#detalleMensajeModal textarea').val()
+			 }, 
+			'responseAutorizacion', 
+			function() {
+				cierraLoading();
+			},
+			function() {
+				cierraLoading();
+			});
 }
 
 function responseAutorizacion(data){
@@ -487,6 +620,39 @@ function responseAutorizacion(data){
 		cargaMensajeModal('MD ASIGNADAS', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, redireccionaAsignadas);
 	}else{
 		
+		moduloEjecutado = $("#moduloId").val();
+		
+		if($("#tipoAutorizacion").val() == AUTORIZA_MODULO){
+			$('#autoriza' + moduloEjecutado).removeClass('sin_autorizar');
+			$('#autoriza' + moduloEjecutado).addClass('autorizado');
+			
+			$('#rechaza' + moduloEjecutado).removeClass('autorizado');
+			$('#rechaza' + moduloEjecutado).addClass('sin_autorizar');
+			FACTORES[moduloEjecutado].motivoRechazoDefinitivo =  false;
+		}else if($("#tipoAutorizacion").val() == RECHAZA_MODULO){
+			$('#rechaza' + moduloEjecutado).removeClass('sin_autorizar');
+			$('#rechaza' + moduloEjecutado).addClass('autorizado');
+			
+			$('#autoriza' + moduloEjecutado).removeClass('autorizado');
+			$('#autoriza' + moduloEjecutado).addClass('sin_autorizar');
+			
+			if(MOTIVOS_RECHAZO[moduloEjecutado][$('#motivoRechazo').val()].isDefinitivo)
+				FACTORES[moduloEjecutado].motivoRechazoDefinitivo =  true;
+			else
+				FACTORES[moduloEjecutado].motivoRechazoDefinitivo =  false;
+		}else{
+			$('#autoriza' + moduloEjecutado).removeClass('autorizado');
+			$('#rechaza' + moduloEjecutado).removeClass('autorizado');
+			$('#autoriza' + moduloEjecutado).addClass('sin_autorizar');
+			$('#rechaza' + moduloEjecutado).addClass('sin_autorizar');
+			FACTORES[moduloEjecutado].motivoRechazoDefinitivo =  false;
+		}
+		
+		
+		FACTORES[moduloEjecutado].motivoRechazoDefinitivo =  true;
+		
+		PROGRESO_ATENCION++;
+		dibujaGraficaAutorizaciones();
 	}
 }
 
@@ -569,7 +735,7 @@ FactorAutorizacion = function(id, nombre){
 	this.id = id;
 	this.nombre = nombre;
 	
-	this.motivoRechazo;
+	this.motivoRechazoDefinitivo;
 };
 
 MotivoRechazo = function(id, nombre, isDefinitivo){

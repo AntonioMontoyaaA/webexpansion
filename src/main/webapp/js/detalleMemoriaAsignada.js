@@ -100,7 +100,7 @@ function dibujaGraficaAutorizaciones(){
 		});
 	
 	progreso = atendidos/TOTAL_ATENCIONES;
-	bar.animate(progreso, {
+	bar.set(progreso, {
 	    from: {color: '#000000', width: 5},
 	    to: {color: "#00FF00", width: 5} });
 	

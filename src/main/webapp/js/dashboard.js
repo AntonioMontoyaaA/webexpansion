@@ -661,7 +661,7 @@ function Resumen_grafica_analista(data){
 	            }
 	        },
 	        pie: {
-	        	size: "123%",
+	        	size: "122%",
 	            dataLabels: {
 	                enabled: false
 	            },
@@ -736,7 +736,7 @@ function Resumen_grafica_analista(data){
 	            }
 	        },
 	        pie: {
-	        	size: "123%",
+	        	size: "122%",
 	            dataLabels: {
 	                enabled: false
 	            },
@@ -810,7 +810,7 @@ function Resumen_grafica_analista(data){
 	            }
 	        },
 	        pie: {
-	        	size: "123%",
+	        	size: "122%",
 	            dataLabels: {
 	                enabled: false
 	            },
@@ -884,7 +884,7 @@ function Resumen_grafica_analista(data){
 	            }
 	        },
 	        pie: {
-	        	size: "123%",
+	        	size: "122%",
 	            dataLabels: {
 	                enabled: false
 	            },
@@ -1144,7 +1144,7 @@ function Resumen_grafica_dirArea(data){
 	            }
 	        },
 	        pie: {
-	        	size: "123%",
+	        	size: "122%",
 	            dataLabels: {
 	                enabled: false
 	            },
@@ -1213,7 +1213,7 @@ function Resumen_grafica_dirArea(data){
 	            }
 	        },
 	        pie: {
-	        	size: "123%",
+	        	size: "122%",
 	            dataLabels: {
 	                enabled: false
 	            },
@@ -1281,7 +1281,7 @@ function Resumen_grafica_dirArea(data){
 	            }
 	        },
 	        pie: {
-	        	size: "123%",
+	        	size: "122%",
 	            dataLabels: {
 	                enabled: false
 	            },
@@ -1349,7 +1349,7 @@ function Resumen_grafica_dirArea(data){
 	            }
 	        },
 	        pie: {
-	        	size: "123%",
+	        	size: "122%",
 	            dataLabels: {
 	                enabled: false
 	            },
@@ -1594,7 +1594,7 @@ function Resumen_grafica_dirGeneral(data){
 	            }
 	        },
 	        pie: {
-	        	size: "123%",
+	        	size: "122%",
 	            dataLabels: {
 	                enabled: false
 	            },
@@ -1681,7 +1681,7 @@ function Resumen_grafica_dirGeneral(data){
 	            }
 	        },
 	        pie: {
-	        	size: "123%",
+	        	size: "122%",
 	            dataLabels: {
 	                enabled: false
 	            },
@@ -1767,7 +1767,7 @@ function Resumen_grafica_dirGeneral(data){
 	            }
 	        },
 	        pie: {
-	        	size: "123%",
+	        	size: "122%",
 	            dataLabels: {
 	                enabled: false
 	            },
@@ -1853,7 +1853,7 @@ function Resumen_grafica_dirGeneral(data){
 	            }
 	        },
 	        pie: {
-	        	size: "123%",
+	        	size: "122%",
 	            dataLabels: {
 	                enabled: false
 	            },

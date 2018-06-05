@@ -87,3 +87,8 @@ span.estrellas{
 	width:100px;
 	text-align:left;
 }
+/*rechazadas*/
+span.seccion{
+	display: inline-block;
+	width:100px;
+}

@@ -21,7 +21,21 @@
 
 <div class="container-fluid">
 	<div class="row padding_p">
-		<div class="col-lg-12 titulo">DASHBOARD ${usr.perfil.areasxpuesto[0].areaNom} > RECHAZADAS </div>
+		<div class="col-lg-4 titulo">DASHBOARD ${usr.perfil.areasxpuesto[0].areaNom} > RECHAZADAS </div>
+		<div class="col-lg-4 titulo" style="background: #FFFFFF; color: #1f3d7a;text-align: center; border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">
+			<span><img src="img/web_gerenteExpansionc.png"></span>
+			<span style="padding-left: 5px;">Gerente</span>
+			<span><img src="img/web_expansionc.png"></span>
+			<span style="padding-left: 5px;">Vencidas</span>
+			<span><img src="img/web_gestoriac.png"></span>
+			<span style="padding-left: 5px;">Vencidas</span>
+			<span><img src="img/web_construccionc.png"></span>
+			<span style="padding-left: 5px;">Vencidas</span>
+			<span><img src="img/web_operacionesc.png"></span>
+			<span style="padding-left: 5px;">Vencidas</span>	
+		</div>
+		<div class="col-lg-4 titulo">&nbsp;</div>
+		
 		<div class="col-lg-9 titulogrande">MD RECHAZADAS</div>
 		<div class="col-lg-3" style="padding-top: 5px;">
 			<div id="descargaExcel" style="position: relative; float: left;margin-right: 10px;cursor: pointer"><img src="${pageContext.request.contextPath}/img/iconos_DOWNLOAD.png"></div>

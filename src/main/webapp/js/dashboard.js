@@ -433,7 +433,7 @@ function Resumen_grafica_analista(data){
 		var actual=data.areas.GESTORIA;
 	if(areaId==3)
 		var actual=data.areas.CONSTRUCCION;
-	if(areaId==4)
+	if(areaId==5)
 		var actual=data.areas.OPERACIONES;
 	
 	

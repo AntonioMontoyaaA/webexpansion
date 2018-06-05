@@ -7,7 +7,7 @@ function initTablaMemoriasAsignadas(nombreDiv, datosDesgloseVenta, nombreTabla){
 				'<tr style="cursor: pointer;border-top: 0px; border-bottom: 0px;">' +
 					'<th width="20%"  class="headerTable_flat">Nombre MD</th>'  +
 					'<th width="10%"  class="headerTable_flat" style="text-align: center;">Categoría</th>' +
-					'<th width="10%"  class="headerTable_flat">Puntuación</th>' +
+					'<th width="10%"  class="headerTable_flat" style="width:150px; text-align:center;">Puntuación</th>' +
 					'<th width="20%"  class="headerTable_flat">Creador</th>' +
 					'<th width="17%"  class="headerTable_flat">Fecha de creación</th>' +
 					'<th width="18%"  class="headerTable_flat">Fecha de vecimiento</th>' +
@@ -23,7 +23,7 @@ function initTablaMemoriasAsignadas(nombreDiv, datosDesgloseVenta, nombreTabla){
 			{"aaData": datosDesgloseVenta,
 				"aoColumns": [{"sClass":"izquierda","bSearchable":true},
 				           {"bSearchable":true},
-				           {"bSearchable":true},
+				           {"sClass":"left","bSearchable":true},
 				           {"bSearchable":true},
 				           {"bSearchable":true},
 				           {"bSearchable":true},
@@ -57,7 +57,7 @@ function initTablaMemoriasAutorizadas(nombreDiv, datosDesgloseVenta, nombreTabla
 				'<tr style="cursor: pointer;border-top: 0px; border-bottom: 0px;">' +
 					'<th class="headerTable_flat">Nombre MD</th>'  +
 					'<th class="headerTable_flat" style="text-align: center;">Categoría</th>' +
-					'<th class="headerTable_flat">Puntuación</th>' +
+					'<th class="headerTable_flat" style="width:150px; text-align:center;" >Puntuación</th>' +
 					'<th class="headerTable_flat">Creador</th>' +
 					'<th class="headerTable_flat">Fecha de creación</th>' +
 					'<th class="headerTable_flat">Autorizó</th>' +
@@ -70,11 +70,11 @@ function initTablaMemoriasAutorizadas(nombreDiv, datosDesgloseVenta, nombreTabla
             '</tbody>' +
         '</table>');
 	
-	tablaMemoriasAsignadas = $("#" + nombreTabla).dataTable(
+	tablaMemoriasAutorizadas = $("#" + nombreTabla).dataTable(
 			{"aaData": datosDesgloseVenta,
 				"aoColumns": [{"sClass":"izquierda","bSearchable":true},
 				           {"bSearchable":true},
-				           {"bSearchable":true},
+				           {"sClass":"left","bSearchable":true},
 				           {"bSearchable":true},
 				           {"bSearchable":true},
 				           {"bSearchable":true},
@@ -109,7 +109,7 @@ function initTablaMemoriasAutorizadasDirGeneral(nombreDiv, datosDesgloseVenta, n
 				'<tr style="cursor: pointer;border-top: 0px; border-bottom: 0px;">' +
 					'<th class="headerTable_flat">Nombre MD</th>'  +
 					'<th class="headerTable_flat" style="text-align: center;">Categoría</th>' +
-					'<th class="headerTable_flat">Puntuación</th>' +
+					'<th class="headerTable_flat" style="width:150px; text-align:center;">Puntuación</th>' +
 					'<th class="headerTable_flat">Creador</th>' +
 					'<th class="headerTable_flat">Fecha de creación</th>' +
 					'<th class="headerTable_flat">Tipo de Autorización</th>' +
@@ -120,11 +120,11 @@ function initTablaMemoriasAutorizadasDirGeneral(nombreDiv, datosDesgloseVenta, n
             '</tbody>' +
         '</table>');
 	
-	tablaMemoriasAsignadas = $("#" + nombreTabla).dataTable(
+	tablaMemoriasAutorizadasDirGeneral = $("#" + nombreTabla).dataTable(
 			{"aaData": datosDesgloseVenta,
 				"aoColumns": [{"sClass":"izquierda","bSearchable":true},
 				           {"bSearchable":true},
-				           {"bSearchable":true},
+				           {"sClass":"left","bSearchable":true},
 				           {"bSearchable":true},
 				           {"bSearchable":true},
 				           {"bSearchable":true},
@@ -157,11 +157,12 @@ function initTablaMemoriasRechazadas(nombreDiv, datosDesgloseVenta, nombreTabla)
 				'<tr style="cursor: pointer;border-top: 0px; border-bottom: 0px;">' +
 					'<th class="headerTable_flat">Nombre MD</th>'  +
 					'<th class="headerTable_flat" style="text-align: center;">Categoría</th>' +
-					'<th class="headerTable_flat">Puntuación</th>' +
+					'<th class="headerTable_flat" style="width:150px; text-align:center;">Puntuación</th>' +
 					'<th class="headerTable_flat">Creador</th>' +
 					'<th class="headerTable_flat">Fecha de creación</th>' +
-					'<th class="headerTable_flat">Autorizó</th>' +
-					'<th class="headerTable_flat">Fecha Autorización</th>' +
+					'<th class="headerTable_flat">Rechazó</th>' +
+					'<th class="headerTable_flat">Fecha de Rechazo</th>' +
+					'<th class="headerTable_flat">Motivo</th>' +
 					'<th class="headerTable_flat">Tipo</th>' +
 					'<th class="oculto">id</th>' +
 				'</tr>'+
@@ -174,6 +175,7 @@ function initTablaMemoriasRechazadas(nombreDiv, datosDesgloseVenta, nombreTabla)
 			{"aaData": datosDesgloseVenta,
 				"aoColumns": [{"sClass":"izquierda","bSearchable":true},
 				           {"bSearchable":true},
+				           {"sClass":"left","bSearchable":true},
 				           {"bSearchable":true},
 				           {"bSearchable":true},
 				           {"bSearchable":true},

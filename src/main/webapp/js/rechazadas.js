@@ -75,19 +75,18 @@ function creatabla(){
 					case 'C':	estrellas = puntuacionEnTiempoC;
 								break;
 				};
-				
-				resultados[i].mdVencida ? variable = "Fuera de tiempo" : variable = "En tiempo";
-				
+								
 				datosMemoriasRechazadas[i] = new Array();	 	 		 			 
 				datosMemoriasRechazadas[i][0] = "<span>" + resultados[i].nombreMd + "</span>"; 
 				datosMemoriasRechazadas[i][1] = "<span>" + resultados[i].categoria + "</span>";
-				datosMemoriasRechazadas[i][2] = "<span>" + resultados[i].puntuacion + '</span><span class="estrellas">'+ estrellas+"</span>";
+				datosMemoriasRechazadas[i][2] = "<span>" + resultados[i].puntuacion + '</span><span> puntos '+ estrellas+"</span>";
 				datosMemoriasRechazadas[i][3] = "<span>" + resultados[i].creador + "</span>";
 				datosMemoriasRechazadas[i][4] = "<span>" + resultados[i].fechaCreacion + "</span>";
-				datosMemoriasRechazadas[i][5] = "<span>" + resultados[i].autorizador + "</span>";
-				datosMemoriasRechazadas[i][6] = "<span>" + resultados[i].fechaAutorizacion + "</span>";
-				datosMemoriasRechazadas[i][7] = "<span>" + variable + "</span>";
-				datosMemoriasRechazadas[i][8] = resultados[i].mdId;
+				datosMemoriasRechazadas[i][5] = "<span>" + resultados[i].nombreRechazo + "</span>";
+				datosMemoriasRechazadas[i][6] = "<span>" + resultados[i].fechaRechazo + "</span>";
+				datosMemoriasRechazadas[i][7] = "<span>" + resultados[i].motivoRechazo + "</span>";
+				datosMemoriasRechazadas[i][8] = "<span>" + resultados[i].tipoRechazo + "</span>";
+				datosMemoriasRechazadas[i][9] = resultados[i].mdId;
 			 }			
 			initTablaMemoriasRechazadas('DivTablaRechazadas', datosMemoriasRechazadas, 'tablaMemoriasRechazadas');
 		}

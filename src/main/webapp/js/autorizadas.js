@@ -54,7 +54,6 @@ function creatabla(){
 			initTablaMemoriasAutorizadasDirGeneral('DivTablaAutorizadas', 0, 'tablaMemoriasAutorizadas');
 
 		} else {
-			perfil=3;
 			var resultados = data.mds;
 			datosExcel = data;
 			$("#descargaExcel").show();
@@ -87,7 +86,7 @@ function creatabla(){
 					datosMemoriasAutorizadas[i] = new Array();	 	 		 			 
 					datosMemoriasAutorizadas[i][0] = "<span>" + resultados[i].nombreMd + "</span>"; 
 					datosMemoriasAutorizadas[i][1] = "<span>" + resultados[i].categoria + "</span>";
-					datosMemoriasAutorizadas[i][2] = "<span>" + resultados[i].puntuacion + '</span><span class="estrellas">'+ estrellas+"</span>";
+					datosMemoriasAutorizadas[i][2] = "<span>" + resultados[i].puntuacion + '</span><span> puntos'+ estrellas+"</span>";
 					datosMemoriasAutorizadas[i][3] = "<span>" + resultados[i].creador + "</span>";
 					datosMemoriasAutorizadas[i][4] = "<span>" + resultados[i].fechaCreacion + "</span>";
 					datosMemoriasAutorizadas[i][5] = "<span>" + variable + "</span>";
@@ -97,7 +96,7 @@ function creatabla(){
 				datosMemoriasAutorizadas[i] = new Array();	 	 		 			 
 				datosMemoriasAutorizadas[i][0] = "<span>" + resultados[i].nombreMd + "</span>"; 
 				datosMemoriasAutorizadas[i][1] = "<span>" + resultados[i].categoria + "</span>";
-				datosMemoriasAutorizadas[i][2] = "<span>" + resultados[i].puntuacion + '</span><span class="estrellas">'+ estrellas+"</span>";
+				datosMemoriasAutorizadas[i][2] = "<span>" + resultados[i].puntuacion + '</span><span> puntos'+ estrellas+"</span>";
 				datosMemoriasAutorizadas[i][3] = "<span>" + resultados[i].creador + "</span>";
 				datosMemoriasAutorizadas[i][4] = "<span>" + resultados[i].fechaCreacion + "</span>";
 				datosMemoriasAutorizadas[i][5] = "<span>" + resultados[i].autorizador + "</span>";

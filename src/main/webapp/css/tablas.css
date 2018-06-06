@@ -2,7 +2,7 @@ td{
 	border-top:1px solid gray;
 	text-align:center;
 	color:#1f3d7a;
-	font-size:13px;
+	font-size:12px;
 	padding-top:6px;
 	padding-bottom:6px;
 	padding-left:12px;
@@ -12,6 +12,7 @@ th{
 	padding-top:5px;
 	padding-bottom:5px;
 	color:#1f3d7a;
+	font-size:14px;
 }
 tbody tr:hover{
 	background-color:#ecfcff;
@@ -81,4 +82,13 @@ table{
 	margin-top: 2px;
     margin-left: 8px;
     width: 18px;
+}
+span.estrellas{
+	width:100px;
+	text-align:left;
+}
+/*rechazadas*/
+span.seccion{
+	display: inline-block;
+	width:100px;
 }

@@ -20,8 +20,28 @@
 <%@ include file="/jsp/generic/header.jsp" %>
 
 <div class="container-fluid">
-	<div class="row padding_p">
-		<div class="col-lg-12 titulo">DASHBOARD ${usr.perfil.areasxpuesto[0].areaNom} > RECHAZADAS </div>
+	<div class="row padding_p" style="padding-top:0px;">
+		<div class="col-lg-3 titulo">DASHBOARD ${usr.perfil.areasxpuesto[0].areaNom} > RECHAZADAS </div>
+		<div class="col-lg-5" style="font-size:12px; background: #FFFFFF; color: #1f3d7a;text-align: center; border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">
+		
+			<span class="seccion" style="width:80px;"><span><img src="img/web_gerenteExpansionc.png">&nbsp;</span>
+			<span>Gerente</span></span>
+			
+			<span class="seccion"><span><img src="img/web_expansionc.png">&nbsp;</span>
+			<span>Expansión</span></span>
+			
+			<span class="seccion"><span><img src="img/web_gestoriac.png">&nbsp;</span>
+			<span>Gestoría</span></span>
+			
+			<span class="seccion"><span><img src="img/web_construccionc.png">&nbsp;</span>
+			<span>Construcción</span></span>
+			
+			<span class="seccion"><span><img src="img/web_operacionesc.png">&nbsp;</span>
+			<span>Operaciones</span></span>
+		</div>
+		
+		<div class="col-lg-4 titulo">&nbsp;</div>
+		
 		<div class="col-lg-9 titulogrande">MD RECHAZADAS</div>
 		<div class="col-lg-3" style="padding-top: 5px;">
 			<div id="descargaExcel" style="position: relative; float: left;margin-right: 10px;cursor: pointer"><img src="${pageContext.request.contextPath}/img/iconos_DOWNLOAD.png"></div>

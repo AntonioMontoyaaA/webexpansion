@@ -126,6 +126,116 @@ function dibujaGraficaAutorizaciones(){
 	}
 }
 
+function generaPopAutorizacion(titulo, datos){
+	var popAutorizacion = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 17px;">' + titulo + '<br/></span></div>' + 
+	   '<div style="width: 60%; position: relative; float: left; margin-top: 10px;"><span style="color: #FFF;font-size: 12px;font-weight: bold;">Autorizó</span></div>' +
+	   '<div style="width: 40%; position: relative; float: left; margin-top: 10px;"><span style="color: #FFF;font-size: 12px;font-weight: bold;">Fecha autorización</span></div>' +
+	   '<div style="width: 60%; position: relative; float: left"><span style="color: #FFF;font-size: 10px;">' + datos.nombre + '</span></div>' +
+	   '<div style="width: 40%; position: relative; float: left"><span style="color: #FFF;font-size: 10px;">' + datos.fechaAutorizacion + '</span></div>' +
+	   '<div style="width: 60%; position: relative; float: left"><span style="color: #FFF;font-size: 12px;font-weight: bold;">Fecha límite</span></div>' +
+	   '<div style="width: 40%; position: relative; float: left"><span style="color: #FFF;font-size: 12px;font-weight: bold;">Días vencidos</span></div>' + 
+	   '<div style="width: 60%; position: relative; float: left"><span style="color: #FFF;font-size: 10px;">' + datos.fechaLimite + '</span></div>' +
+	   '<div style="width: 40%; position: relative; float: left"><span style="color: #FFF;font-size: 10px;">' + datos.diasVencidos + '</span></div></div>';
+	
+	return popAutorizacion;
+}
+function dibujaAreasCompletadas(AREAS){
+	for(var i = 0; i < AREAS.length; i++) {
+		if(AREAS[i].EXPANSION != undefined && 
+				AREAS[i].EXPANSION.length > 0 && 
+				AREAS[i].EXPANSION[0].puestosValida != undefined && 
+				AREAS[i].EXPANSION[0].puestosValida.length > 0) {
+			
+			if(AREAS[i].EXPANSION[0].puestosValida[0] == 'GERENTE DE EXPANSION') {
+				
+				$("#gerenteExpansionDiv").css("cursor", "pointer");
+				$("#circuloAutorizaGerenteExpansion").addClass("circuloSeguimientoAprobado");
+				
+				var contentPopGerente = generaPopAutorizacion('Autorización Gerente de Expansión', AREAS[i].EXPANSION[0]);
+				
+				$("#gerenteExpansionSegPop").popover({
+					html: true, 
+					content : contentPopGerente
+				});
+				
+				if(AREAS[i].EXPANSION[0].diasVencidos > 0) {
+					$("#gerenteExpansionImg").css("display", "inline");
+				}
+			}else if(AREAS[i].EXPANSION[0].puestosValida[0] == 'ANALISTA DE EXPANSION') {
+				
+				$("#expansionDiv").css("cursor", "pointer");
+				$("#circuloAutorizaExpansion").addClass("circuloSeguimientoAprobado");
+				
+				var contentPopExpansion = generaPopAutorizacion('Autorización de Expansión', AREAS[i].EXPANSION[0]);
+				
+				$("#expansionSegPop").popover({
+					html: true, 
+					content : contentPopExpansion
+				});
+				
+				if(AREAS[i].EXPANSION[0].diasVencidos > 0) {
+					$("#expansionImg").css("display", "inline");
+				}
+			}
+		}else if(AREAS[i].GESTORIA != undefined && 
+				AREAS[i].GESTORIA.length > 0) {
+			
+				
+			$("#gestoriaDiv").css("cursor", "pointer");
+			$("#circuloAutorizaGestoria").addClass("circuloSeguimientoAprobado");
+				
+			var contentPopGestoria = generaPopAutorizacion('Autorización Gestoría', AREAS[i].GESTORIA[0]);
+				
+			$("#gestoriaSegPop").popover({
+				html: true, 
+				content : contentPopGestoria
+			});
+				
+			if(AREAS[i].GESTORIA[0].diasVencidos > 0) {
+				$("#gestoriaImg").css("display", "inline");
+			}
+			
+		}else if(AREAS[i].CONSTRUCCION != undefined && 
+				AREAS[i].CONSTRUCCION.length > 0) {
+			
+				
+			$("#construccionDiv").css("cursor", "pointer");
+			$("#circuloAutorizaConstruccion").addClass("circuloSeguimientoAprobado");
+				
+			var contentPopConstruccion = generaPopAutorizacion('Autorización Construcción', AREAS[i].CONSTRUCCION[0]);
+				
+			$("#construccionSegPop").popover({
+				html: true, 
+				content : contentPopConstruccion
+			});
+				
+			if(AREAS[i].CONSTRUCCION[0].diasVencidos > 0) {
+				$("#construccionImg").css("display", "inline");
+			}
+			
+		}else if(AREAS[i].OPERACIONES != undefined && 
+				AREAS[i].OPERACIONES.length > 0) {
+			
+				
+			$("#operacionesDiv").css("cursor", "pointer");
+			$("#circuloAutorizaOperaciones").addClass("circuloSeguimientoAprobado");
+				
+			var contentPopOperaciones = generaPopAutorizacion('Autorización Operaciones', AREAS[i].OPERACIONES[0]);
+				
+			$("#operacionesSegPop").popover({
+				html: true, 
+				content : contentPopOperaciones
+			});
+				
+			if(AREAS[i].OPERACIONES[0].diasVencidos > 0) {
+				$("#operacionesImg").css("display", "inline");
+			}
+			
+		}
+		
+	}
+}
+
 function buscaDetalleMD(mdId) {
 	cargaLoading();
 	
@@ -154,36 +264,9 @@ function buscaDetalleMD(mdId) {
 			
 			/* Datos de áreas que ya han autorizado */
 			if(data.areasAutorizadas != undefined && data.areasAutorizadas.length > 0) {
-				for(var i = 0; i < data.areasAutorizadas.length; i++) {
-					if(data.areasAutorizadas[i].EXPANSION != undefined && data.areasAutorizadas[i].EXPANSION.length > 0 
-							&& data.areasAutorizadas[i].EXPANSION[0].puestosValida != undefined && data.areasAutorizadas[i].EXPANSION[0].puestosValida.length > 0) {
-						if(data.areasAutorizadas[i].EXPANSION[0].puestosValida[0] == 'GERENTE DE EXPANSION') {
-							
-							$("#gerenteExpansionDiv").css("cursor", "pointer");
-							$("#circuloAutorizaGerenteExpansion").addClass("circuloSeguimientoAprobado");
-							var contentPopGerente = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 17px;">Autorización Gerente de Expansión<br/></span></div>' + 
-							   '<div style="width: 60%; position: relative; float: left; margin-top: 10px;"><span style="color: #FFF;font-size: 12px;font-weight: bold;">Autorizó</span></div>' +
-							   '<div style="width: 40%; position: relative; float: left; margin-top: 10px;"><span style="color: #FFF;font-size: 12px;font-weight: bold;">Fecha autorización</span></div>' +
-							   '<div style="width: 60%; position: relative; float: left"><span style="color: #FFF;font-size: 10px;">' + data.areasAutorizadas[i].EXPANSION[0].nombre + '</span></div>' +
-							   '<div style="width: 40%; position: relative; float: left"><span style="color: #FFF;font-size: 10px;">' + data.areasAutorizadas[i].EXPANSION[0].fechaAutorizacion + '</span></div>' +
-							   '<div style="width: 60%; position: relative; float: left"><span style="color: #FFF;font-size: 12px;font-weight: bold;">Fecha límite</span></div>' +
-							   '<div style="width: 40%; position: relative; float: left"><span style="color: #FFF;font-size: 12px;font-weight: bold;">Días vencidos</span></div>' + 
-							   '<div style="width: 60%; position: relative; float: left"><span style="color: #FFF;font-size: 10px;">' + data.areasAutorizadas[i].EXPANSION[0].fechaLimite + '</span></div>' +
-							   '<div style="width: 40%; position: relative; float: left"><span style="color: #FFF;font-size: 10px;">' + data.areasAutorizadas[i].EXPANSION[0].diasVencidos + '</span></div></div>';
-							
-							$("#gerenteExpansionSegPop").popover({
-								html: true, 
-								content : contentPopGerente
-							});
-							
-							if(data.areasAutorizadas[i].EXPANSION[0].diasVencidos > 0) {
-								$("#gerenteExpansionImg").css("display", "inline");
-							}
-						}
-					}
-				}
-				
+				dibujaAreasCompletadas(data.areasAutorizadas)
 			}
+			
 			/* Datos generales de la MD */
 			if(data.generales != undefined) {
 				$("#nombreMd").text(data.generales.nombreMd);
@@ -276,7 +359,7 @@ function buscaDetalleMD(mdId) {
 				var condicionesGeneralesLocal = "";
 				if(data.construccion.factores.length > 0) {
 					for(var i = 0; i < data.construccion.factores.length; i++) {
-						if(data.construccion.factores[i].nivelId == 3) {
+						if(data.construccion.factores[i].nivelId > 2 && data.construccion.factores[i].nivelId < 6) {
 							condicionesGeneralesLocal = data.construccion.factores[i].nombreFactor
 						} else {
 							htmlFactores += '<img style="padding-right: 10px;" src="img/icono_factor.png"/><span class="subtituloDetalleMd sangria_cuerpo">' + data.construccion.factores[i].nombreFactor + '</span><br/>';
@@ -569,12 +652,12 @@ function actionfinalizaMD(){
 
 function funcionesAutorizacion(){
 	$("#btnModalAutorizacion").click(function() {
-		
+		var motivoSeleccionado = 0;
 		if($("#tipoAutorizacion").val() == AUTORIZA_MODULO){
 			if($('#detalleMensajeModal textarea').val() == '')
 				$('#detalleMensajeModal textarea').val(' ');
-				
-			autoriza();
+			motivoSeleccionado = 0;
+			autoriza(motivoSeleccionado);
 		}else if($("#tipoAutorizacion").val() == RECHAZA_MODULO){
 			mensaje = '';
 			if($('#detalleMensajeModal textarea').val() == '')
@@ -584,10 +667,11 @@ function funcionesAutorizacion(){
 					mensaje += 'Por favor selecciona el motivo de rechazo';
 				else
 					mensaje = 'Porfavor escriba y seleccione el motivo de rechazo';
-			}
+			}else
+				motivoSeleccionado = $('#motivoRechazo option:selected').val();
 			
 			if(mensaje == '')
-				autoriza();
+				autoriza(motivoSeleccionado);
 			else{
 				$("#modal_autorizacion").modal("hide");
 				cargaMensajeModal('MD ASIGNADAS', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, muestraPopAutorizacion);
@@ -597,7 +681,7 @@ function funcionesAutorizacion(){
 	});	
 }
 
-function autoriza(){
+function autoriza(motivoSeleccionado){
 	$("#modal_autorizacion").modal("hide");
 	
 	cargaLoading();
@@ -606,7 +690,7 @@ function autoriza(){
 			{'modulo': $("#moduloId").val(),
 			 'md': $("#mdIdAutorizacion").val(),
 			 'validacion':$("#tipoAutorizacion").val(),
-			 'motivo': $('#motivoRechazo').val(),
+			 'motivo': motivoSeleccionado,
 			 'finaliza' : $("#finaliza").val(),
 			 'comentario': $('#detalleMensajeModal textarea').val()
 			 }, 

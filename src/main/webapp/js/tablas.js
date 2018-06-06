@@ -30,6 +30,7 @@ function initTablaMemoriasAsignadas(nombreDiv, datosDesgloseVenta, nombreTabla){
 				           {"bSearchable":true},
 				           { "sClass": "oculto", "bSearchable": false }],		
 			"bJQueryUI": false,
+			"order": [[2, "desc"], [5, "desc"]],
 			"sPaginationType": "full_numbers",
 			"oLanguage": idiomaEspanol,
 			"bLengthChange":false,

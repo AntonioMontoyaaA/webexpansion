@@ -24,7 +24,7 @@
 <%@ include file="/jsp/generic/header.jsp" %>
 
 <div class="container-fluid">
-	<div class="row padding_p">
+	<div class="row padding_p" style="padding-top:0px;">
 		<div class="col-lg-5 titulo">Dashboard Expansión > Asignadas </div>
 		<div class="col-lg-2 titulo" style="background: #FFFFFF; color: #1f3d7a;text-align: center; border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">
 			<span class="punto"></span>
@@ -52,6 +52,7 @@
 
 <jsp:include page="/jsp/generic/loading.jsp" />
 <jsp:include page="/jsp/generic/mensajes.jsp" />
+
 <form action='memoria_detalle'  id="detalleMemoriaAsignadaAction" method="post">
 	<input type="hidden" name="mdId" id="mdId" value=""/>
 	<input type="hidden" name="nombreMd" id="nombreMd" value=""/>

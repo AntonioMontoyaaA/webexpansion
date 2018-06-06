@@ -20,7 +20,7 @@
 <%@ include file="/jsp/generic/header.jsp" %>
 
 <div class="container-fluid">
-	<div class="row padding_p">
+	<div class="row padding_p" style="padding-top:0px;">
 		<div class="col-lg-12 titulo">DASHBOARD ${usr.perfil.areasxpuesto[0].areaNom} > AUTORIZADAS </div>
 		<div class="col-lg-9 titulogrande">MD AUTORIZADAS</div>
 		<div class="col-lg-3" style="padding-top: 5px;">

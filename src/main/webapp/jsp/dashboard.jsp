@@ -20,7 +20,7 @@
 
 <%@ include file="/jsp/generic/header.jsp" %>
 <div class="container-fluid menupr_fondo">
-	<div class="row padding_p">
+	<div class="row padding_p" style="padding-top:0px;">
 	<div class="col-lg-12 titulo" id="nombrePerfil">
 	</div>
 		<div class="col-lg-8">

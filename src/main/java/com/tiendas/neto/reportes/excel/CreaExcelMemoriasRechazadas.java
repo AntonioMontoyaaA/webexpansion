@@ -31,6 +31,7 @@ public class CreaExcelMemoriasRechazadas {
         sheet.setColumnWidth(6, 9000);
         sheet.setColumnWidth(7, 6000);
         sheet.setColumnWidth(8, 6000);
+        sheet.setColumnWidth(9, 4000);
         
         HSSFFont tituloHeader0 = wb.createFont();
         tituloHeader0.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
@@ -97,13 +98,16 @@ public class CreaExcelMemoriasRechazadas {
         cell.setCellValue(new HSSFRichTextString("FECHA CREACION"));
         cell = row.createCell(6);
         cell.setCellStyle(headerCellStyle);
-        cell.setCellValue(new HSSFRichTextString("AUTORIZADOR"));
+        cell.setCellValue(new HSSFRichTextString("RECHAZÓ"));
         cell = row.createCell(7);
         cell.setCellStyle(headerCellStyle);
-        cell.setCellValue(new HSSFRichTextString("FECHA AUTORIZACION"));
+        cell.setCellValue(new HSSFRichTextString("FECHA RECHAZO"));
         cell = row.createCell(8);
         cell.setCellStyle(headerCellStyle);
-        cell.setCellValue(new HSSFRichTextString("TIPO AUTORIZACION"));
+        cell.setCellValue(new HSSFRichTextString("MOTIVO"));
+        cell = row.createCell(9);
+        cell.setCellStyle(headerCellStyle);
+        cell.setCellValue(new HSSFRichTextString("TIPO"));
         
         for(int i = 0; i < listaMemorias.size(); i++) {
         	HSSFCellStyle datosCellStyle = null;
@@ -132,19 +136,16 @@ public class CreaExcelMemoriasRechazadas {
             cellDatos.setCellValue(new HSSFRichTextString(listaMemorias.get(i).getFechaCreacion()));
             cellDatos = rowDatos.createCell(6);
             cellDatos.setCellStyle(datosCellStyle);
-            cellDatos.setCellValue(new HSSFRichTextString(listaMemorias.get(i).getAutorizador()));
+            cellDatos.setCellValue(new HSSFRichTextString(listaMemorias.get(i).getNombreRechazo()));
             cellDatos = rowDatos.createCell(7);
             cellDatos.setCellStyle(datosCellStyle);
-            cellDatos.setCellValue(new HSSFRichTextString(listaMemorias.get(i).getFechaAutorizacion()));
+            cellDatos.setCellValue(new HSSFRichTextString(listaMemorias.get(i).getFechaRechazo()));
             cellDatos = rowDatos.createCell(8);
-            
-            String vencida="";
-            if(listaMemorias.get(i).getMdVencida()=="true")
-            	vencida="Fuera de tiempo";
-            else
-            	vencida="En tiempo";
             cellDatos.setCellStyle(datosCellStyle);
-            cellDatos.setCellValue(new HSSFRichTextString(vencida));        
+            cellDatos.setCellValue(new HSSFRichTextString(listaMemorias.get(i).getMotivoRechazo()));   
+            cellDatos = rowDatos.createCell(9);
+            cellDatos.setCellStyle(datosCellStyle);
+            cellDatos.setCellValue(new HSSFRichTextString(listaMemorias.get(i).getTipoRechazo()));   
         }      
         return wb;
     }

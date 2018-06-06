@@ -7,7 +7,7 @@ function initTablaMemoriasAsignadas(nombreDiv, datosDesgloseVenta, nombreTabla){
 				'<tr style="cursor: pointer;border-top: 0px; border-bottom: 0px;">' +
 					'<th width="20%"  class="headerTable_flat">Nombre MD</th>'  +
 					'<th width="10%"  class="headerTable_flat" style="text-align: center;">Categoría</th>' +
-					'<th width="10%"  class="headerTable_flat" style="width:150px; text-align:center;">Puntuación</th>' +
+					'<th width="10%"  class="headerTable_flat" style="width:160px; text-align:center;">Puntuación</th>' +
 					'<th width="20%"  class="headerTable_flat">Creador</th>' +
 					'<th width="17%"  class="headerTable_flat">Fecha de creación</th>' +
 					'<th width="18%"  class="headerTable_flat">Fecha de vecimiento</th>' +
@@ -58,7 +58,7 @@ function initTablaMemoriasAutorizadas(nombreDiv, datosDesgloseVenta, nombreTabla
 				'<tr style="cursor: pointer;border-top: 0px; border-bottom: 0px;">' +
 					'<th class="headerTable_flat">Nombre MD</th>'  +
 					'<th class="headerTable_flat" style="text-align: center;">Categoría</th>' +
-					'<th class="headerTable_flat" style="width:150px; text-align:center;" >Puntuación</th>' +
+					'<th class="headerTable_flat" style="width:160px; text-align:center;" >Puntuación</th>' +
 					'<th class="headerTable_flat">Creador</th>' +
 					'<th class="headerTable_flat">Fecha de creación</th>' +
 					'<th class="headerTable_flat">Autorizó</th>' +
@@ -111,7 +111,7 @@ function initTablaMemoriasAutorizadasDirGeneral(nombreDiv, datosDesgloseVenta, n
 				'<tr style="cursor: pointer;border-top: 0px; border-bottom: 0px;">' +
 					'<th class="headerTable_flat">Nombre MD</th>'  +
 					'<th class="headerTable_flat" style="text-align: center;">Categoría</th>' +
-					'<th class="headerTable_flat" style="width:150px; text-align:center;">Puntuación</th>' +
+					'<th class="headerTable_flat" style="width:160px; text-align:center;">Puntuación</th>' +
 					'<th class="headerTable_flat">Creador</th>' +
 					'<th class="headerTable_flat">Fecha de creación</th>' +
 					'<th class="headerTable_flat">Tipo de Autorización</th>' +
@@ -160,7 +160,7 @@ function initTablaMemoriasRechazadas(nombreDiv, datosDesgloseVenta, nombreTabla)
 				'<tr style="cursor: pointer;border-top: 0px; border-bottom: 0px;">' +
 					'<th class="headerTable_flat">Nombre MD</th>'  +
 					'<th class="headerTable_flat" style="text-align: center;">Categoría</th>' +
-					'<th class="headerTable_flat" style="width:150px; text-align:center;">Puntuación</th>' +
+					'<th class="headerTable_flat" style="width:160px; text-align:center;">Puntuación</th>' +
 					'<th class="headerTable_flat">Creador</th>' +
 					'<th class="headerTable_flat">Fecha de creación</th>' +
 					'<th class="headerTable_flat">Rechazó</th>' +

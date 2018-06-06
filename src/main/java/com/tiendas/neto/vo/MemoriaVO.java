@@ -17,6 +17,11 @@ public class MemoriaVO implements Serializable {
 	private String autorizador;
 	private String fechaAutorizacion;
 	private String mdVencida;
+	private String nombreRechazo;
+	private String tipoRechazo;
+	private String motivoRechazo;
+	private String fechaRechazo;
+	private AreasVo[] listaAreas;
 	
 	
 	public long getMdId() {
@@ -75,6 +80,36 @@ public class MemoriaVO implements Serializable {
 	}
 	public void setMdVencida(String mdVencida) {
 		this.mdVencida = mdVencida;
+	}
+	public String getNombreRechazo() {
+		return nombreRechazo;
+	}
+	public void setNombreRechazo(String nombreRechazo) {
+		this.nombreRechazo = nombreRechazo;
+	}
+	public String getTipoRechazo() {
+		return tipoRechazo;
+	}
+	public void setTipoRechazo(String tipoRechazo) {
+		this.tipoRechazo = tipoRechazo;
+	}
+	public String getMotivoRechazo() {
+		return motivoRechazo;
+	}
+	public void setMotivoRechazo(String motivoRechazo) {
+		this.motivoRechazo = motivoRechazo;
+	}
+	public String getFechaRechazo() {
+		return fechaRechazo;
+	}
+	public void setFechaRechazo(String fechaRechazo) {
+		this.fechaRechazo = fechaRechazo;
+	}
+	public AreasVo[] getListaAreas() {
+		return listaAreas;
+	}
+	public void setListaAreas(AreasVo[] listaAreas) {
+		this.listaAreas = listaAreas;
 	}
 	
 }

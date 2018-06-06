@@ -302,54 +302,81 @@ function progSemanal_grafica(data){
 //---------------------------------  ARMA GRAFICA PLAN DE APERTURA MENSUAL
 function AperturaMensual_grafica(data){
 var	datos=data.meses;
+var ene_plan=0, ene_real=0, feb_plan=0, feb_real=0, mar_plan=0, mar_real=0, abr_plan=0, abr_real=0, may_plan=0, may_real=0;
+var jun_plan=0, jun_real=0, jul_plan=0, jul_real=0, ago_plan=0, ago_real=0, sep_plan=0, sep_real=0, oct_plan=0, oct_real=0;
+var nov_plan=0, nov_real=0, dic_plan=0, dic_real=0;
 
-if(mes=="ENERO"){
-	$('#metas').text(datos.Enero.plan);
-	$('#t_abiertas').text(datos.Enero.real);
+if(mes=="ENERO" && datos.Enero!="undefined"){
+	ener_plan=datos.Enero.plan;
+	ene_real=datos.Enero.real;
+	$('#metas').text(ene_plan);
+	$('#t_abiertas').text(ene_real);
 }
-if(mes=="FEBRERO"){
-	$('#metas').text(datos.Febrero.plan);
-	$('#t_abiertas').text(datos.Febrero.real);
+if(mes=="FEBRERO"  && datos.Febrero!="undefined"){
+	feb_plan=datos.Febrero.plan;
+	feb_real=datos.Febrero.real;
+	$('#metas').text(feb_plan);
+	$('#t_abiertas').text(feb_real);
 }
-if(mes=="MARZO"){
-	$('#metas').text(datos.Marzo.plan);
-	$('#t_abiertas').text(datos.Marzo.real);
+if(mes=="MARZO"  && datos.Marzo!="undefined"){
+	mar_plan=datos.Marzo.plan;
+	mar_real=datos.Marzo.real;
+	$('#metas').text(mar_plan);
+	$('#t_abiertas').text(mar_real);
 }
-if(mes=="ABRIL"){
-	$('#metas').text(datos.Abril.plan);
-	$('#t_abiertas').text(datos.Abril.real);
+if(mes=="ABRIL"  && datos.Abril!="undefined"){
+	abr_plan=datos.Abril.plan;
+	abr_real=datos.Abril.real;
+	$('#metas').text(abr_plan);
+	$('#t_abiertas').text(abr_real);
 }
-if(mes=="MAYO"){
-	$('#metas').text(datos.Mayo.plan);
-	$('#t_abiertas').text(datos.Mayo.real);
+if(mes=="MAYO"  && datos.Mayo!="undefined"){
+	may_plan=datos.Mayo.plan;
+	may_real=datos.Mayo.real;
+	$('#metas').text(may_plan);
+	$('#t_abiertas').text(may_real);
 }
-if(mes=="JUNIO"){
-	$('#metas').text(datos.Junio.plan);
-	$('#t_abiertas').text(datos.Junio.real);
+if(mes=="JUNIO"  && datos.Junio!="undefined"){
+	jun_plan=datos.Junio.plan;
+	jun_real=datos.Junio.real;
+	$('#metas').text(jun_plan);
+	$('#t_abiertas').text(jun_real);
 }
-if(mes=="JULIO"){
-	$('#metas').text(datos.Julio.plan);
-	$('#t_abiertas').text(datos.Julio.real);
+if(mes=="JULIO"  && datos.Julio!="undefined"){
+	jul_plan=datos.Julio.plan;
+	jul_real=datos.Julio.real;
+	$('#metas').text(jul_plan);
+	$('#t_abiertas').text(jul_real);
 }
-if(mes=="AGOSTO"){
-	$('#metas').text(datos.Agosto.plan);
-	$('#t_abiertas').text(datos.Agosto.real);
+if(mes=="AGOSTO"  && datos.Agosto!="undefined"){
+	ago_plan=datos.Agosto.plan;
+	ago_real=datos.Agosto.real;
+	$('#metas').text(ago_plan);
+	$('#t_abiertas').text(ago_real);
 }
-if(mes=="SEPTIEMBRE"){
-	$('#metas').text(datos.Septiembre.plan);
-	$('#t_abiertas').text(datos.Septiembre.real);
+if(mes=="SEPTIEMBRE"  && datos.Septiembre!="undefined"){
+	sep_plan=datos.Septiembre.plan;
+	sep_real=datos.Septiembre.real;
+	$('#metas').text(sep_plan);
+	$('#t_abiertas').text(sep_real);
 }
-if(mes=="OCTUBRE"){
-	$('#metas').text(datos.Octubre.plan);
-	$('#t_abiertas').text(datos.Octubre.real);
+if(mes=="OCTUBRE"  && datos.Octubre!="undefined"){
+	oct_plan=datos.Octubre.plan;
+	oct_real=datos.Octubre.real;
+	$('#metas').text(oct_plan);
+	$('#t_abiertas').text(oct_real);
 }
-if(mes=="NOVIEMBRE"){
-	$('#metas').text(datos.Noviembre.plan);
-	$('#t_abiertas').text(datos.Noviembre.real);
+if(mes=="NOVIEMBRE"  && datos.Noviembre!="undefined"){
+	nov_plan=datos.Noviembre.plan;
+	nov_real=datos.Noviembre.real;
+	$('#metas').text(nov_plan);
+	$('#t_abiertas').text(nov_real);
 }
-if(mes=="DICIEMBRE"){
-	$('#metas').text(datos.Diciembre.plan);
-	$('#t_abiertas').text(datos.Diciembre.real);
+if(mes=="DICIEMBRE"  && datos.Diciembre!="undefined"){
+	dic_plan=datos.Diciembre.plan;
+	dic_real=datos.Diciembre.real;
+	$('#metas').text(dic_plan);
+	$('#t_abiertas').text(dic_real);
 }
 
 	
@@ -393,33 +420,34 @@ if(mes=="DICIEMBRE"){
 	    series: [{
 		        name: 'Faltante',
 		        color: '#C9C9C9',
-		        data: [datos.Enero.plan - datos.Enero.real,
-		        	datos.Febrero.plan - datos.Febrero.real,
-		        	datos.Marzo.plan - datos.Marzo.real,
-		        	datos.Abril.plan - datos.Abril.real,
-		        	datos.Mayo.plan - datos.Mayo.real,
-		        	datos.Junio.plan - datos.Junio.real,
-		        	datos.Julio.plan - datos.Julio.real,
-		        	datos.Agosto.plan - datos.Agosto.real,
-		        	datos.Septiembre.plan - datos.Septiembre.real,
-		        	datos.Octubre.plan - datos.Octubre.real,
-		        	datos.Noviembre.plan - datos.Noviembre.real,
-		        	datos.Diciembre.plan - datos.Diciembre.real]
+		        data: [
+		        	ene_plan - ene_real,
+		        	feb_plan - feb_real,
+		        	mar_plan - mar_real,
+		        	abr_plan - abr_real,
+		        	may_plan - may_real,
+		        	jun_plan - jun_real,
+		        	jul_plan - jul_real,
+		        	ago_plan - ago_real,
+		        	sep_plan - sep_real,
+		        	oct_plan - oct_real,
+		        	nov_plan - nov_real,
+		        	dic_plan - dic_real]
 		    },{
 		    	name: 'Aperturas',
 		    	color: '#40BCD8',
-		    	data: [datos.Enero.real,
-		    		datos.Febrero.real,
-		    		datos.Marzo.real,
-		    		datos.Abril.real,
-		    		datos.Mayo.real,
-		    		datos.Junio.real,
-		    		datos.Julio.real,
-		    		datos.Agosto.real,
-		    		datos.Septiembre.real,
-		    		datos.Octubre.real,
-		    		datos.Noviembre.real,
-		    		datos.Diciembre.real]
+		    	data: [ene_real,
+		    		feb_real,
+		    		mar_real,
+		    		abr_real,
+		    		may_real,
+		    		jun_real,
+		    		jul_real,
+		    		ago_real,
+		    		sep_real,
+		    		oct_real,
+		    		nov_real,
+		    		dic_real]
 		    }]
 	});
 }
@@ -700,7 +728,7 @@ function Resumen_grafica_analista(data){
 	Highcharts.chart('container_atrasadas', {
 	    chart: {
 	    	events: {
-                click: function () {location.href = 'atrasadas'}
+                click: function () {location.href = 'asignadas'}
             },
 	        plotBackgroundColor: null,
 	        plotBorderWidth: 0,
@@ -1177,7 +1205,7 @@ function Resumen_grafica_dirArea(data){
 	Highcharts.chart('container_atrasadas', {
 	    chart: {
 	    	events: {
-                click: function () {location.href = 'atrasadas'}
+                click: function () {location.href = 'asignadas'}
             },
 	        plotBackgroundColor: null,
 	        plotBorderWidth: 0,
@@ -1645,7 +1673,7 @@ function Resumen_grafica_dirGeneral(data){
 	Highcharts.chart('container_atrasadas', {
 	    chart: {
 	    	events: {
-                click: function () {location.href = 'atrasadas'}
+                click: function () {location.href = 'asignadas'}
             },
 	        plotBackgroundColor: null,
 	        plotBorderWidth: 0,

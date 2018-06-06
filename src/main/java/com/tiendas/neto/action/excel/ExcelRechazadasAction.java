@@ -53,9 +53,10 @@ public class ExcelRechazadasAction extends ExpansionAction {
 	        	memoria.setPuntuacion(array.getJSONObject(i).getInt("puntuacion"));
 	        	memoria.setCreador(array.getJSONObject(i).getString("creador"));
 	        	memoria.setFechaCreacion(array.getJSONObject(i).getString("fechaCreacion"));
-	        	memoria.setAutorizador(array.getJSONObject(i).getString("autorizador"));
-	        	memoria.setFechaAutorizacion(array.getJSONObject(i).getString("fechaAutorizacion"));
-	        	memoria.setMdVencida(array.getJSONObject(i).getString("mdVencida"));
+	        	memoria.setNombreRechazo(array.getJSONObject(i).getString("nombreRechazo"));
+	        	memoria.setFechaRechazo(array.getJSONObject(i).getString("fechaRechazo"));
+	        	memoria.setMotivoRechazo(array.getJSONObject(i).getString("motivoRechazo"));
+	        	memoria.setTipoRechazo(array.getJSONObject(i).getString("tipoRechazo"));
 	        	listaMemorias.add(memoria);
 	        }
 	        

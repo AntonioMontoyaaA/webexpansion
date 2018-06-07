@@ -7,15 +7,26 @@ var fecha_entera;
 var perfil;
 var area;
 var areaId;
+var fecha_general;
+var fecha_generalH;
 mesesarr = new Array ("ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE");
 
+
 $(function(){
+	
 		$('#iddashboard').addClass('resaltado'); //resalta en el header
 		perfil=$('#perfil_usuario').val();
 		area= $('#area').val();
 		areaId=$('#areaId').val();
 		
+		$('#nombrePerfil').text('DASHBOARD ANALISTA '+area);
 		cargafechas();
+		
+		selectGeneral();
+		selectHistorico();
+		
+		fecha_general="01/"+$('#datepickermes').val();
+		fecha_generalH=$('#datepickersemanaH').val();
 		
 		progGeneral();
 		progSemanal();
@@ -23,6 +34,7 @@ $(function(){
 });
 
 function cargafechas(){
+	
 	var f=new Date();
 	var mesint = new Array ("01","02","03","04","05","06","07","08","09","10","11","12");
 	
@@ -35,10 +47,11 @@ function cargafechas(){
 }
 // ---------------------- CONSULTAS AL ACTION
 function progGeneral(){
+	
 	cargafechas();
 	$('#fecha_pg').text(fecha_entera);
 	invocarJSONServiceAction("DashboardGeneralAction", 
-			{'tipoConsulta': $('#opcion').val(), 'fechaConsulta': fecha}, 
+			{'tipoConsulta': $('#opcion').val(), 'fechaConsulta': fecha_general}, 
 			'obtieneDashboardResponse', 
 			function() {
 				//Funcion de error
@@ -72,21 +85,6 @@ function progGeneral(){
 		$('.analista').show();
 		Resumen_grafica_analista(data);
 	}
-		
-		if($('#opcion').val()=="0")
-			$('#pg_fecha').text(dia+' DE '+mes);
-		if($('#opcion').val()=="1")
-			$('#pg_fecha').text('SEMANA');
-		if($('#opcion').val()=="2")
-			$('#pg_fecha').text(mes+' '+año);
-		if($('#opcion').val()=="3")
-			$('#pg_fecha').text('BIMESTRE');
-		if($('#opcion').val()=="4")
-			$('#pg_fecha').text('TRIMESTRE');
-		if($('#opcion').val()=="5")
-			$('#pg_fecha').text('SEMESTRE');
-		if($('#opcion').val()=="6")
-			$('#pg_fecha').text('AÑO '+año);
 	}
 };	
 }
@@ -95,7 +93,7 @@ function progSemanal(){
 	$('#fecha_ps').text(fecha_entera);
 
 	invocarJSONServiceAction("DashboardPSemanalAction", 
-			{'tipoConsulta': $('#opcion_historial').val(), 'fechaConsulta': fecha,
+			{'tipoConsulta': $('#opcion_historial').val(), 'fechaConsulta': fecha_generalH,
 				'num': "10"}, 
 			'obtieneDashboardResponseSemanal', 
 			function() {
@@ -454,7 +452,6 @@ if(mes=="DICIEMBRE"  && datos.Diciembre!="undefined"){
 //---------------------------------  ARMA GRAFICA RESUMEN
 // ASIGNADAS
 function Resumen_grafica_analista(data){
-	$('#nombrePerfil').text('DASHBOARD ANALISTA '+area);
 	if(areaId==1)
 		var actual=data.areas.EXPANSION;
 	if(areaId==2)
@@ -1927,4 +1924,198 @@ function Resumen_grafica_dirGeneral(data){
             }]
 	    }]
 	});
+}
+function selectGeneral(){
+	$('#datepickerdia').hide();
+	$('#datepickersemana').hide();
+	$('#datepickermes').hide();
+	$('#datepickeraño').hide();
+	
+
+	if($('#opcion').val()=="0"){
+		$('#pg_fecha').text(dia+' DE '+mes);
+		
+		$('#datepickerdia').datepicker({
+			format : 'dd/mm/yyyy',
+			autoclose : true,
+			language : 'es',
+			todayHighlight : true
+	    }).datepicker("setDate", new Date()).on("change", function() {
+	       if(fecha_general!=''){
+	    	   fecha_general=$('#datepickerdia').val();
+	    	   progGeneral();
+	       }
+	    });
+		
+		$('#datepickerdia').show();
+		
+	}
+	if($('#opcion').val()=="1"){
+		$('#pg_fecha').text('SEMANA');
+		
+		
+		$('#datepickersemana').datepicker({
+			format : 'dd/mm/yyyy',
+			autoclose : true,
+			language : 'es',
+			todayHighlight : true,
+	    }).datepicker("setDate", new Date()).on("change", function() {
+	    	if(fecha_general!=''){
+	    		fecha_general=$('#datepickersemana').val();
+	    		progGeneral();
+	    	}
+	     });
+		
+		$('#datepickersemana').show();
+	}
+	
+	if($('#opcion').val()=="2"){
+		$('#pg_fecha').text(mes+' '+año);
+		
+		$('#datepickermes').datepicker({
+			format : 'mm/yyyy',
+			 startView: "months", 
+			 minViewMode: "months",
+			autoclose : true,
+			language : 'es',
+			todayHighlight : true
+	    }).datepicker("setDate", new Date()).on("change", function() {
+	    	if(fecha_general!=''){
+	    		fecha_general="01/"+$('#datepickermes').val();
+	    		progGeneral();
+	    	}
+	     });
+		
+		$('#datepickermes').show();
+	}
+	if($('#opcion').val()=="3"){
+		$('#pg_fecha').text('BIMESTRE');
+		
+	}
+	if($('#opcion').val()=="4"){
+		$('#pg_fecha').text('TRIMESTRE');
+		
+	}
+	if($('#opcion').val()=="5"){
+		$('#pg_fecha').text('SEMESTRE');
+		
+	}
+	if($('#opcion').val()=="6"){
+		$('#pg_fecha').text('AÑO '+año);
+		
+		$('#datepickeraño').datepicker({
+			format : 'yyyy',
+			startView: "years", 
+			 minViewMode: "years",
+			autoclose : true,
+			language : 'es',
+			todayHighlight : true,
+			viewMode: 'weeks'
+	    }).datepicker("setDate", new Date()).on("change", function() {
+	    	if(fecha_general!=''){
+	    		fecha_general="01/01/"+$('#datepickeraño').val();
+	    		progGeneral();
+	    	}
+	     });
+		
+		$('#datepickeraño').show();
+	}
+}
+
+function selectHistorico(){
+	$('#datepickerdiaH').hide();
+	$('#datepickersemanaH').hide();
+	$('#datepickermesH').hide();
+	$('#datepickerañoH').hide();
+	
+
+	if($('#opcion_historial').val()=="0"){
+		$('#titulo_historial').text(dia+' DE '+mes);
+		
+		$('#datepickerdiaH').datepicker({
+			format : 'dd/mm/yyyy',
+			autoclose : true,
+			language : 'es',
+			todayHighlight : true
+	    }).datepicker("setDate", new Date()).on("change", function() {
+	       if(fecha_generalH!=''){
+	    	   fecha_generalH=$('#datepickerdiaH').val();
+	    	   progSemanal();
+	       }
+	    });
+		
+		$('#datepickerdiaH').show();
+		
+	}
+	if($('#opcion_historial').val()=="1"){
+		$('#titulo_historial').text('SEMANA');
+		
+		
+		$('#datepickersemanaH').datepicker({
+			format : 'dd/mm/yyyy',
+			autoclose : true,
+			language : 'es',
+			todayHighlight : true,
+	    }).datepicker("setDate", new Date()).on("change", function() {
+	    fecha_general=$('#datepickersemanaH').val();
+	    	if(fecha_generalH!=''){
+	    		fecha_generalH=$('#datepickersemanaH').val();
+	    		progSemanal();
+	    	}
+	     });
+		
+		$('#datepickersemanaH').show();
+	}
+	
+	if($('#opcion_historial').val()=="2"){
+		$('#titulo_historial').text(mes+' '+año);
+		
+		$('#datepickermesH').datepicker({
+			format : 'mm/yyyy',
+			 startView: "months", 
+			 minViewMode: "months",
+			autoclose : true,
+			language : 'es',
+			todayHighlight : true
+	    }).datepicker("setDate", new Date()).on("change", function() {
+	    	if(fecha_generalH!=''){
+	    		fecha_generalH="01/"+$('#datepickermesH').val();
+	    		progSemanal();
+	    	}
+	     });
+		
+		$('#datepickermesH').show();
+	}
+	if($('#opcion_historial').val()=="3"){
+		$('#titulo_historial').text('BIMESTRE');
+		
+	}
+	if($('#opcion_historial').val()=="4"){
+		$('#titulo_historial').text('TRIMESTRE');
+		
+	}
+	if($('#opcion_historial').val()=="5"){
+		$('#titulo_historial').text('SEMESTRE');
+		
+	}
+	if($('#opcion_historial').val()=="6"){
+		$('#titulo_historial').text('AÑO '+año);
+		
+		$('#datepickerañoH').datepicker({
+			format : 'yyyy',
+			startView: "years", 
+			 minViewMode: "years",
+			autoclose : true,
+			language : 'es',
+			todayHighlight : true,
+			viewMode: 'weeks'
+	    }).datepicker("setDate", new Date()).on("change", function() {
+	    	if(fecha_generalH!=''){
+	    		fecha_generalH="01/01/"+$('#datepickerañoH').val();
+	    		progSemanal();
+	    	}
+	     });
+		
+		$('#datepickerañoH').show();
+	}
 }

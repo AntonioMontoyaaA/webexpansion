@@ -24,7 +24,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 //este es un comentario de prueba
-public class AsignadasInfoAction extends ActionSupport implements SessionAware, ParameterNameAware {
+public class AsignadasInfoAction extends ExpansionAction implements SessionAware, ParameterNameAware {
 	protected Map<String, Object> session ;
 	@SuppressWarnings("unused")
 	private static final Logger logger = Logger.getLogger(ExpansionAction.class);
@@ -93,29 +93,4 @@ public class AsignadasInfoAction extends ActionSupport implements SessionAware, 
 		
 		return null;
 	} 
-	
-	protected void sendJSONObjectToResponse(Object objToSend){
-		Gson gson = new Gson();
-		String jsonResult = gson.toJson(objToSend);	      
-	      HttpServletResponse response = ServletActionContext.getResponse();
-	      response.setContentType("application/json");
-	      response.setCharacterEncoding("UTF-8");
-	      try {
-	    	  response.getWriter().write(jsonResult );
-		} catch (IOException e) {
-		}
-	}
-	
-	@Override
-	public void setSession(Map<String, Object> session) {					 
-		this.session = session ;	
-	}
-	@Override
-	public boolean acceptableParameterName(String parameterName) {	     
-	    boolean allowedParameterName = true ;	     
-	    if ( parameterName.contains("session")  || parameterName.contains("request") ) {	     
-	        allowedParameterName = false ;	         
-	    } 	     
-	    return allowedParameterName;
-	}	
 }

@@ -5,6 +5,8 @@ $(function(){
 	$('#idautorizadas').addClass('resaltado');
 	perfil=$('#perfil_usuario').val();
 	inicializaCalendarios();
+	if($( "#datepicker1").val()!='')
+		creatabla();
 	
 	$("#descargaExcel").click(function() {
 		$("#datos").val(JSON.stringify(datosExcel));

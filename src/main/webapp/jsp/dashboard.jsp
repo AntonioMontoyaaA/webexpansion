@@ -87,7 +87,7 @@
 					<form class="form-inline p_cabecera">
 					<span class="fecha" id="fecha_ps"></span>
   					
-  						<select class="form-control form-inline desp filtro" onchange="selectHistorico()" id="opcion_historial">
+  						<select class="form-control form-inline desp filtro" onchange="selectHistorico();" id="opcion_historial">
     					<option value="0">Día</option>
     					<option value="1" selected>Semana</option>
     					<option value="2" >Mes</option>
@@ -290,6 +290,8 @@
 		</div>
 	</div>
 </div>
+	
+		<input type="hidden" id="fechaConsulta" name="fechaConsulta" value="" />
 	
 <jsp:include page="/jsp/generic/loading.jsp" />
 <jsp:include page="/jsp/generic/mensajes.jsp" />

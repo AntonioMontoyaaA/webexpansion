@@ -44,9 +44,13 @@
 		
 		<div class="col-lg-8 titulogrande">MD RECHAZADAS</div>
 		<div class="col-lg-4" style="padding-top: 5px;">
-			<div id="recargaAutorizadas" style="position: relative; float: left;margin-right: 10px;cursor: pointer"><button class="btn_refresh" type="button" onclick="refreshRechazadas();"><img src="${pageContext.request.contextPath}/img/refresh_sf.png"></button></div>
+			<div id="recargaAutorizadas" style="position: relative; float: left;margin-right: 10px;cursor: pointer">
+				<button class="btn desp rechargue" type="button" onclick="creatabla();">
+  								<img src="${pageContext.request.contextPath}/img/refresh_sf.png" />
+  			</button>
+			</div>
 			<div id="descargaExcel" style="position: relative; float: left;margin-right: 10px;cursor: pointer"><img src="${pageContext.request.contextPath}/img/iconos_DOWNLOAD.png"></div>
-			<div style="position: relative; float: left;margin-right: 10px;"><input type="text" class="fechaInicialCalendario" readonly id="datepicker1" onchange="creatabla();"/></div>
+			<div style="position: relative; float: left;margin-right: 10px;"><input type="text" class="fechaInicialCalendario" readonly id="datepicker1" onchange="creatabla();" value="${fecha_busqueda}"/></div>
 			<div class="buscador"><input placeholder="Buscar MD" id="buscador" class="buscadorInput" onkeyup="ejecutaBusquedaRechazadas()" type="text" /></div>
 		</div>
 		<div class="col-lg-12">

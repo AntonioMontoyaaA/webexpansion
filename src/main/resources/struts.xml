@@ -16,9 +16,9 @@
 		<action name="dashboard">
 			<result>jsp/dashboard.jsp</result>
 		</action>
-		<action name="asignadas">
-			<result>jsp/asignadas.jsp</result>
-		</action> 
+		<action name = "asignadas">
+         	<result>jsp/asignadas.jsp</result>
+      	</action>
 		<action name="asignadas_detalle">
 			<result>jsp/asignadas_detalle.jsp</result>
 		</action> 
@@ -40,7 +40,12 @@
 	</package>
 	
 	<package name="default" namespace="/" extends="struts-default">
-	
+
+		<action name = "EnviaFechaAction" 
+         		class = "com.tiendas.neto.action.EnviaFechaAction" 
+         		method = "execute">
+      	</action>
+
 		<action name = "asignadas_info" 
          		class = "com.tiendas.neto.action.AsignadasInfoAction" 
          		method = "execute">

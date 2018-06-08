@@ -6,8 +6,10 @@ $(function(){
 	perfil=$('#perfil_usuario').val();
 	if(perfil==3)
 		$('.ocultable').show();
-	
 	inicializaCalendarios();
+	
+	if($( "#datepicker1").val()!='')
+		creatabla();
 	
 	$("#descargaExcel").click(function() {
 		$("#datos").val(JSON.stringify(datosExcel));

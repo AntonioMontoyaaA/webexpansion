@@ -4,6 +4,8 @@ $(function(){
 	$('#idasignadas').addClass('resaltado');
 	inicializaCalendarios();
 //	creatabla(); //TODO remove
+	if($( "#datepicker1").val()!='')
+		creatabla();
 	
 	$( "#datepicker1").change(function() {
 		creatabla();

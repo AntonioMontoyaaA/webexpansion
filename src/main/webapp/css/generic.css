@@ -197,6 +197,16 @@ html {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
 }
+.btn_refresh {
+	height: 21;
+    padding: 5px;
+    padding-top: 0px;
+    cursor:pointer;
+    background: #FFFFFF;
+    border-radius: 4px 4px 4px 4px;
+    -moz-border-radius: 4px 4px 4px 4px;
+    -webkit-border-radius: 4px 4px 4px 4px;
+}
 /* ---------------------------------  FIN ESTILOS GENERALES */
 
 /* ---------------------------------  INICIO ESTILOS TABLAS */

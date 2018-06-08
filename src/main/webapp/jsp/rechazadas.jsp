@@ -22,7 +22,7 @@
 <div class="container-fluid">
 	<div class="row padding_p" style="padding-top:0px;">
 		<div class="col-lg-3 titulo">DASHBOARD ${usr.perfil.areasxpuesto[0].areaNom} > RECHAZADAS </div>
-		<div class="col-lg-5" style="font-size:12px; background: #FFFFFF; color: #1f3d7a;text-align: center; border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">
+		<div class="col-lg-5 ocultable" style="font-size:12px; background: #FFFFFF; color: #1f3d7a;text-align: center; border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">
 		
 			<span class="seccion" style="width:80px;"><span><img src="img/web_gerenteExpansionc.png">&nbsp;</span>
 			<span>Gerente</span></span>
@@ -42,8 +42,9 @@
 		
 		<div class="col-lg-4 titulo">&nbsp;</div>
 		
-		<div class="col-lg-9 titulogrande">MD RECHAZADAS</div>
-		<div class="col-lg-3" style="padding-top: 5px;">
+		<div class="col-lg-8 titulogrande">MD RECHAZADAS</div>
+		<div class="col-lg-4" style="padding-top: 5px;">
+			<div id="recargaAutorizadas" style="position: relative; float: left;margin-right: 10px;cursor: pointer"><button class="btn_refresh" type="button" onclick="refreshRechazadas();"><img src="${pageContext.request.contextPath}/img/refresh_sf.png"></button></div>
 			<div id="descargaExcel" style="position: relative; float: left;margin-right: 10px;cursor: pointer"><img src="${pageContext.request.contextPath}/img/iconos_DOWNLOAD.png"></div>
 			<div style="position: relative; float: left;margin-right: 10px;"><input type="text" class="fechaInicialCalendario" readonly id="datepicker1" onchange="creatabla();"/></div>
 			<div class="buscador"><input placeholder="Buscar MD" id="buscador" class="buscadorInput" onkeyup="ejecutaBusquedaRechazadas()" type="text" /></div>
@@ -65,6 +66,7 @@
 
 <form style="display: hidden" action="excelRechazadasAction" method="POST" id="form">
 	<input type="hidden" id="datos" name="datos" value=""/>
+	<input type="hidden" name="perfil_usuario" id="perfil_usuario" value="${usr.perfil.perfilesxusuario[0].perfilid}">
 	<input type="submit" id="submitBotonRechazadas" style="display:none" />
 </form>
 

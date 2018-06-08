@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/generic.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/dashboard.css" />	
+	
 <title>Dashboard</title>
 </head>
 <body>
@@ -20,7 +21,7 @@
 
 <%@ include file="/jsp/generic/header.jsp" %>
 <div class="container-fluid menupr_fondo">
-	<div class="row padding_p">
+	<div class="row padding_p" style="padding-top:0px;">
 	<div class="col-lg-12 titulo" id="nombrePerfil">
 	</div>
 		<div class="col-lg-8">
@@ -28,23 +29,28 @@
 		<div class="row divs_p">
 		<div class="col-lg-12 menupr_estilos">
 			<div class="row cabecera">
-				<div class="col-lg-5">
+				<div class="col-lg-7">
 					<span class="azul negrita">Progreso General de áreas</span>
 				</div>
-				<div class="col-lg-7 text-right">
+					
+				
+				<div class="col-lg-5 text-right">
 					<form class="form-inline p_cabecera">
-					<span class="fecha" id="fecha_pg"></span>
-  					
-  						<select class="form-control form-inline desp filtro" onchange="progGeneral();" id="opcion">
+					<select class="form-control form-inline desp filtro" onchange="selectGeneral();" id="opcion">
     					<option value="0">Día</option>
     					<option value="1">Semana</option>
     					<option value="2" selected>Mes</option>
-    					<option value="3">Bimestre</option>
+    					<!-- <option value="3">Bimestre</option>
     					<option value="4">Trimestre</option>
-    					<option value="5">Semestre</option>
+    					<option value="5">Semestre</option> -->
     					<option value="6">Año</option>
   						</select>
 							&nbsp;
+						<input type="text" style="display:none;" class="form-control desp filtro fecha_pick" id="datepickerdia">
+						<input type="text" style="display:none;" class="form-control desp filtro fecha_pick" id="datepickersemana">
+						<input type="text" style="display:none;" class="form-control desp filtro fecha_pick" id="datepickermes">
+						<input type="text" style="display:none;" class="form-control desp filtro fecha_pick" id="datepickeraño">
+						&nbsp;
   						<button class="btn desp rechargue" type="button" onclick="progGeneral();">
   								<img src="${pageContext.request.contextPath}/img/refresh_sf.png" />
   						</button>
@@ -74,22 +80,29 @@
 		<div class="row divs_p">	
 					<div class="col-lg-12 menupr_estilos">
 			<div class="row cabecera">
-				<div class="col-lg-5">
+				<div class="col-lg-7">
 					<span class="azul negrita" id="titulo_historial"></span>
 				</div>
-				<div class="col-lg-7 text-right">
+				<div class="col-lg-5 text-right">
 					<form class="form-inline p_cabecera">
 					<span class="fecha" id="fecha_ps"></span>
   					
-  						<select class="form-control form-inline desp filtro" onchange="progSemanal()" id="opcion_historial">
+  						<select class="form-control form-inline desp filtro" onchange="selectHistorico()" id="opcion_historial">
     					<option value="0">Día</option>
     					<option value="1" selected>Semana</option>
     					<option value="2" >Mes</option>
-    					<option value="3">Bimestre</option>
+    					<!-- <option value="3">Bimestre</option>
     					<option value="4">Trimestre</option>
-    					<option value="5">Semestre</option>
+    					<option value="5">Semestre</option> -->
     					<option value="6">Año</option>
-  						</select>
+  						</select>&nbsp;
+  						
+  						<input type="text" style="display:none;" class="form-control desp filtro fecha_pick" id="datepickerdiaH">
+						<input type="text" style="display:none;" class="form-control desp filtro fecha_pick" id="datepickersemanaH">
+						<input type="text" style="display:none;" class="form-control desp filtro fecha_pick" id="datepickermesH">
+						<input type="text" style="display:none;" class="form-control desp filtro fecha_pick" id="datepickerañoH">
+						&nbsp;
+  						
   						<button class="btn desp rechargue" type="button" onclick="progSemanal();">
   								<img src="${pageContext.request.contextPath}/img/refresh_sf.png" />
   						</button>
@@ -286,6 +299,8 @@
 	<script	src="${pageContext.request.contextPath}/js/jquery/popper.js"></script>
 	<script	src="${pageContext.request.contextPath}/js/utiles/utiles.js"></script>
 	<script	src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+	<script	src="${pageContext.request.contextPath}/bootstrap/js/bootstrap-datepicker.min.js"></script>	
+	<script	src="${pageContext.request.contextPath}/bootstrap/js/bootstrap-datepicker.es.min.js"></script>
 	<script	src="${pageContext.request.contextPath}/highcharts/highcharts.js"></script>
 	<script	src="${pageContext.request.contextPath}/js/dashboard.js"></script>
 	<script	src="${pageContext.request.contextPath}/highcharts/js/modules/data.js"></script>

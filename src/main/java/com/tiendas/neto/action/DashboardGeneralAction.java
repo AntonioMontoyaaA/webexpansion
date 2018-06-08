@@ -54,6 +54,8 @@ public class DashboardGeneralAction extends ExpansionAction{
 			puestoId = usuario.getPerfil().getPuestoId();
 			if(usuario.getPerfil().getAreasxpuesto().size() > 0) {
 				areaId = usuario.getPerfil().getAreasxpuesto().get(0).getAreaId();
+				//String valor=usuario.getPerfil().getPerfilesxusuario().get(0).getPermisos().get(0).getPERMITEAUTORIZAR()+"";
+				//System.out.println(valor+" valor de permiso");
 			}
 		} else {
 			RespuestaVo respuestaVo = new RespuestaVo();

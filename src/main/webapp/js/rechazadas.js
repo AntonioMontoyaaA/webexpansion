@@ -1,7 +1,12 @@
 var datosExcel = "";
+var perfil;
 
 $(function(){
 	$('#idrechazadas').addClass('resaltado');
+	perfil=$('#perfil_usuario').val();
+	if(perfil==3)
+		$('.ocultable').show();
+	
 	inicializaCalendarios();
 	
 	$("#descargaExcel").click(function() {
@@ -31,6 +36,10 @@ function inicializaCalendarios() {
 	$("#datepicker1").datepicker.dateFormat = 'dd/MM/yy';
 }
 
+function refreshRechazadas() {
+	creatabla();
+}
+
 
 function creatabla(){
 	invocarJSONServiceAction("rechazadas_info", 
@@ -49,11 +58,55 @@ function creatabla(){
 			cargaMensajeModal('MD RECHAZADAS', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
 			$("#descargaExcel").hide();
 			initTablaMemoriasRechazadas('DivTablaRechazadas', 0, 'tablaMemoriasRechazadas');
+			initTablaMemoriasRechazadasDirGeneral('DivTablaRechazadas', 0, 'tablaMemoriasRechazadas');
 		} else {
+			
+			if(perfil==3){
 			var resultados = data.mds;
 			datosExcel = data;
 			$("#descargaExcel").show();
+			var datosMemoriasRechazadas = new Array();
+			var total = 0;
+			var puntuacionEnTiempoA = "<img class='estrellaPuntuacion' src='img/icono_estrella_azul.png'><img class='estrellaPuntuacion' src='img/icono_estrella_azul.png'><img class='estrellaPuntuacion' src='img/icono_estrella_azul.png'>";
+			var puntuacionEnTiempoB = "<img class='estrellaPuntuacion' src='img/icono_estrella_azul.png'><img class='estrellaPuntuacion' src='img/icono_estrella_azul.png'>";
+			var puntuacionEnTiempoC = "<img class='estrellaPuntuacion' src='img/icono_estrella_azul.png'>";
+			var puntuacionVencidaA = "<img class='estrellaPuntuacion' src='img/icono_estrella_roja.png'><img class='estrellaPuntuacion' src='img/icono_estrella_roja.png'><img class='estrellaPuntuacion' src='img/icono_estrella_roja.png'>";
+			var puntuacionVencidaB = "<img class='estrellaPuntuacion' src='img/icono_estrella_roja.png'><img class='estrellaPuntuacion' src='img/icono_estrella_roja.png'>";
+			var puntuacionVencidaC = "<img class='estrellaPuntuacion' src='img/icono_estrella_roja.png'>";
+			var estrellas = "";
+			var variable;
+			var areasrechazo=[];
 			
+			
+			
+			
+			for( var i = 0 ; i < resultados.length; i++){	
+				switch(resultados[i].categoria) {
+					case 'A':	estrellas = puntuacionEnTiempoA;
+								break;
+					case 'B':	estrellas = puntuacionEnTiempoB;
+								break;
+					case 'C':	estrellas = puntuacionEnTiempoC;
+								break;
+				};
+								
+				datosMemoriasRechazadas[i] = new Array();	 	 		 			 
+				datosMemoriasRechazadas[i][0] = "<span>" + resultados[i].nombreMd + "</span>"; 
+				datosMemoriasRechazadas[i][1] = "<span>" + resultados[i].categoria + "</span>";
+				datosMemoriasRechazadas[i][2] = "<span>" + resultados[i].puntuacion + '</span><span> puntos '+ estrellas+"</span>";
+				datosMemoriasRechazadas[i][3] = "<span>" + resultados[i].creador + "</span>";
+				datosMemoriasRechazadas[i][4] = "<span>" + resultados[i].fechaCreacion + "</span>";
+				datosMemoriasRechazadas[i][8] = "<span>" + areasrechazo+ "</span>";
+				datosMemoriasRechazadas[i][8] = "<span>" + resultados[i].tipoRechazo + "</span>";
+				datosMemoriasRechazadas[i][9] = resultados[i].mdId;
+			 }			
+			initTablaMemoriasRechazadasDirGeneral('DivTablaRechazadas', datosMemoriasRechazadas, 'tablaMemoriasRechazadas');
+		}
+			
+		else{
+			var resultados = data.mds;
+			datosExcel = data;
+			$("#descargaExcel").show();
 			var datosMemoriasRechazadas = new Array();
 			var total = 0;
 			var puntuacionEnTiempoA = "<img class='estrellaPuntuacion' src='img/icono_estrella_azul.png'><img class='estrellaPuntuacion' src='img/icono_estrella_azul.png'><img class='estrellaPuntuacion' src='img/icono_estrella_azul.png'>";
@@ -89,6 +142,7 @@ function creatabla(){
 				datosMemoriasRechazadas[i][9] = resultados[i].mdId;
 			 }			
 			initTablaMemoriasRechazadas('DivTablaRechazadas', datosMemoriasRechazadas, 'tablaMemoriasRechazadas');
+		}
 		}
 	};	
 }

@@ -34,7 +34,7 @@
 		data-content="
 		<div class='popover_logout azul'><a href='Logout'> Cerrar Sesión</a></div>
 		
-		" ><img src="img/usuario.png" style="padding-right:15px;"></a></span>
+		" ><img src="img/user.png" style="padding-right:15px;"></a></span>
 		</form>
 		</div>	
 </nav>

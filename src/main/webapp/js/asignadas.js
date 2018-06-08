@@ -38,6 +38,10 @@ function inicializaCalendarios() {
 //	$("#datepicker1").val('01/05/2018'); //TODO remove
 }
 
+function refreshAsignadas() {
+	creatabla();
+}
+
 function creatabla(){
 	
 	invocarJSONServiceAction("asignadas_info", 
@@ -138,9 +142,9 @@ function ejecutaBusquedaAsignadas() {
 
 
 function redireccionaConsulta() {
-	console.log("*** LE DIERON EN EL SI ***");
+	
 }
 
 function redireccionaConsultaDos() {
-	console.log("*** LE DIERON EN EL SI V2 ***");
+	
 }

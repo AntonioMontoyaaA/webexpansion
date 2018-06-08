@@ -456,6 +456,7 @@ function datosFlujoPeatonal(flujoPeatonal){
 		i++;
 	}
 	
+	
 	promedio = Math.trunc(sumatoriaConteos/totalconteos);
 	rows.push(['Promedio', promedio]);
 	colores.push(colorPromedio);

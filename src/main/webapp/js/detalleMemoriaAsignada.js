@@ -394,9 +394,9 @@ function buscaDetalleMD(mdId) {
 			if(data.generalidades != undefined) {
 				$("#montoRenta").text('$' + formato(data.generalidades.renta, true) + " al mes");
 				$("#disponibilidad").text(data.generalidades.disponibilidad);
-				$("#amortizacion").text(data.generalidades.periodoAmortizacion);
+				$("#amortizacion").text(data.generalidades.porcentajeAmortizacion);
 				$("#tiempoAmortizacion").text(data.generalidades.periodoAmortizacion);
-				$("#periodoGracia").text('$' + formato(data.generalidades.periodoGracia, true));
+				$("#periodoGracia").text(data.generalidades.periodoGracia);
 				$("#puntosGeneralidades").text(data.generalidades.puntos);
 				
 				var contentPopGeneralidades = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 17px;">Agrega tips para que tus buscadores encuentren sitios mejores</span></div></div>';
@@ -412,59 +412,7 @@ function buscaDetalleMD(mdId) {
 			}
 			/* Datos de los conteos */
 			if(data.flujoPeatonal != undefined) {
-				$("#puntosConteos").text(data.flujoPeatonal.puntos);
-				var conteo1 = new Array();
-				var conteo2 = new Array();
-				var conteo3 = new Array();
-				var promedio = new Array();
-				var fecha1 = "";
-				var fecha2 = "";
-				var fecha3 = "";
-				var suma1 = 0;
-				var suma2 = 0;
-				var suma3 = 0;
-				var categorias = new Array();
-				var listaDetalleId = new Array();
-				
-				for(var i = 0; i < data.flujoPeatonal.conteos.length; i++) {
-					
-					if(listaDetalleId.length == 0) {
-						listaDetalleId.push(data.flujoPeatonal.conteos[i].detalleId);
-						categorias.push(data.flujoPeatonal.conteos[i].horaInicio + "-" + data.flujoPeatonal.conteos[i].horaFinal);
-					} else if(!listaDetalleId.includes(data.flujoPeatonal.conteos[i].detalleId)) {
-						listaDetalleId.push(data.flujoPeatonal.conteos[i].detalleId);
-						categorias.push(data.flujoPeatonal.conteos[i].horaInicio + "-" + data.flujoPeatonal.conteos[i].horaFinal);
-					}
-					
-					if(data.flujoPeatonal.conteos[i].detalleId == PRIMER_HORARIO_CONTEO) {
-						conteo1.push(data.flujoPeatonal.conteos[i].total);
-						fecha1 = data.flujoPeatonal.conteos[i].fecha;
-						suma1 += data.flujoPeatonal.conteos[i].total;
-					} else if(data.flujoPeatonal.conteos[i].detalleId  == SEGUNDO_HORARIO_CONTEO) {
-						conteo2.push(data.flujoPeatonal.conteos[i].total);
-						fecha2 = data.flujoPeatonal.conteos[i].fecha
-						suma2 += data.flujoPeatonal.conteos[i].total;
-					} else {
-						conteo3.push(data.flujoPeatonal.conteos[i].total);
-						fecha3 = data.flujoPeatonal.conteos[i].fecha;
-						suma3 += data.flujoPeatonal.conteos[i].total;
-					}
-				}
-				promedio.push(suma1 / conteo1.length);
-				promedio.push(suma2 / conteo2.length);
-				promedio.push(suma3 / conteo3.length);
-				$("#promedioConteos").text(Math.trunc((suma1 + suma2 + suma3)/(conteo1.length + conteo2.length + conteo3.length)));
-				
-				var contentPopConteos = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 17px;">Agrega tips para que tus buscadores encuentren sitios mejores</span></div></div>';
-				if(data.flujoPeatonal.tips != undefined && data.flujoPeatonal.tips.length > 0) {
-					contentPopConteos = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 17px;">' + data.flujoPeatonal.tips[0] + '</span></div></div>';
-				}
-				$("#conteosTip").popover({
-					html: true, 
-					content : contentPopConteos
-				});
-				
-				validaEstatusAtencion(data.flujoPeatonal.estatus, 7);
+				datosFlujoPeatonal(data.flujoPeatonal);
 			}
 			
 			setTimeout(function () {
@@ -472,10 +420,58 @@ function buscaDetalleMD(mdId) {
 			}, 500);
 			
 			
-			cargaFlujoPeatonal(categorias, fecha1, conteo1, fecha2, conteo2, fecha3, conteo3, promedio);
+			
 			dibujaGraficaAutorizaciones();
 		}
 	}
+}
+
+function datosFlujoPeatonal(flujoPeatonal){
+	$("#puntosConteos").text(flujoPeatonal.puntos);
+
+	var rows = [[null]];
+	var colores = [];
+	var coloresPredeterminados = ['#40bcd8','#a8ddd1','#a3daff','#a3ffcc'];
+	var colorPromedio = '#d8b4e0';
+	var horarios= {};
+	var sumatoriaConteos = 0;
+	var totalconteos = 0;
+	var promedio;
+	
+	for(var i = 0; i < flujoPeatonal.conteos.length; i++) {
+		id = flujoPeatonal.conteos[i].detalleId;
+		if(horarios[id] == undefined){
+			horarios[id] = new Array();
+			horarios[id].push(flujoPeatonal.conteos[i].horaInicio + "-" + flujoPeatonal.conteos[i].horaFinal);
+		}
+		horarios[id].push(flujoPeatonal.conteos[i].total);
+		sumatoriaConteos += flujoPeatonal.conteos[i].total;
+		totalconteos++;
+	}
+	i = 0;
+	for(h in horarios){
+		rows.push(horarios[h])
+		colores.push(coloresPredeterminados[i])
+		i++;
+	}
+	
+	promedio = Math.trunc(sumatoriaConteos/totalconteos);
+	rows.push(['Promedio', promedio]);
+	colores.push(colorPromedio);
+	$("#promedioConteos").text(promedio);
+	
+	var contentPopConteos = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 17px;">Agrega tips para que tus buscadores encuentren sitios mejores</span></div></div>';
+	if(flujoPeatonal.tips != undefined && flujoPeatonal.tips.length > 0) {
+		contentPopConteos = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 17px;">' + flujoPeatonal.tips[0] + '</span></div></div>';
+	}
+	$("#conteosTip").popover({
+		html: true, 
+		content : contentPopConteos
+	});
+	
+	validaEstatusAtencion(flujoPeatonal.estatus, 7);
+	
+	cargaFlujoPeatonal(colores,rows);
 }
 
 function redireccionaAsignadas() {
@@ -486,34 +482,17 @@ function muestraPopAutorizacion(){
 	$("#modal_autorizacion").modal("show");
 }
 
-function cargaFlujoPeatonal(categorias, fecha1, conteo1, fecha2, conteo2, fecha3, conteo3, promedio) {
+function cargaFlujoPeatonal(colores,rows) {
 	Highcharts.chart('contenedorFlujoPeatonal', {
 	    chart: {
 	        type: 'column'
 	    },
-	    legend: {
-            itemStyle: {
-               fontSize:'7px',
-               font: '7pt Helvetica, sans-serif',
-               color: '#00427F'
-            },
-            itemHoverStyle: {
-               color: '#000'
-            },
-            itemHiddenStyle: {
-               color: '#444'
-            }
-         
-        },
+	    legend:false,
 	    title: {
 	        text: ''
 	    },
 	    subtitle: {
 	        text: ''
-	    },
-	    xAxis: {
-	        categories: categorias,
-	        crosshair: true
 	    },
 	    yAxis: {
 	        min: 0,
@@ -521,37 +500,32 @@ function cargaFlujoPeatonal(categorias, fecha1, conteo1, fecha2, conteo2, fecha3
 	            text: 'Personas'
 	        }
 	    },
+	    xAxis: {
+	        title: {
+	            text: 'Conteos'
+	        }
+	    },
 	    tooltip: {
-	        headerFormat: '<span style="font-size:12px">{point.key}</span><table>',
-	        pointFormat: '<tr><td style="font-size:10px;color:{series.color};padding:0">{series.name}: </td>' +
-	            '<td style="font-size:10px; padding:0"><b>{point.y:.1f}</b></td></tr>',
+	        headerFormat: '<span style="font-size:12px"></span><table>',
+	        pointFormat: '<tr><td style="font-size:10px;color:{series.color};padding:0"></td>' +
+	            '<td style="font-size:10px; padding:0"><b>{point.y}</b></td></tr>',
 	        footerFormat: '</table>',
-	        shared: true,
+	        shared: false,
+	        valueDecimals: 0,
 	        useHTML: true
 	    },
+	    colors: colores,
 	    plotOptions: {
 	        column: {
 	            pointPadding: 0.2,
 	            borderWidth: 0
+	        },series: {
+	            colorByPoint: true
 	        }
 	    },
-	    series: [{
-	        name: fecha1,
-	        data: conteo1,
-	        color: '#A8DCD1'
-	    }, {
-	        name: fecha2,
-	        data: conteo2,
-	        color: '#40BCD8'
-	    }, {
-	        name: fecha3,
-	        data: conteo3,
-	        color: '#A3D9FF'
-	    }, {
-	        name: 'Promedio',
-	        data: promedio,
-	        color: '#F1E3F3'
-	    }]
+	    data: {
+	    	rows: rows
+	    }
 	});
 }
 

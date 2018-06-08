@@ -448,6 +448,7 @@ function datosFlujoPeatonal(flujoPeatonal){
 		sumatoriaConteos += flujoPeatonal.conteos[i].total;
 		totalconteos++;
 	}
+	
 	i = 0;
 	for(h in horarios){
 		rows.push(horarios[h])

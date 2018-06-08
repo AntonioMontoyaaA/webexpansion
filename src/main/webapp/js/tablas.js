@@ -7,7 +7,7 @@ function initTablaMemoriasAsignadas(nombreDiv, datosDesgloseVenta, nombreTabla){
 				'<tr style="cursor: pointer;border-top: 0px; border-bottom: 0px;">' +
 					'<th width="20%"  class="headerTable_flat">Nombre MD</th>'  +
 					'<th width="10%"  class="headerTable_flat" style="text-align: center;">Categoría</th>' +
-					'<th width="10%"  class="headerTable_flat" style="width:150px; text-align:center;">Puntuación</th>' +
+					'<th width="10%"  class="headerTable_flat" style="width:160px; text-align:center;">Puntuación</th>' +
 					'<th width="20%"  class="headerTable_flat">Creador</th>' +
 					'<th width="17%"  class="headerTable_flat">Fecha de creación</th>' +
 					'<th width="18%"  class="headerTable_flat">Fecha de vecimiento</th>' +
@@ -23,14 +23,14 @@ function initTablaMemoriasAsignadas(nombreDiv, datosDesgloseVenta, nombreTabla){
 			{"aaData": datosDesgloseVenta,
 				"aoColumns": [{"sClass":"izquierda","bSearchable":true},
 				           {"bSearchable":true},
-				           {"sClass":"left","bSearchable":true},
+				           {"sClass":"izquierda","bSearchable":true},
 				           {"bSearchable":true},
 				           {"bSearchable":true},
 				           {"bSearchable":true},
 				           {"bSearchable":true},
 				           { "sClass": "oculto", "bSearchable": false }],		
 			"bJQueryUI": false,
-			"order": [[2, "desc"], [5, "desc"]],
+			"order": [],
 			"sPaginationType": "full_numbers",
 			"oLanguage": idiomaEspanol,
 			"bLengthChange":false,
@@ -58,7 +58,7 @@ function initTablaMemoriasAutorizadas(nombreDiv, datosDesgloseVenta, nombreTabla
 				'<tr style="cursor: pointer;border-top: 0px; border-bottom: 0px;">' +
 					'<th class="headerTable_flat">Nombre MD</th>'  +
 					'<th class="headerTable_flat" style="text-align: center;">Categoría</th>' +
-					'<th class="headerTable_flat" style="width:150px; text-align:center;" >Puntuación</th>' +
+					'<th class="headerTable_flat" style="width:160px; text-align:center;" >Puntuación</th>' +
 					'<th class="headerTable_flat">Creador</th>' +
 					'<th class="headerTable_flat">Fecha de creación</th>' +
 					'<th class="headerTable_flat">Autorizó</th>' +
@@ -75,7 +75,7 @@ function initTablaMemoriasAutorizadas(nombreDiv, datosDesgloseVenta, nombreTabla
 			{"aaData": datosDesgloseVenta,
 				"aoColumns": [{"sClass":"izquierda","bSearchable":true},
 				           {"bSearchable":true},
-				           {"sClass":"left","bSearchable":true},
+				           {"sClass":"izquierda","bSearchable":true},
 				           {"bSearchable":true},
 				           {"bSearchable":true},
 				           {"bSearchable":true},
@@ -86,6 +86,7 @@ function initTablaMemoriasAutorizadas(nombreDiv, datosDesgloseVenta, nombreTabla
 			"sPaginationType": "full_numbers",
 			"oLanguage": idiomaEspanol,
 			"bLengthChange":false,
+			"order": [],
 			"iDisplayLength":1000,
 			 "bScrollCollapse": false,
 			 "sScrollY": "70vh",
@@ -110,7 +111,7 @@ function initTablaMemoriasAutorizadasDirGeneral(nombreDiv, datosDesgloseVenta, n
 				'<tr style="cursor: pointer;border-top: 0px; border-bottom: 0px;">' +
 					'<th class="headerTable_flat">Nombre MD</th>'  +
 					'<th class="headerTable_flat" style="text-align: center;">Categoría</th>' +
-					'<th class="headerTable_flat" style="width:150px; text-align:center;">Puntuación</th>' +
+					'<th class="headerTable_flat" style="width:160px; text-align:center;">Puntuación</th>' +
 					'<th class="headerTable_flat">Creador</th>' +
 					'<th class="headerTable_flat">Fecha de creación</th>' +
 					'<th class="headerTable_flat">Tipo de Autorización</th>' +
@@ -125,7 +126,7 @@ function initTablaMemoriasAutorizadasDirGeneral(nombreDiv, datosDesgloseVenta, n
 			{"aaData": datosDesgloseVenta,
 				"aoColumns": [{"sClass":"izquierda","bSearchable":true},
 				           {"bSearchable":true},
-				           {"sClass":"left","bSearchable":true},
+				           {"sClass":"izquierda","bSearchable":true},
 				           {"bSearchable":true},
 				           {"bSearchable":true},
 				           {"bSearchable":true},
@@ -134,6 +135,7 @@ function initTablaMemoriasAutorizadasDirGeneral(nombreDiv, datosDesgloseVenta, n
 			"sPaginationType": "full_numbers",
 			"oLanguage": idiomaEspanol,
 			"bLengthChange":false,
+			"order": [],
 			"iDisplayLength":1000,
 			 "bScrollCollapse": false,
 			 "sScrollY": "70vh",
@@ -158,7 +160,7 @@ function initTablaMemoriasRechazadas(nombreDiv, datosDesgloseVenta, nombreTabla)
 				'<tr style="cursor: pointer;border-top: 0px; border-bottom: 0px;">' +
 					'<th class="headerTable_flat">Nombre MD</th>'  +
 					'<th class="headerTable_flat" style="text-align: center;">Categoría</th>' +
-					'<th class="headerTable_flat" style="width:150px; text-align:center;">Puntuación</th>' +
+					'<th class="headerTable_flat" style="width:160px; text-align:center;">Puntuación</th>' +
 					'<th class="headerTable_flat">Creador</th>' +
 					'<th class="headerTable_flat">Fecha de creación</th>' +
 					'<th class="headerTable_flat">Rechazó</th>' +
@@ -176,7 +178,7 @@ function initTablaMemoriasRechazadas(nombreDiv, datosDesgloseVenta, nombreTabla)
 			{"aaData": datosDesgloseVenta,
 				"aoColumns": [{"sClass":"izquierda","bSearchable":true},
 				           {"bSearchable":true},
-				           {"sClass":"left","bSearchable":true},
+				           {"sClass":"izquierda","bSearchable":true},
 				           {"bSearchable":true},
 				           {"bSearchable":true},
 				           {"bSearchable":true},
@@ -188,6 +190,7 @@ function initTablaMemoriasRechazadas(nombreDiv, datosDesgloseVenta, nombreTabla)
 			"sPaginationType": "full_numbers",
 			"oLanguage": idiomaEspanol,
 			"bLengthChange":false,
+			"order": [],
 			"iDisplayLength":1000,
 			 "bScrollCollapse": false,
 			 "sScrollY": "70vh",

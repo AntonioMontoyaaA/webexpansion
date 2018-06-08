@@ -36,6 +36,10 @@ function inicializaCalendarios() {
 	$("#datepicker1").datepicker.dateFormat = 'dd/MM/yy';
 }
 
+function refreshRechazadas() {
+	creatabla();
+}
+
 
 function creatabla(){
 	invocarJSONServiceAction("rechazadas_info", 

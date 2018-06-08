@@ -33,6 +33,10 @@ function inicializaCalendarios() {
 	$("#datepicker1").datepicker.dateFormat = 'dd/MM/yy';
 }
 
+function refreshAutorizadas() {
+	creatabla();
+}
+
 
 function creatabla(){
 	invocarJSONServiceAction("autorizadas_info", 

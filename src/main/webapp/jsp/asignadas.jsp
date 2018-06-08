@@ -32,8 +32,9 @@
 			<span class="punto" style="background-color: #FF5B16"></span>
 			<span style="padding-left: 5px;">Vencidas</span></div>
 		<div class="col-lg-5 titulo">&nbsp;</div>
-		<div class="col-lg-9 titulogrande">MD ASIGNADAS</div>
-		<div class="col-lg-3" style="padding-top: 5px;">
+		<div class="col-lg-8 titulogrande">MD ASIGNADAS</div>
+		<div class="col-lg-4" style="padding-top: 5px;">
+			<div id="recargaAsignadas" style="position: relative; float: left;margin-right: 10px;cursor: pointer"><button class="btn_refresh" type="button" onclick="refreshAsignadas();"><img src="${pageContext.request.contextPath}/img/refresh_sf.png"></button></div>
 			<div id="descargaExcelAsignadas" style="position: relative; float: left;margin-right: 10px;cursor: pointer"><img src="${pageContext.request.contextPath}/img/iconos_DOWNLOAD.png"></div>
 			<div style="position: relative; float: left;margin-right: 10px;"><input type="text" class="fechaInicialCalendario" readonly id="datepicker1"/></div>
 			<div class="buscadorAsignadas"><input placeholder="Buscar MD" id="buscadorAsignadas" class="buscadorAsignadasInput" onkeyup="ejecutaBusquedaAsignadas()" type="text" /></div>

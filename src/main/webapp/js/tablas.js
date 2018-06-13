@@ -2,17 +2,17 @@ function initTablaMemoriasAsignadas(nombreDiv, datosDesgloseVenta, nombreTabla){
 	
 	$("#" + nombreDiv).html(
 	   
-		'<table cellpadding="0" cellspacing="0" border="0px"  class="row-border" id="' + nombreTabla + '" >' +
+		'<table cellpadding="0" cellspacing="0" border="0px"  class="row-border stripe hover" id="' + nombreTabla + '" >' +
 			'<thead>'  +
 				'<tr style="cursor: pointer;border-top: 0px; border-bottom: 0px;">' +
-					'<th width="20%"  class="headerTable_flat">Nombre MD</th>'  +
-					'<th width="10%"  class="headerTable_flat" style="text-align: center;">Categoría</th>' +
-					'<th width="10%"  class="headerTable_flat" style="width:160px; text-align:center;">Puntuación</th>' +
-					'<th width="20%"  class="headerTable_flat">Creador</th>' +
-					'<th width="17%"  class="headerTable_flat">Fecha de creación</th>' +
-					'<th width="18%"  class="headerTable_flat">Fecha de vecimiento</th>' +
-					'<th width="5%"  class="headerTable_flat">Mensajes</th>' +
-					'<th width="5%"  class="oculto">id</th>' +
+					'<th  class="gris negrita t14 center" style="padding:0;">Nombre MD</th>'  +
+					'<th  class="gris negrita t14">Categoría</th>' +
+					'<th  class="gris negrita t14 center puntuacion" style="padding:0;">Puntuación</th>' +
+					'<th class="gris negrita t14">Creador</th>' +
+					'<th class="gris negrita t14">Fecha de creación</th>' +
+					'<th  class="gris negrita t14">Fecha de vecimiento</th>' +
+					'<th class="gris negrita t14">Mensajes</th>' +
+					'<th class="oculto">id</th>' +
 				'</tr>'+
 			'</thead>' +
 			'<tbody>'  +			
@@ -53,17 +53,17 @@ function initTablaMemoriasAutorizadas(nombreDiv, datosDesgloseVenta, nombreTabla
 	
 	$("#" + nombreDiv).html(
 	   
-		'<table cellpadding="0" cellspacing="0" border="0px"  class="row-border" id="' + nombreTabla + '" >' +
+			'<table cellpadding="0" cellspacing="0" border="0px"  class="row-border stripe hover" id="' + nombreTabla + '" >' +
 			'<thead>'  +
 				'<tr style="cursor: pointer;border-top: 0px; border-bottom: 0px;">' +
-					'<th class="headerTable_flat">Nombre MD</th>'  +
-					'<th class="headerTable_flat" style="text-align: center;">Categoría</th>' +
-					'<th class="headerTable_flat" style="width:160px; text-align:center;" >Puntuación</th>' +
-					'<th class="headerTable_flat">Creador</th>' +
-					'<th class="headerTable_flat">Fecha de creación</th>' +
-					'<th class="headerTable_flat">Autorizó</th>' +
-					'<th class="headerTable_flat">Fecha Autorización</th>' +
-					'<th class="headerTable_flat">Tipo</th>' +
+				'<th  class="gris negrita t14 center" style="padding:0;">Nombre MD</th>'  +
+					'<th class="gris negrita t14">Categoría</th>' +
+					'<th  class="gris negrita t14 center puntuacion" style="padding:0;">Puntuación</th>' +
+					'<th class="gris negrita t14">Creador</th>' +
+					'<th class="gris negrita t14">Fecha de creación</th>' +
+					'<th class="gris negrita t14">Autorizó</th>' +
+					'<th class="gris negrita t14">Fecha Autorización</th>' +
+					'<th class="gris negrita t14">Tipo</th>' +
 					'<th class="oculto">id</th>' +
 				'</tr>'+
 			'</thead>' +
@@ -106,15 +106,15 @@ function initTablaMemoriasAutorizadasDirGeneral(nombreDiv, datosDesgloseVenta, n
 	
 	$("#" + nombreDiv).html(
 	   
-		'<table cellpadding="0" cellspacing="0" border="0px"  class="row-border" id="' + nombreTabla + '" >' +
+			'<table cellpadding="0" cellspacing="0" border="0px"  class="row-border stripe hover" id="' + nombreTabla + '" >' +
 			'<thead>'  +
 				'<tr style="cursor: pointer;border-top: 0px; border-bottom: 0px;">' +
-					'<th class="headerTable_flat">Nombre MD</th>'  +
-					'<th class="headerTable_flat" style="text-align: center;">Categoría</th>' +
-					'<th class="headerTable_flat" style="width:160px; text-align:center;">Puntuación</th>' +
-					'<th class="headerTable_flat">Creador</th>' +
-					'<th class="headerTable_flat">Fecha de creación</th>' +
-					'<th class="headerTable_flat">Tipo de Autorización</th>' +
+				'<th  class="gris negrita t14 center" style="padding:0;">Nombre MD</th>'  +
+					'<th class="gris negrita t14">Categoría</th>' +
+					'<th  class="gris negrita t14 center puntuacion" style="padding:0;">Puntuación</th>' +
+					'<th class="gris negrita t14">Creador</th>' +
+					'<th class="gris negrita t14">Fecha de creación</th>' +
+					'<th class="gris negrita t14">Tipo de Autorización</th>' +
 					'<th class="oculto">id</th>' +
 				'</tr>'+
 			'</thead>' +
@@ -155,18 +155,18 @@ function initTablaMemoriasRechazadas(nombreDiv, datosDesgloseVenta, nombreTabla)
 	
 	$("#" + nombreDiv).html(
 	   
-		'<table cellpadding="0" cellspacing="0" border="0px"  class="row-border" id="' + nombreTabla + '" >' +
+			'<table cellpadding="0" cellspacing="0" border="0px"  class="row-border stripe hover" id="' + nombreTabla + '" >' +
 			'<thead>'  +
 				'<tr style="cursor: pointer;border-top: 0px; border-bottom: 0px;">' +
-					'<th class="headerTable_flat">Nombre MD</th>'  +
-					'<th class="headerTable_flat" style="text-align: center;">Categoría</th>' +
-					'<th class="headerTable_flat" style="width:160px; text-align:center;">Puntuación</th>' +
-					'<th class="headerTable_flat">Creador</th>' +
-					'<th class="headerTable_flat">Fecha de creación</th>' +
-					'<th class="headerTable_flat">Rechazó</th>' +
-					'<th class="headerTable_flat">Fecha de Rechazo</th>' +
-					'<th class="headerTable_flat">Motivo</th>' +
-					'<th class="headerTable_flat">Tipo</th>' +
+				'<th  class="gris negrita t14 center" style="padding:0;">Nombre MD</th>'  +
+					'<th class="gris negrita t14">Categoría</th>' +
+					'<th  class="gris negrita t14 center puntuacion" style="padding:0;">Puntuación</th>' +
+					'<th class="gris negrita t14">Creador</th>' +
+					'<th class="gris negrita t14">Fecha de creación</th>' +
+					'<th class="gris negrita t14">Rechazó</th>' +
+					'<th class="gris negrita t14">Fecha de Rechazo</th>' +
+					'<th class="gris negrita t14">Motivo</th>' +
+					'<th class="gris negrita t14">Tipo</th>' +
 					'<th class="oculto">id</th>' +
 				'</tr>'+
 			'</thead>' +

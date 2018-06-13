@@ -1,21 +1,20 @@
 td{
-	border-top:1px solid gray;
+	border-top:1px solid #dfddd9;
 	text-align:center;
-	color:#1f3d7a;
+	color:#5d5d57;
 	font-size:12px;
 	padding-top:6px;
 	padding-bottom:6px;
-	padding-left:12px;
 }
 th{
+	font-weight:normal;
 	text-align:center;
 	padding-top:5px;
 	padding-bottom:5px;
-	color:#1f3d7a;
-	font-size:14px;
+	border-bottom:2px solid #5d5d57;
 }
 tbody tr:hover{
-	background-color:#ecfcff;
+	background-color:#E0F0FA;
 	cursor:pointer;
 }
 .tabla_container{
@@ -27,19 +26,11 @@ tbody tr:hover{
 table{
 	width:100%;
 }
-
+.odd{
+	background:#f4f4f3;
+}
 .ui-datepicker-trigger {
 	display: none !important;
-}
-.desp{
-	font-size:12px;
-	font-family:"Helvetica";
-	background-color:white;
-	color:#00437e;
-	border-color:#00437e;
-	height:25px !important;
-	padding:0;
-	margin-left:8px;
 }
 .detalleMemoriaAutorizadaAction {
 	display: none;
@@ -47,17 +38,16 @@ table{
 
 /* estilos comunes de elementos de la tabla*/
 
-.buscador {
-	width: 30px;
-	position: relative; 
-	float: left;
-    border-radius: 4px 4px 4px 4px;
-    -moz-border-radius: 4px 4px 4px 4px;
-    -webkit-border-radius: 4px 4px 4px 4px;
+.buscador {	
+	width:400px;
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius:2px;
     border: 0px solid #000000;
-    background-color: white;
+    color:white;
     font-size: 12px;
     padding-left: 3px;
+    background-color:#071B36;
     background-image: url(../img/iconos_search.png);
     background-size: 13px 13px;
     background-position: left;
@@ -66,21 +56,32 @@ table{
 }
 
 .buscadorInput {
-	width: 120px;
+	font-size: 12px;
+	width:375px !important;
     height: 20px;
-    border-radius: 4px 4px 4px 4px;
-    -moz-border-radius: 4px 4px 4px 4px;
-    -webkit-border-radius: 4px 4px 4px 4px;
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
     border: 0px solid #000000;
-    background-color: white;
     padding-left: 7px;
     margin-left: 15px;
+ 	background-color:#071B36;
 }
+.buscadorInput::placeHolder {
+ 	color: #A9A9A9;
+}
+.buscadorInput:focus {
+ 	color: white;
+}
+
 #descargaExcel{
 	display:none;
 }
 .oculto {
 	display : none;	
+}
+.form-control:focus, .form-control.focus{
+ background-color:#071B36;
 }
 
 .estrellaPuntuacion {
@@ -97,6 +98,9 @@ span.estrellas{
 	width:100px;
 	text-align:left;
 }
+.puntuacion{
+	min-width:140px;
+}
 /*rechazadas*/
 span.seccion{
 	display: inline-block;
@@ -107,12 +111,16 @@ span.seccion{
 }
 .izquierda {
 	text-align: left;
-	padding-left: 5px;
+	padding-left: 8px;
+}
+.derecha {
+	text-align: right;
+	padding-right: 8px;
 }
 /* ----------------------------boton recarga */
 .desp{
 	font-size:12px;
-	font-family:"Helvetica";
+	font-family:"Helvetica Neue";
 	background-color:white;
 	color:#00437e;
 	border:0;
@@ -120,6 +128,9 @@ span.seccion{
 	padding:0;
 	margin-left:8px;
 	margin-top:1px;
+	border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius:2px;
 }
 .rechargue{
 	width:27px;

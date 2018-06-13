@@ -74,21 +74,21 @@ function creatabla(){
 			
 			var datosMemoriasAsignadas = new Array();
 			var total = 0;
-			var spanRojo = "";
-			var puntuacionEnTiempoA = "<img class='estrellaPuntuacion' src='img/icono_estrella_azul.png'><img class='estrellaPuntuacion' src='img/icono_estrella_azul.png'><img class='estrellaPuntuacion' src='img/icono_estrella_azul.png'>";
-			var puntuacionEnTiempoB = "<img class='estrellaPuntuacion' src='img/icono_estrella_azul.png'><img class='estrellaPuntuacion' src='img/icono_estrella_azul.png'>";
-			var puntuacionEnTiempoC = "<img class='estrellaPuntuacion' src='img/icono_estrella_azul.png'>";
-			var puntuacionVencidaA = "<img class='estrellaPuntuacion' src='img/icono_estrella_roja.png'><img class='estrellaPuntuacion' src='img/icono_estrella_roja.png'><img class='estrellaPuntuacion' src='img/icono_estrella_roja.png'>";
-			var puntuacionVencidaB = "<img class='estrellaPuntuacion' src='img/icono_estrella_roja.png'><img class='estrellaPuntuacion' src='img/icono_estrella_roja.png'>";
-			var puntuacionVencidaC = "<img class='estrellaPuntuacion' src='img/icono_estrella_roja.png'>";
+			var spanColor = "";
+			var puntuacionEnTiempoA = "<img class='estrellaPuntuacion' src='img/estrellita.png'><img class='estrellaPuntuacion' src='img/estrellita.png'><img class='estrellaPuntuacion' src='img/estrellita.png'>";
+			var puntuacionEnTiempoB = "<img class='estrellaPuntuacion' src='img/estrellita.png'><img class='estrellaPuntuacion' src='img/estrellita.png'>";
+			var puntuacionEnTiempoC = "<img class='estrellaPuntuacion' src='img/estrellita.png'>";
+			var puntuacionVencidaA = "<img class='estrellaPuntuacion' src='img/estrellita.png'><img class='estrellaPuntuacion' src='img/estrellita.png'><img class='estrellaPuntuacion' src='img/estrellita.png'>";
+			var puntuacionVencidaB = "<img class='estrellaPuntuacion' src='img/estrellita.png'><img class='estrellaPuntuacion' src='img/estrellita.png'>";
+			var puntuacionVencidaC = "<img class='estrellaPuntuacion' src='img/estrellita.png'>";
 			var estrellas = "";
 			
 			for( var i = 0 ; i < resultados.length; i++){
 				
 				if(resultados[i].mdVencida) {
-					spanRojo = "color: #FF5B16";
+					spanColor = "color: #FF5B16";
 				} else {
-					spanRojo = "";
+					spanColor = "color: #13b86f";
 				}
 				
 				switch(resultados[i].categoria) {
@@ -101,12 +101,12 @@ function creatabla(){
 				};
 				
 				datosMemoriasAsignadas[i] = new Array();	 	 		 			 
-				datosMemoriasAsignadas[i][0] = "<span style='" + spanRojo + "'>" + resultados[i].nombreMd + "</span>"; 
-				datosMemoriasAsignadas[i][1] = "<span style='" + spanRojo + "'>" + resultados[i].categoria + "</span>";
-				datosMemoriasAsignadas[i][2] = "<span style='" + spanRojo + "'>" + resultados[i].puntuacion + " puntos </span>" + estrellas;
-				datosMemoriasAsignadas[i][3] = "<span style='" + spanRojo + "'>" + resultados[i].creador + "</span>";
-				datosMemoriasAsignadas[i][4] = "<span style='" + spanRojo + "'>" + resultados[i].fechaCreacion + "</span>";
-				datosMemoriasAsignadas[i][5] = "<span style='" + spanRojo + "'>" + resultados[i].fechaVencimiento + "</span>";
+				datosMemoriasAsignadas[i][0] = "<span style='" + spanColor + "'>" + resultados[i].nombreMd + "</span>"; 
+				datosMemoriasAsignadas[i][1] = "<span style='" + spanColor + "'>" + resultados[i].categoria + "</span>";
+				datosMemoriasAsignadas[i][2] = "<span style='"  + "'>" + resultados[i].puntuacion + " puntos </span>" + estrellas;
+				datosMemoriasAsignadas[i][3] = "<span style='"  + "'>" + resultados[i].creador + "</span>";
+				datosMemoriasAsignadas[i][4] = "<span style='"  + "'>" + resultados[i].fechaCreacion + "</span>";
+				datosMemoriasAsignadas[i][5] = "<span style='"  + "'>" + resultados[i].fechaVencimiento + "</span>";
 				datosMemoriasAsignadas[i][6] = "<div><img src='img/iconos_COMENTARIOS.png'></div>";
 				datosMemoriasAsignadas[i][7] = resultados[i].mdId;
 			 }
@@ -139,7 +139,7 @@ function obtieneDetalleMd(nombreMd, mdId) {
 }
 
 function ejecutaBusquedaAsignadas() {
-	$("#tablaMemoriasAsignadas").dataTable().fnFilter($("#buscadorAsignadas").val());
+	$("#tablaMemoriasAsignadas").dataTable().fnFilter($("#buscador").val());
 }
 
 

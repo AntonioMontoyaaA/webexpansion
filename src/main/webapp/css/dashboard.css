@@ -19,23 +19,21 @@
 	.fecha{margin-left:0;}
 }
 span.estilo_info{
-	font-size:14px;
-	padding-right:8px;
-}
-span.estilo_dato{
-	font-size:14px;
 	padding-right:15px;
 }
+span.estilo_dato{
+	padding-right:18px;
+}
 .p_cabecera{
+	margin-top:2px;
 	margin-bottom:0.1em !important;	
 }
 /* ----------------------------------------- DESPLEGABLE ---------------------- */
 .desp{
 	font-size:12px;
-	font-family:"Helvetica";
+	font-family:"Helvetica Neue";
 	background-color:white;
-	color:#00437e;
-	border-color:#00437e;
+	border-color:black;
 	height:25px !important;
 	padding:0;
 	margin-left:8px;
@@ -43,6 +41,7 @@ span.estilo_dato{
 .filtro{
 	min-width:100px !important;
 	width:100px !important;
+	border-radius: 0.15rem;
 }
 .filtros{
 	width:150px;
@@ -56,6 +55,7 @@ span.estilo_dato{
 
 /* ------------------------------------------- GRAFICAS --------------*/
 /* ------------------------------------------- GRAFICA PROGRESO GENERAL DE AREAS --------------*/
+
 #container .highcharts-point{
 	width:13px;
 }
@@ -99,17 +99,15 @@ span.estilo_dato{
 /* ESTILOS DE LA SECCION DE RESUMEN, CIRCULOS*/
 .numero_grande{
 	font-size:2.5em;
-	font-weight:bold;
 }
 .numero_chico{
 	font-size:0.8em;
 }
 .resumen_personales{
-	margin-top:6px;
+	margin-top:3px;
 	margin-bottom:2px;
 	 float:left;
 	 text-align:left;
-	 font-size:14px;
 }
 .analista{
 	display:none;
@@ -144,6 +142,21 @@ span.estilo_dato{
 	font-size: 14px;
      width: 17px;
      height: 17px;
+     -moz-border-radius: 50%;
+     -webkit-border-radius: 50%;
+     border-radius: 50%;
+     color:white;
+     position: relative;
+     float: left;
+     line-height:1;
+}
+.circulo_puntop{
+	padding-top:2px;
+	text-align:center;
+	margin:5px;
+	font-size: 14px;
+     width: 13px;
+     height: 13px;
      -moz-border-radius: 50%;
      -webkit-border-radius: 50%;
      border-radius: 50%;
@@ -196,7 +209,7 @@ span.estilo_dato{
 .dir_general{
 	display:none;
 }
-/* ----------------------datepicker */
+/* ------------------------------datepicker --------------------------------*/
 
 .datepicker table tr td.active.active,
  .datepicker table tr td.active.highlighted.active,
@@ -205,6 +218,7 @@ span.estilo_dato{
     color:#00437e;
     background-color:#40BCD8;
     border-color: #125087;
+    cursor:pointer;
 }
 /*centrar datepicker*/
 .table-condensed{  				
@@ -218,6 +232,7 @@ span.estilo_dato{
     width: 160px;
     height:40px;
     font-weight:normal;
+    cursor:pointer;
 }
 
 .datepicker table tr td, .datepicker table tr th {
@@ -228,10 +243,9 @@ span.estilo_dato{
     border: none;
     color:#00437e;
     padding-bottom:0px;
+    cursor:pointer;
 }
-.datepicker table tr td.new, .datepicker table tr td.old {
-    color: #00437e;
-}
+
 .datepicker table tr td span {
     display: block;
     width: 23%;
@@ -243,6 +257,14 @@ span.estilo_dato{
     border-radius: 4px;
 }
 
+.disabled {
+  color: #C9C9C9;
+  cursor:default;
+}
+.disabled.day {
+  color: #C9C9C9;
+  cursor:default;
+}
 @media(max-width: 767px){
 .datepicker table tr td, .datepicker table tr th {
 	font-size:15px;
@@ -256,4 +278,9 @@ span.estilo_dato{
 }
 .fecha_pick{
 	padding-left:5px;
+}
+.combos{
+	position:relative;
+	 float:right;
+	 width:260px;
 }

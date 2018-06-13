@@ -21,15 +21,15 @@
 
 <div class="container-fluid">
 	<div class="row padding_p" style="padding-top:0px;">
-		<div class="col-lg-3 titulo">DASHBOARD ${usr.perfil.areasxpuesto[0].areaNom} > RECHAZADAS </div>
-		<div class="col-lg-5 ocultable" style="font-size:12px; background: #FFFFFF; color: #1f3d7a;text-align: center; border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">
+		<div class="col-lg-12 titulo azul t12 negrita">DASHBOARD ${usr.perfil.areasxpuesto[0].areaNom} > RECHAZADAS ${usr.perfil.areasxpuesto[0].areaNom}</div>
+		
+		<%-- <div class="col-lg-4 ocultable" style="font-size:12px; background: #FFFFFF; color: #1f3d7a;text-align: center; border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">
 		
 			<span class="seccion" style="width:80px;"><span><img src="img/web_gerenteExpansionc.png">&nbsp;</span>
 			<span>Gerente</span></span>
 			
 			<span class="seccion"><span><img src="img/web_expansionc.png">&nbsp;</span>
 			<span>Expansión</span></span>
-			
 			<span class="seccion"><span><img src="img/web_gestoriac.png">&nbsp;</span>
 			<span>Gestoría</span></span>
 			
@@ -39,23 +39,29 @@
 			<span class="seccion"><span><img src="img/web_operacionesc.png">&nbsp;</span>
 			<span>Operaciones</span></span>
 		</div>
+		<div class="col-lg-4"></div>--%>
 		
-		<div class="col-lg-4 titulo">&nbsp;</div>
-		
-		<div class="col-lg-8 titulogrande">MD RECHAZADAS</div>
-		<div class="col-lg-4" style="padding-top: 5px;">
-			<div id="recargaAutorizadas" style="position: relative; float: left;margin-right: 10px;cursor: pointer">
+		<div class="col-lg-4  titulogrande azul t18">MD RECHAZADAS ${usr.perfil.areasxpuesto[0].areaNom}</div>
+		<div class="col-lg-8">
+			
+			<form class="form-inline float-right">
+				<div class="buscador">
+					<input placeholder="Buscar" id="buscador"  class="form-control buscadorInput t12" onkeyup="ejecutaBusquedaRechazadas();" type="text" />
+				</div>
 				<button class="btn desp rechargue" type="button" onclick="creatabla();">
   								<img src="${pageContext.request.contextPath}/img/refresh_sf.png" />
-  			</button>
-			</div>
-			<div id="descargaExcel" style="position: relative; float: left;margin-right: 10px;cursor: pointer"><img src="${pageContext.request.contextPath}/img/iconos_DOWNLOAD.png"></div>
-			<div style="position: relative; float: left;margin-right: 10px;"><input type="text" class="fechaInicialCalendario" readonly id="datepicker1" onchange="creatabla();" value="${fecha_busqueda}"/></div>
-			<div class="buscador"><input placeholder="Buscar MD" id="buscador" class="buscadorInput" onkeyup="ejecutaBusquedaRechazadas()" type="text" /></div>
-		</div>
+  				</button>
+				<div class="desp" id="descargaExcel" style="cursor: pointer;">
+					<img src="${pageContext.request.contextPath}/img/iconos_DOWNLOAD.png">
+				</div>
+			<input type="text" class="fechaInicialCalendario" readonly id="datepicker1" onchange="creatabla();" value="${fecha_busqueda}"/>
+		</form>
+	</div>
+		
+		
 		<div class="col-lg-12">
 			<div class="row padding_p">
-				<div class="col-lg-12 menupr_estilos tabla_container">
+				<div class="col-lg-12 menupr_estilos fblanco tabla_container">
 					<!--Tabla-->
     				<div id="DivTablaRechazadas" style="padding-top: 3px;position: relative;float: left;width: 99%; left: 5px;">
     				</div>

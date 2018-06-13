@@ -21,23 +21,31 @@
 
 <div class="container-fluid">
 	<div class="row padding_p" style="padding-top:0px;">
-		<div class="col-lg-12 titulo">DASHBOARD ${usr.perfil.areasxpuesto[0].areaNom} > AUTORIZADAS </div>
-		<div class="col-lg-8 titulogrande">MD AUTORIZADAS</div>
-		<div class="col-lg-4" style="padding-top: 5px;">
-			<div id="recargaAutorizadas" style="position: relative; float: left;margin-right: 10px;cursor: pointer">
-			<button class="btn desp rechargue" type="button" onclick="creatabla();">
+		<div class="col-lg-12 titulo azul t12 negrita">DASHBOARD ${usr.perfil.areasxpuesto[0].areaNom} > AUTORIZADAS </div>
+		
+		<div class="col-lg-4  titulogrande azul t18">MD AUTORIZADAS ${usr.perfil.areasxpuesto[0].areaNom}</div>
+		
+		<div class="col-lg-8">
+			
+			<form class="form-inline float-right">
+				<div class="buscador">
+					<input type="text" placeholder="Buscar" id="buscador"  class="form-control buscadorInput t12" onkeyup="ejecutaBusquedaAutorizadas();"/>
+				</div>
+				<button class="btn desp rechargue" type="button" onclick="creatabla();">
   								<img src="${pageContext.request.contextPath}/img/refresh_sf.png" />
-  			</button>
-			</div>
-			<div id="descargaExcel" style="position: relative; float: left;margin-right: 10px;cursor: pointer"><img src="${pageContext.request.contextPath}/img/iconos_DOWNLOAD.png"></div>
-			<div style="position: relative; float: left;margin-right: 10px;"><input type="text" class="fechaInicialCalendario" readonly id="datepicker1" onchange="creatabla();" value="${fecha_busqueda}"/></div>
-			<div class="buscador"><input placeholder="Buscar MD" id="buscador" class="buscadorInput" onkeyup="ejecutaBusquedaAutorizadas()" type="text" /></div>
-		</div>
+  				</button>
+				<div class="desp" id="descargaExcel" style="cursor: pointer;">
+					<img src="${pageContext.request.contextPath}/img/iconos_DOWNLOAD.png">
+				</div>
+			<input type="text" class="fechaInicialCalendario" readonly id="datepicker1" onchange="creatabla();" value="${fecha_busqueda}"/>
+		</form>
+	</div>
+	
 		<div class="col-lg-12">
 			<div class="row padding_p">
-				<div class="col-lg-12 menupr_estilos tabla_container">
+				<div class="col-lg-12 menupr_estilos fblanco tabla_container">
 					<!--Tabla-->
-    				<div id="DivTablaAutorizadas" style="padding-top: 3px;position: relative;float: left;width: 99%; left: 5px;">
+    				<div id="DivTablaAutorizadas">
     				</div>
 				</div>
 			</div>

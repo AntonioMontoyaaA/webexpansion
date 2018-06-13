@@ -139,49 +139,21 @@ html {
 .fechaInicialCalendario {
 	width: 87px;
 	height: 21px;
-	border-radius: 4px 4px 4px 4px;
-    -moz-border-radius: 4px 4px 4px 4px;
-    -webkit-border-radius: 4px 4px 4px 4px;
+	border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius:2px;
     border: 0px solid #000000;
     background-color: white;
     font-size: 12px;
+    margin-left:8px;
     padding-left: 8px;
-    background-image: url(../img/iconosFLECHITA.png);
+    background-image: url(../img/flechita.png);
     background-position: right;
     background-repeat: no-repeat;
     background-origin: content-box;
     padding-right: 4px;
+    
     cursor: pointer;
-}
-
-.buscadorAsignadas {
-	width: 30px;
-	position: relative; 
-	float: left;
-    border-radius: 4px 4px 4px 4px;
-    -moz-border-radius: 4px 4px 4px 4px;
-    -webkit-border-radius: 4px 4px 4px 4px;
-    border: 0px solid #000000;
-    background-color: white;
-    font-size: 12px;
-    padding-left: 3px;
-    background-image: url(../img/iconos_search.png);
-    background-size: 13px 13px;
-    background-position: left;
-    background-repeat: no-repeat;
-    background-origin: content-box;
-}
-
-.buscadorAsignadasInput {
-	width: 120px;
-    height: 20px;
-    border-radius: 4px 4px 4px 4px;
-    -moz-border-radius: 4px 4px 4px 4px;
-    -webkit-border-radius: 4px 4px 4px 4px;
-    border: 0px solid #000000;
-    background-color: white;
-    padding-left: 7px;
-    margin-left: 15px;
 }
 .sangria_cuerpo {
 	padding-left: 15px;
@@ -283,11 +255,11 @@ a.links{
 background-image: url('https://mdbootstrap.com/img/svg/hamburger7.svg?color=0069ac');
 }
 .navbar_fondo{
-	background-color:#ffffff;
+	background: linear-gradient(#254581, #0E121C);
 	padding:0rem 0rem;
 }
 .navbar_borde{
-	border-bottom:4px solid #00427F;
+	border-bottom:4px solid white;
 	height:52px;
 }
 @media (max-width: 991px) {
@@ -303,16 +275,13 @@ li.nav-item{
 	a.nav-link{text-align:left;}
 } 
 a.nav-link{
-	font-size: 15px;
-	color:darkblue;
 	text-align:center;
-	border-bottom:4px solid #00427F;
+	border-bottom:4px solid white;
 	height:56px;
 	line-height:57px;;
 }
 a.nav-link:hover{
-	border-bottom:4px solid #00427F;
-	background:#cce0f4;
+	color:#FF5B16 !important;
 }
 a.nav-link.resaltado{
 	border-bottom:4px solid #40bcd8;
@@ -323,7 +292,7 @@ a.nav-link.resaltado{
 }
 /* --------------------------- GENERICOS --------------------*/ 
 .center{
-	text-align:center;
+	text-align:center !important;
 	align:center;
 	justify-content: center;
 	float:center;
@@ -332,50 +301,96 @@ a.nav-link.resaltado{
 	text-align:left;
 	align:left;
 }
+.float_left{
+	position:relative;
+	float:left;
+}
 .right{
 	text-align:right;
 	align:right;
 }
+.float_right{
+	position:relative;
+	float:right;
+}
 .titulo{
-	font-weight:bold;
-	color:white;
-	font-size:12px;
 	padding-left:12px;
 	
 }
 .titulogrande{
-	color:white;
-	font-size:22px;
 	padding-top:3px;
 	padding-left:12px;
 	padding-right:5px;
 }
+@font-face {
+font-family:"Helvetica Neue";
+src: url("../fonts/HelveticaNeue.ttf");
+}
+@font-face {
+font-family:"Helvetica Neue Bold";
+src: url("../fonts/HelveticaNeue-Medium.otf");
+}
 body{
-	background: linear-gradient(#005B97,#0075BE,#1E9CD7,#CCE0F4);
-	font-family: "Helvetica";
+	background: #e7e6e3;
+	font-family: "Helvetica Neue";
 }
 .negrita{
-	margin-bottom:5px;
-	color:#00437e;
-	font-weight:bold;
+	font-family: "Helvetica Neue Bold";
+}
+.letra{
+	font-family: "Helvetica Neue";
+	font-weight: normal;
+}
+.t18{
+	font-size:18px;
+}
+.t14{
+	font-size:14px;
+}
+.t12{
+	font-size:12px;
+}
+.t10{
+	font-size:10px;
 }
 span.azul{
-	color:#00437e;
+	color:#071B36;
 }
 .azul{
-	color:#00437e;
+	color:#071B36;
+}
+span.blanco{
+	color:white !important;
+}
+tspan.blanco{
+	fill: white;
+}
+.blanco{
+	color:white !important;
+}
+.gris{
+	color:#5d5d57;
+}
+span.gris{
+	color:#5d5d57;
+}
+.fazul{
+	background-color:#071B36;
+}
+.fblanco{
+	background-color:white;
 }
  .cabecera{
  	padding-top:10px;
- 	padding-left:15px;
+ 	padding-left:0px;
  }
 /* ---------------------------------------- ESTILOS DE MENU PRINCIPAL*/
 .menupr_estilos{
-	border-radius: 8px 8px 8px 8px;
-	-moz-border-radius: 8px 8px 8px 8px;
-	-webkit-border-radius: 8px 8px 8px 8px;
+	border-radius: 2px 2px 2px 2px;
+	-moz-border-radius: 2px 2px 2px 2px;
+	-webkit-border-radius: 2px 2px 2px 2px;
 	border: 0px solid #000000;
-	background:white;
+
 }
 .padding_p{
 	padding-left:7px;

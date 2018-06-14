@@ -18,7 +18,7 @@
        </div>
       </div>
       <div class="modal-footer" style="background: #C9C9C9; justify-content: center">
-        <button type="button" class="btn" id="btnModalAutorizacion" style="width: 100px; height: 30px; background: #01579B; padding-top: 4px; cursor: pointer;color: #FFFFFF;">Aceptar</button>
+        <button type="button" class="btn" id="btnModalAutorizacion" style="width: 100px; height: 30px; background: #071B36; padding-top: 4px; cursor: pointer;color: #FFFFFF;">Aceptar</button>
         <input type="hidden" id="tipoAutorizacion" />
         <input type="hidden" id="moduloId" />
         <input type="hidden" id="mdIdAutorizacion" />

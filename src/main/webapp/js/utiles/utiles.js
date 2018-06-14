@@ -72,11 +72,11 @@ function invocarJSONServiceAction(nombreAction, parametros, successFunction, err
 }
 
 function cargaLoading() {
-	$("#loadingPagina").show();
+	$("#loadingPagina").modal('show');
 }
 
 function cierraLoading() {
-	$("#loadingPagina").hide();
+	$("#loadingPagina").modal('hide');
 }
 
 function cargaMensajeModal(titulo, descripcionMensaje, tipoMensaje, estatusMensaje, funcionEvalSi) {
@@ -99,13 +99,13 @@ function cargaMensajeModal(titulo, descripcionMensaje, tipoMensaje, estatusMensa
 	
 	switch(estatusMensaje) {
 	case TIPO_ESTATUS_ERROR:
-		$("#mensajeHeader").css("background", "#F44336");
+		$("#mensajeHeader").css("background", "#071B36");
 		break;
 	case TIPO_ESTATUS_ALERTA:
-		$("#mensajeHeader").css("background", "#FBC02D");
+		$("#mensajeHeader").css("background", "#071B36");
 		break;
 	case TIPO_ESTATUS_EXITO:
-		$("#mensajeHeader").css("background", "#55a4f3");
+		$("#mensajeHeader").css("background", "#071B36");
 		break;
 	};
 	

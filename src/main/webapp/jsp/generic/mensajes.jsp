@@ -15,19 +15,19 @@
  <div class="modal" id="mensajes_modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header" id="mensajeHeader" >
+      <div class="modal-header blanco" id="mensajeHeader" style="padding-top:7px; padding-bottom:7px;">
         <div id="tituloMensaje">---</div>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close blanco" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
        <div id="descripcionMensaje">---</div>
       </div>
-      <div class="modal-footer" style="background: #C9C9C9; justify-content: center; color: #FFFFFF;">
-        <button type="button" class="btn" id="botonMensajeSi"  style="width: 70px; height: 30px; background: #2E7D32; padding-top: 4px; margin-right: 20px; cursor: pointer;color: #FFFFFF;">Si</button>
-        <button type="button" class="btn" id="botonMensajeNo" style="width: 70px; height: 30px; background: #B71C1C; padding-top: 4px; margin-right: 20px; cursor: pointer;color: #FFFFFF;">No</button>
-        <button type="button" class="btn" id="botonMensajeAceptar" style="width: 100px; height: 30px; background: #01579B; padding-top: 4px; cursor: pointer;color: #FFFFFF;">Aceptar</button>
+      <div class="modal-footer" style="justify-content: center; border:0;">
+        <button type="button" class="btn fazul blanco" id="botonMensajeSi"  style="width: 70px; height: 30px; padding-top: 4px; margin-right: 20px; cursor: pointer;">Si</button>
+        <button type="button" class="btn fazul blanco" id="botonMensajeNo" style="width: 70px; height: 30px; padding-top: 4px; margin-right: 20px; cursor: pointer;">No</button>
+        <button type="button" class="btn fazul blanco" id="botonMensajeAceptar" style="width: 100px; height: 30px; padding-top: 4px; cursor: pointer;">Aceptar</button>
       </div>
     </div>
   </div>

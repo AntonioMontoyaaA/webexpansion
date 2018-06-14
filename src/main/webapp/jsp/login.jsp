@@ -6,41 +6,138 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/generic.css" />
-	
-<title>Login</title>
-<body>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css" />
 
-<div class="container-fluid">
-	<div class="row center">
-			<div class="col-lg-2 login">
-				<br><br>
-					<div class="col-md-12 center">
-						<img src="${pageContext.request.contextPath}/img/icono_login.png">
-					</div>
-					<br>
-					
-					<form action="Login" method="post">					
-					<div class="col-md-12">
-						<input type="text" name="user" value="303035" class="form-control input_login" placeholder="User">
-					</div>
-						<div class="col-md-12 padding_pass">
-							<input type="password" name="pass" value="303035" class="form-control input_login" placeholder="Password">
+<title>Login</title>
+</head>
+
+<body>
+	<div class="bg-image">
+	<div class="vertical-center center">
+		<div class="contenedor">
+			<div class="row center margenVEntreExagonos">
+				<div class="center margenHEntreExagonos altoExagono">
+					<div class="hexagonB">
+						<div class="hexagon-in1B">
+							<div class="hexagon-in2B font-weight-bold">
+								<div class="hexagon">
+									<div class="hexagon-in1" href="#">
+										<div class="hexagon-in2 font-weight-bold">
+											<div class="vertical-center-exagono center">
+												<div class="row">
+													<label class="tamFuenteTituloExagono">NEO</label>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
-					<br><br>
-						<div class="center">
-							<button type="submit" class="btn blogin">&emsp;Iniciar sesión&emsp;</button>
-						</div>	
-					</form>
-					<div class="center">
-					<a class="links" href="#">Olvidaste&nbsp;tu&nbsp;contraseña</a>
 					</div>
+				</div>
+			</div>
+			
+			<form action='<spring:url value="/loginAction"/>' method="POST" name="loginForm" novalidate>	
+			<div class="row center margenVEntreExagonos">
+				<div class="center margenHEntreExagonos altoExagono">
+					<div class="hexagonB">
+						<div class="hexagon-in1B">
+							<span class="hexagon-in2B">
+								<div class="hexagon">
+									<div class="hexagon-in1">
+										<div class="hexagon-in2">
+											<div class="vertical-center-exagono center">
+												<div class="row inicio_user2">
+													<a href="#" class="col col-12 altura">
+														<img src="img/neto-user.png" class="img-exagono-max" alt="Tiendas Neto">
+													</a>
+													<div class="col col-12 center "></div>
+													<div class="col col-10 offset-1 separadorInputLogin">
+														<input type="text" placeholder="Escribe tu usuario" class="form-control input_login" name="fiusuarioid" id="fiusuarioid" required>
+													</div>
+												</div>
+												<div class="row inicio_user">
+														<img src="img/neto-user.png" alt="Tiendas Neto" style="cursor:pointer" onclick="ocultauser();">
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</span>
+						</div>
+					</div>
+				</div>
+				
+				<div class="center altoExagono">
+					<div class="hexagonB" style="margin: 0 4px;">
+						<div class="hexagon-in1B">
+							<span class="hexagon-in2B" >
+								<div class="hexagon">
+									<div class="hexagon-in1">
+										<div class="hexagon-in2">
+											<div class="vertical-center-exagono center">
+												<div class="row inicio_pass2">
+													<a href="#" class="col col-12 altura">
+														<img src="img/contra.png" class="img-exagono-max" alt="Tiendas Neto">
+													</a>
+													<div class="col col-12 center "></div>
+													<div class="col col-10 offset-1">
+														<input id="inPassword" type="password" placeholder="Escribe tu contraseña" class="form-control input_login" name="fccontrasena" id="fccontrasena" required>
+													</div>
+													<div class="col col-12">
+														<a class="btn btnOlvidoContrasena" href="#">Olvidaste&nbsp;tu&nbsp;contraseña?</a>
+													</div>
+												</div>
+												
+												<div class="row inicio_pass">
+														<img src="img/contra.png"  style="cursor:pointer" class="" alt="Tiendas Neto"  onclick="ocultapass();">
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<input id="btnLogin" type="submit" value="&emsp;Iniciar sesión&emsp;" class="btn blogin" style="display:none;">
+			</form>
+			
+			<div class="row center" style="margin: -1.8em 0;">
+				<div class="center margenHEntreExagonos altoExagono">
+					<div class="hexagonB">
+						<div class="hexagon-in1B">
+							<span class="hexagon-in2B font-weight-bold">
+								<div class="hexagon">
+									<div class="hexagon-in1" href="#">
+										<div class="hexagon-in2 font-weight-bold ">
+											<div class="vertical-center-exagono center">
+												<div class="row">
+													<div class="col col-12">
+														<img src="img/logoBlanco.png" class="logoNetoExagono">
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</span>
+						</div>
+					</div>
+				</div>
+				
 				
 			</div>
-			</div>
-				
+		</div>
 	</div>
-	
+	</div>
+
 	<script	src="${pageContext.request.contextPath}/js/jquery/jquery.min.js"></script>	
+		<script src="${pageContext.request.contextPath}/js/jquery/popper.js"></script>
 	<script	src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="${pageContext.request.contextPath}/js/login.js"></script>
+	
+	</body>
 </html>

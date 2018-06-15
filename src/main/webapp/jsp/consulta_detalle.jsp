@@ -11,7 +11,8 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/generic.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/asignadas.css" />
-<title>Asignadas</title>
+	
+<title>Detalle</title>
 </head>
 <body>
 	<!--<c:forEach var="permiso" items="${usr.perfil.perfilesxusuario[0].permisos}">
@@ -438,6 +439,8 @@
 <div style="display: none;">
 	<s:textfield name="mdId" label="" cssStyle="display: none"></s:textfield>
 	<s:textfield name="nombreMd" label="" cssStyle="display: none"></s:textfield>
+	<s:textfield name="tipo_md" label="" cssStyle="display: none"></s:textfield>
+	
 </div>
 
 <jsp:include page="/jsp/generic/loading.jsp" />
@@ -458,7 +461,7 @@
 	<script src="${pageContext.request.contextPath}/js/progress/progressbar.js"></script>
 	<script src="${pageContext.request.contextPath}/js/progress/progressbar.min.js"></script>
 	<script	src="${pageContext.request.contextPath}/js/utiles/utiles.js"></script>
-	<script	src="${pageContext.request.contextPath}/js/detalleMemoriaAsignada.js"></script>
+	<script	src="${pageContext.request.contextPath}/js/detalleMemoria.js"></script>
 	
 	</body>
 </html>

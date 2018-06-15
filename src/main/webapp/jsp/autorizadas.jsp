@@ -53,6 +53,12 @@
 	</div>
 </div>
 
+<form action='consulta_detalle'  id="consultaDetalleAction" method="post">
+	<input type="hidden" name="mdId" id="mdId" value=""/>
+	<input type="hidden" name="nombreMd" id="nombreMd" value=""/>
+	<input type="hidden" name="tipo_md" id="nombreMd" value="1"/>
+</form>
+
 <jsp:include page="/jsp/generic/loading.jsp" />
 <jsp:include page="/jsp/generic/mensajes.jsp" />
 

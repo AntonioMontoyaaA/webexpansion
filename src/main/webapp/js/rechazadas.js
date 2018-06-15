@@ -98,12 +98,18 @@ function creatabla(){
 				datosMemoriasRechazadas[i][2] = "<span>" + resultados[i].puntuacion + '</span><span> puntos '+ estrellas+"</span>";
 				datosMemoriasRechazadas[i][3] = "<span>" + resultados[i].creador + "</span>";
 				datosMemoriasRechazadas[i][4] = "<span>" + resultados[i].fechaCreacion + "</span>";
-				datosMemoriasRechazadas[i][8] = "<span>" + areasrechazo+ "</span>";
-				datosMemoriasRechazadas[i][8] = "<span>" + resultados[i].tipoRechazo + "</span>";
-				datosMemoriasRechazadas[i][9] = resultados[i].mdId;
+				datosMemoriasRechazadas[i][5] = "<span>" + areasrechazo+ "</span>";
+				datosMemoriasRechazadas[i][6] = "<span>" + resultados[i].tipoRechazo + "</span>";
+				datosMemoriasRechazadas[i][7] = resultados[i].mdId;
 			 }			
 			initTablaMemoriasRechazadasDirGeneral('DivTablaRechazadas', datosMemoriasRechazadas, 'tablaMemoriasRechazadas');
-		}
+		
+			$("#tablaMemoriasRechazadas tr td").not(":eq(7)").click(function() {
+				var nombreMd = $(this).parent().find("td:eq(0) span").html();
+				var mdId = $(this).parent().find("td:eq(7)").html();
+				obtieneDetalleMd(nombreMd, mdId);
+			});
+			}
 			
 		else{
 			var resultados = data.mds;
@@ -144,10 +150,21 @@ function creatabla(){
 				datosMemoriasRechazadas[i][9] = resultados[i].mdId;
 			 }			
 			initTablaMemoriasRechazadas('DivTablaRechazadas', datosMemoriasRechazadas, 'tablaMemoriasRechazadas');
+		
+			$("#tablaMemoriasRechazadas tr td").not(":eq(9)").click(function() {
+				var nombreMd = $(this).parent().find("td:eq(0) span").html();
+				var mdId = $(this).parent().find("td:eq(9)").html();
+				obtieneDetalleMd(nombreMd, mdId);
+			});
 		}
 		}
 	};	
 }
 function ejecutaBusquedaRechazadas() {
 	$("#tablaMemoriasRechazadas").dataTable().fnFilter($("#buscador").val());
+}
+function obtieneDetalleMd(nombreMd, mdId) {
+	$("#nombreMd").val(nombreMd);
+	$("#mdId").val(mdId);
+	$("#consultaDetalleAction").submit();
 }

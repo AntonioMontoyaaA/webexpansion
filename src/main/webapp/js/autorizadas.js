@@ -111,14 +111,33 @@ function creatabla(){
 				datosMemoriasAutorizadas[i][8] = resultados[i].mdId;
 				}
 			 }	
-			if(perfil==3)
+			if(perfil==3){
 			initTablaMemoriasAutorizadasDirGeneral('DivTablaAutorizadas', datosMemoriasAutorizadas, 'tablaMemoriasAutorizadas');
-			else
+			$("#tablaMemoriasAutorizadas tr td").not(":eq(6)").click(function() {
+				var nombreMd = $(this).parent().find("td:eq(0) span").html();
+				var mdId = $(this).parent().find("td:eq(6)").html();
+				obtieneDetalleMd(nombreMd, mdId);
+			});
+			}
+			else{
 			initTablaMemoriasAutorizadas('DivTablaAutorizadas', datosMemoriasAutorizadas, 'tablaMemoriasAutorizadas');
+			
+			$("#tablaMemoriasAutorizadas tr td").not(":eq(8)").click(function() {
+				var nombreMd = $(this).parent().find("td:eq(0) span").html();
+				var mdId = $(this).parent().find("td:eq(8)").html();
+				obtieneDetalleMd(nombreMd, mdId);
+			});
+			}
+			
 			
 		}
 	};	
 }
 function ejecutaBusquedaAutorizadas() {
 	$("#tablaMemoriasAutorizadas").dataTable().fnFilter($("#buscador").val());
+}
+function obtieneDetalleMd(nombreMd, mdId) {
+	$("#nombreMd").val(nombreMd);
+	$("#mdId").val(mdId);
+	$("#consultaDetalleAction").submit();
 }

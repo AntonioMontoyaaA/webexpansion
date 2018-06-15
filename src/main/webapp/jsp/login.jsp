@@ -37,27 +37,22 @@
 				</div>
 			</div>
 			
-			<form action='<spring:url value="/loginAction"/>' method="POST" name="loginForm" novalidate>	
+			<form action='Login' method="POST" onsubmit="return validacion();">	
 			<div class="row center margenVEntreExagonos">
 				<div class="center margenHEntreExagonos altoExagono">
 					<div class="hexagonB">
 						<div class="hexagon-in1B">
 							<span class="hexagon-in2B">
-								<div class="hexagon">
+								<div class="hexagon" onclick="ocultauser();"  style="cursor:pointer;">
 									<div class="hexagon-in1">
 										<div class="hexagon-in2">
 											<div class="vertical-center-exagono center">
-												<div class="row inicio_user2">
-													<a href="#" class="col col-12 altura">
-														<img src="img/neto-user.png" class="img-exagono-max" alt="Tiendas Neto">
-													</a>
-													<div class="col col-12 center "></div>
-													<div class="col col-10 offset-1 separadorInputLogin">
-														<input type="text" placeholder="Escribe tu usuario" class="form-control input_login" name="fiusuarioid" id="fiusuarioid" required>
-													</div>
-												</div>
 												<div class="row inicio_user">
-														<img src="img/neto-user.png" alt="Tiendas Neto" style="cursor:pointer" onclick="ocultauser();">
+														<img src="img/neto-user.png">
+												</div>
+												<div class="row inicio_user2 center">
+														<div class="imagen"><img src="img/neto-user.png" class="img-exagono-max"></div>
+															<input type="text" id="user" placeholder="Escribe tu usuario" class="form-control input_login" name="user">
 												</div>
 											</div>
 										</div>
@@ -72,25 +67,21 @@
 					<div class="hexagonB" style="margin: 0 4px;">
 						<div class="hexagon-in1B">
 							<span class="hexagon-in2B" >
-								<div class="hexagon">
+								<div class="hexagon" onclick="ocultapass();" style="cursor:pointer;">
 									<div class="hexagon-in1">
 										<div class="hexagon-in2">
 											<div class="vertical-center-exagono center">
-												<div class="row inicio_pass2">
-													<a href="#" class="col col-12 altura">
+												<div class="row inicio_pass">
+														<img src="img/contra.png">
+												</div>
+												<div class="row inicio_pass2 center">
+													<div class="imagen">
 														<img src="img/contra.png" class="img-exagono-max" alt="Tiendas Neto">
-													</a>
-													<div class="col col-12 center "></div>
-													<div class="col col-10 offset-1">
-														<input id="inPassword" type="password" placeholder="Escribe tu contraseña" class="form-control input_login" name="fccontrasena" id="fccontrasena" required>
 													</div>
+														<input id="pass" type="password" placeholder="Escribe tu contraseña" class="form-control input_login" name="pass">
 													<div class="col col-12">
 														<a class="btn btnOlvidoContrasena" href="#">Olvidaste&nbsp;tu&nbsp;contraseña?</a>
 													</div>
-												</div>
-												
-												<div class="row inicio_pass">
-														<img src="img/contra.png"  style="cursor:pointer" class="" alt="Tiendas Neto"  onclick="ocultapass();">
 												</div>
 											</div>
 										</div>

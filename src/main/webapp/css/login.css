@@ -7,7 +7,19 @@ body {
 	font-family: "Helvetica";
 }
 .altura{
+	height:5%;
+}
+.imagen{
+	position:relative;
 	top:-20;
+}
+.mensajeerror{
+	height:10px;
+	text-align:center;
+	font-size:10px;
+	color:#40BCD8;
+	top:-100;
+	position:relative;
 }
 .bg-image {
 	background: url('../img/bg3.jpg');
@@ -108,6 +120,7 @@ input[type=text]:focus {
 
 /* input login */
 .input_login{
+	width:70%;
 	color: #FFFFFF;
 	border-top: 0;
 	border-left: 0;
@@ -115,15 +128,17 @@ input[type=text]:focus {
 	border-bottom: 1px solid #FFF;
 	background: transparent !important;
 	padding:0;
-	font-size: 15px;
+	font-size: 14px;
 	border-radius: 0;
 	text-align: center;
 	box-shadow: none;
+	margin: 0 auto;
+	font-family:"Helvetica";
 }
 .input_login:focus{
 	color:white;
 }
-input.form-control.input_login::placeholder{
+.input_login::placeholder{
 	color: #FFFFFF;
 	font-size: 10px;
 }
@@ -294,9 +309,11 @@ a.linksLogin{
 }
 
 @media screen and (min-width: 301px) and (max-width: 945px) {
-	.altura{
-	top:-0;
-	}
+	.imagen{
+	position:relative;
+	top:-15;
+}
+	
 	.margenVEntreExagonos {
 		margin: -7.4em 0;
 	}
@@ -307,11 +324,11 @@ a.linksLogin{
 		width: 30px;
 		height: 30px;
 	}
-	input.form-control.input_login{
+	.input_login{
 		padding: .1rem .5rem;
 		font-size: 12px;
 	}
-	input.form-control.input_login::placeholder{
+	.form-control.input_login::placeholder{
 		font-size: 6.5px;
 	}
 	.btn.btnOlvidoContrasena {
@@ -339,6 +356,10 @@ a.linksLogin{
 }
 
 @media all and (max-width: 300px) {
+	.imagen{
+	position:relative;
+	top:-15;
+	}
 	
 	.margenVEntreExagonos {
 		margin: -8.5em 0;
@@ -356,11 +377,11 @@ a.linksLogin{
 	.vertical-center-exagono {
 		top: 3em;
 	}
-	input.form-control.input_login{
+	.input_login{
 		padding: .2rem .5rem;
 		font-size: 13px;
 	}
-	input.form-control.input_login::placeholder{
+	.input_login::placeholder{
 		font-size: 7.5px;
 	}
 	.btn.btnOlvidoContrasena {

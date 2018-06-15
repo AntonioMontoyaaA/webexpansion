@@ -1,12 +1,30 @@
 function ocultauser(){
-	console.log("entro");
-	
-	$('.inicio_user').hide();
-	$('.inicio_user2').show();
+if($('.inicio_user').is(":visible")){
+	$('.inicio_user').fadeOut('fast');
+	setTimeout(muestrauser,200);
+}
+}
+function muestrauser(){
+	$('.inicio_user2').fadeIn('fast');
 }
 function ocultapass(){
-	console.log("entroooo");
+if($('.inicio_pass').is(":visible")){
+	$('.inicio_pass').fadeOut('fast');
+	setTimeout(muestrapass,200)
+	}
+}
+function muestrapass(){
+	$('.inicio_pass2').fadeIn('fast');
+}
+
+function validacion(){
 	
-	$('.inicio_pass').hide();
-	$('.inicio_pass2').show();
+	if ($('#user').val()== '') {
+		console.log($('#user').val());
+        return false;
+    }
+	if ($('#pass').val() == '') {
+        return false;
+    }
+	
 }

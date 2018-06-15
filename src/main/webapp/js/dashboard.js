@@ -377,7 +377,6 @@ var jun_plan=0, jun_real=0, jul_plan=0, jul_real=0, ago_plan=0, ago_real=0, sep_
 var nov_plan=0, nov_real=0, dic_plan=0, dic_real=0;
 
 if(datos.Enero!="undefined"){
-	console.log("hhjhkjhk");
 	ene_plan=datos.Enero.plan;
 	ene_real=datos.Enero.real;
 	if(mes=="ENERO"){

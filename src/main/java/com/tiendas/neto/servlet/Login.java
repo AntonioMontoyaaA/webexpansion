@@ -43,7 +43,8 @@ public class Login  extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	UsuarioLoginVO usuario=new UsuarioLoginVO();
     	int codigo;
-    	
+    	response.setContentType("text/html;charset=UTF-8");
+
     	user=request.getParameter("user");
     	pass=request.getParameter("pass"); 
     	
@@ -58,12 +59,11 @@ public class Login  extends HttpServlet {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				response.setContentType("text/html;charset=UTF-8");
 				RequestDispatcher despachador = getServletContext().getRequestDispatcher("/jsp/dashboard.jsp");
 				despachador.include(request, response);
 				System.out.println("login");
 			} else {
-				RequestDispatcher despachador = getServletContext().getRequestDispatcher("/jsp/errorSesion.jsp");
+				RequestDispatcher despachador = getServletContext().getRequestDispatcher("/jsp/login_error.jsp");
 				despachador.include(request, response);
 				System.out.println("error");
 			}
@@ -72,7 +72,7 @@ public class Login  extends HttpServlet {
     	String metodo ="metodo: "+ new String (Thread.currentThread().getStackTrace()[1].getMethodName());
     	
     	elog.error(clase, metodo, e+"", user, pass);
-		RequestDispatcher despachador = getServletContext().getRequestDispatcher("/jsp/errorSesion.jsp");
+		RequestDispatcher despachador = getServletContext().getRequestDispatcher("/jsp/login_error.jsp");
 		despachador.include(request, response);
 		System.out.println("fatal error");
 

@@ -55,19 +55,23 @@ function validaEstatusAtencion(estatus, idObjetos){
 		if(estatus == 2){// pendiente atencion
 			$('#autoriza'  + idObjetos).addClass('sin_autorizar');
 			$('#rechaza'  + idObjetos).addClass('sin_autorizar');
+			FACTORES[idObjetos].motivo = 0;
 		}else if(estatus == 1){ //autorizado
 			$('#autoriza' + idObjetos).removeClass('sin_autorizar');
 			$('#autoriza' + idObjetos).addClass('autorizado');
 			FACTORES[idObjetos].atendido = true;
+			FACTORES[idObjetos].motivo = -1;
 		}else if(estatus == 0){//rechazado
 			$('#rechaza' + idObjetos).removeClass('sin_autorizar');
 			$('#rechaza' + idObjetos).addClass('autorizado');
 			FACTORES[idObjetos].atendido = true;
+			FACTORES[idObjetos].motivo = 1;
 		}else if(estatus == 3){//rechazado con motivo definitivo
 			$('#rechaza' + idObjetos).removeClass('sin_autorizar');
 			$('#rechaza' + idObjetos).addClass('autorizado');
 			FACTORES[idObjetos].atendido = true;
 			FACTORES[idObjetos].motivoRechazoDefinitivo =  true;
+			FACTORES[idObjetos].motivo = 1;
 		}else{//desconocido
 			$('#autoriza' + idObjetos).addClass('sin_autorizar');
 			$('#rechaza' + idObjetos).addClass('sin_autorizar');
@@ -272,12 +276,13 @@ function buscaDetalleMD(mdId) {
 				$("#nombreMd").text(data.generales.nombreMd);
 				$("#creadorMd").text(data.generales.creador);
 				$("#categoriaMd").text(data.generales.categoria);
+				estrella = "<img class='estrellaPuntuacionDetalle' src='img/estrella.png'>";
 				if(data.generales.categoria == 'A') {
-					$("#estrellasMd").html("<img class='estrellaPuntuacionDetalle' src='img/icono_estrella_azul.png'><img class='estrellaPuntuacionDetalle' src='img/icono_estrella_azul.png'><img class='estrellaPuntuacionDetalle' src='img/icono_estrella_azul.png'>");
+					$("#estrellasMd").html(estrella + estrella + estrella);
 				} else if(data.generales.categoria == 'B') {
-					$("#estrellasMd").html("<img class='estrellaPuntuacionDetalle' src='img/icono_estrella_azul.png'><img class='estrellaPuntuacionDetalle' src='img/icono_estrella_azul.png'>");
+					$("#estrellasMd").html(estrella + estrella);
 				} else {
-					$("#estrellasMd").html("<img class='estrellaPuntuacionDetalle' src='img/icono_estrella_azul.png'>");
+					$("#estrellasMd").html(estrella);
 				}
 				$("#fechaCreacion").text(data.generales.fechaCreacion);
 				$("#puntuacionMd").text(data.generales.puntuacion);
@@ -589,9 +594,22 @@ function finalizaMD(estatus){
 				'¿Est\u00e1s seguro de autorizar la MD?',
 				TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, actionfinalizaMD);
 	}else if(estatus == 0){
-		cargaMensajeModal('MD ASIGNADAS', 
-				'¿Est\u00e1s seguro de rechazar la MD?',
-				TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, actionfinalizaMD);
+		
+		var conRechazo = false;
+		for(i in FACTORES){
+			if(FACTORES[i].motivo != -1){
+				conRechazo = true;
+				break;
+			}
+		}
+		
+		if(conRechazo){
+			cargaMensajeModal('MD ASIGNADAS', 
+					'¿Est\u00e1s seguro de rechazar la MD?',
+					TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, actionfinalizaMD);
+		}else{
+			console.log('sin rechazo')
+		}
 	}
 }
 
@@ -604,7 +622,7 @@ function actionfinalizaMD(){
 			 'validacion': ESTATUS_FINALIZA_MD,
 			 'motivo': 0,
 			 'finaliza' : 1,
-			 'comentario': ' '
+			 'comentario': ''
 			 }, 
 			'responseFinalizacion', 
 			function() {
@@ -693,6 +711,7 @@ function responseAutorizacion(data){
 			$('#rechaza' + moduloEjecutado).removeClass('autorizado');
 			$('#rechaza' + moduloEjecutado).addClass('sin_autorizar');
 			FACTORES[moduloEjecutado].motivoRechazoDefinitivo =  false;
+			FACTORES[moduloEjecutado].motivo = -1;
 		}else if($("#tipoAutorizacion").val() == RECHAZA_MODULO){
 			$('#rechaza' + moduloEjecutado).removeClass('sin_autorizar');
 			$('#rechaza' + moduloEjecutado).addClass('autorizado');
@@ -700,16 +719,20 @@ function responseAutorizacion(data){
 			$('#autoriza' + moduloEjecutado).removeClass('autorizado');
 			$('#autoriza' + moduloEjecutado).addClass('sin_autorizar');
 			
-			if(MOTIVOS_RECHAZO[moduloEjecutado][$('#motivoRechazo').val()].isDefinitivo)
+			if(MOTIVOS_RECHAZO[moduloEjecutado][$('#motivoRechazo').val()].isDefinitivo){
 				FACTORES[moduloEjecutado].motivoRechazoDefinitivo =  true;
-			else
+				FACTORES[moduloEjecutado].motivo = $('#motivoRechazo').val();
+			}else{
 				FACTORES[moduloEjecutado].motivoRechazoDefinitivo =  false;
+				FACTORES[moduloEjecutado].motivo = $('#motivoRechazo').val();
+			}
 		}else{
 			$('#autoriza' + moduloEjecutado).removeClass('autorizado');
 			$('#rechaza' + moduloEjecutado).removeClass('autorizado');
 			$('#autoriza' + moduloEjecutado).addClass('sin_autorizar');
 			$('#rechaza' + moduloEjecutado).addClass('sin_autorizar');
 			FACTORES[moduloEjecutado].motivoRechazoDefinitivo =  false;
+			FACTORES[moduloEjecutado].motivo = 1;
 		}
 		
 		
@@ -753,23 +776,29 @@ function consultaMotivosRechazo(modulo){
 function parseaPermisos(){
 	PERMISOS = {};
 	$('.permisos_detalleMd').each(function(){
-		a = JSON.parse($(this).val().replaceAll("'",'"'));
 		
-		if(PERMISOS[a.FIMODULOID] == undefined){
-			PERMISOS[a.FIMODULOID] = new Permiso(
-					a.BLOQUEASEGUIMIENTO,
-					a.FIESTATUS,
-					a.FIMODULOID,
-					a.FISUBMODULO,
-					a.PERMITEEDITAR,
-					a.PERMITECOMENTAR,
-					a.PERMITERECHAZAR,
-					a.PERMITEAUTORIZAR
-			);
+		rel = $(this).attr('rel');
+		
+		if(rel == 8){//Modulo para detalle de la MD
+			a = JSON.parse($(this).val().replaceAll("'",'"'));
 			
-			if(a.PERMITEAUTORIZAR == 1)
-				TOTAL_ATENCIONES++;
+			if(PERMISOS[a.FISUBMODULO] == undefined){
+				PERMISOS[a.FISUBMODULO] = new Permiso(
+						a.BLOQUEASEGUIMIENTO,
+						a.FIESTATUS,
+						a.FIMODULOID,
+						a.FISUBMODULO,
+						a.PERMITEEDITAR,
+						a.PERMITECOMENTAR,
+						a.PERMITERECHAZAR,
+						a.PERMITEAUTORIZAR
+				);
+				
+				if(a.PERMITEAUTORIZAR == 1)
+					TOTAL_ATENCIONES++;
+			}
 		}
+		
 	});
 }
 
@@ -797,7 +826,9 @@ FactorAutorizacion = function(id, nombre, atendido){
 	this.id = id;
 	this.nombre = nombre;
 	this.atendido = atendido;
-	this.motivoRechazoDefinitivo;
+	
+	this.motivoRechazoDefinitivo = false;
+	this.motivo = -1;
 };
 
 MotivoRechazo = function(id, nombre, isDefinitivo){

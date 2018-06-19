@@ -12,10 +12,11 @@ var PERMISOS = {};
 var ESTATUS_FINALIZA_MD = -1;
 
 $(function(){
+	
 	if($('#tipo_md').val()=="1")
 	$('#idautorizadas').addClass('resaltado'); 
 	
-	if($('tipo_md').val()=="1")
+	if($('tipo_md').val()=="0")
 	$('#idrechazadas').addClass('resaltado');
 	
 	$("#nombreMdTxt").text($("#nombreMd").val());

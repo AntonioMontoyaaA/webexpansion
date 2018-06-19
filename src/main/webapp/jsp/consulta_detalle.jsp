@@ -15,9 +15,6 @@
 <title>Detalle</title>
 </head>
 <body>
-	<!--<c:forEach var="permiso" items="${usr.perfil.perfilesxusuario[0].permisos}">
-    	<input type="hidden" class="permisos_detalleMd" rel="${permiso.getFIMODULOID()}" value="${permiso.toJSON()}">
-    </c:forEach> -->
     
     <c:forTokens items = "{'BLOQUEASEGUIMIENTO': 0,'FIESTATUS': 1,'FIMODULOID': 1,'PERMITEEDITAR': 0,'FISUBMODULO': -1,'PERMITECOMENTAR': 0,'PERMITERECHAZAR': 0,'PERMITEAUTORIZAR': 1}#
 {'BLOQUEASEGUIMIENTO': 0,'FIESTATUS': 1,'FIMODULOID': 2,'PERMITEEDITAR': 0,'FISUBMODULO': -1,'PERMITECOMENTAR': 1,'PERMITERECHAZAR': 1,'PERMITEAUTORIZAR': 0}#

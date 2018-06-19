@@ -61,6 +61,7 @@ function creatabla(){
 			$("#descargaExcel").hide();
 			initTablaMemoriasRechazadas('DivTablaRechazadas', 0, 'tablaMemoriasRechazadas');
 			initTablaMemoriasRechazadasDirGeneral('DivTablaRechazadas', 0, 'tablaMemoriasRechazadas');
+			
 		} else {
 			
 			if(perfil==3){
@@ -79,10 +80,27 @@ function creatabla(){
 			var variable;
 			var areasrechazo=[];
 			
+			var icono_expansion='<span><img src="img/web_expansionc.png"></span>&nbsp;';
+			var icono_gestoria='<span><img src="img/web_gestoriac.png"></span>&nbsp;';
+			var icono_construccion='<span><img src="img/web_construccionc.png"></span>&nbsp;';
+			var icono_operaciones='<span><img src="img/web_operacionesc.png"></span>&nbsp;';
 			
 			
-			
-			for( var i = 0 ; i < resultados.length; i++){	
+			for( var i = 0 ; i < resultados.length; i++){
+				var listaiconos="";
+				areasrechazo=resultados[i].areasRechazo;	
+				
+				for(var x=0; x < areasrechazo.length;x++){
+					if(areasrechazo[x].areaId==1)
+						listaiconos=listaiconos+""+icono_expansion;
+					if(areasrechazo[x].areaId==2)
+						listaiconos=listaiconos+""+icono_gestoria;
+					if(areasrechazo[x].areaId==3)
+						listaiconos=listaiconos+""+icono_construccion;
+					if(areasrechazo[x].areaId==5)
+						listaiconos=listaiconos+""+icono_operaciones;
+				}
+				
 				switch(resultados[i].categoria) {
 					case 'A':	estrellas = puntuacionEnTiempoA;
 								break;
@@ -98,7 +116,7 @@ function creatabla(){
 				datosMemoriasRechazadas[i][2] = "<span>" + resultados[i].puntuacion + '</span><span> puntos '+ estrellas+"</span>";
 				datosMemoriasRechazadas[i][3] = "<span>" + resultados[i].creador + "</span>";
 				datosMemoriasRechazadas[i][4] = "<span>" + resultados[i].fechaCreacion + "</span>";
-				datosMemoriasRechazadas[i][5] = "<span>" + areasrechazo+ "</span>";
+				datosMemoriasRechazadas[i][5] = listaiconos;
 				datosMemoriasRechazadas[i][6] = "<span>" + resultados[i].tipoRechazo + "</span>";
 				datosMemoriasRechazadas[i][7] = resultados[i].mdId;
 			 }			

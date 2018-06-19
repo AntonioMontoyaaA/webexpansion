@@ -55,6 +55,8 @@ public class DetalleMemoriaXIdAction extends ActionSupport implements SessionAwa
 				if(usuario.getPerfil().getAreasxpuesto().size() > 0) {
 					areaId = String.valueOf(usuario.getPerfil().getAreasxpuesto().get(0).getAreaId());
 				}
+				if(areaId==null)
+					areaId="1";
 			} else {
 				RespuestaVo respuestaVo = new RespuestaVo();
 				respuestaVo.setCodigo(501);
@@ -63,6 +65,11 @@ public class DetalleMemoriaXIdAction extends ActionSupport implements SessionAwa
 				
 				return null;
 			}
+			
+			System.out.println("usuario "+numeroEmpleado);
+			System.out.println("mdId "+mdId);
+			System.out.println("puestoId "+puestoId);
+			System.out.println("areaId "+areaId);
 			
 			final OkHttpClient client = new OkHttpClient();
 			FormBody.Builder formBuilder = new FormBody.Builder()

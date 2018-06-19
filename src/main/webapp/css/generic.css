@@ -33,11 +33,9 @@ html {
 }
 #tituloMensaje {
 	color: #FFFFFF;
-	font-family: "Heveltica Neue";
 	font-size: 18px;
 	display: table-cell;
 	vertical-align: middle;
-	padding-top: 5px;
 }
 #descripcionMensaje {
 	color: #616161;

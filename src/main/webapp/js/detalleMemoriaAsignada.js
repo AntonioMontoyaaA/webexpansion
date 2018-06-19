@@ -538,7 +538,7 @@ function cargaFlujoPeatonal(colores,rows) {
 
 function autorizaPantalla(modulo, elemento) {
 	if($(elemento).hasClass('sin_autorizar')){
-		$("#tituloModalAutorizacion").text("¿Estás seguro de autorizar este punto?");
+		$("#tituloModalAutorizacion").text("¿Estás seguro de autorizar " + FACTORES[modulo].nombre + "?");
 		$("#tipoAutorizacion").val(AUTORIZA_MODULO);
 		$("#finaliza").val(0);
 		$("#moduloId").val(modulo);
@@ -558,7 +558,7 @@ function rechazaPantalla(modulo, elemento) {
 
 function buscaMotivosRechazo(modulo){
 	if(MOTIVOS_RECHAZO[modulo] == undefined){ //no se han consultado los motivos de rechazo
-		consultaMotivosRechazo(modulo);
+		consultaMotivosRechazo(modulo,2);
 	}else{//ya se consultaron los motivos
 		cargaComboMotivos(modulo);
 	}
@@ -576,8 +576,10 @@ function cargaComboMotivos(modulo){
 	
 	$("#comboMotivos").html(strCombo);
 	$('#motivoRechazo').val(0);
-	
-	$("#tituloModalAutorizacion").text("¿Estás seguro de rechazar este punto?");
+	if(modulo == 0)
+		$("#tituloModalAutorizacion").text("¿Estás seguro de rechazar la MD?");
+	else
+		$("#tituloModalAutorizacion").text("¿Estás seguro de rechazar " + FACTORES[modulo].nombre + "?");
 	$("#tipoAutorizacion").val(RECHAZA_MODULO);
 	$("#finaliza").val(0);
 	$("#moduloId").val(modulo);
@@ -608,21 +610,26 @@ function finalizaMD(estatus){
 					'¿Est\u00e1s seguro de rechazar la MD?',
 					TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, actionfinalizaMD);
 		}else{
-			console.log('sin rechazo')
+			consultaMotivosRechazo(0, 1);
 		}
 	}
 }
 
-function actionfinalizaMD(){
+function actionfinalizaMD(motivo, comment){
 	cargaLoading();
+	
+	if(motivo == undefined)
+		motivo = 0;
+	if(comment == undefined)
+		comment = '';
 	
 	invocarJSONServiceAction("autorizaMd", 
 			{'modulo':0,
 			 'md': $("#mdIdAutorizacion").val(),
 			 'validacion': ESTATUS_FINALIZA_MD,
-			 'motivo': 0,
+			 'motivo': motivo,
 			 'finaliza' : 1,
-			 'comentario': ''
+			 'comentario': comment
 			 }, 
 			'responseFinalizacion', 
 			function() {
@@ -678,23 +685,27 @@ function funcionesAutorizacion(){
 function autoriza(motivoSeleccionado){
 	$("#modal_autorizacion").modal("hide");
 	
+	modulo = $("#moduloId").val();
 	cargaLoading();
-	
-	invocarJSONServiceAction("autorizaMd", 
-			{'modulo': $("#moduloId").val(),
-			 'md': $("#mdIdAutorizacion").val(),
-			 'validacion':$("#tipoAutorizacion").val(),
-			 'motivo': motivoSeleccionado,
-			 'finaliza' : $("#finaliza").val(),
-			 'comentario': $('#detalleMensajeModal textarea').val()
-			 }, 
-			'responseAutorizacion', 
-			function() {
-				cierraLoading();
-			},
-			function() {
-				cierraLoading();
-			});
+	if(modulo != 0){
+		invocarJSONServiceAction("autorizaMd", 
+				{'modulo': modulo,
+				 'md': $("#mdIdAutorizacion").val(),
+				 'validacion':$("#tipoAutorizacion").val(),
+				 'motivo': motivoSeleccionado,
+				 'finaliza' : $("#finaliza").val(),
+				 'comentario': $('#detalleMensajeModal textarea').val()
+				 }, 
+				'responseAutorizacion', 
+				function() {
+					cierraLoading();
+				},
+				function() {
+					cierraLoading();
+				});
+	}else{
+		actionfinalizaMD(motivoSeleccionado, $('#detalleMensajeModal textarea').val())
+	}
 }
 
 function responseAutorizacion(data){
@@ -741,10 +752,10 @@ function responseAutorizacion(data){
 	}
 }
 
-function consultaMotivosRechazo(modulo){
+function consultaMotivosRechazo(modulo, tipo){
 	invocarJSONServiceAction("motivosRechazo", 
 			{'modulo': modulo,
-			'tipoModulo': 2}, 
+			'tipoModulo': tipo}, 
 			'almacenaMotivosRechazo', 
 			function() {
 				cierraLoading();

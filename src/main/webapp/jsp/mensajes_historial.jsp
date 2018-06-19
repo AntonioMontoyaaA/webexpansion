@@ -25,10 +25,10 @@
 <!-- CHAT -->	
 		<div class="col-lg-4">
 		<div class="row divs_p">
-		<div class="col-lg-12 menupr_estilos">
+		<div class="col-lg-12 menupr_estilos fazul">
 			<div class="row cabecera">
 				<div class="col-lg-12">
-					<span class="azul negrita">Historial Chat</span>
+					<span class="blanco negrita">Historial Chat</span>
 				</div>
 			</div>
 			<div class="col-md-12 chat frame">
@@ -41,26 +41,23 @@
 		<div class="row">
 <!-- DATOS DEL SITIO -->
 			<div class="col-lg-6 divs_p">
-			<div class="col-lg-12 menupr_estilos ">
+			<div class="col-lg-12 menupr_estilos fazul">
 			<div class="row cabecera">
 				<div class="col-lg-12">
-					<span class="azul negrita">1) Datos del sitio</span>
+					<span class="blanco negrita">1) Datos del sitio</span>
 				</div>
 			</div>
 			<div class="col-md-12 div_alt" id="datos_sitio">
-					<div class="row msj_bloque">
-					<div class="msj_icono"></div>
-					<div class="msj_texto azul"></div>
-					</div>
+				
 			</div>
 			</div>
 			</div>
 <!-- DATOS DEL PROPIETARIO -->
 			<div class="col-lg-6 divs_p">
-			<div class="col-lg-12 menupr_estilos ">
+			<div class="col-lg-12 menupr_estilos fazul">
 			<div class="row cabecera">
 				<div class="col-lg-12">
-					<span class="azul negrita">2) Datos del propietario</span>
+					<span class="blanco negrita">2) Datos del propietario</span>
 				</div>
 			</div>
 			<div class="col-md-12 div_alt" id="datos_prop"></div>
@@ -69,7 +66,7 @@
 			</div>
 <!-- SUPERFICIE -->		
 		<div class="col-lg-6 divs_p">
-			<div class="col-lg-12 menupr_estilos ">
+			<div class="col-lg-12 menupr_estilos fblanco">
 			<div class="row cabecera">
 				<div class="col-lg-12">
 					<span class="azul negrita">3) Superficie</span>
@@ -80,7 +77,7 @@
 			</div>
 <!-- ZONIFICACION -->		
 			<div class="col-lg-6 divs_p">
-			<div class="col-lg-12 menupr_estilos ">
+			<div class="col-lg-12 menupr_estilos fblanco">
 			<div class="row cabecera">
 				<div class="col-lg-12">
 					<span class="azul negrita">4) Zonificación</span>
@@ -93,7 +90,7 @@
 	</div>
 <!-- CONSTRUCCION -->	
 	<div class="col-lg-4 divs_p">
-			<div class="col-lg-12 menupr_estilos ">
+			<div class="col-lg-12 menupr_estilos fblanco">
 			<div class="row cabecera">
 				<div class="col-lg-12">
 					<span class="azul negrita">5) Construcción</span>
@@ -104,10 +101,10 @@
 		</div>
 <!-- GENERALIDADES DEL SITIO -->		
 		<div class="col-lg-4 divs_p">
-			<div class="col-lg-12 menupr_estilos ">
+			<div class="col-lg-12 menupr_estilos fazul">
 			<div class="row cabecera">
 				<div class="col-lg-12">
-					<span class="azul negrita">Generalidades del sitio</span>
+					<span class="blanco negrita">Generalidades del sitio</span>
 				</div>
 			</div>
 			<div class="col-md-12 div_alt" id="generalidades_sitio"></div>
@@ -115,10 +112,10 @@
 		</div>
 <!-- FLUJO PEATONAL -->		
 		<div class="col-lg-4 divs_p">
-			<div class="col-lg-12 menupr_estilos ">
+			<div class="col-lg-12 menupr_estilos fazul">
 			<div class="row cabecera">
 				<div class="col-lg-12">
-					<span class="azul negrita">Flujo peatonal</span>
+					<span class="blanco negrita">Flujo peatonal</span>
 				</div>
 			</div>
 			<div class="col-md-12 div_alt" id="flujo_peatonal"></div>

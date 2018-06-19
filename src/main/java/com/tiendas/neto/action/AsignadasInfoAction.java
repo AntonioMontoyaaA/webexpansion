@@ -40,7 +40,7 @@ public class AsignadasInfoAction extends ExpansionAction implements SessionAware
 		UsuarioLoginVO usuario = null;
 		String numeroEmpleado = null;
 		int puestoId = 0;
-		int areaId = 0;
+		String areaId = "";
 		HttpSession usuarioSesion = ServletActionContext.getRequest().getSession();
 		usuario = (UsuarioLoginVO) usuarioSesion.getAttribute("usr");
 		
@@ -48,8 +48,8 @@ public class AsignadasInfoAction extends ExpansionAction implements SessionAware
 			if(usuario != null) {
 				numeroEmpleado = String.valueOf(usuario.getPerfil().getNumeroEmpleado());
 				puestoId = usuario.getPerfil().getPuestoId();
-				if(usuario.getPerfil().getAreasxpuesto().size() > 0) {
-					areaId = usuario.getPerfil().getAreasxpuesto().get(0).getAreaId();
+				if(usuario.getPerfil().getAreasxpuesto().length > 0) {
+					areaId = String.valueOf(usuario.getPerfil().getAreasxpuesto()[0].getAreaId());
 				}
 			} else {
 				RespuestaVo respuestaVo = new RespuestaVo();

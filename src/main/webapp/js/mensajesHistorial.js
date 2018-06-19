@@ -46,7 +46,7 @@ function escribirMensajes(){
 		 {"hora": "15/05/18 15:30", "quien": 0, "areaId": 4, "area": "Operaciones", "modulo": 2, "mensaje": "verificar los datos del propietario"},
 		 {"hora": "15/05/18 15:35", "quien": 1, "areaId": 1, "area": "Expansión", "modulo": 2, "mensaje": "nombre del propietario incorrecto"},
 		 {"hora": "15/05/18 16:00", "quien": 0, "areaId": 2, "area": "Gestoría", "modulo": 2, "mensaje": "escribir correctamente la informacion del propietario"},
-		 {"hora": "15/05/18 16:03", "quien": 1, "areaId": 3, "area": "Expansión", "modulo": 2, "mensaje": "verificar informacion"}
+		 {"hora": "15/05/18 16:03", "quien": 1, "areaId": 3, "area": "Contrucción", "modulo": 2, "mensaje": "verificar informacion"}
 		 ];
 	
 	$.each(datos, function(i, data) {
@@ -72,33 +72,63 @@ function escribirMensajes(){
 		icono='<img src="img/web_operacionesc.png">';
 	}
 	
+		
+	
+	if(modulo==1){ //modulo
+		html="";
+		html=html+'<div class="row msj_bloque">';
+		html=html+'<div class="msj_icono">'+icono+'</div>';
+		html=html+'<div class="msj_texto blanco"><font class="area">'+area+'</font><br>'+mensaje+'</div>';
+		html=html+'</div>';
+		
+		$('#datos_sitio').append(html);
+	}
+	if(modulo==2){ //modulo
+		html="";
+		html=html+'<div class="row msj_bloque">';
+		html=html+'<div class="msj_icono">'+icono+'</div>';
+		html=html+'<div class="msj_texto blanco"><font class="area">'+area+'</font><br>'+mensaje+'</div>';
+		html=html+'</div>';
+		$('#datos_prop').append(html);	
+	}
+	if(modulo==3){ //modulo
 		html="";
 		html=html+'<div class="row msj_bloque">';
 		html=html+'<div class="msj_icono">'+icono+'</div>';
 		html=html+'<div class="msj_texto azul"><font class="area">'+area+'</font><br>'+mensaje+'</div>';
 		html=html+'</div>';
-			
-	
-	if(modulo==1){ //modulo
-		$('#datos_sitio').append(html);
-	}
-	if(modulo==2){ //modulo
-		$('#datos_prop').append(html);	
-	}
-	if(modulo==3){ //modulo
 		$('#superficie').append(html);
 	}
 	if(modulo==4){ //modulo
+		html="";
+		html=html+'<div class="row msj_bloque">';
+		html=html+'<div class="msj_icono">'+icono+'</div>';
+		html=html+'<div class="msj_texto azul"><font class="area">'+area+'</font><br>'+mensaje+'</div>';
+		html=html+'</div>';
 		$('#zonificacion').append(html);
 	}
 	if(modulo==5){ //modulo
-		$('#construccion').text('');
+		html="";
+		html=html+'<div class="row msj_bloque">';
+		html=html+'<div class="msj_icono">'+icono+'</div>';
+		html=html+'<div class="msj_texto azul"><font class="area">'+area+'</font><br>'+mensaje+'</div>';
+		html=html+'</div>';
 		$('#construccion').append(html);
 	}
 	if(modulo==6){ //modulo
+		html="";
+		html=html+'<div class="row msj_bloque">';
+		html=html+'<div class="msj_icono">'+icono+'</div>';
+		html=html+'<div class="msj_texto blanco"><font class="area">'+area+'</font><br>'+mensaje+'</div>';
+		html=html+'</div>';
 		$('#generalidades_sitio').append(html);
 	}
 	if(modulo==7){ //modulo
+		html="";
+		html=html+'<div class="row msj_bloque">';
+		html=html+'<div class="msj_icono">'+icono+'</div>';
+		html=html+'<div class="msj_texto blanco"><font class="area">'+area+'</font><br>'+mensaje+'</div>';
+		html=html+'</div>';
 		$('#flujo_peatonal').append(html);
 	}
 

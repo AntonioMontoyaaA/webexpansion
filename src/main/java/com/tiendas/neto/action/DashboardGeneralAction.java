@@ -46,16 +46,14 @@ public class DashboardGeneralAction extends ExpansionAction{
 		UsuarioLoginVO usuario = (UsuarioLoginVO) usuarioSesion.getAttribute("usr");
 		String numeroEmpleado = null;
 		int puestoId = 0;
-		int areaId = 0;
+		String areaId = "";
 		
 		
 		if(usuario != null) {
 			numeroEmpleado = String.valueOf(usuario.getPerfil().getNumeroEmpleado());
 			puestoId = usuario.getPerfil().getPuestoId();
-			if(usuario.getPerfil().getAreasxpuesto().size() > 0) {
-				areaId = usuario.getPerfil().getAreasxpuesto().get(0).getAreaId();
-				//String valor=usuario.getPerfil().getPerfilesxusuario().get(0).getPermisos().get(0).getPERMITEAUTORIZAR()+"";
-				//System.out.println(valor+" valor de permiso");
+			if(usuario.getPerfil().getAreasxpuesto().length > 0) {
+				areaId = String.valueOf(usuario.getPerfil().getAreasxpuesto()[0].getAreaId());
 			}
 		} else {
 			RespuestaVo respuestaVo = new RespuestaVo();

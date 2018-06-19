@@ -52,8 +52,8 @@ public class DetalleMemoriaXIdAction extends ActionSupport implements SessionAwa
 				numeroEmpleado = String.valueOf(usuario.getPerfil().getNumeroEmpleado());
 				
 				puestoId = String.valueOf(usuario.getPerfil().getPuestoId());
-				if(usuario.getPerfil().getAreasxpuesto().size() > 0) {
-					areaId = String.valueOf(usuario.getPerfil().getAreasxpuesto().get(0).getAreaId());
+				if(usuario.getPerfil().getAreasxpuesto().length > 0) {
+					areaId = String.valueOf(usuario.getPerfil().getAreasxpuesto()[0].getAreaId());
 				}
 				if(areaId==null)
 					areaId="1";

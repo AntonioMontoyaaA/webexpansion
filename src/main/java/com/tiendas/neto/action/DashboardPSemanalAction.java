@@ -63,6 +63,8 @@ public class DashboardPSemanalAction extends ExpansionAction{
 			if(usuario.getPerfil().getAreasxpuesto().length > 0) {
 				areaId = String.valueOf(usuario.getPerfil().getAreasxpuesto()[0].getAreaId());
 			}
+			else
+				areaId="1";
 		} else {
 			RespuestaVo respuestaVo = new RespuestaVo();
 			respuestaVo.setCodigo(501);

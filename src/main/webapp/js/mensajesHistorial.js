@@ -72,8 +72,6 @@ function escribirMensajes(){
 		icono='<img src="img/web_operacionesc.png">';
 	}
 	
-		
-	
 	if(modulo==1){ //modulo
 		html="";
 		html=html+'<div class="row msj_bloque">';

@@ -60,6 +60,8 @@ public class AceptaRechazaMDAction extends ActionSupport implements SessionAware
 				if(usuario.getPerfil().getAreasxpuesto().length > 0) {
 					areaId = String.valueOf(usuario.getPerfil().getAreasxpuesto()[0].getAreaId());
 				}
+				else
+					areaId="1";
 
 				final OkHttpClient client = new OkHttpClient();
 				

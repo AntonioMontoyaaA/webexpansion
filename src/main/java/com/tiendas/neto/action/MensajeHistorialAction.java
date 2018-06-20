@@ -1,11 +1,14 @@
 package com.tiendas.neto.action;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 
 import com.tiendas.neto.dao.Expansionlog;
 import com.tiendas.neto.singleton.SingletonProperties;
+import com.tiendas.neto.vo.RespuestaVo;
+import com.tiendas.neto.vo.UsuarioLoginVO;
 
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
@@ -29,27 +32,41 @@ public class MensajeHistorialAction extends ExpansionAction{
 	}
 
 	@Override
-	public String execute() throws Exception{
-		String respuesta="{'codigo': 200, 'mensaje': 'Datos guardados con exito','chat':{'mensajeId': 1, 'areaId': 1,"
-				+ " 'area': 'auditoria', 'autor': 'Oscar Melo', 'texto': 'El Sian no est· separado', "
-				+ "'fecha': '23/04/2018', 'modulo': 0}}";
-		/*
-		try{
-		final OkHttpClient client = new OkHttpClient();
-		FormBody.Builder formBuilder = new FormBody.Builder()
-		 .add("mdId", getMdId());
+	public String execute() throws Exception {
+		String respuesta="";
+		String numeroEmpleado = null;
+		UsuarioLoginVO usuario = null;
+		
+		HttpSession usuarioSesion = ServletActionContext.getRequest().getSession();
+		usuario = (UsuarioLoginVO) usuarioSesion.getAttribute("usr");
+		
+		try {	
+			if(usuario != null) {
+				numeroEmpleado = String.valueOf(usuario.getPerfil().getNumeroEmpleado());		
+			} else {
+				RespuestaVo respuestaVo = new RespuestaVo();
+				respuestaVo.setCodigo(501);
+				respuestaVo.setMensaje("Error en la sesi√≥n");
+				sendJSONObjectToResponse(respuestaVo);
+				
+				return null;
+			}
+			
+			final OkHttpClient client = new OkHttpClient();
+			FormBody.Builder formBuilder = new FormBody.Builder()
+					.add("mdId", getMdId())
+					.add("usuarioId", numeroEmpleado);
 
 		
 		 RequestBody formBody = formBuilder.build();
 		 Request request = new Request.Builder()
-				 .url(sp.getPropiedad(""))
+				 .url(sp.getPropiedad("obtieneChat"))
                  .post(formBody)
                  .build();
 		
 		 Response response = client.newCall(request).execute();
 		 respuesta = response.body().string();
-		 */
-		try {
+		 
 		 HttpServletResponse response2 = ServletActionContext.getResponse();
 			response2.setContentType("application/json");
 			response2.setCharacterEncoding("UTF-8");

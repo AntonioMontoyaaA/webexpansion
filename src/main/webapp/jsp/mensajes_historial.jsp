@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 
 <!-- &emsp;  &nbsp;-->
 <html>
@@ -34,95 +35,124 @@
 			<div class="col-md-12 chat frame">
 					<ul id="chat"></ul>
 			</div>
+			<div class="row cabecera">
+				<div class="col-lg-12">
+					<input id="chatGral" class="input_text" type="text" placeholder="Escribir mensaje a general" onkeyup="enviaMensajeGral(event)" /><img id="chatGralSend" onclick="enviaMensajeGralSend()" src="img/send_chat.png" class="send sendDisable" />
+				</div>
+			</div>
 		</div>
 		</div>
 		</div>	
 		<div class="col-lg-8">
 		<div class="row">
-<!-- DATOS DEL SITIO -->
+<!-- Jefe de expansión -->
 			<div class="col-lg-6 divs_p">
-			<div class="col-lg-12 menupr_estilos fazul">
+			<div class="col-lg-12 menupr_estilos fblanco">
 			<div class="row cabecera">
 				<div class="col-lg-12">
-					<span class="blanco negrita">1) Datos del sitio</span>
+					<span class="azul negrita">Jefe de expansi&oacute;n</span>
 				</div>
 			</div>
-			<div class="col-md-12 div_alt" id="datos_sitio">
+			<div class="col-md-12 div_alt" id="jefe_expansion">
 				
 			</div>
-			</div>
-			</div>
-<!-- DATOS DEL PROPIETARIO -->
-			<div class="col-lg-6 divs_p">
-			<div class="col-lg-12 menupr_estilos fazul">
 			<div class="row cabecera">
 				<div class="col-lg-12">
-					<span class="blanco negrita">2) Datos del propietario</span>
+					<input id="chatJefe" class="input_text" type="text" placeholder="Escribir mensaje a jefe"  onkeyup="enviaMensajeJefe(event)"/><img id="chatJefeSend" onclick="enviaMensajeJefeSend()" src="img/send_chat.png" class="send sendDisable" />
 				</div>
 			</div>
-			<div class="col-md-12 div_alt" id="datos_prop"></div>
-			
 			</div>
 			</div>
-<!-- SUPERFICIE -->		
+<!-- Gerente de expansión -->
+			<div class="col-lg-6 divs_p">
+			<div class="col-lg-12 menupr_estilos fblanco">
+			<div class="row cabecera">
+				<div class="col-lg-12">
+					<span class="azul negrita">Gerente de expansi&oacute;n</span>
+				</div>
+			</div>
+			<div class="col-md-12 div_alt" id="gerente_expansion">
+			</div>
+			<div class="row cabecera">
+				<div class="col-lg-12">
+					<input id="chatGerente" class="input_text" type="text" placeholder="Escribir mensaje a gerente" onkeyup="enviaMensajeGerente(event)"  /><img id="chatGerenteSend" onclick="enviaMensajeGerenteSend()" src="img/send_chat.png" class="send sendDisable" />
+				</div>
+			</div>
+			</div>
+			</div>
+<!-- Expansión -->		
 		<div class="col-lg-6 divs_p">
 			<div class="col-lg-12 menupr_estilos fblanco">
 			<div class="row cabecera">
 				<div class="col-lg-12">
-					<span class="azul negrita">3) Superficie</span>
+					<span class="azul negrita">Expansi&oacute;n</span>
 				</div>
 			</div>
-			<div class="col-md-12 div_alt" id="superficie"></div>
+			<div class="col-md-12 div_alt" id="expansion"></div>
+			<div class="row cabecera">
+				<div class="col-sm-12">
+					<input id="chatExpansion" class="input_text" type="text" placeholder="Escribir mensaje a expansi&oacute;n" onkeyup="enviaMensajeExpansion(event)" /><img id="chatExpansionSend" onclick="enviaMensajeExpansionSend()" src="img/send_chat.png" class="send sendDisable" />
+				</div>
 			</div>
 			</div>
-<!-- ZONIFICACION -->		
+			</div>
+<!-- Gestoría -->		
 			<div class="col-lg-6 divs_p">
 			<div class="col-lg-12 menupr_estilos fblanco">
 			<div class="row cabecera">
 				<div class="col-lg-12">
-					<span class="azul negrita">4) Zonificación</span>
+					<span class="azul negrita">Gestor&iacute;a</span>
 				</div>
 			</div>
-			<div class="col-md-12 div_alt" id="zonificacion"></div>
+			<div class="col-md-12 div_alt" id="gestoria"></div>
+			<div class="row cabecera">
+				<div class="col-lg-12">
+					<input id="chatGestoria" class="input_text" type="text" placeholder="Escribir mensaje a gestor&iacute;a" onkeyup="enviaMensajeGestoria(event)" /><img id="chatGestoriaSend" onclick="enviaMensajeGestoriaSend()" src="img/send_chat.png" class="send sendDisable" />
+				</div>
+			</div>
+			</div>
+			</div>
+<!-- Construcción -->		
+			<div class="col-lg-6 divs_p">
+			<div class="col-lg-12 menupr_estilos fblanco">
+			<div class="row cabecera">
+				<div class="col-lg-12">
+					<span class="azul negrita">Construcci&oacute;n</span>
+				</div>
+			</div>
+			<div class="col-md-12 div_alt" id="construccion"></div>
+			<div class="row cabecera">
+				<div class="col-lg-12">
+					<input id="chatConstruccion" class="input_text" type="text" placeholder="Escribir mensaje a construcci&oacute;n" onkeyup="enviaMensajeConstruccion(event)" /><img id="chatConstruccionSend" onclick="enviaMensajeConstruccionSend()" src="img/send_chat.png" class="send sendDisable" />
+				</div>
+			</div>
+			</div>
+			</div>
+<!-- Operaciones -->		
+			<div class="col-lg-6 divs_p">
+			<div class="col-lg-12 menupr_estilos fblanco">
+			<div class="row cabecera">
+				<div class="col-lg-12">
+					<span class="azul negrita">Operaciones</span>
+				</div>
+			</div>
+			<div class="col-md-12 div_alt" id="operaciones"></div>
+			<div class="row cabecera">
+				<div class="col-lg-12">
+					<input id="chatOperaciones" class="input_text" type="text" placeholder="Escribir mensaje a operaciones" onkeyup="enviaMensajeOperaciones(event)" /><img id="chatOperacionesSend" onclick="enviaMensajeOperacionesSend()" src="img/send_chat.png" class="send sendDisable" />
+				</div>
+			</div>
 			</div>
 			</div>
 		</div>
 	</div>
-<!-- CONSTRUCCION -->	
-	<div class="col-lg-4 divs_p">
-			<div class="col-lg-12 menupr_estilos fblanco">
-			<div class="row cabecera">
-				<div class="col-lg-12">
-					<span class="azul negrita">5) Construcción</span>
-				</div>
-			</div>
-			<div class="col-md-12 div_alt" id="construccion"></div>
-			</div>
-		</div>
-<!-- GENERALIDADES DEL SITIO -->		
-		<div class="col-lg-4 divs_p">
-			<div class="col-lg-12 menupr_estilos fazul">
-			<div class="row cabecera">
-				<div class="col-lg-12">
-					<span class="blanco negrita">Generalidades del sitio</span>
-				</div>
-			</div>
-			<div class="col-md-12 div_alt" id="generalidades_sitio"></div>
-			</div>
-		</div>
-<!-- FLUJO PEATONAL -->		
-		<div class="col-lg-4 divs_p">
-			<div class="col-lg-12 menupr_estilos fazul">
-			<div class="row cabecera">
-				<div class="col-lg-12">
-					<span class="blanco negrita">Flujo peatonal</span>
-				</div>
-			</div>
-			<div class="col-md-12 div_alt" id="flujo_peatonal"></div>
-			</div>
-		</div>
 	
 </div>
+</div>
+
+<div style="display: none;">
+	<s:textfield name="mdIdChat" label="" cssStyle="display: block"></s:textfield>
+	<input type="hidden" id="usuarioLogin" value="${usr.perfil.numeroEmpleado}" />
 </div>
 	
 <jsp:include page="/jsp/generic/loading.jsp" />

@@ -128,7 +128,7 @@ function creatabla(){
 }
 
 function muestraChatXMd(mdId) {
-	$("#mdId").val(mdId);
+	$("#mdIdChat").val(mdId);
 	$("#chatPorMd").submit();
 }
 

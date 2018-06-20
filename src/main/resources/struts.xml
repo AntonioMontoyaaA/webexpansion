@@ -34,7 +34,7 @@
 		<action name="localizador">
 			<result>jsp/localizador.jsp</result>
 		</action>
-		<action name="mensajes_historial">
+		<action name="">
 			<result>jsp/mensajes_historial.jsp</result>
 		</action>
 	</package>
@@ -61,6 +61,18 @@
          		class = "com.tiendas.neto.action.DetalleMemoriaAsignadaAction" 
          		method = "execute">
          	<result name = "success">jsp/asignadas_detalle.jsp</result>
+      	</action>
+      	
+      	<action name = "mensajes_historial" 
+         		class = "com.tiendas.neto.action.DetalleMemoriaChatAction" 
+         		method = "execute">
+         	<result name = "success">jsp/mensajes_historial.jsp</result>
+      	</action>
+      	
+      	<action name = "GuardaMensajeAction" 
+         		class = "com.tiendas.neto.action.GuardaMensajeAction" 
+         		method = "execute">
+         	<result name = "success">jsp/mensajes_historial.jsp</result>
       	</action>
       	
       	<action name = "memoria_detalle_x_id" 

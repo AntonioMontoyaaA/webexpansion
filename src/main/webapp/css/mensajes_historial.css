@@ -23,7 +23,7 @@
 	overflow-y: auto;
 }
 .chat{
-	height:53%;
+	height:76%;
 	overflow-y: auto;
 }
  /* -------------------------------------------------------------- */
@@ -85,4 +85,38 @@ input:focus{
 .hora{
 	margin-top:4px;
 	font-size:10px;
+}
+.input_text {
+	width: 93%;
+    border-radius: 4px;
+    border: 1px solid #CCCCCC;
+    padding-left: 10px;
+    font-size: 15px;
+}
+.mensaje_enviado {
+	text-align: right;
+    border-radius: 5px;
+    padding: 5px;
+    background: #BBDEFB;
+}
+.mensaje_recibido {
+	border-radius: 5px;
+    padding: 5px;
+    background: #DDDDDD;
+}
+.mensaje_evento {
+	width: 100%;
+	padding: 5px;
+    background: #DDDDDD;
+}
+.send {
+	cursor: pointer;
+	margin-left: 10px;
+}
+.sendDisable {
+	filter: alpha(opacity=35);
+	-khtml-opacity: 0.35;
+	-moz-opacity: 0.35;
+	opacity: 0.35;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=35)";
 }

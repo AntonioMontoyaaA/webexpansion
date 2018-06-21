@@ -236,7 +236,7 @@ function format(mdId){
 }
 
 function muestraChatXMd(mdId) {
-	$("#mdId").val(mdId);
+	$("#mdIdChat").val(mdId);
 	$("#chatPorMd").submit();
 }
 

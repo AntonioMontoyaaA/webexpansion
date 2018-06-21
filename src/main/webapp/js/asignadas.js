@@ -243,6 +243,7 @@ function muestraChatXMd(mdId) {
 function obtieneDetalleMd(nombreMd, mdId) {
 	$("#nombreMd").val(nombreMd);
 	$("#mdId").val(mdId);
+	$("#tipoMd").val('0');
 	$("#detalleMemoriaAsignadaAction").submit();
 }
 

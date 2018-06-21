@@ -11,12 +11,15 @@ var FACTORES = {};
 var PERMISOS = {};
 var ESTATUS_FINALIZA_MD = -1;
 
+var TIPOMD = 0;
+
 $(function(){
 	$('#idasignadas').addClass('resaltado');
 	
 	$("#nombreMdTxt").text($("#nombreMd").val());
 	inicializaFactores();
 	parseaPermisos();
+	TIPOMD = parseInt($("#tipoMd").val());
 	buscaDetalleMD($("#mdId").val());
 	MOTIVOS_RECHAZO = {};
 	

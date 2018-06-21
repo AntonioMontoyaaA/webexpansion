@@ -21,6 +21,15 @@ public class DetalleMemoriaAsignadaAction extends ActionSupport implements Sessi
 	
 	private String mdId;
 	private String nombreMd;
+	private String tipoMd;
+	
+	public String getTipoMd() {
+		return tipoMd;
+	}
+	
+	public void setTipoMd(String tipoMd) {
+		this.tipoMd = tipoMd;
+	}
 	
 	public String getMdId() {
 		return mdId;
@@ -43,9 +52,11 @@ public class DetalleMemoriaAsignadaAction extends ActionSupport implements Sessi
 		
 		String nombreMd = ServletActionContext.getRequest().getParameter("nombreMd");
 		String mdId = ServletActionContext.getRequest().getParameter("mdId");
+		String tipoMd = ServletActionContext.getRequest().getParameter("tipoMd");
 		
 		this.mdId = mdId;
 		this.nombreMd = nombreMd;
+		this.tipoMd = tipoMd;
 		
 		return "success";
 	} 

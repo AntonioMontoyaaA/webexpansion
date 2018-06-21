@@ -57,6 +57,8 @@ public class AceptaRechazaMDAction extends ActionSupport implements SessionAware
 				String numeroEmpleado = String.valueOf(usuario.getPerfil().getNumeroEmpleado());
 				String puestoId = String.valueOf(usuario.getPerfil().getPuestoId());
 				String areaId = "";
+				if(comentario.isEmpty())
+					comentario = "''";
 				if(usuario.getPerfil().getAreasxpuesto().length > 0) {
 					areaId = String.valueOf(usuario.getPerfil().getAreasxpuesto()[0].getAreaId());
 				}

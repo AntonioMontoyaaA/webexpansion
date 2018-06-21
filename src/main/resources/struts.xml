@@ -34,13 +34,12 @@
 		<action name="localizador">
 			<result>jsp/localizador.jsp</result>
 		</action>
-		<action name="mensajes_historial">
+		<action name="">
 			<result>jsp/mensajes_historial.jsp</result>
 		</action>
 	</package>
 	
 	<package name="default" namespace="/" extends="struts-default">
-		
 
 		<action name = "EnviaFechaAction" 
          		class = "com.tiendas.neto.action.EnviaFechaAction" 
@@ -63,6 +62,19 @@
          		method = "execute">
          	<result name = "success">jsp/asignadas_detalle.jsp</result>
       	</action>
+      	
+      	<action name = "mensajes_historial" 
+         		class = "com.tiendas.neto.action.DetalleMemoriaChatAction" 
+         		method = "execute">
+         	<result name = "success">jsp/mensajes_historial.jsp</result>
+      	</action>
+      	
+      	<action name = "GuardaMensajeAction" 
+         		class = "com.tiendas.neto.action.GuardaMensajeAction" 
+         		method = "execute">
+         	<result name = "success">jsp/mensajes_historial.jsp</result>
+      	</action>
+      	
       	<action name = "memoria_detalle_x_id" 
          		class = "com.tiendas.neto.action.DetalleMemoriaXIdAction" 
          		method = "execute">
@@ -82,7 +94,8 @@
       	</action>
       	
 <!-- **********  autorizadas y rechazadas      -->
-		<action name = "consulta_detalle" 
+ 		
+ 		<action name = "consulta_detalle" 
          		class = "com.tiendas.neto.action.DetalleMemoriaAction" 
          		method = "execute">
          <result name = "success">jsp/consulta_detalle.jsp</result>

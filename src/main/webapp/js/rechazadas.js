@@ -42,7 +42,10 @@ function refreshRechazadas() {
 	creatabla();
 }
 
-
+var icono_expansion='<span><img src="img/web_expansionc.png"></span>&nbsp;';
+var icono_gestoria='<span><img src="img/web_gestoriac.png"></span>&nbsp;';
+var icono_construccion='<span><img src="img/web_construccionc.png"></span>&nbsp;';
+var icono_operaciones='<span><img src="img/web_operacionesc.png"></span>&nbsp;';
 function creatabla(){
 	invocarJSONServiceAction("rechazadas_info", 
 				{'fechaConsulta': $( "#datepicker1").val(),
@@ -80,12 +83,6 @@ function creatabla(){
 			var variable;
 			var areasrechazo=[];
 			
-			var icono_expansion='<span><img src="img/web_expansionc.png"></span>&nbsp;';
-			var icono_gestoria='<span><img src="img/web_gestoriac.png"></span>&nbsp;';
-			var icono_construccion='<span><img src="img/web_construccionc.png"></span>&nbsp;';
-			var icono_operaciones='<span><img src="img/web_operacionesc.png"></span>&nbsp;';
-			
-			
 			for( var i = 0 ; i < resultados.length; i++){
 				var listaiconos="";
 				areasrechazo=resultados[i].areasRechazo;	
@@ -122,11 +119,30 @@ function creatabla(){
 			 }			
 			initTablaMemoriasRechazadasDirGeneral('DivTablaRechazadas', datosMemoriasRechazadas, 'tablaMemoriasRechazadas');
 		
-			$("#tablaMemoriasRechazadas tr td").not(":eq(7)").click(function() {
+			$("#tablaMemoriasRechazadas tr td").not(".motivos").click(function() {
 				var nombreMd = $(this).parent().find("td:eq(0) span").html();
 				var mdId = $(this).parent().find("td:eq(7)").html();
 				obtieneDetalleMd(nombreMd, mdId);
 			});
+			
+			 $('#tablaMemoriasRechazadas tbody').on('click', 'td.motivos', function () {
+					var table=$("#tablaMemoriasRechazadas").DataTable();
+					var mdId = $(this).parent().find("td:eq(7)").html();
+
+				        var tr = $(this).closest('tr');
+				        var row = table.row( tr );
+				 
+				        if ( row.child.isShown() ) {
+				            row.child.hide();
+				            tr.removeClass('shown');
+				        }
+				        else {
+				            row.child( format(data.mds, mdId) ).show();
+				            tr.addClass('shown');
+				        }
+				    } );
+			
+			
 			}
 			
 		else{
@@ -178,6 +194,46 @@ function creatabla(){
 		}
 	};	
 }
+
+
+function format(data, mdId){
+	var html="";
+	
+	for(i=0;i<data.length;i++){
+		if(data[i].mdId==mdId){
+			 html= '<table class="fgris">'+
+		     '<tr>'+
+	            '<td class=" negro" style="width:13%;">Motivo de Rechazo</td>'+
+	            '<td class=" negro left">'+
+	            '<div class="row">';
+					var areasrechazo=data[i].areasRechazo;	
+		
+							for(var x=0; x < areasrechazo.length;x++){
+								var icono="";								
+										if(areasrechazo[x].areaId==1)
+											icono=icono_expansion;
+										if(areasrechazo[x].areaId==2)
+											icono=icono_gestoria;
+										if(areasrechazo[x].areaId==3)
+											icono=icono_construccion;
+										if(areasrechazo[x].areaId==5)
+											icono=icono_operaciones;
+										
+										mensaje= areasrechazo[x].motivoRechazo;
+										html=html+'<div class="col-lg-3"><span >'+icono+'</span><span style="position:relative; top:1px;">'+mensaje+'</span></div>';
+							}
+		}
+	            	
+	            html=html+'</div>'+
+	            '</td>'+
+	        '</tr>'+
+	    '</table>';
+			
+	}
+	return html;
+}
+	 
+
 function ejecutaBusquedaRechazadas() {
 	$("#tablaMemoriasRechazadas").dataTable().fnFilter($("#buscador").val());
 }

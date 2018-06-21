@@ -237,8 +237,10 @@ function format(data, mdId){
 function ejecutaBusquedaRechazadas() {
 	$("#tablaMemoriasRechazadas").dataTable().fnFilter($("#buscador").val());
 }
+
 function obtieneDetalleMd(nombreMd, mdId) {
 	$("#nombreMd").val(nombreMd);
 	$("#mdId").val(mdId);
-	$("#consultaDetalleAction").submit();
+	$("#tipoMd").val('2');
+	$("#detalleMemoriaAsignadaAction").submit();
 }

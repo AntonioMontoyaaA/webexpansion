@@ -11,7 +11,7 @@ var FACTORES = {};
 var PERMISOS = {};
 var ESTATUS_FINALIZA_MD = -1;
 
-var TIPOMD = 0;
+var TIPOMD = -1;
 
 $(function(){
 	$('#idasignadas').addClass('resaltado');
@@ -126,6 +126,13 @@ function dibujaGraficaAutorizaciones(){
 		if(!motivoDefinitivo)
 			$('#autoriza8').show();
 		
+		if(TIPOMD == 1){
+			$('#autoriza8').removeClass('sin_autorizar');
+			$('#autoriza8').addClass('autorizado');
+		}else if(TIPOMD == 2){
+			$('#rechaza8').removeClass('sin_autorizar');
+			$('#rechaza8').addClass('autorizado');
+		}
 	}else{
 
 		$('#autoriza8').hide();
@@ -495,7 +502,8 @@ function muestraPopAutorizacion(){
 function cargaFlujoPeatonal(colores,rows) {
 	Highcharts.chart('contenedorFlujoPeatonal', {
 	    chart: {
-	        type: 'column'
+	        type: 'column',
+	        backgroundColor: '#071B36',
 	    },
 	    legend:false,
 	    title: {
@@ -528,7 +536,7 @@ function cargaFlujoPeatonal(colores,rows) {
 	    plotOptions: {
 	        column: {
 	            pointPadding: 0.2,
-	            borderWidth: 0
+	            borderWidth: 0.5
 	        },series: {
 	            colorByPoint: true
 	        }
@@ -540,7 +548,7 @@ function cargaFlujoPeatonal(colores,rows) {
 }
 
 function autorizaPantalla(modulo, elemento) {
-	if($(elemento).hasClass('sin_autorizar')){
+	if($(elemento).hasClass('sin_autorizar') && TIPOMD == 0){
 		$("#tituloModalAutorizacion").text("¿Estás seguro de autorizar " + FACTORES[modulo].nombre + "?");
 		$("#tipoAutorizacion").val(AUTORIZA_MODULO);
 		$("#finaliza").val(0);
@@ -553,7 +561,7 @@ function autorizaPantalla(modulo, elemento) {
 }
 
 function rechazaPantalla(modulo, elemento) {
-	if($(elemento).hasClass('sin_autorizar')){
+	if($(elemento).hasClass('sin_autorizar') && TIPOMD == 0){
 		cargaLoading();
 		buscaMotivosRechazo(modulo);
 	}
@@ -593,27 +601,29 @@ function cargaComboMotivos(modulo){
 }
 
 function finalizaMD(estatus){
-	ESTATUS_FINALIZA_MD = estatus;
-	if(estatus == 1){
-		cargaMensajeModal('MD ASIGNADAS', 
-				'¿Est\u00e1s seguro de autorizar la MD?',
-				TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, actionfinalizaMD);
-	}else if(estatus == 0){
-		
-		var conRechazo = false;
-		for(i in FACTORES){
-			if(FACTORES[i].motivo != -1){
-				conRechazo = true;
-				break;
-			}
-		}
-		
-		if(conRechazo){
+	if(TIPOMD = 0){
+		ESTATUS_FINALIZA_MD = estatus;
+		if(estatus == 1){
 			cargaMensajeModal('MD ASIGNADAS', 
-					'¿Est\u00e1s seguro de rechazar la MD?',
+					'¿Est\u00e1s seguro de autorizar la MD?',
 					TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, actionfinalizaMD);
-		}else{
-			consultaMotivosRechazo(0, 1);
+		}else if(estatus == 0){
+			
+			var conRechazo = false;
+			for(i in FACTORES){
+				if(FACTORES[i].motivo != -1){
+					conRechazo = true;
+					break;
+				}
+			}
+			
+			if(conRechazo){
+				cargaMensajeModal('MD ASIGNADAS', 
+						'¿Est\u00e1s seguro de rechazar la MD?',
+						TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, actionfinalizaMD);
+			}else{
+				consultaMotivosRechazo(0, 1);
+			}
 		}
 	}
 }

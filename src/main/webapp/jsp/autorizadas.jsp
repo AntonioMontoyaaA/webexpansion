@@ -53,10 +53,10 @@
 	</div>
 </div>
 
-<form action='consulta_detalle'  id="consultaDetalleAction" method="post">
+<form action='memoria_detalle'  id="detalleMemoriaAsignadaAction" method="post">
 	<input type="hidden" name="mdId" id="mdId" value=""/>
 	<input type="hidden" name="nombreMd" id="nombreMd" value=""/>
-	<input type="hidden" name="tipo_md" id="nombreMd" value="1"/>
+	<input type="hidden" name="tipoMd" id="tipoMd" value=""/>
 </form>
 
 <jsp:include page="/jsp/generic/loading.jsp" />

@@ -139,5 +139,6 @@ function ejecutaBusquedaAutorizadas() {
 function obtieneDetalleMd(nombreMd, mdId) {
 	$("#nombreMd").val(nombreMd);
 	$("#mdId").val(mdId);
-	$("#consultaDetalleAction").submit();
+	$("#tipoMd").val('1');
+	$("#detalleMemoriaAsignadaAction").submit();
 }

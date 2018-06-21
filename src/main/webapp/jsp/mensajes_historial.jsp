@@ -138,7 +138,7 @@
 			</div>
 			<div class="col-md-12 div_alt" id="operaciones"></div>
 			<div class="row cabecera">
-				<div class="col-lg-12">
+				<div class="col-sm-12">
 					<input id="chatOperaciones" class="input_text" type="text" placeholder="Escribir mensaje a operaciones" onkeyup="enviaMensajeOperaciones(event)" /><img id="chatOperacionesSend" onclick="enviaMensajeOperacionesSend()" src="img/send_chat.png" class="send sendDisable" />
 				</div>
 			</div>

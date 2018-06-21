@@ -1,10 +1,15 @@
 var TIPO_MENSAJE_GRAL = 0;
-var TIPO_MENSAJE_JEFE = 110;
+var TIPO_MENSAJE_JEFE = 99;
 var TIPO_MENSAJE_GERENTE = 111;
 var TIPO_MENSAJE_EXPANSION = 1;
 var TIPO_MENSAJE_GESTORIA = 2;
 var TIPO_MENSAJE_CONSTRUCCION = 3;
 var TIPO_MENSAJE_OPERACIONES = 5;
+
+var AREA_EXPANSION = 1;
+var AREA_GESTORIA = 2;
+var AREA_CONSTRUCCION = 3;
+var AREA_OPERACIONES = 4;
 
 $(function(){
 		$('#idasignadas').addClass('resaltado'); //para el efecto de header
@@ -60,17 +65,22 @@ function escribirMensajes(mensajes){
 			
 			$.each(mensajes.JEFE, function(i, data) {
 				
-				/*if(mensajes.JEFE.areaId == "JEFE EXPANSION"){ //areaId
-					icono='<img src="img/web_expansionc.png">';
+				if(data.areaId != undefined) {
+					switch(data.areaId) {
+						case AREA_EXPANSION :
+							icono='<img src="img/web_expansionc.png">';
+							break;
+						case AREA_GESTORIA :
+							icono='<img src="img/web_gestoriac.png">';
+							break;
+						case AREA_CONSTRUCCION :
+							icono='<img src="img/web_construccionc.png">';
+							break;
+						case AREA_OPERACIONES :
+							icono='<img src="img/web_operacionesc.png">';
+							break;
+					};
 				}
-				if(areaId==2){ //areaId
-					icono='<img src="img/web_gestoriac.png">';
-				}
-				if(areaId==3){ //areaId
-					icono='<img src="img/web_construccionc.png">';
-				}
-				if(areaId==4){ //areaId
-					icono='<img src="img/web_operacionesc.png">';*/
 				
 				html="";
 				html=html+'<div class="row msj_bloque">';
@@ -110,6 +120,24 @@ function escribirMensajes(mensajes){
 			icono='<img src="img/web_gerenteExpansionc.png">';
 			
 			$.each(mensajes.GERENTE, function(i, data) {
+				
+				if(data.areaId != undefined) {
+					switch(data.areaId) {
+						case AREA_EXPANSION :
+							icono='<img src="img/web_expansionc.png">';
+							break;
+						case AREA_GESTORIA :
+							icono='<img src="img/web_gestoriac.png">';
+							break;
+						case AREA_CONSTRUCCION :
+							icono='<img src="img/web_construccionc.png">';
+							break;
+						case AREA_OPERACIONES :
+							icono='<img src="img/web_operacionesc.png">';
+							break;
+					};
+				}
+				
 				html="";
 				html=html+'<div class="row msj_bloque">';
 				
@@ -148,6 +176,24 @@ function escribirMensajes(mensajes){
 			icono='<img src="img/web_expansionc.png">';
 			
 			$.each(mensajes.EXPANSION, function(i, data) {
+				
+				if(data.areaId != undefined) {
+					switch(data.areaId) {
+						case AREA_EXPANSION :
+							icono='<img src="img/web_expansionc.png">';
+							break;
+						case AREA_GESTORIA :
+							icono='<img src="img/web_gestoriac.png">';
+							break;
+						case AREA_CONSTRUCCION :
+							icono='<img src="img/web_construccionc.png">';
+							break;
+						case AREA_OPERACIONES :
+							icono='<img src="img/web_operacionesc.png">';
+							break;
+					};
+				}
+				
 				html="";
 				html=html+'<div class="row msj_bloque">';
 				
@@ -186,6 +232,24 @@ function escribirMensajes(mensajes){
 			icono='<img src="img/web_gestoriac.png">';
 			
 			$.each(mensajes.GESTORIA, function(i, data) {
+				
+				if(data.areaId != undefined) {
+					switch(data.areaId) {
+						case AREA_EXPANSION :
+							icono='<img src="img/web_expansionc.png">';
+							break;
+						case AREA_GESTORIA :
+							icono='<img src="img/web_gestoriac.png">';
+							break;
+						case AREA_CONSTRUCCION :
+							icono='<img src="img/web_construccionc.png">';
+							break;
+						case AREA_OPERACIONES :
+							icono='<img src="img/web_operacionesc.png">';
+							break;
+					};
+				}
+				
 				html="";
 				html=html+'<div class="row msj_bloque">';
 				
@@ -224,6 +288,24 @@ function escribirMensajes(mensajes){
 			icono='<img src="img/web_construccionc.png">';
 			
 			$.each(mensajes.CONSTRUCCION, function(i, data) {
+				
+				if(data.areaId != undefined) {
+					switch(data.areaId) {
+						case AREA_EXPANSION :
+							icono='<img src="img/web_expansionc.png">';
+							break;
+						case AREA_GESTORIA :
+							icono='<img src="img/web_gestoriac.png">';
+							break;
+						case AREA_CONSTRUCCION :
+							icono='<img src="img/web_construccionc.png">';
+							break;
+						case AREA_OPERACIONES :
+							icono='<img src="img/web_operacionesc.png">';
+							break;
+					};
+				}
+				
 				html="";
 				html=html+'<div class="row msj_bloque">';
 				
@@ -262,6 +344,24 @@ function escribirMensajes(mensajes){
 			icono='<img src="img/web_operacionesc.png">';
 			
 			$.each(mensajes.OPERACIONES, function(i, data) {
+				
+				if(data.areaId != undefined) {
+					switch(data.areaId) {
+						case AREA_EXPANSION :
+							icono='<img src="img/web_expansionc.png">';
+							break;
+						case AREA_GESTORIA :
+							icono='<img src="img/web_gestoriac.png">';
+							break;
+						case AREA_CONSTRUCCION :
+							icono='<img src="img/web_construccionc.png">';
+							break;
+						case AREA_OPERACIONES :
+							icono='<img src="img/web_operacionesc.png">';
+							break;
+					};
+				}
+				
 				html="";
 				html=html+'<div class="row msj_bloque">';
 				
@@ -374,6 +474,7 @@ function enviaMensajeJefe(e) {
     if (keycode == '13' && $("#chatJefe").val() != "") {
         enviaMensaje($("#chatJefe").val(), TIPO_MENSAJE_JEFE);
         $("#chatJefe").val("");
+        $("#chatJefeSend").addClass("sendDisable");
     } else if($("#chatJefe").val() != "") {
     	$("#chatJefeSend").removeClass("sendDisable");
     } else {
@@ -397,6 +498,7 @@ function enviaMensajeGerente(e) {
     if (keycode == '13' && $("#chatGerente").val() != "") {
         enviaMensaje($("#chatGerente").val(), TIPO_MENSAJE_GERENTE);
         $("#chatGerente").val("");
+        $("#chatGerenteSend").addClass("sendDisable");
     } else if($("#chatGerente").val() != "") {
     	$("#chatGerenteSend").removeClass("sendDisable");
     } else {
@@ -420,6 +522,7 @@ function enviaMensajeExpansion(e) {
     if (keycode == '13' && $("#chatExpansion").val() != "") {
         enviaMensaje($("#chatExpansion").val(), TIPO_MENSAJE_EXPANSION);
         $("#chatExpansion").val("");
+        $("#chatExpansionSend").addClass("sendDisable");
     } else if($("#chatExpansion").val() != "") {
     	$("#chatExpansionSend").removeClass("sendDisable");
     } else {
@@ -443,6 +546,7 @@ function enviaMensajeGestoria(e) {
     if (keycode == '13' && $("#chatGestoria").val() != "") {
         enviaMensaje($("#chatGestoria").val(), TIPO_MENSAJE_GESTORIA);
         $("#chatGestoria").val("");
+        $("#chatGestoriaSend").addClass("sendDisable");
     } else if($("#chatGestoria").val() != "") {
     	$("#chatGestoriaSend").removeClass("sendDisable");
     } else {
@@ -466,6 +570,7 @@ function enviaMensajeConstruccion(e) {
     if (keycode == '13' && $("#chatConstruccion").val() != "") {
         enviaMensaje($("#chatConstruccion").val(), TIPO_MENSAJE_CONSTRUCCION);
         $("#chatConstruccion").val("");
+        $("#chatConstruccionSend").addClass("sendDisable");
     } else if($("#chatConstruccion").val() != "") {
     	$("#chatConstruccionSend").removeClass("sendDisable");
     } else {
@@ -489,6 +594,7 @@ function enviaMensajeOperaciones(e) {
     if (keycode == '13' && $("#chatOperaciones").val() != "") {
         enviaMensaje($("#chatOperaciones").val(), TIPO_MENSAJE_OPERACIONES);
         $("#chatOperaciones").val("");
+        $("#chatOperacionesSend").addClass("sendDisable");
     } else if($("#chatOperaciones").val() != "") {
     	$("#chatOperacionesSend").removeClass("sendDisable");
     } else {

@@ -236,12 +236,12 @@ function initTablaMemoriasRechazadasDirGeneral(nombreDiv, datosDesgloseVenta, no
 				           {"sClass":"izquierda","bSearchable":true},
 				           {"bSearchable":true},
 				           {"bSearchable":true},
-				           {"bSearchable":true},
+				           {"sClass": "motivos","bSearchable":true},
 				           {"bSearchable":true},
 				           { "sClass": "oculto", "bSearchable": false }],		
 			"bJQueryUI": false,
 			"sPaginationType": "full_numbers",
-			"oLanguage": idiomaEspanol,
+			"oLanguage": idiomaEspanolDirRechazadas,
 			"bLengthChange":false,
 			"order": [],
 			"iDisplayLength":1000,
@@ -261,7 +261,46 @@ function initTablaMemoriasRechazadasDirGeneral(nombreDiv, datosDesgloseVenta, no
 
 var idiomaEspanol = {
 	    "sEmptyTable":     "<div style='padding:10px; color:red; font-size:13px;'>No existen memorias descriptivas</div>",
-	    "sInfo":           "Totales: <b>_TOTAL_</b>",
+	    "sInfo":           '<div class="col-12 fazul blanco right">Totales: <b>_TOTAL_</b></div>',
+	    "sInfoEmpty":      "Totales: 0",
+	    "sInfoFiltered":   "(_TOTAL_ de _MAX_ memorias en total)",
+	    "sInfoPostFix":    "",
+	    "sInfoThousands":  ",",
+	    "sLengthMenu":     "",
+	    "sLoadingRecords": "Cargando...",
+	    "sProcessing":     "Procesando...",
+	    "sSearch":         "",
+	    "sZeroRecords":    "No se encontraron resultados",
+	    "oPaginate": {
+	        "sFirst":    "Primero",
+	        "sLast":     "Último",
+	        "sNext":     "&raquo;",
+	        "sPrevious": "&laquo;"
+	    },
+	    "oAria": {
+	        "sSortAscending":  ": activar para Ordenar Ascendentemente",
+	        "sSortDescending": ": activar para Ordendar Descendentemente"
+	    }
+	};
+
+var idiomaEspanolDirRechazadas = {
+	    "sEmptyTable":     "<div style='padding:10px; color:red; font-size:13px;'>No existen memorias descriptivas</div>",
+	    "sInfo":           '<div class="row fazul blanco">'+
+	    						'<div class="col-xl-6 col-lg-9 center">'+
+	    						'<div class="row">'+
+	    								'<div class="col-xl-3 col-6 center"  style="min-width:160px;">'+
+	    									icono_expansion+'<span style="margin-left:10px;">Expansión</span></div>'+
+	    								'<div class="col-xl-3 col-6 center"  style="min-width:160px;">'+
+	    									icono_gestoria+'<span style="margin-left:10px;">Gestoría</span></div>'+
+	    								'<div class="col-xl-3 col-6 center"  style="min-width:160px;">'+
+	    									icono_construccion+'<span style="margin-left:10px;">Construcción</span></div>'+
+	    								'<div class="col-xl-3 col-6 center" style="min-width:160px;">'+
+	    									icono_operaciones+'<span style="margin-left:10px;">Operaciones</span></div>'+
+	    						'</div></div>'+
+	    							'<div class="col-xl-6 col-lg-3 right">Totales: <b>_TOTAL_</b></div>'+
+	    					'</div>',
+	    							
+	    				
 	    "sInfoEmpty":      "Totales: 0",
 	    "sInfoFiltered":   "(_TOTAL_ de _MAX_ memorias en total)",
 	    "sInfoPostFix":    "",

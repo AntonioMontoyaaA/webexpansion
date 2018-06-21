@@ -113,13 +113,30 @@ function creatabla(){
 			
 			 initTablaMemoriasAsignadas('DivTablaAsignadas', datosMemoriasAsignadas, 'tablaMemoriasAsignadas');
 			 
-			$("#tablaMemoriasAsignadas tr td").not(":eq(6)").click(function() {
+			$("#tablaMemoriasAsignadas tr td").not(".liga_chat, .seguimiento").click(function() {
 				var nombreMd = $(this).parent().find("td:eq(0) span").html();
 				var mdId = $(this).parent().find("td:eq(7)").html();
 				obtieneDetalleMd(nombreMd, mdId);
 			});
 			
-			$("#tablaMemoriasAsignadas tr td:eq(6)").click(function() {
+			 $('#tablaMemoriasAsignadas tbody').on('click', 'td.seguimiento', function () {
+				var table=$("#tablaMemoriasAsignadas").DataTable();
+				var mdId = $(this).parent().find("td:eq(7)").html();
+
+			        var tr = $(this).closest('tr');
+			        var row = table.row( tr );
+			 
+			        if ( row.child.isShown() ) {
+			            row.child.hide();
+			            tr.removeClass('shown');
+			        }
+			        else {
+			            row.child( format(mdId) ).show();
+			            tr.addClass('shown');
+			        }
+			    } );
+			
+			$("#tablaMemoriasAsignadas tr td.liga_chat").click(function() {
 				var mdId = $(this).parent().find("td:eq(7)").html();
 				muestraChatXMd(mdId);
 			});
@@ -127,8 +144,99 @@ function creatabla(){
 	};	
 }
 
+var html="";
+var au_gerenteExpasion="";
+var au_expansion="";
+var au_gestoria="";
+var au_construccion="";
+var au_operaciones="";
+var reloj_gerenteExpasion="";
+var reloj_expansion="";
+var reloj_gestoria="";
+var reloj_construccion="";
+var reloj_operaciones="";
+var reloj='<img class="reloj" src="img/iconos_reloj_atraso.png">';
+function format(mdId){
+
+	 $.ajax({
+	        type     : "POST",
+	        url      : 'memoria_detalle_x_id',
+	        data     : {'mdId': mdId},
+	        async	 : false,
+	        success  : function(data) {
+	        	
+	        	if(data.codigo != 200) {} 
+	    		else {
+	    			var AREAS=data.areasAutorizadas;
+	    			
+	    				for(var i = 0; i < AREAS.length; i++) {
+	    					if(AREAS[i].EXPANSION != undefined && 
+	    							AREAS[i].EXPANSION.length > 0 && 
+	    							AREAS[i].EXPANSION[0].puestosValida != undefined && 
+	    							AREAS[i].EXPANSION[0].puestosValida.length > 0) {
+	    						if(AREAS[i].EXPANSION[0].puestosValida[0] == 'GERENTE DE EXPANSION') {
+	    							au_gerenteExpasion='circuloSeguimientoAprobado';
+	    							
+	    							if(AREAS[i].EXPANSION[0].diasVencidos > 0) {
+	    								reloj_gerenteExpasion=reloj;
+	    							}
+	    						}else if(AREAS[i].EXPANSION[0].puestosValida[0] == 'ANALISTA DE EXPANSION') {
+	    							au_expansion="circuloSeguimientoAprobado";							
+	    							if(AREAS[i].EXPANSION[0].diasVencidos > 0) {
+	    								reloj_expansion=reloj;
+	    							}
+	    						}
+	    					}else if(AREAS[i].GESTORIA != undefined && 
+	    							AREAS[i].GESTORIA.length > 0) {
+	    						au_gestoria="circuloSeguimientoAprobado";							
+	    						if(AREAS[i].GESTORIA[0].diasVencidos > 0) {
+	    							reloj_gestoria=reloj;
+	    						}
+	    					}else if(AREAS[i].CONSTRUCCION != undefined && 
+	    							AREAS[i].CONSTRUCCION.length > 0) {
+	    						au_construccion="circuloSeguimientoAprobado";
+	    						if(AREAS[i].CONSTRUCCION[0].diasVencidos > 0) {
+	    							reloj_construccion=reloj;
+	    						}
+	    					}else if(AREAS[i].OPERACIONES != undefined && 
+	    							AREAS[i].OPERACIONES.length > 0) {
+	    						au_operaciones="circuloSeguimientoAprobado";
+	    							
+	    						if(AREAS[i].OPERACIONES[0].diasVencidos > 0) {
+	    							reloj_operaciones=reloj;
+	    						}
+	    						
+	    					}
+	    					
+	    				}
+	    		}
+	        }
+	    });
+	 
+		 return '<table class="fgris">'+
+	        '<tr>'+
+            '<td class="padding negro">AUTORIZADAS</td>'+
+            '<td class="left negro"  style="width:20%;">'+
+            	'<div id="circuloAutorizaGerenteExpansion" class="circuloSeguimiento circulos_tablas '+au_gerenteExpasion+'"></div>'+
+            	'Gerente Expansión<span>'+reloj_gerenteExpasion+'</span></td>'+
+            '<td class="left negro">'+
+            	'<div id="circuloAutorizaExpansion" class="circuloSeguimiento circulos_tablas '+au_expansion+'"></div>'+
+            	'Expansión<span>'+reloj_expansion+'</span></td>'+
+            '<td class="left negro">'+
+            	'<div id="circuloAutorizaGestoria" class="circuloSeguimiento circulos_tablas '+au_gestoria+'"></div>'+
+            	'Gestoría<span>'+reloj_gestoria+'</span></td>'+
+            '<td class="left negro">'+
+            	'<div id="circuloAutorizaConstruccion" class="circuloSeguimiento circulos_tablas '+au_construccion+'"></div>'+
+            	'Construcción<span>'+reloj_construccion+'</span></td>'+
+            '<td class="left negro">'+
+            	'<div id="circuloAutorizaOperaciones" class="circuloSeguimiento circulos_tablas '+au_operaciones+'"></div>'+
+            	'Operaciones<span>'+reloj_operaciones+'</span></td>'+
+        '</tr>'+
+    '</table>';
+}
+
 function muestraChatXMd(mdId) {
-	$("#mdIdChat").val(mdId);
+	$("#mdId").val(mdId);
 	$("#chatPorMd").submit();
 }
 

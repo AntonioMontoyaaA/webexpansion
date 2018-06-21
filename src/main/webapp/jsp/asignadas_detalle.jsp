@@ -429,7 +429,7 @@
 
 <div style="display: none;">
 	<s:textfield name="mdId" label="" cssStyle="display: none"></s:textfield>
-	<s:textfield name="nombreMd" label="" cssStyle="display: none"></s:textfield>
+	<s:textfield name="nombreMd" label="" cssStyle="display: none"></s:textfield>	
 </div>
 
 <jsp:include page="/jsp/generic/loading.jsp" />

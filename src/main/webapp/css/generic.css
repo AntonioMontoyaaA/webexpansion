@@ -220,7 +220,6 @@ input.form-control.input_login::placeholder{
 	font-family: "Helvetica";
 }
 
-.loginfondo {background:gray; height:100%;}
 .padding_pass{padding-top:15px;}
 
 .btn.blogin{
@@ -357,6 +356,9 @@ span.azul{
 .azul{
 	color:#071B36;
 }
+.negro{
+	color:black;
+}
 span.blanco{
 	color:white !important;
 }
@@ -368,6 +370,9 @@ tspan.blanco{
 }
 .gris{
 	color:#5d5d57;
+}
+.fgris{
+	background-color:#e7e6e3;
 }
 span.gris{
 	color:#5d5d57;

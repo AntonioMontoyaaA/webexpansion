@@ -21,14 +21,15 @@ function initTablaMemoriasAsignadas(nombreDiv, datosDesgloseVenta, nombreTabla){
 		
 	tablaMemoriasAsignadas = $("#" + nombreTabla).dataTable(
 			{"aaData": datosDesgloseVenta,
-				"aoColumns": [{"sClass":"izquierda","bSearchable":true},
+				"aoColumns": [
+						   {"sClass":"izquierda padding","bSearchable":true},
 				           {"bSearchable":true},
 				           {"sClass":"izquierda","bSearchable":true},
 				           {"bSearchable":true},
 				           {"bSearchable":true},
-				           {"bSearchable":true},
-				           {"bSearchable":true},
-				           { "sClass": "oculto", "bSearchable": false }],		
+				           {"sClass": "seguimiento","bSearchable":true},
+				           {"sClass": "liga_chat","bSearchable":true},
+				           {"sClass": "oculto mdId", "bSearchable": false }],		
 			"bJQueryUI": false,
 			"order": [],
 			"sPaginationType": "full_numbers",
@@ -73,7 +74,7 @@ function initTablaMemoriasAutorizadas(nombreDiv, datosDesgloseVenta, nombreTabla
 	
 	tablaMemoriasAutorizadas = $("#" + nombreTabla).dataTable(
 			{"aaData": datosDesgloseVenta,
-				"aoColumns": [{"sClass":"izquierda","bSearchable":true},
+				"aoColumns": [{"sClass":"izquierda padding","bSearchable":true},
 				           {"bSearchable":true},
 				           {"sClass":"izquierda","bSearchable":true},
 				           {"bSearchable":true},
@@ -124,7 +125,7 @@ function initTablaMemoriasAutorizadasDirGeneral(nombreDiv, datosDesgloseVenta, n
 	
 	tablaMemoriasAutorizadasDirGeneral = $("#" + nombreTabla).dataTable(
 			{"aaData": datosDesgloseVenta,
-				"aoColumns": [{"sClass":"izquierda","bSearchable":true},
+				"aoColumns": [{"sClass":"izquierda padding","bSearchable":true},
 				           {"bSearchable":true},
 				           {"sClass":"izquierda","bSearchable":true},
 				           {"bSearchable":true},
@@ -176,7 +177,7 @@ function initTablaMemoriasRechazadas(nombreDiv, datosDesgloseVenta, nombreTabla)
 	
 	tablaMemoriasRechazadas = $("#" + nombreTabla).dataTable(
 			{"aaData": datosDesgloseVenta,
-				"aoColumns": [{"sClass":"izquierda","bSearchable":true},
+				"aoColumns": [{"sClass":"izquierda padding","bSearchable":true},
 				           {"bSearchable":true},
 				           {"sClass":"izquierda","bSearchable":true},
 				           {"bSearchable":true},
@@ -230,7 +231,7 @@ function initTablaMemoriasRechazadasDirGeneral(nombreDiv, datosDesgloseVenta, no
 	
 	tablaMemoriasRechazadas = $("#" + nombreTabla).dataTable(
 			{"aaData": datosDesgloseVenta,
-				"aoColumns": [{"sClass":"izquierda","bSearchable":true},
+				"aoColumns": [{"sClass":"izquierda padding","bSearchable":true},
 				           {"bSearchable":true},
 				           {"sClass":"izquierda","bSearchable":true},
 				           {"bSearchable":true},

@@ -3,6 +3,8 @@ td{
 	text-align:center;
 	color:#5d5d57;
 	font-size:12px;
+}
+td.padding{
 	padding-top:6px;
 	padding-bottom:6px;
 }
@@ -134,4 +136,12 @@ span.seccion{
 }
 .rechargue{
 	width:27px;
+}
+.circulos_tablas{
+	margin-top:0px !important;
+	margin-right:8px;
+}
+.reloj{
+	width: 17px;
+	margin-left:8px;
 }

@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/generic.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/asignadas.css" />
-<title>Asignadas</title>
+<title>Detalle MD</title>
 </head>
 <body>
 	<c:forEach var="permiso" items="${usr.perfil.perfilesxusuario[0].permisos}">

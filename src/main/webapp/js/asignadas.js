@@ -144,20 +144,20 @@ function creatabla(){
 	};	
 }
 
-var html="";
-var au_gerenteExpasion="";
-var au_expansion="";
-var au_gestoria="";
-var au_construccion="";
-var au_operaciones="";
-var reloj_gerenteExpasion="";
-var reloj_expansion="";
-var reloj_gestoria="";
-var reloj_construccion="";
-var reloj_operaciones="";
-var reloj='<img class="reloj" src="img/iconos_reloj_atraso.png">';
 function format(mdId){
-
+	var html="";
+	var au_gerenteExpasion="";
+	var au_expansion="";
+	var au_gestoria="";
+	var au_construccion="";
+	var au_operaciones="";
+	var reloj_gerenteExpasion="";
+	var reloj_expansion="";
+	var reloj_gestoria="";
+	var reloj_construccion="";
+	var reloj_operaciones="";
+	var reloj='<img class="reloj" src="img/iconos_reloj_atraso.png">';
+	
 	 $.ajax({
 	        type     : "POST",
 	        url      : 'memoria_detalle_x_id',

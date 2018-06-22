@@ -14,7 +14,19 @@ var ESTATUS_FINALIZA_MD = -1;
 var TIPOMD = -1;
 
 $(function(){
+	
+	if($('#tipoMd').val()==0){
 	$('#idasignadas').addClass('resaltado');
+	$('#titulo_tipo').text('EN PROCESO');
+	}
+	if($('#tipoMd').val()==1){
+		$('#idautorizadas').addClass('resaltado');
+		$('#titulo_tipo').text('AUTORIZADAS');
+	}
+	if($('#tipoMd').val()==2){
+		$('#idrechazadas').addClass('resaltado');
+		$('#titulo_tipo').text('RECHAZADAS');
+	}
 	
 	$("#nombreMdTxt").text($("#nombreMd").val());
 	inicializaFactores();
@@ -601,9 +613,11 @@ function cargaComboMotivos(modulo){
 }
 
 function finalizaMD(estatus){
-	if(TIPOMD = 0){
+	if(TIPOMD == 0){
 		ESTATUS_FINALIZA_MD = estatus;
+
 		if(estatus == 1){
+			
 			cargaMensajeModal('MD ASIGNADAS', 
 					'¿Est\u00e1s seguro de autorizar la MD?',
 					TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, actionfinalizaMD);

@@ -285,17 +285,17 @@ var idiomaEspanol = {
 
 var idiomaEspanolDirRechazadas = {
 	    "sEmptyTable":     "<div style='padding:10px; color:red; font-size:13px;'>No existen memorias descriptivas</div>",
-	    "sInfo":           '<div class="row fazul blanco">'+
+	    "sInfo":           '<div class="row fazul blanco" style="padding-bottom:3px;">'+
 	    						'<div class="col-xl-6 col-lg-9 center">'+
 	    						'<div class="row">'+
 	    								'<div class="col-xl-3 col-6 center"  style="min-width:160px;">'+
-	    									icono_expansion+'<span style="margin-left:10px;">Expansión</span></div>'+
+	    									iconob_expansion+'<span style="margin-left:10px;">Expansión</span></div>'+
 	    								'<div class="col-xl-3 col-6 center"  style="min-width:160px;">'+
-	    									icono_gestoria+'<span style="margin-left:10px;">Gestoría</span></div>'+
+	    									iconob_gestoria+'<span style="margin-left:10px;">Gestoría</span></div>'+
 	    								'<div class="col-xl-3 col-6 center"  style="min-width:160px;">'+
-	    									icono_construccion+'<span style="margin-left:10px;">Construcción</span></div>'+
+	    									iconob_construccion+'<span style="margin-left:10px;">Construcción</span></div>'+
 	    								'<div class="col-xl-3 col-6 center" style="min-width:160px;">'+
-	    									icono_operaciones+'<span style="margin-left:10px;">Operaciones</span></div>'+
+	    									iconob_operaciones+'<span style="margin-left:10px;">Operaciones</span></div>'+
 	    						'</div></div>'+
 	    							'<div class="col-xl-6 col-lg-3 right">Totales: <b>_TOTAL_</b></div>'+
 	    					'</div>',

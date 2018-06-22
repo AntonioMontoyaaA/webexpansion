@@ -46,7 +46,7 @@
 										data-placement="bottom" data-content="">Gerente de
 											expansión</a>
 									</span> <img id="gerenteExpansionImg"
-										src="img/iconos_reloj_atraso.png"
+										src="img/b_ATRASADAS.png"
 										style="width: 17px; display: none;">
 								</div>
 							</div>
@@ -57,7 +57,7 @@
 										id="expansionSegPop" tabindex="0" class="blanco t14" role=""
 										data-toggle="popover" data-trigger="focus"
 										data-placement="bottom" data-content="">Expansión</a>
-									</span> <img id="expansionImg" src="img/iconos_reloj_atraso.png"
+									</span> <img id="expansionImg" src="img/b_ATRASADAS.png"
 										style="width: 17px; display: none;">
 								</div>
 							</div>
@@ -68,7 +68,7 @@
 										id="gestoriaSegPop" tabindex="0" class="blanco t14" role=""
 										data-toggle="popover" data-trigger="focus"
 										data-placement="bottom" data-content="">Gestoría</a>
-									</span> <img id="gestoriaImg" src="img/iconos_reloj_atraso.png"
+									</span> <img id="gestoriaImg" src="img/b_ATRASADAS.png"
 										style="width: 17px; display: none;">
 								</div>
 							</div>
@@ -79,7 +79,7 @@
 										id="construccionSegPop" tabindex="0" class="blanco t14" role=""
 										data-toggle="popover" data-trigger="focus"
 										data-placement="bottom" data-content="">Construcción</a>
-									</span> <img id="construccionImg" src="img/iconos_reloj_atraso.png"
+									</span> <img id="construccionImg" src="img/b_ATRASADAS.png"
 										style="width: 17px; display: none;">
 								</div>
 							</div>
@@ -90,7 +90,7 @@
 										id="operacionesSegPop" tabindex="0" class="blanco t14" role=""
 										data-toggle="popover" data-trigger="focus"
 										data-placement="bottom" data-content="">Operaciones</a>
-									</span> <img id="operacionesImg" src="img/iconos_reloj_atraso.png"
+									</span> <img id="operacionesImg" src="img/b_ATRASADAS.png"
 										style="width: 17px; display: none;">
 								</div>
 							</div>

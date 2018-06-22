@@ -46,6 +46,12 @@ var icono_expansion='<span><img src="img/web_expansionc.png"></span>&nbsp;';
 var icono_gestoria='<span><img src="img/web_gestoriac.png"></span>&nbsp;';
 var icono_construccion='<span><img src="img/web_construccionc.png"></span>&nbsp;';
 var icono_operaciones='<span><img src="img/web_operacionesc.png"></span>&nbsp;';
+
+var iconob_expansion='<span><img src="img/b_expansion.png"></span>&nbsp;';
+var iconob_gestoria='<span><img src="img/b_gestoria.png"></span>&nbsp;';
+var iconob_construccion='<span><img src="img/b_construccion.png"></span>&nbsp;';
+var iconob_operaciones='<span><img src="img/b_operaciones.png"></span>&nbsp;';
+	
 function creatabla(){
 	invocarJSONServiceAction("rechazadas_info", 
 				{'fechaConsulta': $( "#datepicker1").val(),

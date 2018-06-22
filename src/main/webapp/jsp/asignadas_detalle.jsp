@@ -16,7 +16,7 @@
 <body>
 	<c:forEach var="permiso" items="${usr.perfil.perfilesxusuario[0].permisos}">
     	<input type="hidden" class="permisos_detalleMd" rel="${permiso.getFIMODULOID()}" value="${permiso.toJSON()}">
-    </c:forEach> -
+    </c:forEach>
     
    
 <%@ include file="/jsp/generic/header.jsp" %>

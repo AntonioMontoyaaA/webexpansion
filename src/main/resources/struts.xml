@@ -13,6 +13,7 @@
 	
 	<package name="user" namespace="/" extends="struts-default">
 		
+		
 		<action name="dashboard">
 			<result>jsp/dashboard.jsp</result>
 		</action>
@@ -57,18 +58,18 @@
          		method = "execute">
       	</action>
       	
-      	<action name = "memoria_detalle" 
+      <action name = "memoria_detalle" 
          		class = "com.tiendas.neto.action.DetalleMemoriaAsignadaAction" 
          		method = "execute">
          	<result name = "success">jsp/asignadas_detalle.jsp</result>
       	</action>
-      	
+      		
       	<action name = "mensajes_historial" 
          		class = "com.tiendas.neto.action.DetalleMemoriaChatAction" 
          		method = "execute">
          	<result name = "success">jsp/mensajes_historial.jsp</result>
       	</action>
-      	
+      	 
       	<action name = "GuardaMensajeAction" 
          		class = "com.tiendas.neto.action.GuardaMensajeAction" 
          		method = "execute">
@@ -94,12 +95,6 @@
       	</action>
       	
 <!-- **********  autorizadas y rechazadas      -->
- 		
- 		<action name = "consulta_detalle" 
-         		class = "com.tiendas.neto.action.DetalleMemoriaAction" 
-         		method = "execute">
-         <result name = "success">jsp/consulta_detalle.jsp</result>
-      	</action>
 
       <action name = "autorizadas_info" 
          	class = "com.tiendas.neto.action.Autorizadas_RechazadasInfoAction" 

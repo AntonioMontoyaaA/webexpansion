@@ -1,3 +1,6 @@
+h5{
+	margin-bottom:0px;
+}
 .texto_azulg{
 	font-size:15px;
 	font-weight:normal;
@@ -93,12 +96,9 @@ float:right;
 background:#c8c8c8;
 }
 
-/* ----------------------------------------------- DATEPICKER*/
-.fazul{
-	background:#125087;
-}
+/* ----------------------------------------------- DATEPICKER PEQUEÑO*/
 
-.datepicker table tr td.active.active,
+#embeddingDatePicker .datepicker table tr td.active.active,
  .datepicker table tr td.active.highlighted.active,
   .datepicker table tr td.active.highlighted:active,
    .datepicker table tr td.active:active {
@@ -109,32 +109,45 @@ background:#c8c8c8;
     border-color: #125087;
 }
 /*centrar datepicker*/
-.table-condensed{  				
+#embeddingDatePicker .table-condensed{  				
 	text-align:center;
 	margin:0 auto;
 }
-.datepicker .datepicker-switch {
+#embeddingDatePicker .datepicker .datepicker-switch {
     text-align: left;
     font-size:13px;
-    color:white;
+    color: #071B36;
     width: 160px;
-    height:40px;
     font-weight:normal;
 }
 
-.datepicker table tr td, .datepicker table tr th {
+#embeddingDatePicker .datepicker table tr td{
 	font-size:11px;
     text-align: center;
-    width: 20px;
+    width: 1%;
     height: 22px;
     border: none;
     color:white;
     padding-bottom:0px;
 }
-.datepicker table tr td.new, .datepicker table tr td.old {
+ #embeddingDatePicker .datepicker table tr th {
+	font-size:11px;
+    text-align: center;
+    width: 1%;
+    height: 30px;
+    border: none;
+    color:#071B36;
+    background-color:white;
+    padding-bottom:0px;
+ }
+#embeddingDatePicker .dow {
+	background-color:#071B36 !important;
+}
+ 
+#embeddingDatePicker .datepicker table tr td.new, .datepicker table tr td.old {
     color: #777;
 }
-.datepicker table tr td span {
+#embeddingDatePicker .datepicker table tr td span {
     display: block;
     width: 23%;
     height: 54px;
@@ -146,27 +159,78 @@ background:#c8c8c8;
 }
 
 @media(max-width: 767px){
-.datepicker table tr td, .datepicker table tr th {
+#embeddingDatePicker .datepicker table tr td, #embeddingDatePicker .datepicker table tr th {
 	font-size:15px;
 	}
-.table-condensed{  				
+#embeddingDatePicker .table-condensed{  				
 	text-align:center;
 	margin:0 auto;
 	width:70%;
 	min-width:250px;
-}
+} 
 }
 
 
-.calendario{
+#embeddingDatePicker .calendario{
 	min-width:160px;
 }
 
-.dia{
+#embeddingDatePicker .dia{
 	font-size:16px;
 	border:1px solid black;
 	height:37px;
 }
-h5{
-	margin-bottom:0px;
+/* ----------------------------------------------- DATEPICKER GRANDE*/
+#calendarioPrincipal .datepicker table tr td.active.active,
+ .datepicker table tr td.active.highlighted.active,
+  .datepicker table tr td.active.highlighted:active,
+   .datepicker table tr td.active:active {
+    border-color: #125087;
+    font-weight: bold;
+    
 }
+/*centrar datepicker*/
+#calendarioPrincipal .table-condensed{  				
+	text-align:center;
+	margin:0 auto;
+}
+#calendarioPrincipal .datepicker .datepicker-switch {
+    text-align: left;
+    font-size:13px;
+    color:#5d5d57;
+    width: 100%;
+    font-weight:normal;
+}
+
+#calendarioPrincipal .datepicker table tr td{
+	font-size:11px;
+    text-align: center;
+    width: 1%;
+    height:70px;
+    border: 1px solid #5d5d57;
+    color:#5d5d57;
+    padding-bottom:0px;
+}
+#calendarioPrincipal .datepicker table tr th {
+	font-size:11px;
+    text-align: center;
+    width: 1%;
+    height:30px;
+    border: 1px solid #5d5d57;
+    color:#5d5d57;
+    padding-bottom:0px;
+}
+
+#calendarioPrincipal .datepicker table tr td.new, .datepicker table tr td.old {
+    color:#E5E5E5 !important;
+}
+#calendarioPrincipal .datepicker table tr td span {
+    display: block;
+    width: 23%;
+    line-height: 54px;
+    float: left;
+    margin: 1%;
+    cursor: pointer;
+    border-radius: 4px;
+}
+

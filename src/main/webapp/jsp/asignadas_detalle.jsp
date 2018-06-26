@@ -12,6 +12,7 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/generic.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/asignadas.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/utiles/modalImages.css" />
 <title>Detalle MD</title>
 </head>
 <body>
@@ -219,7 +220,9 @@
 				<div class="row div_header_sub">
 					<div class="col-lg-4">
 						<div class="col-lg-12"><span class="blanco t12 sangria_cuerpo">VISTA FRONTAL</span></div>
-						<div class="col-lg-12" style="text-align: center;"><img id="vistaFrontalMd" style="width: 87%; height: 28%" src="img/no_imagen.png" /></div>
+						<div class="col-lg-12" style="text-align: center;">
+							<img class="imagenModal" id="vistaFrontalMd" alt="VISTA FRONTAL" style="width: 87%; height: 28%" src="img/no_imagen.png" onclick="modalImage(this)"/>
+						</div>
 						<div class="row div_bottom">
 							<div class="col-lg-6" style="text-align: right;"><span id="fechaVistaFrontal" class="footerDetalleMd">---</span></div>
 							<div class="col-lg-6" style="text-align: left;"><span id="horaVistaFrontal" class="footerDetalleMd">---</span></div>
@@ -227,7 +230,9 @@
 					</div>
 					<div class="col-lg-4">
 						<div class="col-lg-12"><span class="blanco t12 sangria_cuerpo">LATERAL 1</span></div>
-						<div class="col-lg-12" style="text-align: center;"><img id="vistaLateral1Md" style="width: 87%; height: 28%" src="img/no_imagen.png" /></div>
+						<div class="col-lg-12" style="text-align: center;">
+							<img class="imagenModal" id="vistaLateral1Md" alt="LATERAL 1" style="width: 87%; height: 28%" src="img/no_imagen.png" onclick="modalImage(this)"/>
+						</div>
 						<div class="row div_bottom">
 							<div class="col-lg-6" style="text-align: right;"><span id="fechaVistaLateral1" class="footerDetalleMd">---</span></div>
 							<div class="col-lg-6" style="text-align: left;"><span id="horaVistaLateral1" class="footerDetalleMd">---</span></div>
@@ -235,7 +240,9 @@
 					</div>
 					<div class="col-lg-4">
 						<div class="col-lg-12"><span class="blanco t12 sangria_cuerpo">LATERAL 2</span></div>
-						<div class="col-lg-12" style="text-align: center;"><img id="vistaLateral2Md" style="width: 87%; height: 28%" src="img/no_imagen.png" /></div>
+						<div class="col-lg-12" style="text-align: center;">
+							<img class="imagenModal" id="vistaLateral2Md" alt="LATERAL 2" style="width: 87%; height: 28%" src="img/no_imagen.png" onclick="modalImage(this)"/>
+						</div>
 						<div class="row div_bottom">
 							<div class="col-lg-6" style="text-align: right;"><span id="fechaVistaLateral2" class="footerDetalleMd">---</span></div>
 							<div class="col-lg-6" style="text-align: left;"><span id="horaVistaLateral2" class="footerDetalleMd">---</span></div>
@@ -434,6 +441,12 @@
 	<s:textfield name="tipoMd" label="" cssStyle="display: none"></s:textfield>	
 </div>
 
+<div id="modalImages" class="modalImagen">
+  <span class="closeModal">&times;</span>
+  <img class="modal-content" id="imageModal">
+  <div id="captionModal"></div>
+</div>
+
 <jsp:include page="/jsp/generic/loading.jsp" />
 <jsp:include page="/jsp/generic/mensajes.jsp" />
 <jsp:include page="/jsp/generic/modalAutorizacion.jsp" />
@@ -453,6 +466,6 @@
 	<script src="${pageContext.request.contextPath}/js/progress/progressbar.min.js"></script>
 	<script	src="${pageContext.request.contextPath}/js/utiles/utiles.js"></script>
 	<script	src="${pageContext.request.contextPath}/js/detalleMemoriaAsignada.js"></script>
-	
+	<script	src="${pageContext.request.contextPath}/js/utiles/modalImages.js"></script>
 	</body>
 </html>

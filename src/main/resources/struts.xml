@@ -113,6 +113,12 @@
          	method = "execute" />
       
   <!-- *******fin******* -->    	
+  <!-- ************************************ AGENDA ******* -->
+  		<action name = "obtieneEmpleados" 
+         	class = "com.tiendas.neto.action.AgendaAction" 
+         	method = "obtieneEmpleados" />
+  <!-- ************************************ FIN-AGENDA ******* -->
+   
       	<action name = "DashboardGeneralAction" class="com.tiendas.neto.action.DashboardGeneralAction"
       	 method = "execute"/>
       	<action name = "DashboardPlanAperturaMAction" class="com.tiendas.neto.action.DashboardPlanAperturaMAction"

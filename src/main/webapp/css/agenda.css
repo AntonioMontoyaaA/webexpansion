@@ -1,11 +1,13 @@
 h5{
 	margin-bottom:0px;
 }
-.sel_evento{
-	height:200px;
-	border-bottom:1px solid #a6a6a6;
+.menu_desp{
+	padding-top:10px;
+	padding-bottom:5px;
 }
-.sel_jefe{
+.borde_desp{
+	padding-bottom:5px;
+	border-bottom:1px solid #5d5d57; /*gris*/
 }
 /* -------------------------------- CALENDARIO */ 
 .calendario_grande{
@@ -21,9 +23,36 @@ th{
 	border-left:1px solid #a6a6a6;
 	width:10%;
 	}
-.calendario_grande td, .calendario_grande thead th {
+.calendario_grande td{
 	border:0;
+	padding:3px;
 }
+ .calendario_grande thead th {
+ 	border:0;
+	padding:5px;
+ }
+
+.circulo{
+	padding-top:3px;
+	text-align:center;
+	margin:5px;
+	font-size: 10px;
+     width: 16px;
+     height: 16px;
+     -moz-border-radius: 50%;
+     -webkit-border-radius: 50%;
+     border-radius: 50%;
+     color:white;
+     line-height:1;
+}
+.atrasadas{background:#FF5B16;}
+.realizadas{background:#5D5D5D;}
+.porRealizar{background:#071B36;}
+
+.texto_circulo{
+	padding-top:4px;
+}
+
 
 
 @media(max-width: 1348px){
@@ -71,11 +100,14 @@ background:#c8c8c8;
  .datepicker table tr td.active.highlighted.active,
   .datepicker table tr td.active.highlighted:active,
    .datepicker table tr td.active:active {
-    color:#125087;
+    color:red;
     background-image: url("../img/fondo_datapicker.png");
     background-repeat: no-repeat;
     background-position: center;
     border-color: #125087;
+}
+#embeddingDatePicker .today.day{
+	color:red;
 }
 /*centrar datepicker*/
 #embeddingDatePicker .table-condensed{  				
@@ -128,7 +160,7 @@ background:#c8c8c8;
     border-radius: 4px;
 }
 
-@media(max-width: 767px){
+@media(max-width: 954px){
 #embeddingDatePicker .datepicker table tr td, #embeddingDatePicker .datepicker table tr th {
 	font-size:15px;
 	}
@@ -139,8 +171,6 @@ background:#c8c8c8;
 	min-width:250px;
 } 
 }
-
-
 #embeddingDatePicker .calendario{
 	min-width:160px;
 }

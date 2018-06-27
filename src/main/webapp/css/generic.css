@@ -2,6 +2,9 @@
 html {
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif
 }
+.cursor{
+	cursor:pointer;
+}
 .loadingPagina {
 	position: absolute;
     padding: 0px;

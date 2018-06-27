@@ -36,39 +36,67 @@
 			    
      <div class="row">
      <div class="col-xl-2 col-lg-3 col-md-12 calendario padding_p">
- 	 <div class="col-lg-12 col-md-4 fazul" style="padding-right: 0; padding-left:0;">
- 		<div class="form-group">
-            <div id="embeddingDatePicker" onchange=""></div>
-            <input type="hidden" id="selectedDate" name="selectedDate" />
-    	</div>
-    </div>
+     <div class="col-12 fblanco menupr_estilos" style="height:90%; padding:0;">
+     
     
-    <div class="col-lg-12 col-md-4 sel_evento">
-    	<div class="form-group">
-        <label class="texto_azulg">Selecciona algún evento</label>
-        <div class="col-xs-5 date">
-            
+ 	 <div class="col-12 fazul" style="padding-right: 0; padding-left:0;">
+ 		<div class="form-group" style="margin:0;">
+            <div id="embeddingDatePicker"></div>
+            <input type="hidden" id="selectedDate" name="selectedDate"/>
     	</div>
     </div>
-    </div>
-     <div class="col-lg-12 col-md-4 sel_jefe">
-    	<div class="form-group">
-        <label class="texto_azulg">Selecciona algún jefe</label>
-        <div class="col-xs-5 date">
-           
-        </div>
-    	</div>
-    </div>
-   
+  
+    
+    <div class="col-12 borde_desp fblanco">
+    	<div class="negrita gris t12 cursor menu_desp" data-toggle="collapse" data-target="#eventos">Eventos</div>
+				<div class="collapse" id="eventos">
+						<!-- <div class="row">
+								<div class="col-6">x</div>
+								<div class="col-6">x</div>
+								<div class="col-6">x</div>
+								<div class="col-6">x</div>
+								<div class="col-6">x</div>
+								<div class="col-6">x</div>
+								<br>
+						</div> -->
+				</div>
+	</div>
+	<div class="col-12 borde_desp fblanco">
+    	<div class="negrita t12 gris cursor menu_desp" data-toggle="collapse" data-target="#personal">Personal</div>
+				<div class="collapse" id="personal"></div>		
+	</div>
+	<div class="col-12 borde_desp fblanco">
+    	<div class="negrita t12 gris cursor menu_desp" data-target="#leyenda">Leyenda</div>
+				<div id="leyenda">
+						 <div class="row">
+								<div class="col-12 azul t12">
+									<div class="circulo float_left porRealizar"></div>
+									<div class="texto_circulo"> Por realizar</div>
+								</div>
+								 
+								<div class="col-12 azul t12">
+									<div class="circulo float_left realizadas"></div>
+									<div class="texto_circulo">Realizadas</div>
+								</div>
+								
+								<div class="col-12 azul t12">
+									<div class="circulo float_left atrasadas"></div>
+									<div class="texto_circulo">Atrasadas</div>
+								</div>
+								<br>
+						</div>
+				</div>
+	</div>
+   </div>
     </div>
     
     <div class="col-xl-10 col-lg-9 d-none d-sm-block padding_p">
-  	<table class="table calendario_grande fblanco">
+  	<table class="table calendario_grande fblanco menupr_estilos">
   		<thead>
   		<tr class="" style="border-bottom: 1px solid #5d5d57;">
-  			<th class="prev left">«</th>
-  			<th colspan="5" class="center gris negrita">Junio 2018</th>
-  			<th class="next right">»</th>
+  			<th class="prev left" onclick="botonPrev()">«</th>
+  			<th colspan="5" class="center gris negrita" id="mesCabecera"></th>
+  			<th class="next right" onclick="botonNext()">»</th>
   		</tr>
   		
   			<tr>
@@ -81,62 +109,7 @@
   			<th class="azul center">Domingo</th>
   			</tr>
   		</thead>
-  		<tbody>
-  			<tr>
-  				<td></td>
-  				<td></td>
-  				<td></td>
-  				<td></td>
-  				<td></td>
-  				<td></td>
-  				<td></td>
-  			</tr>
-  			<tr>
-  				<td></td>
-  				<td></td>
-  				<td></td>
-  				<td></td>
-  				<td></td>
-  				<td></td>
-  				<td></td>
-  			</tr>
-  			<tr>
-  				<td></td>
-  				<td></td>
-  				<td></td>
-  				<td></td>
-  				<td></td>
-  				<td></td>
-  				<td></td>
-  			</tr>
-  			<tr>
-  				<td></td>
-  				<td></td>
-  				<td></td>
-  				<td></td>
-  				<td></td>
-  				<td></td>
-  				<td></td>
-  			</tr>
-  			<tr>
-  				<td></td>
-  				<td></td>
-  				<td></td>
-  				<td></td>
-  				<td></td>
-  				<td></td>
-  				<td></td>
-  			</tr>
-  			<tr>
-  				<td></td>
-  				<td></td>
-  				<td></td>
-  				<td></td>
-  				<td></td>
-  				<td></td>
-  				<td></td>
-  			</tr>
-  		</tbody>
+  		<tbody id="cuerpoTabla"></tbody>
   	</table> 
   	
   	<!-- <div class="form-group">

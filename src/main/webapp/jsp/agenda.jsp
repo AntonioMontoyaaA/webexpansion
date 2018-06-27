@@ -11,7 +11,7 @@
  -->  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/generic.css" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/calendar.css" />	
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/agenda.css" />	
 <title>Agenda</title>
 </head>
 <body>
@@ -21,10 +21,9 @@
 <%@ include file="/jsp/generic/header.jsp" %>
 
 <div class="container-fluid">
-	<div class="row margen_cal_titulo">
-		<div class="col-lg-12 titulo">Dashboard Expansión > Agenda </div>
-	
-		<div class="col-lg-12 titulogrande">AGENDA
+	<div class="row padding_p"  style="padding-top:0px;">
+		<div class="col-lg-12 titulo azul t12 negrita">Dashboard Expansión > Agenda </div>
+		<div class="col-lg-12 titulogrande azul t18">AGENDA
 		
 		<button type="submit" class="btn evento">&emsp;Mes&emsp;</button>
 		<button type="submit" class="btn evento">&emsp;+Evento&emsp;</button>
@@ -32,15 +31,12 @@
 		
 		</div>
 		<div class="col-lg-12">
-		<div class="row margen_cal">
-		<div class="col-lg-12 menupr_estilos">
-			
-    <div class="row cabecera"><span class="negrita azul">Marzo 2018</span></div>
-    
+		<div class="row">
+		<div class="col-lg-12">
+			    
      <div class="row">
-     <div class="col-xl-2 col-lg-3 col-md-12 calendario">
-     <div class="row">
- 	 <div class="col-lg-12 col-md-4 fazul">
+     <div class="col-xl-2 col-lg-3 col-md-12 calendario padding_p">
+ 	 <div class="col-lg-12 col-md-4 fazul" style="padding-right: 0; padding-left:0;">
  		<div class="form-group">
             <div id="embeddingDatePicker" onchange=""></div>
             <input type="hidden" id="selectedDate" name="selectedDate" />
@@ -51,34 +47,38 @@
     	<div class="form-group">
         <label class="texto_azulg">Selecciona algún evento</label>
         <div class="col-xs-5 date">
-            <div id="embeddingDatePicker" onchange=""></div>
-            <input type="hidden" id="selectedDate" name="selectedDate" />
-        </div>
+            
     	</div>
+    </div>
     </div>
      <div class="col-lg-12 col-md-4 sel_jefe">
     	<div class="form-group">
         <label class="texto_azulg">Selecciona algún jefe</label>
         <div class="col-xs-5 date">
-            <div id="embeddingDatePicker" onchange=""></div>
-            <input type="hidden" id="selectedDate" name="selectedDate" />
+           
         </div>
     	</div>
     </div>
-    </div>
+   
     </div>
     
-    <div class="col-xl-10 col-lg-9 d-none d-sm-block nopadd">
-  	<table class="table calendario_grande">
+    <div class="col-xl-10 col-lg-9 d-none d-sm-block padding_p">
+  	<table class="table calendario_grande fblanco">
   		<thead>
+  		<tr class="" style="border-bottom: 1px solid #5d5d57;">
+  			<th class="prev left">«</th>
+  			<th colspan="5" class="center gris negrita">Junio 2018</th>
+  			<th class="next right">»</th>
+  		</tr>
+  		
   			<tr>
-  			<th class="texto_azulg">Lunes</th>
-  			<th class="texto_azulg">Martes</th>
-  			<th class="texto_azulg">Miércoles</th>
-  			<th class="texto_azulg">Jueves</th>
-  			<th class="texto_azulg">Viernes</th>
-  			<th class="texto_azulg">Sábado</th>
-  			<th class="texto_azulg">Domingo</th>
+  			<th class="azul center">Lunes</th>
+  			<th class="azul center">Martes</th>
+  			<th class="azul center">Miércoles</th>
+  			<th class="azul center">Jueves</th>
+  			<th class="azul center">Viernes</th>
+  			<th class="azul center">Sábado</th>
+  			<th class="azul center">Domingo</th>
   			</tr>
   		</thead>
   		<tbody>
@@ -137,7 +137,16 @@
   				<td></td>
   			</tr>
   		</tbody>
-  	</table>
+  	</table> 
+  	
+  	<!-- <div class="form-group">
+            <div id="calendarioPrincipal" onchange=""></div>
+            <input type="hidden" id="selectedDate2" name="selectedDate2" />
+    	</div>
+  	 -->
+  	
+  	
+  	
 	</div>
 	</div>
 	<div class="row d-block d-sm-none nopadd">

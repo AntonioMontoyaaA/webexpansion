@@ -1,6 +1,7 @@
 h5{
 	margin-bottom:0px;
 }
+/* MENUS DESPLEGABLES, BARRA LATERAL*/
 .menu_desp{
 	padding-top:10px;
 	padding-bottom:5px;
@@ -9,6 +10,44 @@ h5{
 	padding-bottom:5px;
 	border-bottom:1px solid #5d5d57; /*gris*/
 }
+
+.atrasadas{background:#FF5B16;}
+.realizadas{background:#5D5D5D;}
+.porRealizar{background:#071B36;}
+
+.texto_circulo{
+	padding-top:6px;
+}
+
+.circulo{
+	padding-top:4px;
+	text-align:center;
+	margin:5px;
+	font-size: 9px;
+     width: 16px;
+     height: 16px;
+     -moz-border-radius: 50%;
+     -webkit-border-radius: 50%;
+     border-radius: 50%;
+     color:white;
+     line-height:1;
+}
+
+.caja_texto{
+	padding-top:2px;
+	text-align:center;
+	margin:5px;
+	font-size: 9px;
+     width: 14px;
+     height: 14px;
+     -moz-border-radius: 30%;
+     -webkit-border-radius: 30%;
+     border-radius: 30%;
+     color:white;
+     line-height:1;
+}
+
+/* FIN */
 /* -------------------------------- CALENDARIO */ 
 .calendario_grande{
 	width:100%;
@@ -27,39 +66,20 @@ th{
 	border:0;
 	padding:3px;
 }
+.contenido{
+	height:100px;
+	overflow:auto;
+	margin:0px;
+}
  .calendario_grande thead th {
  	border:0;
 	padding:5px;
  }
 
-.circulo{
-	padding-top:3px;
-	text-align:center;
-	margin:5px;
-	font-size: 10px;
-     width: 16px;
-     height: 16px;
-     -moz-border-radius: 50%;
-     -webkit-border-radius: 50%;
-     border-radius: 50%;
-     color:white;
-     line-height:1;
-}
-.atrasadas{background:#FF5B16;}
-.realizadas{background:#5D5D5D;}
-.porRealizar{background:#071B36;}
-
-.texto_circulo{
-	padding-top:4px;
-}
-
-
-
 @media(max-width: 1348px){
 }
 .table{
 	margin-bottom:0px;
-	height:81%;
 }
 .he{
 	background:#104d84;

@@ -139,7 +139,7 @@ function progGeneral(){
 	  
 		Resumen_grafica_dirGeneral(data);	
 	}
-	if(perfil==4){
+	else if(perfil==4){
 		$('#container_proceso,#container_atrasadas,#container_autorizadas,#container_rechazadas').css('height','24%');
 		sum_asignadas=actual.asignadas;
 		sum_atrasadas=actual.atrasadas;
@@ -149,7 +149,7 @@ function progGeneral(){
 		
 		Resumen_grafica_dirArea(data);
 	}
-	if(perfil==5){
+	else if(perfil==5){
 		$('.analista').show();
 		sum_asignadas=actual.asignadas;
 		sum_atrasadas=actual.atrasadas;
@@ -158,6 +158,16 @@ function progGeneral(){
 		sum_totales= sum_asignadas + sum_autorizadas + sum_rechazadas;
 		
 		Resumen_grafica_analista(data);
+	}
+	else{
+		$('#container_proceso,#container_atrasadas,#container_autorizadas,#container_rechazadas').css('height','24%');
+		sum_asignadas=actual.asignadas;
+		sum_atrasadas=actual.atrasadas;
+		sum_autorizadas=actual.autorizadas;
+		sum_rechazadas=actual.rechazadas;
+		sum_totales= sum_asignadas + sum_autorizadas + sum_rechazadas;
+		
+		Resumen_grafica_dirArea(data);
 	}
 	}
 };	

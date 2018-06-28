@@ -117,6 +117,14 @@
   		<action name = "obtieneEmpleados" 
          	class = "com.tiendas.neto.action.AgendaAction" 
          	method = "obtieneEmpleados" />
+         
+         <action name = "obtieneEventos" 
+         	class = "com.tiendas.neto.action.AgendaAction" 
+         	method = "obtieneEventos" />
+     
+         <action name = "obtieneAgenda" 
+         	class = "com.tiendas.neto.action.AgendaAction" 
+         	method = "obtieneAgenda" />
   <!-- ************************************ FIN-AGENDA ******* -->
    
       	<action name = "DashboardGeneralAction" class="com.tiendas.neto.action.DashboardGeneralAction"

@@ -31,12 +31,10 @@
 		
 		</div>
 		<div class="col-lg-12">
-		<div class="row">
-		<div class="col-lg-12">
 			    
      <div class="row">
-     <div class="col-xl-2 col-lg-3 col-md-12 calendario padding_p">
-     <div class="col-12 fblanco menupr_estilos" style="height:90%; padding:0;">
+     <div class="col-xl-3 col-lg-3 col-md-12 calendario padding_p" style="min-width:210px;">
+     <div class="col-12 fblanco menupr_estilos" style="height:98%; padding:0;">
      
     
  	 <div class="col-12 fazul" style="padding-right: 0; padding-left:0;">
@@ -49,22 +47,13 @@
     
     <div class="col-12 borde_desp fblanco">
     	<div class="negrita gris t12 cursor menu_desp" data-toggle="collapse" data-target="#eventos">Eventos</div>
-				<div class="collapse" id="eventos">
-						<!-- <div class="row">
-								<div class="col-6">x</div>
-								<div class="col-6">x</div>
-								<div class="col-6">x</div>
-								<div class="col-6">x</div>
-								<div class="col-6">x</div>
-								<div class="col-6">x</div>
-								<br>
-						</div> -->
-				</div>
+				<div class="collapse" id="eventos"></div>
 	</div>
 	<div class="col-12 borde_desp fblanco">
     	<div class="negrita t12 gris cursor menu_desp" data-toggle="collapse" data-target="#personal">Personal</div>
 				<div class="collapse" id="personal"></div>		
 	</div>
+	
 	<div class="col-12 borde_desp fblanco">
     	<div class="negrita t12 gris cursor menu_desp" data-target="#leyenda">Leyenda</div>
 				<div id="leyenda">
@@ -90,7 +79,7 @@
    </div>
     </div>
     
-    <div class="col-xl-10 col-lg-9 d-none d-sm-block padding_p">
+    <div class="col-xl-9 col-lg-9 d-none d-sm-block padding_p">
   	<table class="table calendario_grande fblanco menupr_estilos">
   		<thead>
   		<tr class="" style="border-bottom: 1px solid #5d5d57;">
@@ -219,11 +208,12 @@
 	</div>
 	
 			
-			</div>
-		</div>
+			
 		</div>
 	</div>
 </div>
+<jsp:include page="/jsp/generic/loading.jsp" />
+<jsp:include page="/jsp/generic/mensajes.jsp" />
 
 	<!-- Bootstrap core JavaScript -->
 	<script	src="${pageContext.request.contextPath}/js/jquery/jquery.min.js"></script>	

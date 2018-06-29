@@ -243,6 +243,11 @@ Left
 	color: #FFFFFF !important;
 	max-width:400px;
 }
+.popover-content  {
+	background: #40BCD8 !important;
+	color: #FFFFFF !important;
+	max-width:400px;
+}
 
 .popover .arrow,
 .popover .arrow:after {

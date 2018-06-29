@@ -237,18 +237,21 @@ font-family: "Helvetica";
 .btn.blogin:hover{
 background:#3E72A1;
 }
-
+a
 .btn.blogin:active{
 background:#64DEF1;
 }
 
-
+a:focus{
+	outline:none;
+}
 
 a.links{
 	font-size:13px;
 	text-decoration: underline;
 	color:#00427F;
 }
+
 /* ------------------------------  NAVBAR / HEADERS   */
 
 .custom-toggler .navbar-toggler-icon {

@@ -4,7 +4,7 @@ $(function(){
 	calculaFechaActual();
 	llenaPersonal();
 	llenaEventos();
-	
+
 });
 
 var mes;
@@ -36,8 +36,8 @@ function calcula_Días(){
 }
 
 function armaAgenda(){
+	
 	$('#mesCabecera').text(meses_letra[mes]+" "+año);
-	$('#cuerpoTabla').text('');
 	
 	var fecha="01"+"/"+mes+"/"+año;
 	invocarJSONServiceAction("obtieneAgenda", {"fecha":fecha},
@@ -53,37 +53,9 @@ function armaAgenda(){
 
 	obtieneAgenda = function( data ) {
 	if(data.codigo != 200){ //arma agenda vacia
-		
-		html=''
-			var contador=1;
-			var contadordías=1;
-				
-			for(var i=0;contadordías<ultimoDia;i++){
-			html=html+'<tr>';
-				for(var cont=0;cont<7;cont++){
-					if(contador>=posicionSemana && contadordías<=ultimoDia){
-						
-						html=html+'<td>';
-						html=html+'<div class="row center gris">'+contadordías+'</div>';
-						html=html+'<div class="row contenido">';
-						
-						html=html+'</div>';
-						html=html+'</td>';
-						
-						contadordías++;
-					}
-					else{
-					html=html+'<td></td>';
-					}
-					contador++;
-				}	
-			html=html+'</tr>';
-			}
-			$('#cuerpoTabla').append(html);	
-		
-		cargaMensajeModal('AGENDA ', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
+		creaAgendaVacia();
+		//cargaMensajeModal('AGENDA ', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
 		}
-	
 	else{ //arma agenda con valores
 		
 		html=''
@@ -101,17 +73,44 @@ function armaAgenda(){
 						html=html+'<div class="row contenido">';
 						
 						for(var i=0;i<data.agenda.length;i++){
-							var nombreusuario=data.agenda[i].nombreUsuarioAsignado;
+							var nombreEvento=data.agenda[i].nombre;
 							var eventoId=data.agenda[i].eventoId;
-							var idusuario=data.agenda[i].empleadoId;
-							var espacio=nombreusuario.indexOf(" ");
-							var abreviacion=nombreusuario[0]+nombreusuario[espacio+1];
+							var idusuario=data.agenda[i].usuarioAsignadoId;
+							
+							var ubicacion=data.agenda[i].lugar;
+							var participantes=data.agenda[i].nombreUsuarioAsignado;
+							var fechainicial=(data.agenda[i].fechaCompleta).substring(0,10);
+							var horainicial=data.agenda[i].tiempoInicio;
+							var fechafinal=(data.agenda[i].fechaCompletaFinal).substring(0,10);
+							var horafinal=data.agenda[i].tiempoFinal;
+							var descripcion=nombreEvento+" "+ubicacion;
+							var asignadopor=data.agenda[i].nombreUsuarioAsigna;
+							
+							
+							var espacio=participantes.indexOf(" ");
+							var abreviacion=participantes[0]+participantes[espacio+1];
 							
 							if(data.agenda[i].diaMes==contadordías){
+													
+								html=html+'<div class="col-12 personal_'+idusuario+' ocultableEvento'+eventoId+'">';
+								html=html+'<a tabindex="0" class="agenda_link" data-toggle="popover" data-trigger="focus" data-placement="bottom" '+
+								'data-content="'+
+								"<div class='col-12 blanco center negrita t12'>"+nombreEvento+"</div>"+
+								"<div class='row'>"+
+									"<div class='col-6 t12 blanco'>"+ubicacion+"</div>"+
+									"<div class='col-6 t12 blanco'>"+participantes+"</div>"+
+									"<div class='col-6 t12 blanco'>"+fechainicial+"</div>"+
+									"<div class='col-6 t12 blanco'>"+horainicial+"</div>"+
+									"<div class='col-6 t12 blanco'>"+fechafinal+"</div>"+
+									"<div class='col-6 t12 blanco'>"+horafinal+"</div>"+
+									"<div class='col-12 t12 blanco'>"+descripcion+"</div>"+
+									"<div class='col-12 t12 blanco'>"+asignadopor+"</div>"+
+								"</div>"+
+								'">';
 								
-								html=html+'<div class="col-12 personal_'+idusuario+'">';
 								html=html+'<div class="circulo float_left back_'+eventoId+'">'+abreviacion+'</div>';
-								html=html+'<div class="t10 gris texto_circulo">'+data.agenda[i].nombre+'</div>';
+								html=html+'<div class="t10 gris texto_circulo">'+nombreEvento+'</div></a>';
+								
 								html=html+'</div>';
 							}
 							
@@ -127,11 +126,47 @@ function armaAgenda(){
 					}
 					contador++;
 				}	
+				
 			html=html+'</tr>';
 			}
+			$('#cuerpoTabla').text('');
 			$('#cuerpoTabla').append(html);	
+			$('[data-toggle="popover"]').popover({ html : true });
+			
 	}
 	}
+	 
+}
+
+function creaAgendaVacia(){
+	html=''
+		var contador=1;
+		var contadordías=1;
+			
+		for(var i=0;contadordías<ultimoDia;i++){
+		html=html+'<tr>';
+			for(var cont=0;cont<7;cont++){
+				if(contador>=posicionSemana && contadordías<=ultimoDia){
+					
+					html=html+'<td>';
+					html=html+'<div class="row center gris">'+contadordías+'</div>';
+					html=html+'<div class="row contenido">';
+					
+					html=html+'</div>';
+					html=html+'</td>';
+					
+					contadordías++;
+				}
+				else{
+				html=html+'<td></td>';
+				}
+				contador++;
+			}	
+		html=html+'</tr>';
+		}
+		$('#cuerpoTabla').text('');	
+		$('#cuerpoTabla').append(html);	
+	
 }
 
 function botonNext(){
@@ -223,8 +258,8 @@ function llenaPersonal(){
 					var abreviacion=nombre[0]+nombre[espacio+1];
 					
 					html=html+'<div class="col-12 cursor" id="'+id+'" onclick="seleccionPersonal(this)">';
-					html=html+'<div class="circulo float_left ffgris circulo_'+id+'">'+abreviacion+'</div>';
-					html=html+'<div class="t12 gris texto_circulo gris texto_'+id+'">'+nombre+'</div>';
+					html=html+'<div class="circulo float_left fazul circulo_'+id+'">'+abreviacion+'</div>';
+					html=html+'<div class="t12 texto_circulo azul texto_'+id+'">'+nombre+'</div>';
 					html=html+'</div>';	
 				}
 			}	
@@ -281,10 +316,10 @@ function seleccionEvento(valor){
 	var id=valor.id;
 	
 	if($('.ocultableEvento'+id).is(":visible")){
-		$('.ocultableEvento'+id).addClass("oculto");
+		$('.ocultableEvento'+id).addClass("oculto_evento");
 	}
 	else{
-		$('.ocultableEvento'+id).removeClass("oculto");
+		$('.ocultableEvento'+id).removeClass("oculto_evento");
 	}
 	
 }
@@ -298,6 +333,8 @@ function seleccionPersonal(valor){
 		
 		$('.circulo_'+id).addClass("fazul");
 		$('.texto_'+id).addClass("azul");
+		$('.personal_'+id).removeClass("oculto_personal");
+
 	}
 	else{
 		$('.circulo_'+id).removeClass("fazul");
@@ -305,6 +342,8 @@ function seleccionPersonal(valor){
 		
 		$('.circulo_'+id).addClass("ffgris");
 		$('.texto_'+id).addClass("gris");
+		$('.personal_'+id).addClass("oculto_personal");
+
 
 		
 	}

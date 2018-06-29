@@ -14,7 +14,10 @@ h5{
 .texto_circulo{
 	padding-top:6px;
 }
-.oculto{
+.oculto_evento{
+	display:none;
+}
+.oculto_personal{
 	display:none;
 }
 .circulo{
@@ -47,6 +50,11 @@ h5{
 
 /* FIN */
 /* -------------------------------- CALENDARIO */ 
+
+.agenda_link{
+	text-decoration:none !important;
+}
+
 .calendario_grande{
 	width:100%;
 }
@@ -200,7 +208,7 @@ background:#c8c8c8;
 }
 
 /* ------------------------------------JUEGOS DE COLORES ------------------------------- */
-
+/* -------------------------------back_(idEvento)*/
 
 .atrasadas{background:#FF5B16;}
 .realizadas{background:#5D5D5D;}
@@ -211,5 +219,4 @@ background:#c8c8c8;
 .back_3{background-color:#40BCD8;}
 .back_2{background-color:#00417F;}
 .back_1{background-color:#FF7C17;}
-
 

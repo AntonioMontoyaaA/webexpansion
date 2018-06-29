@@ -52,10 +52,40 @@ function armaAgenda(){
 			});
 
 	obtieneAgenda = function( data ) {
-	if(data.codigo != 200){
+	if(data.codigo != 200){ //arma agenda vacia
+		
+		html=''
+			var contador=1;
+			var contadordías=1;
+				
+			for(var i=0;contadordías<ultimoDia;i++){
+			html=html+'<tr>';
+				for(var cont=0;cont<7;cont++){
+					if(contador>=posicionSemana && contadordías<=ultimoDia){
+						
+						html=html+'<td>';
+						html=html+'<div class="row center gris">'+contadordías+'</div>';
+						html=html+'<div class="row contenido">';
+						
+						html=html+'</div>';
+						html=html+'</td>';
+						
+						contadordías++;
+					}
+					else{
+					html=html+'<td></td>';
+					}
+					contador++;
+				}	
+			html=html+'</tr>';
+			}
+			$('#cuerpoTabla').append(html);	
+		
 		cargaMensajeModal('AGENDA ', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
 		}
-	else{
+	
+	else{ //arma agenda con valores
+		
 		html=''
 			var contador=1;
 			var contadordías=1;
@@ -71,11 +101,16 @@ function armaAgenda(){
 						html=html+'<div class="row contenido">';
 						
 						for(var i=0;i<data.agenda.length;i++){
+							var nombreusuario=data.agenda[i].nombreUsuarioAsignado;
+							var eventoId=data.agenda[i].eventoId;
+							var idusuario=data.agenda[i].empleadoId;
+							var espacio=nombreusuario.indexOf(" ");
+							var abreviacion=nombreusuario[0]+nombreusuario[espacio+1];
 							
 							if(data.agenda[i].diaMes==contadordías){
 								
-								html=html+'<div class="col-12">';
-								html=html+'<div class="circulo float_left fazul"></div>';
+								html=html+'<div class="col-12 personal_'+idusuario+'">';
+								html=html+'<div class="circulo float_left back_'+eventoId+'">'+abreviacion+'</div>';
 								html=html+'<div class="t10 gris texto_circulo">'+data.agenda[i].nombre+'</div>';
 								html=html+'</div>';
 							}
@@ -182,12 +217,14 @@ function llenaPersonal(){
 				
 				for(var emp=0;emp<data.empleados[arregloAreas[i]][arregloPuestos[a]].length;emp++){
 					var nombre=data.empleados[arregloAreas[i]][arregloPuestos[a]][emp].nombre;
+					var id=data.empleados[arregloAreas[i]][arregloPuestos[a]][emp].empleadoId;
+					
 					var espacio=nombre.indexOf(" ");
 					var abreviacion=nombre[0]+nombre[espacio+1];
 					
-					html=html+'<div class="col-12">';
-					html=html+'<div class="circulo float_left fazul">'+abreviacion+'</div>';
-					html=html+'<div class="t12 gris texto_circulo">'+nombre+'</div>';
+					html=html+'<div class="col-12 cursor" id="'+id+'" onclick="seleccionPersonal(this)">';
+					html=html+'<div class="circulo float_left ffgris circulo_'+id+'">'+abreviacion+'</div>';
+					html=html+'<div class="t12 gris texto_circulo gris texto_'+id+'">'+nombre+'</div>';
 					html=html+'</div>';	
 				}
 			}	
@@ -226,8 +263,8 @@ function llenaEventos(){
 					var eventoId=arreglo[i].eventoId;
 										
 					html=html+'<div class="col-12 cursor" id="'+eventoId+'" onclick="seleccionEvento(this)">';
-					html=html+'<div class="caja_texto float_left fazul">';
-						html=html+'<img class="ocultableEvento'+eventoId+'" src="img/check.png" style="display:none">';
+					html=html+'<div class="caja_texto float_left  back_'+eventoId+'">';
+						html=html+'<img class="ocultableEvento'+eventoId+'" src="img/check.png">';
 					html=html+'</div>';
 					html=html+'<label class="gris t12 cursor texto_circulo" for="'+eventoId+'">'+nombre+'</label>';
 					html=html+'</div>';	
@@ -244,12 +281,32 @@ function seleccionEvento(valor){
 	var id=valor.id;
 	
 	if($('.ocultableEvento'+id).is(":visible")){
-		$('.ocultableEvento'+id).hide();
-		console.log("visible");
+		$('.ocultableEvento'+id).addClass("oculto");
 	}
 	else{
-		$('.ocultableEvento'+id).show();
-		console.log("no visible");
+		$('.ocultableEvento'+id).removeClass("oculto");
+	}
+	
+}
+function seleccionPersonal(valor){
+	var id=valor.id;
+	
+	if($('.circulo_'+id).hasClass("ffgris")==true){
+		
+		$('.circulo_'+id).removeClass("ffgris");
+		$('.texto_'+id).removeClass("gris");
+		
+		$('.circulo_'+id).addClass("fazul");
+		$('.texto_'+id).addClass("azul");
+	}
+	else{
+		$('.circulo_'+id).removeClass("fazul");
+		$('.texto_'+id).removeClass("azul");
+		
+		$('.circulo_'+id).addClass("ffgris");
+		$('.texto_'+id).addClass("gris");
+
+		
 	}
 	
 }

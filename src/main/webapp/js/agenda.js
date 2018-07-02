@@ -97,14 +97,30 @@ function armaAgenda(){
 								'data-content="'+
 								"<div class='col-12 blanco center negrita t12'>"+nombreEvento+"</div>"+
 								"<div class='row'>"+
-									"<div class='col-6 t12 blanco'>"+ubicacion+"</div>"+
-									"<div class='col-6 t12 blanco'>"+participantes+"</div>"+
-									"<div class='col-6 t12 blanco'>"+fechainicial+"</div>"+
-									"<div class='col-6 t12 blanco'>"+horainicial+"</div>"+
-									"<div class='col-6 t12 blanco'>"+fechafinal+"</div>"+
-									"<div class='col-6 t12 blanco'>"+horafinal+"</div>"+
-									"<div class='col-12 t12 blanco'>"+descripcion+"</div>"+
-									"<div class='col-12 t12 blanco'>"+asignadopor+"</div>"+
+									"<div class='col-6 t12 blanco'>"+
+									"<div class='negrita sub'>Ubicacion</div>"+
+									ubicacion+"</div>"+
+									"<div class='col-6 t12 blanco'>"+
+									"<div class='negrita sub'>Participantes</div>"+
+									participantes+"</div>"+
+									"<div class='col-6 t12 blanco'>"+
+									"<div class='negrita sub'>Fecha inicial</div>"+
+									fechainicial+"</div>"+
+									"<div class='col-6 t12 blanco'>"+
+									"<div class='negrita sub'>Hora inicial</div>"+
+									horainicial+"</div>"+
+									"<div class='col-6 t12 blanco'>"+
+									"<div class='negrita sub'>Fecha final</div>"+
+									fechafinal+"</div>"+
+									"<div class='col-6 t12 blanco'>"+
+									"<div class='negrita sub'>Hora final</div>"+
+									horafinal+"</div>"+
+									"<div class='col-12 t12 blanco'>"+
+									"<div class='negrita sub'>Descripción</div>"+
+									descripcion+"</div>"+
+									"<div class='col-12 t12 blanco'>"+
+									"<div class='negrita sub'>Asignado por</div>"+
+									asignadopor+"</div>"+
 								"</div>"+
 								'">';
 								
@@ -131,11 +147,14 @@ function armaAgenda(){
 			}
 			$('#cuerpoTabla').text('');
 			$('#cuerpoTabla').append(html);	
-			$('[data-toggle="popover"]').popover({ html : true });
+			
+			$('.agenda_link').popover({
+				 	html:true,
+			    });  
+
 			
 	}
 	}
-	 
 }
 
 function creaAgendaVacia(){

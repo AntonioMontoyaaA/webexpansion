@@ -21,7 +21,7 @@ h5{
 	display:none;
 }
 .circulo{
-	padding-top:4px;
+	padding-top:3px;
 	text-align:center;
 	margin:5px;
 	font-size: 9px;
@@ -50,6 +50,29 @@ h5{
 
 /* FIN */
 /* -------------------------------- CALENDARIO */ 
+.popover{
+color:white;
+background-color: #071B36;
+}
+.popover .arrow,
+.popover .arrow:after {
+	border-bottom-color: #071B36; !important;
+}
+.popover.bottom .arrow:after {
+  border-bottom-color: #071B36; !important;
+  background: #071B36; !important;
+}
+.popover.right .arrow:after {
+  border-right-color: #071B36; !important;
+}
+
+.popover-content {
+	background-color: #071B36;;
+}
+
+.sub{
+	margin-top:10px;
+}
 
 .agenda_link{
 	text-decoration:none !important;

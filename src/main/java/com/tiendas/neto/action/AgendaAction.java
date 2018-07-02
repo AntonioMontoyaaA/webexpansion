@@ -22,6 +22,7 @@ public class AgendaAction extends ExpansionAction{
 	Expansionlog elog=new Expansionlog();
 	
 	private String fecha;
+	private String tipoEvento;
 	
 	
 	public String getFecha() {
@@ -30,6 +31,14 @@ public class AgendaAction extends ExpansionAction{
 
 	public void setFecha(String fecha) {
 		this.fecha = fecha;
+	}
+
+	public String getTipoEvento() {
+		return tipoEvento;
+	}
+
+	public void setTipoEvento(String tipoEvento) {
+		this.tipoEvento = tipoEvento;
 	}
 
 	public String obtieneEmpleados() throws Exception{
@@ -151,6 +160,7 @@ public class AgendaAction extends ExpansionAction{
 		final OkHttpClient client = new OkHttpClient();
 		FormBody.Builder formBuilder = new FormBody.Builder()
          .add("usuarioId", numeroEmpleado)
+         .add("tipoEvento", getTipoEvento())
          .add("fecha", getFecha());
 				
 		RequestBody formBody = formBuilder.build();

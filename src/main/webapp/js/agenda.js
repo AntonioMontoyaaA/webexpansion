@@ -1,10 +1,15 @@
+var perfil;
 $(function(){
 	$('#idagenda').addClass('resaltado');
+	perfil=$('#perfil_usuario').val();
 	inicializaCalendarios();
 	calculaFechaActual();
 	llenaPersonal();
 	llenaEventos();
 
+	if(perfil!='3'){
+		$('#crear_evento').show();
+	}
 });
 
 var mes;
@@ -40,7 +45,7 @@ function armaAgenda(){
 	$('#mesCabecera').text(meses_letra[mes]+" "+año);
 	
 	var fecha="01"+"/"+mes+"/"+año;
-	invocarJSONServiceAction("obtieneAgenda", {"fecha":fecha},
+	invocarJSONServiceAction("obtieneAgenda", {"fecha":fecha, "tipoEvento":'0'},
 			'obtieneAgenda', 
 			function() {
 				//Funcion de error
@@ -211,6 +216,25 @@ function botonPrev(){
 }
 
 function inicializaCalendarios(){
+// crear evento
+	$('#hinicial').datetimepicker({
+        format: 'LT'
+    });
+	
+	$('#finicial').datetimepicker({
+        format: 'L'
+    });
+	
+	$('#hfinal').datetimepicker({
+        format: 'LT'
+    });
+	
+	$('#ffinal').datetimepicker({
+        format: 'L'
+    });
+	
+	
+// calendario izquierda
 	$('#embeddingDatePicker').datepicker({
 		setDate : new Date(),
 		format : 'dd/mm/yyyy',

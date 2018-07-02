@@ -50,6 +50,9 @@ h5{
 
 /* FIN */
 /* -------------------------------- CALENDARIO */ 
+#crear_evento{
+	display:none;
+}
 .popover{
 color:white;
 background-color: #071B36;
@@ -133,7 +136,7 @@ padding: 0;
 font-size:12px;
 color:#00437e;
 font-family: "Helvetica";
-width:75px;
+width:100px;
 height:21px;
 margin-left:15px;
 float:right;
@@ -146,9 +149,9 @@ background:#c8c8c8;
 /* ----------------------------------------------- DATEPICKER PEQUEÑO*/
 
 #embeddingDatePicker .datepicker table tr td.active.active,
- .datepicker table tr td.active.highlighted.active,
-  .datepicker table tr td.active.highlighted:active,
-   .datepicker table tr td.active:active {
+#embeddingDatePicker .datepicker table tr td.active.highlighted.active,
+ #embeddingDatePicker .datepicker table tr td.active.highlighted:active,
+  #embeddingDatePicker .datepicker table tr td.active:active {
     color:red;
     background-image: url("../img/fondo_datapicker.png");
     background-repeat: no-repeat;
@@ -195,7 +198,7 @@ background:#c8c8c8;
 	color:white !important;
 }
  
-#embeddingDatePicker .datepicker table tr td.new, .datepicker table tr td.old {
+#embeddingDatePicker .datepicker table tr td.new, #embeddingDatePicker .datepicker table tr td.old {
     color: #777 !important;
 }
 #embeddingDatePicker .datepicker table tr td span {
@@ -229,6 +232,79 @@ background:#c8c8c8;
 	border:1px solid black;
 	height:37px;
 }
+
+/* --------------------------------------- estilos del formulario crear evento -----*/
+
+.filtro{
+	font-size:12px;
+	font-family:"Helvetica Neue";
+	height:25px !important;
+	padding:0;
+	min-width:100px !important;
+	width:100%;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+	border-color:#071B36;
+	
+}
+
+.formulario_hora{
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border: 0px solid #000000;
+    padding-left: 3px;
+    background-image: url(../img/hora.png);
+    background-position: left;
+    background-repeat: no-repeat;
+    background-origin: content-box;
+    border:1px solid #071B36;
+    margin-bottom:10px;
+}
+.formulario_fecha{
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border: 0px solid #000000;
+    padding-left: 3px;
+    background-image: url(../img/fecha.png);
+    background-position: left;
+    background-repeat: no-repeat;
+    background-origin: content-box;
+    border:1px solid #071B36;
+    margin-bottom:10px;
+    
+}
+.formularioint {
+	width:80px;
+    font-size: 12px;
+    height: 20px;
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border: 0px solid #000000;
+    margin-left: 17px;
+    padding-right:0;
+    padding-left:5px;
+    
+}
+.etiqueta{
+	margin:0
+}
+.azulc{
+	color:#40BCD8;
+}
+#descripcion{
+	border-color:#071B36;
+	border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+     border:1px solid #071B36;
+}
+
+
+
 
 /* ------------------------------------JUEGOS DE COLORES ------------------------------- */
 /* -------------------------------back_(idEvento)*/

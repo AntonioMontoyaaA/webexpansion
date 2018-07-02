@@ -10,15 +10,15 @@
 <!--   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
  -->  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/tempusdominus-bootstrap-4.min.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/generic.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/agenda.css" />	
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <title>Agenda</title>
 </head>
 <body>
-<%--  <c:forEach var="permisos" items="${permisos}">
-     	  			 <c:out value="${permisos.codigo}"/> </c:forEach>  --%>
-<%-- <p>Student First Name: <c:out value="${login.contra}"/></p> --%>
 <%@ include file="/jsp/generic/header.jsp" %>
+<input type="hidden" id="perfil_usuario" value="${usr.perfil.perfilesxusuario[0].perfilid}">
 
 <div class="container-fluid">
 	<div class="row padding_p"  style="padding-top:0px;">
@@ -26,7 +26,8 @@
 		<div class="col-lg-12 titulogrande azul t18">AGENDA
 		
 		<button type="submit" class="btn evento">&emsp;Mes&emsp;</button>
-		<button type="submit" class="btn evento">&emsp;+Evento&emsp;</button>
+		<button id="crear_evento" type="submit" class="btn evento" 
+			 data-toggle="modal" data-target="#exampleModal">&emsp;Crear Evento&emsp;</button>
 		
 		
 		</div>
@@ -206,13 +207,86 @@
   	<div class="col-xs-12 ev e_31">Sin Eventos</div>
   	
 	</div>
-	
-			
-			
 		</div>
 	</div>
 </div>
-<jsp:include page="/jsp/generic/loading.jsp" />
+
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"  data-backdrop="static" data-keyboard="false"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">New message</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="form-group">
+									 <select class="form-control filtro" id="tipo_evento">
+										<option selected>Elegir tipo de evento</option>
+									</select> 
+									
+								<div class="row">
+										<div class="col-lg-6" style="padding-right:5px;">
+										 <label class="etiqueta t12"><font class="azulc">*</font>Fecha inical</label>
+										<div class="formulario_fecha">
+											<input type="text" class="form-control datetimepicker-input formularioint" id="finicial" data-toggle="datetimepicker" data-target="#finicial"/>
+										</div>
+										</div>
+
+										<div class="col-lg-6" style="padding-left:5px;">
+										 <label class="etiqueta t12"><font class="azulc">*</font>Hora inicial</label>
+										<div class="formulario_hora">
+												 <input type="text" class="form-control datetimepicker-input formularioint" id="hinicial" data-toggle="datetimepicker" data-target="#hinicial"/>
+										</div>
+										</div>
+										
+										<div class="col-lg-6" style="padding-right:5px;">
+										 <label class="etiqueta t12"><font class="azulc">*</font>Fecha final</label>
+										<div class="formulario_fecha">
+											<input type="text" class="form-control datetimepicker-input formularioint" id="ffinal" data-toggle="datetimepicker" data-target="#ffinal"/>
+										</div>
+										</div>
+
+										<div class="col-lg-6" style="padding-left:5px;">
+										<label class="etiqueta t12"><font class="azulc">*</font>Hora final</label>
+										<div class="formulario_hora">
+												 <input type="text" class="form-control datetimepicker-input formularioint" id="hfinal" data-toggle="datetimepicker" data-target="#hfinal"/>
+										</div>
+										</div>
+									</div>
+									
+									<label class="etiqueta t12"><font class="azulc">*</font>Lugar</label>
+									<input type="text" class="form-control filtro" id="lugar">
+									
+									<label for="descripcion" class="etiqueta t12"><font class="azulc">*</font>Descripción</label>
+									<textarea class="form-control" id="descripcion"></textarea>
+								</div>
+
+
+
+							</div>
+							<div class="col-lg-6"></div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">Send message</button>
+				
+				</div>
+			</div>
+		</div>
+	</div>
+	
+
+	<jsp:include page="/jsp/generic/loading.jsp" />
 <jsp:include page="/jsp/generic/mensajes.jsp" />
 
 	<!-- Bootstrap core JavaScript -->
@@ -222,7 +296,12 @@
 	<script	src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 	<script	src="${pageContext.request.contextPath}/bootstrap/js/bootstrap-datepicker.min.js"></script>	
 	<script	src="${pageContext.request.contextPath}/bootstrap/js/bootstrap-datepicker.es.min.js"></script>	
+	<script	src="${pageContext.request.contextPath}/js/jquery/moment.js"></script>
+	<script	src="${pageContext.request.contextPath}/js/jquery/es.js"></script>
+	<script	src="${pageContext.request.contextPath}/js/jquery/tempusdominus-bootstrap-4.min.js"></script>
+	
 	<script	src="${pageContext.request.contextPath}/js/agenda.js"></script>
+	
 	
 	
 	

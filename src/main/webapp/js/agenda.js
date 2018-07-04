@@ -278,22 +278,32 @@ function llenaPersonal(){
 		var arregloAreas=Object.keys(data.empleados);
 		var arregloSuperior;
 		var arregloPuestos;
+		
+		var llenaAreas='';
 		html='';
 		html=html+'<div class="row">';
 		
-		for(var i=0;i<arregloAreas.length;i++){
+		for(var i=0;i<arregloAreas.length;i++){ 
+			
+			//llena la lista desplegable de Areas (CREA EVENTO)
+			llenaAreas=llenaAreas+'<div class="dropdown-item opcion_drop areas"  id="'+arregloAreas[i]+'">';
+			llenaAreas=llenaAreas+'<div class="cuadro float_left">'+arregloAreas[i].substring(0,1)+'</div>';
+			llenaAreas=llenaAreas+'<div class="informacion t12 azul">'+arregloAreas[i]+'</div>';
+			llenaAreas=llenaAreas+'</div>';
+
+			
 			arregloPuestos= Object.keys(data.empleados[arregloAreas[i]]);
 			
 			html=html+'<div class="col-12">';
 			html=html+'<div class="t12 gris negrita">'+arregloAreas[i]+'</div>';
 			html=html+'</div>';
 			
-			for(var a=0; a<arregloPuestos.length;a++){
+			for(var a=0; a<arregloPuestos.length;a++){ 
 				html=html+'<div class="col-12">';
 				html=html+'<div class="t12 gris negrita">'+arregloPuestos[a]+'</div>';
 				html=html+'</div>';
 				
-				for(var emp=0;emp<data.empleados[arregloAreas[i]][arregloPuestos[a]].length;emp++){
+				for(var emp=0;emp<data.empleados[arregloAreas[i]][arregloPuestos[a]].length;emp++){ //llena la lista de personal
 					var nombre=data.empleados[arregloAreas[i]][arregloPuestos[a]][emp].nombre;
 					var id=data.empleados[arregloAreas[i]][arregloPuestos[a]][emp].empleadoId;
 					
@@ -309,6 +319,51 @@ function llenaPersonal(){
 		}
 		html=html+'</div>';
 		$('#personal').append(html);
+		$('#areas').append(llenaAreas);
+		
+		
+		
+		 
+		
+		 // ------------------------------------------------
+		 $('.areas').on('click', function(){ //llena los puestos segun el area seleccionada (CREA EVENTO)
+			    var id=$(this).attr('id');
+			    $('#info_seleccionada').text(id);
+			    $('#letra_seleccionada').text(id.substring(0,1));
+			    
+			    var llenaPuestos= Object.keys(data.empleados[id]);
+			    var html='';
+			    if(llenaPuestos.length>0){
+			    $('#info_seleccionadaPuesto').text(llenaPuestos[0]);
+			    $('#letra_seleccionadaPuesto').text(llenaPuestos[0].substring(0,1));
+			    	
+			    for(var i=0;i<llenaPuestos.length;i++){
+			    	html=html+'<div class="dropdown-item opcion_drop listapuestos" onclick="llenaPersonal.ejemplo();" id="'+llenaPuestos[i]+'">';
+			    	html=html+'<div class="cuadro float_left">'+llenaPuestos[i].substring(0,1)+'</div>';
+			    	html=html+'<div class="informacion t12 azul">'+llenaPuestos[i]+'</div></div>';
+			    }
+			    
+			    $('#puestos').text('');
+			    $('#puestos').append(html);
+			    
+			    $('.listapuestos').on('click', function(){ //llena los puestos segun el area seleccionada (CREA EVENTO)
+					 var area=$('#info_seleccionada').val();  
+					 var idpuesto=$(this).attr('id');
+					 var llenaEmpleados=data.empleados[area][idpuesto];
+					   
+					    var html='';
+					    	for(var i=0;i<llenaEmpleados.length;i++){
+					    		html=html+'<option value="'+llenaEmpleados[i].nombre+'">'+llenaEmpleados[i].nombre+'</option>';
+					    	}
+					    
+					    $('#participantes').text('');
+					    $('#participantes').append(html);
+					    
+			});
+			    
+			    }			    
+		 });
+		 // ----------------------------------------------------
 		
 		}
 	}
@@ -333,23 +388,29 @@ function llenaEventos(){
 		}
 	if(data.codigo==200) {
 		var arreglo=data.eventos;
+		var creaEvento='';
 		html='';
 		html=html+'<div class="row">';
 		
 				for(var i=0;i<arreglo.length;i++){
 					var nombre=arreglo[i].nombre;
 					var eventoId=arreglo[i].eventoId;
-										
+					
+					// llena información para el panel lateral
 					html=html+'<div class="col-12 cursor" id="'+eventoId+'" onclick="seleccionEvento(this)">';
 					html=html+'<div class="caja_texto float_left  back_'+eventoId+'">';
 						html=html+'<img class="ocultableEvento'+eventoId+'" src="img/check.png">';
 					html=html+'</div>';
 					html=html+'<label class="gris t12 cursor texto_circulo" for="'+eventoId+'">'+nombre+'</label>';
 					html=html+'</div>';	
+					
+					// llena información para el menu desplegable (CREAR EVENTO)
+					creaEvento=creaEvento+'<option value="'+eventoId+'">'+nombre+'</option>';
 				}
 				
 		html=html+'</div>';
 		$('#eventos').append(html);
+		$('#tipo_evento').append(creaEvento);
 		
 		}
 	}

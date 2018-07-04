@@ -1,7 +1,4 @@
 /* ---------------------------------  INICIA ESTILOS GENERALES */
-html {
-	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif
-}
 .cursor{
 	cursor:pointer;
 }
@@ -335,13 +332,13 @@ src: url("../fonts/HelveticaNeue-Medium.otf");
 }
 body{
 	background: #e7e6e3;
-	font-family: "Helvetica Neue";
+	font-family: "Helvetica Neue" !important;
 }
 .negrita{
-	font-family: "Helvetica Neue Bold";
+	font-family: "Helvetica Neue Bold" !important;
 }
 .letra{
-	font-family: "Helvetica Neue";
+	font-family: "Helvetica Neue" !important;
 	font-weight: normal;
 }
 .t18{

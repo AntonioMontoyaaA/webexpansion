@@ -215,8 +215,8 @@
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">New message</h5>
+				<div class="modal-header right">
+					<h5 class="modal-title" id="exampleModalLabel">Nuevo Evento</h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -227,8 +227,8 @@
 						<div class="row">
 							<div class="col-lg-6">
 								<div class="form-group">
-									 <select class="form-control filtro" id="tipo_evento">
-										<option selected>Elegir tipo de evento</option>
+									 <select class="filtro" id="tipo_evento">
+										<option value="" selected>Elegir tipo de evento</option>
 									</select> 
 									
 								<div class="row">
@@ -262,23 +262,56 @@
 									</div>
 									
 									<label class="etiqueta t12"><font class="azulc">*</font>Lugar</label>
-									<input type="text" class="form-control filtro" id="lugar">
+									<input type="text" class=" filtro" id="lugar">
 									
 									<label for="descripcion" class="etiqueta t12"><font class="azulc">*</font>Descripción</label>
-									<textarea class="form-control" id="descripcion"></textarea>
+									<textarea class="form-control t12 letra" id="descripcion"></textarea>
+									
+									<label class="etiqueta t12"><font class="azulc">*</font>Asignado por</label>
+									<input type="text" class="filtro" id="asignado">
+								</div>
+							</div>
+							<div class="col-lg-6">
+									<label class="etiqueta t12">Asignar a</label>
+
+								<div class="contenedor">
+									<div class="dropdown show">
+										<div class="dropdown-toggle filtro_interno float_left" 
+											role="button" id="dropdownAreas" data-toggle="dropdown"
+											aria-haspopup="true" aria-expanded="false"><div class="cuadro float_left" id="letra_seleccionada">A</div>
+										</div>
+
+										<div class="dropdown-menu opciones" aria-labelledby="dropdownAreas" id="areas"></div>
+									</div>
+									<div class="informacion t12 azul" id="info_seleccionada">Area</div>
 								</div>
 
 
+								<label class="etiqueta t12">Puesto</label>
+								<div class="contenedor">
+									<div class="dropdown show">
+										<div class="dropdown-toggle filtro_interno float_left" 
+											role="button" id="dropdownPuestos" data-toggle="dropdown"
+											aria-haspopup="true" aria-expanded="false"><div class="cuadro float_left" id="letra_seleccionadaPuesto">-</div>
+										</div>
 
+										<div class="dropdown-menu opciones" aria-labelledby="dropdownPuestos" id="puestos"></div>
+									</div>
+									<div class="informacion t12 azul" id="info_seleccionadaPuesto">-</div>
+								</div>
+
+									
+									<label class="etiqueta t12">Participantes</label>
+									<select class="filtro" id="participantes"></select> 
+								
 							</div>
-							<div class="col-lg-6"></div>
 						</div>
 					</form>
 				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">Send message</button>
+				<div class="modal-footer pie">
+					<button type="button" class="t12 btn boton fblanco azul"
+						data-dismiss="modal">Cancelar</button>
+					<button type="button" class="t12 btn boton fazul blanco">Aceptar</button>
 				
 				</div>
 			</div>

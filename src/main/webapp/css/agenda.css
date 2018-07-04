@@ -239,16 +239,73 @@ background:#c8c8c8;
 	font-size:12px;
 	font-family:"Helvetica Neue";
 	height:25px !important;
-	padding:0;
+	padding-right:0;
+	padding-left:5px;
+	padding-top:0;
+	padding-bottom:0;
 	min-width:100px !important;
 	width:100%;
     border-radius: 4px;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
 	border-color:#071B36;
-	
+	margin-bottom:10px;
+	border:1px solid;
+}
+.filtro:hover{
+	outline:none;
 }
 
+.filtro_interno{
+	width:20%;
+	border:0;
+	height:25px;
+}
+.informacion{
+	width:80%;
+	height:25px;
+	padding-top:5px;
+}
+.opciones{
+	position:absolute !important;
+	padding:0;
+}
+.opcion_drop{
+	padding-left:5px;
+}
+.filtro_interno:focus{
+	outline:none;
+}
+.contenedor{
+	 border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border: 0px solid #000000;
+    padding-left: 3px;
+    background-position: left;
+    background-repeat: no-repeat;
+    background-origin: content-box;
+    border:1px solid #071B36;
+}
+.filtro_interno.dropdown-toggle::after {
+    margin-top: 10px;
+    margin-left:0;
+}
+.cuadro{
+	padding-top:1px;
+	text-align:center;
+	margin-top:5px;
+	margin-right:10px;
+	font-size: 14px;
+     width: 16px;
+     height: 16px;
+     -moz-border-radius: 30%;
+     -webkit-border-radius: 30%;
+     border-radius: 30%;
+     color:white;
+     line-height:1;
+     background:#071B36;
+}
 .formulario_hora{
     border-radius: 4px;
     -moz-border-radius: 4px;
@@ -289,6 +346,7 @@ background:#c8c8c8;
     padding-left:5px;
     
 }
+
 .etiqueta{
 	margin:0
 }
@@ -301,9 +359,18 @@ background:#c8c8c8;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
      border:1px solid #071B36;
+     margin-bottom:10px;
 }
-
-
+.boton{
+	height:20px;
+	padding-top:0;
+	padding-bottom:0;
+	margin-left:30px !important;
+}
+.pie{
+	border-top:1px solid #5D5D5D;
+	background:#E5E5E5;
+}
 
 
 /* ------------------------------------JUEGOS DE COLORES ------------------------------- */

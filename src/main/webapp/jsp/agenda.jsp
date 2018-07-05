@@ -278,12 +278,17 @@
 									<div class="dropdown show">
 										<div class="dropdown-toggle filtro_interno float_left" 
 											role="button" id="dropdownAreas" data-toggle="dropdown"
-											aria-haspopup="true" aria-expanded="false"><div class="cuadro float_left" id="letra_seleccionada">A</div>
+											aria-haspopup="true" aria-expanded="false"><div class="cuadro float_left" id="letra_seleccionada">-</div>
 										</div>
 
-										<div class="dropdown-menu opciones" aria-labelledby="dropdownAreas" id="areas"></div>
+										<div class="dropdown-menu opciones"	aria-labelledby="dropdownAreas" id="areas">
+											<div class="dropdown-item opcion_drop listapuestos">
+												<div class="cuadro float_left">-</div>
+												<div class="informacion t12 azul">Selecciona un Área</div>
+											</div>
+										</div>
 									</div>
-									<div class="informacion t12 azul" id="info_seleccionada">Area</div>
+									<div class="informacion t12 azul" id="info_seleccionada">Selecciona un Área</div>
 								</div>
 
 
@@ -295,9 +300,15 @@
 											aria-haspopup="true" aria-expanded="false"><div class="cuadro float_left" id="letra_seleccionadaPuesto">-</div>
 										</div>
 
-										<div class="dropdown-menu opciones" aria-labelledby="dropdownPuestos" id="puestos"></div>
+										<div class="dropdown-menu opciones" aria-labelledby="dropdownPuestos" id="puestos">
+										<div class="dropdown-item opcion_drop puestos">
+												<div class="cuadro float_left">-</div>
+												<div class="informacion t12 azul">Selecciona un puesto</div>
+										</div>
+										</div>
+										
 									</div>
-									<div class="informacion t12 azul" id="info_seleccionadaPuesto">-</div>
+									<div class="informacion t12 azul" id="info_seleccionadaPuesto">Selecciona un puesto</div>
 								</div>
 
 									

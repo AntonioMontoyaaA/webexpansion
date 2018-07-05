@@ -325,7 +325,7 @@ function llenaPersonal(){
 		
 		 
 		
-		 // ------------------------------------------------
+	// ------------------------------------------------
 		 $('.areas').on('click', function(){ //llena los puestos segun el area seleccionada (CREA EVENTO)
 			    var id=$(this).attr('id');
 			    $('#info_seleccionada').text(id);
@@ -338,15 +338,18 @@ function llenaPersonal(){
 			    $('#letra_seleccionadaPuesto').text(llenaPuestos[0].substring(0,1));
 			    	
 			    for(var i=0;i<llenaPuestos.length;i++){
-			    	html=html+'<div class="dropdown-item opcion_drop listapuestos" onclick="llenaPersonal.ejemplo();" id="'+llenaPuestos[i]+'">';
+			    	html=html+'<div class="dropdown-item opcion_drop puestos" id="'+llenaPuestos[i]+'">';
 			    	html=html+'<div class="cuadro float_left">'+llenaPuestos[i].substring(0,1)+'</div>';
 			    	html=html+'<div class="informacion t12 azul">'+llenaPuestos[i]+'</div></div>';
 			    }
 			    
-			    $('#puestos').text('');
+			   
 			    $('#puestos').append(html);
-			    
-			    $('.listapuestos').on('click', function(){ //llena los puestos segun el area seleccionada (CREA EVENTO)
+			    }
+			 }); 
+	// ----------------------------------------------------	    
+			 
+		 $('.puestos').on('click', function(){ //llena los puestos segun el area seleccionada (CREA EVENTO)
 					 var area=$('#info_seleccionada').val();  
 					 var idpuesto=$(this).attr('id');
 					 var llenaEmpleados=data.empleados[area][idpuesto];
@@ -359,11 +362,8 @@ function llenaPersonal(){
 					    $('#participantes').text('');
 					    $('#participantes').append(html);
 					    
-			});
-			    
-			    }			    
-		 });
-		 // ----------------------------------------------------
+			    });
+	// ----------------------------------------------------			    
 		
 		}
 	}

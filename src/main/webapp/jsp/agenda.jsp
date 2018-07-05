@@ -282,10 +282,7 @@
 										</div>
 
 										<div class="dropdown-menu opciones"	aria-labelledby="dropdownAreas" id="areas">
-											<div class="dropdown-item opcion_drop listapuestos">
-												<div class="cuadro float_left">-</div>
-												<div class="informacion t12 azul">Selecciona un Área</div>
-											</div>
+										<!-- aqui van las opciones injectadas -->
 										</div>
 									</div>
 									<div class="informacion t12 azul" id="info_seleccionada">Selecciona un Área</div>

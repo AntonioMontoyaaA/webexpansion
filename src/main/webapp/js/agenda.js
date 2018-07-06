@@ -108,7 +108,7 @@ function armaAgenda(){
 									"<div class='negrita sub'>Participantes</div>";
 									html=html+"<div class='particip'>";		
 										for(var x=0;x<participantes.length;x++){
-											html=html+"<div class='t12'>"+participantes[x].nombre+"</div>";										
+											html=html+"<div class='t10'>"+participantes[x].nombre+"</div>";										
 										}
 									html=html+"</div>";	
 									html=html+"</div>"+
@@ -526,10 +526,11 @@ function limpiaPuestos(){
 function clicPuestos(valor) {
 	var area = $('#inputArea').val();
 	var id = valor.id;
+	
+	if (id != "") {
+		
 	var codigo=$('#'+id).attr('codigo');
 	var html = '';
-
-	if (id != "") {
 		var llenaEmpleados = data_personal.empleados[area][id];
 
 		$('#info_seleccionadaPuesto').text(id);
@@ -544,7 +545,7 @@ function clicPuestos(valor) {
 					+ llenaEmpleados[i].nombre + '</option>';
 		}
 	} else {
-		limpiaPuestos();
+    	limpiaPuestos();
 	}
 
 	$('#participantes').text('');

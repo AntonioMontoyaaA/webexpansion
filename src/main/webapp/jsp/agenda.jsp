@@ -285,7 +285,7 @@
 										<!-- aqui van las opciones injectadas -->
 										</div>
 									</div>
-									<div class="informacion t12 azul" id="info_seleccionada">Selecciona un Área</div>
+									<div class="informacion t10 azul" id="info_seleccionada">Selecciona un Área</div>
 									<input type="hidden" id="inputArea" value=""/>
 									<input type="hidden" id="inputAreaId" value=""/>
 								</div>
@@ -307,7 +307,7 @@
 										</div>
 										
 									</div>
-									<div class="informacion t12 azul" id="info_seleccionadaPuesto">Selecciona un puesto</div>
+									<div class="informacion t10 azul" id="info_seleccionadaPuesto">Selecciona un puesto</div>
 									<input type="hidden" id="inputPuesto" value=""/>
 									<input type="hidden" id="inputPuestoId" value=""/>
 								</div>

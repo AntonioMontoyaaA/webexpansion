@@ -125,6 +125,10 @@
          <action name = "obtieneAgenda" 
          	class = "com.tiendas.neto.action.AgendaAction" 
          	method = "obtieneAgenda" />
+         	
+         	 <action name = "enviaDatos" 
+         	class = "com.tiendas.neto.action.AgendaAction" 
+         	method = "enviaDatos" />
   <!-- ************************************ FIN-AGENDA ******* -->
    
       	<action name = "DashboardGeneralAction" class="com.tiendas.neto.action.DashboardGeneralAction"

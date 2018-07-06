@@ -289,13 +289,13 @@ var idiomaEspanolDirRechazadas = {
 	    						'<div class="col-xl-6 col-lg-9 center">'+
 	    						'<div class="row">'+
 	    								'<div class="col-xl-3 col-6 center"  style="min-width:160px;">'+
-	    									iconob_expansion+'<span style="margin-left:10px;">Expansión</span></div>'+
+	    								'<span><img src="img/b_expansion.png"></span>&nbsp;'+'<span style="margin-left:10px;">Expansión</span></div>'+
 	    								'<div class="col-xl-3 col-6 center"  style="min-width:160px;">'+
-	    									iconob_gestoria+'<span style="margin-left:10px;">Gestoría</span></div>'+
+	    								'<span><img src="img/b_gestoria.png"></span>&nbsp;'+'<span style="margin-left:10px;">Gestoría</span></div>'+
 	    								'<div class="col-xl-3 col-6 center"  style="min-width:160px;">'+
-	    									iconob_construccion+'<span style="margin-left:10px;">Construcción</span></div>'+
+	    								'<span><img src="img/b_construccion.png"></span>&nbsp;'+'<span style="margin-left:10px;">Construcción</span></div>'+
 	    								'<div class="col-xl-3 col-6 center" style="min-width:160px;">'+
-	    									iconob_operaciones+'<span style="margin-left:10px;">Operaciones</span></div>'+
+	    								'<span><img src="img/b_operaciones.png"></span>&nbsp;'+'<span style="margin-left:10px;">Operaciones</span></div>'+
 	    						'</div></div>'+
 	    							'<div class="col-xl-6 col-lg-3 right">Totales: <b>_TOTAL_</b></div>'+
 	    					'</div>',

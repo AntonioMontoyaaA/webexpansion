@@ -26,7 +26,7 @@
 		<div class="col-lg-12 titulogrande azul t18">AGENDA
 		
 		<button type="submit" class="btn evento">&emsp;Mes&emsp;</button>
-		<button id="crear_evento" type="submit" class="btn evento" 
+		<button id="crear_evento" onclick="llenaAreas()" type="button" class="btn evento" 
 			 data-toggle="modal" data-target="#exampleModal">&emsp;Crear Evento&emsp;</button>
 		
 		
@@ -80,7 +80,7 @@
    </div>
     </div>
     
-    <div class="col-xl-9 col-lg-9 d-none d-sm-block padding_p">
+    <div class="col-xl-9 col-lg-9 padding_p">
   	<table class="table calendario_grande fblanco menupr_estilos">
   		<thead>
   		<tr class="" style="border-bottom: 1px solid #5d5d57;">
@@ -112,7 +112,7 @@
   	
 	</div>
 	</div>
-	<div class="row d-block d-sm-none nopadd">
+<%-- 	<div class="row d-block d-sm-none nopadd">
   	<div class="col-xs-12 he h_1"><span class="num_dia">1</span><span class="nom_dia">Lunes</span></div>
   	<div class="col-xs-12 ev e_1">Sin Eventos</div>
   	
@@ -206,7 +206,7 @@
   	<div class="col-xs-12 he h_31"><span class="num_dia">31</span><span class="nom_dia">Miércoles</span></div>
   	<div class="col-xs-12 ev e_31">Sin Eventos</div>
   	
-	</div>
+	</div> --%>
 		</div>
 	</div>
 </div>
@@ -286,6 +286,8 @@
 										</div>
 									</div>
 									<div class="informacion t12 azul" id="info_seleccionada">Selecciona un Área</div>
+									<input type="hidden" id="inputArea" value=""/>
+									<input type="hidden" id="inputAreaId" value=""/>
 								</div>
 
 
@@ -306,11 +308,27 @@
 										
 									</div>
 									<div class="informacion t12 azul" id="info_seleccionadaPuesto">Selecciona un puesto</div>
+									<input type="hidden" id="inputPuesto" value=""/>
+									<input type="hidden" id="inputPuestoId" value=""/>
 								</div>
 
-									
 									<label class="etiqueta t12">Participantes</label>
-									<select class="filtro" id="participantes"></select> 
+									<div class="cuadro_agregar float-right cursor" id="agregarParticipante" onclick="agregarParticipante();">+</div>
+									<select class="filtro" id="participantes">
+									<option value="" selected></option>
+									</select> 
+									
+									
+									<table id="tabla_participantes" class="hover">
+									<thead style="display:none;">
+									<tr>
+										<th>entidadId</th>
+										<th>nombre</th>
+										<th>borrar</th>
+									</tr>
+									</thead>
+									</table>
+									
 								
 							</div>
 						</div>
@@ -319,7 +337,7 @@
 				<div class="modal-footer pie">
 					<button type="button" class="t12 btn boton fblanco azul"
 						data-dismiss="modal">Cancelar</button>
-					<button type="button" class="t12 btn boton fazul blanco">Aceptar</button>
+					<button type="button" class="t12 btn boton fazul blanco" onclick="enviaDatos()">Aceptar</button>
 				
 				</div>
 			</div>
@@ -337,6 +355,7 @@
 	<script	src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 	<script	src="${pageContext.request.contextPath}/bootstrap/js/bootstrap-datepicker.min.js"></script>	
 	<script	src="${pageContext.request.contextPath}/bootstrap/js/bootstrap-datepicker.es.min.js"></script>	
+	<script src="${pageContext.request.contextPath}/DataTable/js/jquery.dataTables.min.js"></script>
 	<script	src="${pageContext.request.contextPath}/js/jquery/moment.js"></script>
 	<script	src="${pageContext.request.contextPath}/js/jquery/es.js"></script>
 	<script	src="${pageContext.request.contextPath}/js/jquery/tempusdominus-bootstrap-4.min.js"></script>

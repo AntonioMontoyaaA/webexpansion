@@ -232,7 +232,7 @@ background:#c8c8c8;
 	border:1px solid black;
 	height:37px;
 }
-
+/* --------------------------estilo de datepicker (CREA EVENTO)*/
 /* --------------------------------------- estilos del formulario crear evento -----*/
 
 .filtro{
@@ -278,6 +278,7 @@ background:#c8c8c8;
 }
 .contenedor{
 	 border-radius: 4px;
+	 margin-bottom:10px;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
     border: 0px solid #000000;
@@ -299,6 +300,19 @@ background:#c8c8c8;
 	font-size: 14px;
      width: 16px;
      height: 16px;
+     -moz-border-radius: 30%;
+     -webkit-border-radius: 30%;
+     border-radius: 30%;
+     color:white;
+     line-height:1;
+     background:#071B36;
+}
+.cuadro_agregar{
+	text-align:center;
+	margin-top:3px;
+	font-size: 10px;
+     width: 12px;
+     height: 12px;
      -moz-border-radius: 30%;
      -webkit-border-radius: 30%;
      border-radius: 30%;
@@ -346,7 +360,23 @@ background:#c8c8c8;
     padding-left:5px;
     
 }
-
+#tabla_participantes td{
+	font-size:10;
+}
+#tabla_participantes td.oculto{
+display:none
+}
+#tabla_participantes td.cerrar{
+color:#C9C9C9;
+}
+#tabla_participantes tbody tr:hover{
+	background-color:#E0F0FA;
+	cursor:pointer;
+}
+.particip{
+	overflow-y:auto;
+	max-height:100px;
+}
 .etiqueta{
 	margin:0
 }

@@ -69,6 +69,10 @@ table{
     margin-left: 15px;
  	background-color:#071B36;
 }
+@media (max-width: 500px) {
+	.buscadorInput{width:90% !important;}
+	.buscador{width:82% !important;}
+}
 .buscadorInput::placeHolder {
  	color: #A9A9A9;
 }

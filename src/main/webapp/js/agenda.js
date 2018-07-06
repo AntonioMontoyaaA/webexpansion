@@ -1,3 +1,10 @@
+var mes;
+var año;
+var dia;
+var ultimoDia;
+var posicionSemana;
+var meses_letra = ["","Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+var fecha_datep;
 var perfil;
 $(function(){
 	$('#idagenda').addClass('resaltado');
@@ -12,14 +19,7 @@ $(function(){
 	}
 });
 
-var mes;
-var año;
-var dia;
-var ultimoDia;
-var posicionSemana;
-var meses_letra = ["","Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-var fecha_datep;
-
+// --------------------------- CALENDARIO
 function calculaFechaActual(){
 	var date = new Date();
 	mes=date.getMonth()+1;
@@ -30,7 +30,6 @@ function calculaFechaActual(){
 
 function calcula_Días(){
 	ultimoDia = new Date(año, mes, 0).getDate();
-	
 	var dt = new Date(mes+' '+'01'+' '+año);
 	posicionSemana=dt.getUTCDay();	
 	
@@ -45,7 +44,7 @@ function armaAgenda(){
 	$('#mesCabecera').text(meses_letra[mes]+" "+año);
 	
 	var fecha="01"+"/"+mes+"/"+año;
-	invocarJSONServiceAction("obtieneAgenda", {"fecha":fecha, "tipoEvento":'0'},
+	invocarJSONServiceAction("obtieneAgenda", {"fecha":fecha, "tipoEvento":'0', "apartirDe":"0"},
 			'obtieneAgenda', 
 			function() {
 				//Funcion de error
@@ -80,10 +79,10 @@ function armaAgenda(){
 						for(var i=0;i<data.agenda.length;i++){
 							var nombreEvento=data.agenda[i].nombre;
 							var eventoId=data.agenda[i].eventoId;
-							var idusuario=data.agenda[i].usuarioAsignadoId;
+							var idusuario=data.agenda[i].usuarioAsignaId;
 							
 							var ubicacion=data.agenda[i].lugar;
-							var participantes=data.agenda[i].nombreUsuarioAsignado;
+							var participantes=data.agenda[i].listaUsuariosAsignados;
 							var fechainicial=(data.agenda[i].fechaCompleta).substring(0,10);
 							var horainicial=data.agenda[i].tiempoInicio;
 							var fechafinal=(data.agenda[i].fechaCompletaFinal).substring(0,10);
@@ -92,8 +91,8 @@ function armaAgenda(){
 							var asignadopor=data.agenda[i].nombreUsuarioAsigna;
 							
 							
-							var espacio=participantes.indexOf(" ");
-							var abreviacion=participantes[0]+participantes[espacio+1];
+							var espacio=asignadopor.indexOf(" ");
+							var abreviacion=asignadopor[0]+asignadopor[espacio+1];
 							
 							if(data.agenda[i].diaMes==contadordías){
 													
@@ -106,8 +105,13 @@ function armaAgenda(){
 									"<div class='negrita sub'>Ubicacion</div>"+
 									ubicacion+"</div>"+
 									"<div class='col-6 t12 blanco'>"+
-									"<div class='negrita sub'>Participantes</div>"+
-									participantes+"</div>"+
+									"<div class='negrita sub'>Participantes</div>";
+									html=html+"<div class='particip'>";		
+										for(var x=0;x<participantes.length;x++){
+											html=html+"<div class='t12'>"+participantes[x].nombre+"</div>";										
+										}
+									html=html+"</div>";	
+									html=html+"</div>"+
 									"<div class='col-6 t12 blanco'>"+
 									"<div class='negrita sub'>Fecha inicial</div>"+
 									fechainicial+"</div>"+
@@ -214,8 +218,28 @@ function botonPrev(){
 	}
 	calcula_Días();
 }
-
+// ---------------------------------------------------------------
+// ------------------------------------------ INICIALIZA DATEPICKERS
+var tabla_participantes;
 function inicializaCalendarios(){
+	
+	tabla_participantes=$('#tabla_participantes').DataTable({
+		"aoColumns": [
+			   {"sClass":"oculto"},
+	           {"":""},
+	           {"sClass":"cerrar negrita"}],
+		"scrollY": "150px",
+		"scrollCollapse": true,
+		 "searching": false,
+		 "paging": false,
+		 "info":false,
+		 "ordering": false,
+		 "language": {
+		      "emptyTable": "",
+		      "zeroRecords": ""
+		    }
+	 });
+	
 // crear evento
 	$('#hinicial').datetimepicker({
         format: 'LT'
@@ -256,118 +280,72 @@ function inicializaCalendarios(){
 	    	calcula_Días();
 	    });
 }
-
+// ------------------------------------- LLENA PANEL IZQUIERDO
 function llenaPersonal(){
 	
-	invocarJSONServiceAction("obtieneEmpleados", {},
-			'obtieneEmpleados', 
-			function() {
-				//Funcion de error
-				cierraLoading();
-			},
-			function() {
-				//Función al finalizar
-				cierraLoading();
-			});
+	 $.ajax({
+	        type     : "POST",
+	        url      : 'obtieneEmpleados',
+	        data     : {},
+	        async	 : false,
+	        beforeSend : function(){
+	        	cargaLoading();
+	        },
+	        success  : function(data) {
+	        	cierraLoading();
+	        	
+	        	if(data.codigo != 200){
+	        		cargaMensajeModal('AGENDA ', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
+	        		}
+	        	if(data.codigo==200) {
+	        		$('#personal').text('');
+	        		data_personal=data;
+	        		
+	        		var arregloAreas=Object.keys(data.empleados);
+	        		var arregloSuperior;
+	        		var arregloPuestos;
+	        		
+	        		var llenaAreas='';
+	        		html='';
+	        		html=html+'<div class="row">';
+	        		
+	        		for(var i=0;i<arregloAreas.length;i++){ 	
 
-	obtieneEmpleados = function( data ) {
-	if(data.codigo != 200){
-		cargaMensajeModal('AGENDA ', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
-		}
-	if(data.codigo==200) {
-		var arregloAreas=Object.keys(data.empleados);
-		var arregloSuperior;
-		var arregloPuestos;
-		
-		var llenaAreas='';
-		html='';
-		html=html+'<div class="row">';
-		
-		for(var i=0;i<arregloAreas.length;i++){ 
-			
-			//llena la lista desplegable de Areas (CREA EVENTO)
-			llenaAreas=llenaAreas+'<div class="dropdown-item opcion_drop areas"  id="'+arregloAreas[i]+'">';
-			llenaAreas=llenaAreas+'<div class="cuadro float_left">'+arregloAreas[i].substring(0,1)+'</div>';
-			llenaAreas=llenaAreas+'<div class="informacion t12 azul">'+arregloAreas[i]+'</div>';
-			llenaAreas=llenaAreas+'</div>';
+	        			arregloPuestos= Object.keys(data.empleados[arregloAreas[i]]);
+	        				
+	        			html=html+'<div class="col-12">';
+	        			html=html+'<div class="t12 gris negrita">'+arregloAreas[i]+'</div>';
+	        			html=html+'</div>';
+	        			
+	        			for(var a=0; a<arregloPuestos.length;a++){ 
+	        				if(arregloPuestos[a]!="AREAID"){
+	        					
+	        			
+	        				html=html+'<div class="col-12">';
+	        				html=html+'<div class="t12 gris negrita">'+arregloPuestos[a]+'</div>';
+	        				html=html+'</div>';
+	        				for(var emp=0;emp<data.empleados[arregloAreas[i]][arregloPuestos[a]].length;emp++){ //llena la lista de personal
+	        					var nombre=data.empleados[arregloAreas[i]][arregloPuestos[a]][emp].nombre;
+	        					var id=data.empleados[arregloAreas[i]][arregloPuestos[a]][emp].empleadoId;
+	        					var espacio=nombre.indexOf(" ");
+	        					var abreviacion=nombre[0]+nombre[espacio+1];
+	        					
+	        					html=html+'<div class="col-12 cursor" id="'+id+'" onclick="seleccionPersonal(this)">';
+	        					html=html+'<div class="circulo float_left fazul circulo_'+id+'">'+abreviacion+'</div>';
+	        					html=html+'<div class="t12 texto_circulo azul texto_'+id+'">'+nombre+'</div>';
+	        					html=html+'</div>';	
+	        				}
+	        			}	
+	        			}
+	        		}
+	        		html=html+'</div>';
+	        		$('#personal').append(html);
 
-			
-			arregloPuestos= Object.keys(data.empleados[arregloAreas[i]]);
-			
-			html=html+'<div class="col-12">';
-			html=html+'<div class="t12 gris negrita">'+arregloAreas[i]+'</div>';
-			html=html+'</div>';
-			
-			for(var a=0; a<arregloPuestos.length;a++){ 
-				html=html+'<div class="col-12">';
-				html=html+'<div class="t12 gris negrita">'+arregloPuestos[a]+'</div>';
-				html=html+'</div>';
-				
-				for(var emp=0;emp<data.empleados[arregloAreas[i]][arregloPuestos[a]].length;emp++){ //llena la lista de personal
-					var nombre=data.empleados[arregloAreas[i]][arregloPuestos[a]][emp].nombre;
-					var id=data.empleados[arregloAreas[i]][arregloPuestos[a]][emp].empleadoId;
-					
-					var espacio=nombre.indexOf(" ");
-					var abreviacion=nombre[0]+nombre[espacio+1];
-					
-					html=html+'<div class="col-12 cursor" id="'+id+'" onclick="seleccionPersonal(this)">';
-					html=html+'<div class="circulo float_left fazul circulo_'+id+'">'+abreviacion+'</div>';
-					html=html+'<div class="t12 texto_circulo azul texto_'+id+'">'+nombre+'</div>';
-					html=html+'</div>';	
-				}
-			}	
-		}
-		html=html+'</div>';
-		$('#personal').append(html);
-		$('#areas').append(llenaAreas);
-		
-		
-		
-		 
-		
-	// ------------------------------------------------
-		 $('.areas').on('click', function(){ //llena los puestos segun el area seleccionada (CREA EVENTO)
-			    var id=$(this).attr('id');
-			    $('#info_seleccionada').text(id);
-			    $('#letra_seleccionada').text(id.substring(0,1));
-			    
-			    var llenaPuestos= Object.keys(data.empleados[id]);
-			    var html='';
-			    if(llenaPuestos.length>0){
-			    $('#info_seleccionadaPuesto').text(llenaPuestos[0]);
-			    $('#letra_seleccionadaPuesto').text(llenaPuestos[0].substring(0,1));
-			    	
-			    for(var i=0;i<llenaPuestos.length;i++){
-			    	html=html+'<div class="dropdown-item opcion_drop puestos" id="'+llenaPuestos[i]+'">';
-			    	html=html+'<div class="cuadro float_left">'+llenaPuestos[i].substring(0,1)+'</div>';
-			    	html=html+'<div class="informacion t12 azul">'+llenaPuestos[i]+'</div></div>';
-			    }
-			    
-			   
-			    $('#puestos').append(html);
-			    }
-			 }); 
-	// ----------------------------------------------------	    
-			 
-		 $('.puestos').on('click', function(){ //llena los puestos segun el area seleccionada (CREA EVENTO)
-					 var area=$('#info_seleccionada').val();  
-					 var idpuesto=$(this).attr('id');
-					 var llenaEmpleados=data.empleados[area][idpuesto];
-					   
-					    var html='';
-					    	for(var i=0;i<llenaEmpleados.length;i++){
-					    		html=html+'<option value="'+llenaEmpleados[i].nombre+'">'+llenaEmpleados[i].nombre+'</option>';
-					    	}
-					    
-					    $('#participantes').text('');
-					    $('#participantes').append(html);
-					    
-			    });
-	// ----------------------------------------------------			    
-		
-		}
-	}
+	        		}
+	        }
+	 });
 }
+
 
 function llenaEventos(){
 	
@@ -454,3 +432,253 @@ function seleccionPersonal(valor){
 	
 }
 
+// -----------------------------------
+// LLENA LOS COMBOS DE CREA-EVENTO
+var data_personal='';
+
+function llenaAreas(){
+	//limpia el formularo al abrir
+	limpiaAreas();
+	$('#tipo_evento').val('');
+	$('#finicial').val('');
+	$('#hinicial').val('');
+	$('#ffinal').val('');
+	$('#hfinal').val('');
+	$('#lugar').val('');
+	$('#descripcion').val('');
+	$('#asignado').val('');
+	
+	
+	tabla_participantes.clear().draw();
+	arregloEmpleadoId=[];
+	arregloNombre=[];
+	
+	var arregloAreas=Object.keys(data_personal.empleados);
+	var llena='';
+	
+	llena=llena+'<div class="dropdown-item opcion_drop areas"  id="">';
+	llena=llena+'<div class="cuadro float_left">-</div>';
+	llena=llena+'<div class="informacion t12 azul">Selecciona un Área</div>';
+	llena=llena+'</div>';
+	
+	for(var i=0;i<arregloAreas.length;i++){ 	
+		//llena la lista desplegable de Areas (CREA EVENTO)
+		llena=llena+'<div class="dropdown-item opcion_drop areas"  id="'+arregloAreas[i]+'" codigo="'+data_personal.empleados[arregloAreas[i]].AREAID+'">';
+		llena=llena+'<div class="cuadro float_left">'+arregloAreas[i].substring(0,1)+'</div>';
+		llena=llena+'<div class="informacion t12 azul">'+arregloAreas[i]+'</div>';
+		llena=llena+'</div>';
+	}
+	$('#areas').text('');
+	$('#areas').append(llena);
+	
+	// ------------------------------------------------
+	 $('.areas').on('click', function(){ //llena los puestos segun el area seleccionada (CREA EVENTO)
+		    var id=$(this).attr('id');
+		    var codigo=$(this).attr('codigo');
+		    
+		    var html='';
+		    html=html+'<div onclick="clicPuestos(this)" class="dropdown-item opcion_drop puestos" id="">';
+	    	html=html+'<div class="cuadro float_left">-</div>';
+	    	html=html+'<div class="informacion t12 azul">Selecciona un puesto</div></div>';
+	    	
+		    
+		    if(id!=""){
+		    $('#info_seleccionada').text(id);
+		    $('#inputArea').val(id);
+		    $('#inputAreaId').val(codigo);
+		    $('#letra_seleccionada').text(id.substring(0,1));
+	
+		    var llenaPuestos= Object.keys(data_personal.empleados[id]);
+		    
+		    if(llenaPuestos.length>0){
+		    for(var i=0;i<llenaPuestos.length;i++){
+		    	 if(llenaPuestos[i]!="AREAID"){
+		    	html=html+'<div onclick="clicPuestos(this)" class="dropdown-item opcion_drop puestos" id="'+llenaPuestos[i]+'" codigo="'+data_personal.empleados[id][llenaPuestos[i]][0].puestoId+'">';
+		    	html=html+'<div class="cuadro float_left">'+llenaPuestos[i].substring(0,1)+'</div>';
+		    	html=html+'<div class="informacion t12 azul">'+llenaPuestos[i]+'</div></div>';
+		    	 }	
+		    }
+		    }
+		    }
+		    else{
+		    	limpiaAreas();
+		    }
+		    
+		    $('#puestos').text('');
+		    $('#puestos').append(html);
+		 }); 
+}
+function limpiaAreas(){
+	 $('#info_seleccionada').text('Selecciona un Área');
+	    $('#inputArea').val("");
+	    $('#inputAreaId').val("");
+	    $('#letra_seleccionada').text('-');
+	    limpiaPuestos();
+}
+function limpiaPuestos(){
+	$('#info_seleccionadaPuesto').text('Selecciona un puesto');
+	 $('#inputPuesto').val('');
+	 $('#inputPuestoId').val('');
+	 $('#letra_seleccionadaPuesto').text('-');
+	 $('#participantes').text('');
+}
+
+function clicPuestos(valor) {
+	var area = $('#inputArea').val();
+	var id = valor.id;
+	var codigo=$('#'+id).attr('codigo');
+	var html = '';
+
+	if (id != "") {
+		var llenaEmpleados = data_personal.empleados[area][id];
+
+		$('#info_seleccionadaPuesto').text(id);
+		$('#inputPuesto').val(id);
+		$('#inputPuestoId').val(codigo);
+		$('#letra_seleccionadaPuesto').text(id.substring(0, 1));
+		
+		html = html + '<option value selected></option>';
+		for (var i = 0; i < llenaEmpleados.length; i++) {
+			html = html + '<option value="' + llenaEmpleados[i].empleadoId
+					+ '/' + llenaEmpleados[i].nombre + '">'
+					+ llenaEmpleados[i].nombre + '</option>';
+		}
+	} else {
+		limpiaPuestos();
+	}
+
+	$('#participantes').text('');
+	$('#participantes').append(html);
+}
+
+var arregloEmpleadoId=[];
+var arregloNombre=[];
+
+function agregarParticipante(){	
+	
+	if($('#participantes').val()!=null && $('#participantes').val()!=""){
+		var area=$('#inputArea').val();  
+		var puesto=$('#inputPuesto').val(); 
+		var cadena=$('#participantes').val().split("/",2);
+		var empleadoId=cadena[0];
+		var nombre=cadena[1];
+		var repetido=0;
+		
+		if(arregloEmpleadoId.length>0){
+		for(var i=0;i<arregloEmpleadoId.length;i++){
+			if(arregloEmpleadoId[i]==empleadoId){
+				repetido++;
+			}
+		}
+		
+		if(repetido==0){
+			arregloEmpleadoId.push(empleadoId);
+			arregloNombre.push(nombre);
+			
+			actualizaTablaParticipantes();
+		}
+		}
+		else{
+			arregloEmpleadoId.push(empleadoId);
+			arregloNombre.push(nombre);
+			actualizaTablaParticipantes();
+		}
+		
+		$('#participantes').val(null);
+	}	
+	
+}
+
+function borrarParticipante(valor){
+	for(var i=0;i<arregloEmpleadoId.length;i++){
+		if(arregloEmpleadoId[i]==valor.id){
+			var index=i;
+		}
+	}
+	arregloEmpleadoId.splice(index,1);
+	arregloNombre.splice(index,1);
+	
+	actualizaTablaParticipantes();
+}
+
+function actualizaTablaParticipantes(){
+	tabla_participantes.clear().draw();
+	
+	for(var i=0;i<arregloEmpleadoId.length;i++ ){
+		tabla_participantes.row.add([arregloEmpleadoId[i], arregloNombre[i], "x"]).draw( false );
+		$('#tabla_participantes tr').attr("onclick", "borrarParticipante(this)");	
+	}	
+}
+function enviaDatos(){
+	if($('#tipo_evento').val()!="" &&
+			$('#finicial').val()!="" &&
+			$('#hinicial').val()!="" &&
+			$('#ffinal').val()!="" &&
+			$('#hfinal').val()!="" &&
+			$('#descripcion').val()!="" &&
+			$('#lugar').val()!="" &&
+			$('#inputAreaId').val()){
+	
+	var tipo;
+	var datosParticipantes="";
+	var cadenaEnviar;
+	
+	if(arregloEmpleadoId.length>0 ||( $('#participantes').val()!=null && $('#participantes').val()!="")){
+			agregarParticipante();
+		
+		tipo=3;
+		for(var i=0; i<arregloEmpleadoId.length;i++){
+			datosParticipantes=datosParticipantes+'{"entidadId":'+arregloEmpleadoId[i]+'}';
+			
+			if(i<arregloEmpleadoId.length-1)
+			datosParticipantes=datosParticipantes+',';
+		}
+		cadenaEnviar="["+datosParticipantes+"]";		
+		
+	}
+	else{
+		if($('#inputArea').val()!="" && $('#inputPuesto').val()!=""){
+			console.log("entro a puestos");
+			tipo=2;
+			cadenaEnviar='[{"entidadId":'+$('#inputPuestoId').val()+'}]';
+		}
+		if($('#inputArea').val()!="" && $('#inputPuesto').val()==""){
+			console.log("entro a areas");
+			tipo=1;
+			cadenaEnviar='[{"entidadId":'+$('#inputAreaId').val()+'}]';
+		}
+	}
+	
+	console.log(cadenaEnviar);
+	invocarJSONServiceAction("enviaDatos",
+			{
+				"tareaxAreaId":$('#tipo_evento').val(),
+				"fechaAgenda":$('#finicial').val()+" "+$('#hinicial').val()+":00",
+				"fechaFinProgramada":$('#ffinal').val()+" "+$('#hfinal').val()+":00",
+				"observaciones":$('#descripcion').val(),
+				"direccion":$('#lugar').val(),
+				"latitud":"0",
+				"longitud":"0",
+				"tipoAsignacion":tipo,
+				"porAsignar":cadenaEnviar
+			},
+			'obtieneEventosenviaDatos', 
+			function() {
+				//Funcion de error
+				cierraLoading();
+			},
+			function() {
+				//Función al finalizar
+				cierraLoading();
+			});
+
+	obtieneEventosenviaDatos = function( data ) {
+	if(data.codigo != 200){
+		cargaMensajeModal('AGENDA ', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
+		}
+	if(data.codigo==200) {
+		cargaMensajeModal('AGENDA ', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_EXITO, null);
+		}
+	}
+	}	
+}

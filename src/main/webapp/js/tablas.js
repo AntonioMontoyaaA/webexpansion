@@ -259,6 +259,79 @@ function initTablaMemoriasRechazadasDirGeneral(nombreDiv, datosDesgloseVenta, no
 	$("#" + nombreTabla + "_filter").hide();
 }
 
+function initTablaMemoriasTablero(nombreDiv, datosDesgloseMemorias, nombreTabla) {
+	
+	$("#" + nombreDiv).html(
+	   
+		'<table cellpadding="0" cellspacing="0" border="0px"  class="row-border stripe hover" id="' + nombreTabla + '" >' +
+			'<thead>'  +
+				'<tr style="cursor: pointer;border-top: 0px; border-bottom: 0px;">' +
+					'<th width="5%" class="gris negrita t12 center" style="padding:0;">No.</th>'  +
+					'<th width="10%" class="gris negrita t12 center" style="padding:0;">Fecha recepci&oacute;n MD</th>'  +
+					'<th width="10%" class="gris negrita t12">Fuente MD</th>' +
+					'<th width="10%" class="gris negrita t12">Nombre de la tda</th>' +
+					'<th width="5%" class="gris negrita t12">Conteo auditor</th>' +
+					'<th width="5%" class="gris negrita t12">Pregestor&iacute;a autorizada</th>' +
+					'<th width="5%" class="gris negrita t12">Levantamiento realizado</th>' +
+					'<th width="5%" class="gris negrita t12">VoBo layout por operaciones</th>' +
+					'<th width="5%" class="gris negrita t12 center">Monto presupuesto obra construcci&oacute;n</th>' +
+					'<th width="5%" class="gris negrita t12 center">Presupuesto auditor&iacute;a</th>' +
+					'<th width="5%" class="gris negrita t12">Gestor&iacute;a</th>' +
+					'<th width="5%" class="gris negrita t12">VoBo final de operaciones del sitio</th>' +
+					'<th width="5%" class="gris negrita t12">Contrato firmado arrendador</th>' +
+					'<th width="7%" class="gris negrita t12">Inicio obra</th>' +
+					'<th width="7%" class="gris negrita t12">Fin obra</th>' +
+					'<th width="6%" class="gris negrita t12">Inauguraci&oacute;n</th>' +
+				'</tr>'+
+			'</thead>' +
+			'<tbody>'  +			
+            '</tbody>' +
+        '</table>');
+		
+	tablaMemoriasTablero = $("#" + nombreTabla).dataTable(
+			{"aaData": datosDesgloseMemorias,
+				"aoColumns": [
+							{"bSearchable":true},
+				           {"bSearchable":true},
+				           {"bSearchable":true},
+				           {"bSearchable":true},
+				           {"bSearchable":true},
+				           {"bSearchable":true},
+				           {"bSearchable":true},
+				           {"bSearchable":true},
+				           {"sClass":"derecha","bSearchable":true},
+				           {"sClass":"derecha","bSearchable":true},
+				           {"bSearchable":true},
+				           {"bSearchable":true},
+				           {"bSearchable":true},
+				           {"bSearchable":true},
+				           {"bSearchable":true},
+				           {"bSearchable":true}],		
+			"bJQueryUI": false,
+			"order": [],
+			"sPaginationType": "full_numbers",
+			"oLanguage": idiomaEspanol,
+			"bLengthChange":false,
+			"iDisplayLength":1000,
+			 "bScrollCollapse": false,
+			 "sScrollY": "70vh",
+			 "fixedColumns":   {
+		            "leftColumns": 2
+		        },
+		     "scrollX":        true,
+		     "scrollCollapse": true,
+			 "aoColumnDefs": [ {
+					"sClass": "center",
+					"aTargets": [ 0,2 ]
+			} ]
+			 
+	});	
+	
+	$("#" + nombreTabla + "_DTTT_container").hide();
+	$("#" + nombreTabla + "_paginate").hide();
+	$("#" + nombreTabla + "_filter").hide();
+}
+
 var idiomaEspanol = {
 	    "sEmptyTable":     "<div style='padding:10px; color:red; font-size:13px;'>No existen memorias descriptivas</div>",
 	    "sInfo":           '<div class="col-12 fazul blanco right">Totales: <b>_TOTAL_</b></div>',

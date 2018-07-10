@@ -12,11 +12,13 @@
 				<div class="navbar-collapse collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav mr-auto ml-auto mt-2 mt-lg-0" >
 						<li class="nav-item"><a id="iddashboard" class="nav-link blanco t12" href="dashboard">Dashboard</a></li>
+						<li class="nav-item"><a id="idtablero" class="nav-link blanco t12" href="tablero">Tablero</a></li>
 						<li class="nav-item"><a id="idasignadas" class="nav-link blanco t12" href="asignadas">En Proceso</a></li>
 						<li class="nav-item"><a id="idautorizadas" class="nav-link blanco t12" href="autorizadas">Autorizadas</a></li>
 						<li class="nav-item"><a id="idrechazadas" class="nav-link blanco t12" href="rechazadas">Rechazadas</a></li>
 						<li class="nav-item"><a id="idagenda" class="nav-link blanco t12" href="agenda">Agenda</a></li>	
 						<li class="nav-item"><a id="idlocalizador" class="nav-link blanco t12" href="localizador">Localizador</a></li>	
+						<li class="nav-item"><a id="idlocalizador" class="nav-link blanco t12" href="localizador">Finalizadas</a></li>	
 					</ul>
 					
 		<form class="form-inline my-2 my-lg-0">

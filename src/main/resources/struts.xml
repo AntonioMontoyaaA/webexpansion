@@ -17,6 +17,9 @@
 		<action name="dashboard">
 			<result>jsp/dashboard.jsp</result>
 		</action>
+		<action name="tablero">
+			<result>jsp/tablero.jsp</result>
+		</action>
 		<action name = "asignadas">
          	<result>jsp/asignadas.jsp</result>
       	</action>

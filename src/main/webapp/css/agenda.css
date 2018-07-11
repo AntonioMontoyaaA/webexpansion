@@ -239,7 +239,6 @@ background:#c8c8c8;
   .datepicker table tr td.active.highlighted:active,
    .datepicker table tr td.active:active {
     color:#00437e;
-    background-color:#40BCD8;
     border-color: #125087;
     cursor:pointer;
 }

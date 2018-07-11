@@ -53,7 +53,7 @@
 												</div>
 												<div class="row inicio_user2 center">
 														<div class="imagen"><img src="img/neto-user.png" class="img-exagono-max"></div>
-															<input type="text" value="327320" id="user" placeholder="Escribe tu usuario" class="form-control input_login" name="user">
+															<input type="text" value="" id="user" placeholder="Escribe tu usuario" class="form-control input_login" name="user">
 												</div>
 											</div>
 										</div>
@@ -79,7 +79,7 @@
 													<div class="imagen">
 														<img src="img/contra.png" class="img-exagono-max" alt="Tiendas Neto">
 													</div>
-														<input id="pass" type="password" value="327320" placeholder="Escribe tu contraseña" class="form-control input_login" name="pass">
+														<input id="pass" type="password" value="" placeholder="Escribe tu contraseña" class="form-control input_login" name="pass">
 													<div class="col col-12">
 														<a class="btn btnOlvidoContrasena" href="#">Olvidaste&nbsp;tu&nbsp;contraseña?</a>
 													</div>

@@ -1,5 +1,4 @@
-var mes;
-var año;
+
 var dia;
 var ultimoDia;
 var posicionSemana;
@@ -24,11 +23,16 @@ function calculaFechaActual(){
 	var date = new Date();
 	mes=date.getMonth()+1;
 	año=date.getFullYear();
+	$('#mes_select').val(mes);	
+	$('#año_select').val(año);	
 	
 	calcula_Días();	
 }
 
 function calcula_Días(){
+	var año=$('#año_select').val();
+	var mes=$('#mes_select').val();
+	
 	ultimoDia = new Date(año, mes, 0).getDate();
 	var dt = new Date(mes+' '+'01'+' '+año);
 	posicionSemana=dt.getUTCDay();	
@@ -40,11 +44,13 @@ function calcula_Días(){
 }
 
 function armaAgenda(){
+	var año=$('#año_select').val();
+	var mes=$('#mes_select').val();
 	
 	$('#mesCabecera').text(meses_letra[mes]+" "+año);
 	
 	var fecha="01"+"/"+mes+"/"+año;
-	invocarJSONServiceAction("obtieneAgenda", {"fecha":fecha, "tipoEvento":'0', "apartirDe":"0"},
+	invocarJSONServiceAction("obtieneAgenda", {"fecha":fecha, "tipoEvento":'0', "apartirDe":"2"},
 			'obtieneAgenda', 
 			function() {
 				//Funcion de error
@@ -93,8 +99,10 @@ function armaAgenda(){
 							
 							var espacio=asignadopor.indexOf(" ");
 							var abreviacion=asignadopor[0]+asignadopor[espacio+1];
+							var data_mes=parseInt(data.agenda[i].fechaCompleta.substring(3,5));
+							var data_año=data.agenda[i].fechaCompleta.substring(6,10);
 							
-							if(data.agenda[i].diaMes==contadordías){
+							if(data.agenda[i].diaMes==contadordías && data_mes==mes && data_año==año){
 													
 								html=html+'<div class="col-12 personal_'+idusuario+' ocultableEvento'+eventoId+'">';
 								html=html+'<a tabindex="0" class="agenda_link" data-toggle="popover" data-trigger="focus" data-placement="bottom" '+
@@ -167,6 +175,9 @@ function armaAgenda(){
 }
 
 function creaAgendaVacia(){
+	var año=$('#año_select').val();
+	var mes=$('#mes_select').val();
+	
 	html=''
 		var contador=1;
 		var contadordías=1;
@@ -198,24 +209,36 @@ function creaAgendaVacia(){
 }
 
 function botonNext(){
-	if(mes<12){
+	var mes=$('#mes_select').val();
+	var año=$('#año_select').val();
+	
+	console.log(mes+" "+ año)
+	
+	if(mes<=12){
 		mes++;
 	}
-	else{
+	if(mes==13){
 		mes=1;
 		año++;
 	}
-	
+	$('#mes_select').val(mes);	
+	$('#año_select').val(año);	
 	calcula_Días();	
 }
 function botonPrev(){
-	if(mes>1){
+	var mes=$('#mes_select').val();
+	var año=$('#año_select').val();
+	
+	
+	if(mes>=1){
 		mes--;
 	}
-	else{
+	if(mes==0){
 		año--;
 		mes=12;
 	}
+	$('#mes_select').val(mes);	
+	$('#año_select').val(año);	
 	calcula_Días();
 }
 // ---------------------------------------------------------------
@@ -245,16 +268,24 @@ function inicializaCalendarios(){
         format: 'LT'
     });
 	
-	$('#finicial').datetimepicker({
-        format: 'L'
+	$('#finicial').datepicker({
+		startDate: new Date(),
+		format : 'dd/mm/yyyy',
+		autoclose : true,
+		language : 'es',
+		todayHighlight : true
     });
 	
 	$('#hfinal').datetimepicker({
         format: 'LT'
     });
 	
-	$('#ffinal').datetimepicker({
-        format: 'L'
+	$('#ffinal').datepicker({
+		startDate: new Date(),
+		format : 'dd/mm/yyyy',
+		autoclose : true,
+		language : 'es',
+		todayHighlight : true
     });
 	
 	
@@ -276,6 +307,8 @@ function inicializaCalendarios(){
 	    	var date=new Date(tempmes+' '+tempdia+' '+tempaño);
 	    	mes=date.getMonth()+1;
 	    	año=date.getFullYear();
+	    	$('#mes_select').val(mes);	
+	    	$('#año_select').val(año);	
 	    	
 	    	calcula_Días();
 	    });

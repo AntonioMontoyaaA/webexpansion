@@ -18,7 +18,7 @@
 						<li class="nav-item"><a id="idrechazadas" class="nav-link blanco t12" href="rechazadas">Rechazadas</a></li>
 						<li class="nav-item"><a id="idagenda" class="nav-link blanco t12" href="agenda">Agenda</a></li>	
 						<li class="nav-item"><a id="idlocalizador" class="nav-link blanco t12" href="localizador">Localizador</a></li>	
-						<li class="nav-item"><a id="idlocalizador" class="nav-link blanco t12" href="localizador">Finalizadas</a></li>	
+						<li class="nav-item"><a id="idlocalizador" class="nav-link blanco t12" href="aprobadas">Aprobadas</a></li>	
 					</ul>
 					
 		<form class="form-inline my-2 my-lg-0">

@@ -267,7 +267,7 @@ background-image: url('https://mdbootstrap.com/img/svg/hamburger7.svg?color=0069
 }
 
 li.nav-item{
-	width:120px;
+	width:90px;
 }
 
  @media (max-width: 1200px) {

@@ -11,6 +11,7 @@
  -->  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/generic.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/dropzone/dropzone.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/asignadas.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/utiles/modalImages.css" />
 <title>Detalle MD</title>
@@ -190,70 +191,107 @@
 			</div>
 		</div>
 		</div>
-		
-		<div class="col-lg-12">
-		<div class="row divs_p">
-			<div class="col-lg-12 menupr_estilos fazul">
-			<div class="col-12 titulo_seccion">
-				<span class="negrita blanco t14">3) Superficie</span>
-				<div class="float_right">
-					<span class="negrita blanco t14">Puntos: </span> 
-					<span id="puntosSuperficie" class="negrita blanco t14">---</span>
-					<span>
-						<img id="autoriza3" title="Autoriza punto" class="sin_autorizar b_autorizar" onclick="autorizaPantalla(3, this);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
-					</span>
-					<span>
-						<img id="rechaza3" title="Rechaza punto" class="sin_autorizar b_rechazar" onclick="rechazaPantalla(3, this);" style="cursor: pointer;" src="img/rechaza_mark.png">
-					</span>
-					<a id="superficieTip" tabindex="0" class="question_mark b_tip" role="" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="">
-						<img style="cursor: pointer;" src="img/question.png">
-					</a>
-					
+
+			<div class="col-lg-12">
+				<div class="row divs_p">
+					<div class="col-lg-12 menupr_estilos fazul">
+						<div class="col-12 titulo_seccion">
+							<span class="negrita blanco t14">3) Superficie</span>
+							<div class="float_right">
+								<span class="negrita blanco t14">Puntos: </span> <span
+									id="puntosSuperficie" class="negrita blanco t14">---</span> <span>
+									<img id="autoriza3" title="Autoriza punto"
+									class="sin_autorizar b_autorizar"
+									onclick="autorizaPantalla(3, this);" style="cursor: pointer;"
+									src="img/autoriza_mark.png">&nbsp;
+								</span> <span> <img id="rechaza3" title="Rechaza punto"
+									class="sin_autorizar b_rechazar"
+									onclick="rechazaPantalla(3, this);" style="cursor: pointer;"
+									src="img/rechaza_mark.png">
+								</span> <a id="superficieTip" tabindex="0" class="question_mark b_tip"
+									role="" data-toggle="popover" data-trigger="focus"
+									data-placement="bottom" data-content=""> <img
+									style="cursor: pointer;" src="img/question.png">
+								</a>
+
+							</div>
+						</div>
+
+						<div class="row div_header_sub">
+							<div class="col-lg-4">
+								<span class="blanco t12 sangria_cuerpo">FRENTE</span>&nbsp;&nbsp;&nbsp;<span
+									id="frenteMd" class="negrita blanco t14 sangria_cuerpo">---</span>
+							</div>
+							<div class="col-lg-4">
+								<span class="blanco t12 sangria_cuerpo">PROFUNDIDAD</span>&nbsp;&nbsp;&nbsp;<span
+									id="profundidadMd" class="negrita blanco t14 sangria_cuerpo">---</span>
+							</div>
+							<div class="col-lg-4">
+								<span class="blanco t12 sangria_cuerpo">TOTAL</span>&nbsp;&nbsp;&nbsp;<span
+									id="tamanioTotalMd" class="negrita blanco t14 sangria_cuerpo">---</span>
+							</div>
+						</div>
+						<div class="row div_header_sub">
+							<div class="col-lg-4">
+								<div class="col-lg-12">
+									<span class="blanco t12 sangria_cuerpo">VISTA FRONTAL</span>
+								</div>
+								<div class="col-lg-12" style="text-align: center;">
+									<img class="imagenModal" id="vistaFrontalMd"
+										alt="VISTA FRONTAL" style="width: 87%; height: 28%"
+										src="img/no_imagen.png" onclick="modalImage(this)" />
+								</div>
+								<div class="row div_bottom">
+									<div class="col-lg-6" style="text-align: right;">
+										<span id="fechaVistaFrontal" class="footerDetalleMd">---</span>
+									</div>
+									<div class="col-lg-6" style="text-align: left;">
+										<span id="horaVistaFrontal" class="footerDetalleMd">---</span>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-4">
+								<div class="col-lg-12">
+									<span class="blanco t12 sangria_cuerpo">LATERAL 1</span>
+								</div>
+								<div class="col-lg-12" style="text-align: center;">
+									<img class="imagenModal" id="vistaLateral1Md" alt="LATERAL 1"
+										style="width: 87%; height: 28%" src="img/no_imagen.png"
+										onclick="modalImage(this)" />
+								</div>
+								<div class="row div_bottom">
+									<div class="col-lg-6" style="text-align: right;">
+										<span id="fechaVistaLateral1" class="footerDetalleMd">---</span>
+									</div>
+									<div class="col-lg-6" style="text-align: left;">
+										<span id="horaVistaLateral1" class="footerDetalleMd">---</span>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-4">
+								<div class="col-lg-12">
+									<span class="blanco t12 sangria_cuerpo">LATERAL 2</span>
+								</div>
+								<div class="col-lg-12" style="text-align: center;">
+									<img class="imagenModal" id="vistaLateral2Md" alt="LATERAL 2"
+										style="width: 87%; height: 28%" src="img/no_imagen.png"
+										onclick="modalImage(this)" />
+								</div>
+								<div class="row div_bottom">
+									<div class="col-lg-6" style="text-align: right;">
+										<span id="fechaVistaLateral2" class="footerDetalleMd">---</span>
+									</div>
+									<div class="col-lg-6" style="text-align: left;">
+										<span id="horaVistaLateral2" class="footerDetalleMd">---</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
-			
-				<div class="row div_header_sub">
-					<div class="col-lg-4"><span class="blanco t12 sangria_cuerpo">FRENTE</span>&nbsp;&nbsp;&nbsp;<span id="frenteMd" class="negrita blanco t14 sangria_cuerpo">---</span></div>
-					<div class="col-lg-4"><span class="blanco t12 sangria_cuerpo">PROFUNDIDAD</span>&nbsp;&nbsp;&nbsp;<span id="profundidadMd" class="negrita blanco t14 sangria_cuerpo">---</span></div>
-					<div class="col-lg-4"><span class="blanco t12 sangria_cuerpo">TOTAL</span>&nbsp;&nbsp;&nbsp;<span id="tamanioTotalMd" class="negrita blanco t14 sangria_cuerpo">---</span></div>
-				</div>
-				<div class="row div_header_sub">
-					<div class="col-lg-4">
-						<div class="col-lg-12"><span class="blanco t12 sangria_cuerpo">VISTA FRONTAL</span></div>
-						<div class="col-lg-12" style="text-align: center;">
-							<img class="imagenModal" id="vistaFrontalMd" alt="VISTA FRONTAL" style="width: 87%; height: 28%" src="img/no_imagen.png" onclick="modalImage(this)"/>
-						</div>
-						<div class="row div_bottom">
-							<div class="col-lg-6" style="text-align: right;"><span id="fechaVistaFrontal" class="footerDetalleMd">---</span></div>
-							<div class="col-lg-6" style="text-align: left;"><span id="horaVistaFrontal" class="footerDetalleMd">---</span></div>
-						</div>
-					</div>
-					<div class="col-lg-4">
-						<div class="col-lg-12"><span class="blanco t12 sangria_cuerpo">LATERAL 1</span></div>
-						<div class="col-lg-12" style="text-align: center;">
-							<img class="imagenModal" id="vistaLateral1Md" alt="LATERAL 1" style="width: 87%; height: 28%" src="img/no_imagen.png" onclick="modalImage(this)"/>
-						</div>
-						<div class="row div_bottom">
-							<div class="col-lg-6" style="text-align: right;"><span id="fechaVistaLateral1" class="footerDetalleMd">---</span></div>
-							<div class="col-lg-6" style="text-align: left;"><span id="horaVistaLateral1" class="footerDetalleMd">---</span></div>
-						</div>
-					</div>
-					<div class="col-lg-4">
-						<div class="col-lg-12"><span class="blanco t12 sangria_cuerpo">LATERAL 2</span></div>
-						<div class="col-lg-12" style="text-align: center;">
-							<img class="imagenModal" id="vistaLateral2Md" alt="LATERAL 2" style="width: 87%; height: 28%" src="img/no_imagen.png" onclick="modalImage(this)"/>
-						</div>
-						<div class="row div_bottom">
-							<div class="col-lg-6" style="text-align: right;"><span id="fechaVistaLateral2" class="footerDetalleMd">---</span></div>
-							<div class="col-lg-6" style="text-align: left;"><span id="horaVistaLateral2" class="footerDetalleMd">---</span></div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		</div>
-		
-		<div class="col-lg-8 col-12">
+
+			<div class="col-lg-8 col-12">
 		<div class="row divs_p">
 			<div class="col-lg-12 menupr_estilos fblanco altura1">
 			
@@ -405,34 +443,54 @@
 			</div>
 		</div>
 		</div>
-		
-		<div class="col-lg-4">
-		<div class="row divs_p">
-			<div class="col-lg-12 menupr_estilos fazul altura1">
-			<div class="col-12 titulo_seccion">
-				<span class="negrita blanco t14">8) Autorizacón final</span>
-				<div class="float_right">
-					<span>
-						<img id="autoriza8" title="Autoriza punto" class="sin_autorizar b_autorizar" onclick="finalizaMD(1);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
-					</span>
-					<span>
-						<img id="rechaza8" title="Rechaza punto" class="sin_autorizar b_rechazar" onclick="finalizaMD(0);" style="cursor: pointer;" src="img/rechaza_mark.png">
-					</span>
+
+			<div class="col-lg-4">
+				<div class="row divs_p">
+					<div class="col-lg-12 menupr_estilos fazul altura1">
+						<div class="col-12 titulo_seccion">
+							<span class="negrita blanco t14">8) Autorizacón final</span>
+							<div class="float_right">
+								<span> <img id="autoriza8" title="Autoriza punto"
+									class="sin_autorizar b_autorizar" onclick="finalizaMD(1);"
+									style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
+								</span> <span> <img id="rechaza8" title="Rechaza punto"
+									class="sin_autorizar b_rechazar" onclick="finalizaMD(0);"
+									style="cursor: pointer;" src="img/rechaza_mark.png">
+								</span>
+							</div>
+						</div>
+
+						<div
+							style="width: 100%; position: relative; float: left; text-align: left; padding-top: 20px;">
+							<div id="containerProgreso"></div>
+						</div>
+						<div
+							style="width: 100%; position: relative; float: left; text-align: center; padding-top: 20px;">
+							<span class="subtituloIconos blanco">Progreso autorización
+								puntos</span>
+						</div>
+					</div>
 				</div>
 			</div>
-			
-				<div style="width: 100%;position: relative; float: left;text-align: left; padding-top: 20px;">
-					<div id="containerProgreso"></div>
-				</div>
-				<div style="width: 100%;position: relative; float: left;text-align: center; padding-top: 20px;">
-					<span class="subtituloIconos blanco">Progreso autorización puntos</span>
+
+			<div class="col-lg-12" style="display: none;">
+				<div class="row divs_p">
+					<div class="col-lg-12 menupr_estilos fazul altura1">
+						<div class="col-12 titulo_seccion">
+							<span class="negrita blanco t14">** Documentos **</span>
+						</div>
+						<div class="row div_header_sub">
+							<div class="col-lg-4">
+								<div id="contenedorDrop" style="width: 100%;height: 290px;"></div>
+							</div>
+							<div class="col-lg-4"></div>
+							<div class="col-lg-4"></div>
+						</div>
+					</div>
 				</div>
 			</div>
+
 		</div>
-		</div>
-		
-	
-	</div>
 </div>
 
 <div style="display: none;">
@@ -465,6 +523,7 @@
 	<script src="${pageContext.request.contextPath}/js/progress/progressbar.js"></script>
 	<script src="${pageContext.request.contextPath}/js/progress/progressbar.min.js"></script>
 	<script	src="${pageContext.request.contextPath}/js/utiles/utiles.js"></script>
+	<script	src="${pageContext.request.contextPath}/js/dropzone/dropzone.js"></script>
 	<script	src="${pageContext.request.contextPath}/js/detalleMemoriaAsignada.js"></script>
 	<script	src="${pageContext.request.contextPath}/js/utiles/modalImages.js"></script>
 	</body>

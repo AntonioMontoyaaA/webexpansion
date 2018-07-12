@@ -123,7 +123,7 @@ function dibujaGraficaAutorizaciones(){
 	    from: {color: '#000000', width: 5},
 	    to: {color: "#00FF00", width: 5} });
 	
-	if(atendidos == TOTAL_ATENCIONES){
+	if(atendidos == TOTAL_ATENCIONES && TOTAL_ATENCIONES > 0){
 		
 		motivoDefinitivo = false;
 		
@@ -165,6 +165,7 @@ function generaPopAutorizacion(titulo, datos){
 	
 	return popAutorizacion;
 }
+
 function dibujaAreasCompletadas(AREAS){
 	for(var i = 0; i < AREAS.length; i++) {
 		if(AREAS[i].EXPANSION != undefined && 
@@ -384,16 +385,17 @@ function buscaDetalleMD(mdId) {
 			if(data.construccion != undefined) {
 				var htmlFactores = "";
 				var condicionesGeneralesLocal = "";
-				if(data.construccion.factores.length > 0) {
-					for(var i = 0; i < data.construccion.factores.length; i++) {
-						if(data.construccion.factores[i].nivelId > 2 && data.construccion.factores[i].nivelId < 6) {
-							condicionesGeneralesLocal = data.construccion.factores[i].nombreFactor
+				if(data.construccion.factores.EXPANSION.length > 0) {
+					for(var i = 0; i < data.construccion.factores.EXPANSION.length; i++) {
+						if(data.construccion.factores.EXPANSION[i].nivelId > 2 
+								&& data.construccion.factores.EXPANSION[i].nivelId < 6) {
+							condicionesGeneralesLocal = data.construccion.factores.EXPANSION[i].nombreFactor
 						} else {
-							htmlFactores += '<img style="padding-right: 10px;" src="img/icono_factor.png"/><span class="subtituloDetalleMd sangria_cuerpo">' + data.construccion.factores[i].nombreFactor + '</span><br/>';
+							htmlFactores += '<img style="padding-right: 10px;" src="img/icono_factor.png"/><span class="subtituloDetalleMd sangria_cuerpo">' + data.construccion.factores.EXPANSION[i].nombreFactor + '</span><br/>';
 							
-							if(data.construccion.factores[i].subfactores!=undefined)
-								for(var j = 0; j < data.construccion.factores[i].subfactores.length; j++) {
-									htmlFactores += '<img class="sangria_cuerpo" src="img/icono_subfactor.png"/><span class="subtituloDetalleMd sangria_cuerpo">' + data.construccion.factores[i].subfactores[j].nombre + '</span><br/>';
+							if(data.construccion.factores.EXPANSION[i].subfactores!=undefined)
+								for(var j = 0; j < data.construccion.factores.EXPANSION[i].subfactores.length; j++) {
+									htmlFactores += '<img class="sangria_cuerpo" src="img/icono_subfactor.png"/><span class="subtituloDetalleMd sangria_cuerpo">' + data.construccion.factores.EXPANSION[i].subfactores[j].nombre + '</span><br/>';
 								}
 						}
 					}
@@ -453,9 +455,15 @@ function buscaDetalleMD(mdId) {
 	}
 }
 
-function datosFlujoPeatonal(flujoPeatonal){
-	$("#puntosConteos").text(flujoPeatonal.puntos);
+Object.size = function(obj) {
+    var size = 0;
+    for (var key in obj) {
+        if (obj.hasOwnProperty(key)) size++;
+    }
+    return size;
+};
 
+function datosFlujoPeatonal(flujoPeatonal){
 	var rows = [[null]];
 	var colores = [];
 	var coloresPredeterminados = ['#40bcd8','#a8ddd1','#a3daff','#a3ffcc'];
@@ -464,43 +472,52 @@ function datosFlujoPeatonal(flujoPeatonal){
 	var sumatoriaConteos = 0;
 	var totalconteos = 0;
 	var promedio;
+
+	if(flujoPeatonal.EXPANSION != undefined){
 	
-	for(var i = 0; i < flujoPeatonal.conteos.length; i++) {
-		id = flujoPeatonal.conteos[i].detalleId;
-		if(horarios[id] == undefined){
-			horarios[id] = new Array();
-			horarios[id].push(flujoPeatonal.conteos[i].horaInicio + "-" + flujoPeatonal.conteos[i].horaFinal);
+		$("#puntosConteos").text(flujoPeatonal.EXPANSION.puntos);
+	
+		var contentPopConteos = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 17px;">Agrega tips para que tus buscadores encuentren sitios mejores</span></div></div>';
+		if(flujoPeatonal.EXPANSION.tips != undefined && flujoPeatonal.EXPANSION.tips.length > 0) {
+			contentPopConteos = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 17px;">' + flujoPeatonal.EXPANSION.tips[0] + '</span></div></div>';
 		}
-		horarios[id].push(flujoPeatonal.conteos[i].total);
-		sumatoriaConteos += flujoPeatonal.conteos[i].total;
-		totalconteos++;
+		$("#conteosTip").popover({
+			html: true, 
+			content : contentPopConteos
+		});
+		
+		validaEstatusAtencion(flujoPeatonal.EXPANSION.estatus, 7);
+		
+		
+	
+		for(var i = 0; i < flujoPeatonal.EXPANSION.conteos.length; i++) {
+			id = flujoPeatonal.EXPANSION.conteos[i].detalleId;
+			if(horarios[id] == undefined){
+				horarios[id] = new Array();
+				horarios[id].push(flujoPeatonal.EXPANSION.conteos[i].horaInicio 
+						+ "-" + flujoPeatonal.EXPANSION.conteos[i].horaFinal);
+			}
+			horarios[id].push(flujoPeatonal.EXPANSION.conteos[i].total);
+			sumatoriaConteos += flujoPeatonal.EXPANSION.conteos[i].total;
+			totalconteos++;
+		}
 	}
 	
-	i = 0;
-	for(h in horarios){
-		rows.push(horarios[h])
-		colores.push(coloresPredeterminados[i])
-		i++;
+	if(Object.size(horarios) > 0){
+		i = 0;
+		for(h in horarios){
+			rows.push(horarios[h])
+			colores.push(coloresPredeterminados[i])
+			i++;
+		}
+		
+		promedio = Math.trunc(sumatoriaConteos/totalconteos);
+		rows.push(['Promedio', promedio]);
+		colores.push(colorPromedio);
+		$("#promedioConteos").text(promedio);
+		
+		cargaFlujoPeatonal(colores,rows);
 	}
-	
-	
-	promedio = Math.trunc(sumatoriaConteos/totalconteos);
-	rows.push(['Promedio', promedio]);
-	colores.push(colorPromedio);
-	$("#promedioConteos").text(promedio);
-	
-	var contentPopConteos = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 17px;">Agrega tips para que tus buscadores encuentren sitios mejores</span></div></div>';
-	if(flujoPeatonal.tips != undefined && flujoPeatonal.tips.length > 0) {
-		contentPopConteos = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 17px;">' + flujoPeatonal.tips[0] + '</span></div></div>';
-	}
-	$("#conteosTip").popover({
-		html: true, 
-		content : contentPopConteos
-	});
-	
-	validaEstatusAtencion(flujoPeatonal.estatus, 7);
-	
-	cargaFlujoPeatonal(colores,rows);
 }
 
 function redireccionaAsignadas() {
@@ -838,6 +855,16 @@ function parseaPermisos(){
 		}
 		
 	});
+}
+
+function inicializaDropzone(){
+	$('#contenedorDrop').dropzone(
+			{
+				url: "/file/post",
+				addRemoveLinks: true,
+				dictDefaultMessage: "Arrastra el layout o da clic para adjuntar"
+			}
+	);
 }
 
 Permiso = function(

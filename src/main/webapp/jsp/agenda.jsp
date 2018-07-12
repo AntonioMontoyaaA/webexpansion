@@ -79,6 +79,8 @@
 	</div>
    </div>
     </div>
+    <input type="hidden" id="mes_select" value=""/>
+    <input type="hidden" id="año_select" value=""/>
     
     <div class="col-xl-9 col-lg-9 padding_p">
   	<table class="table calendario_grande fblanco menupr_estilos">
@@ -235,7 +237,7 @@
 										<div class="col-lg-6" style="padding-right:5px;">
 										 <label class="etiqueta t12"><font class="azulc">*</font>Fecha inical</label>
 										<div class="formulario_fecha">
-											<input type="text" class="form-control datetimepicker-input formularioint" id="finicial" data-toggle="datetimepicker" data-target="#finicial"/>
+											<input type="text" class="form-control formularioint" id="finicial"/>
 										</div>
 										</div>
 
@@ -249,7 +251,7 @@
 										<div class="col-lg-6" style="padding-right:5px;">
 										 <label class="etiqueta t12"><font class="azulc">*</font>Fecha final</label>
 										<div class="formulario_fecha">
-											<input type="text" class="form-control datetimepicker-input formularioint" id="ffinal" data-toggle="datetimepicker" data-target="#ffinal"/>
+											<input type="text" class="form-control formularioint" id="ffinal"/>
 										</div>
 										</div>
 

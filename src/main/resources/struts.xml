@@ -60,8 +60,19 @@
          	<result name = "success">jsp/autorizadas.jsp</result>
       	</action>
       	
+      	<action name = "tablero_info"
+                class = "com.tiendas.neto.action.TableroInfoAction"
+                method = "execute">
+            <result name = "success">jsp/tablero.jsp</result>
+         </action>
+      	
       	<action name = "excelAsignadasAction" 
          		class = "com.tiendas.neto.action.excel.ExcelAsignadasAction" 
+         		method = "execute">
+      	</action>
+      	
+      	<action name = "excelTableroAction" 
+         		class = "com.tiendas.neto.action.excel.ExcelTableroAction" 
          		method = "execute">
       	</action>
       	

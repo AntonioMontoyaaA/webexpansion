@@ -153,6 +153,14 @@ function dibujaGraficaAutorizaciones(){
 }
 
 function generaPopAutorizacion(titulo, datos){
+	texto = '';
+	dias = parseInt(datos.diasVencidos);
+	if(dias < 0)
+		texto = 'A ' + (dias * -1) + ' días de vencer';
+	else if(dias == 0)
+		texto = 'En tiempo';
+	else if(dias > 0)
+		texto = dias + ' días después';
 	var popAutorizacion = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 17px;">' + titulo + '<br/></span></div>' + 
 	   '<div style="width: 60%; position: relative; float: left; margin-top: 10px;"><span style="color: #FFF;font-size: 12px;font-weight: bold;">Autorizó</span></div>' +
 	   '<div style="width: 40%; position: relative; float: left; margin-top: 10px;"><span style="color: #FFF;font-size: 12px;font-weight: bold;">Fecha autorización</span></div>' +
@@ -161,7 +169,7 @@ function generaPopAutorizacion(titulo, datos){
 	   '<div style="width: 60%; position: relative; float: left"><span style="color: #FFF;font-size: 12px;font-weight: bold;">Fecha límite</span></div>' +
 	   '<div style="width: 40%; position: relative; float: left"><span style="color: #FFF;font-size: 12px;font-weight: bold;">Días vencidos</span></div>' + 
 	   '<div style="width: 60%; position: relative; float: left"><span style="color: #FFF;font-size: 10px;">' + datos.fechaLimite + '</span></div>' +
-	   '<div style="width: 40%; position: relative; float: left"><span style="color: #FFF;font-size: 10px;">' + datos.diasVencidos + '</span></div></div>';
+	   '<div style="width: 40%; position: relative; float: left"><span style="color: #FFF;font-size: 10px;">' + texto + '</span></div></div>';
 	
 	return popAutorizacion;
 }

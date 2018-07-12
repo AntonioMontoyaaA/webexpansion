@@ -96,17 +96,17 @@ function creatabla(){
 					datosMemorias[i][4] = "<span style='"  + "'>---</span>";
 				}
 				if(resultadoTablero[i].PRE_GESTORIA != undefined) {
-					datosMemorias[i][5] = "<span>" + resultadoTablero[i].PRE_GESTORIA.validacion + "</span>";
+					datosMemorias[i][5] = "<span>" + resultadoTablero[i].PRE_GESTORIA.fechaValidacion + "</span>";
 				} else {
 					datosMemorias[i][5] = "<span>---</span>";
 				}
 				if(resultadoTablero[i].PRE_CONSTRUCCION != undefined) {
-					datosMemorias[i][6] = "<span>" + resultadoTablero[i].PRE_CONSTRUCCION.validacion + "</span>";
+					datosMemorias[i][6] = "<span>" + resultadoTablero[i].PRE_CONSTRUCCION.fechaValidacion + "</span>";
 				} else {
 					datosMemorias[i][6] = "<span>---</span>";
 				}
 				if(resultadoTablero[i].VOBO_LAYOUT != undefined) {
-					datosMemorias[i][7] = "<span>" + resultadoTablero[i].VOBO_LAYOUT.validacion + "</span>";
+					datosMemorias[i][7] = "<span>" + resultadoTablero[i].VOBO_LAYOUT.fechaValidacion + "</span>";
 				} else {
 					datosMemorias[i][7] = "<span>---</span>";
 				}
@@ -121,22 +121,22 @@ function creatabla(){
 					datosMemorias[i][9] = "<span>---</span>";
 				}
 				if(resultadoTablero[i].TRAMITES != undefined) {
-					datosMemorias[i][10] = "<span>" + resultadoTablero[i].TRAMITES.validacion + "</span>";
+					datosMemorias[i][10] = "<span>" + resultadoTablero[i].TRAMITES.fechaValidacion + "</span>";
 				} else {
 					datosMemorias[i][10] = "<span>---</span>";
 				}
 				if(resultadoTablero[i].VOBOFNL_OPERACIONES != undefined) {
-					datosMemorias[i][11] = "<span>" + resultadoTablero[i].VOBOFNL_OPERACIONES.validacion + "</span>";
+					datosMemorias[i][11] = "<span>" + resultadoTablero[i].VOBOFNL_OPERACIONES.fechaValidacion + "</span>";
 				} else {
 					datosMemorias[i][11] = "<span>---</span>";
 				}
 				if(resultadoTablero[i].FIRMA_CONTRATO != undefined) {
-					datosMemorias[i][12] = "<span>" + resultadoTablero[i].FIRMA_CONTRATO.validacion + "</span>";
+					datosMemorias[i][12] = "<span>" + resultadoTablero[i].FIRMA_CONTRATO.fechaValidacion + "</span>";
 				} else {
 					datosMemorias[i][12] = "<span>---</span>";
 				}
 				if(resultadoTablero[i].INICIO_OBRA != undefined) {
-					datosMemorias[i][13] = "<span>" + resultadoTablero[i].INICIO_OBRA.validacion + "</span>";
+					datosMemorias[i][13] = "<span>" + resultadoTablero[i].INICIO_OBRA.fechaValidacion + "</span>";
 				} else {
 					datosMemorias[i][13] = "<span>---</span>";
 				}

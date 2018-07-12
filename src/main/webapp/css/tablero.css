@@ -74,3 +74,76 @@ span.circulo {
 	color: #FFFFFF !important;
 }
 
+.circle_expansion {
+	border-radius: 50%;
+    width: 1em;
+    height: 1em;
+    background: #37AFCE;
+    float: left;
+    margin-top: 4px;
+    margin-left: 10px;
+}
+
+.circle_gestoria {
+	border-radius: 50%;
+    width: 1em;
+    height: 1em;
+    background: #FC4313;
+    float: left;
+    margin-top: 4px;
+    margin-left: 10px;
+}
+
+.circle_operaciones {
+	border-radius: 50%;
+    width: 1em;
+    height: 1em;
+    background: #1E8F33;
+    float: left;
+    margin-top: 4px;
+    margin-left: 10px;
+}
+
+.circle_auditoria {
+	border-radius: 50%;
+    width: 1em;
+    height: 1em;
+    background: #1C336E;
+    float: left;
+    margin-top: 4px;
+    margin-left: 10px;
+}
+
+.circle_construccion {
+	border-radius: 50%;
+    width: 1em;
+    height: 1em;
+    background: #D35612;
+    float: left;
+    margin-top: 4px;
+    margin-left: 10px;
+}
+
+.padding_right {
+	padding-right: 10px;
+}
+
+.txt_expansion {
+	color: #37AFCE;
+}
+
+.txt_gestoria {
+	color: #FC4313;
+}
+
+.txt_operaciones {
+	color: #1E8F33;
+}
+
+.txt_auditoria {
+	color: #1C336E;
+}
+
+.txt_construccion {
+	color: #D35612;
+}

@@ -1,3 +1,6 @@
+var resultadoTablero = null;
+var datosExcel = "";
+
 $(function(){
 	$('#idtablero').addClass('resaltado');
 	inicializaCalendarios();
@@ -9,9 +12,9 @@ $(function(){
 		creatabla();
 	});
 	
-	$("#descargaExcelAsignadas").click(function() {
+	$("#descargaExcelTablero").click(function() {
 		$("#datos").val(JSON.stringify(datosExcel));
-		$("#submitBotonAsignadas").click();
+		$("#submitBotonTablero").click();
 	});
 	
 });
@@ -35,14 +38,14 @@ function inicializaCalendarios() {
 	});
 	
 	$("#datepicker1").datepicker.dateFormat = 'dd/MM/yy';
-//	$("#datepicker1").val('01/05/2018'); //TODO remove
+	$("#datepicker1").val(FECHA_HOY); //TODO remove
 }
 
 function creatabla(){
 	
-	invocarJSONServiceAction("asignadas_info", 
+	invocarJSONServiceAction("tablero_info", 
 				{'fechaConsulta': $( "#datepicker1").val()}, 
-				'obtieneMdsResponse', 
+				'obtieneTableroResponse', 
 				function() {
 					//Funcion de error
 					
@@ -54,54 +57,220 @@ function creatabla(){
 					cierraLoading();
 				});
 	
-	obtieneMdsResponse = function( data ) {
+	obtieneTableroResponse = function( data ) {
 		
 		
 		if(data.codigo != 200) {
 			cargaMensajeModal('Memorias descriptivas', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
-			$("#descargaExcelMemorias").hide();
-			initTablaMemoriasAsignadas('DivTablaAsignadas', 0, 'tablaMemoriasAsignadas');
+			$("#descargaExcelTablero").hide();
+			initTablaMemoriasTablero('DivTablaTablero', 0, 'tablaMemoriasTablero');
 		} else {
-			//var resultados = data.mds;
-			var resultados = new Array();
-			
+			resultadoTablero = data.detalleTablero;
 			datosExcel = data;
-			$("#descargaExcelMemorias").show();
+			$("#descargaExcelTablero").show();
 			var datosMemorias = new Array();
 			
-			resultados.push({numero:1, fechaRecepcion: "06/06/2018", fuenteMd: "Expansion", nombreTda: "Amapolas Puerto", conteoAuditor: 188, pregestoriaAutorizada: "Si", levantamientoRealizado: "Si", voboLayoutOperaciones: "Si", montoPresupuestoObraCons: 2156427, presupuestoAuditoria: 123456, gestoria: "Si", voboFinalOperaciones: "Si", contratoFirmado: "Si", inicioObra: "09/07/2018", terminacionObra: "09/12/2018", inauguracion: "10/12/2018"});
-			resultados.push({numero:2, fechaRecepcion: "06/06/2018", fuenteMd: "Expansion", nombreTda: "Amapolas Puerto", conteoAuditor: 188, pregestoriaAutorizada: "Si", levantamientoRealizado: "Si", voboLayoutOperaciones: "Si", montoPresupuestoObraCons: 2156427, presupuestoAuditoria: 123456, gestoria: "Si", voboFinalOperaciones: "Si", contratoFirmado: "Si", inicioObra: "09/07/2018", terminacionObra: "09/12/2018", inauguracion: "10/12/2018"});
-			resultados.push({numero:3, fechaRecepcion: "06/06/2018", fuenteMd: "Expansion", nombreTda: "Amapolas Puerto", conteoAuditor: 188, pregestoriaAutorizada: "Si", levantamientoRealizado: "Si", voboLayoutOperaciones: "Si", montoPresupuestoObraCons: 2156427, presupuestoAuditoria: 123456, gestoria: "Si", voboFinalOperaciones: "Si", contratoFirmado: "Si", inicioObra: "09/07/2018", terminacionObra: "09/12/2018", inauguracion: "10/12/2018"});
-			resultados.push({numero:4, fechaRecepcion: "06/06/2018", fuenteMd: "Expansion", nombreTda: "Amapolas Puerto", conteoAuditor: 188, pregestoriaAutorizada: "Si", levantamientoRealizado: "Si", voboLayoutOperaciones: "Si", montoPresupuestoObraCons: 2156427, presupuestoAuditoria: 123456, gestoria: "Si", voboFinalOperaciones: "Si", contratoFirmado: "Si", inicioObra: "09/07/2018", terminacionObra: "09/12/2018", inauguracion: "10/12/2018"});
-			
-			
-			for( var i = 0 ; i < resultados.length; i++){
+			for( var i = 0 ; i < resultadoTablero.length; i++){
 				
 				
 				datosMemorias[i] = new Array();	 	 		 			 
-				datosMemorias[i][0] = "<span style='"  + "'>" + resultados[i].numero + "</span>"; 
-				datosMemorias[i][1] = "<span style='"  + "'>" + resultados[i].fechaRecepcion + "</span>";
-				datosMemorias[i][2] = "<span style='"  + "'>" + resultados[i].fuenteMd + "</span>";
-				datosMemorias[i][3] = "<span style='"  + "'>" + resultados[i].nombreTda + "</span>";
-				datosMemorias[i][4] = "<span style='"  + "'>" + resultados[i].conteoAuditor + "</span>";
-				datosMemorias[i][5] = "<span style='"  + "'>" + resultados[i].pregestoriaAutorizada + "</span>";
-				datosMemorias[i][6] = "<span style='"  + "'>" + resultados[i].levantamientoRealizado + "</span>";
-				datosMemorias[i][7] = "<span style='"  + "'>" + resultados[i].voboLayoutOperaciones + "</span>";
-				datosMemorias[i][8] = "<span style='"  + "'>$ " + formato(resultados[i].montoPresupuestoObraCons, true) + "</span>";
-				datosMemorias[i][9] = "<span style='"  + "'>$ " + formato(resultados[i].presupuestoAuditoria, true) + "</span>";
-				datosMemorias[i][10] = "<span style='"  + "'>" + resultados[i].gestoria + "</span>";
-				datosMemorias[i][11] = "<span style='"  + "'>" + resultados[i].voboFinalOperaciones + "</span>";
-				datosMemorias[i][12] = "<span style='"  + "'>" + resultados[i].contratoFirmado + "</span>";
-				datosMemorias[i][13] = "<span style='"  + "'>" + resultados[i].inicioObra + "</span>";
-				datosMemorias[i][14] = "<span style='"  + "'>" + resultados[i].terminacionObra + "</span>";
-				datosMemorias[i][15] = "<span style='"  + "'>" + resultados[i].inauguracion + "</span>";
+				datosMemorias[i][0] =  resultadoTablero[i].MDID;
+				if(resultadoTablero[i].FECHARECEPCION != undefined) {
+					datosMemorias[i][1] = "<span style='"  + "'>" + resultadoTablero[i].FECHARECEPCION.fechaValidacion + "</span>";
+				} else {
+					datosMemorias[i][1] = "<span style='"  + "'>---</span>";
+				}
+				if(resultadoTablero[i].FUENTEMD != undefined) {
+					datosMemorias[i][2] = "<span style='"  + "'>" + resultadoTablero[i].FUENTEMD + "</span>";
+				} else {
+					datosMemorias[i][2] = "<span style='"  + "'>---</span>";
+				}
+				if(resultadoTablero[i].NOMBRETDA != undefined) {
+					datosMemorias[i][3] = "<span style='"  + "'>" + resultadoTablero[i].NOMBRETDA + "</span>";
+				} else {
+					datosMemorias[i][3] = "<span style='"  + "'>---</span>";
+				}
+				if(resultadoTablero[i].CONTEOAUDITOR != undefined) {
+					datosMemorias[i][4] = "<span style='"  + "'>" + formato(resultadoTablero[i].CONTEOAUDITOR, true) + "</span>";
+				} else {
+					datosMemorias[i][4] = "<span style='"  + "'>---</span>";
+				}
+				if(resultadoTablero[i].PRE_GESTORIA != undefined) {
+					datosMemorias[i][5] = "<span>" + resultadoTablero[i].PRE_GESTORIA.validacion + "</span>";
+				} else {
+					datosMemorias[i][5] = "<span>---</span>";
+				}
+				if(resultadoTablero[i].PRE_CONSTRUCCION != undefined) {
+					datosMemorias[i][6] = "<span>" + resultadoTablero[i].PRE_CONSTRUCCION.validacion + "</span>";
+				} else {
+					datosMemorias[i][6] = "<span>---</span>";
+				}
+				if(resultadoTablero[i].VOBO_LAYOUT != undefined) {
+					datosMemorias[i][7] = "<span>" + resultadoTablero[i].VOBO_LAYOUT.validacion + "</span>";
+				} else {
+					datosMemorias[i][7] = "<span>---</span>";
+				}
+				if(resultadoTablero[i].PRESUPUESTO_OBRA != undefined) {
+					datosMemorias[i][8] = "<span>$ " + formato(resultadoTablero[i].PRESUPUESTO_OBRA, true) + "</span>";
+				} else {
+					datosMemorias[i][8] = "<span>---</span>";
+				}
+				if(resultadoTablero[i].PRESUPUESTO_AUDITORIA != undefined) {
+					datosMemorias[i][9] = "<span>$ " + formato(resultadoTablero[i].PRESUPUESTO_AUDITORIA, true) + "</span>";
+				} else {
+					datosMemorias[i][9] = "<span>---</span>";
+				}
+				if(resultadoTablero[i].TRAMITES != undefined) {
+					datosMemorias[i][10] = "<span>" + resultadoTablero[i].TRAMITES.validacion + "</span>";
+				} else {
+					datosMemorias[i][10] = "<span>---</span>";
+				}
+				if(resultadoTablero[i].VOBOFNL_OPERACIONES != undefined) {
+					datosMemorias[i][11] = "<span>" + resultadoTablero[i].VOBOFNL_OPERACIONES.validacion + "</span>";
+				} else {
+					datosMemorias[i][11] = "<span>---</span>";
+				}
+				if(resultadoTablero[i].FIRMA_CONTRATO != undefined) {
+					datosMemorias[i][12] = "<span>" + resultadoTablero[i].FIRMA_CONTRATO.validacion + "</span>";
+				} else {
+					datosMemorias[i][12] = "<span>---</span>";
+				}
+				if(resultadoTablero[i].INICIO_OBRA != undefined) {
+					datosMemorias[i][13] = "<span>" + resultadoTablero[i].INICIO_OBRA.validacion + "</span>";
+				} else {
+					datosMemorias[i][13] = "<span>---</span>";
+				}
+				if(resultadoTablero[i].ESTIMADO_FINOBRA != undefined) {
+					datosMemorias[i][14] = "<span>" + resultadoTablero[i].ESTIMADO_FINOBRA + "</span>";
+				} else {
+					datosMemorias[i][14] = "<span>---</span>";
+				}
+				if(resultadoTablero[i].ESTIMADO_APERTURA != undefined) {
+					datosMemorias[i][15] = "<span>" + resultadoTablero[i].ESTIMADO_APERTURA + "</span>";
+				} else {
+					datosMemorias[i][15] = "<span>" + resultadoTablero[i].ESTIMADO_APERTURA + "</span>";
+				}
+				datosMemorias[i][16] = resultadoTablero[i].MDID;
 			 }
 			
 			initTablaMemoriasTablero('DivTablaTablero', datosMemorias, 'tablaMemoriasTablero');
+			
+			$("#tablaMemoriasTablero tr td").click(function() {
+				var mdId = $(this).parent().find("td:eq(16)").html();
+				
+				idColumna = jQuery("#tablaMemoriasTablero").dataTable().fnGetPosition(this);
+				var col = idColumna[1];
+				
+				console.log("::: columna :::" + col);
+				
+				for(var i = 0; i < resultadoTablero.length; i++) {
+					if(mdId == resultadoTablero[i].MDID) {
+						switch(col) {
+							case 5:
+								if(resultadoTablero[i].PRE_GESTORIA.validacion == "SI") {
+									var mensaje = "¿Quién autorizó? " + resultadoTablero[i].PRE_GESTORIA.usuario + "<br/>" +
+											"Del área: " + resultadoTablero[i].PRE_GESTORIA.Area + "<br/>" +
+											"En la fecha: " +  resultadoTablero[i].PRE_GESTORIA.fechaValidacion;
+									cargaMensajeModal('PRE-GESTORIA', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_EXITO, null);
+								} else {
+									var mensaje = "ATENCIÓN: Este paso no ha sido validado.";
+									cargaMensajeModal('PRE-GESTORIA', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
+								}
+								break;
+							case 6:
+								if(resultadoTablero[i].PRE_CONSTRUCCION.validacion == "SI") {
+									var mensaje = "¿Quién autorizó? " + resultadoTablero[i].PRE_CONSTRUCCION.usuario + "<br/>" +
+											"Del área: " + resultadoTablero[i].PRE_CONSTRUCCION.Area + "<br/>" +
+											"En la fecha: " +  resultadoTablero[i].PRE_CONSTRUCCION.fechaValidacion;
+									cargaMensajeModal('PRE-CONSTRUCCION', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_EXITO, null);
+								} else {
+									var mensaje = "ATENCIÓN: Este paso no ha sido validado.";
+									cargaMensajeModal('PRE-CONSTRUCCION', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
+								}
+								break;
+							case 7:
+								if(resultadoTablero[i].VOBO_LAYOUT.validacion == "SI") {
+									var mensaje = "¿Quién autorizó? " + resultadoTablero[i].VOBO_LAYOUT.usuario + "<br/>" +
+											"Del área: " + resultadoTablero[i].VOBO_LAYOUT.Area + "<br/>" +
+											"En la fecha: " +  resultadoTablero[i].VOBO_LAYOUT.fechaValidacion;
+									cargaMensajeModal('VOBO LAYOUT', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_EXITO, null);
+								} else {
+									var mensaje = "ATENCIÓN: Este paso no ha sido validado.";
+									cargaMensajeModal('VOBO LAYOUT', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
+								}
+								break;
+							case 10:
+								if(resultadoTablero[i].TRAMITES.validacion == "SI") {
+									var mensaje = "¿Quién autorizó? " + resultadoTablero[i].TRAMITES.usuario + "<br/>" +
+											"Del área: " + resultadoTablero[i].TRAMITES.Area + "<br/>" +
+											"En la fecha: " +  resultadoTablero[i].TRAMITES.fechaValidacion;
+									cargaMensajeModal('GESTORÍA', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_EXITO, null);
+								} else {
+									var mensaje = "ATENCIÓN: Este paso no ha sido validado.";
+									cargaMensajeModal('GESTORÍA', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
+								}
+								break;
+							case 11:
+								if(resultadoTablero[i].VOBOFNL_OPERACIONES.validacion == "SI") {
+									var mensaje = "¿Quién autorizó? " + resultadoTablero[i].VOBOFNL_OPERACIONES.usuario + "<br/>" +
+											"Del área: " + resultadoTablero[i].VOBOFNL_OPERACIONES.Area + "<br/>" +
+											"En la fecha: " +  resultadoTablero[i].VOBOFNL_OPERACIONES.fechaValidacion;
+									cargaMensajeModal('VOBO FINAL OPERACIONES', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_EXITO, null);
+								} else {
+									var mensaje = "ATENCIÓN: Este paso no ha sido validado.";
+									cargaMensajeModal('VOBO FINAL OPERACIONES', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
+								}
+								break;
+							case 12:
+								if(resultadoTablero[i].FIRMA_CONTRATO.validacion == "SI") {
+									var mensaje = "¿Quién autorizó? " + resultadoTablero[i].FIRMA_CONTRATO.usuario + "<br/>" +
+											"Del área: " + resultadoTablero[i].FIRMA_CONTRATO.Area + "<br/>" +
+											"En la fecha: " +  resultadoTablero[i].FIRMA_CONTRATO.fechaValidacion;
+									cargaMensajeModal('CONTRATO FIRMADO', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_EXITO, null);
+								} else {
+									var mensaje = "ATENCIÓN: Este paso no ha sido validado.";
+									cargaMensajeModal('CONTRATO FIRMADO', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
+								}
+								break;
+							case 13:
+								if(resultadoTablero[i].INICIO_OBRA.validacion == "SI") {
+									var mensaje = "¿Quién autorizó? " + resultadoTablero[i].INICIO_OBRA.usuario + "<br/>" +
+											"Del área: " + resultadoTablero[i].INICIO_OBRA.Area + "<br/>" +
+											"En la fecha: " +  resultadoTablero[i].INICIO_OBRA.fechaValidacion;
+									cargaMensajeModal('INICIO DE OBRA', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_EXITO, null);
+								} else {
+									var mensaje = "ATENCIÓN: Este paso no ha sido validado.";
+									cargaMensajeModal('INICIO DE OBRA', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
+								}
+								break;
+						};
+						break;
+					}
+				}
+			});
+			
+			$(".DTFC_Cloned tr td").click(function() {
+				var mdId = $(this).parent().find("td:eq(0)").html();
+				
+				for(var i = 0; i < resultadoTablero.length; i++) {
+					if(mdId == resultadoTablero[i].MDID) {
+						if(resultadoTablero[i].FECHARECEPCION.validacion == "SI") {
+							var mensaje = "¿Quién autorizó? " + resultadoTablero[i].FECHARECEPCION.usuario + "<br/>" +
+											"Del área: " + resultadoTablero[i].FECHARECEPCION.Area + "<br/>" +
+											"En la fecha: " +  resultadoTablero[i].FECHARECEPCION.fechaValidacion;
+							cargaMensajeModal('RECEPCIÓN', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_EXITO, null);
+						} else {
+							var mensaje = "ATENCIÓN: Este paso no ha sido validado.";
+							cargaMensajeModal('RECEPCIÓN', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
+						}
+						break;
+					}
+				}
+			});
 		}
 	};	
 }
 
-function ejecutaBusquedaAsignadas() {
-	$("#tablaMemoriasAsignadas").dataTable().fnFilter($("#buscador").val());
+function ejecutaBusquedaTablero() {
+	$("#tablaMemoriasTablero").dataTable().fnFilter($("#buscador").val());
 }

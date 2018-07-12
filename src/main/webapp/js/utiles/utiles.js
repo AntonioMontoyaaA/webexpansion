@@ -81,7 +81,7 @@ function cierraLoading() {
 
 function cargaMensajeModal(titulo, descripcionMensaje, tipoMensaje, estatusMensaje, funcionEvalSi) {
 	$("#tituloMensaje").text(titulo);
-	$("#descripcionMensaje").text(descripcionMensaje);
+	$("#descripcionMensaje").html(descripcionMensaje);
 	this.funcionEvalSi = funcionEvalSi;
 	
 	switch(tipoMensaje) {

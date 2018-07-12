@@ -31,6 +31,9 @@ table{
 .odd{
 	background:#f4f4f3;
 }
+.even {
+	background: #fff;
+}
 .ui-datepicker-trigger {
 	display: none !important;
 }

@@ -1,0 +1,222 @@
+package com.tiendas.neto.vo;
+
+import java.io.Serializable;
+
+public class TableroVo implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private long mdId;
+	private String fechaRecepcionMd;
+	private String fuenteMd;
+	private String nombreTda;
+	private int conteoAuditor;
+	private String pregestoriaAutorizada;
+	private String levantamientoRealizado;
+	private String voboLayoutOperaciones;
+	private double montoConstruccion;
+	private double montoAuditoria;
+	private String gestoria;
+	private String voboFinalOperaciones;
+	private String contratoFirmado;
+	private String inicioObra;
+	private String finObra;
+	private String inauguracion;
+	/**
+	 * @return the mdId
+	 */
+	public long getMdId() {
+		return mdId;
+	}
+	/**
+	 * @param mdId the mdId to set
+	 */
+	public void setMdId(long mdId) {
+		this.mdId = mdId;
+	}
+	/**
+	 * @return the fechaRecepcionMd
+	 */
+	public String getFechaRecepcionMd() {
+		return fechaRecepcionMd;
+	}
+	/**
+	 * @param fechaRecepcionMd the fechaRecepcionMd to set
+	 */
+	public void setFechaRecepcionMd(String fechaRecepcionMd) {
+		this.fechaRecepcionMd = fechaRecepcionMd;
+	}
+	/**
+	 * @return the fuenteMd
+	 */
+	public String getFuenteMd() {
+		return fuenteMd;
+	}
+	/**
+	 * @param fuenteMd the fuenteMd to set
+	 */
+	public void setFuenteMd(String fuenteMd) {
+		this.fuenteMd = fuenteMd;
+	}
+	/**
+	 * @return the nombreTda
+	 */
+	public String getNombreTda() {
+		return nombreTda;
+	}
+	/**
+	 * @param nombreTda the nombreTda to set
+	 */
+	public void setNombreTda(String nombreTda) {
+		this.nombreTda = nombreTda;
+	}
+	/**
+	 * @return the conteoAuditor
+	 */
+	public int getConteoAuditor() {
+		return conteoAuditor;
+	}
+	/**
+	 * @param conteoAuditor the conteoAuditor to set
+	 */
+	public void setConteoAuditor(int conteoAuditor) {
+		this.conteoAuditor = conteoAuditor;
+	}
+	/**
+	 * @return the pregestoriaAutorizada
+	 */
+	public String getPregestoriaAutorizada() {
+		return pregestoriaAutorizada;
+	}
+	/**
+	 * @param pregestoriaAutorizada the pregestoriaAutorizada to set
+	 */
+	public void setPregestoriaAutorizada(String pregestoriaAutorizada) {
+		this.pregestoriaAutorizada = pregestoriaAutorizada;
+	}
+	/**
+	 * @return the levantamientoRealizado
+	 */
+	public String getLevantamientoRealizado() {
+		return levantamientoRealizado;
+	}
+	/**
+	 * @param levantamientoRealizado the levantamientoRealizado to set
+	 */
+	public void setLevantamientoRealizado(String levantamientoRealizado) {
+		this.levantamientoRealizado = levantamientoRealizado;
+	}
+	/**
+	 * @return the voboLayoutOperaciones
+	 */
+	public String getVoboLayoutOperaciones() {
+		return voboLayoutOperaciones;
+	}
+	/**
+	 * @param voboLayoutOperaciones the voboLayoutOperaciones to set
+	 */
+	public void setVoboLayoutOperaciones(String voboLayoutOperaciones) {
+		this.voboLayoutOperaciones = voboLayoutOperaciones;
+	}
+	/**
+	 * @return the montoConstruccion
+	 */
+	public double getMontoConstruccion() {
+		return montoConstruccion;
+	}
+	/**
+	 * @param montoConstruccion the montoConstruccion to set
+	 */
+	public void setMontoConstruccion(double montoConstruccion) {
+		this.montoConstruccion = montoConstruccion;
+	}
+	/**
+	 * @return the montoAuditoria
+	 */
+	public double getMontoAuditoria() {
+		return montoAuditoria;
+	}
+	/**
+	 * @param montoAuditoria the montoAuditoria to set
+	 */
+	public void setMontoAuditoria(double montoAuditoria) {
+		this.montoAuditoria = montoAuditoria;
+	}
+	/**
+	 * @return the gestoria
+	 */
+	public String getGestoria() {
+		return gestoria;
+	}
+	/**
+	 * @param gestoria the gestoria to set
+	 */
+	public void setGestoria(String gestoria) {
+		this.gestoria = gestoria;
+	}
+	/**
+	 * @return the voboFinalOperaciones
+	 */
+	public String getVoboFinalOperaciones() {
+		return voboFinalOperaciones;
+	}
+	/**
+	 * @param voboFinalOperaciones the voboFinalOperaciones to set
+	 */
+	public void setVoboFinalOperaciones(String voboFinalOperaciones) {
+		this.voboFinalOperaciones = voboFinalOperaciones;
+	}
+	/**
+	 * @return the contratoFirmado
+	 */
+	public String getContratoFirmado() {
+		return contratoFirmado;
+	}
+	/**
+	 * @param contratoFirmado the contratoFirmado to set
+	 */
+	public void setContratoFirmado(String contratoFirmado) {
+		this.contratoFirmado = contratoFirmado;
+	}
+	/**
+	 * @return the inicioObra
+	 */
+	public String getInicioObra() {
+		return inicioObra;
+	}
+	/**
+	 * @param inicioObra the inicioObra to set
+	 */
+	public void setInicioObra(String inicioObra) {
+		this.inicioObra = inicioObra;
+	}
+	/**
+	 * @return the finObra
+	 */
+	public String getFinObra() {
+		return finObra;
+	}
+	/**
+	 * @param finObra the finObra to set
+	 */
+	public void setFinObra(String finObra) {
+		this.finObra = finObra;
+	}
+	/**
+	 * @return the inauguracion
+	 */
+	public String getInauguracion() {
+		return inauguracion;
+	}
+	/**
+	 * @param inauguracion the inauguracion to set
+	 */
+	public void setInauguracion(String inauguracion) {
+		this.inauguracion = inauguracion;
+	}
+	
+	
+
+}

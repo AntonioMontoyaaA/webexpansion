@@ -36,7 +36,7 @@ span.estilo_dato{
 	border-color:black;
 	height:25px !important;
 	padding:0;
-	margin-left:8px;
+	margin-right:8px;
 }
 .filtro{
 	min-width:100px !important;
@@ -138,10 +138,11 @@ span.estilo_dato{
 .circulo_punto{
 	padding-top:2px;
 	text-align:center;
-	margin:5px;
+	margin-top:4px;
+	margin-right:5px;
 	font-size: 14px;
-     width: 17px;
-     height: 17px;
+/*      width: 17px; */
+/*      height: 17px; */
      -moz-border-radius: 50%;
      -webkit-border-radius: 50%;
      border-radius: 50%;
@@ -150,7 +151,7 @@ span.estilo_dato{
      float: left;
      line-height:1;
 }
-.circulo_puntop{
+ .circulo_puntop{
 	padding-top:2px;
 	text-align:center;
 	margin:5px;
@@ -164,7 +165,7 @@ span.estilo_dato{
      position: relative;
      float: left;
      line-height:1;
-}
+} 
 /* ---------------------------  POPOVER */
 .popover{
 	background:#ededed;
@@ -282,5 +283,4 @@ span.estilo_dato{
 .combos{
 	position:relative;
 	 float:right;
-	 width:260px;
 }

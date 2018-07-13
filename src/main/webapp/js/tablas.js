@@ -334,6 +334,56 @@ function initTablaMemoriasTablero(nombreDiv, datosDesgloseMemorias, nombreTabla)
 	$("#" + nombreTabla + "_filter").hide();
 }
 
+function initTablaMemoriasAprobadas(nombreDiv, datos, nombreTabla){
+	
+	$("#" + nombreDiv).html(
+			   
+			'<table cellpadding="0" cellspacing="0" border="0px"  class="row-border stripe hover" id="' + nombreTabla + '" >' +
+			'<thead>'  +
+				'<tr style="cursor: pointer;border-top: 0px; border-bottom: 0px;">' +
+				'<th  class="gris negrita t14 center" style="padding:0;">Nombre MD</th>'  +
+					'<th class="gris negrita t14">Responsable</th>' +
+					'<th class="gris negrita t14">Estatus</th>' +
+					'<th class="gris negrita t14">Autorizó</th>' +
+					'<th class="gris negrita t14">Fecha compromiso</th>' +
+					'<th class="gris negrita t14">Motivo</th>' +
+					'<th class="oculto">id</th>' +
+				'</tr>'+
+			'</thead>' +
+			'<tbody>'  +			
+            '</tbody>' +
+        '</table>');
+	
+	tablaMemoriasAprobadas = $("#" + nombreTabla).dataTable(
+			{"aaData": datos,
+				"aoColumns": [{"sClass":"izquierda padding imagen","bSearchable":true},
+				           {"bSearchable":true},
+				           {"bSearchable":true},
+				           {"bSearchable":true},
+				           {"bSearchable":true},
+				           {"bSearchable":true},
+				           { "sClass": "oculto", "bSearchable": false }],		
+			"bJQueryUI": false,
+			"sPaginationType": "full_numbers",
+			"oLanguage": idiomaEspanol,
+			"bLengthChange":false,
+			"order": [],
+			"iDisplayLength":1000,
+			 "bScrollCollapse": false,
+			 "sScrollY": "70vh",
+			 "aoColumnDefs": [ {
+					"sClass": "center",
+					"aTargets": [ 0,2 ]
+			} ]
+			 
+	});	
+	
+	
+	$("#" + nombreTabla + "_DTTT_container").hide();
+	$("#" + nombreTabla + "_paginate").hide();
+	$("#" + nombreTabla + "_filter").hide();
+}
+
 var idiomaEspanol = {
 	    "sEmptyTable":     "<div style='padding:10px; color:red; font-size:13px;'>No existen memorias descriptivas</div>",
 	    "sInfo":           '<div class="col-12 fazul blanco right">Totales: <b>_TOTAL_</b></div>',

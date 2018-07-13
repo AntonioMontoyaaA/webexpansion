@@ -25,9 +25,9 @@
        <div id="descripcionMensaje">---</div>
       </div>
       <div class="modal-footer" style="justify-content: center; border:0;">
-        <button type="button" class="btn fazul blanco" id="botonMensajeSi"  style="width: 70px; height: 30px; padding-top: 4px; margin-right: 20px; cursor: pointer;">Si</button>
-        <button type="button" class="btn fazul blanco" id="botonMensajeNo" style="width: 70px; height: 30px; padding-top: 4px; margin-right: 20px; cursor: pointer;">No</button>
-        <button type="button" class="btn fazul blanco" id="botonMensajeAceptar" style="width: 100px; height: 30px; padding-top: 4px; cursor: pointer;">Aceptar</button>
+        <button type="button" class="btn fazul blanco" id="botonMensajeSi"  style="width: 70px; height: 30px; padding-top: 2px; margin-right: 20px; cursor: pointer;">Si</button>
+        <button type="button" class="btn fazul blanco" id="botonMensajeNo" style="width: 70px; height: 30px; padding-top: 2px; margin-right: 20px; cursor: pointer;">No</button>
+        <button type="button" class="btn fazul blanco" id="botonMensajeAceptar" style="width: 100px; height: 30px; padding-top: 2px; cursor: pointer;">Aceptar</button>
       </div>
     </div>
   </div>

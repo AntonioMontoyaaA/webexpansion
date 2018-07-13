@@ -2,7 +2,10 @@
 	margin: 0;
 	padding: 0;
 }
-
+.logoNetoExagono {
+	width: 100%;
+	opacity: .1;
+}
 body {
 	font-family: "Helvetica";
 }
@@ -91,11 +94,7 @@ input[type=text]:focus {
 	font-size: 28px;
 	opacity: .7;
 }
-.logoNetoExagono {
-	width: 100%;
-	height: 60px;
-	opacity: .1;
-}
+
 .bg-color-exagono-in {
 	background-color: rgba(0,0,0, .05) !important;
 }
@@ -317,9 +316,6 @@ a.linksLogin{
 	.margenVEntreExagonos {
 		margin: -7.4em 0;
 	}
-	.logoNetoExagono {
-		height: 40px;
-	}
 	.img-exagono-max {
 		width: 30px;
 		height: 30px;
@@ -366,9 +362,6 @@ a.linksLogin{
 	}
 	.tamFuenteTituloExagono {
 		font-size: 20px;
-	}
-	.logoNetoExagono {
-		height: 40px;
 	}
 	.img-exagono-max {
 		width: 35px;

@@ -26,7 +26,7 @@
 										<div class="hexagon-in2 font-weight-bold">
 											<div class="vertical-center-exagono center">
 												<div class="row">
-													<label class="tamFuenteTituloExagono">NEO</label>
+													<label class="tamFuenteTituloExagono">VOKSE</label>
 												</div>
 											</div>
 										</div>

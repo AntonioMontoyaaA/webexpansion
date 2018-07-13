@@ -112,7 +112,7 @@
          	<result name = "success">jsp/asignadas_detalle.jsp</result>
       	</action>
       	
-<!-- **********  autorizadas y rechazadas      -->
+<!-- **********  autorizadas y rechazadas, aprobadas     -->
 
       <action name = "autorizadas_info" 
          	class = "com.tiendas.neto.action.Autorizadas_RechazadasInfoAction" 
@@ -121,6 +121,16 @@
         <action name = "rechazadas_info" 
          	class = "com.tiendas.neto.action.Autorizadas_RechazadasInfoAction" 
          	method = "execute" />
+         	
+        <action name = "aprobadas_info" 
+         	class = "com.tiendas.neto.action.AprobadasInfoAction" 
+         	method = "execute" />
+         	
+        <action name = "lineaTiempo" 
+         		class = "com.tiendas.neto.action.DetalleMemoriaAsignadaAction" 
+         		method = "execute">
+         	<result name = "success">jsp/lineaTiempo.jsp</result>
+      	</action>
          		
 	    <action name = "excelAutorizadasAction" 
          	class = "com.tiendas.neto.action.excel.ExcelAutorizadasAction" 

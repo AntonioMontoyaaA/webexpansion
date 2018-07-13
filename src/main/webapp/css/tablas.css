@@ -142,7 +142,7 @@ span.seccion{
     -webkit-border-radius:2px;
 }
 .rechargue{
-	width:27px;
+	width:25px;
 }
 .circulos_tablas{
 	margin-top:0px !important;
@@ -151,4 +151,116 @@ span.seccion{
 .reloj{
 	width: 17px;
 	margin-left:8px;
+}
+
+/* ------------------------------- BOTONES TABLA APROBADAS */
+#time{
+	background-image:url('../img/aprobadas/fin_tiempoSF.png');
+	background-position:center;
+	background-repeat: no-repeat;
+}
+#time:hover{
+	background-image:url('../img/aprobadas/tiempoB.png');
+	background-position:center;
+	background-repeat: no-repeat;
+	background-color:#C9C9C9;
+}
+#time.activado, #time.activado:hover{
+	background-image:url('../img/aprobadas/tiempoB.png');
+	background-position:center;
+	background-repeat: no-repeat;
+	background-color:#071B36;
+}
+.time_tabla{
+	background-image:url('../img/aprobadas/fin_tiempoSF.png');	
+	background-position:right;
+	background-repeat: no-repeat;
+}
+#edit{
+	background-image:url('../img/aprobadas/fin_editarSF.png');
+	background-position:center;
+	background-repeat: no-repeat;
+}
+.edit_tabla{
+	background-image:url('../img/aprobadas/fin_editarSF.png');	
+	background-position:right;
+	background-repeat: no-repeat;
+}
+#edit:hover{
+	background-image:url('../img/aprobadas/editarB.png');
+	background-position:center;
+	background-repeat: no-repeat;
+	background-color:#C9C9C9;
+}
+#edit.activado, #edit.activado:hover{
+	background-image:url('../img/aprobadas/editarB.png');
+	background-position:center;
+	background-repeat: no-repeat;
+	background-color:#071B36;
+}
+#pause{
+	background-image:url('../img/aprobadas/fin_pausarSF.png');
+	background-position:center;
+	background-repeat: no-repeat;
+}
+.pause_tabla{
+	background-image:url('../img/aprobadas/fin_pausarSF.png');
+	background-position:right;
+	background-repeat: no-repeat;
+}
+#pause:hover{
+	background-image:url('../img/aprobadas/pausarB.png');
+	background-position:center;
+	background-repeat: no-repeat;
+	background-color:#C9C9C9;
+}
+#pause.activado, #pause.activado:hover{
+	background-image:url('../img/aprobadas/pausarB.png');
+	background-position:center;
+	background-repeat: no-repeat;
+	background-color:#071B36;
+}
+#refuse{
+	background-image:url('../img/aprobadas/fin_cancelarsSF.png');
+	background-position:center;
+	background-repeat: no-repeat;
+}
+.refuse_tabla{
+	background-image:url('../img/aprobadas/fin_cancelarsSF.png');
+	background-position:right;
+	background-repeat: no-repeat;
+}
+#refuse:hover{
+	background-image:url('../img/aprobadas/cancelarB.png');
+	background-position:center;
+	background-repeat: no-repeat;
+	background-color:#C9C9C9;
+}
+#refuse.activado, #refuse.activado:hover{
+	background-image:url('../img/aprobadas/cancelarB.png');
+	background-position:center;
+	background-repeat: no-repeat;
+	background-color:#071B36;
+}
+#change{
+	background-image:url('../img/aprobadas/fin_regresarStatusSF.png');
+	background-position:center;
+	background-repeat: no-repeat;
+}
+.change_tabla{
+	background-image:url('../img/aprobadas/fin_regresarStatusSF.png');
+	background-position:right;
+	background-repeat: no-repeat;
+}
+#change:hover{
+	background-image:url('../img/aprobadas/regresarB.png');
+	background-position:center;
+	background-repeat: no-repeat;
+	background-color:#C9C9C9;
+}
+#change.activado, #change.activado:hover{
+	background-image:url('../img/aprobadas/regresarB.png');
+	background-position:center;
+	background-repeat: no-repeat;
+	background-color:#071B36;
 }

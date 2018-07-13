@@ -132,15 +132,17 @@
 <!-- PLAN APERTURA MENSUAL -->	
 			<div class="col-lg-12 menupr_estilos fazul">
 				<div class="row cabecera">
-				<div class="col-lg-10 col-md-10">
+				<div class="col-lg-10">
 					<span class="blanco negrita t14">Plan Apertura Mensual</span>
 				</div>
-				<div class="col-lg-2 col-md-2 text-right">
+				<div class="col-lg-2 text-right">
+					<div class="combos">
 					<form class="form-inline p_cabecera">
   						<button class="btn desp rechargue" type="button" onclick="AperturaMensual();">
   								<img src="${pageContext.request.contextPath}/img/refresh_sf.png" />
   						</button>
   					</form>
+  					</div>
 				</div>
 			<div class="col-lg-12 p_cabecera">
 				<span class="blanco estilo_info t14">METAS</span><span class="blanco negrita estilo_dato" id="metas"></span>
@@ -168,13 +170,13 @@
 				
 				<div class="col-xl-6 analista">
 				<div class="div_left">
-					<div class="circulo_punto" style="background:#00427F;" id="proceso_p"></div>
+					<div class="circulo_punto t14 negrita" id="proceso_p" style="color:#356A9D;"></div>
 					<span  class="resumen_personales azul t14">Personales</span>
 				</div>
 				</div>
 				<div class="col-xl-6 analista">
 				<div  class="div_right">
-					<div class="circulo_punto" style="background:#64DEF1;" id="proceso_a"></div>
+					<div class="circulo_punto t14 negrita" id="proceso_a" style="color:#64DEF1;"></div>
 					<span  class="resumen_personales azul t14">Area</span>
 				</div>
 				</div>
@@ -194,13 +196,13 @@
 				
 				<div class="col-xl-6 analista">
 				<div class="div_left">
-					<div class="circulo_punto" style="background:#00427F;" id="atrasadas_p"></div>
+					<div class="circulo_punto t14 negrita" id="atrasadas_p" style="color:#356A9D;"></div>
 					<span  class="resumen_personales azul t14">Personales</span>
 				</div>
 				</div>
 				<div class="col-xl-6 analista">
 				<div class="div_right">
-					<div class="circulo_punto" style="background:#64DEF1;" id="atrasadas_a"></div>
+					<div class="circulo_punto t14 negrita" id="atrasadas_a" style="color:#64DEF1;"></div>
 					<span  class="resumen_personales azul t14">Area</span>
 				</div>
 				</div>
@@ -219,13 +221,13 @@
 				
 				<div class="col-xl-6 analista">
 				<div class="div_left">
-					<div class="circulo_punto" style="background:#00427F;" id="autorizadas_p"></div>
+					<div class="circulo_punto t14 negrita" id="autorizadas_p" style="color:#356A9D;"></div>
 					<span  class="resumen_personales blanco t14">Personales</span>
 				</div>
 				</div>
 				<div class="col-xl-6 analista">
 				<div class="div_right">
-					<div class="circulo_punto" style="background:#64DEF1;" id="autorizadas_a"></div>
+					<div class="circulo_punto t14 negrita" id="autorizadas_a" style="color:#64DEF1;"></div>
 					<span  class="resumen_personales blanco t14">Area</span>
 				</div>
 				</div>
@@ -244,13 +246,13 @@
 				
 				<div class="col-xl-6 analista">
 				<div class="div_left">
-					<div class="circulo_punto" style="background:#00427F;" id="rechazadas_p"></div>
+					<div class="circulo_punto t14 negrita" id="rechazadas_p" style="color:#356A9D;"></div>
 					<span  class="resumen_personales blanco t14">Personales</span>
 				</div>
 				</div>
 				<div class="col-xl-6 analista">
 				<div class="div_right">
-					<div class="circulo_punto" style="background:#64DEF1;" id="rechazadas_a"></div>
+					<div class="circulo_punto t14 negrita" id="rechazadas_a" style="color:#64DEF1;"></div>
 					<span  class="resumen_personales blanco t14">Area</span>
 				</div>
 				</div>

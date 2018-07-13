@@ -1,7 +1,7 @@
 
 <nav class="navbar justify-content-between navbar-expand-lg navbar_fondo navbar_borde">
 	<span class="navbar-brand"> <img
-		src="img/logoBlanco.png">
+		src="img/logoBlanco.png" style="width:80px;">
 	</span>
 				<button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse"
 					data-target="#navbarSupportedContent"
@@ -18,7 +18,7 @@
 						<li class="nav-item"><a id="idrechazadas" class="nav-link blanco t12" href="rechazadas">Rechazadas</a></li>
 						<li class="nav-item"><a id="idagenda" class="nav-link blanco t12" href="agenda">Agenda</a></li>	
 						<li class="nav-item"><a id="idlocalizador" class="nav-link blanco t12" href="localizador">Localizador</a></li>	
-						<li class="nav-item"><a id="idlocalizador" class="nav-link blanco t12" href="aprobadas">Aprobadas</a></li>	
+						<li class="nav-item"><a id="idaprobadas" class="nav-link blanco t12" href="aprobadas">Aprobadas</a></li>	
 					</ul>
 					
 		<form class="form-inline my-2 my-lg-0">

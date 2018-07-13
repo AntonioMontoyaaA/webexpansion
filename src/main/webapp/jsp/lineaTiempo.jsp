@@ -10,12 +10,13 @@
 <!--   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
  -->  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/jquery-ui.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/utiles/frappe-gantt.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/generic.css" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/tablas.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/lineaTiempo.css" />
+	
 
 	
-<title>Autorizadas</title>
+<title>Linea de Tiempo</title>
 </head>
 <body>
 <%@ include file="/jsp/generic/header.jsp" %>
@@ -23,7 +24,28 @@
 <div class="container-fluid">
 	<div class="row padding_p" style="padding-top:0px;">
 		<div class="col-lg-12 titulo azul t12 negrita">DASHBOARD ${usr.perfil.areasxpuesto[0].areaNom} > APROBADAS > TIEMPOS </div>
+	
+	<div class="col-lg-12">
+		<div class="row">
+				<button class="btn desp rechargue" type="button">
+  								<img src="${pageContext.request.contextPath}/img/refresh_sf.png" />
+  				</button>
 		</div>
+		
+		<div class="row padding_p">
+				<div class="col-lg-12 menupr_estilos fblanco">
+					<!--   aquí va la grafica       -->
+					<svg id="gantt"></svg>
+				
+				</div>
+		</div>
+		
+		<div class="row padding_p">
+				<div class="col-lg-12 menupr_estilos fblanco" style="height:200px;">x</div>
+		</div>
+		
+	</div>
+	</div>
 	</div>
 
 
@@ -33,13 +55,11 @@
 	<!-- Bootstrap core JavaScript -->
 	<script	src="${pageContext.request.contextPath}/js/jquery/jquery.min.js"></script>
 	<script	src="${pageContext.request.contextPath}/js/jquery/popper.js"></script>
-	<script	src="${pageContext.request.contextPath}/js/utiles/utiles.js"></script>
-	<script	src="${pageContext.request.contextPath}/js/jquery/jquery-ui.js"></script>
-	<script src="${pageContext.request.contextPath}/DataTable/js/jquery.dataTables.min.js"></script>
-	<script src="${pageContext.request.contextPath}/js/jquery/jquery.ui.datepicker-es.js"></script>
+<%-- 	<script	src="${pageContext.request.contextPath}/js/utiles/utiles.js"></script> --%>
 	<script	src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-	<script	src="${pageContext.request.contextPath}/js/tablas.js"></script>
-	<script	src="${pageContext.request.contextPath}/js/aprobadas.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery/frappe-gantt.min.js"></script>
+	<script	src="${pageContext.request.contextPath}/js/lineaTiempo.js"></script>
+	
 	
 	
 	</body>

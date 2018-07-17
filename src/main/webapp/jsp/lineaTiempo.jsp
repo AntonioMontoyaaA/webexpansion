@@ -33,7 +33,7 @@
 		</div>
 		
 		<div class="row padding_p">
-				<div class="col-lg-12 menupr_estilos fblanco">
+				<div class="col-lg-12 menupr_estilos fblanco"  style="padding:0;">
 					<!--   aquí va la grafica       -->
 					<svg id="gantt"></svg>
 				
@@ -41,7 +41,92 @@
 		</div>
 		
 		<div class="row padding_p">
-				<div class="col-lg-12 menupr_estilos fblanco" style="height:200px;">x</div>
+				<div class="col-lg-12 menupr_estilos fblanco">
+					<div class="col-12 cabecera">
+					<span class="verde negrita t12" id="nombrepuesto">Gerente de Expansión</span>
+					<div class="float_right"></div>
+					</div>
+					
+					<div class="row">
+						<div class="col-lg-6" style="padding-left:50px;">
+								<div class="row">
+									<div class="col-lg-4">
+										<div class="col-lg-12" style="padding-left:0;">
+											<span class="t12 negrita">Responsable</span> <input
+												type="text" class="form-control campo t12" id="responsable"
+												value="El responsable" readonly>
+										</div>
+										<div class="col-lg-12" style="padding-left:0;">
+											<span class="t12 negrita">Estatus</span> <input type="text"
+												class="form-control campo t12" id="responsable"
+												value="El estatus" readonly>
+										</div>
+										<div class="col-lg-12" style="padding-left:0;">
+											<span class="t12 negrita">Duración</span> <input type="text"
+												class="form-control campo t12" id="responsable"
+												value="La duracion" readonly>
+										</div>
+									</div>
+									<div class="col-lg-8">
+										<span class="t12 negrita">Motivo</span>
+										<textarea class="form-control campo t12" id="motivo" readonly>blablablaaa</textarea>
+										<div class="row">
+											<div class="col-lg-6">
+												<span class="t12 negrita">Completados</span> <input
+													type="text" class="form-control campo t12" id="completados"
+													value="Completados" readonly>
+											</div>
+											<div class="col-lg-6">
+												<span class="t12 negrita">Faltantes</span> <input
+													type="text" class="form-control campo t12" id="faltantes"
+													value="Faltantes" readonly>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						<div class="col-lg-6">
+							<div class="row">
+								<div class="col-lg-6">
+										<div class="col-lg-12" style="padding-left:0;">
+											<span class="t12 negrita">Fecha Inicial</span> 
+											<input type="text" class="form-control campo t12" id="fechainicial"
+												value="17/07/2018 09:48:00am" readonly>
+										</div>
+										<div class="col-lg-12" style="padding-left:0;">
+											<span class="t12 negrita">Fecha Real Estimada</span> 
+											<input type="text" class="form-control campo t12" id="fechareal"
+												value="17/07/2018 09:48:00am" readonly>
+										</div>
+										<div class="col-lg-12" style="padding-left:0;">
+											<span class="t12 negrita">Fecha Final</span> 
+											<input type="text" class="form-control campo t12" id="fechafinal"
+												value="17/07/2018 09:48:00am" readonly>
+										</div>
+								</div>
+								<div class="col-lg-6">
+										<div class="col-lg-12" style="padding-left:0;">
+											<span class="t12 negrita">Dependencia</span> 
+											<input type="text" class="form-control campo t12" id="dependencia"
+												value="Ninguno" readonly>
+										</div>
+										<div class="col-lg-12" style="padding-left:0;">
+											<span class="t12 negrita">Progreso</span>
+											<div class="row" style="padding-left:15px;">
+												<div id="progres_ext" class="progress" style="width:80%;">
+													<div id="progres_int" class="progress-bar" style="width: 90%"></div>
+												</div>
+												<div class="float_right t12" id="porcentaje" style="padding:3px 10px;">90%</div>
+											</div>
+											
+										</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+								
+				</div>
 		</div>
 		
 	</div>

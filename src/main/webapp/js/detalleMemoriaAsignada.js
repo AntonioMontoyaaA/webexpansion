@@ -970,6 +970,8 @@ function initMap(latitudSitio, longitudSitio, listaCompetencias, listaGeneradore
     
     var puntosZonificacion = new Array();
     
+    
+    if(listaCompetencias != undefined){
     for(var i = 0; i < listaCompetencias.length; i++) {
     	puntosZonificacion.push(
     			{
@@ -977,7 +979,9 @@ function initMap(latitudSitio, longitudSitio, listaCompetencias, listaGeneradore
     				type: listaCompetencias[i].competenciaId
     			});
     }
+    }
     
+    if(listaGeneradores != undefined){
     for(var i = 0; i < listaGeneradores.length; i++) {
     	puntosZonificacion.push(
     			{
@@ -985,6 +989,8 @@ function initMap(latitudSitio, longitudSitio, listaCompetencias, listaGeneradore
     				type: listaGeneradores[i].generadorId
     			});
     }
+    }
+    
     puntosZonificacion.push(
 			{
 				position: new google.maps.LatLng(latitudSitio, longitudSitio),

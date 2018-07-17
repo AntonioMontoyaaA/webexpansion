@@ -390,9 +390,10 @@ function buscaDetalleMD(mdId) {
 
 			}
 			/* Datos de la construcción */
-			if(data.construccion != undefined) {
+			if(data.construccion != undefined && data.construccion.factores.EXPANSION != undefined) {
 				var htmlFactores = "";
 				var condicionesGeneralesLocal = "";
+				
 				if(data.construccion.factores.EXPANSION.length > 0) {
 					for(var i = 0; i < data.construccion.factores.EXPANSION.length; i++) {
 						if(data.construccion.factores.EXPANSION[i].nivelId > 2 

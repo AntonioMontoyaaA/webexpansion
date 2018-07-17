@@ -37,25 +37,33 @@ public class TableroInfoAction extends ExpansionAction implements SessionAware, 
 		usuario = (UsuarioLoginVO) usuarioSesion.getAttribute("usr");
 		
 		try {
-			String fecha = ServletActionContext.getRequest().getParameter("fechaConsulta");
-			
-			final OkHttpClient client = new OkHttpClient();
-			FormBody.Builder formBuilder = new FormBody.Builder()
-			 .add("fechaIni", fecha)
-			 .add("usuarioId", String.valueOf(usuario.getPerfil().getNumeroEmpleado()));
-			
-			 RequestBody formBody = formBuilder.build();
-			 Request request = new Request.Builder()
-					 .url(sp.getPropiedad("tableroMemorias"))
-	                 .post(formBody)
-	                 .build();
-			
-			 Response response = client.newCall(request).execute();
-			 respuesta = response.body().string();
-			 HttpServletResponse response2 = ServletActionContext.getResponse();
-				response2.setContentType("application/json");
-				response2.setCharacterEncoding("UTF-8");
-				response2.getWriter().write(respuesta);
+			if(usuario != null) {
+				String fecha = ServletActionContext.getRequest().getParameter("fechaConsulta");
+				
+				final OkHttpClient client = new OkHttpClient();
+				FormBody.Builder formBuilder = new FormBody.Builder()
+				 .add("fechaIni", fecha)
+				 .add("usuarioId", String.valueOf(usuario.getPerfil().getNumeroEmpleado()));
+				
+				 RequestBody formBody = formBuilder.build();
+				 Request request = new Request.Builder()
+						 .url(sp.getPropiedad("tableroMemorias"))
+		                 .post(formBody)
+		                 .build();
+				
+				 Response response = client.newCall(request).execute();
+				 respuesta = response.body().string();
+				 HttpServletResponse response2 = ServletActionContext.getResponse();
+					response2.setContentType("application/json");
+					response2.setCharacterEncoding("UTF-8");
+					response2.getWriter().write(respuesta);
+			} else {
+				RespuestaVo respuestaVo = new RespuestaVo();
+				respuestaVo.setCodigo(501);
+				respuestaVo.setMensaje("Error en la sesión");
+				sendJSONObjectToResponse(respuestaVo);
+				return null;
+			}
 		} catch (Exception e) {
 			String clase  ="clase: "+ new String (Thread.currentThread().getStackTrace()[1].getClassName());	
 			String metodo ="metodo: "+ new String (Thread.currentThread().getStackTrace()[1].getMethodName());

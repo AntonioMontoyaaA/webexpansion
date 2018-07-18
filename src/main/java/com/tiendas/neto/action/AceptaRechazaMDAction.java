@@ -30,7 +30,6 @@ public class AceptaRechazaMDAction extends ActionSupport implements SessionAware
 	Expansionlog elog = new Expansionlog();
 	SingletonProperties sp = SingletonProperties.getInstancia();
 	
-	@Override
 	public String execute() throws Exception {
 		String respuesta="";
 		UsuarioLoginVO usuario = null;
@@ -49,7 +48,7 @@ public class AceptaRechazaMDAction extends ActionSupport implements SessionAware
 			if(usuario == null){
 				RespuestaVo respuestaVo = new RespuestaVo();
 				respuestaVo.setCodigo(501);
-				respuestaVo.setMensaje("Error en la sesiÃ³n");
+				respuestaVo.setMensaje("Error en la sesión");
 				sendJSONObjectToResponse(respuestaVo);
 				
 				return null;
@@ -109,16 +108,15 @@ public class AceptaRechazaMDAction extends ActionSupport implements SessionAware
 	
 	protected void sendJSONObjectToResponse(Object objToSend) {
 		Gson gson = new Gson();
-		String jsonResult = gson.toJson(objToSend);	      
+		String jsonResult = gson.toJson(objToSend);
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		try {
-			response.getWriter().write(jsonResult );
-		} catch (IOException e) {
-		}
+			response.getWriter().write(jsonResult);
+		} catch (IOException e) {}
 	}
-	
+
 	@Override
 	public boolean acceptableParameterName(String parameterName) {
 		boolean allowedParameterName = true ;	     

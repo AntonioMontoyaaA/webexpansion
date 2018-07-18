@@ -20,7 +20,7 @@
 	<c:forEach var="permiso" items="${usr.perfil.perfilesxusuario[0].permisos}">
     	<input type="hidden" class="permisos_detalleMd" rel="${permiso.getFIMODULOID()}" value="${permiso.toJSON()}">
     </c:forEach>
-    
+    <input type="hidden" id="areaUsuario" value="${usr.perfil.areasxpuesto[0].areaId}">
    
 <%@ include file="/jsp/generic/header.jsp" %>
 
@@ -232,24 +232,7 @@
 							</div>
 						</div>
 						<div class="row div_header_sub">
-							<div class="col-lg-4">
-								<div class="col-lg-12">
-									<span class="blanco t12 sangria_cuerpo">VISTA FRONTAL</span>
-								</div>
-								<div class="col-lg-12" style="text-align: center;">
-									<img class="imagenModal" id="vistaFrontalMd"
-										alt="VISTA FRONTAL" style="width: 87%; height: 28%"
-										src="img/no_imagen.png" onclick="modalImage(this)" />
-								</div>
-								<div class="row div_bottom">
-									<div class="col-lg-6" style="text-align: right;">
-										<span id="fechaVistaFrontal" class="footerDetalleMd">---</span>
-									</div>
-									<div class="col-lg-6" style="text-align: left;">
-										<span id="horaVistaFrontal" class="footerDetalleMd">---</span>
-									</div>
-								</div>
-							</div>
+							
 							<div class="col-lg-4">
 								<div class="col-lg-12">
 									<span class="blanco t12 sangria_cuerpo">LATERAL 1</span>
@@ -268,6 +251,26 @@
 									</div>
 								</div>
 							</div>
+							
+							<div class="col-lg-4">
+								<div class="col-lg-12">
+									<span class="blanco t12 sangria_cuerpo">VISTA FRONTAL</span>
+								</div>
+								<div class="col-lg-12" style="text-align: center;">
+									<img class="imagenModal" id="vistaFrontalMd"
+										alt="VISTA FRONTAL" style="width: 87%; height: 28%"
+										src="img/no_imagen.png" onclick="modalImage(this)" />
+								</div>
+								<div class="row div_bottom">
+									<div class="col-lg-6" style="text-align: right;">
+										<span id="fechaVistaFrontal" class="footerDetalleMd">---</span>
+									</div>
+									<div class="col-lg-6" style="text-align: left;">
+										<span id="horaVistaFrontal" class="footerDetalleMd">---</span>
+									</div>
+								</div>
+							</div>
+							
 							<div class="col-lg-4">
 								<div class="col-lg-12">
 									<span class="blanco t12 sangria_cuerpo">LATERAL 2</span>
@@ -473,18 +476,30 @@
 				</div>
 			</div>
 
-			<div class="col-lg-12" style="display: none;">
+			<div class="col-lg-12" " id="manejadorArchivos" style="display: none;">
 				<div class="row divs_p">
 					<div class="col-lg-12 menupr_estilos fazul altura1">
 						<div class="col-12 titulo_seccion">
 							<span class="negrita blanco t14">** Documentos **</span>
 						</div>
 						<div class="row div_header_sub">
-							<div class="col-lg-4">
-								<div id="contenedorDrop" style="width: 100%;height: 290px;"></div>
+							
+							<div class="col-lg-4"><!-- DropZone -->
+								<div style="display: none;" id="msjUploader"></div>
+								<div id="contenedorUploader">
+									<form action="/uploadLayout" class="dropzone" id="uploader"></form>
+									<div class="modal-footer" style="background: #C9C9C9; justify-content: center; height: 63px;">
+										<div id="subeArchivo" class="btn" style="display:none; width: 100px; height: 30px; background: #071B36; padding-top: 4px; cursor: pointer;color: #FFFFFF;">Aceptar</div>
+									</div>
+								</div>
 							</div>
-							<div class="col-lg-4"></div>
-							<div class="col-lg-4"></div>
+							
+							
+							<div class="col-lg-4" id="filesMD"><!-- Files -->
+							
+							</div>
+							
+							<div class="col-lg-4" id="commentsByFile"></div> <!-- Comments -->
 						</div>
 					</div>
 				</div>
@@ -524,6 +539,7 @@
 	<script src="${pageContext.request.contextPath}/js/progress/progressbar.min.js"></script>
 	<script	src="${pageContext.request.contextPath}/js/utiles/utiles.js"></script>
 	<script	src="${pageContext.request.contextPath}/js/dropzone/dropzone.js"></script>
+	<script	src="${pageContext.request.contextPath}/js/dropzone/dateFormat.js"></script>
 	<script	src="${pageContext.request.contextPath}/js/detalleMemoriaAsignada.js"></script>
 	<script	src="${pageContext.request.contextPath}/js/utiles/modalImages.js"></script>
 	</body>

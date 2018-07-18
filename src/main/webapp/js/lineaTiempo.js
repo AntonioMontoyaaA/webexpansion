@@ -1,9 +1,34 @@
 $(function(){
 	
-	inicializaGrantt();
+	consultaLinea();
+	
 	
 });
-function inicializaGrantt(){
+function consultaLinea(){
+	invocarJSONServiceAction("LineaTiempoMdAction", 
+			{'mdId': $('#mdId').val()}, 
+			'obtieneLinea', 
+			function() {
+				//Funcion de error
+				cierraLoading();
+			},
+			function() {
+				//Función al finalizar
+				cierraLoading();
+			});
+
+	obtieneLinea = function( data ) {
+	if(data.codigo != 200){
+		cargaMensajeModal('LINEA DE TIEMPO ', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
+		}
+	if(data.codigo==200) {
+			inicializaGrantt(data.detalleSeguimiento);
+		}
+	}
+}
+
+function inicializaGrantt(data){
+	
 	function stopEvent(event) {
 		event.preventDefault();
 		event.stopPropagation();

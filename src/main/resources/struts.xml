@@ -112,6 +112,12 @@
          	<result name = "success">jsp/asignadas_detalle.jsp</result>
       	</action>
       	
+      	<action name ="subeLayout" 
+         		class = "com.tiendas.neto.action.ManejadorArchivosAction" 
+         		method = "subeLayout">
+         	<result name = "success">jsp/asignadas_detalle.jsp</result>
+      	</action>
+      	
 <!-- **********  autorizadas y rechazadas, aprobadas     -->
 
       <action name = "autorizadas_info" 

@@ -268,3 +268,20 @@ Left
 	color: #FFFFFF !important;
 }
 
+#uploader{
+	width: 100%;
+	height: 210px;
+	background: none;
+	color: rgb(64, 188, 216);
+	border: 2px dashed #0087F7;
+}
+
+#msjUploader{
+	width: 100%;
+	height: 210px;
+	background: none;
+	color: rgb(64, 188, 216);
+	border: 2px dashed #0087F7;
+	text-align: center;
+    padding-top: 100px;
+}

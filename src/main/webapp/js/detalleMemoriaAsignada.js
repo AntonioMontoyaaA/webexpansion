@@ -12,18 +12,27 @@ var PERMISOS = {};
 var ESTATUS_FINALIZA_MD = -1;
 
 var TIPOMD = -1;
+Dropzone.autoDiscover = false;
+var LAYOUT_B64 = '';
+var LAYOUT_Type = '';
+var uploader;
+var dropzoneLayouts;
+var dropzoneOptions;
+var ARCHIVO_SUBIDO = false;
 
+var areaConstruccion = 3;
+var AREA_USUARIO;
 $(function(){
+	TIPOMD = parseInt($("#tipoMd").val());
+	AREA_USUARIO = parseInt($('#areaUsuario').val());
 	
-	if($('#tipoMd').val()==0){
-	$('#idasignadas').addClass('resaltado');
-	$('#titulo_tipo').text('EN PROCESO');
-	}
-	if($('#tipoMd').val()==1){
+	if(TIPOMD == 0){
+		$('#idasignadas').addClass('resaltado');
+		$('#titulo_tipo').text('EN PROCESO');
+	}else if(TIPOMD == 1){
 		$('#idautorizadas').addClass('resaltado');
 		$('#titulo_tipo').text('AUTORIZADAS');
-	}
-	if($('#tipoMd').val()==2){
+	}else if(TIPOMD == 2){
 		$('#idrechazadas').addClass('resaltado');
 		$('#titulo_tipo').text('RECHAZADAS');
 	}
@@ -31,7 +40,7 @@ $(function(){
 	$("#nombreMdTxt").text($("#nombreMd").val());
 	inicializaFactores();
 	parseaPermisos();
-	TIPOMD = parseInt($("#tipoMd").val());
+
 	buscaDetalleMD($("#mdId").val());
 	MOTIVOS_RECHAZO = {};
 	
@@ -40,6 +49,7 @@ $(function(){
 		});
 		
 	funcionesAutorizacion();
+	inicializaDropzone();
 });
 
 function inicializaFactores(){
@@ -146,7 +156,6 @@ function dibujaGraficaAutorizaciones(){
 			$('#rechaza8').addClass('autorizado');
 		}
 	}else{
-
 		$('#autoriza8').hide();
 		$('#rechaza8').hide();
 	}
@@ -393,7 +402,6 @@ function buscaDetalleMD(mdId) {
 			if(data.construccion != undefined && data.construccion.factores.EXPANSION != undefined) {
 				var htmlFactores = "";
 				var condicionesGeneralesLocal = "";
-				
 				if(data.construccion.factores.EXPANSION.length > 0) {
 					for(var i = 0; i < data.construccion.factores.EXPANSION.length; i++) {
 						if(data.construccion.factores.EXPANSION[i].nivelId > 2 
@@ -641,13 +649,20 @@ function cargaComboMotivos(modulo){
 function finalizaMD(estatus){
 	if(TIPOMD == 0){
 		ESTATUS_FINALIZA_MD = estatus;
-
-		if(estatus == 1){
+		permiteAutorizacion = true;
+		if(AREA_USUARIO == areaConstruccion && !ARCHIVO_SUBIDO){
+			permiteAutorizacion = false;
+			cargaMensajeModal('MD ASIGNADAS', 
+					'Debes adjuntar el archivo de layout antes de autorizar',
+					TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA);
+		}
+		
+		if(estatus == 1 && permiteAutorizacion){
 			
 			cargaMensajeModal('MD ASIGNADAS', 
 					'¿Est\u00e1s seguro de autorizar la MD?',
 					TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, actionfinalizaMD);
-		}else if(estatus == 0){
+		}else if(estatus == 0 && permiteAutorizacion){
 			
 			var conRechazo = false;
 			for(i in FACTORES){
@@ -867,13 +882,83 @@ function parseaPermisos(){
 }
 
 function inicializaDropzone(){
-	$('#contenedorDrop').dropzone(
-			{
-				url: "/file/post",
-				addRemoveLinks: true,
-				dictDefaultMessage: "Arrastra el layout o da clic para adjuntar"
-			}
-	);
+
+	if(TIPOMD == 0 && AREA_USUARIO == areaConstruccion){
+		$('#manejadorArchivos').show();
+	}
+	
+	dropzoneOptions = {
+            dictDefaultMessage: 'Arrastra aqui el layout o da clic para buscarlo en tu equipo',
+            dictFallbackMessage: 'Tu explorador no es compatible, actualizalo',
+            dictFileTooBig: 'El archivo es muy grande {{filesize}}, el limite es {{maxFilesize}} MB',
+            dictInvalidFileType: 'Archivo no permitido',
+            dictRemoveFile: 'Eliminar archivo', 
+            dictRemoveFileConfirmation: 'Archivo eliminado',
+            dictMaxFilesExceeded: 'Solo puedes agregar {{maxFiles}} archivo',
+            paramName: "file",
+            autoProcessQueue: false,
+            maxFilesize: 3, // MB
+            maxFiles: 1,
+            addRemoveLinks: true,
+            acceptedFiles: 'image/*,application/pdf,.psd',
+            accept: function(file, done){
+                reader = new FileReader();
+                reader.onload = handleReaderLoad;
+                reader.readAsDataURL(file);
+                
+                LAYOUT_B64 = '';
+                LAYOUT_Type = '';
+                
+                function handleReaderLoad(evt) {
+                	LAYOUT_B64 = evt.target.result;
+                	LAYOUT_Type = file.type;
+                	$('#subeArchivo').show();
+                }
+                done();
+            }
+        };
+	
+        uploader = document.querySelector('#uploader');
+        dropzoneLayouts = new Dropzone(uploader, dropzoneOptions);
+        ARCHIVO_SUBIDO = false;
+        $('#subeArchivo').click(function(){
+        	
+        	cargaLoading();
+        	
+        	mdId = $("#mdId").val();
+        	nombreArchivo = 'LYT' + mdId; 
+        	fecha = new Date().format("dd/mm/yyyy H:MM:ss");
+        	archivo = LAYOUT_B64;
+        	formato = LAYOUT_Type.split('/')[1];
+        	tipoArchivo = 2;
+        	
+        	invocarJSONServiceAction("subeLayout", 
+        			{'mdId': mdId,
+        			'nombreArchivo': nombreArchivo,
+        			'archivo': archivo,
+        			'formato': formato,
+        			'tipoArchivo': tipoArchivo,
+        			'fecha': fecha}, 
+        			'respSubeArchivo', 
+        			function() {
+        				cierraLoading();
+        			},
+        			function() {
+        				cierraLoading();
+        			});
+
+        	respSubeArchivo = function(data){
+        		if(data.codigo != 200){
+        			cargaMensajeModal('MD ASIGNADAS', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR);
+        		}else{
+        			ARCHIVO_SUBIDO = true;
+        			dropzoneLayouts.destroy();
+        			$('#subeArchivo').hide();
+        			$('#contenedorUploader').hide();
+        			$('#msjUploader').html('')
+        		}
+        	}
+        });
 }
 
 Permiso = function(
@@ -971,25 +1056,24 @@ function initMap(latitudSitio, longitudSitio, listaCompetencias, listaGeneradore
     
     var puntosZonificacion = new Array();
     
-    
     if(listaCompetencias != undefined){
-    for(var i = 0; i < listaCompetencias.length; i++) {
-    	puntosZonificacion.push(
-    			{
-    				position: new google.maps.LatLng(listaCompetencias[i].latitud, listaCompetencias[i].longitud),
-    				type: listaCompetencias[i].competenciaId
-    			});
-    }
+	    for(var i = 0; i < listaCompetencias.length; i++) {
+	    	puntosZonificacion.push(
+	    			{
+	    				position: new google.maps.LatLng(listaCompetencias[i].latitud, listaCompetencias[i].longitud),
+	    				type: listaCompetencias[i].competenciaId
+	    			});
+	    }
     }
     
     if(listaGeneradores != undefined){
-    for(var i = 0; i < listaGeneradores.length; i++) {
-    	puntosZonificacion.push(
-    			{
-    				position: new google.maps.LatLng(listaGeneradores[i].latitud, listaGeneradores[i].longitud),
-    				type: listaGeneradores[i].generadorId
-    			});
-    }
+	    for(var i = 0; i < listaGeneradores.length; i++) {
+	    	puntosZonificacion.push(
+	    			{
+	    				position: new google.maps.LatLng(listaGeneradores[i].latitud, listaGeneradores[i].longitud),
+	    				type: listaGeneradores[i].generadorId
+	    			});
+	    }
     }
     
     puntosZonificacion.push(

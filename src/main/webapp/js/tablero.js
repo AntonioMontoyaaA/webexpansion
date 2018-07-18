@@ -1,6 +1,11 @@
 var resultadoTablero = null;
 var datosExcel = "";
 
+var togSrc = [
+    "../img/arrowDown.png",
+    "../img/arrowUp.png"
+];
+
 $(function(){
 	$('#idtablero').addClass('resaltado');
 	inicializaCalendarios();
@@ -17,7 +22,23 @@ $(function(){
 		$("#submitBotonTablero").click();
 	});
 	
+	$(".slide-toggle").click(function(){
+        $(".box").slideToggle();
+    });
+	
 });
+
+function dibujaEstatus(resumen) {
+	var datos = "";
+	var total = 0;
+	
+	for(var i = 0; i < resumen.length; i++) {
+		datos += '<div class="tabla_pendientes" style="width: 65%;"><span>' + resumen[i].estatus + '</span></div><div class="tabla_pendientes" style="width: 35%;"><span>' + resumen[i].total + '</span></div>';
+		total += resumen[i].total;
+	}
+	datos += '<div class="tabla_pendientes" style="border-top: 2px solid #FFF;width: 65%;"><span>Total</span></div><div class="tabla_pendientes" style="border-top: 2px solid #FFF;width: 35%;"><span id="totalPendientes">' + total + '</span></div>';
+	$("#box-inner").html(datos);
+}
 
 function inicializaCalendarios() {
 	$(".ui-datepicker-trigger").hide();
@@ -69,6 +90,10 @@ function creatabla(){
 			datosExcel = data;
 			$("#descargaExcelTablero").show();
 			var datosMemorias = new Array();
+			
+			if(data.resumen != undefined && data.resumen != null && data.resumen != "null") {
+				dibujaEstatus(data.resumen);
+			}
 			
 			for( var i = 0 ; i < resultadoTablero.length; i++){
 				

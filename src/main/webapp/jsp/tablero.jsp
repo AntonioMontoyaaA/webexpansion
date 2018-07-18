@@ -33,9 +33,22 @@
             <div class="col-lg-5"></div>--%>
             
             
-            <div class="col-lg-4 titulogrande azul t18">TABLERO ${usr.perfil.areasxpuesto[0].areaNom}</div>
-            <div class="col-lg-8">
-            
+            <div class="col-lg-2 titulogrande azul t18">TABLERO ${usr.perfil.areasxpuesto[0].areaNom}</div>
+            <div class="col-lg-4">
+            	<div class="slide-toggle">
+            		<div class="row">
+            			<div class="col-lg-6 header_boton" style="border-right: 1px solid #ccc;width: 65%;"><img id="imgTableroPend" src="${pageContext.request.contextPath}/img/arrowDown.png" />&nbsp;&nbsp;&nbsp;Área</div>
+            			<div class="col-lg-6 header_boton" style="width: 35%;">Pendientes</div>
+            		</div>
+            		
+            	</div>
+            	<div class="box" style="display: none;">
+            		<div id="box-inner" class="box-inner">
+            			
+            		</div>
+            	</div>
+            </div>
+            <div class="col-lg-6">
                 <form class="form-inline float-right">
                 <div class="buscador">
                         <input type="text"  placeholder="Buscar" id="buscador" class="form-control buscadorInput t12" onkeyup="ejecutaBusquedaTablero()"/>

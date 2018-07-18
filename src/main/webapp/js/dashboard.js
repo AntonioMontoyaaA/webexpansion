@@ -15,20 +15,24 @@ var legend_e;
 var legend_g;
 var legend_c;
 var legend_o;
+var legend_a;
 var actual;
 var E=0;
 var G=0;
 var C=0;
 var O=0;
+var A=0;
 var sumaE=0;
 var sumaG=0;
 var sumaC=0;
 var sumaO=0;
+var sumaA=0;
 var sum_asignadas=0;
 var sum_atrasadas=0;
 var sum_autorizadas=0;
 var sum_rechazadas=0;
 var sum_totales=0;
+
 var serie_proceso;
 var serie_atrasadas;
 var serie_autorizadas;
@@ -90,10 +94,13 @@ function progGeneral(){
 		G=data.areas.GESTORIA;
 		C=data.areas.CONSTRUCCION;
 		O=data.areas.OPERACIONES;
+		A=data.areas.AUDITORIA;
+		
 		sumaE=E.total;
 		sumaG=G.total;
 		sumaC=C.total;
 		sumaO=O.total;
+		sumaA=A.total;
 		
 
 		serie_proceso='<span class="blanco t14 letra">En Proceso </span>';
@@ -105,6 +112,7 @@ function progGeneral(){
 		legend_g='<span class="negrita t14">GESTORIA</span><br><span class="negrita t14">'+sumaG+'</span>';
 		legend_c='<span class="negrita t14">CONSTRUCCION</span><br><span class="negrita t14">'+sumaC+'</span>';
 		legend_o='<span class="negrita t14">OPERACIONES</span><br><span class="negrita t14">'+sumaO+'</span>';
+		legend_a='<span class="negrita t14">AUDITORIA</span><br><span class="negrita t14">'+sumaA+'</span>';
 		
 		
 		if(areaId==1){
@@ -118,6 +126,10 @@ function progGeneral(){
 		if(areaId==3){
 			legend_c='<span class="blanco t14 negrita">CONSTRUCCION</span><br><span class="negrita t14 blanco">'+sumaC+'</span>';
 			actual=C;
+		}
+		if(areaId==4){
+			legend_a='<span class="blanco t14 negrita">AUDITORIA</span><br><span class="negrita t14 blanco">'+sumaA+'</span>';
+			actual=A;
 		}
 		if(areaId==5){
 			legend_o='<span class="blanco t14 negrita">OPERACIONES</span><br><span class="negrita t14 blanco">'+sumaO+'</span>';

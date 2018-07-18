@@ -483,7 +483,8 @@
 							<span class="negrita blanco t14">** Documentos **</span>
 						</div>
 						<div class="row div_header_sub">
-							<div class="col-lg-4">
+							
+							<div class="col-lg-4"><!-- DropZone -->
 								<div style="display: none;" id="msjUploader"></div>
 								<div id="contenedorUploader">
 									<form action="/uploadLayout" class="dropzone" id="uploader"></form>
@@ -491,10 +492,14 @@
 										<div id="subeArchivo" class="btn" style="display:none; width: 100px; height: 30px; background: #071B36; padding-top: 4px; cursor: pointer;color: #FFFFFF;">Aceptar</div>
 									</div>
 								</div>
-								
 							</div>
-							<div class="col-lg-4"></div>
-							<div class="col-lg-4"></div>
+							
+							
+							<div class="col-lg-4" id="filesMD"><!-- Files -->
+							
+							</div>
+							
+							<div class="col-lg-4" id="commentsByFile"></div> <!-- Comments -->
 						</div>
 					</div>
 				</div>

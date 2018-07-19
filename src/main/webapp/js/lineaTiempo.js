@@ -1,9 +1,10 @@
+var nombre="";
 $(function(){
 	
 	consultaLinea();
 });
 function consultaLinea(){
-	
+
 	invocarJSONServiceAction("lineaTiempoMdAction", 
 			{'mdId': $('#mdId').val()}, 
 			'obtieneLinea', 
@@ -31,7 +32,12 @@ function reformat(fecha){
 	return nuevafecha;
 }
 
+
 function inicializaGrantt(datos){
+	$('#contenedor').text('');
+	$('#contenedor').append('<svg id="gantt"></svg>');
+	
+	
 	var data=datos.detalleSeguimiento;
 	
 	function stopEvent(event) {
@@ -123,22 +129,69 @@ function inicializaGrantt(datos){
 
 	$('.accion').click(function(){
 		var index;
-		var nombre = $(this).attr('data-id');
+		nombre = $(this).attr('data-id');
 		
-		for(var i=0;i<data.length;i++){
-			
+		llenacampos(data);
+		llenacombo(datos.estatus);
+	});
+	
+	$('.cuadroeditar').click(function(){
+		$('.cuadroguardar').show();
+		$('.cuadrocancelar').show();
+		$('.cuadroeditar').hide();
+		$('.grupo').removeAttr("readonly");	
+		$('#responsable').hide();
+		$('#combo_responsables').show();	
+		//$('#estatus').hide();
+		//$('#combo_estatus').show();	
+	});
+	
+	$('.cuadroguardar').click(function(){
+		guardar(datos);
+		consultaLinea();
+	
+		$('.grupo').attr("readonly",true);
+		$('#combo_responsables').hide();
+		$('#responsable').show();
+		$('.cuadroguardar').hide();
+		$('.cuadrocancelar').hide();
+		$('.cuadroeditar').show();
+	
+	});
+	
+	$('.cuadrocancelar').click(function(){
+		$('.grupo').attr("readonly",true);
+		//$('#combo_estatus').hide();
+		//$('#estatus').show();
+		$('#combo_responsables').hide();
+		$('#responsable').show();
+		$('.cuadroguardar').hide();
+		$('.cuadrocancelar').hide();
+		$('.cuadroeditar').show();
+		
+		llenacampos(data);
+		
+	});
+
+function llenacampos(data){
+	
+	var index="";
+		for(var i=0;i<data.length;i++){		
 			if(data[i].nivelEstatusArea==nombre){
 				index=i;
 			}
 		}
 		
 		var responsable=data[index].responsable;
+		var idresponsable=data[index].usuarioIdResponsable;
 		var estatus=data[index].estatus;
 		var duracion=data[index].duracion;
-		var motivo="";
+		var motivo=data[index].motivo;
+		
 		if(motivo.length>1){
-			motivo=data[index].motivo[motivo.length-1];
+			motivo=data[index].motivo[0];
 		}
+		
 		var completados=data[index].completados;
 		var faltantes=data[index].faltantes;
 		var fechainicial=data[index].fechaInicial;
@@ -146,9 +199,12 @@ function inicializaGrantt(datos){
 		var fechafinal=data[index].fechaFinal;
 		var dependencia=data[index].dependencia;
 		var progres_int=data[index].progreso;
+		var nivelestatus=data[index].nivelEstatusAreaId;
 		
 		
+		$('#nivelEstatusAreaId').val(nivelestatus);
 		$('#responsable').val(responsable);
+		$('#responsable').attr("idresponsable",idresponsable);
 		$('#estatus').val(estatus);
 		$('#duracion').val(duracion);
 		$('#motivo').val(motivo);
@@ -162,47 +218,20 @@ function inicializaGrantt(datos){
 		$('#porcentaje').text(progres_int);
 		$('#nombrepuesto').text(nombre);
 		
+		
 		if(data[index].permisoEditar==1){
 			$('.cuadroeditar').show();
 		}
 		else{
 			$('.cuadroeditar').hide();
+			$('.cuadroguardar').hide();
+			$('.cuadrocancelar').hide();
+			
+			$('.grupo').attr("readonly",true);
+			$('#combo_responsables').hide();
+			$('#responsable').show();
 		}
-		
-		llenacombo(datos.estatus);
-	});
-	
-	$('.cuadroeditar').click(function(){
-		$('.cuadroguardar').show();
-		$('.cuadrocancelar').show();
-		$('.cuadroeditar').hide();
-		$('.grupo').removeAttr("readonly");	
-		$('#estatus').hide();
-		$('#combo_estatus').show();
-		
-		
-		
-		
-	});
-	$('.cuadroguardar').click(function(){
-		guardar(datos);
-		
-		$('.cuadroguardar').hide();
-		$('.cuadrocancelar').hide();
-		$('.cuadroeditar').show();
-		
-	});
-	$('.cuadrocancelar').click(function(){
-		$('.grupo').attr("readonly",true);
-		$('#combo_estatus').hide();
-		$('#estatus').show();
-		
-		
-		
-		$('.cuadroguardar').hide();
-		$('.cuadrocancelar').hide();
-		$('.cuadroeditar').show();
-	});
+	}
 }
 
 function llenacombo(estatus){
@@ -220,7 +249,78 @@ function llenacombo(estatus){
 	}
 	$('#combo_estatus').append(html);
 	
+	//llena combo_reponsables
+	
+	
+	invocarJSONServiceAction("comboResponsablesAction", 
+			{'mdId': $('#mdId').val(),
+			 'nivelEstatusAreaId': $('#nivelEstatusAreaId').val()
+			}, 
+			'obtienelistaResponsables', 
+			function() {
+				//Funcion de error
+				cierraLoading();
+			},
+			function() {
+				//Función al finalizar
+				cierraLoading();
+			});
+
+	obtienelistaResponsables = function( data ) {
+	if(data.codigo != 200){
+		cargaMensajeModal('LINEA DE TIEMPO ', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
+		}
+	if(data.codigo==200) {
+		resp="";
+		$('#combo_responsables').text('');
+		var idresponsable=$('#responsable').attr('idresponsable');
+		var responsables=data.responsables;
+		
+		resp=resp+'<option value="">Selecciona usuario.. </option>';
+		for(var i=0;i<responsables.length;i++){
+			var activo="";
+				if(idresponsable==responsables[i].usuarioId){
+					activo="selected";
+				}
+				resp=resp+'<option '+activo+' value="'+responsables[i].usuarioId+'">'+responsables[i].nombre+'</option>';
+			}
+		$('#combo_responsables').append(resp);
+		}
+	}
+	
+	
 }
 function guardar(datos){
 	
+	if($('#motivo').val()!=""){
+
+	invocarJSONServiceAction("guardaLineaTiempoAction", 
+			{'mdId': $('#mdId').val(),
+			'nivelEstatusAreaId': $('#nivelEstatusAreaId').val(),
+			'usuarioIdResponsable': $('#combo_responsables').val(),
+			'fechaFinal': $('#fechareal').val(),
+			'motivo': $('#motivo').val(),
+			}, 
+			'guardaLinea', 
+			function() {
+				//Funcion de error
+				cierraLoading();
+			},
+			function() {
+				//Función al finalizar
+				cierraLoading();
+			});
+
+	guardaLinea = function( data ) {
+	if(data.codigo != 200){
+		cargaMensajeModal('LINEA DE TIEMPO ', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
+		}
+	if(data.codigo==200) {
+		cargaMensajeModal('LINEA DE TIEMPO ', "Se guardaron los datos de forma exitosa", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_EXITO, null);
+		}
+	}
+	}
+	else{
+		cargaMensajeModal('LINEA DE TIEMPO ', "Debes instroducir un motivo", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_EXITO, null);
+	}
 }

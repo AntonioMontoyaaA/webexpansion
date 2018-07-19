@@ -10,7 +10,7 @@ function initTablaMemoriasAsignadas(nombreDiv, datosDesgloseVenta, nombreTabla){
 					'<th  class="gris negrita t14 center puntuacion" style="padding:0;">Puntuación</th>' +
 					'<th class="gris negrita t14">Creador</th>' +
 					'<th class="gris negrita t14">Fecha de creación</th>' +
-					'<th  class="gris negrita t14">Fecha de vecimiento</th>' +
+					'<th  class="gris negrita t14">Fecha de vencimiento</th>' +
 					'<th class="gris negrita t14">Mensajes</th>' +
 					'<th class="oculto">id</th>' +
 				'</tr>'+
@@ -270,6 +270,8 @@ function initTablaMemoriasTablero(nombreDiv, datosDesgloseMemorias, nombreTabla)
 					'<th width="10%" class="gris negrita t12 center txt_expansion" style="padding:0;background: #FFF;">Fecha recepci&oacute;n MD</th>'  +
 					'<th width="10%" class="gris negrita t12 txt_expansion">Fuente MD</th>' +
 					'<th width="10%" class="gris negrita t12 txt_expansion">Nombre de la tda</th>' +
+					'<th width="5%" class="gris negrita t12">Categor&iacute;a</th>' +
+					'<th width="5%" class="gris negrita t12 ">VoBo inicial operaciones</th>' +
 					'<th width="5%" class="gris negrita t12 txt_auditoria">Conteo auditor</th>' +
 					'<th width="5%" class="gris negrita t12 txt_suditoria">Pregestor&iacute;a autorizada</th>' +
 					'<th width="5%" class="gris negrita t12 txt_construccion">Levantamiento realizado</th>' +
@@ -296,6 +298,8 @@ function initTablaMemoriasTablero(nombreDiv, datosDesgloseMemorias, nombreTabla)
 							{"sClass":"izquierda padding padding_right","bSearchable":true},
 				           {"bSearchable":true},
 				           {"sClass":"izquierda padding","bSearchable":true},
+				           {"sClass":"izquierda padding","bSearchable":true},
+				           {"bSearchable":true},
 				           {"sClass":"izquierda padding","bSearchable":true},
 				           {"bSearchable":true},
 				           {"bSearchable":true},

@@ -37,8 +37,9 @@
             <div class="col-lg-4">
             	<div class="slide-toggle">
             		<div class="row">
-            			<div class="col-lg-6 header_boton" style="border-right: 1px solid #ccc;width: 65%;"><img id="imgTableroPend" src="${pageContext.request.contextPath}/img/arrowDown.png" />&nbsp;&nbsp;&nbsp;Área</div>
-            			<div class="col-lg-6 header_boton" style="width: 35%;">Pendientes</div>
+            			<div class="header_boton" style="border-right: 1px solid #ccc;width: 64%;"><img id="imgTableroPend" src="${pageContext.request.contextPath}/img/arrowDown.png" />&nbsp;&nbsp;&nbsp;Área</div>
+            			<div class="header_boton" style="border-right: 1px solid #ccc;width: 17%;padding-left: 10px;">Pendientes</div>
+            			<div class="header_boton" style="width: 17%;padding-left: 10px;">Atrasadas</div>
             		</div>
             		
             	</div>
@@ -76,6 +77,11 @@
     <jsp:include page="/jsp/generic/loading.jsp" />
 <jsp:include page="/jsp/generic/mensajes.jsp" />
 
+<form action='memoria_detalle'  id="detalleMemoriaAsignadaAction" method="post">
+	<input type="hidden" name="mdId" id="mdId" value=""/>
+	<input type="hidden" name="nombreMd" id="nombreMd" value=""/>
+	<input type="hidden" name="tipoMd" id="tipoMd" value=""/>
+</form>
 
 <form style="display: hidden" action="./excelTableroAction" method="POST" id="form">
     <input type="hidden" id="datos" name="datos" value=""/>

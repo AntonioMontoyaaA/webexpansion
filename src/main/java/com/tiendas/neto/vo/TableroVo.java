@@ -12,6 +12,8 @@ public class TableroVo implements Serializable {
 	private String fechaRecepcionMd;
 	private String fuenteMd;
 	private String nombreTda;
+	private String categoria;
+	private String voboInicialOperaciones;
 	private int conteoAuditor;
 	private String pregestoriaAutorizada;
 	private String levantamientoRealizado;
@@ -71,6 +73,30 @@ public class TableroVo implements Serializable {
 	 */
 	public void setNombreTda(String nombreTda) {
 		this.nombreTda = nombreTda;
+	}
+	/**
+	 * @return the categoria
+	 */
+	public String getCategoria() {
+		return categoria;
+	}
+	/**
+	 * @param categoria the categoria to set
+	 */
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
+	}
+	/**
+	 * @return the voboInicialOperaciones
+	 */
+	public String getVoboInicialOperaciones() {
+		return voboInicialOperaciones;
+	}
+	/**
+	 * @param voboInicialOperaciones the voboInicialOperaciones to set
+	 */
+	public void setVoboInicialOperaciones(String voboInicialOperaciones) {
+		this.voboInicialOperaciones = voboInicialOperaciones;
 	}
 	/**
 	 * @return the conteoAuditor
@@ -216,6 +242,7 @@ public class TableroVo implements Serializable {
 	public void setInauguracion(String inauguracion) {
 		this.inauguracion = inauguracion;
 	}
+	
 	
 	
 

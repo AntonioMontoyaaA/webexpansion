@@ -47,6 +47,7 @@ public class ManejadorArchivosAction
 		String fecha = ServletActionContext.getRequest().getParameter("fecha");
 		String monto = ServletActionContext.getRequest().getParameter("monto");
 		String tipoServicio = ServletActionContext.getRequest().getParameter("tipoServicio");
+		
 		try{
 			
 			if(usuario == null){

@@ -187,6 +187,14 @@
       	 method = "execute">
       	 <result name = "SUCCESS">jsp/login.jsp</result>
       	 </action>
+      	 
+      	 <!-- ************************************ ACCIONES SEGUIMIENTO ******* -->
+      	 <action name = "accion_md_action"
+               class = "com.tiendas.neto.action.AccionMdAction"
+               method = "execute">
+           <result name = "success">jsp/aprobadas.jsp</result>
+        </action>
+      	 <!-- ************************************ ACCIONES SEGUIMIENTO ******* -->
       	
       	
 	</package>

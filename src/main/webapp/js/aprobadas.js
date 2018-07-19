@@ -87,7 +87,11 @@ function creatabla(){
 				datosMemoriasAprobadas[i][2] = "<span>" + resultados[i].estatus + '</span>';
 				datosMemoriasAprobadas[i][3] = "<span>" + resultados[i].autorizo + "</span>";
 				datosMemoriasAprobadas[i][4] = "<span>" + resultados[i].fechaCompromiso + "</span>";
-				datosMemoriasAprobadas[i][5] = "<span>" + resultados[i].motivo + "</span>";
+				if(resultados[i].motivo != undefined && resultados[i].motivo != null && resultados[i].motivo != "null") {
+					datosMemoriasAprobadas[i][5] = "<span>" + resultados[i].motivo + "</span>";
+				} else {
+					datosMemoriasAprobadas[i][5] = "<span>-</span>";
+				}
 				datosMemoriasAprobadas[i][6] = resultados[i].mdId;
 				
 			 }	
@@ -231,17 +235,77 @@ function editarMD(nombreMd, mdId){
 	
 }
 function pausarMD(nombreMd, mdId){
-	cargaMensajeModal('MD APROBADAS', 
-			'¿Está seguro de pausar la MD?',
-			TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, '');
+	mdIdEstatus = mdId;
+    cargaMensajeModal('MD APROBADAS', 
+            '¿Está seguro de pausar la MD?',
+            TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, pausaMdAction);
 }
 function rechazarMD(nombreMd, mdId){
-	cargaMensajeModal('MD APROBADAS', 
-			'¿Está seguro de rechazar la MD?',
-			TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, '');
+	mdIdEstatus = mdId;
+    cargaMensajeModal('MD APROBADAS', 
+            '¿Está seguro de rechazar la MD?',
+            TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, rechazaMdAction);
 }
 function cambiarStatusMD(nombreMd, mdId){
-	cargaMensajeModal('MD APROBADAS', 
-			'¿Está seguro de cambiar el estatus de la MD?',
-			TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, '');
+    cargaMensajeModal('MD APROBADAS', 
+            '¿Está seguro de cambiar el estatus de la MD?',
+            TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, '');
+}
+
+var ESTATUS_PAUSA_MD = 21;
+var ESTATUS_CANCELADAS_MD = 17;
+var mdIdEstatus = 0;
+
+function pausaMdAction() {
+    invocarJSONServiceAction("accion_md_action", 
+            {'mdId': mdIdEstatus,
+            'estatusvalidacion': ESTATUS_PAUSA_MD
+            }, 
+            'accionMdResponse', 
+            function() {
+                //Funcion de error
+                
+                cierraLoading();
+            },
+            function() {
+                //Función al finalizar
+                
+                cierraLoading();
+            });
+
+    accionMdResponse = function( data ) {
+        if(data.codigo != 200) {
+            cargaMensajeModal('EDITA MD', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
+        } else {
+            cargaMensajeModal('EDITA MD', "Memoria descriptiva pausada con éxito", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_EXITO, null);
+            refreshAprobadas();
+        }
+    }
+}
+
+function rechazaMdAction() {
+    invocarJSONServiceAction("accion_md_action", 
+            {'mdId': mdIdEstatus,
+            'estatusvalidacion': ESTATUS_CANCELADAS_MD
+            }, 
+            'accionMdResponse', 
+            function() {
+                //Funcion de error
+                
+                cierraLoading();
+            },
+            function() {
+                //Función al finalizar
+                
+                cierraLoading();
+            });
+
+    accionMdResponse = function( data ) {
+        if(data.codigo != 200) {
+            cargaMensajeModal('EDITA MD', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
+        } else {
+            cargaMensajeModal('EDITA MD', "Memoria descriptiva pausada con éxito", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_EXITO, null);
+            refreshAprobadas();
+        }
+    }
 }

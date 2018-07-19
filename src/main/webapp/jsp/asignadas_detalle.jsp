@@ -21,7 +21,8 @@
     	<input type="hidden" class="permisos_detalleMd" rel="${permiso.getFIMODULOID()}" value="${permiso.toJSON()}">
     </c:forEach>
     <input type="hidden" id="areaUsuario" value="${usr.perfil.areasxpuesto[0].areaId}">
-   
+    <input type="hidden" id="nombreAreaUsuario" value="${usr.perfil.areasxpuesto[0].areaNom}">
+    <input type="hidden" id="nombreCompletoUsuario" value="${usr.perfil.nombre} ${usr.perfil.apellidoP} ${usr.perfil.apellidoM}">
 <%@ include file="/jsp/generic/header.jsp" %>
 
 <div class="container-fluid">
@@ -39,7 +40,7 @@
 					<div class="col-lg-9" style="padding-top: 8px">
 						<div class="row div_header menupr_estilos fazul">
 						
-							<div id="gerenteExpansionDiv" class="col-lg-3" style="min-width:200;">
+							<div id="gerenteExpansionDiv" class="col-lg-3 min_width">
 								<div id="circuloAutorizaGerenteExpansion"
 									class="circuloSeguimiento">&nbsp;&nbsp;&nbsp;</div>
 								<div style="position: relative; float: left;">
@@ -64,6 +65,19 @@
 										style="width: 17px; display: none;">
 								</div>
 							</div>
+							
+							<div id="auditoriaDiv" class="col-lg-2 min_width">
+								<div id="circuloAutorizaAuditoria" class="circuloSeguimiento">&nbsp;&nbsp;&nbsp;</div>
+								<div style="position: relative; float: left;">
+									<span class="azul t12">&nbsp;&nbsp; <a
+										id="auditoriaSegPop" tabindex="0" class="blanco t14" role=""
+										data-toggle="popover" data-trigger="focus"
+										data-placement="bottom" data-content="">Auditoria</a>
+									</span> <img id="auditoriaImg" src="img/b_ATRASADAS.png"
+										style="width: 17px; display: none;">
+								</div>
+							</div>
+							
 							<div id="gestoriaDiv" class="col-lg-2 min_width">
 								<div id="circuloAutorizaGestoria" class="circuloSeguimiento">&nbsp;&nbsp;&nbsp;</div>
 								<div style="position: relative; float: left;">
@@ -488,18 +502,25 @@
 								<div style="display: none;" id="msjUploader"></div>
 								<div id="contenedorUploader">
 									<form action="/uploadLayout" class="dropzone" id="uploader"></form>
-									<div class="modal-footer" style="background: #C9C9C9; justify-content: center; height: 63px;">
-										<div id="subeArchivo" class="btn" style="display:none; width: 100px; height: 30px; background: #071B36; padding-top: 4px; cursor: pointer;color: #FFFFFF;">Aceptar</div>
-									</div>
+									<span class="simbolo">$</span>
+									<input id="montoPresupuesto" onkeypress="return isNumberKey(event,this)" style="display: none;">
+									<div id="subeArchivo" class="btn btnBlanco" style="display:none;">Aceptar</div>
 								</div>
 							</div>
 							
 							
-							<div class="col-lg-4" id="filesMD"><!-- Files -->
-							
+							<div class="col-lg-4"><!-- Files -->
+								<div class="filesMD"></div>
 							</div>
-							
-							<div class="col-lg-4" id="commentsByFile"></div> <!-- Comments -->
+							<div class="col-lg-4"><!-- Comments -->
+								<div class="commentsByFile"></div>
+								<div class="commentFileContainer" style="display: none;">
+									<div class="tituloComment"></div>
+									<div id="motivoRechazoLayout"></div>
+									<textarea rows="4" cols="50" id="commentFile"></textarea>
+									<div id="submitComment" class="btn btnBlanco">Aceptar</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>

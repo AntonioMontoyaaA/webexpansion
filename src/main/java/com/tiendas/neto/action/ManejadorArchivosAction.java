@@ -33,7 +33,7 @@ public class ManejadorArchivosAction
 	Expansionlog elog = new Expansionlog();
 	SingletonProperties sp = SingletonProperties.getInstancia();
 	
-	public void subeLayout() throws Exception{
+	public void subeArchivo() throws Exception{
 		String respuesta="";
 		UsuarioLoginVO usuario = null;
 		HttpSession usuarioSesion = ServletActionContext.getRequest().getSession();
@@ -45,7 +45,8 @@ public class ManejadorArchivosAction
 		String formato = ServletActionContext.getRequest().getParameter("formato");
 		String tipoArchivo = ServletActionContext.getRequest().getParameter("tipoArchivo");
 		String fecha = ServletActionContext.getRequest().getParameter("fecha");
-		
+		String monto = ServletActionContext.getRequest().getParameter("monto");
+		String tipoServicio = ServletActionContext.getRequest().getParameter("tipoServicio");
 		try{
 			
 			if(usuario == null){
@@ -56,6 +57,8 @@ public class ManejadorArchivosAction
 				
 			}else{
 				String numeroEmpleado = String.valueOf(usuario.getPerfil().getNumeroEmpleado());
+				if(monto.isEmpty())
+					monto = "''";
 				
 				final OkHttpClient client = new OkHttpClient();
 				
@@ -92,13 +95,13 @@ public class ManejadorArchivosAction
 							.add("mdId", mdId)
 							.add("urlArchivo", url)
 							.add("nombreArchivo", nombreFinal)
-							.add("formato", formato)
-							.add("tipoServicio", "2")
+							.add("monto", monto)
+							.add("tipoServicio", tipoServicio)
 							.add("fecha", fecha);
 					
 					body = builder.build();
 					request = new Request.Builder()
-						.url(sp.getPropiedad("layoutConstruccion"))
+						.url(sp.getPropiedad("guardadocsmontos"))
 						.post(body)
 						.build();
 					

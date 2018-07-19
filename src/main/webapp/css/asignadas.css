@@ -169,6 +169,7 @@ Left
 }
 .min_width{
 	min-width:150px;
+	max-width: 230px;
 }
 .question_mark {
 	padding-left:2px;
@@ -272,16 +273,127 @@ Left
 	width: 100%;
 	height: 210px;
 	background: none;
-	color: rgb(64, 188, 216);
-	border: 2px dashed #0087F7;
+	color: #FFF;
+	border: 1px dashed #0087F7;
+	font-size: 16px;
 }
 
 #msjUploader{
 	width: 100%;
 	height: 290px;
 	background: none;
-	color: rgb(64, 188, 216);
+	color: #FFF;
 	border: 1px dashed #0087F7;
 	text-align: center;
     padding-top: 100px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 16px;
+}
+
+.filesMD{
+	width: 100%;
+	height: 290px;
+	color: #FFF;
+	border: 1px solid #0087F7;
+	font-size: 16px;
+	padding-left: 10px;
+    padding-right: 10px;
+    overflow: auto;
+}
+
+.msjFiles{
+	text-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 100px;
+}
+
+.fileMD{
+	margin-bottom: 5px;
+    cursor: pointer;
+    margin-top: 5px;
+    padding-left: 5px;
+    height: 45px;
+}
+
+.filePendiente{
+	 border: 1px solid rgba(255,255,255,0.1);
+}
+
+.fileRechazado{
+	  border: 1px solid rgba(161, 28, 28, 0.5);
+}
+
+.fileAutorizado{
+	 border: 1px solid rgba(28, 161, 58, 0.5);
+}
+
+.fileMD:hover{
+	background-color: #15335d;
+}
+
+.autorFile{
+	font-size: 10px;
+    font-style: italic;
+    text-transform: capitalize;
+}
+
+.commentsByFile, .commentFileContainer{
+	width: 100%;
+	height: 290px;
+	color: #FFF;
+	border: 1px solid #0087F7;
+	font-size: 16px;
+	text-align: center;
+}
+
+#motivoRechazoLayout{
+    width: 95%;
+    margin: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.btnBlanco{
+    width: 100px;
+    height: 30px;
+    background: #FFF;
+    margin-top: 10px;
+    line-height: 18px;
+    color: #071B36;
+}
+
+.tituloComment{
+	line-height: 35px;
+}
+
+#commentFile{
+	resize: none;
+	width: 95%;
+	height: 140px;
+}
+
+.simbolo{
+    color: #fff;
+    position: relative;
+    top: 7px;	
+}
+
+#montoPresupuesto{
+	width: 350px;
+    position: relative;
+    top: 6px;
+}
+
+.datosFile{
+	float: left;
+	width: 75%;
+}
+
+.actionsFile{
+	text-align: center;
+    line-height: 40px;
+    width: 25%;
+    float: right;
 }

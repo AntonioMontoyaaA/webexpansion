@@ -112,9 +112,9 @@
          	<result name = "success">jsp/asignadas_detalle.jsp</result>
       	</action>
       	
-      	<action name ="subeLayout" 
+      	<action name ="subeArchivo" 
          		class = "com.tiendas.neto.action.ManejadorArchivosAction" 
-         		method = "subeLayout">
+         		method = "subeArchivo">
          	<result name = "success">jsp/asignadas_detalle.jsp</result>
       	</action>
       	

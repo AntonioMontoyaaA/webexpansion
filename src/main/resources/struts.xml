@@ -112,9 +112,9 @@
          	<result name = "success">jsp/asignadas_detalle.jsp</result>
       	</action>
       	
-      	<action name ="subeLayout" 
+      	<action name ="subeArchivo" 
          		class = "com.tiendas.neto.action.ManejadorArchivosAction" 
-         		method = "subeLayout">
+         		method = "subeArchivo">
          	<result name = "success">jsp/asignadas_detalle.jsp</result>
       	</action>
       	
@@ -141,6 +141,14 @@
       	 <action name = "lineaTiempoMdAction" 
          		class = "com.tiendas.neto.action.LineaTiempoMdAction" 
          		method = "execute" />
+         
+          <action name = "comboResponsablesAction" 
+         		class = "com.tiendas.neto.action.LineaTiempoMdAction" 
+         		method = "llenaResponsables" />
+         		
+         <action name = "guardaLineaTiempoAction" 
+         		class = "com.tiendas.neto.action.LineaTiempoMdAction" 
+         		method = "guardar" />
          	
          <action name = "excelAprobadasAction" 
          	class = "com.tiendas.neto.action.excel.ExcelAprobadasAction" 

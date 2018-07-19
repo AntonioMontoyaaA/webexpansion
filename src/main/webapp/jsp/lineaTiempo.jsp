@@ -33,17 +33,14 @@
 		</div>
 		
 		<div class="row padding_p">
-				<div class="col-lg-12 menupr_estilos fblanco"  style="padding:0;">
-					<!--   aquí va la grafica       -->
-					<svg id="gantt"></svg>
-				
-				</div>
+				<div class="col-lg-12 menupr_estilos fblanco" id="contenedor"  style="padding:0;"></div>
 		</div>
 		
 		<div class="row padding_p">
 				<div class="col-lg-12 menupr_estilos fblanco">
 					<div class="col-12 cabecera">
 					<span class="verde negrita t12" id="nombrepuesto">-</span>
+					<input type="hidden" id="nivelEstatusAreaId" name="nivelEstatusAreaId" value="" />
 					
 					<div class="float_right cuadroeditar cursor"></div>
 					<div class="float_right cuadrocancelar cursor"></div>
@@ -56,20 +53,21 @@
 									<div class="col-lg-4">
 										<div class="col-lg-12" style="padding-left:0;">
 											<span class="t12 negrita">Responsable</span> <input
-												type="text" class="form-control campo t12 grupo" id="responsable"
+												type="text" class="form-control campo t12 grupo" id="responsable" 
 												value="-" readonly>
+											<div><select style="display:none;" class="campo t12 grupo" id="combo_responsables"></select></div>
 										</div>
 										
 										<div class="col-lg-12" style="padding-left:0;">
 											<span class="t12 negrita">Estatus</span>
-											<input type="text" class="form-control campo t12 grupo" id="estatus" value="-" readonly>
+											<input type="text" class="form-control campo t12" id="estatus" value="-" readonly>
 												
 												<div><select style="display:none;" class="campo t12 grupo" id="combo_estatus"></select></div>
 										</div>
 										
 										<div class="col-lg-12" style="padding-left:0;">
 											<span class="t12 negrita">Duración (días)</span> <input type="text"
-												class="form-control campo t12 grupo" id="duracion"
+												class="form-control campo t12" id="duracion"
 												value="-" readonly>
 										</div>
 									</div>
@@ -79,12 +77,12 @@
 										<div class="row">
 											<div class="col-lg-6">
 												<span class="t12 negrita">Completados (días)</span> <input
-													type="text" class="form-control campo t12 grupo" id="completados"
+													type="text" class="form-control campo t12" id="completados"
 													value="-" readonly>
 											</div>
 											<div class="col-lg-6">
 												<span class="t12 negrita">Faltantes (días)</span> <input
-													type="text" class="form-control campo t12 grupo" id="faltantes"
+													type="text" class="form-control campo t12" id="faltantes"
 													value="-" readonly>
 											</div>
 										</div>
@@ -101,19 +99,19 @@
 										</div>
 										<div class="col-lg-12" style="padding-left:0;">
 											<span class="t12 negrita">Fecha Real Estimada</span> 
-											<input type="text" class="form-control campo t12" id="fechareal"
+											<input type="text" class="form-control campo t12 grupo" id="fechareal"
 												value="-" readonly>
 										</div>
 										<div class="col-lg-12" style="padding-left:0;">
 											<span class="t12 negrita">Fecha Final</span> 
-											<input type="text" class="form-control campo t12 grupo" id="fechafinal"
+											<input type="text" class="form-control campo t12 " id="fechafinal"
 												value="-" readonly>
 										</div>
 								</div>
 								<div class="col-lg-6">
 										<div class="col-lg-12" style="padding-left:0;">
 											<span class="t12 negrita">Dependencia</span> 
-											<input type="text" class="form-control campo t12 grupo" id="dependencia"
+											<input type="text" class="form-control campo t12" id="dependencia"
 												value="-" readonly>
 										</div>
 										<div class="col-lg-12" style="padding-left:0;">

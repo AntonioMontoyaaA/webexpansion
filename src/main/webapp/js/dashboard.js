@@ -135,8 +135,6 @@ function progGeneral(){
 			legend_o='<span class="blanco t14 negrita">OPERACIONES</span><br><span class="negrita t14 blanco">'+sumaO+'</span>';
 			actual=O;
 		}
-	//perfil=4; //dir_area
-	//perfil=3; //dir_general
 	
 	if(perfil==3){
 	  $('.dir_general').show();

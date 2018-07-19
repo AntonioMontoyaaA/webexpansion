@@ -19,9 +19,15 @@ var uploader;
 var dropzoneLayouts;
 var dropzoneOptions;
 var ARCHIVO_SUBIDO = false;
-
+var ARCHIVOS_MD;
 var areaConstruccion = 3;
+var areaOperaciones = 5;
 var AREA_USUARIO;
+
+var ESTATUS_MD;
+
+var ESTATUS_PRESUPUESTO_CONSTRUCCION = 10;
+var ESTATUS_PRESUPUESTO_AUDITORIA = 11;
 $(function(){
 	TIPOMD = parseInt($("#tipoMd").val());
 	AREA_USUARIO = parseInt($('#areaUsuario').val());
@@ -35,7 +41,14 @@ $(function(){
 	}else if(TIPOMD == 2){
 		$('#idrechazadas').addClass('resaltado');
 		$('#titulo_tipo').text('RECHAZADAS');
+	}else if(TIPOMD == 3){
+		$('#idaprobadas').addClass('resaltado');
+		$('#titulo_tipo').text('APROBADAS');
+	}else if(TIPOMD == 5){
+		$('#idtablero').addClass('resaltado');
+		$('#titulo_tipo').text('TABLERO');
 	}
+	
 	
 	$("#nombreMdTxt").text($("#nombreMd").val());
 	inicializaFactores();
@@ -49,7 +62,6 @@ $(function(){
 		});
 		
 	funcionesAutorizacion();
-	inicializaDropzone();
 });
 
 function inicializaFactores(){
@@ -66,6 +78,12 @@ function validaEstatusAtencion(estatus, idObjetos){
 	
 	$('#autoriza8').hide();
 	$('#rechaza8').hide();
+	
+	if(TIPOMD > 2){
+		$('#autoriza' + idObjetos).hide();
+		$('#rechaza' + idObjetos).hide();
+		return;
+	}
 	
 	if(PERMISOS[idObjetos] != undefined && PERMISOS[idObjetos].permiteAutorizar == 1){
 		
@@ -128,7 +146,11 @@ function dibujaGraficaAutorizaciones(){
 		  svgStyle: null
 		});
 	
-	progreso = atendidos/TOTAL_ATENCIONES;
+	if(TIPOMD != 3)
+		progreso = atendidos/TOTAL_ATENCIONES;
+	else
+		progreso = 1;
+	
 	bar.set(progreso, {
 	    from: {color: '#000000', width: 5},
 	    to: {color: "#00FF00", width: 5} });
@@ -275,6 +297,21 @@ function dibujaAreasCompletadas(AREAS){
 				$("#operacionesImg").css("display", "inline");
 			}
 			
+		}else if(AREAS[i].AUDITORIA != undefined && 
+				AREAS[i].AUDITORIA.length > 0) {
+			$("#auditoriaDiv").css("cursor", "pointer");
+			$("#circuloAutorizaAuditoria").addClass("circuloSeguimientoAprobado");
+				
+			var contentPopAuditoria = generaPopAutorizacion('Autorización Auditoria', AREAS[i].AUDITORIA[0]);
+				
+			$("#auditoriaSegPop").popover({
+				html: true, 
+				content : contentPopAuditoria
+			});
+				
+			if(AREAS[i].AUDITORIA[0].diasVencidos > 0) {
+				$("#auditoriaImg").css("display", "inline");
+			}
 		}
 		
 	}
@@ -300,9 +337,11 @@ function buscaDetalleMD(mdId) {
 	obtieneDetalleMdResponse = function( data ) {
 	 
 		if(data.codigo != 200) {
-			cargaMensajeModal('MD ASIGNADAS', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, redireccionaAsignadas);
+			cargaMensajeModal('DETALLE MD', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, redireccionaAsignadas);
 		} else {
 			MOTIVOS_RECHAZO = {};
+			ARCHIVOS_MD = new Array();
+			
 			$("#mdIdAutorizacion").val(mdId);
 			ESTATUS_FINALIZA_MD = -1;
 			
@@ -352,9 +391,9 @@ function buscaDetalleMD(mdId) {
 			/* Datos de la superficie */
 			if(data.superficie != undefined) {
 				$("#puntosSuperficie").text(data.superficie.puntos);
-				$("#frenteMd").text(data.superficie.frente + " mts");
-				$("#profundidadMd").text(data.superficie.profundidad + " mts");
-				$("#tamanioTotalMd").html(data.superficie.total + " mts<sup>2</sup>");
+				$("#frenteMd").text(formato(data.superficie.frente, true) + " mts");
+				$("#profundidadMd").text(formato(data.superficie.profundidad, true) + " mts");
+				$("#tamanioTotalMd").html(formato(data.superficie.total, true) + " mts<sup>2</sup>");
 				$("#vistaFrontalMd").attr("src", data.superficie.vistaFrontal);
 				$("#fechaVistaFrontal").text(data.superficie.fechaFrontal);
 				$("#horaVistaFrontal").text(data.superficie.horaFrontal);
@@ -468,6 +507,56 @@ function buscaDetalleMD(mdId) {
 			
 			
 			dibujaGraficaAutorizaciones();
+			
+			/* DATOS Seguimiento */
+			if(data.seguimiento != undefined) {
+				if(data.seguimiento.PRECONSTRUCCION != undefined
+						&& data.seguimiento.PRECONSTRUCCION != null){
+					
+					ARCHIVOS_MD =  new Array();
+					$.each(data.seguimiento.PRECONSTRUCCION, function(i,item){
+						nombres = item.urllayout.split('/');
+						name = nombres[nombres.length -1];
+						
+						ARCHIVOS_MD.push(new Archivo(
+	        					name,
+	        					item.urllayout,
+	        					2,
+	        					$('#nombreCompletoUsuario').val(),
+	        					$('#nombreAreaUsuario').val(),
+	        					null, null));
+					});
+					ARCHIVOS_MD[ARCHIVOS_MD.length -1].estatus = 0;
+				}
+			}
+			
+			estatus = 10;//TODO
+			
+			ESTATUS_MD = estatus;
+			if(ESTATUS_MD == ESTATUS_PRESUPUESTO_CONSTRUCCION
+					&& TIPOMD == 3 && AREA_USUARIO == areaConstruccion){
+				ARCHIVOS_MD =  new Array();
+				if(data.seguimiento != undefined) {
+					if(data.seguimiento.PRESUPUESTOOBRA != undefined
+							&& data.seguimiento.PRESUPUESTOOBRA != null){
+						
+						$.each(data.seguimiento.PRESUPUESTOOBRA, function(i,item){
+							nombres = item.urllayout.split('/');
+							name = nombres[nombres.length -1];
+							
+							ARCHIVOS_MD.push(new Archivo(
+		        					name,
+		        					item.urllayout,
+		        					2,
+		        					$('#nombreCompletoUsuario').val(),
+		        					$('#nombreAreaUsuario').val(),
+		        					null, null));
+						});
+						ARCHIVOS_MD[ARCHIVOS_MD.length -1].estatus = 0;
+					}
+				}
+			}
+			inicializaDropzone();
 		}
 	}
 }
@@ -652,14 +741,14 @@ function finalizaMD(estatus){
 		permiteAutorizacion = true;
 		if(AREA_USUARIO == areaConstruccion && !ARCHIVO_SUBIDO){
 			permiteAutorizacion = false;
-			cargaMensajeModal('MD ASIGNADAS', 
+			cargaMensajeModal('DETALLE MD', 
 					'Debes adjuntar el archivo de layout antes de autorizar',
 					TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA);
 		}
 		
 		if(estatus == 1 && permiteAutorizacion){
 			
-			cargaMensajeModal('MD ASIGNADAS', 
+			cargaMensajeModal('DETALLE MD', 
 					'¿Est\u00e1s seguro de autorizar la MD?',
 					TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, actionfinalizaMD);
 		}else if(estatus == 0 && permiteAutorizacion){
@@ -673,7 +762,7 @@ function finalizaMD(estatus){
 			}
 			
 			if(conRechazo){
-				cargaMensajeModal('MD ASIGNADAS', 
+				cargaMensajeModal('DETALLE MD', 
 						'¿Est\u00e1s seguro de rechazar la MD?',
 						TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, actionfinalizaMD);
 			}else{
@@ -709,12 +798,12 @@ function actionfinalizaMD(motivo, comment){
 	
 	responseFinalizacion = function(data){
 		if(data.codigo != 200){
-			cargaMensajeModal('MD ASIGNADAS', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, redireccionaAsignadas);
+			cargaMensajeModal('DETALLE MD', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, redireccionaAsignadas);
 		}else{
 			if(ESTATUS_FINALIZA_MD == 1)
-				cargaMensajeModal('MD ASIGNADAS', 'Autorizaci\u00f3n exitosa', TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_EXITO, redireccionaAsignadas);
+				cargaMensajeModal('DETALLE MD', 'Autorizaci\u00f3n exitosa', TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_EXITO, redireccionaAsignadas);
 			else if(ESTATUS_FINALIZA_MD == 0)
-				cargaMensajeModal('MD ASIGNADAS', 'Rechazo exitoso', TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_EXITO, redireccionaAsignadas);
+				cargaMensajeModal('DETALLE MD', 'Rechazo exitoso', TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_EXITO, redireccionaAsignadas);
 		}
 	}
 }
@@ -743,7 +832,7 @@ function funcionesAutorizacion(){
 				autoriza(motivoSeleccionado);
 			else{
 				$("#modal_autorizacion").modal("hide");
-				cargaMensajeModal('MD ASIGNADAS', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, muestraPopAutorizacion);
+				cargaMensajeModal('DETALLE MD', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, muestraPopAutorizacion);
 			}
 		}
 		
@@ -778,7 +867,7 @@ function autoriza(motivoSeleccionado){
 
 function responseAutorizacion(data){
 	if(data.codigo != 200){
-		cargaMensajeModal('MD ASIGNADAS', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, redireccionaAsignadas);
+		cargaMensajeModal('DETALLE MD', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, redireccionaAsignadas);
 	}else{
 		
 		moduloEjecutado = $("#moduloId").val();
@@ -834,7 +923,7 @@ function consultaMotivosRechazo(modulo, tipo){
 
 	almacenaMotivosRechazo = function(data){
 		if(data.codigo != 200){
-			cargaMensajeModal('MD ASIGNADAS', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, redireccionaAsignadas);
+			cargaMensajeModal('DETALLE MD', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, redireccionaAsignadas);
 		}else{
 			if(data.motivos != undefined){
 				motivos = {};
@@ -885,81 +974,405 @@ function inicializaDropzone(){
 
 	if(TIPOMD == 0 && AREA_USUARIO == areaConstruccion){
 		$('#manejadorArchivos').show();
-	}
-	
-	dropzoneOptions = {
-            dictDefaultMessage: 'Arrastra aqui el layout o da clic para buscarlo en tu equipo',
-            dictFallbackMessage: 'Tu explorador no es compatible, actualizalo',
-            dictFileTooBig: 'El archivo es muy grande {{filesize}}, el limite es {{maxFilesize}} MB',
-            dictInvalidFileType: 'Archivo no permitido',
-            dictRemoveFile: 'Eliminar archivo', 
-            dictRemoveFileConfirmation: 'Archivo eliminado',
-            dictMaxFilesExceeded: 'Solo puedes agregar {{maxFiles}} archivo',
-            paramName: "file",
-            autoProcessQueue: false,
-            maxFilesize: 3, // MB
-            maxFiles: 1,
-            addRemoveLinks: true,
-            acceptedFiles: 'image/*,application/pdf,.psd',
-            accept: function(file, done){
-                reader = new FileReader();
-                reader.onload = handleReaderLoad;
-                reader.readAsDataURL(file);
-                
-                LAYOUT_B64 = '';
-                LAYOUT_Type = '';
-                
-                function handleReaderLoad(evt) {
-                	LAYOUT_B64 = evt.target.result;
-                	LAYOUT_Type = file.type;
-                	$('#subeArchivo').show();
-                }
-                done();
-            }
-        };
-	
-        uploader = document.querySelector('#uploader');
-        dropzoneLayouts = new Dropzone(uploader, dropzoneOptions);
-        ARCHIVO_SUBIDO = false;
-        $('#subeArchivo').click(function(){
-        	
-        	cargaLoading();
-        	
-        	mdId = $("#mdId").val();
-        	nombreArchivo = 'LYT' + mdId; 
-        	fecha = new Date().format("dd/mm/yyyy H:MM:ss");
-        	archivo = LAYOUT_B64;
-        	formato = LAYOUT_Type.split('/')[1];
-        	tipoArchivo = 2;
-        	
-        	invocarJSONServiceAction("subeLayout", 
-        			{'mdId': mdId,
-        			'nombreArchivo': nombreArchivo,
-        			'archivo': archivo,
-        			'formato': formato,
-        			'tipoArchivo': tipoArchivo,
-        			'fecha': fecha}, 
-        			'respSubeArchivo', 
-        			function() {
-        				cierraLoading();
-        			},
-        			function() {
-        				cierraLoading();
-        			});
+		$('#montoPresupuesto').hide();
+		
+		dropzoneOptions = {
+	            dictDefaultMessage: 'Arrastra aqui el layout o da clic para buscarlo en tu equipo',
+	            dictFallbackMessage: 'Tu explorador no es compatible, actualizalo',
+	            dictFileTooBig: 'El archivo es muy grande {{filesize}}, el limite es {{maxFilesize}} MB',
+	            dictInvalidFileType: 'Archivo no permitido',
+	            dictRemoveFile: 'Eliminar archivo', 
+	            dictRemoveFileConfirmation: 'Archivo eliminado',
+	            dictMaxFilesExceeded: 'Solo puedes agregar {{maxFiles}} archivo',
+	            paramName: "file",
+	            autoProcessQueue: false,
+	            maxFilesize: 3, // MB
+	            maxFiles: 1,
+	            addRemoveLinks: true,
+	            acceptedFiles: 'image/*,application/pdf,.psd',
+	            accept: function(file, done){
+	                reader = new FileReader();
+	                reader.onload = handleReaderLoad;
+	                reader.readAsDataURL(file);
+	                
+	                LAYOUT_B64 = '';
+	                LAYOUT_Type = '';
+	                
+	                function handleReaderLoad(evt) {
+	                	LAYOUT_B64 = evt.target.result;
+	                	LAYOUT_Type = file.type;
+	                	$('#subeArchivo').show();
+	                }
+	                done();
+	            }
+	        };
+		
+	        uploader = document.querySelector('#uploader');
+	        dropzoneLayouts = new Dropzone(uploader, dropzoneOptions);
+	        ARCHIVO_SUBIDO = false;
+	        
+	        dibujaArchivos();
+	        $('#subeArchivo').unbind('click');
+	        $('#subeArchivo').click(function(){
+	        	
+	        	cargaLoading();
+	        	
+	        	mdId = $("#mdId").val();
+	        	nombreArchivo = 'LYT' + mdId; 
+	        	fecha = new Date().format("dd/mm/yyyy H:MM:ss");
+	        	archivo = LAYOUT_B64;
+	        	formato = LAYOUT_Type.split('/')[1];
+	        	tipoArchivo = 2;
+	        	tipoServicio = 1;
+	        	
+	        	invocarJSONServiceAction("subeArchivo", 
+	        			{'mdId': mdId,
+	        			'nombreArchivo': nombreArchivo,
+	        			'archivo': archivo,
+	        			'formato': formato,
+	        			'tipoArchivo': tipoArchivo,
+	        			'tipoServicio' : tipoServicio,
+	        			'fecha': fecha,
+	        			'monto': ''}, 
+	        			'respSubeArchivo', 
+	        			function() {
+	        				cierraLoading();
+	        			},
+	        			function() {
+	        				cierraLoading();
+	        			});
 
-        	respSubeArchivo = function(data){
-        		if(data.codigo != 200){
-        			cargaMensajeModal('MD ASIGNADAS', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR);
-        		}else{
-        			ARCHIVO_SUBIDO = true;
-        			dropzoneLayouts.destroy();
-        			$('#subeArchivo').hide();
-        			$('#contenedorUploader').hide();
-        			$('#msjUploader').html('')
-        		}
-        	}
-        });
+	        	respSubeArchivo = function(data){
+	        		if(data.codigo != 200){
+	        			cargaMensajeModal('DETALLE MD', 'No se logro cargar el archivo, por favor reintenta', TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR);
+	        		}else{
+	        			ARCHIVO_SUBIDO = true;
+	        			dropzoneLayouts.destroy();
+	        			$('#subeArchivo').hide();
+	        			$('#contenedorUploader').hide();
+	        			$('#msjUploader').html('¡Felicidades! El archivo fue cargado con exito. Deberás esperar a que el layout sea validado por el area correspondiente.');
+	        			$('#msjUploader').show();
+	        			ARCHIVOS_MD.push(new Archivo(
+	        					nombreArchivo,
+	        					data.url,
+	        					0,
+	        					$('#nombreCompletoUsuario').val(),
+	        					$('#nombreAreaUsuario').val(),
+	        					null, null));
+	        			dibujaArchivos();
+	        		}
+	        	}
+	        });
+	}else if(TIPOMD == 3 && AREA_USUARIO == areaOperaciones){
+		$('#manejadorArchivos').show();
+		$('#subeArchivo').hide();
+		$('#montoPresupuesto').hide();
+		$('#contenedorUploader').hide();
+		if (ARCHIVOS_MD.length > 0)
+			$('#msjUploader').html('Deberás autorizar el layout.');
+		else
+			$('#msjUploader').html('Deberás esperar a que el layout sea cargado por el area correspondiente');
+		
+		$('#msjUploader').show();
+		
+		dibujaArchivos();
+	}else if(TIPOMD == 3 
+			&& AREA_USUARIO == areaConstruccion 
+			&& ESTATUS_MD == ESTATUS_PRESUPUESTO_CONSTRUCCION){
+		$('#manejadorArchivos').show();
+		$('#montoPresupuesto').show();
+		$('#montoPresupuesto').attr('placeholder', 'Captura el monto toal de presupuesto');
+		$('#subeArchivo').show();
+		
+		dropzoneOptions = {
+	            dictDefaultMessage: 'Arrastra aqui el detalle de presupuesto o da clic para buscarlo en tu equipo',
+	            dictFallbackMessage: 'Tu explorador no es compatible, actualizalo',
+	            dictFileTooBig: 'El archivo es muy grande {{filesize}}, el limite es {{maxFilesize}} MB',
+	            dictInvalidFileType: 'Archivo no permitido',
+	            dictRemoveFile: 'Eliminar archivo', 
+	            dictRemoveFileConfirmation: 'Archivo eliminado',
+	            dictMaxFilesExceeded: 'Solo puedes agregar {{maxFiles}} archivo',
+	            paramName: "file",
+	            autoProcessQueue: false,
+	            maxFilesize: 3, // MB
+	            maxFiles: 1,
+	            addRemoveLinks: true,
+	            acceptedFiles: 'image/*,application/pdf,.psd',
+	            accept: function(file, done){
+	                reader = new FileReader();
+	                reader.onload = handleReaderLoad;
+	                reader.readAsDataURL(file);
+	                
+	                LAYOUT_B64 = '';
+	                LAYOUT_Type = '';
+	                
+	                function handleReaderLoad(evt) {
+	                	LAYOUT_B64 = evt.target.result;
+	                	LAYOUT_Type = file.type;
+	                	$('#subeArchivo').show();
+	                }
+	                done();
+	            }
+	        };
+		
+	        uploader = document.querySelector('#uploader');
+	        dropzoneLayouts = new Dropzone(uploader, dropzoneOptions);
+	        ARCHIVO_SUBIDO = false;
+	        
+	        dibujaArchivos();
+	        $('#subeArchivo').unbind('click');
+	        $('#subeArchivo').click(function(){
+	        	
+	        	cargaLoading();
+	        	
+	        	mdId = $("#mdId").val();
+	        	nombreArchivo = 'LYT' + mdId; 
+	        	fecha = new Date().format("dd/mm/yyyy H:MM:ss");
+	        	archivo = LAYOUT_B64;
+	        	formato = LAYOUT_Type.split('/')[1];
+	        	tipoArchivo = 2;
+	        	tipoServicio = 1;
+	        	monto = $('#montoPresupuesto').val();
+	        	
+	        	mensaje = '';
+	        	
+	        	if(monto == '')
+	        		mensaje = 'Escribe el monto total presupuestado';
+	        	if(LAYOUT_B64 == ''){
+	        		if(mensaje == '')
+	        			mensaje = 'Carga el archivo detalle del presupuesto';
+	        		else
+	        			mensaje = 'Carga el archivo detalle del presupuesto y escribe el monto total presupuestado';
+	        	}
+	        	
+	        	if(mensaje == ''){
+		        	monto = format(monto);
+		        	$('#montoPresupuesto').val(monto);
+		        	
+		        	invocarJSONServiceAction("subeArchivo", 
+		        			{'mdId': mdId,
+		        			'nombreArchivo': nombreArchivo,
+		        			'archivo': archivo,
+		        			'formato': formato,
+		        			'tipoArchivo': tipoArchivo,
+		        			'tipoServicio' : tipoServicio,
+		        			'fecha': fecha,
+		        			'monto': ''}, 
+		        			'respSubeArchivo', 
+		        			function() {
+		        				cierraLoading();
+		        			},
+		        			function() {
+		        				cierraLoading();
+		        			});
+
+		        	respSubeArchivo = function(data){
+		        		if(data.codigo != 200){
+		        			cargaMensajeModal('DETALLE MD', 'No se logro cargar el archivo, por favor reintenta', TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR);
+		        		}else{
+		        			ARCHIVO_SUBIDO = true;
+		        			dropzoneLayouts.destroy();
+		        			$('#subeArchivo').hide();
+		        			$('#contenedorUploader').hide();
+		        			$('#msjUploader').html('¡Felicidades! El archivo fue cargado con exito. Deberás esperar a que el layout sea validado por el area correspondiente.');
+		        			$('#msjUploader').show();
+		        			ARCHIVOS_MD.push(new Archivo(
+		        					nombreArchivo,
+		        					data.url,
+		        					0,
+		        					$('#nombreCompletoUsuario').val(),
+		        					$('#nombreAreaUsuario').val(),
+		        					null, null));
+		        			dibujaArchivos();
+		        		}
+		        	}
+	        	}else
+	        		cargaMensajeModal('DETALLE MD', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR);
+	        });
+	}
 }
+
+function dibujaArchivos(){
+	$('.filesMD').html('');
+	if(ARCHIVOS_MD.length == 0){
+		$('.filesMD').html('<div class="msjFiles">La MD no cuenta con archivos</div>');
+	}else{
+		strArchivos = '';
+		if(AREA_USUARIO == areaConstruccion){
+			$.each(ARCHIVOS_MD, function(i, item){
+				if(item.estatus == 0){
+					clase = 'filePendiente';
+					ARCHIVO_SUBIDO = true;
+				}else if(item.estatus == 1)
+					clase = 'fileAutorizado';
+				else if(item.estatus == 2)
+					clase = 'fileRechazado';
+				else
+					clase = 'filePendiente';
+				
+				strArchivos = '<div class="fileMD ' + clase + '">'
+									+ '<div class="datosFile" rel="' + i + '">'
+										+ '<div class="nombreFile">' + item.nombre + '</div>'
+										+ '<div class="autorFile">' + item.autor + '/' + item.areaAutor + '</div>'
+									+ '</div>'
+									+ '<div class="actionsFile">'
+											+ '<span> <img title="Descargar archivo" onclick="descargaArchivo(' + i + ');" style="cursor: pointer;" src="img/iconos_DOWNLOAD.png">&nbsp;'
+									+ '</div>'
+								+ '</div>' +strArchivos;
+			});
+		}else if(AREA_USUARIO == areaOperaciones){
+			$.each(ARCHIVOS_MD, function(i, item){
+				strAcciones = '<span> <img title="Descargar archivo" onclick="descargaArchivo(' + i + ');" style="cursor: pointer;" src="img/iconos_DOWNLOAD.png">&nbsp;';
+				if(item.estatus == 0){
+					clase = 'filePendiente';
+					strAcciones = '<span> <img title="Descargar archivo" onclick="descargaArchivo(' + i + ');" style="cursor: pointer;" src="img/iconos_DOWNLOAD.png">&nbsp;'
+						+ '<span> <img title="Autorizar layout" class="sin_autorizar" onclick="autorizaArchivo(1, ' + i + ', this);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;'
+						+ '<span> <img title="Rechazar layout" class="sin_autorizar" onclick="autorizaArchivo(0, ' + i + ', this);" style="cursor: pointer;" src="img/rechaza_mark.png">&nbsp;';
+				}else if(item.estatus == 1)
+					clase = 'fileAutorizado';
+				else if(item.estatus == 2)
+					clase = 'fileRechazado';
+				else
+					clase = 'filePendiente';
+				
+				strArchivos = '<div class="fileMD ' + clase + '">'
+									+ '<div class="datosFile" rel="' + i + '">'
+										+ '<div class="nombreFile">' + item.nombre + '</div>'
+										+ '<div class="autorFile">' + item.autor + '/' + item.areaAutor + '</div>'
+									+ '</div>'
+									+ '<div class="actionsFile">'
+											+ strAcciones
+									+ '</div>'
+								+ '</div>' +strArchivos;
+			});
+		}
+		
+		
+		$('.filesMD').html(strArchivos);
+		
+		$('.datosFile').unbind('click');
+		$('.datosFile').click(function(){
+			id = parseInt($(this).attr('rel'));
+			
+			if(ARCHIVOS_MD[id]  == undefined || ARCHIVOS_MD[id].comentario == null)
+				$('.commentsByFile').html('<div class="msjFiles">El archivo no cuenta con comentarios</div>');
+			else
+				$('.commentsByFile').html('<div class="msjFiles">"' + ARCHIVOS_MD[id].comentario + '" - ' + ARCHIVOS_MD[id].autorCometario + '</div>');
+		});
+	}
+} 
+
+function isNumberKey(evt, obj) {
+    var charCode = (evt.which) ? evt.which : event.keyCode
+    var value = obj.value;
+    var dotcontains = value.indexOf(".") != -1;
+    if (dotcontains)
+        if (charCode == 46) return false;
+    if (charCode == 46) return true;
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+    return true;
+}
+
+function autorizaArchivo(autoriza, id, btn){
+	if($(btn).hasClass('sin_autorizar')){
+		$('.commentsByFile').hide();
+		
+		if(autoriza == 0){
+			obtieneMotivosGenerales('motivoRechazoLayout');
+			$('.tituloComment').html('Selecciona un motivo de rechazo y escribe un comentario');
+			$('#commentFile').val('');
+		}else{
+			$('.tituloComment').html('¿Deseas comentar algo acerca del layout?');
+			$('#motivoRechazoLayout').hide();
+			$('#commentFile').val('');
+		}
+		
+		$('.commentFileContainer').show();
+		
+		$('#submitComment').unbind('click');
+		$('#submitComment').click(function(){
+			comentario = $('#commentFile').val();
+			ESTATUS_FINALIZA_MD = autoriza;
+			if(autoriza == 0){
+				motivo = $('#motivoRechazoLyt option:selected').val();
+				mensaje = '';
+				
+				if(comentario == '')
+					mensaje += 'Porfavor escriba el motivo de rechazo';
+				if(motivo == 0){
+					if(mensaje == '')
+						mensaje += 'Por favor selecciona el motivo de rechazo';
+					else
+						mensaje = 'Porfavor escriba el mensaje y seleccione el motivo de rechazo';
+				}
+				
+				if(mensaje == '')
+					actionfinalizaMD(motivo, comentario);
+				else
+					cargaMensajeModal('DETALLE MD', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR);
+			}else{
+				motivo = 0;
+				actionfinalizaMD(motivo, comentario);
+			}
+		});
+	}
+}
+
+function obtieneMotivosGenerales(combo){
+	
+	invocarJSONServiceAction("motivosRechazo", 
+			{'modulo': 0,
+			'tipoModulo': 1}, 
+			'setMotivosGenerales', 
+			function() {
+				cierraLoading();
+			},
+			function() {
+				cierraLoading();
+			});
+
+	setMotivosGenerales = function(data){
+		if(data.codigo != 200){
+			cargaMensajeModal('DETALLE MD', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, redireccionaAsignadas);
+		}else{
+			if(data.motivos != undefined){
+				strCombo = '<select id="motivoRechazoLyt" class="motivoRechazo" style="background-color: white;">' + 
+				'<option value="0" disabled>SELECCIONA EL MOTIVO DE RECHAZO</option>';
+				
+				$.each(data.motivos, function(){
+					strCombo += '<option value="' + this.motivoId + '">' + this.descripcion + '</option>' 
+				});
+	
+				strCombo += '</select>';
+	
+				$("#" + combo).html(strCombo);
+				$('#motivoRechazoLyt').val(0);
+			}
+		}
+	}
+}
+
+function descargaArchivo(i){
+	window.open(ARCHIVOS_MD[i].url);
+}
+
+Archivo = function(
+		nombre,
+		url,
+		estatus,
+		autor,
+		areaAutor,
+		comentario,
+		autorCometario){
+	this.nombre = nombre;
+	this.url = url;
+	this.estatus = estatus;
+	this.autor = autor;
+	this.areaAutor = areaAutor;
+	this.comentario = comentario;
+	this.autorCometario = autorCometario;
+};
 
 Permiso = function(
 		bloqueaSeguimiento,
@@ -1096,3 +1509,20 @@ function initMap(latitudSitio, longitudSitio, listaCompetencias, listaGeneradore
     });
    
   }
+
+function formato(cnt, cents) {
+	cnt = cnt.toString().replace(/\$|\u20AC|\,/g,'');
+	if (isNaN(cnt))
+		return 0;	
+	var sgn = (cnt == (cnt = Math.abs(cnt)));
+	cnt = Math.floor(cnt * 100 + 0.5);
+	cvs = cnt % 100;
+	cnt = Math.floor(cnt / 100).toString();
+	if (cvs < 10)
+	cvs = '0' + cvs;
+	for (var i = 0; i < Math.floor((cnt.length - (1 + i)) / 3); i++)
+		cnt = cnt.substring(0, cnt.length - (4 * i + 3)) + ',' 
+                        + cnt.substring(cnt.length - (4 * i + 3));
+
+	return (((sgn) ? '' : '-') + cnt) + ( cents ?  '.' + cvs : '');
+}

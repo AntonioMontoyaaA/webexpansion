@@ -23,6 +23,45 @@ public class MemoriaVO implements Serializable {
 	private String fechaRechazo;
 	private AreasVo[] listaAreas;
 	
+	private String autorizo;
+	private String estatus;
+	private String fechaCompromiso;
+	private String motivo;
+	private String responsable;
+	
+	
+
+	public String getMotivo() {
+		return motivo;
+	}
+	public void setMotivo(String motivo) {
+		this.motivo = motivo;
+	}
+	public String getAutorizo() {
+		return autorizo;
+	}
+	public void setAutorizo(String autorizo) {
+		this.autorizo = autorizo;
+	}
+	public String getEstatus() {
+		return estatus;
+	}
+	public void setEstatus(String estatus) {
+		this.estatus = estatus;
+	}
+	public String getFechaCompromiso() {
+		return fechaCompromiso;
+	}
+	public void setFechaCompromiso(String fechaCompromiso) {
+		this.fechaCompromiso = fechaCompromiso;
+	}
+	public String getResponsable() {
+		return responsable;
+	}
+	public void setResponsable(String responsable) {
+		this.responsable = responsable;
+	}
+	
 	
 	public long getMdId() {
 		return mdId;

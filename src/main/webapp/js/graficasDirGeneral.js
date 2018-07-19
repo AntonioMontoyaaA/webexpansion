@@ -35,26 +35,27 @@ function Resumen_grafica_dirGeneral(data){
 		            legend_e,
 		            legend_g,
 		            legend_c,
-		            legend_o
+		            legend_o,
+		            legend_a
 		        ],
 		        crosshair: true },
 		  
 		        series: [{
 		        name: serie_proceso,
 		        color: color_proceso,
-		        data: [E.asignadas, G.asignadas, C.asignadas, O.asignadas]
+		        data: [E.asignadas, G.asignadas, C.asignadas, O.asignadas, A.asignadas]
 		    }, {
 		        name: serie_atrasadas,
 		        color: color_atrasadas,
-		        data: [E.atrasadas, G.atrasadas, C.atrasadas, O.atrasadas]
+		        data: [E.atrasadas, G.atrasadas, C.atrasadas, O.atrasadas, A.atrasadas]
 		    }, {
 		        name: serie_autorizadas,
 		        color: color_autorizadas,
-		        data: [E.autorizadas, G.autorizadas, C.autorizadas, O.autorizadas]
+		        data: [E.autorizadas, G.autorizadas, C.autorizadas, O.autorizadas, A.autorizadas]
 		    },{
 		        name: serie_rechazadas,
 		        color: color_rechazadas,
-		        data: [E.rechazadas, G.rechazadas, C.rechazadas, O.rechazadas]
+		        data: [E.rechazadas, G.rechazadas, C.rechazadas, O.rechazadas, A.rechazadas]
 		    }],
 		    tooltip:{
 		    	headerFormat:''
@@ -84,8 +85,8 @@ function Resumen_grafica_dirGeneral(data){
 	    },
 	    xAxis: {
 	        categories: [
-	            'Expansion',
-	            'Gestoría',
+	        	 legend_e,
+		            legend_g
 	        ],
 	        crosshair: true },
 	        series: [{
@@ -133,26 +134,27 @@ function Resumen_grafica_dirGeneral(data){
 	    },
 	    xAxis: {
 	        categories: [
-	            'Construcción',
-	            'Operaciones'
+	        	legend_c,
+	            legend_o,
+	            legend_a
 	        ],
 	        crosshair: true },
 	        series: [{
 	        name: serie_proceso,
 	        color: color_proceso,
-	        data: [data.areas.CONSTRUCCION.asignadas, data.areas.OPERACIONES.asignadas]
+	        data: [data.areas.CONSTRUCCION.asignadas, data.areas.OPERACIONES.asignadas, data.areas.AUDITORIA.asignadas]
 	    }, {
 	        name: serie_atrasadas,
 	        color: color_atrasadas,
-	        data: [data.areas.CONSTRUCCION.atrasadas, data.areas.OPERACIONES.atrasadas]
+	        data: [data.areas.CONSTRUCCION.atrasadas, data.areas.OPERACIONES.atrasadas, data.areas.AUDITORIA.atrasadas]
 	    }, {
 	        name: serie_autorizadas,
 	        color: color_autorizadas,
-	        data: [data.areas.CONSTRUCCION.autorizadas, data.areas.OPERACIONES.autorizadas]
+	        data: [data.areas.CONSTRUCCION.autorizadas, data.areas.OPERACIONES.autorizadas, data.areas.AUDITORIA.autorizadas]
 	    },{
 	        name: serie_rechazadas,
 	        color: color_rechazadas,
-	        data: [data.areas.CONSTRUCCION.rechazadas, data.areas.OPERACIONES.rechazadas]
+	        data: [data.areas.CONSTRUCCION.rechazadas, data.areas.OPERACIONES.rechazadas, data.areas.AUDITORIA.rechazadas]
 	    }],
 	    tooltip:{
 	    	headerFormat:''
@@ -166,6 +168,7 @@ function Resumen_grafica_dirGeneral(data){
 	var color_g="#FF5B16";
 	var color_c="#1E9D42";
 	var color_o="#40BCD8";
+	var color_a="#FFC300";
 
 	
 		Highcharts.chart('container_proceso', {
@@ -241,6 +244,13 @@ function Resumen_grafica_dirGeneral(data){
 		            name: 'Operaciones',
 		            color: color_o,
 		            y: O.asignadas, 
+		            dataLabels: {
+		                    enabled: false}
+	        	},
+	        	{
+		            name: 'Auditoria',
+		            color: color_a,
+		            y: A.asignadas, 
 		            dataLabels: {
 		                    enabled: false}
 	        	},{
@@ -329,6 +339,12 @@ function Resumen_grafica_dirGeneral(data){
 	            dataLabels: {
 	                    enabled: false}
         	},{
+	            name: 'Auditoria',
+	            color: color_a,
+	            y: A.atrasadas, 
+	            dataLabels: {
+	                    enabled: false}
+        	},{
                 name: 'Otras',
                 color: '#C9C9C9',
                 y: sum_totales-sum_atrasadas, 
@@ -414,6 +430,12 @@ function Resumen_grafica_dirGeneral(data){
 	            dataLabels: {
 	                    enabled: false}
         	},{
+	            name: 'Auditoría',
+	            color:color_a,
+	            y: A.autorizadas, 
+	            dataLabels: {
+	                    enabled: false}
+        	},{
                 name: 'Otras',
                 color: 'white',
                 y: sum_totales-sum_autorizadas, 
@@ -496,6 +518,12 @@ function Resumen_grafica_dirGeneral(data){
 	            name: 'Operaciones',
 	            color:color_o,
 	            y: O.rechazadas, 
+	            dataLabels: {
+	                    enabled: false}
+        	},{
+	            name: 'Auditoría',
+	            color:color_a,
+	            y: A.rechazadas, 
 	            dataLabels: {
 	                    enabled: false}
         	},{

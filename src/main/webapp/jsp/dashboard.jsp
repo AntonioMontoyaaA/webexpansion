@@ -266,29 +266,29 @@
 				<div class="col-lg-12 menupr_estilos dir_general fblanco">	
 					<div class="row resumen_pie">
 					
-					<div class="col-3">
-					<div  style="min-width:110px;">
-						<div class="circulo_puntop" style="background:#006dac;"></div>
-						<span  class="resumen_personales t12 azul">Expansión</span>
+					<div class="col-2 ancho">
+						<div class="circulo_puntop" style="background:#00417F;"></div>
+						<span  class="resumen_personales t10 azul">Expansión</span>
+				
 					</div>
+					<div class="col-2 ancho">
+						<div class="circulo_puntop"  style="background:#FF5B16;"></div>
+						<span  class="resumen_personales t10 azul">Gestoría</span>
+					
 					</div>
-					<div class="col-3">
-					<div style="min-width:110px;">
-						<div class="circulo_puntop"  style="background:#194377;"></div>
-						<span  class="resumen_personales t12 azul">Gestoría</span>
+					<div class="col-2 ancho">
+						<div class="circulo_puntop"  style="background:#1E9D42;"></div>
+						<span class="resumen_personales t10 azul">Construcción</span>
+					
 					</div>
+					<div class="col-2 ancho">
+						<div class="circulo_puntop"  style="background:#40BCD8;"></div>
+						<span  class="resumen_personales t10 azul">Operaciones</span>
+					
 					</div>
-					<div class="col-3">
-					<div style="min-width:120px;">
-						<div class="circulo_puntop"  style="background:#97dfcf;"></div>
-						<span class="resumen_personales t12 azul">Construcción</span>
-					</div>
-					</div>
-					<div class="col-3">
-					<div style="min-width:120px;">
-						<div class="circulo_puntop"  style="background:#07c0d7;"></div>
-						<span  class="resumen_personales t12 azul">Operaciones</span>
-					</div>
+					<div class="col-2 ancho">
+						<div class="circulo_puntop"  style="background:#FFC300;"></div>
+						<span  class="resumen_personales t10 azul">Auditoría</span>
 					</div>
 					
 				</div>

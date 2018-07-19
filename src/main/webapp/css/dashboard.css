@@ -75,7 +75,7 @@ span.estilo_dato{
 #container_sm2{
 	display:none;
 	padding-top:25px;
-	height: 250;
+	height: 350;
 	margin: 0 auto;
 }
 
@@ -154,10 +154,11 @@ span.estilo_dato{
  .circulo_puntop{
 	padding-top:2px;
 	text-align:center;
-	margin:5px;
+	margin-top:5px;
+	margin-right:3px;
 	font-size: 14px;
-     width: 13px;
-     height: 13px;
+     width: 11px;
+     height: 11px;
      -moz-border-radius: 50%;
      -webkit-border-radius: 50%;
      border-radius: 50%;
@@ -166,6 +167,9 @@ span.estilo_dato{
      float: left;
      line-height:1;
 } 
+.ancho{
+	min-width:110px;
+}
 /* ---------------------------  POPOVER */
 .popover{
 	background:#ededed;

@@ -7,8 +7,14 @@ function Resumen_grafica_analista(data){
 	$('#sum_totales').text(sum_totales);
 	
 	$('#proceso_p').text(actual.asignadasUsuario);
-	$('#proceso_a').text(sum_asignadas-actual.asignadasUsuario);
 	
+	if(sum_asignadas-actual.asignadasUsuario>0){
+		$('#proceso_a').text(sum_asignadas-actual.asignadasUsuario);
+	}
+	else{
+		$('#proceso_a').text('0');
+
+	}
 	$('#atrasadas_p').text(actual.atrasadasUsuario);
 	$('#atrasadas_a').text(sum_atrasadas-actual.atrasadasUsuario);
 	
@@ -45,26 +51,27 @@ function Resumen_grafica_analista(data){
 		           legend_e,
 		           legend_g,
 		           legend_c,
-		           legend_o
+		           legend_o,
+		           legend_a
 		        ],
 		        crosshair: true },
 		  
 		        series: [{
 		        name: serie_proceso,
 		        color: color_proceso,
-		        data: [E.asignadas, G.asignadas, C.asignadas, O.asignadas]
+		        data: [E.asignadas, G.asignadas, C.asignadas, O.asignadas, A.asignadas]
 		    }, {
 		        name: serie_atrasadas,
 		        color: color_atrasadas,
-		        data: [E.atrasadas, G.atrasadas, C.atrasadas, O.atrasadas]
+		        data: [E.atrasadas, G.atrasadas, C.atrasadas, O.atrasadas, A.atrasadas]
 		    }, {
 		        name: serie_autorizadas,
 		        color: color_autorizadas,
-		        data: [E.autorizadas, G.autorizadas, C.autorizadas, O.autorizadas]
+		        data: [E.autorizadas, G.autorizadas, C.autorizadas, O.autorizadas, A.autorizadas]
 		    },{
 		        name: serie_rechazadas,
 		        color: color_rechazadas,
-		        data: [E.rechazadas, G.rechazadas, C.rechazadas, O.rechazadas]
+		        data: [E.rechazadas, G.rechazadas, C.rechazadas, O.rechazadas, A.rechazadas]
 		    }],
 		    tooltip:{
 		    	headerFormat:''
@@ -95,8 +102,8 @@ function Resumen_grafica_analista(data){
 	    },
 	    xAxis: {
 	        categories: [
-	            'Expansion',
-	            'Gestoría',
+	        	 legend_e,
+		           legend_g
 	        ],
 	        crosshair: true },
 	        series: [{
@@ -144,26 +151,27 @@ function Resumen_grafica_analista(data){
 	    },
 	    xAxis: {
 	        categories: [
-	            'Construcción',
-	            'Operaciones'
+	        	legend_c,
+		           legend_o,
+		           legend_a
 	        ],
 	        crosshair: true },
 	        series: [{
 	        name: serie_proceso,
 	        color: color_proceso,
-	        data: [data.areas.CONSTRUCCION.asignadas, data.areas.OPERACIONES.asignadas]
+	        data: [data.areas.CONSTRUCCION.asignadas, data.areas.OPERACIONES.asignadas, data.areas.AUDITORIA.asignadas]
 	    }, {
 	        name: serie_atrasadas,
 	        color: color_atrasadas,
-	        data: [data.areas.CONSTRUCCION.atrasadas, data.areas.OPERACIONES.atrasadas]
+	        data: [data.areas.CONSTRUCCION.atrasadas, data.areas.OPERACIONES.atrasadas, data.areas.AUDITORIA.atrasadas]
 	    }, {
 	        name: serie_autorizadas,
 	        color: color_autorizadas,
-	        data: [data.areas.CONSTRUCCION.autorizadas, data.areas.OPERACIONES.autorizadas]
+	        data: [data.areas.CONSTRUCCION.autorizadas, data.areas.OPERACIONES.autorizadas, data.areas.AUDITORIA.autorizadas]
 	    },{
 	        name: serie_rechazadas,
 	        color: color_rechazadas,
-	        data: [data.areas.CONSTRUCCION.rechazadas, data.areas.OPERACIONES.rechazadas]
+	        data: [data.areas.CONSTRUCCION.rechazadas, data.areas.OPERACIONES.rechazadas, data.areas.AUDITORIA.rechazadas]
 	    }],
 	    tooltip:{
 	    	headerFormat:''

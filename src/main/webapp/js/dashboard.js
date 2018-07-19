@@ -140,10 +140,10 @@ function progGeneral(){
 	  $('.dir_general').show();
 	  $('#container_proceso,#container_atrasadas,#container_autorizadas,#container_rechazadas').css('height','22%');
 	  
-	  sum_asignadas=E.asignadas+G.asignadas+C.asignadas+O.asignadas;
-	  sum_atrasadas=E.atrasadas+G.atrasadas+C.atrasadas+O.atrasadas;
-	  sum_autorizadas=E.autorizadas+G.autorizadas+C.autorizadas+O.autorizadas;
-	  sum_rechazadas=E.rechazadas+G.rechazadas+C.rechazadas+O.rechazadas;
+	  sum_asignadas=E.asignadas+G.asignadas+C.asignadas+O.asignadas+A.asignadas;
+	  sum_atrasadas=E.atrasadas+G.atrasadas+C.atrasadas+O.atrasadas+A.atrasadas;
+	  sum_autorizadas=E.autorizadas+G.autorizadas+C.autorizadas+O.autorizadas+A.autorizadas;
+	  sum_rechazadas=E.rechazadas+G.rechazadas+C.rechazadas+O.rechazadas+A.rechazadas;
 	  sum_totales= sum_asignadas + sum_autorizadas + sum_rechazadas;
 
 	  

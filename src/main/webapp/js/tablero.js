@@ -33,11 +33,16 @@ function dibujaEstatus(resumen) {
 	var total = 0;
 	
 	for(var i = 0; i < resumen.length; i++) {
-		datos += '<div class="tabla_pendientes" style="width: 65%;"><span>' + resumen[i].estatus + '</span></div><div class="tabla_pendientes" style="width: 35%;"><span>' + resumen[i].total + '</span></div>';
+		datos += '<div onclick="filtraEstatus(\'' + resumen[i].estatus + '\')" class="tabla_pendientes" style="width: 65%;"><span>' + resumen[i].estatus + '</span></div><div class="tabla_pendientes" style="width: 35%;"><span>' + resumen[i].total + '</span></div>';
 		total += resumen[i].total;
 	}
-	datos += '<div class="tabla_pendientes" style="border-top: 2px solid #FFF;width: 65%;"><span>Total</span></div><div class="tabla_pendientes" style="border-top: 2px solid #FFF;width: 35%;"><span id="totalPendientes">' + total + '</span></div>';
+	datos += '<div onclick="filtraEstatus(\'\')" class="tabla_pendientes" style="border-top: 2px solid #FFF;width: 65%;"><span>Total</span></div><div class="tabla_pendientes" style="border-top: 2px solid #FFF;width: 35%;"><span id="totalPendientes">' + total + '</span></div>';
 	$("#box-inner").html(datos);
+}
+
+function filtraEstatus(cadena) {
+	 $(".box").slideToggle();
+	 $("#tablaMemoriasTablero").dataTable().fnFilter(cadena);
 }
 
 function inicializaCalendarios() {
@@ -176,6 +181,7 @@ function creatabla(){
 					datosMemorias[i][15] = "<span>" + resultadoTablero[i].ESTIMADO_APERTURA + "</span>";
 				}
 				datosMemorias[i][16] = resultadoTablero[i].MDID;
+				datosMemorias[i][17] = resultadoTablero[i].ESTATUSMD;
 			 }
 			
 			initTablaMemoriasTablero('DivTablaTablero', datosMemorias, 'tablaMemoriasTablero');
@@ -185,8 +191,6 @@ function creatabla(){
 				
 				idColumna = jQuery("#tablaMemoriasTablero").dataTable().fnGetPosition(this);
 				var col = idColumna[1];
-				
-				console.log("::: columna :::" + col);
 				
 				for(var i = 0; i < resultadoTablero.length; i++) {
 					if(mdId == resultadoTablero[i].MDID) {

@@ -170,6 +170,7 @@ span.circulo {
     padding-left: 30px;
 }
 .tabla_pendientes {
+	cursor: pointer;
 	position: relative;
     float: left;
     border-right: 1px solid #FFF;

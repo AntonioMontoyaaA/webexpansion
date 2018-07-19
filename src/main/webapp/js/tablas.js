@@ -283,6 +283,7 @@ function initTablaMemoriasTablero(nombreDiv, datosDesgloseMemorias, nombreTabla)
 					'<th width="7%" class="gris negrita t12 txt_construccion">Fin obra</th>' +
 					'<th width="6%" class="gris negrita t12">Inauguraci&oacute;n</th>' +
 					'<th class="oculto">id</th>' +
+					'<th class="oculto">id</th>' +
 				'</tr>'+
 			'</thead>' +
 			'<tbody>'  +			
@@ -308,7 +309,8 @@ function initTablaMemoriasTablero(nombreDiv, datosDesgloseMemorias, nombreTabla)
 				           {"bSearchable":true},
 				           {"bSearchable":true},
 				           {"bSearchable":true},
-				           { "sClass": "oculto", "bSearchable": false }],
+				           { "sClass": "oculto", "bSearchable": false },
+				           { "sClass": "oculto", "bSearchable": true }],
 			"bJQueryUI": false,
 			"order": [],
 			"sPaginationType": "full_numbers",

@@ -91,6 +91,8 @@ function creatabla(){
 			
 			for( var i = 0 ; i < resultados.length; i++){
 				var listaiconos="";
+				
+				if(resultados[i].areasRechazo!=undefined){
 				areasrechazo=resultados[i].areasRechazo;	
 				
 				for(var x=0; x < areasrechazo.length;x++){
@@ -104,6 +106,7 @@ function creatabla(){
 						listaiconos=listaiconos+""+icono_operaciones;
 				}
 				
+				}
 				switch(resultados[i].categoria) {
 					case 'A':	estrellas = puntuacionEnTiempoA;
 								break;

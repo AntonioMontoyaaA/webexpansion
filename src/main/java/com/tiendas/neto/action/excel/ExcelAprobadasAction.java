@@ -17,6 +17,7 @@ import org.json.JSONObject;
 
 import com.tiendas.neto.action.ExpansionAction;
 import com.tiendas.neto.dao.Expansionlog;
+import com.tiendas.neto.reportes.excel.CreaExcelMemoriasAprobadas;
 import com.tiendas.neto.reportes.excel.CreaExcelMemoriasAsignadas;
 import com.tiendas.neto.reportes.excel.CreaExcelMemoriasAutorizadas;
 import com.tiendas.neto.singleton.SingletonProperties;
@@ -45,32 +46,26 @@ public class ExcelAprobadasAction extends ExpansionAction {
 	        JSONObject jsonObj = new JSONObject(datos);
 	       
 	        List<MemoriaVO> listaMemorias = new ArrayList<MemoriaVO>();
-	        JSONArray array = jsonObj.getJSONArray("mds");
+	        JSONArray array = jsonObj.getJSONArray("aprobadas");
 	        for(int i = 0 ; i < array.length() ; i++) {
 	        	MemoriaVO memoria = new MemoriaVO();
 	        	memoria.setMdId(array.getJSONObject(i).getLong("mdId"));
 	        	memoria.setNombreMd(array.getJSONObject(i).getString("nombreMd"));
-	        	memoria.setCategoria(array.getJSONObject(i).getString("categoria"));
-	        	memoria.setPuntuacion(array.getJSONObject(i).getInt("puntuacion"));
-	        	memoria.setCreador(array.getJSONObject(i).getString("creador"));
-	        	memoria.setFechaCreacion(array.getJSONObject(i).getString("fechaCreacion"));
-	        	memoria.setAutorizador(array.getJSONObject(i).getString("autorizador"));
-	        	memoria.setFechaAutorizacion(array.getJSONObject(i).getString("fechaAutorizacion"));
-	        	memoria.setMdVencida(array.getJSONObject(i).getString("mdVencida"));
+	        	memoria.setResponsable(array.getJSONObject(i).getString("responsable"));
+	        	memoria.setEstatus(array.getJSONObject(i).getString("estatus"));
+	        	memoria.setAutorizo(array.getJSONObject(i).getString("autorizo"));
+	        	memoria.setFechaCompromiso(array.getJSONObject(i).getString("fechaCompromiso"));
+	        	memoria.setMotivo(array.getJSONObject(i).getString("motivo"));
 	        	listaMemorias.add(memoria);
 	        }
 	        HSSFWorkbook workbook=null;
-	        CreaExcelMemoriasAutorizadas excelCreator = new CreaExcelMemoriasAutorizadas();
-	        
-	        if(perfil.equals("3")) {
-		     workbook = excelCreator.createWorkbookDirGeneral(listaMemorias);
-	        }
-	        else {
+	        CreaExcelMemoriasAprobadas excelCreator = new CreaExcelMemoriasAprobadas();
+	
 	         workbook = excelCreator.createWorkbook(listaMemorias);
-	        }
+	        
 	        
 	        response.setContentType("application/vnd.ms-excel");
-			response.setHeader("Content-Disposition", "attachment; filename=" + "MDsAutorizadas_"+ new SimpleDateFormat("yyMMddHHmmss").format(new Date())+ ".xls");
+			response.setHeader("Content-Disposition", "attachment; filename=" + "MDsAprobadas_"+ new SimpleDateFormat("yyMMddHHmmss").format(new Date())+ ".xls");
 			response.setHeader("Pragma", "No-cache");
 			response.setDateHeader("Expires", 0);
 	        

@@ -214,8 +214,8 @@ function llenacampos(data){
 		$('#fechareal').val(fechareal);
 		$('#fechafinal').val(fechafinal);
 		$('#dependencia').val(dependencia);
-		$('#progres_int').css('width',progres_int);
-		$('#porcentaje').text(progres_int);
+		$('#progres_int').css('width',progres_int+'%');
+		$('#porcentaje').text(progres_int+"%");
 		$('#nombrepuesto').text(nombre);
 		
 		

@@ -137,7 +137,15 @@
          		method = "execute">
          	<result name = "success">jsp/lineaTiempo.jsp</result>
       	</action>
-         		
+      	
+      	 <action name = "lineaTiempoMdAction" 
+         		class = "com.tiendas.neto.action.LineaTiempoMdAction" 
+         		method = "execute" />
+         	
+         <action name = "excelAprobadasAction" 
+         	class = "com.tiendas.neto.action.excel.ExcelAprobadasAction" 
+         	method = "execute" />
+         			
 	    <action name = "excelAutorizadasAction" 
          	class = "com.tiendas.neto.action.excel.ExcelAutorizadasAction" 
          	method = "execute" />

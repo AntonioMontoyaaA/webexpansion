@@ -12,6 +12,63 @@
     -moz-border-radius: 2px;
     -webkit-border-radius:2px;
 }
+.cuadroeditar{
+	background-image:url('../img/aprobadas/editarB.png');
+	background-color:#40BCD8;
+	background-repeat:no-repeat;
+	background-position:center;
+	background-size:15px 15px;
+	border:0;
+	height:19px !important;
+	width:19px !important;
+	padding:0;
+	border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius:2px;
+    margin-left:10px;
+    display:none;
+}
+.cuadrocancelar{
+	background-image:url('../img/aprobadas/cancelarB.png');
+	background-color:#FF5B16;
+	background-repeat:no-repeat;
+	background-position:center;
+	background-size:15px 15px;
+	border:0;
+	height:19px !important;
+	width:19px !important;
+	padding:0;
+	border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius:2px;
+    margin-left:10px;
+        display:none;
+    
+}
+.cuadroguardar{
+	background-image:url('../img/aprobadas/save.png');
+	background-color:#1E9D42;
+	background-repeat:no-repeat;
+	background-position:center;
+	background-size:15px 15px;
+	border:0;
+	margin-left:10px;
+	height:19px !important;
+	width:19px !important;
+	padding:0;
+	border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius:2px;
+       display:none;
+    
+}
+.grupo{
+	border-radius: 2px;
+	height:30px;
+	margin-bottom:10px;
+	width:100%;
+}
+
 .rechargue{
 	width:25px;
 }
@@ -22,9 +79,11 @@
 	padding-bottom:10px;
 }
 /* ----------------------------------LINEA DE TIEMPO -----------------------------*/
-#gantt{
-	height:300px !important;
+.gantt-container{
+	overflow:auto;
+	height:55% !important;
 }
+
 .handle-group{
 	display:none;
 }
@@ -74,6 +133,6 @@
     fill: #ffffff;
 }
 
-.details-container.pop_up{
-	width:200px;
+.gantt-container .popup-wrapper {
+	display:none !important;
 }

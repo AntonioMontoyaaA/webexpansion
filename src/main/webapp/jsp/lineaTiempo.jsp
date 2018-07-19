@@ -43,8 +43,11 @@
 		<div class="row padding_p">
 				<div class="col-lg-12 menupr_estilos fblanco">
 					<div class="col-12 cabecera">
-					<span class="verde negrita t12" id="nombrepuesto">Gerente de Expansión</span>
-					<div class="float_right"></div>
+					<span class="verde negrita t12" id="nombrepuesto">-</span>
+					
+					<div class="float_right cuadroeditar cursor"></div>
+					<div class="float_right cuadrocancelar cursor"></div>
+					<div class="float_right cuadroguardar cursor"></div>		
 					</div>
 					
 					<div class="row">
@@ -53,33 +56,36 @@
 									<div class="col-lg-4">
 										<div class="col-lg-12" style="padding-left:0;">
 											<span class="t12 negrita">Responsable</span> <input
-												type="text" class="form-control campo t12" id="responsable"
-												value="El responsable" readonly>
+												type="text" class="form-control campo t12 grupo" id="responsable"
+												value="-" readonly>
 										</div>
+										
 										<div class="col-lg-12" style="padding-left:0;">
-											<span class="t12 negrita">Estatus</span> <input type="text"
-												class="form-control campo t12" id="responsable"
-												value="El estatus" readonly>
+											<span class="t12 negrita">Estatus</span>
+											<input type="text" class="form-control campo t12 grupo" id="estatus" value="-" readonly>
+												
+												<div><select style="display:none;" class="campo t12 grupo" id="combo_estatus"></select></div>
 										</div>
+										
 										<div class="col-lg-12" style="padding-left:0;">
-											<span class="t12 negrita">Duración</span> <input type="text"
-												class="form-control campo t12" id="responsable"
-												value="La duracion" readonly>
+											<span class="t12 negrita">Duración (días)</span> <input type="text"
+												class="form-control campo t12 grupo" id="duracion"
+												value="-" readonly>
 										</div>
 									</div>
 									<div class="col-lg-8">
 										<span class="t12 negrita">Motivo</span>
-										<textarea class="form-control campo t12" id="motivo" readonly>blablablaaa</textarea>
+										<textarea class="form-control campo t12 grupo" id="motivo" readonly>-</textarea>
 										<div class="row">
 											<div class="col-lg-6">
-												<span class="t12 negrita">Completados</span> <input
-													type="text" class="form-control campo t12" id="completados"
-													value="Completados" readonly>
+												<span class="t12 negrita">Completados (días)</span> <input
+													type="text" class="form-control campo t12 grupo" id="completados"
+													value="-" readonly>
 											</div>
 											<div class="col-lg-6">
-												<span class="t12 negrita">Faltantes</span> <input
-													type="text" class="form-control campo t12" id="faltantes"
-													value="Faltantes" readonly>
+												<span class="t12 negrita">Faltantes (días)</span> <input
+													type="text" class="form-control campo t12 grupo" id="faltantes"
+													value="-" readonly>
 											</div>
 										</div>
 									</div>
@@ -91,32 +97,32 @@
 										<div class="col-lg-12" style="padding-left:0;">
 											<span class="t12 negrita">Fecha Inicial</span> 
 											<input type="text" class="form-control campo t12" id="fechainicial"
-												value="17/07/2018 09:48:00am" readonly>
+												value="-" readonly>
 										</div>
 										<div class="col-lg-12" style="padding-left:0;">
 											<span class="t12 negrita">Fecha Real Estimada</span> 
 											<input type="text" class="form-control campo t12" id="fechareal"
-												value="17/07/2018 09:48:00am" readonly>
+												value="-" readonly>
 										</div>
 										<div class="col-lg-12" style="padding-left:0;">
 											<span class="t12 negrita">Fecha Final</span> 
-											<input type="text" class="form-control campo t12" id="fechafinal"
-												value="17/07/2018 09:48:00am" readonly>
+											<input type="text" class="form-control campo t12 grupo" id="fechafinal"
+												value="-" readonly>
 										</div>
 								</div>
 								<div class="col-lg-6">
 										<div class="col-lg-12" style="padding-left:0;">
 											<span class="t12 negrita">Dependencia</span> 
-											<input type="text" class="form-control campo t12" id="dependencia"
-												value="Ninguno" readonly>
+											<input type="text" class="form-control campo t12 grupo" id="dependencia"
+												value="-" readonly>
 										</div>
 										<div class="col-lg-12" style="padding-left:0;">
 											<span class="t12 negrita">Progreso</span>
 											<div class="row" style="padding-left:15px;">
 												<div id="progres_ext" class="progress" style="width:80%;">
-													<div id="progres_int" class="progress-bar" style="width: 90%"></div>
+													<div id="progres_int" class="progress-bar" style="width: 0%"></div>
 												</div>
-												<div class="float_right t12" id="porcentaje" style="padding:3px 10px;">90%</div>
+												<div class="float_right t12" id="porcentaje" style="padding:3px 10px;">-</div>
 											</div>
 											
 										</div>
@@ -144,7 +150,7 @@
 	<!-- Bootstrap core JavaScript -->
 	<script	src="${pageContext.request.contextPath}/js/jquery/jquery.min.js"></script>
 	<script	src="${pageContext.request.contextPath}/js/jquery/popper.js"></script>
-<%-- 	<script	src="${pageContext.request.contextPath}/js/utiles/utiles.js"></script> --%>
+	<script	src="${pageContext.request.contextPath}/js/utiles/utiles.js"></script> 
 	<script	src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 	<script src="${pageContext.request.contextPath}/js/jquery/frappe-gantt.min.js"></script>
 	<script	src="${pageContext.request.contextPath}/js/lineaTiempo.js"></script>

@@ -1,6 +1,5 @@
 package com.tiendas.neto.singleton;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
@@ -31,6 +30,6 @@ public class SingletonProperties {
 	}
 
 	public String getPropiedad(String clave) {
-		return p.getProperty(clave);
+		return p.getProperty("prefijo") + p.getProperty(clave);
 	}
 }

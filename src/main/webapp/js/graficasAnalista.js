@@ -8,7 +8,7 @@ function Resumen_grafica_analista(data){
 	
 	$('#proceso_p').text(actual.asignadasUsuario);
 	
-	if(sum_asignadas-actual.asignadasUsuario>0){
+	if(sum_asignadas-actual.asignadasUsuario>=0){
 		$('#proceso_a').text(sum_asignadas-actual.asignadasUsuario);
 	}
 	else{

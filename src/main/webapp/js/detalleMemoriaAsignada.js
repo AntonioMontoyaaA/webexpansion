@@ -33,6 +33,9 @@ var ESTATUS_VALIDACION_LAYOUT = 9;
 var ESTATUS_PRESUPUESTO_CONSTRUCCION = 10;
 var ESTATUS_PRESUPUESTO_AUDITORIA = 11;
 var ESTATUS_VOBO_FINAL = 12;
+var ESTATUS_CORRECCION_LAYOUT = 18;
+var ESTATUS_CORRECCION_PRESUPUESTO_CONSTRUCCION = 19;
+var ESTATUS_CORRECCION_PRESUPUESTO_AUDITORIA = 20;
 
 $(function(){
 	TIPOMD = parseInt($("#tipoMd").val());
@@ -536,7 +539,7 @@ function buscaDetalleMD(mdId) {
 				}
 			}
 			
-			if(ESTATUS_MD == ESTATUS_PRESUPUESTO_CONSTRUCCION
+			if((ESTATUS_MD == ESTATUS_PRESUPUESTO_CONSTRUCCION || ESTATUS_MD == ESTATUS_CORRECCION_PRESUPUESTO_CONSTRUCCION)
 					&& TIPOMD == 3 && AREA_USUARIO == areaConstruccion){
 				ARCHIVOS_MD =  new Array();
 				if(data.seguimiento != undefined) {
@@ -556,7 +559,7 @@ function buscaDetalleMD(mdId) {
 						});
 					}
 				}
-			}else if(ESTATUS_MD == ESTATUS_PRESUPUESTO_AUDITORIA
+			}else if((ESTATUS_MD == ESTATUS_PRESUPUESTO_AUDITORIA || ESTATUS_MD == ESTATUS_CORRECCION_PRESUPUESTO_AUDITORIA)
 					&& TIPOMD == 3 && AREA_USUARIO == areaAuditoria){
 				ARCHIVOS_MD =  new Array();
 				if(data.seguimiento != undefined) {
@@ -861,6 +864,17 @@ function finalizaMD(estatus){
 				consultaMotivosRechazo(0, 1);
 			}
 		}
+	}else if(TIPOMD == 3 && AREA_USUARIO == areaOperaciones){
+		ESTATUS_FINALIZA_MD = estatus;
+		if(estatus == 1){
+			cargaMensajeModal('DETALLE MD', 
+					'¿Est\u00e1s seguro de autorizar la MD?',
+					TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, actionfinalizaMD);
+		}else if(estatus == 0){
+			cargaMensajeModal('DETALLE MD', 
+					'¿Est\u00e1s seguro de rechazar la MD?',
+					TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, consultaMotivosRechazo);
+		}
 	}
 }
 
@@ -1069,7 +1083,7 @@ function parseaPermisos(){
 
 function inicializaDropzone(){
 
-	if(TIPOMD == 0 && AREA_USUARIO == areaConstruccion && (ESTATUS_MD < 9 || ESTATUS_MD == 18)){
+	if(TIPOMD == 0 && AREA_USUARIO == areaConstruccion && (ESTATUS_MD < 9 || ESTATUS_MD == ESTATUS_CORRECCION_LAYOUT)){
 		$('#manejadorArchivos').show();
 		$('#montoPresupuesto').hide();
 		$('.simbolo').hide();
@@ -1157,6 +1171,10 @@ function inicializaDropzone(){
 	        					$('#nombreAreaUsuario').val(),
 	        					null, null));
 	        			dibujaArchivos();
+	        			if(ESTATUS_MD == ESTATUS_CORRECCION_LAYOUT){
+	        				ESTATUS_FINALIZA_MD = 1;
+	        				actionfinalizaMD();
+	        			}
 	        		}
 	        	}
 	        });
@@ -1176,7 +1194,8 @@ function inicializaDropzone(){
 		dibujaArchivos();
 	}else if(TIPOMD == 3 
 			&& AREA_USUARIO == areaConstruccion 
-			&& ESTATUS_MD == ESTATUS_PRESUPUESTO_CONSTRUCCION){
+			&& (ESTATUS_MD == ESTATUS_PRESUPUESTO_CONSTRUCCION
+					|| ESTATUS_MD == ESTATUS_CORRECCION_PRESUPUESTO_CONSTRUCCION)){
 		$('#manejadorArchivos').show();
 		$('#montoPresupuesto').show();
 		$('#montoPresupuesto').attr('placeholder', 'Captura el monto total de presupuesto');
@@ -1290,7 +1309,7 @@ function inicializaDropzone(){
 	        });
 	}else if(TIPOMD == 3 
 			&& AREA_USUARIO == areaAuditoria 
-			&& ESTATUS_MD == ESTATUS_PRESUPUESTO_AUDITORIA){
+			&& (ESTATUS_MD == ESTATUS_PRESUPUESTO_AUDITORIA || ESTATUS_MD == ESTATUS_CORRECCION_PRESUPUESTO_AUDITORIA)){
 		$('#manejadorArchivos').show();
 		$('#montoPresupuesto').show();
 		$('#montoPresupuesto').attr('placeholder', 'Captura el monto total de presupuesto');
@@ -1440,11 +1459,13 @@ function dibujaArchivos(){
 			$.each(ARCHIVOS_MD, function(i, item){
 				if(item.estatus == 2){
 					clase = 'filePendiente';
-					ARCHIVO_SUBIDO = true;
-					$('#subeArchivo').hide();
-        			$('#contenedorUploader').hide();
-        			$('#msjUploader').html('¡Felicidades! El archivo fue cargado con exito. Deberás esperar a que el presupuesto sea validado por el area correspondiente.');
-        			$('#msjUploader').show();
+					if(ESTATUS_MD != ESTATUS_CORRECCION_LAYOUT && ESTATUS_MD != ESTATUS_CORRECCION_PRESUPUESTO_CONSTRUCCION){
+						ARCHIVO_SUBIDO = true;
+						$('#subeArchivo').hide();
+	        			$('#contenedorUploader').hide();
+	        			$('#msjUploader').html('¡Felicidades! El archivo fue cargado con exito. Deberás esperar a que el presupuesto sea validado por el area correspondiente.');
+	        			$('#msjUploader').show();
+					}
 				}else if(item.estatus == 1)
 					clase = 'fileAutorizado';
 				else if(item.estatus == 0)

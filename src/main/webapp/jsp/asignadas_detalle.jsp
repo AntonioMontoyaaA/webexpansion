@@ -27,7 +27,7 @@
 
 <div class="container-fluid">
 	<div class="row padding_p">
-	<div class="col-lg-12 titulo azul t12 negrita">DASHBOARD ${usr.perfil.areasxpuesto[0].areaNom} > <span id="titulo_tipo"></span> > ><span id="nombreMdTxt"></span></div>
+	<div class="col-lg-12 titulo azul t12 negrita">DASHBOARD ${usr.perfil.areasxpuesto[0].areaNom} > <span id="titulo_tipo"></span> > <span id="nombreMdTxt"></span>></div>
 
 			<div class="col-lg-12"
 				style="padding-left: 20px; padding-right: 20px;">

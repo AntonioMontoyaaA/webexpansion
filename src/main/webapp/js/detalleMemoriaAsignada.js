@@ -58,8 +58,6 @@ $(function(){
 		$('#titulo_tipo').text('TABLERO');
 	}
 	
-	
-	$("#nombreMdTxt").text($("#nombreMd").val());
 	inicializaFactores();
 	parseaPermisos();
 
@@ -362,6 +360,7 @@ function buscaDetalleMD(mdId) {
 			/* Datos generales de la MD */
 			if(data.generales != undefined) {
 				$("#nombreMd").text(data.generales.nombreMd);
+				$("#nombreMdTxt").text(data.generales.nombreMd);
 				$("#creadorMd").text(data.generales.creador);
 				$("#categoriaMd").text(data.generales.categoria);
 				estrella = "<img class='estrellaPuntuacionDetalle' src='img/estrella.png'>";

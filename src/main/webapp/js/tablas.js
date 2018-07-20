@@ -456,20 +456,7 @@ var idiomaEspanolDirRechazadas = {
 var idiomaEspanolTablero = {
 	    "sEmptyTable":     "<div style='padding:10px; color:red; font-size:13px;'>No existen memorias descriptivas</div>",
 	    "sInfo":           '<div class="row fazul blanco" style="padding-bottom:3px;">'+
-	    						'<div class="col-xl-9 col-lg-9 center">'+
-	    						'<div class="row">'+
-	    								'<div class="col-xl-2 col-6 center"  style="min-width:160px;">'+
-	    								'<div class="circle_expansion"><span class="t12" style="margin-left: 20px;">Expansión</span></div></div>'+
-	    								'<div class="col-xl-2 col-6 center"  style="min-width:160px;">'+
-	    								'<div class="circle_gestoria"><span class="t12" style="margin-left: 20px;">Gestoría</span></div></div>'+
-	    								'<div class="col-xl-2 col-6 center"  style="min-width:160px;">'+
-	    								'<div class="circle_operaciones"><span class="t12" style="margin-left: 20px;">Operaciones</span></div></div>'+
-	    								'<div class="col-xl-2 col-6 center" style="min-width:160px;">'+
-	    								'<div class="circle_auditoria"><span class="t12" style="margin-left: 20px;">Auditoría</span></div></div>'+
-	    								'<div class="col-xl-4 col-6 center" style="min-width:160px;">'+
-	    								'<div class="circle_construccion"><span class="t12" style="margin-left: 20px;">Construcción</span></div></div>'+
-	    						'</div></div>'+
-	    							'<div class="col-xl-3 col-lg-3 right">Totales: <b>_TOTAL_</b></div>'+
+	    							'<div class="col-xl-12 col-lg-12 right">Totales: <b>_TOTAL_</b></div>'+
 	    					'</div>',
 	    							
 	    				

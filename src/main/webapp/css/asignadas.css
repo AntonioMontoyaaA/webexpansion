@@ -406,3 +406,9 @@ Left
     width: 25%;
     float: right;
 }
+
+#containerFilesVoboFinal{
+	height: 275px;
+    color: #FFF;
+    overflow: auto;
+}

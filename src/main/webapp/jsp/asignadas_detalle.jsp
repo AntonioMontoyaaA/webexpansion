@@ -461,7 +461,7 @@
 		</div>
 		</div>
 
-			<div class="col-lg-4">
+			<div class="col-lg-4" id="voboMD">
 				<div class="row divs_p">
 					<div class="col-lg-12 menupr_estilos fazul altura1">
 						<div class="col-12 titulo_seccion">
@@ -485,6 +485,29 @@
 							style="width: 100%; position: relative; float: left; text-align: center; padding-top: 20px;">
 							<span class="subtituloIconos blanco">Progreso autorización
 								puntos</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-lg-4" id="voboFinal" style="display: none;">
+				<div class="row divs_p">
+					<div class="col-lg-12 menupr_estilos fazul altura1">
+						<div class="col-12 titulo_seccion">
+							<span class="negrita blanco t14">8) Autorizacón final</span>
+							<div class="float_right">
+								<span> <img id="autoriza9" title="Autoriza punto"
+									class="sin_autorizar b_autorizar" onclick="finalizaMD(1);"
+									style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
+								</span> <span> <img id="rechaza9" title="Rechaza punto"
+									class="sin_autorizar b_rechazar" onclick="finalizaMD(0);"
+									style="cursor: pointer;" src="img/rechaza_mark.png">
+								</span>
+							</div>
+						</div>
+
+						<div style="width: 100%; position: relative; float: left; text-align: left; padding-top: 20px;">
+							<div id="containerFilesVoboFinal"></div>
 						</div>
 					</div>
 				</div>

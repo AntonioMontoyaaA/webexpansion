@@ -40,7 +40,7 @@
 					<div class="col-lg-9" style="padding-top: 8px">
 						<div class="row div_header menupr_estilos fazul">
 						
-							<div id="gerenteExpansionDiv" class="col-lg-3 min_width">
+							<div id="gerenteExpansionDiv" class="col-lg-3" style="min-width: 210px; max-width: 215px;">
 								<div id="circuloAutorizaGerenteExpansion"
 									class="circuloSeguimiento">&nbsp;&nbsp;&nbsp;</div>
 								<div style="position: relative; float: left;">

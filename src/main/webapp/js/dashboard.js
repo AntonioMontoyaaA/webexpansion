@@ -273,7 +273,7 @@ function progSemanal_grafica(data){
 	}
 	if($('#opcion_historial').val()=="1"){
 		for(i=0;i<arreglo.length;i++){
-			nuevacadena="Semana "+arreglo[i].substring(7,9)+"<br>"+arreglo[i].substring(10);
+			nuevacadena="<span>Semana "+arreglo[i].substring(7,9)+"</span><br><span class='ocultapeq'>"+arreglo[i].substring(10)+"</span>";
 			ejex.push(nuevacadena);
 		}
 	

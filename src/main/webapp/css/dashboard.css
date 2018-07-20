@@ -133,6 +133,7 @@ span.estilo_dato{
 	#container_apmensual{height: 200px;}
 	.numero_grande{font-size:1.5em}
 	.numero_chico{font-size:0.6em}
+	.ocultapeq{display:none;}
 }
 /* ----------------------- puntos*/
 .circulo_punto{

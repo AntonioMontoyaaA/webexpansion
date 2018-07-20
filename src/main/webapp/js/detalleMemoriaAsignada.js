@@ -1359,7 +1359,7 @@ function inicializaDropzone(){
 	        	archivo = LAYOUT_B64;
 	        	formato = LAYOUT_Type.split('/')[1];
 	        	tipoArchivo = 2;
-	        	tipoServicio = 2;
+	        	tipoServicio = 3;
 	        	monto = $('#montoPresupuesto').val();
 	        	
 	        	mensaje = '';

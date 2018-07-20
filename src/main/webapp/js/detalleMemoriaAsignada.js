@@ -372,7 +372,7 @@ function buscaDetalleMD(mdId) {
 					$("#estrellasMd").html(estrella);
 				}
 				$("#fechaCreacion").text(data.generales.fechaCreacion);
-				$("#puntuacionMd").text(data.generales.puntuacion);
+				$("#puntuacionMd").text(data.generales.totalPuntos);
 			}
 			/* Datos del sitio */
 			if(data.datosSitio != undefined) {

@@ -69,10 +69,14 @@ function creatabla(){
 			datosExcel = data;
 			$("#descargaExcel").show();
 			$("#time").show();
-			$("#edit").show();
+//			$("#edit").show();
+//			$("#change").show();
 			$("#pause").show();
 			$("#refuse").show();
-			$("#change").show();
+
+			//TODO remove
+			$("#edit").hide();
+			$("#change").hide();
 			
 			var datosMemoriasAprobadas = new Array();
 			var variable;

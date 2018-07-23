@@ -28,14 +28,21 @@
 		</div>
 			
 			
-		<span class="mr-sm-2"><a id="avisos" tabindex="0" class="" role="" data-toggle="popover" data-trigger="focus" data-placement="bottom"
+		<span class="mr-sm-2"><a id="avisos" tabindex="0" class="header" role="" data-toggle="popover" data-trigger="focus" data-placement="bottom"
 			data-content="
 			"><img src="img/web_AVISOS.png"  style="margin-bottom:13px;"></a></span>
 		&nbsp;
 		
-		<span class="my-2 my-sm-0"><a id="perfil" tabindex="0" class="" role="" data-toggle="popover" data-trigger="focus" data-placement="bottom"
-		data-content="
-		<div class='popover_logout azul'><a href='Logout'> Cerrar Sesión</a></div>" >
+		<span class="my-2 my-sm-0"><a tabindex="0" class="header" role="tooltip" data-toggle="popover" data-trigger="focus" data-placement="bottom"
+		 data-template='<div class="popover1">
+		 	<div class="arrow"></div>
+		 	<h3 class="popover-header"></h3>
+		 	<div class="popover-body"></div>
+		 </div>' 
+                     
+		data-content="<form id='logout' action='Logout'>
+		 <div id='salir' class='cursor t14 negrita azul' onclick='salir()'>Cerrar Sesión </div>
+		</form>" >
 		<img src="img/user.png" style="padding-right:15px; margin-bottom:15px;"></a></span>
 		</form>
 		</div>	

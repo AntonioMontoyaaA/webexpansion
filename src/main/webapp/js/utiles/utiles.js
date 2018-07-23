@@ -160,11 +160,16 @@ function mueveReloj(){
      setTimeout(mueveReloj,60000)
 }
 
-function popover(){
-	 $('#avisos').popover({ html : true }).addClass('avisos');;
-	 $('#perfil').popover({ html : true });
-	 
-	/* $('.popover-dismiss').popover({
+function popover(){ //popover del header
+	 $('.header').popover({
+		 container: 'body',
+		 html:true
+	 });
+	$('.popover-dismiss').popover({
 		  trigger: 'focus'
-		});*/
+		});
+}
+function salir(){
+	console.log("entro");
+	$('#logout').submit();
 }

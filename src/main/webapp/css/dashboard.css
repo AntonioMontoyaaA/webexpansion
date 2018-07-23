@@ -171,47 +171,6 @@ span.estilo_dato{
 .ancho{
 	min-width:110px;
 }
-/* ---------------------------  POPOVER */
-.popover{
-	background:#ededed;
-	border: 1px solid #ededed;
-}
-.popover_titulo{
-	padding-left:10px;
-	padding-top:3px;
-	padding-bottom:5px;
-	font-weight:bold;
-}
-.popover_opcion{
-	border-top:1.5px solid #e1e1e1;
-	padding-left:12px;
-	padding-top:3px;
-	padding-bottom:5px;
-	padding-right:12px;
-}
-.popover_logout{
-	padding-left:12px;
-	padding-top:3px;
-	padding-bottom:5px;
-	padding-right:12px;
-}
-.popover-body{
-    padding: 0;
-}
-.bs-popover-auto[x-placement^=bottom] .arrow::after, .bs-popover-bottom .arrow::after {
-    top: 0px;
-    border-bottom-color:#ededed;
-}
-.popover a:hover{
-	text-decoration:none;
-	color:#40BCD8;
-	font-size:11px;
-}
-.popover a{
-	text-decoration:none;
-	color:#00437e;
-	font-size:11px;
-}
 .dir_general{
 	display:none;
 }

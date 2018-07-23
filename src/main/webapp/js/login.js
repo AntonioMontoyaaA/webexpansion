@@ -31,10 +31,10 @@ function muestrapass(){
 function validacion(){
 	
 	if ($('#user').val()== '') {
-		console.log($('#user').val());
         return false;
     }
 	if ($('#pass').val() == '') {
+		$('#hexa_pass').click();
         return false;
     }
 	

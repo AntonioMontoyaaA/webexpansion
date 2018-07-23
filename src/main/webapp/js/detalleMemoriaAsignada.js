@@ -634,16 +634,14 @@ function buscaDetalleMD(mdId) {
 							&& eval(data)["seguimiento"]["PRESUPUESTO AUDITORIA"] != null){
 						
 						$.each(eval(data)["seguimiento"]["PRESUPUESTO AUDITORIA"], function(i,item){
-							nombres = item.urllayout.split('/');
-							name = nombres[nombres.length -1];
-							
 							ARCHIVOS_MD.push(new Archivo(
-		        					name,
-		        					item.urllayout,
-		        					2,
+		        					item.nombreArchivo,
+		        					item.urldoctoc,
+		        					item.validacion,
 		        					$('#nombreCompletoUsuario').val(),
 		        					$('#nombreAreaUsuario').val(),
-		        					null, null));
+		        					null,null,
+		        					item.monto));
 						});
 						ARCHIVOS_MD[ARCHIVOS_MD.length -1].estatus = 0;
 					}

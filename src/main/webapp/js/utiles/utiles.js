@@ -170,6 +170,7 @@ function popover(){ //popover del header
 		});
 }
 function salir(){
+	
 	console.log("entro");
 	$('#logout').submit();
 }

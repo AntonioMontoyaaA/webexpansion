@@ -4,6 +4,15 @@ if($('.inicio_user').is(":visible")){
 	setTimeout(muestrauser,200);
 }
 }
+$('#hexa_user').click(function(){
+	console.log("hizo clic user");
+	$('#user').focus();
+});
+$('#hexa_pass').click(function(){
+	console.log("hizo clic pass");
+	$('#pass').focus();
+});
+
 function muestrauser(){
 	$('.inicio_user2').fadeIn('fast');
 }

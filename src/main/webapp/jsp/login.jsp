@@ -47,7 +47,7 @@
 								<div class="hexagon" onclick="ocultauser();"  style="cursor:pointer;">
 									<div class="hexagon-in1">
 										<div class="hexagon-in2">
-											<div class="vertical-center-exagono center">
+											<div class="vertical-center-exagono center cursor" id="hexa_user">
 												<div class="row inicio_user">
 														<img src="img/neto-user.png">
 												</div>
@@ -71,7 +71,7 @@
 								<div class="hexagon" onclick="ocultapass();" style="cursor:pointer;">
 									<div class="hexagon-in1">
 										<div class="hexagon-in2">
-											<div class="vertical-center-exagono center">
+											<div class="vertical-center-exagono center cursor" id="hexa_pass">
 												<div class="row inicio_pass">
 														<img src="img/contra.png">
 												</div>

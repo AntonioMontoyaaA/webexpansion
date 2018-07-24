@@ -5,17 +5,23 @@ var posicionSemana;
 var meses_letra = ["","Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 var fecha_datep;
 var perfil;
+var randomColor=[];
+var claseColor=[];
+
 $(function(){
 	$('#idagenda').addClass('resaltado');
 	perfil=$('#perfil_usuario').val();
-	inicializaCalendarios();
-	calculaFechaActual();
 	llenaPersonal();
 	llenaEventos();
+	inicializaCalendarios();
+	calculaFechaActual();
+
 
 	if(perfil!='3'){
 		$('#crear_evento').show();
 	}
+	
+	
 });
 
 // --------------------------- CALENDARIO
@@ -74,13 +80,23 @@ function armaAgenda(){
 				
 			for(var i=0;contadordías<ultimoDia;i++){
 			html=html+'<tr>';
+			
+			
 				for(var cont=0;cont<7;cont++){
 					
 					if(contador>=posicionSemana && contadordías<=ultimoDia){
+						var repetidos=0;
 						
 						html=html+'<td>';
 						html=html+'<div class="row center gris">'+contadordías+'</div>';
 						html=html+'<div class="row contenido">';
+						
+						for(var i=0;i<data.agenda.length;i++){
+							if(data.agenda[i].diaMes==contadordías && data_mes==mes && data_año==año){
+								 repetidos++;
+							}
+						}
+						
 						
 						for(var i=0;i<data.agenda.length;i++){
 							var nombreEvento=data.agenda[i].nombre;
@@ -103,8 +119,13 @@ function armaAgenda(){
 							var data_año=data.agenda[i].fechaCompleta.substring(6,10);
 							
 							if(data.agenda[i].diaMes==contadordías && data_mes==mes && data_año==año){
-													
+								
+								if(repetidos>3){
+								html=html+'<div class="personal_'+idusuario+' ocultableEvento'+eventoId+'">';
+								}
+								else{
 								html=html+'<div class="col-12 personal_'+idusuario+' ocultableEvento'+eventoId+'">';
+								}
 								html=html+'<a tabindex="0" class="agenda_link" data-toggle="popover" data-trigger="focus" data-placement="bottom" '+
 								'data-content="'+
 								"<div class='col-12 blanco center negrita t12'>"+nombreEvento+"</div>"+
@@ -140,10 +161,23 @@ function armaAgenda(){
 									asignadopor+"</div>"+
 								"</div>"+
 								'">';
-								
-								html=html+'<div class="circulo float_left back_'+eventoId+'">'+abreviacion+'</div>';
-								html=html+'<div class="t10 gris texto_circulo">'+nombreEvento+'</div></a>';
-								
+									
+									var back="";
+									for(var n=0;n<claseColor.length;n++){
+										if(eventoId==claseColor[n]){
+											back=randomColor[n];
+										}
+									}
+									if(back==""){
+										back="black";
+									}
+									
+								if(repetidos>3){
+									html=html+'<div class="circulo_min float_left" style="background:'+back+'"></div></a>';
+								}else{
+									html=html+'<div class="circulo float_left" style="background:'+back+'">'+abreviacion+'</div>';
+									html=html+'<div class="t10 gris texto_circulo">'+nombreEvento+'</div></a>';
+								}
 								html=html+'</div>';
 							}
 							
@@ -380,8 +414,7 @@ function llenaPersonal(){
 }
 
 
-function llenaEventos(){
-	
+function llenaEventos(){   
 	invocarJSONServiceAction("obtieneEventos", {},
 			'obtieneEventos', 
 			function() {
@@ -402,31 +435,47 @@ function llenaEventos(){
 		var creaEvento='';
 		html='';
 		html=html+'<div class="row">';
-		
+
 				for(var i=0;i<arreglo.length;i++){
 					var nombre=arreglo[i].nombre;
 					var eventoId=arreglo[i].eventoId;
+					var random=0;
+					
+					while(random.length!=6){
+						random=Math.floor(Math.random()*16777215).toString(16);
+					}
+					
+					randomColor.push('#'+random);
+					claseColor.push(eventoId);
+					
 					
 					// llena información para el panel lateral
 					html=html+'<div class="col-12 cursor" id="'+eventoId+'" onclick="seleccionEvento(this)">';
-					html=html+'<div class="caja_texto float_left  back_'+eventoId+'">';
+					html=html+'<div class="caja_texto float_left" style="background:'+'#'+random+'">';
 						html=html+'<img class="ocultableEvento'+eventoId+'" src="img/check.png">';
 					html=html+'</div>';
 					html=html+'<label class="gris t12 cursor texto_circulo" for="'+eventoId+'">'+nombre+'</label>';
 					html=html+'</div>';	
-					
-					// llena información para el menu desplegable (CREAR EVENTO)
+				}
+
+				// llena información para el menu desplegable (CREAR EVENTO)
+				var eventosxPuesto=data.eventosPuesto;
+				
+				for(var e=0;e<eventosxPuesto.length;e++){
+					var nombre=eventosxPuesto[e].nombre;
+					var eventoId=eventosxPuesto[e].eventoId;
 					creaEvento=creaEvento+'<option value="'+eventoId+'">'+nombre+'</option>';
 				}
 				
 		html=html+'</div>';
 		$('#eventos').append(html);
-		$('#tipo_evento').append(creaEvento);
-		
+		$('#tipo_evento').append(creaEvento);	
 		}
+		
+		
 	}
+	
 }
-
 function seleccionEvento(valor){
 	var id=valor.id;
 	
@@ -522,13 +571,13 @@ function llenaAreas(){
 		    $('#letra_seleccionada').text(id.substring(0,1));
 	
 		    var llenaPuestos= Object.keys(data_personal.empleados[id]);
-		    
+		   
 		    if(llenaPuestos.length>0){
 		    for(var i=0;i<llenaPuestos.length;i++){
 		    	 if(llenaPuestos[i]!="AREAID"){
-		    	html=html+'<div onclick="clicPuestos(this)" class="dropdown-item opcion_drop puestos" id="'+llenaPuestos[i]+'" codigo="'+data_personal.empleados[id][llenaPuestos[i]][0].puestoId+'">';
-		    	html=html+'<div class="cuadro float_left">'+llenaPuestos[i].substring(0,1)+'</div>';
-		    	html=html+'<div class="informacion t12 azul">'+llenaPuestos[i]+'</div></div>';
+		    		 html=html+'<div onclick="clicPuestos(this)" class="dropdown-item opcion_drop puestos" id="'+llenaPuestos[i]+"/"+data_personal.empleados[id][llenaPuestos[i]][0].puestoId+'">';
+		    		 html=html+'<div class="cuadro float_left">'+llenaPuestos[i].substring(0,1)+'</div>';
+		    		 html=html+'<div class="informacion t12 azul">'+llenaPuestos[i]+'</div></div>';
 		    	 }	
 		    }
 		    }
@@ -554,15 +603,22 @@ function limpiaPuestos(){
 	 $('#inputPuestoId').val('');
 	 $('#letra_seleccionadaPuesto').text('-');
 	 $('#participantes').text('');
+	 
+	arregloEmpleadoId=[];
+	arregloNombre=[];
+	actualizaTablaParticipantes();
 }
 
 function clicPuestos(valor) {
 	var area = $('#inputArea').val();
-	var id = valor.id;
 	
-	if (id != "") {
+	if (valor.id != "") {
 		
-	var codigo=$('#'+id).attr('codigo');
+	var cadena = valor.id;
+	var arreglo=cadena.split("/");
+	var id=arreglo[0];
+	var codigo=arreglo[1];
+	
 	var html = '';
 		var llenaEmpleados = data_personal.empleados[area][id];
 
@@ -579,6 +635,7 @@ function clicPuestos(valor) {
 		}
 	} else {
     	limpiaPuestos();
+    	
 	}
 
 	$('#participantes').text('');
@@ -672,12 +729,10 @@ function enviaDatos(){
 	}
 	else{
 		if($('#inputArea').val()!="" && $('#inputPuesto').val()!=""){
-			console.log("entro a puestos");
 			tipo=2;
 			cadenaEnviar='[{"entidadId":'+$('#inputPuestoId').val()+'}]';
 		}
 		if($('#inputArea').val()!="" && $('#inputPuesto').val()==""){
-			console.log("entro a areas");
 			tipo=1;
 			cadenaEnviar='[{"entidadId":'+$('#inputAreaId').val()+'}]';
 		}
@@ -715,4 +770,5 @@ function enviaDatos(){
 		}
 	}
 	}	
+	calcula_Días();
 }

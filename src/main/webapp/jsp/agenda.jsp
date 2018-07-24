@@ -269,8 +269,7 @@
 									<label for="descripcion" class="etiqueta t12"><font class="azulc">*</font>Descripción</label>
 									<textarea class="form-control t12 letra" id="descripcion"></textarea>
 									
-									<label class="etiqueta t12"><font class="azulc">*</font>Asignado por</label>
-									<input type="text" class="filtro" id="asignado">
+									
 								</div>
 							</div>
 							<div class="col-lg-6">

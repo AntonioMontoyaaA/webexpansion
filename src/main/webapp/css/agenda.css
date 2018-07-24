@@ -33,6 +33,13 @@ h5{
      color:white;
      line-height:1;
 }
+.circulo_min{
+     width: 10px;
+     height: 10px;
+     -moz-border-radius: 50%;
+     -webkit-border-radius: 50%;
+     border-radius: 50%;
+}
 
 .caja_texto{
 	padding-top:2px;
@@ -468,19 +475,7 @@ color:#C9C9C9;
 
 
 /* ------------------------------------JUEGOS DE COLORES ------------------------------- */
-/* -------------------------------back_(idEvento) color de checkbox*/
 
 .atrasadas{background:#FF5B16;}
 .realizadas{background:#5D5D5D;}
 .porRealizar{background:#071B36;}
-
-.back_1{background-color:#FF7C17;}
-.back_2{background-color:#00417F;}
-.back_3{background-color:#40BCD8;}
-.back_4{background-color:#1E9D42;}
-.back_5{background-color:#071B36;}
-.back_6{background-color:#ff80c0;}
-.back_7{background-color:#000000;}
-.back_8{background-color:#804000;}
-.back_9{background-color:#808000;}
-.back_10{background-color:#400080;}

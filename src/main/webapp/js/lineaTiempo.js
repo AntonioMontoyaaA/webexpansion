@@ -140,6 +140,11 @@ function inicializaGrantt(datos){
 		$('.cuadrocancelar').show();
 		$('.cuadroeditar').hide();
 		$('.grupo').removeAttr("readonly");	
+		
+		if($('#fechafinal').val()==""){
+			$('#fechareal').removeAttr("readonly");	
+		}
+		
 		$('#responsable').hide();
 		$('#combo_responsables').show();	
 		//$('#estatus').hide();
@@ -151,6 +156,8 @@ function inicializaGrantt(datos){
 		consultaLinea();
 	
 		$('.grupo').attr("readonly",true);
+		$('#fechareal').attr("readonly",true);
+		
 		$('#combo_responsables').hide();
 		$('#responsable').show();
 		$('.cuadroguardar').hide();
@@ -161,6 +168,7 @@ function inicializaGrantt(datos){
 	
 	$('.cuadrocancelar').click(function(){
 		$('.grupo').attr("readonly",true);
+		$('#fechareal').attr("readonly",true);
 		//$('#combo_estatus').hide();
 		//$('#estatus').show();
 		$('#combo_responsables').hide();

@@ -40,6 +40,15 @@ h5{
      -webkit-border-radius: 50%;
      border-radius: 50%;
 }
+.circulo_min:hover{
+     width: 10px;
+     height: 10px;
+     -moz-border-radius: 50%;
+     -webkit-border-radius: 50%;
+     border-radius: 50%;
+     border:2px solid white;
+     
+}
 
 .caja_texto{
 	padding-top:2px;

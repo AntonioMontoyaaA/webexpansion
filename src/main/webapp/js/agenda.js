@@ -121,10 +121,10 @@ function armaAgenda(){
 							if(data.agenda[i].diaMes==contadordías && data_mes==mes && data_año==año){
 								
 								if(repetidos>3){
-								html=html+'<div class="personal_'+idusuario+' ocultableEvento'+eventoId+'">';
+								html=html+'<div class="personal_'+idusuario+' ocultableEvento'+eventoId+' cursor">';
 								}
 								else{
-								html=html+'<div class="col-12 personal_'+idusuario+' ocultableEvento'+eventoId+'">';
+								html=html+'<div class="col-12 personal_'+idusuario+' ocultableEvento'+eventoId+' cursor">';
 								}
 								html=html+'<a tabindex="0" class="agenda_link" data-toggle="popover" data-trigger="focus" data-placement="bottom" '+
 								'data-content="'+

@@ -296,16 +296,6 @@ public class AgendaAction extends ExpansionAction{
 		response2.setContentType("application/json");
 		response2.setCharacterEncoding("UTF-8");
 		
-		System.out.println(getTareaxAreaId()+" textarea ");
-		System.out.println(getFechaAgenda()+" fechaagenda ");
-		System.out.println(getFechaFinProgramada()+" fechafin ");
-		System.out.println(getObservaciones()+" observa ");
-		System.out.println(getDireccion()+" direccion ");
-		System.out.println(getLatitud()+" latitud ");
-		System.out.println(getLongitud()+" longi ");
-		System.out.println(getTipoAsignacion()+" tipoa ");
-		System.out.println(getPorAsignar()+" proasignar ");
-		
 		
 		try{
 		final OkHttpClient client = new OkHttpClient();

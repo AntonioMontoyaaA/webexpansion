@@ -99,7 +99,7 @@
 										</div>
 										<div class="col-lg-12" style="padding-left:0;">
 											<span class="t12 negrita">Fecha Real Estimada</span> 
-											<input type="text" class="form-control campo t12 grupo" id="fechareal"
+											<input type="text" class="form-control campo t12" id="fechareal"
 												value="-" readonly>
 										</div>
 										<div class="col-lg-12" style="padding-left:0;">

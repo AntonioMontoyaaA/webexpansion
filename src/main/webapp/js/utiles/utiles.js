@@ -161,16 +161,38 @@ function mueveReloj(){
 }
 
 function popover(){ //popover del header
-	 $('.header').popover({
+	 $('#salir').popover({
 		 container: 'body',
 		 html:true
 	 });
+	 
+	consultaNotificaciones();
+	
+	 
 	$('.popover-dismiss').popover({
 		  trigger: 'focus'
-		});
+	});
 }
 function salir(){
-	
 	console.log("entro");
 	$('#logout').submit();
+}
+function consultaNotificaciones(){
+	notificaciones="";
+	notificaciones+="<div>";
+	notificaciones+="<div class='t12 negrita azul titulo_avisos'>Avisos</div>";
+	notificaciones+="<div class='t12 negrita azul avisos'>";
+	
+	for(var i=0;i<10;i++){
+		notificaciones+="<div class='t12 leido cursor'>Tienes un aviso pendiente</div>";
+		notificaciones+="<div class='t12 noleido cursor'>Tienes un aviso pendiente</div>";
+	}
+	notificaciones+="</div>";
+	notificaciones+="</div>";
+	
+	 $('#notificaciones').popover({
+		 container: 'body',
+		 content: notificaciones,
+		 html:true
+	 });
 }

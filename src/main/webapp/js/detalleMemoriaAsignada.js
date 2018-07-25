@@ -199,15 +199,25 @@ function generaPopAutorizacion(titulo, datos){
 		texto = 'En tiempo';
 	else if(dias > 0)
 		texto = dias + ' días después';
-	var popAutorizacion = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 17px;">' + titulo + '<br/></span></div>' + 
-	   '<div style="width: 60%; position: relative; float: left; margin-top: 10px;"><span style="color: #FFF;font-size: 12px;font-weight: bold;">Autorizó</span></div>' +
-	   '<div style="width: 40%; position: relative; float: left; margin-top: 10px;"><span style="color: #FFF;font-size: 12px;font-weight: bold;">Fecha autorización</span></div>' +
-	   '<div style="width: 60%; position: relative; float: left"><span style="color: #FFF;font-size: 10px;">' + datos.nombre + '</span></div>' +
-	   '<div style="width: 40%; position: relative; float: left"><span style="color: #FFF;font-size: 10px;">' + datos.fechaAutorizacion + '</span></div>' +
-	   '<div style="width: 60%; position: relative; float: left"><span style="color: #FFF;font-size: 12px;font-weight: bold;">Fecha límite</span></div>' +
-	   '<div style="width: 40%; position: relative; float: left"><span style="color: #FFF;font-size: 12px;font-weight: bold;">Días vencidos</span></div>' + 
-	   '<div style="width: 60%; position: relative; float: left"><span style="color: #FFF;font-size: 10px;">' + datos.fechaLimite + '</span></div>' +
-	   '<div style="width: 40%; position: relative; float: left"><span style="color: #FFF;font-size: 10px;">' + texto + '</span></div></div>';
+	var popAutorizacion = '<div class="col-12 center"><span class="negrita blanco t14">' + titulo + '<br/></span></div>' + 
+	 '<div class="row">'+
+	   '<div class="col-6">'+
+	   '<div><span class="t12 blanco negrita float_left padd">Autorizó</span></div>' +
+	   '<span class="t12 blanco float_left">' + datos.nombre + '</span>'+
+	   '</div>' +
+	   '<div class="col-6">'+
+	   '<div><span class="t12 blanco negrita float_left padd">Fecha autorización</span></div>' +
+	   '<span class="t12 blanco float_left">' + datos.fechaAutorizacion + '</span>' +
+	   '</div>' +
+	   '<div class="col-6">'+
+	   '<div><span class="t12 blanco negrita float_left padd">Fecha límite</span></div>' +
+	   '<span class="t12 blanco float_left">' + datos.fechaLimite + '</span>' +
+	   '</div>' +
+	   '<div class="col-6">'+
+	   '<div><span class="t12 blanco negrita float_left padd">Días vencidos</span></div>' + 
+	   '<span class="t12 blanco float_left">' + texto + '</span>'+
+	   '</div>'+
+	   '</div>';
 	
 	return popAutorizacion;
 }
@@ -412,13 +422,14 @@ function buscaDetalleMD(mdId) {
 				$("#fechaVistaLateral2").text(data.superficie.fechaLateral2);
 				$("#horaVistaLateral2").text(data.superficie.horaLateral2);
 				
-				var contentPopSuperficie = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 17px;">Ponderación<br/></span></div>' + 
-				   '<div style="width: 60%; position: relative; float: left; margin-top: 10px;"><span style="color: #FFF;font-size: 12px;font-weight: normal;">Frente mts MIN:</span></div>' +
-				   '<div style="width: 40%; position: relative; float: left; margin-top: 10px;"><span style="color: #FFF;font-size: 12px;font-weight: bold;">' + data.superficie.frente + '</span></div>' +
-				   '<div style="width: 60%; position: relative; float: left; margin-top: 10px;"><span style="color: #FFF;font-size: 12px;font-weight: normal;">Profundidad mts MIN:</span></div>' +
-				   '<div style="width: 40%; position: relative; float: left; margin-top: 10px;"><span style="color: #FFF;font-size: 12px;font-weight: bold;">' + data.superficie.profundidad + '</span></div>' +
-				   '<div style="width: 60%; position: relative; float: left; margin-top: 10px;"><span style="color: #FFF;font-size: 12px;font-weight: normal;">Total MIN:</span></div>' +
-				   '<div style="width: 40%; position: relative; float: left; margin-top: 10px;"><span style="color: #FFF;font-size: 12px;font-weight: bold;">' + data.superficie.total + 'mts<sup>2</sup></span></div></div>';
+				var contentPopSuperficie ='<div class="row" style="padding-top:3px;">' + 
+				   '<div class="col-6"><span class="t14 blanco">Frente mínimo:</span></div>' +
+				   '<div class="col-6"><span class="t14 blanco negrita">' + data.superficie.frente + ' mts</span></div>' +
+				   '<div class="col-6 padd"><span class="t14 blanco">Profundidad mínima:</span></div>' +
+				   '<div class="col-6 padd"><span class="t14 blanco negrita">' + data.superficie.profundidad + ' mts</span></div>' +
+				   '<div class="col-6 padd"><span class="t14 blanco">Total mínimo:</span></div>' +
+				   '<div class="col-6 padd"><span class="t14 blanco negrita">' + data.superficie.total + 'mts<sup>2</sup></span></div>'+
+				   '</div>';
 				
 				$("#superficieTip").popover({
 					html: true, 
@@ -433,9 +444,9 @@ function buscaDetalleMD(mdId) {
 				var listaCompetencias = data.zonificacion.competencias;
 				var listaGeneradores = data.zonificacion.generadores;
 				
-				var contentPopZonificacion = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 17px;">Agrega tips para que tus buscadores encuentren sitios mejores</span></div></div>';
+				var contentPopZonificacion = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 14px;">Agrega tips para que tus buscadores encuentren sitios mejores</span></div></div>';
 				if(data.zonificacion.tips != undefined && data.zonificacion.tips.length > 0) {
-					contentPopZonificacion = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 17px;">' + data.zonificacion.tips[0] + '</span></div></div>';
+					contentPopZonificacion = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 14px;">' + data.zonificacion.tips[0] + '</span></div></div>';
 				}
 				$("#zonificacionTip").popover({
 					html: true, 
@@ -472,9 +483,9 @@ function buscaDetalleMD(mdId) {
 					$("#puntosConstruccion").text("---");
 				}
 				
-				var contentPopConstruccion = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 17px;">Agrega tips para que tus buscadores encuentren sitios mejores</span></div></div>';
+				var contentPopConstruccion = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 14px;">Agrega tips para que tus buscadores encuentren sitios mejores</span></div></div>';
 				if(data.construccion.tips != undefined && data.construccion.tips.length > 0) {
-					contentPopConstruccion = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 17px;">' + data.construccion.tips[0] + '</span></div></div>';
+					contentPopConstruccion = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 14px;">' + data.construccion.tips[0] + '</span></div></div>';
 				}
 				$("#construccionTip").popover({
 					html: true, 
@@ -492,9 +503,9 @@ function buscaDetalleMD(mdId) {
 				$("#periodoGracia").text(data.generalidades.periodoGracia);
 				$("#puntosGeneralidades").text(data.generalidades.puntos);
 				
-				var contentPopGeneralidades = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 17px;">Agrega tips para que tus buscadores encuentren sitios mejores</span></div></div>';
+				var contentPopGeneralidades = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 14px;">Agrega tips para que tus buscadores encuentren sitios mejores</span></div></div>';
 				if(data.generalidades.tips != undefined && data.generalidades.tips.length > 0) {
-					contentPopGeneralidades = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 17px;">' + data.generalidades.tips[0] + '</span></div></div>';
+					contentPopGeneralidades = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 14px;">' + data.generalidades.tips[0] + '</span></div></div>';
 				}
 				$("#generalidadesTip").popover({
 					html: true, 
@@ -675,9 +686,9 @@ function datosFlujoPeatonal(flujoPeatonal){
 	
 		$("#puntosConteos").text(flujoPeatonal.EXPANSION.puntos);
 	
-		var contentPopConteos = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 17px;">Agrega tips para que tus buscadores encuentren sitios mejores</span></div></div>';
+		var contentPopConteos = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 14px;">Agrega tips para que tus buscadores encuentren sitios mejores</span></div></div>';
 		if(flujoPeatonal.EXPANSION.tips != undefined && flujoPeatonal.EXPANSION.tips.length > 0) {
-			contentPopConteos = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 17px;">' + flujoPeatonal.EXPANSION.tips[0] + '</span></div></div>';
+			contentPopConteos = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 14px;">' + flujoPeatonal.EXPANSION.tips[0] + '</span></div></div>';
 		}
 		$("#conteosTip").popover({
 			html: true, 

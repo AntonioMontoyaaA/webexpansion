@@ -233,27 +233,27 @@
 
 						<div class="row div_header_sub">
 							<div class="col-lg-4">
-								<span class="blanco t12 sangria_cuerpo">FRENTE</span>&nbsp;&nbsp;&nbsp;<span
-									id="frenteMd" class="negrita blanco t14 sangria_cuerpo">---</span>
+								<span class="blanco t12">FRENTE</span>&nbsp;&nbsp;&nbsp;<span
+									id="frenteMd" class="negrita blanco t14">---</span>
 							</div>
 							<div class="col-lg-4">
-								<span class="blanco t12 sangria_cuerpo">PROFUNDIDAD</span>&nbsp;&nbsp;&nbsp;<span
+								<span class="blanco t12">PROFUNDIDAD</span>&nbsp;&nbsp;&nbsp;<span
 									id="profundidadMd" class="negrita blanco t14 sangria_cuerpo">---</span>
 							</div>
 							<div class="col-lg-4">
-								<span class="blanco t12 sangria_cuerpo">TOTAL</span>&nbsp;&nbsp;&nbsp;<span
+								<span class="blanco t12">TOTAL</span>&nbsp;&nbsp;&nbsp;<span
 									id="tamanioTotalMd" class="negrita blanco t14 sangria_cuerpo">---</span>
 							</div>
 						</div>
 						<div class="row div_header_sub">
 							
 							<div class="col-lg-4">
-								<div class="col-lg-12">
-									<span class="blanco t12 sangria_cuerpo">LATERAL 1</span>
+								<div class="col-lg-12" style="padding:0;">
+									<span class="blanco t12">LATERAL 1</span>
 								</div>
-								<div class="col-lg-12" style="text-align: center;">
+								<div class="col-lg-12" style="padding:0;">
 									<img class="imagenModal" id="vistaLateral1Md" alt="LATERAL 1"
-										style="width: 87%; height: 28%" src="img/no_imagen.png"
+										style="width: 100%; max-height: 300" src="img/no_imagen.png"
 										onclick="modalImage(this)" />
 								</div>
 								<div class="row div_bottom">
@@ -267,12 +267,12 @@
 							</div>
 							
 							<div class="col-lg-4">
-								<div class="col-lg-12">
-									<span class="blanco t12 sangria_cuerpo">VISTA FRONTAL</span>
+								<div class="col-lg-12" style="padding:0;">
+									<span class="blanco t12">VISTA FRONTAL</span>
 								</div>
-								<div class="col-lg-12" style="text-align: center;">
+								<div class="col-lg-12" style="padding:0;">
 									<img class="imagenModal" id="vistaFrontalMd"
-										alt="VISTA FRONTAL" style="width: 87%; height: 28%"
+										alt="VISTA FRONTAL" style="width: 100%; max-height: 300"
 										src="img/no_imagen.png" onclick="modalImage(this)" />
 								</div>
 								<div class="row div_bottom">
@@ -286,12 +286,12 @@
 							</div>
 							
 							<div class="col-lg-4">
-								<div class="col-lg-12">
-									<span class="blanco t12 sangria_cuerpo">LATERAL 2</span>
+								<div class="col-lg-12" style="padding:0;">
+									<span class="blanco t12 ">LATERAL 2</span>
 								</div>
-								<div class="col-lg-12" style="text-align: center;">
+								<div class="col-lg-12" style="padding:0;">
 									<img class="imagenModal" id="vistaLateral2Md" alt="LATERAL 2"
-										style="width: 87%; height: 28%" src="img/no_imagen.png"
+										style="width: 100%; max-height: 300" src="img/no_imagen.png"
 										onclick="modalImage(this)" />
 								</div>
 								<div class="row div_bottom">

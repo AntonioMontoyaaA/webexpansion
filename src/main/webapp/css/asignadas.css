@@ -46,9 +46,7 @@ span.circulo {
 .circuloSeguimiento {
      width: 13px;
      height: 13px;
-     -moz-border-radius: 50%;
-     -webkit-border-radius: 50%;
-     border-radius: 50%;
+     border-radius: 15%;
      background: #C9C9C9;
      position: relative;
      float: left;
@@ -242,33 +240,31 @@ Left
 }
 
 /* ----------------------------------- ESTILOS POPOVER */
-.popover  {
-	background: #40BCD8 !important;
-	color: #FFFFFF !important;
-	max-width:400px;
+.padd{
+	padding-top:10px;
 }
-.popover-content  {
-	background: #40BCD8 !important;
-	color: #FFFFFF !important;
+.popover  {
+	background: #AAB8CB;
 	max-width:400px;
+	padding-bottom:5px;
 }
 
 .popover .arrow,
 .popover .arrow:after {
-	border-bottom-color: #40BCD8 !important;
+	border-bottom-color: #AAB8CB !important;
 }
 
 .popover.bottom .arrow:after {
-  border-bottom-color: #40BCD8 !important;
-  background: #40BCD8 !important;
+  border-bottom-color: #AAB8CB !important;
+  background: #AAB8CB !important;
   color: #FFFFFF;
 }
 .popover.right .arrow:after {
-  border-right-color: #40BCD8 !important;
+  border-right-color: #AAB8CB !important;
 }
 
 .popover-content {
-	background-color: #40BCD8;
+	background-color: #AAB8CB;
 	color: #FFFFFF !important;
 }
 

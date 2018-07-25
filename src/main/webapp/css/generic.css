@@ -431,6 +431,36 @@ span.gris{
 
 /* -------------------------------------------- POPOVER DEL HEADER ------------------------*/
 /* ========== BEGIN POPOVER 1 ========== */
+.titulo_avisos{
+	border-bottom:2px solid #D1D1D1;
+	padding-left:10px;
+	padding-right:10px;
+	padding-top:3px;
+	padding-bottom:3px;
+	
+}
+.leido{
+	color:#22A0BC;
+	padding-left:10px;
+	padding-right:10px;
+
+}
+.noleido{
+	color:#D1D1D1;
+	padding-left:10px;
+	padding-right:10px;
+	
+}
+.leido:hover, .noleido:hover{
+	background:#F4F4F4;
+}
+
+.avisos{
+	overflow-y:auto;
+	max-height:200px;
+	padding-top:3px;
+	padding-bottom:3px;
+}
 #logout{
 	margin:0;
 	padding:0;
@@ -590,7 +620,7 @@ span.gris{
 }
 
 .popover1-header {
-  padding: 0.5rem 0.75rem;
+  padding: 0;
   margin-bottom: 0;
   font-size: 1rem;
   color: inherit;
@@ -604,7 +634,6 @@ span.gris{
   display: none;
 }
 
-.popover1-body {
-  padding: 0.5rem 0.75rem;
-  color: #212529;
+.popover1 .popover-body {
+  padding: 0;
 }

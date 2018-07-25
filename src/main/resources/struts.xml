@@ -202,6 +202,21 @@
                method = "execute">
            <result name = "success">jsp/aprobadas.jsp</result>
         </action>
+        <action name = "edita_md_datos_sitio"
+               class = "com.tiendas.neto.action.EditaMdDatosSitioAction"
+               method = "execute">
+           <result name = "success">jsp/aprobadas.jsp</result>
+        </action>
+        <action name = "edita_md_datos_propietario"
+               class = "com.tiendas.neto.action.EditaMdDatosPropietarioAction"
+               method = "execute">
+           <result name = "success">jsp/aprobadas.jsp</result>
+        </action>
+        <action name = "edita_md_generalidades"
+               class = "com.tiendas.neto.action.EditaGeneralidadesAction"
+               method = "execute">
+           <result name = "success">jsp/aprobadas.jsp</result>
+        </action>
       	 <!-- ************************************ ACCIONES SEGUIMIENTO ******* -->
       	
       	

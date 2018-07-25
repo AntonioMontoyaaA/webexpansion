@@ -465,7 +465,7 @@
 				<div class="row divs_p">
 					<div class="col-lg-12 menupr_estilos fazul altura1">
 						<div class="col-12 titulo_seccion">
-							<span class="negrita blanco t14">8) Autorizacón final</span>
+							<span class="negrita blanco t14">8) Autorización final</span>
 							<div class="float_right">
 								<span> <img id="autoriza8" title="Autoriza punto"
 									class="sin_autorizar b_autorizar" onclick="finalizaMD(1);"

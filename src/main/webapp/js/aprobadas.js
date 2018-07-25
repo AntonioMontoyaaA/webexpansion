@@ -1,6 +1,12 @@
 var datosExcel = "";
 var perfil;
 
+var DETALLE_MD = 3;
+var EDITA_MD = 4;
+var ESTATUS_PAUSA_MD = 21;
+var ESTATUS_CANCELADAS_MD = 17;
+var mdIdEstatus = 0;
+
 $(function(){
 	$('#idaprobadas').addClass('resaltado');
 	
@@ -144,7 +150,7 @@ function ejecutaBusquedaAprobadas() {
 function obtieneDetalleMd(nombreMd, mdId) {
 	$("#nombreMd").val(nombreMd);
 	$("#mdId").val(mdId);
-	$("#tipoMd").val('3');
+	$("#tipoMd").val(DETALLE_MD);
 	$("#detalleMemoriaAsignadaAction").submit();
 }
 
@@ -236,7 +242,10 @@ function historialMD(nombreMd, mdId){
 		$("#lineaTiempoAction").submit();
 }
 function editarMD(nombreMd, mdId){
-	
+	$("#nombreMd").val(nombreMd);
+    $("#mdId").val(mdId);
+    $("#tipoMd").val(EDITA_MD);
+    $("#detalleMemoriaAsignadaAction").submit();
 }
 function pausarMD(nombreMd, mdId){
 	mdIdEstatus = mdId;
@@ -255,10 +264,6 @@ function cambiarStatusMD(nombreMd, mdId){
             '¿Está seguro de cambiar el estatus de la MD?',
             TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, '');
 }
-
-var ESTATUS_PAUSA_MD = 21;
-var ESTATUS_CANCELADAS_MD = 17;
-var mdIdEstatus = 0;
 
 function pausaMdAction() {
     invocarJSONServiceAction("accion_md_action", 

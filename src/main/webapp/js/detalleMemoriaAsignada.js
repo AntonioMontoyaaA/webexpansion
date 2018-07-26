@@ -12,6 +12,12 @@ var PERMISOS = {};
 var ESTATUS_FINALIZA_MD = -1;
 
 var TIPOMD = -1;
+
+var DETALLE_MD_ASIGNADAS = 1;
+var DETALLE_MD_AUTORIZADAS = 2;
+var DETALLE_MD_RECHAZADAS = 3;
+var DETALLE_MD_EDITAR = 4;
+
 Dropzone.autoDiscover = false;
 var LAYOUT_B64 = '';
 var LAYOUT_Type = '';
@@ -53,7 +59,7 @@ $(function(){
 	}else if(TIPOMD == 3){
 		$('#idaprobadas').addClass('resaltado');
 		$('#titulo_tipo').text('APROBADAS');
-	}else if(TIPOMD == 5){
+	}else if(TIPOMD == 4 || TIPOMD == 5){
 		$('#idtablero').addClass('resaltado');
 		$('#titulo_tipo').text('TABLERO');
 	}
@@ -70,6 +76,163 @@ $(function(){
 		
 	funcionesAutorizacion();
 });
+
+function inicializaModulosEdicion(modulos, datosSitio, datosPropietario, generalidades) {
+	$("#modulo1Creacion").hide();
+	$("#modulo2Creacion").hide();
+	$("#modulo3Creacion").hide();
+	$("#modulo4Creacion").hide();
+	$("#modulo5Creacion").hide();
+	$("#modulo6Creacion").hide();
+	$("#modulo7Creacion").hide();
+	
+	for(var i = 0; i < modulos.length; i++) {
+		switch(modulos[i].moduloId) {
+		case 1:
+			if(modulos[i].editable == 1) {
+				var datos = "";
+				$("#modulo1Edita").show();
+				
+				datos += '<span class="negrita azul t14 sangria_cuerpo">Calle</span><br/>' +
+					'<input id="calleMdText" type="text" class="text_edita"/><br/>' +
+					'<span class="negrita azul t14 sangria_cuerpo">Colonia</span><br/>' +
+					'<input id="coloniaMdText" type="text" class="text_edita"><br/>' +
+					'<span class="negrita azul t14 sangria_cuerpo">Municipio</span><br/>' +
+					'<input id="municipioMdText" type="text" class="text_edita"><br/>' +
+					'<span class="negrita azul t14 sangria_cuerpo">Ciudad</span><br/>' +
+					'<input id="ciudadMdText" type="text" class="text_edita"><br/>' +
+					'<span class="negrita azul t14 sangria_cuerpo">Estado</span><br/>' +
+					'<input id="estadoMdText" type="text" class="text_edita"><br/>' +
+					'<span class="negrita azul t14 sangria_cuerpo">Código postal</span><br/>' +
+					'<input id="codigoPostalMdText" type="text" class="text_edita"><br/>';
+				$("#modulo1Datos").html(datos);
+				
+				if(datosSitio != undefined) {
+					$("#calleMdText").val(datosSitio.calle);
+					$("#coloniaMdText").val(datosSitio.colonia);
+					$("#municipioMdText").val(datosSitio.municipio);
+					$("#ciudadMdText").val(datosSitio.ciudad);
+					$("#estadoMdText").val(datosSitio.estado);
+					$("#codigoPostalMdText").val(datosSitio.codigoPostal);
+				}
+				
+			}
+			break;
+		case 2:
+			if(modulos[i].editable == 1) {
+				var datos = "";
+				$("#modulo2Edita").show();
+				
+				datos += '<span class="negrita azul t14 sangria_cuerpo">Nombre</span><br/>' +
+				'<input id="nombrePropietarioText" type="text" class="text_edita"/><br/>' +
+				'<span class="negrita azul t14 sangria_cuerpo">Apellido Paterno</span><br/>' +
+				'<input id="apaternoPropietarioText" type="text" class="text_edita"/><br/>' +
+				'<span class="negrita azul t14 sangria_cuerpo">Apellido Materno</span><br/>' +
+				'<input id="amaternoPropietarioText" type="text" class="text_edita"/><br/>' +
+				'<span class="negrita azul t14 sangria_cuerpo">Teléfono</span><br/>' +
+				'<input id="telefonoPropietarioText" type="text" class="text_edita"><br/>' +
+				'<span class="negrita azul t14 sangria_cuerpo">Email</span><br/>' +
+				'<input id="emailPropietarioText" type="text" class="text_edita"><br/>';
+			$("#modulo2Datos").html(datos);
+			
+			if(datosPropietario != undefined) {
+				$("#nombrePropietarioText").val(datosPropietario.nombreP);
+				$("#apaternoPropietarioText").val(datosPropietario.aPaterno);
+				$("#amaternoPropietarioText").val(datosPropietario.aMaterno);
+				$("#telefonoPropietarioText").val(datosPropietario.telefono);
+				$("#emailPropietarioText").val(datosPropietario.email);
+			}
+			}
+			break;
+		case 3:
+			if(modulos[i].editable == 1) {
+				$("#modulo3Edita").show();
+			}
+			break;
+		case 4:
+			if(modulos[i].editable == 1) {
+				$("#modulo4Edita").show();
+			}
+			break;
+		case 5:
+			if(modulos[i].editable == 1) {
+				$("#modulo5Edita").show();
+			}
+			break;
+		case 6:
+			if(modulos[i].editable == 1) {
+				var datos = "";
+				$("#modulo6Edita").show();
+				
+				datos += '<span class="negrita blanco t14 sangria_cuerpo">Renta</span><br/>' +
+				'<input id="montoRentaText" type="text" class="text_edita"/><br/>' +
+				'<div style="width: 100%"><span class="negrita blanco t14 sangria_cuerpo">Disponibilidad</span><br/>' +
+				'<select id="disponibilidadText" class="t12 sangria_cuerpo" style="margin-left: 20px;" onchange="cambiaDisponibilidad()">';
+				if(generalidades.disponibilidad == 1) {
+					datos += '<option value="1" selected>DISPONIBLE INMEDIATO</option>';
+				} else {
+					datos += '<option value="1">DISPONIBLE INMEDIATO</option>';
+				}
+				if(generalidades.disponibilidad == 2) {
+					datos += '<option value="2" selected>OCUPADO</option>';
+				} else {
+					datos += '<option value="2">OCUPADO</option>';
+				}
+				if(generalidades.disponibilidad == 3) {
+					datos += '<option value="3" selected>DISPONIBLE A PARTIR DE</option>';
+				} else {
+					datos += '<option value="3">DISPONIBLE A PARTIR DE</option>';
+				}
+				datos += '</select><br/>' +
+				'<input id="disponibilidadFechaText" readonly style="display: none;margin-top: 5px;margin-bottom: 10px;" type="text" class="text_edita" placeholder="dd/MM/yyyy"></div>' +
+				'<span class="negrita blanco t14 sangria_cuerpo">Amortización (%)</span><br/>' +
+				'<input id="amortizacionText" type="text" class="text_edita"><br/>' +
+				'<span class="negrita blanco t14 sangria_cuerpo">Tiempo de amortización (meses)</span><br/>' +
+				'<input id="tiempoAmortizacionText" type="text" class="text_edita"><br/>' +
+				'<span class="negrita blanco t14 sangria_cuerpo">Periodo de gracia (meses)</span><br/>' +
+				'<input id="periodoGraciaText" type="text" class="text_edita"><br/>';
+			$("#modulo6Datos").html(datos);
+			
+			if(generalidades != undefined) {
+				$("#montoRentaText").val(generalidades.renta);
+				$("#amortizacionText").val(generalidades.porcentajeAmortizacion.replace("%",""));
+				$("#tiempoAmortizacionText").val(generalidades.periodoAmortizacion.replace("MESES",""));
+				$("#periodoGraciaText").val(generalidades.periodoGracia.replace("MESES",""));
+				$("#disponibilidadFechaText").val(generalidades.fechadisponible);
+				inicializaCalendarioDisponibilidad();
+			}
+			}
+			break;
+		case 7:
+			if(modulos[i].editable == 1) {
+				$("#modulo7Edita").show();
+			}
+			break;
+		};
+	}
+}
+
+function inicializaCalendarioDisponibilidad() {
+	$(".ui-datepicker-trigger").hide();
+	
+	var dateHoy = new Date();
+	var FECHA_HOY = $.datepicker.formatDate('dd/mm/yy',dateHoy);
+	
+	$( "#disponibilidadFechaText").datepicker({
+		minDate:0,
+		autoSize : true,
+		showOn: 'both',
+		showAnim: 'slideDown',
+        buttonImageOnly: true,
+        onClose: function( selectedDate ) {
+			var date = $(this).datepicker('getDate');			
+			var endDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+        }
+	});
+	
+	$("#disponibilidadFechaText").datepicker.dateFormat = 'dd/MM/yy';
+	$("#disponibilidadFechaText").val(FECHA_HOY);
+}
 
 function inicializaFactores(){
 	FACTORES[1] = new FactorAutorizacion(1,'Datos del sitio',false);
@@ -362,6 +525,9 @@ function buscaDetalleMD(mdId) {
 			$("#mdIdAutorizacion").val(mdId);
 			ESTATUS_FINALIZA_MD = -1;
 			
+			if(TIPOMD == DETALLE_MD_EDITAR && data.modulos != undefined) {
+				inicializaModulosEdicion(data.modulos, data.datosSitio, data.datosPropietario, data.generalidades);
+			}
 			/* Datos de áreas que ya han autorizado */
 			if(data.areasAutorizadas != undefined && data.areasAutorizadas.length > 0) {
 				dibujaAreasCompletadas(data.areasAutorizadas)
@@ -1815,4 +1981,127 @@ function formatear(cnt, cents) {
                         + cnt.substring(cnt.length - (4 * i + 3));
 
 	return (((sgn) ? '' : '-') + cnt) + ( cents ?  '.' + cvs : '');
+}
+
+/********************************** Funciones para editar ********************************/
+function cambiaDisponibilidad() {
+	if($("#disponibilidadText").val() == 3) {
+		$("#disponibilidadFechaText").show();
+	} else {
+		$("#disponibilidadFechaText").hide();
+	}
+}
+
+function editaPantalla(pantalla, o) {
+	switch(pantalla) {
+		case 1:
+			cargaMensajeModal('EDITA MD', "¿Estás seguro de modificar la dirección del sitio?", TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_EXITO, editaDatosSitioAction);
+			break;
+		case 2:
+			cargaMensajeModal('EDITA MD', "¿Estás seguro de modificar los datos del propietario?", TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_EXITO, editaPropietarioAction);
+			break;
+		case 6:
+			cargaMensajeModal('EDITA MD', "¿Estás seguro de modificar las generalidades del sitio?", TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_EXITO, editaGeneralidadesAction);
+			break;
+	}
+}
+
+function editaDatosSitioAction() {
+	var mdId = $("#mdId").val();
+	invocarJSONServiceAction("edita_md_datos_sitio", 
+			{'mdId': mdId,
+			'calle': $("#calleMdText").val(),
+			'colonia': $("#coloniaMdText").val(),
+			'municipio': $("#municipioMdText").val(),
+			'ciudad': $("#ciudadMdText").val(),
+			'estado': $("#estadoMdText").val(),
+			'codigoPostal': $("#codigoPostalMdText").val()
+			}, 
+			'editaMdResponse', 
+			function() {
+				//Funcion de error
+				
+				cierraLoading();
+			},
+			function() {
+				//Función al finalizar
+				
+				cierraLoading();
+			});
+
+	editaMdResponse = function( data ) {
+		if(data.codigo != 200) {
+			cargaMensajeModal('EDITA MD', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
+		} else {
+			cargaMensajeModal('EDITA MD', "Datos modificados con éxito", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_EXITO, null);
+		}
+	}
+}
+
+function editaPropietarioAction() {
+	var mdId = $("#mdId").val();
+	invocarJSONServiceAction("edita_md_datos_propietario", 
+			{'mdId': mdId,
+			'nombrePropietario': $("#nombrePropietarioText").val(),
+			'apaternoPropietario': $("#apaternoPropietarioText").val(),
+			'amaternoPropietario': $("#amaternoPropietarioText").val(),
+			'telefono': $("#telefonoPropietarioText").val(),
+			'email': $("#emailPropietarioText").val()
+			}, 
+			'editaPropietarioResponse', 
+			function() {
+				//Funcion de error
+				
+				cierraLoading();
+			},
+			function() {
+				//Función al finalizar
+				
+				cierraLoading();
+			});
+
+	editaPropietarioResponse = function( data ) {
+		if(data.codigo != 200) {
+			cargaMensajeModal('EDITA MD', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
+		} else {
+			cargaMensajeModal('EDITA MD', "Datos modificados con éxito", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_EXITO, null);
+		}
+	}
+}
+
+function editaGeneralidadesAction() {
+	var mdId = $("#mdId").val();
+	
+	if($("#disponibilidadText").val() == 2 && $("#disponibilidadFechaText").val() == "") {
+		cargaMensajeModal('EDITA MD', "Debes capturar una fecha para la disponibilidad", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
+	} else {
+		invocarJSONServiceAction("edita_md_generalidades", 
+				{'mdId': mdId,
+				'renta': $("#montoRentaText").val(),
+				'disponibilidad': $("#disponibilidadText").val(),
+				'fechadisponible': $("#disponibilidadFechaText").val(),
+				'porcentajeamortiza': $("#amortizacionText").val(),
+				'periodoamortizacion': $("#tiempoAmortizacionText").val(),
+				'periodogracia': $("#periodoGraciaText").val()
+				}, 
+				'editaGeneralidadesResponse', 
+				function() {
+					//Funcion de error
+					
+					cierraLoading();
+				},
+				function() {
+					//Función al finalizar
+					
+					cierraLoading();
+				});
+
+		editaGeneralidadesResponse = function( data ) {
+			if(data.codigo != 200) {
+				cargaMensajeModal('EDITA MD', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
+			} else {
+				cargaMensajeModal('EDITA MD', "Datos modificados con éxito", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_EXITO, null);
+			}
+		}
+	}
 }

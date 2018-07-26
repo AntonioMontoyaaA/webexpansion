@@ -10,6 +10,7 @@
 <!--   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
  -->  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/jquery-ui.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/generic.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/dropzone/dropzone.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/asignadas.css" />
@@ -150,28 +151,31 @@
 			<div class="col-lg-12 menupr_estilos fblanco altura1">
 			<div class="col-12 titulo_seccion">
 				<span class="negrita azul t14">1) Datos del sitio</span>
-				<div class="float_right">
+				<div id="modulo1Edita" class="float_right" style="display: none;">
+                    <span><img id="historial1" title="Historial" onclick="historialPantalla(1, this);" style="cursor: pointer;" src="img/historial_mark.png">&nbsp;</span>
+                    <span><img id="edita1" title="Guarda cambios" onclick="editaPantalla(1, this);" style="cursor: pointer;" src="img/edita_mark.png"></span>
+                </div>
+				<div id="modulo1Creacion" class="float_right">
 					<span><img id="autoriza1" title="Autoriza punto" class="sin_autorizar b_autorizar" onclick="autorizaPantalla(1, this);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
 					</span>
 						<span><img id="rechaza1" title="Rechaza punto" class="sin_autorizar b_rechazar" onclick="rechazaPantalla(1, this);" style="cursor: pointer;" src="img/rechaza_mark.png">
 						</span>
 				</div>
 			</div>
-				
-				<div style="width: 100%;position: relative; float: left;text-align: left">
-						<span class="negrita azul t14 sangria_cuerpo">Calle</span><br/>
-						<span id="calleMd" class="azul t12 sangria_doble_cuerpo">---</span><br/>
-						<span class="negrita azul t14 sangria_cuerpo">Colonia</span><br/>
-						<span id="coloniaMd" class="azul t12 sangria_doble_cuerpo">---</span><br/>
-						<span class="negrita azul t14 sangria_cuerpo">Municipio</span><br/>
-						<span id="municipioMd" class="azul t12 sangria_doble_cuerpo">---</span><br/>
-						<span class="negrita azul t14 sangria_cuerpo">Ciudad</span><br/>
-						<span id="ciudadMd" class="azul t12 sangria_doble_cuerpo">---</span><br/>
-						<span class="negrita azul t14 sangria_cuerpo">Estado</span><br/>
-						<span id="estadoMd" class="azul t12 sangria_doble_cuerpo">---</span><br/>
-						<span class="negrita azul t14 sangria_cuerpo">Código postal</span><br/>
-						<span id="codiPostalMd" class="azul t12 sangria_doble_cuerpo">---</span><br/>
-				</div>
+			<div id="modulo1Datos" style="width: 100%;position: relative; float: left;text-align: left">
+					<span class="negrita azul t14 sangria_cuerpo">Calle</span><br/>
+					<span id="calleMd" class="azul t12 sangria_doble_cuerpo">---</span><br/>
+					<span class="negrita azul t14 sangria_cuerpo">Colonia</span><br/>
+					<span id="coloniaMd" class="azul t12 sangria_doble_cuerpo">---</span><br/>
+					<span class="negrita azul t14 sangria_cuerpo">Municipio</span><br/>
+					<span id="municipioMd" class="azul t12 sangria_doble_cuerpo">---</span><br/>
+					<span class="negrita azul t14 sangria_cuerpo">Ciudad</span><br/>
+					<span id="ciudadMd" class="azul t12 sangria_doble_cuerpo">---</span><br/>
+					<span class="negrita azul t14 sangria_cuerpo">Estado</span><br/>
+					<span id="estadoMd" class="azul t12 sangria_doble_cuerpo">---</span><br/>
+					<span class="negrita azul t14 sangria_cuerpo">Código postal</span><br/>
+					<span id="codiPostalMd" class="azul t12 sangria_doble_cuerpo">---</span><br/>
+			</div>
 			</div>
 		</div>
 		</div>
@@ -181,7 +185,11 @@
 			<div class="col-lg-12 menupr_estilos fblanco altura1">
 			<div class="col-12 titulo_seccion">
 				<span class="negrita azul t14">2) Datos del propietario</span>
-				<div class="float_right">
+				<div id="modulo2Edita" class="float_right" style="display: none;">
+                    <span><img id="historial2" title="Historial" onclick="historialPantalla(2, this);" style="cursor: pointer;" src="img/historial_mark.png">&nbsp;</span>
+                    <span><img id="edita2" title="Guarda cambios" onclick="editaPantalla(2, this);" style="cursor: pointer;" src="img/edita_mark.png"></span>
+                </div>
+				<div id="modulo2Creacion" class="float_right">
 					<span>
 						<img id="autoriza2" title="Autoriza punto" class="sin_autorizar b_autorizar" onclick="autorizaPantalla(2, this);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
 					</span>
@@ -190,18 +198,17 @@
 					</span>
 				</div>
 			</div>
-			
-				<div style="width: 100%;position: relative; float: left;text-align: left">
-					<span class="negrita azul t14 sangria_cuerpo">Número propietario</span><br/>
-					<span id="propietarioId" class="azul t12 sangria_doble_cuerpo">---</span><br/>
-					<span class="negrita azul t14 sangria_cuerpo">Nombre</span><br/>
-					<span id="nombrePropietario" class="azul t12 sangria_doble_cuerpo">---</span><br/>
-					<span class="negrita azul t14 sangria_cuerpo">Teléfono</span><br/>
-					<span id="telefonoPropietario" class="azul t12 sangria_doble_cuerpo">---</span><br/>
-					<span class="negrita azul t14 sangria_cuerpo">Email</span><br/>
-					<span id="emailPropietario" class="azul t12 sangria_doble_cuerpo">---</span><br/>
-					<span id="rentaANeto" class="negrita azul t14 sangria_doble_cuerpo">---</span><br/>
-				</div>
+			<div id="modulo2Datos" style="width: 100%;position: relative; float: left;text-align: left">
+				<span class="negrita azul t14 sangria_cuerpo">Número propietario</span><br/>
+				<span id="propietarioId" class="azul t12 sangria_doble_cuerpo">---</span><br/>
+				<span class="negrita azul t14 sangria_cuerpo">Nombre</span><br/>
+				<span id="nombrePropietario" class="azul t12 sangria_doble_cuerpo">---</span><br/>
+				<span class="negrita azul t14 sangria_cuerpo">Teléfono</span><br/>
+				<span id="telefonoPropietario" class="azul t12 sangria_doble_cuerpo">---</span><br/>
+				<span class="negrita azul t14 sangria_cuerpo">Email</span><br/>
+				<span id="emailPropietario" class="azul t12 sangria_doble_cuerpo">---</span><br/>
+				<span id="rentaANeto" class="negrita azul t14 sangria_doble_cuerpo">---</span><br/>
+			</div>
 			</div>
 		</div>
 		</div>
@@ -211,7 +218,11 @@
 					<div class="col-lg-12 menupr_estilos fazul">
 						<div class="col-12 titulo_seccion">
 							<span class="negrita blanco t14">3) Superficie</span>
-							<div class="float_right">
+							<div id="modulo3Edita" class="float_right" style="display: none;">
+                                <span><img id="historial3" title="Historial" onclick="historialPantalla(3, this);" style="cursor: pointer;" src="img/historial_mark.png">&nbsp;</span>
+                                <span><img id="edita3" title="Guarda cambios" onclick="editaPantalla(3, this);" style="cursor: pointer;" src="img/edita_mark.png"></span>
+                            </div>
+							<div id="modulo3Creacion" class="float_right">
 								<span class="negrita blanco t14">Puntos: </span> <span
 									id="puntosSuperficie" class="negrita blanco t14">---</span> <span>
 									<img id="autoriza3" title="Autoriza punto"
@@ -314,7 +325,11 @@
 			
 			<div class="col-12 titulo_seccion">
 				<span class="negrita azul t14">4) Zonificación</span>
-				<div class="float_right">
+				<div id="modulo4Edita" class="float_right" style="display: none;">
+                    <span><img id="historial4" title="Historial" onclick="historialPantalla(4, this);" style="cursor: pointer;" src="img/historial_mark.png">&nbsp;</span>
+                    <span><img id="edita4" title="Guarda cambios" onclick="editaPantalla(4, this);" style="cursor: pointer;" src="img/edita_mark.png"></span>
+                </div>
+				<div id="modulo4Creacion" class="float_right">
 					<span class="negrita azul t14">Puntos: </span> <span id="puntosZonificacion" class="negrita azul t14">---</span>
 					<span>
 						<img id="autoriza4" title="Autoriza punto" class="sin_autorizar b_autorizar" onclick="autorizaPantalla(4, this);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
@@ -366,7 +381,11 @@
 			
 			<div class="col-12 titulo_seccion">
 				<span class="negrita azul t14">5) Construcción</span>
-				<div class="float_right">
+				<div id="modulo5Edita" class="float_right" style="display: none;">
+                    <span><img id="historial5" title="Historial" onclick="historialPantalla(5, this);" style="cursor: pointer;" src="img/historial_mark.png">&nbsp;</span>
+                    <span><img id="edita5" title="Guarda cambios" onclick="editaPantalla(5, this);" style="cursor: pointer;" src="img/edita_mark.png"></span>
+                </div>
+				<div id="modulo5Creacion" class="float_right">
 						<span class="negrita azul t14">Puntos: </span> <span id="puntosConstruccion" class="negrita azul t14">---</span>
 					<span>
 						<img id="autoriza5" title="Autoriza punto" class="sin_autorizar b_autorizar" onclick="autorizaPantalla(5, this);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
@@ -399,7 +418,11 @@
 				<span class="negrita blanco t14">6) Generalidades del sitio</span></div>
 				
 			<div class="col-6  right">
-				<div class="">
+				<div id="modulo6Edita" class="float_right" style="display: none;">
+                    <span><img id="historial6" title="Historial" onclick="historialPantalla(6, this);" style="cursor: pointer;" src="img/historial_mark.png">&nbsp;</span>
+                    <span><img id="edita6" title="Guarda cambios" onclick="editaPantalla(6, this);" style="cursor: pointer;" src="img/edita_mark.png"></span>
+                </div>
+				<div id="modulo6Creacion" class="">
 						<span class="negrita blanco t14">Puntos: </span> <span id="puntosGeneralidades" class="negrita blanco t14">---</span>
 					<span>
 						<img id="autoriza6" title="Autoriza punto" class="sin_autorizar b_autorizar" onclick="autorizaPantalla(6, this);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
@@ -412,21 +435,20 @@
 				</div>
 			</div>
 			</div>
-			
-				<div class="row div_header_sub">
-					<div class="col-12">
-						<span class="negrita blanco t14 sangria_cuerpo">Renta</span><br/>
-						<span id="montoRenta" class="blanco t12 sangria_cuerpo">---</span><br/>
-						<span class="negrita blanco t14 sangria_cuerpo">Disponibilidad</span><br/>
-						<span id="disponibilidad" class="blanco t12 sangria_cuerpo">---</span><br/>
-						<span class="negrita blanco t14 sangria_cuerpo">Amortización</span><br/>
-						<span id="amortizacion" class="blanco t12 sangria_cuerpo">---</span><br/>
-						<span class="negrita blanco t14 sangria_cuerpo">Tiempo de amortización</span><br/>
-						<span id="tiempoAmortizacion" class="blanco t12 sangria_cuerpo">---</span><br/>
-						<span class="negrita blanco t14 sangria_cuerpo">Periodo de gracia</span><br/>
-						<span id="periodoGracia" class="blanco t12 sangria_cuerpo">---</span><br/>
-					</div>
+			<div id="modulo6Datos" class="row div_header_sub">
+				<div class="col-12">
+					<span class="negrita blanco t14 sangria_cuerpo">Renta</span><br/>
+					<span id="montoRenta" class="blanco t12 sangria_cuerpo">---</span><br/>
+					<span class="negrita blanco t14 sangria_cuerpo">Disponibilidad</span><br/>
+					<span id="disponibilidad" class="blanco t12 sangria_cuerpo">---</span><br/>
+					<span class="negrita blanco t14 sangria_cuerpo">Amortización</span><br/>
+					<span id="amortizacion" class="blanco t12 sangria_cuerpo">---</span><br/>
+					<span class="negrita blanco t14 sangria_cuerpo">Tiempo de amortización</span><br/>
+					<span id="tiempoAmortizacion" class="blanco t12 sangria_cuerpo">---</span><br/>
+					<span class="negrita blanco t14 sangria_cuerpo">Periodo de gracia</span><br/>
+					<span id="periodoGracia" class="blanco t12 sangria_cuerpo">---</span><br/>
 				</div>
+			</div>
 			</div>
 		</div>
 		</div>
@@ -437,7 +459,11 @@
 			
 			<div class="col-12 titulo_seccion">
 				<span class="negrita blanco t14">7)  Flujo peatonal</span>
-				<div class="float_right">
+				<div id="modulo7Edita" class="float_right" style="display: none;">
+                    <span><img id="historial7" title="Historial" onclick="historialPantalla(7, this);" style="cursor: pointer;" src="img/historial_mark.png">&nbsp;</span>
+                    <span><img id="edita7" title="Guarda cambios" onclick="editaPantalla(7, this);" style="cursor: pointer;" src="img/edita_mark.png"></span>
+                </div>
+				<div id="modulo7Creacion" class="float_right">
 						<span class="negrita blanco t14">Puntos: </span> <span id="puntosConteos" class="negrita blanco t14">---</span>
 					<span>
 						<img id="autoriza7" title="Autoriza punto" class="sin_autorizar b_autorizar" onclick="autorizaPantalla(7, this);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
@@ -463,7 +489,7 @@
 
 			<div class="col-lg-4" id="voboMD">
 				<div class="row divs_p">
-					<div class="col-lg-12 menupr_estilos fazul altura1">
+					<div id="divCalificacionFinal" class="col-lg-12 menupr_estilos fazul altura1">
 						<div class="col-12 titulo_seccion">
 							<span class="negrita blanco t14">8) Autorización final</span>
 							<div class="float_right">
@@ -573,6 +599,8 @@
 
 	<!-- Bootstrap core JavaScript -->
 	<script	src="${pageContext.request.contextPath}/js/jquery/jquery.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery/jquery-ui.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery/jquery.ui.datepicker-es.js"></script>
 	<script	src="${pageContext.request.contextPath}/js/jquery/popper.js"></script>
 	<script	src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 	<script	src="${pageContext.request.contextPath}/highcharts/highcharts.js"></script>

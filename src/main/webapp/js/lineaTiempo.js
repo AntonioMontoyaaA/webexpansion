@@ -1,5 +1,22 @@
 var nombre="";
 $(function(){
+	TIPOMD = parseInt($("#tipoMd").val());
+	if(TIPOMD == 0){
+		$('#idasignadas').addClass('resaltado');
+		$('#titulo_tipo').text('EN PROCESO');
+	}else if(TIPOMD == 1){
+		$('#idautorizadas').addClass('resaltado');
+		$('#titulo_tipo').text('AUTORIZADAS');
+	}else if(TIPOMD == 2){
+		$('#idrechazadas').addClass('resaltado');
+		$('#titulo_tipo').text('RECHAZADAS');
+	}else if(TIPOMD == 3){
+		$('#idaprobadas').addClass('resaltado');
+		$('#titulo_tipo').text('APROBADAS');
+	}else if(TIPOMD == 5){
+		$('#idtablero').addClass('resaltado');
+		$('#titulo_tipo').text('TABLERO');
+	}
 	
 	consultaLinea();
 });
@@ -34,8 +51,8 @@ function reformat(fecha){
 
 
 function inicializaGrantt(datos){
-	$('#contenedor').text('');
-	$('#contenedor').append('<svg id="gantt"></svg>');
+	$('#contenedor_gantt').text('');
+	$('#contenedor_gantt').append('<svg id="gantt"></svg>');
 	
 	
 	var data=datos.detalleSeguimiento;

@@ -1,6 +1,12 @@
 var resultadoTablero = null;
 var datosExcel = "";
 
+var DETALLE_MD = 3;
+var EDITA_MD = 4;
+var ESTATUS_PAUSA_MD = 21;
+var ESTATUS_CANCELADAS_MD = 17;
+var mdIdEstatus = 0;
+
 var togSrc = [
     "../img/arrowDown.png",
     "../img/arrowUp.png"
@@ -204,6 +210,26 @@ function creatabla(){
 			
 			$("#tablaMemoriasTablero tr td").click(function() {
 				var mdId = $(this).parent().find("td:eq(18)").html();
+				var nombreMd=$(this).parent().find("td:eq(3)").html();
+				
+				if(clase!=""){	// -- si hay alguna opcion seleccionada (botones)
+					if(clase=="time_tabla"){
+							historialMD(nombreMd, mdId);
+						}
+						if(clase=="edit_tabla"){
+							editarMD(nombreMd, mdId);
+						}
+						if(clase=="pause_tabla"){
+							pausarMD(nombreMd, mdId);
+						}
+						if(clase=="refuse_tabla"){
+							rechazarMD(nombreMd, mdId);
+						}
+						if(clase=="change_tabla"){
+							cambiarStatusMD(nombreMd, mdId);
+						}	
+				}
+				else{
 				
 				idColumna = jQuery("#tablaMemoriasTablero").dataTable().fnGetPosition(this);
 				var col = idColumna[1];
@@ -319,6 +345,7 @@ function creatabla(){
 						break;
 					}
 				}
+				}
 			});
 			
 			$(".DTFC_Cloned tr td").click(function() {
@@ -362,4 +389,168 @@ function abreDetalleMd(nombreMd, mdId) {
 
 function ejecutaBusquedaTablero() {
 	$("#tablaMemoriasTablero").dataTable().fnFilter($("#buscador").val());
+}
+// FUNCIONES DE LOS BOTONES ACTIVADO/DESACTIVADO
+//-----------------  inicio BOTONES DE ACCIONES EN LA TABLA ---------------------
+var clase="";
+$( '#time' ).click(function() {
+	if(clase!="time_tabla"){
+		clase="time_tabla";
+		$( '#time' ).addClass("activado");
+		
+		$( '#edit' ).removeClass("activado");
+		$( '#pause' ).removeClass("activado");
+		$( '#refuse' ).removeClass("activado");
+		$( '#change' ).removeClass("activado");
+	}
+	else{
+		clase="";
+		$( '#time' ).removeClass("activado");
+	}
+});
+$( '#edit' ).click(function() {
+	if(clase!="edit_tabla"){
+		clase="edit_tabla";
+		$( '#edit' ).addClass("activado");
+		
+		$( '#time' ).removeClass("activado");
+		$( '#pause' ).removeClass("activado");
+		$( '#refuse' ).removeClass("activado");
+		$( '#change' ).removeClass("activado");
+	}
+	else{
+		clase="";
+		$( '#edit' ).removeClass("activado");
+	}
+});
+$( '#pause' ).click(function() {
+	if(clase!="pause_tabla"){
+		clase="pause_tabla";
+		$( '#pause' ).addClass("activado");
+		
+		$( '#edit' ).removeClass("activado");
+		$( '#time' ).removeClass("activado");
+		$( '#refuse' ).removeClass("activado");
+		$( '#change' ).removeClass("activado");
+	}
+	else{
+		$( '#pause' ).removeClass("activado");
+		clase="";
+	}
+});
+$( '#refuse' ).click(function() {
+	if(clase!="refuse_tabla"){
+		clase="refuse_tabla";
+		$( '#refuse' ).addClass("activado");
+		
+		$( '#edit' ).removeClass("activado");
+		$( '#pause' ).removeClass("activado");
+		$( '#time' ).removeClass("activado");
+		$( '#change' ).removeClass("activado");
+	}
+	else{
+		$( '#refuse' ).removeClass("activado");
+		clase="";
+	}
+});
+$( '#change' ).click(function() {
+	if(clase!="change_tabla"){
+		clase="change_tabla";
+		$( '#change' ).addClass("activado");
+		
+		$( '#edit' ).removeClass("activado");
+		$( '#pause' ).removeClass("activado");
+		$( '#refuse' ).removeClass("activado");
+		$( '#time' ).removeClass("activado");
+	}
+	else{
+		$( '#change' ).removeClass("activado");
+		clase="";
+	}
+});
+//--------------------------------- FUNCIONES DE LOS BOTONES
+function historialMD(nombreMd, mdId){
+		$("#nombreMd_tiempo").val(nombreMd);
+		$("#mdId_tiempo").val(mdId);
+		$("#tipoMd_tiempo").val('5');
+		$("#lineaTiempoAction").submit();
+}
+function editarMD(nombreMd, mdId){
+	$("#nombreMd").val(nombreMd);
+    $("#mdId").val(mdId);
+    $("#tipoMd").val(EDITA_MD);
+    $("#detalleMemoriaAsignadaAction").submit();
+}
+// -------------------------------------------------- FUNCIONES
+
+function pausarMD(nombreMd, mdId){
+	mdIdEstatus = mdId;
+    cargaMensajeModal('TABLERO', 
+            '¿Está seguro de pausar la MD?',
+            TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, pausaMdAction);
+}
+function rechazarMD(nombreMd, mdId){
+	mdIdEstatus = mdId;
+    cargaMensajeModal('TABLERO', 
+            '¿Está seguro de rechazar la MD?',
+            TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, rechazaMdAction);
+}
+function cambiarStatusMD(nombreMd, mdId){
+    cargaMensajeModal('TABLERO', 
+            '¿Está seguro de cambiar el estatus de la MD?',
+            TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, '');
+}
+
+function pausaMdAction() {
+    invocarJSONServiceAction("accion_md_action", 
+            {'mdId': mdIdEstatus,
+            'estatusvalidacion': ESTATUS_PAUSA_MD
+            }, 
+            'accionMdResponse', 
+            function() {
+                //Funcion de error
+                
+                cierraLoading();
+            },
+            function() {
+                //Función al finalizar
+                
+                cierraLoading();
+            });
+
+    accionMdResponse = function( data ) {
+        if(data.codigo != 200) {
+            cargaMensajeModal('EDITA MD', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
+        } else {
+            cargaMensajeModal('EDITA MD', "Memoria descriptiva pausada con éxito", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_EXITO, null);
+            refreshAprobadas();
+        }
+    }
+}
+
+function rechazaMdAction() {
+    invocarJSONServiceAction("accion_md_action", 
+            {'mdId': mdIdEstatus,
+            'estatusvalidacion': ESTATUS_CANCELADAS_MD
+            }, 
+            'accionMdResponse', 
+            function() {
+                //Funcion de error
+                
+                cierraLoading();
+            },
+            function() {
+                //Función al finalizar
+                
+                cierraLoading();
+            });
+
+    accionMdResponse = function( data ) {
+        if(data.codigo != 200) {
+            cargaMensajeModal('EDITA MD', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
+        } else {
+            cargaMensajeModal('EDITA MD', "Memoria descriptiva pausada con éxito", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_EXITO, null);
+            refreshAprobadas();
+        }
+    }
 }

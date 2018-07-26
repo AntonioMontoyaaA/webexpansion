@@ -112,6 +112,7 @@ function creatabla(){
 					var nombreMd = $(this).parent().find("td:eq(0) span").html();
 					var mdId = $(this).parent().find("td:eq(6)").html();
 					
+					
 						if(clase=="time_tabla"){
 							historialMD(nombreMd, mdId);
 						}

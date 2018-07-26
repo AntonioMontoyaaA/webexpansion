@@ -61,9 +61,15 @@
                     <img src="${pageContext.request.contextPath}/img/iconos_DOWNLOAD.png">
                 </div>
                     <input type="text" class="fechaInicialCalendario" readonly id="datepicker1" />
+                    
+                	<button class="btn desp rechargue" id="time" type="button"></button>
+  					<button class="btn desp rechargue" id="edit" type="button"></button>
+  					<button class="btn desp rechargue" id="pause" type="button"></button>
+  					<button class="btn desp rechargue" id="refuse" type="button"></button>
+  					<button class="btn desp rechargue" id="change" type="button"></button>
                 </form>
-                
             </div>
+            
             <div class="col-lg-12">
                 <div class="row padding_p">
                     <div class="col-lg-12 menupr_estilos fblanco tabla_container">
@@ -87,6 +93,13 @@
     <input type="hidden" id="datos" name="datos" value=""/>
     <input type="submit" id="submitBotonTablero" style="display:none" />
 </form>
+
+<form action='lineaTiempo'  id="lineaTiempoAction" method="post">
+	<input type="hidden" name="mdId" id="mdId_tiempo" value=""/>
+	<input type="hidden" name="nombreMd" id="nombreMd_tiempo" value=""/>
+	<input type="hidden" name="tipoMd" id="tipoMd_tiempo" value=""/>
+</form>
+
     <!-- Bootstrap core JavaScript -->
     <script  src="${pageContext.request.contextPath}/js/jquery/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/jquery/popper.js"></script>

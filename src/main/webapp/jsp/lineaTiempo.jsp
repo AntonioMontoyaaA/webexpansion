@@ -33,7 +33,7 @@
 		</div>
 		
 		<div class="row padding_p">
-				<div class="col-lg-12 menupr_estilos fblanco" id="contenedor"  style="padding:0;"></div>
+				<div class="col-lg-12 menupr_estilos fblanco" id="contenedor_gantt"  style="padding:0;"></div>
 		</div>
 		
 		<div class="row padding_p">

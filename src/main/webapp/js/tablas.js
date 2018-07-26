@@ -298,7 +298,7 @@ function initTablaMemoriasTablero(nombreDiv, datosDesgloseMemorias, nombreTabla)
 							{"sClass":"izquierda padding padding_right","bSearchable":true},
 				           {"bSearchable":true},
 				           {"sClass":"izquierda padding","bSearchable":true},
-				           {"sClass":"izquierda padding","bSearchable":true},
+				           {"sClass":"imagen izquierda padding","bSearchable":true},
 				           {"bSearchable":true},
 				           {"sClass":"izquierda padding","bSearchable":true},
 				           {"bSearchable":true},

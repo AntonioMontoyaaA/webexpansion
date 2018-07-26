@@ -8,8 +8,11 @@ var TIPO_ESTATUS_EXITO		= 2;
 var funcionEvalSi			= "";
 
 $(function(){
+	
+	consultaNotificaciones();
 	popover();
 	mueveReloj();
+	
 	$("#botonMensajeAceptar").unbind("click");
 	$("#botonMensajeAceptar").click(function() {
 		if(funcionEvalSi != null) {
@@ -166,9 +169,6 @@ function popover(){ //popover del header
 		 html:true
 	 });
 	 
-	consultaNotificaciones();
-	
-	 
 	$('.popover-dismiss').popover({
 		  trigger: 'focus'
 	});
@@ -177,22 +177,49 @@ function salir(){
 	console.log("entro");
 	$('#logout').submit();
 }
+
 function consultaNotificaciones(){
-	notificaciones="";
-	notificaciones+="<div>";
-	notificaciones+="<div class='t12 negrita azul titulo_avisos'>Avisos</div>";
-	notificaciones+="<div class='t12 negrita azul avisos'>";
+	invocarJSONServiceAction("notificacionesAction",
+		{},
+		'funcionNotificaciones', 
+			function() {
+				cierraLoading();
+			},
+			function() {
+				cierraLoading();
+			});
+
+	funcionNotificaciones = function( data ) {
+	if(data.codigo != 200){
 	
-	for(var i=0;i<10;i++){
-		notificaciones+="<div class='t12 leido cursor'>Tienes un aviso pendiente</div>";
-		notificaciones+="<div class='t12 noleido cursor'>Tienes un aviso pendiente</div>";
 	}
-	notificaciones+="</div>";
-	notificaciones+="</div>";
-	
-	 $('#notificaciones').popover({
-		 container: 'body',
-		 content: notificaciones,
-		 html:true
-	 });
+	else{
+		var noti=data.notificaciones;
+		
+		notificaciones="";
+		notificaciones+="<div>";
+		notificaciones+="<div class='t12 negrita azul titulo_avisos'>Avisos</div>";
+		notificaciones+="<div class='t12 negrita azul avisos'>";
+		
+		for(var i=0;i<noti.length;i++){
+			var estatus= noti[i].estatus;
+			
+			if(estatus==1){
+				notificaciones+="<div class='t12 leido cursor' style='font-weight:normal'>"+noti[i].mensaje+"/div>";
+			}
+			else{
+				notificaciones+="<div class='t12 noleido cursor style='font-weight:normal''>"+noti[i].mensaje+"</div>";
+			}
+			
+		}
+		notificaciones+="</div>";
+		notificaciones+="</div>";
+		
+		 $('#notificaciones').popover({
+			 container: 'body',
+			 content: notificaciones,
+			 html:true
+		 });
+	}
+	}
 }

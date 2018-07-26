@@ -101,11 +101,26 @@ function creatabla(){
 		if(data.codigo != 200) {
 			cargaMensajeModal('Memorias descriptivas', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
 			$("#descargaExcelTablero").hide();
+			$("#time").hide();
+			$("#edit").hide();
+			$("#pause").hide();
+			$("#refuse").hide();
+			$("#change").hide();
 			initTablaMemoriasTablero('DivTablaTablero', 0, 'tablaMemoriasTablero');
 		} else {
 			resultadoTablero = data.detalleTablero;
 			datosExcel = data;
 			$("#descargaExcelTablero").show();
+			$("#time").show();
+//			$("#edit").show();
+//			$("#change").show();
+			$("#pause").show();
+			$("#refuse").show();
+
+			//TODO remove
+			$("#edit").hide();
+			$("#change").hide();
+			
 			var datosMemorias = new Array();
 			
 			if(data.resumen != undefined && data.resumen != null && data.resumen != "null") {
@@ -128,7 +143,7 @@ function creatabla(){
 					datosMemorias[i][2] = "<span style='"  + "'>---</span>";
 				}
 				if(resultadoTablero[i].NOMBRETDA != undefined) {
-					datosMemorias[i][3] = "<span style='"  + "'>" + resultadoTablero[i].NOMBRETDA + "</span>";
+					datosMemorias[i][3] = resultadoTablero[i].NOMBRETDA;
 				} else {
 					datosMemorias[i][3] = "<span style='"  + "'>---</span>";
 				}
@@ -346,6 +361,12 @@ function creatabla(){
 					}
 				}
 				}
+			});
+			$('#tablaMemoriasTablero tr').hover(function() { //accion al hover
+				$(this).find("td.imagen").addClass(clase);
+			}, function() { //accion al salir de hover
+				$(this).find("td.imagen").removeClass(clase);
+
 			});
 			
 			$(".DTFC_Cloned tr td").click(function() {

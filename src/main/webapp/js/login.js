@@ -1,9 +1,7 @@
 $('#hexa_user').click(function(){
-	console.log("hizo clic user");
 	$('#user').focus();
 });
 $('#hexa_pass').click(function(){
-	console.log("hizo clic pass");
 	$('#pass').focus();
 });
 

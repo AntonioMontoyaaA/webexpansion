@@ -54,6 +54,10 @@
          		class = "com.tiendas.neto.action.NotificacionesAction" 
          		method = "execute">
     </action>
+    <action name = "marcaNotificacionAction" 
+         		class = "com.tiendas.neto.action.NotificacionesAction" 
+         		method = "marcarLeido">
+    </action>
     <!-- ********************************************************************** -->
 	
 		<action name = "EnviaFechaAction" 

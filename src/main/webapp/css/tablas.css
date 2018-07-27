@@ -44,7 +44,7 @@ table{
 /* estilos comunes de elementos de la tabla*/
 
 .buscador {	
-	width:400px;
+	width:300px;
     border-radius: 2px;
     -moz-border-radius: 2px;
     -webkit-border-radius:2px;
@@ -52,6 +52,7 @@ table{
     color:white;
     font-size: 12px;
     padding-left: 3px;
+    margin-right:10px;
     background-color:#071B36;
     background-image: url(../img/iconos_search.png);
     background-size: 13px 13px;
@@ -62,7 +63,7 @@ table{
 
 .buscadorInput {
 	font-size: 12px;
-	width:375px !important;
+	width:290px !important;
     height: 20px;
     border-radius: 2px;
     -moz-border-radius: 2px;
@@ -135,7 +136,7 @@ span.seccion{
 	border:0;
 	height:20px !important;
 	padding:0;
-	margin-left:8px;
+	margin-left:5px;
 	margin-top:1px;
 	border-radius: 2px;
     -moz-border-radius: 2px;

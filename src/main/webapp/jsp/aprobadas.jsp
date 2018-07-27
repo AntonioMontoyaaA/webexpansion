@@ -72,6 +72,10 @@
 	<input type="hidden" name="tipoMd" id="tipoMd" value=""/>
 </form>
 
+<form action='mensajes_historial'  id="chatPorMd" method="post">
+	<input type="hidden" name="mdIdChat" id="mdIdChat" value=""/>
+</form>
+
 <jsp:include page="/jsp/generic/loading.jsp" />
 <jsp:include page="/jsp/generic/mensajes.jsp" />
 

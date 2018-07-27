@@ -100,6 +100,10 @@
 	<input type="hidden" name="tipoMd" id="tipoMd_tiempo" value=""/>
 </form>
 
+<form action='mensajes_historial'  id="chatPorMd" method="post">
+	<input type="hidden" name="mdIdChat" id="mdIdChat" value=""/>
+</form>
+
     <!-- Bootstrap core JavaScript -->
     <script  src="${pageContext.request.contextPath}/js/jquery/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/jquery/popper.js"></script>

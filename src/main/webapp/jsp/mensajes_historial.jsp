@@ -151,10 +151,16 @@
 </div>
 </div>
 
-<div style="display: none;">
-	<s:textfield name="mdIdChat" label="" cssStyle="display: block"></s:textfield>
+<form action='memoria_detalle'  id="detalleMemoriaAsignadaAction" method="post">
+	<input type="hidden" name="mdId" id="mdId" value=""/>
+	<input type="hidden" name="nombreMd" id="nombreMd" value=""/>
+	<input type="hidden" name="tipoMd" id="tipoMd" value=""/>
+</form>
+
+<form action='mensajes_historial'  id="chatPorMd" method="post">
+	<s:textfield id="mdIdChat" name="mdIdChat" label="" cssStyle="display: block"></s:textfield>
 	<input type="hidden" id="usuarioLogin" value="${usr.perfil.numeroEmpleado}" />
-</div>
+</form>
 	
 <jsp:include page="/jsp/generic/loading.jsp" />
 <jsp:include page="/jsp/generic/mensajes.jsp" />

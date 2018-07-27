@@ -578,11 +578,15 @@
 		</div>
 </div>
 
-<div style="display: none;">
-	<s:textfield name="mdId" label="" cssStyle="display: none"></s:textfield>
-	<s:textfield name="nombreMd" label="" cssStyle="display: none"></s:textfield>	
-	<s:textfield name="tipoMd" label="" cssStyle="display: none"></s:textfield>	
-</div>
+<form action='memoria_detalle'  id="detalleMemoriaAsignadaAction" method="post">
+	<s:textfield id="mdId" name="mdId" label="" cssStyle="display: none"></s:textfield>
+	<s:textfield id="nombreMd" name="nombreMd" label="" cssStyle="display: none"></s:textfield>	
+	<s:textfield id="tipoMd" name="tipoMd" label="" cssStyle="display: none"></s:textfield>	
+</form>
+
+<form action='mensajes_historial'  id="chatPorMd" method="post">
+	<input type="hidden" name="mdIdChat" id="mdIdChat" value=""/>
+</form>
 
 <div id="modalImages" class="modalImagen">
   <span class="closeModal">&times;</span>

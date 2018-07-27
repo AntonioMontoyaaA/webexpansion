@@ -439,13 +439,14 @@ span.gris{
 	padding-bottom:3px;
 	
 }
-.leido{
+.noleido{
+	
 	color:#22A0BC;
 	padding-left:10px;
 	padding-right:10px;
 
 }
-.noleido{
+.leido{
 	color:#D1D1D1;
 	padding-left:10px;
 	padding-right:10px;
@@ -472,9 +473,7 @@ span.gris{
   z-index: 1060;
   display: block;
   max-width: 276px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  font-style: normal;
-  font-weight: 400;
+  font-family: "Helvetica Neue";
   line-height: 1.5;
   text-align: left;
   text-align: start;
@@ -486,7 +485,6 @@ span.gris{
   word-spacing: normal;
   white-space: normal;
   line-break: auto;
-  font-size: 0.875rem;
   word-wrap: break-word;
   background-color: #fff;
   background-clip: padding-box;
@@ -620,9 +618,9 @@ span.gris{
 }
 
 .popover1-header {
+font-weight:normal;
   padding: 0;
   margin-bottom: 0;
-  font-size: 1rem;
   color: inherit;
   background-color: #f7f7f7;
   border-bottom: 1px solid #ebebeb;
@@ -632,8 +630,10 @@ span.gris{
 
 .popover1-header:empty {
   display: none;
+  font-weight:normal;
 }
 
 .popover1 .popover-body {
+font-weight:normal;
   padding: 0;
 }

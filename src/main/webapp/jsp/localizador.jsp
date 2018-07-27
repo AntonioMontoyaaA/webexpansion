@@ -48,7 +48,15 @@
 </div>
 	
 
+<form action='memoria_detalle'  id="detalleMemoriaAsignadaAction" method="post">
+	<input type="hidden" name="mdId" id="mdId" value=""/>
+	<input type="hidden" name="nombreMd" id="nombreMd" value=""/>
+	<input type="hidden" name="tipoMd" id="tipoMd" value=""/>
+</form>
 
+<form action='mensajes_historial'  id="chatPorMd" method="post">
+	<input type="hidden" name="mdIdChat" id="mdIdChat" value=""/>
+</form>
 		
 
 

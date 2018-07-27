@@ -47,7 +47,7 @@
 		 </div>' 
                      
 		data-content="<form id='logout' action='Logout'>
-		 <div id='salir' class='cursor t14 negrita azul' onclick='salir()'>Cerrar Sesión </div>
+		 <div id='salir' class='cursor t14 negrita azul' style='padding:5px 10px;' onclick='salir()'>Cerrar Sesión </div>
 		</form>" >
 		<img src="img/user.png" style="padding-right:15px; margin-bottom:15px;"></a></span>
 		</form>

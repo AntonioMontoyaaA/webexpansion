@@ -48,7 +48,18 @@
 	</package>
 	
 	<package name="default" namespace="/" extends="struts-default">
-
+	
+	<!-- ************************* NOTIFICACIONES ***************************** -->
+	<action name = "notificacionesAction" 
+         		class = "com.tiendas.neto.action.NotificacionesAction" 
+         		method = "execute">
+    </action>
+    <action name = "marcaNotificacionAction" 
+         		class = "com.tiendas.neto.action.NotificacionesAction" 
+         		method = "marcarLeido">
+    </action>
+    <!-- ********************************************************************** -->
+	
 		<action name = "EnviaFechaAction" 
          		class = "com.tiendas.neto.action.EnviaFechaAction" 
          		method = "execute">
@@ -176,7 +187,7 @@
          	class = "com.tiendas.neto.action.AgendaAction" 
          	method = "obtieneAgenda" />
          	
-         	 <action name = "enviaDatos" 
+         <action name = "enviaDatos" 
          	class = "com.tiendas.neto.action.AgendaAction" 
          	method = "enviaDatos" />
   <!-- ************************************ FIN-AGENDA ******* -->

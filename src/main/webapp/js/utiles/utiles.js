@@ -8,8 +8,11 @@ var TIPO_ESTATUS_EXITO		= 2;
 var funcionEvalSi			= "";
 
 $(function(){
+	
+	consultaNotificaciones();
 	popover();
 	mueveReloj();
+	
 	$("#botonMensajeAceptar").unbind("click");
 	$("#botonMensajeAceptar").click(function() {
 		if(funcionEvalSi != null) {
@@ -166,8 +169,13 @@ function popover(){ //popover del header
 		 html:true
 	 });
 	 
-	consultaNotificaciones();
-	
+	 $('#notificaciones').popover({
+		 container: 'body',
+		 content:function(){
+			 return  notificaciones;
+		 },
+		 html:true
+	 });
 	 
 	$('.popover-dismiss').popover({
 		  trigger: 'focus'
@@ -177,22 +185,99 @@ function salir(){
 	console.log("entro");
 	$('#logout').submit();
 }
+
+var notificaciones="";
 function consultaNotificaciones(){
-	notificaciones="";
-	notificaciones+="<div>";
-	notificaciones+="<div class='t12 negrita azul titulo_avisos'>Avisos</div>";
-	notificaciones+="<div class='t12 negrita azul avisos'>";
 	
-	for(var i=0;i<10;i++){
-		notificaciones+="<div class='t12 leido cursor'>Tienes un aviso pendiente</div>";
-		notificaciones+="<div class='t12 noleido cursor'>Tienes un aviso pendiente</div>";
+	 $.ajax({
+	        type     : "POST",
+	        url      : 'notificacionesAction',
+	        data     : {},
+	        async	 : false,
+	        beforeSend : function(){
+	        	cargaLoading();
+	        },
+	success  : function(data) {
+	if(data.codigo != 200){
+	
 	}
-	notificaciones+="</div>";
-	notificaciones+="</div>";
+	else{
+		var noti=data.notificaciones;
+		
+		notificaciones="";
+		notificaciones+="<div>";
+		notificaciones+="<div class='t12 negrita azul titulo_avisos'>Avisos</div>";
+		notificaciones+="<div class='t12 negrita azul avisos'>";
+		
+		for(var i=0;i<noti.length;i++){
+			var estatus= noti[i].estatus;
+			
+			if(estatus==1){
+				notificaciones+="<div mdId='"+noti[i].mdId+"' tipoNotificacion='"+noti[i].tipoNotificacion+
+				"' fechaRegistro='"+noti[i].fechaRegistro+"' nivelEstatusAreaId='"+noti[i].nivelEstatusAreaId+
+				"' nombreSitio='"+noti[i].nombreSitio+
+				"' class='t12 leido cursor style='font-weight:normal' onclick='marca_notificacion(this)'><span>"+
+				noti[i].mensaje+"</span><span class='t10'>&emsp;"+noti[i].fechaRegistro+"</span></div>";
+			}
+			else{
+				notificaciones+="<div mdId='"+noti[i].mdId+"' tipoNotificacion='"+noti[i].tipoNotificacion+
+				"' fechaRegistro='"+noti[i].fechaRegistro+"' nivelEstatusAreaId='"+noti[i].nivelEstatusAreaId+
+				"' nombreSitio='"+noti[i].nombreSitio+
+				"' class='t12 noleido cursor style='font-weight:normal' onclick='marca_notificacion(this)'><span>"+
+				noti[i].mensaje+"</span><span class='t10'>&emsp;"+noti[i].fechaRegistro+"</span></div>";
+			}
+			
+		}
+		notificaciones+="</div>";
+		notificaciones+="</div>";
+	}
+	}
+});
+}
+
+function marca_notificacion(valor){
 	
-	 $('#notificaciones').popover({
-		 container: 'body',
-		 content: notificaciones,
-		 html:true
-	 });
+	var id=$(valor).attr('mdId');
+	var tipoNotificacion=$(valor).attr('tipoNotificacion');
+	var fechaRegistro=$(valor).attr('fechaRegistro');
+	var nivelEstatusAreaId=$(valor).attr('nivelEstatusAreaId');
+	var nombreSitio=$(valor).attr('nombreSitio');
+
+	console.log(id+" "+tipoNotificacion+" "+fechaRegistro+" "+nivelEstatusAreaId+" "+nombreSitio);
+	invocarJSONServiceAction("marcaNotificacionAction",
+			{'mdId':id,
+			 'tipoNotificacion':tipoNotificacion,
+			 'fecha':fechaRegistro,
+			 'nivelEstatusArea':nivelEstatusAreaId
+			 },
+			'marcaNotificacion', 
+				function() {
+					cierraLoading();
+				},
+				function() {
+					cierraLoading();
+				});
+
+		marcaNotificacion = function( data ) {
+			if(data.codigo != 200){
+				console.log("error "+data.mensaje+" mensaje");
+			}
+			else{
+				console.log("ok "+data.mensaje+" mensaje");
+		}
+		}
+		
+		
+	if(tipoNotificacion==1){
+		$("#nombreMd").val(nombreSitio);
+		$("#mdId").val(id);
+		$("#detalleMemoriaAsignadaAction").submit();
+	}
+	else if(tipoNotificacion==2||tipoNotificacion==4){
+		$("#mdIdChat").val(id);
+		$("#chatPorMd").submit();
+	}
+	else{
+		consultaNotificaciones();
+	}
 }

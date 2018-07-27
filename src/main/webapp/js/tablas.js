@@ -271,6 +271,7 @@ function initTablaMemoriasTablero(nombreDiv, datosDesgloseMemorias, nombreTabla)
 					'<th width="10%" class="gris negrita t12 txt_expansion">Fuente MD</th>' +
 					'<th width="10%" class="gris negrita t12 txt_expansion">Nombre de la tda</th>' +
 					'<th width="5%" class="gris negrita t12">Categor&iacute;a</th>' +
+					'<th width="5%" class="gris negrita t12">Puntuaci&oacute;n</th>' +
 					'<th width="5%" class="gris negrita t12 ">VoBo inicial operaciones</th>' +
 					'<th width="5%" class="gris negrita t12 txt_auditoria">Conteo auditor</th>' +
 					'<th width="5%" class="gris negrita t12 txt_suditoria">Pregestor&iacute;a autorizada</th>' +
@@ -299,6 +300,7 @@ function initTablaMemoriasTablero(nombreDiv, datosDesgloseMemorias, nombreTabla)
 				           {"bSearchable":true},
 				           {"sClass":"izquierda padding","bSearchable":true},
 				           {"sClass":"imagen izquierda padding","bSearchable":true},
+				           {"bSearchable":true},
 				           {"bSearchable":true},
 				           {"sClass":"izquierda padding","bSearchable":true},
 				           {"bSearchable":true},
@@ -456,10 +458,24 @@ var idiomaEspanolDirRechazadas = {
 var idiomaEspanolTablero = {
 	    "sEmptyTable":     "<div style='padding:10px; color:red; font-size:13px;'>No existen memorias descriptivas</div>",
 	    "sInfo":           '<div class="row fazul blanco" style="padding-bottom:3px;">'+
-	    							'<div class="col-xl-12 col-lg-12 right">Totales: <b>_TOTAL_</b></div>'+
-	    					'</div>',
-	    							
-	    				
+	    						'<div class="col-xl-6 col-lg-6 center">'+
+	    	    					'<div class="row">'+
+	    	    							'<div class="col-xl-3 col-3 center"  style="min-width:160px;margin-top: 3px;">'+
+	    	    								'<div class="circle_atrasadas"></div><span class="t12" style="margin-left: 0px;">Fecha final atrasada</span>' + 
+	    	    							'</div>'+
+	    	    							'<div class="col-xl-3 col-3 center"  style="min-width:160px;margin-top: 3px;">'+
+	    	    								'<img src="img/leyenda1.png"/><span class="t12" style="margin-left: 5px;padding-top: 3px;">En tiempo</span>' + 
+	    	    							'</div>'+
+	    	    							'<div class="col-xl-3 col-3 center"  style="min-width:160px;margin-top: 3px;">'+
+	    	    								'<img src="img/leyenda2.png"/><span class="t12" style="margin-left: 5px;padding-top: 3px;">Atrasada</span>' + 
+	    	    							'</div>'+
+	    	    							'<div class="col-xl-3 col-3 center" style="min-width:160px;margin-top: 3px;">'+
+	    	    								'<img src="img/leyenda3.png" /><span class="t12" style="margin-left: 5px;padding-top: 3px;">Fecha estimada</span>' +
+	    	    							'</div>'+
+	    	    					'</div>' + 
+	    	    				'</div>'+
+	    	    			'<div class="col-xl-6 col-lg-6 right"><span>Totales: <b>_TOTAL_</b></span></div>'+
+	    				'</div>',
 	    "sInfoEmpty":      "Totales: 0",
 	    "sInfoFiltered":   "(_TOTAL_ de _MAX_ memorias en total)",
 	    "sInfoPostFix":    "",

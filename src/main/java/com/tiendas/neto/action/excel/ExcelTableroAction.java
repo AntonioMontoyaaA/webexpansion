@@ -49,6 +49,7 @@ public class ExcelTableroAction extends ExpansionAction {
 	        	memoria.setFuenteMd(array.getJSONObject(i).getString("FUENTEMD"));
 	        	memoria.setNombreTda(array.getJSONObject(i).getString("NOMBRETDA"));
 	        	memoria.setCategoria(array.getJSONObject(i).getString("CATEGORIA"));
+	        	//memoria.setPuntuacion(array.getJSONObject(i).getInt("PUNTUACION"));
 	        	memoria.setVoboInicialOperaciones(array.getJSONObject(i).getJSONObject("PRE_OPERACIONES").getString("fechaValidacion"));
 	        	memoria.setConteoAuditor(array.getJSONObject(i).getInt("CONTEOAUDITOR"));
 	        	memoria.setPregestoriaAutorizada(array.getJSONObject(i).getJSONObject("PRE_GESTORIA").getString("fechaValidacion"));

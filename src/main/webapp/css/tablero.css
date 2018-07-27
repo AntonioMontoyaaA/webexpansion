@@ -92,6 +92,15 @@ span.circulo {
     margin-top: 4px;
     margin-left: 10px;
 }
+.circle_atrasadas {
+	border-radius: 50%;
+    width: 0.8em;
+    height: 0.8em;
+    background: #E7BE53;
+    float: left;
+    margin-top: 2px;
+    margin-left: 10px;
+}
 
 .padding_right {
 	padding-right: 10px;
@@ -149,4 +158,14 @@ span.circulo {
     padding: 6px;
     color: #efefef;
     height: 33px;
+}
+.text_seleccion {
+	color: #36a6c1;
+}
+.text_seleccion:hover {
+	text-decoration: underline;
+	color: #2196F3;
+}
+.text_seleccion_dos:hover {
+	text-decoration: italic;
 }

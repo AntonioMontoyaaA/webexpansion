@@ -13,6 +13,7 @@ public class TableroVo implements Serializable {
 	private String fuenteMd;
 	private String nombreTda;
 	private String categoria;
+	private int puntuacion;
 	private String voboInicialOperaciones;
 	private int conteoAuditor;
 	private String pregestoriaAutorizada;
@@ -85,6 +86,18 @@ public class TableroVo implements Serializable {
 	 */
 	public void setCategoria(String categoria) {
 		this.categoria = categoria;
+	}
+	/**
+	 * @return the puntuacion
+	 */
+	public int getPuntuacion() {
+		return puntuacion;
+	}
+	/**
+	 * @param puntuacion the puntuacion to set
+	 */
+	public void setPuntuacion(int puntuacion) {
+		this.puntuacion = puntuacion;
 	}
 	/**
 	 * @return the voboInicialOperaciones

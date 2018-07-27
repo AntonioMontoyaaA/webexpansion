@@ -129,11 +129,10 @@ function creatabla(){
 			
 			for( var i = 0 ; i < resultadoTablero.length; i++){
 				
-				
 				datosMemorias[i] = new Array();	 	 		 			 
-				datosMemorias[i][0] =  resultadoTablero[i].MDID;
+				datosMemorias[i][0] =  "<div onclick='obtieneNombreMd(\"" + resultadoTablero[i].MDID + "\");'><span class='text_seleccion'>" + resultadoTablero[i].MDID + "</span></div>";
 				if(resultadoTablero[i].FECHARECEPCION != undefined) {
-					datosMemorias[i][1] = "<span style='"  + "'>" + resultadoTablero[i].FECHARECEPCION.fechaValidacion + "</span>";
+					datosMemorias[i][1] = "<div onclick='muestraFechaMd(\"" + resultadoTablero[i].MDID + "\");'><span class='text_seleccion_dos'>" + resultadoTablero[i].FECHARECEPCION.fechaValidacion + "</span></div>";
 				} else {
 					datosMemorias[i][1] = "<span style='"  + "'>---</span>";
 				}
@@ -152,73 +151,78 @@ function creatabla(){
 				} else {
 					datosMemorias[i][4] = "<span style='"  + "'>---</span>";
 				}
-				if(resultadoTablero[i].PRE_OPERACIONES != undefined) {
-					datosMemorias[i][5] = "<span style='"  + "'>" + resultadoTablero[i].PRE_OPERACIONES.fechaValidacion + "</span>";
+				if(resultadoTablero[i].PUNTUACION != undefined) {
+					datosMemorias[i][5] = "<span style='"  + "'>" + resultadoTablero[i].PUNTUACION + "</span>";
 				} else {
 					datosMemorias[i][5] = "<span style='"  + "'>---</span>";
 				}
-				if(resultadoTablero[i].CONTEOAUDITOR != undefined) {
-					datosMemorias[i][6] = "<span style='"  + "'>" + formato(resultadoTablero[i].CONTEOAUDITOR, true) + "</span>";
+				if(resultadoTablero[i].PRE_OPERACIONES != undefined) {
+					datosMemorias[i][6] = "<span style='"  + "'>" + resultadoTablero[i].PRE_OPERACIONES.fechaValidacion + "</span>";
 				} else {
 					datosMemorias[i][6] = "<span style='"  + "'>---</span>";
 				}
-				if(resultadoTablero[i].PRE_GESTORIA != undefined) {
-					datosMemorias[i][7] = "<span>" + resultadoTablero[i].PRE_GESTORIA.fechaValidacion + "</span>";
+				if(resultadoTablero[i].CONTEOAUDITOR != undefined) {
+					datosMemorias[i][7] = "<span style='"  + "'>" + formato(resultadoTablero[i].CONTEOAUDITOR, true) + "</span>";
 				} else {
-					datosMemorias[i][7] = "<span>---</span>";
+					datosMemorias[i][7] = "<span style='"  + "'>---</span>";
 				}
-				if(resultadoTablero[i].PRE_CONSTRUCCION != undefined) {
-					datosMemorias[i][8] = "<span>" + resultadoTablero[i].PRE_CONSTRUCCION.fechaValidacion + "</span>";
+				if(resultadoTablero[i].PRE_GESTORIA != undefined) {
+					datosMemorias[i][8] = "<span>" + resultadoTablero[i].PRE_GESTORIA.fechaValidacion + "</span>";
 				} else {
 					datosMemorias[i][8] = "<span>---</span>";
 				}
-				if(resultadoTablero[i].VOBO_LAYOUT != undefined) {
-					datosMemorias[i][9] = "<span>" + resultadoTablero[i].VOBO_LAYOUT.fechaValidacion + "</span>";
+				if(resultadoTablero[i].PRE_CONSTRUCCION != undefined) {
+					datosMemorias[i][9] = "<span>" + resultadoTablero[i].PRE_CONSTRUCCION.fechaValidacion + "</span>";
 				} else {
 					datosMemorias[i][9] = "<span>---</span>";
 				}
-				if(resultadoTablero[i].PRESUPUESTO_OBRA != undefined) {
-					datosMemorias[i][10] = "<span>$ " + formato(resultadoTablero[i].PRESUPUESTO_OBRA, true) + "</span>";
+				if(resultadoTablero[i].VOBO_LAYOUT != undefined) {
+					datosMemorias[i][10] = "<span>" + resultadoTablero[i].VOBO_LAYOUT.fechaValidacion + "</span>";
 				} else {
 					datosMemorias[i][10] = "<span>---</span>";
 				}
-				if(resultadoTablero[i].PRESUPUESTO_AUDITORIA != undefined) {
-					datosMemorias[i][11] = "<span>$ " + formato(resultadoTablero[i].PRESUPUESTO_AUDITORIA, true) + "</span>";
+				if(resultadoTablero[i].PRESUPUESTO_OBRA != undefined) {
+					datosMemorias[i][11] = "<span>$ " + formato(resultadoTablero[i].PRESUPUESTO_OBRA, true) + "</span>";
 				} else {
 					datosMemorias[i][11] = "<span>---</span>";
 				}
-				if(resultadoTablero[i].TRAMITES != undefined) {
-					datosMemorias[i][12] = "<span>" + resultadoTablero[i].TRAMITES.fechaValidacion + "</span>";
+				if(resultadoTablero[i].PRESUPUESTO_AUDITORIA != undefined) {
+					datosMemorias[i][12] = "<span>$ " + formato(resultadoTablero[i].PRESUPUESTO_AUDITORIA, true) + "</span>";
 				} else {
 					datosMemorias[i][12] = "<span>---</span>";
 				}
-				if(resultadoTablero[i].VOBOFNL_OPERACIONES != undefined) {
-					datosMemorias[i][13] = "<span>" + resultadoTablero[i].VOBOFNL_OPERACIONES.fechaValidacion + "</span>";
+				if(resultadoTablero[i].TRAMITES != undefined) {
+					datosMemorias[i][13] = "<span>" + resultadoTablero[i].TRAMITES.fechaValidacion + "</span>";
 				} else {
 					datosMemorias[i][13] = "<span>---</span>";
 				}
-				if(resultadoTablero[i].FIRMA_CONTRATO != undefined) {
-					datosMemorias[i][14] = "<span>" + resultadoTablero[i].FIRMA_CONTRATO.fechaValidacion + "</span>";
+				if(resultadoTablero[i].VOBOFNL_OPERACIONES != undefined) {
+					datosMemorias[i][14] = "<span>" + resultadoTablero[i].VOBOFNL_OPERACIONES.fechaValidacion + "</span>";
 				} else {
 					datosMemorias[i][14] = "<span>---</span>";
 				}
-				if(resultadoTablero[i].INICIO_OBRA != undefined) {
-					datosMemorias[i][15] = "<span>" + resultadoTablero[i].INICIO_OBRA.fechaValidacion + "</span>";
+				if(resultadoTablero[i].FIRMA_CONTRATO != undefined) {
+					datosMemorias[i][15] = "<span>" + resultadoTablero[i].FIRMA_CONTRATO.fechaValidacion + "</span>";
 				} else {
 					datosMemorias[i][15] = "<span>---</span>";
 				}
-				if(resultadoTablero[i].ESTIMADO_FINOBRA != undefined) {
-					datosMemorias[i][16] = "<span>" + resultadoTablero[i].ESTIMADO_FINOBRA + "</span>";
+				if(resultadoTablero[i].INICIO_OBRA != undefined) {
+					datosMemorias[i][16] = "<span>" + resultadoTablero[i].INICIO_OBRA.fechaValidacion + "</span>";
 				} else {
 					datosMemorias[i][16] = "<span>---</span>";
 				}
-				if(resultadoTablero[i].ESTIMADO_APERTURA != undefined) {
-					datosMemorias[i][17] = "<span>" + resultadoTablero[i].ESTIMADO_APERTURA + "</span>";
+				if(resultadoTablero[i].ESTIMADO_FINOBRA != undefined) {
+					datosMemorias[i][17] = "<span>" + resultadoTablero[i].ESTIMADO_FINOBRA + "</span>";
 				} else {
-					datosMemorias[i][17] = "<span>" + resultadoTablero[i].ESTIMADO_APERTURA + "</span>";
+					datosMemorias[i][17] = "<span>---</span>";
 				}
-				datosMemorias[i][18] = resultadoTablero[i].MDID;
-				datosMemorias[i][19] = resultadoTablero[i].ESTATUSMD;
+				if(resultadoTablero[i].ESTIMADO_APERTURA != undefined) {
+					datosMemorias[i][18] = "<span>" + resultadoTablero[i].ESTIMADO_APERTURA + "</span>";
+				} else {
+					datosMemorias[i][18] = "<span>" + resultadoTablero[i].ESTIMADO_APERTURA + "</span>";
+				}
+				datosMemorias[i][19] = resultadoTablero[i].MDID;
+				datosMemorias[i][20] = resultadoTablero[i].ESTATUSMD;
 			 }
 			
 			initTablaMemoriasTablero('DivTablaTablero', datosMemorias, 'tablaMemoriasTablero');
@@ -252,7 +256,7 @@ function creatabla(){
 				for(var i = 0; i < resultadoTablero.length; i++) {
 					if(mdId == resultadoTablero[i].MDID) {
 						switch(col) {
-							case 5:
+							case 6:
 							if(resultadoTablero[i].PRE_OPERACIONES.validacion == "SI") {
 								var usuario = resultadoTablero[i].PRE_OPERACIONES.usuario != null ? resultadoTablero[i].PRE_OPERACIONES.usuario : '-';
 								
@@ -265,7 +269,7 @@ function creatabla(){
 								cargaMensajeModal('PRE-OPERACIONES', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
 							}
 							break;
-							case 7:
+							case 8:
 								if(resultadoTablero[i].PRE_GESTORIA.validacion == "SI") {
 									var usuario = resultadoTablero[i].PRE_GESTORIA.usuario != null ? resultadoTablero[i].PRE_GESTORIA.usuario : '-';
 									
@@ -278,7 +282,7 @@ function creatabla(){
 									cargaMensajeModal('PRE-GESTORIA', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
 								}
 								break;
-							case 8:
+							case 9:
 								if(resultadoTablero[i].PRE_CONSTRUCCION.validacion == "SI") {
 									var usuario = resultadoTablero[i].PRE_CONSTRUCCION.usuario != null ? resultadoTablero[i].PRE_CONSTRUCCION.usuario : '-';
 									
@@ -291,7 +295,7 @@ function creatabla(){
 									cargaMensajeModal('PRE-CONSTRUCCION', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
 								}
 								break;
-							case 9:
+							case 10:
 								if(resultadoTablero[i].VOBO_LAYOUT.validacion == "SI") {
 									var usuario = resultadoTablero[i].VOBO_LAYOUT.usuario != null ? resultadoTablero[i].VOBO_LAYOUT.usuario : '-';
 									
@@ -304,7 +308,7 @@ function creatabla(){
 									cargaMensajeModal('VOBO LAYOUT', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
 								}
 								break;
-							case 12:
+							case 13:
 								if(resultadoTablero[i].TRAMITES.validacion == "SI") {
 									var usuario = resultadoTablero[i].TRAMITES.usuario != null ? resultadoTablero[i].TRAMITES.usuario : '-';
 									
@@ -317,7 +321,7 @@ function creatabla(){
 									cargaMensajeModal('GESTORÍA', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
 								}
 								break;
-							case 13:
+							case 14:
 								if(resultadoTablero[i].VOBOFNL_OPERACIONES.validacion == "SI") {
 									var usuario = resultadoTablero[i].VOBOFNL_OPERACIONES.usuario != null ? resultadoTablero[i].VOBOFNL_OPERACIONES.usuario : '-';
 									
@@ -330,7 +334,7 @@ function creatabla(){
 									cargaMensajeModal('VOBO FINAL OPERACIONES', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
 								}
 								break;
-							case 14:
+							case 15:
 								if(resultadoTablero[i].FIRMA_CONTRATO.validacion == "SI") {
 									var usuario = resultadoTablero[i].FIRMA_CONTRATO.usuario != null ? resultadoTablero[i].FIRMA_CONTRATO.usuario : '-';
 									
@@ -343,7 +347,7 @@ function creatabla(){
 									cargaMensajeModal('CONTRATO FIRMADO', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
 								}
 								break;
-							case 15:
+							case 16:
 								if(resultadoTablero[i].INICIO_OBRA.validacion == "SI") {
 									var usuario = resultadoTablero[i].INICIO_OBRA.usuario != null ? resultadoTablero[i].INICIO_OBRA.usuario : '-';
 									
@@ -369,7 +373,7 @@ function creatabla(){
 
 			});
 			
-			$(".DTFC_Cloned tr td").click(function() {
+			/*$(".DTFC_Cloned tr td").click(function() {
 				var mdId = $(this).parent().find("td:eq(0)").html();
 				
 				idColumna = jQuery("#tablaMemoriasTablero").dataTable().fnGetPosition(this);
@@ -396,9 +400,35 @@ function creatabla(){
 						break;
 					}
 				}				
-			});
+			});*/
 		}
 	};	
+}
+
+function obtieneNombreMd(mdId) {
+	for(var i = 0; i < resultadoTablero.length; i++) {
+		if(mdId == resultadoTablero[i].MDID) {
+			abreDetalleMd(resultadoTablero[i].NOMBRETDA, mdId);
+			break;
+		}
+	}
+}
+
+function muestraFechaMd(mdId) {
+	for(var i = 0; i < resultadoTablero.length; i++) {
+		if(mdId == resultadoTablero[i].MDID) {
+			if(resultadoTablero[i].FECHARECEPCION.validacion == "SI") {
+				var mensaje = "¿Quién autorizó? " + resultadoTablero[i].FECHARECEPCION.usuario + "<br/>" +
+								"Del área: " + resultadoTablero[i].FECHARECEPCION.Area + "<br/>" +
+								"En la fecha: " +  resultadoTablero[i].FECHARECEPCION.fechaValidacion;
+				cargaMensajeModal('RECEPCIÓN', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_EXITO, null);
+			} else {
+				var mensaje = "ATENCIÓN: Este paso no ha sido validado.";
+				cargaMensajeModal('RECEPCIÓN', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
+			}
+			break;
+		}
+	}
 }
 
 function abreDetalleMd(nombreMd, mdId) {

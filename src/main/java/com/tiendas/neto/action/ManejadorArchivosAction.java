@@ -189,4 +189,74 @@ public class ManejadorArchivosAction
 		} catch (IOException e) {
 		}
 	}
+	
+	public void guardaConteoAuditor() throws Exception{
+		String respuesta="";
+		UsuarioLoginVO usuario = null;
+		HttpSession usuarioSesion = ServletActionContext.getRequest().getSession();
+		usuario = (UsuarioLoginVO) usuarioSesion.getAttribute("usr");
+		
+		String mdId = ServletActionContext.getRequest().getParameter("mdId");
+		String horaI = ServletActionContext.getRequest().getParameter("horaI");
+		String horaF = ServletActionContext.getRequest().getParameter("horaF");
+		String fecha = ServletActionContext.getRequest().getParameter("fecha");
+		String total = ServletActionContext.getRequest().getParameter("total");
+		
+		String cero = "0";
+		String uno = "1";
+		
+		try{
+			
+			if(usuario == null){
+				RespuestaVo respuestaVo = new RespuestaVo();
+				respuestaVo.setCodigo(501);
+				respuestaVo.setMensaje("Error en la sesión");
+				sendJSONObjectToResponse(respuestaVo);
+				
+			}else{
+				String numeroEmpleado = String.valueOf(usuario.getPerfil().getNumeroEmpleado());
+				
+				final OkHttpClient client = new OkHttpClient();
+				
+				Builder builder = new Builder()
+					.add("usuarioId", numeroEmpleado)
+					.add("mdId", mdId)
+					.add("fecha", fecha)
+					.add("horaInicio", horaI)
+					.add("horaFinal", horaF)
+					.add("total", total)
+					.add("latitud", cero)
+					.add("longitud", cero)
+					.add("bajaConteos", cero)
+					.add("numTelefono", cero)
+					.add("versionApp", cero)
+					.add("tipoServicio", uno);
+				
+				RequestBody body = builder.build();
+				Request request = new Request.Builder()
+					.url(sp.getPropiedad("conteoPeatonal"))
+					.post(body)
+					.build();
+				
+				Response response = client.newCall(request).execute();
+				respuesta = response.body().string();
+				
+				
+				HttpServletResponse re = ServletActionContext.getResponse();
+				re.setContentType("application/json");
+				re.setCharacterEncoding("UTF-8");
+				re.getWriter().write(respuesta);
+				
+			}
+		}catch (Exception e) {
+			String clase  ="clase: "+ new String (Thread.currentThread().getStackTrace()[1].getClassName());	
+			String metodo ="metodo: "+ new String (Thread.currentThread().getStackTrace()[1].getMethodName());
+			elog.error(clase,metodo,e + "", "ID empleado: " + usuario.getPerfil().getNumeroEmpleado());
+			
+			RespuestaVo respuestaVo = new RespuestaVo();
+			respuestaVo.setCodigo(404);
+			respuestaVo.setMensaje("Error al conectarse al servidor");
+			sendJSONObjectToResponse(respuestaVo);
+		}
+	}
 }

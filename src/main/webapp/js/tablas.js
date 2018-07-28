@@ -266,9 +266,10 @@ function initTablaMemoriasTablero(nombreDiv, datosDesgloseMemorias, nombreTabla)
 		'<table cellpadding="0" cellspacing="0" border="0px"  class="row-border stripe hover" id="' + nombreTabla + '" >' +
 			'<thead>'  +
 				'<tr style="cursor: pointer;border-top: 0px; border-bottom: 0px;">' +
+					'<th class="center" center" style="padding:0;background: #FFF;">&nbsp;</th>' +
 					'<th width="5%" class="gris negrita t12 center" style="padding:0;background: #FFF;">No.</th>'  +
-					'<th width="10%" class="gris negrita t12 center txt_expansion" style="padding:0;background: #FFF;">Fecha recepci&oacute;n MD</th>'  +
-					'<th width="10%" class="gris negrita t12 txt_expansion">Fuente MD</th>' +
+					'<th width="9%" class="gris negrita t12 center txt_expansion" style="padding:0;background: #FFF;">Fecha recepci&oacute;n MD</th>'  +
+					'<th width="9%" class="gris negrita t12 txt_expansion">Fuente MD</th>' +
 					'<th width="10%" class="gris negrita t12 txt_expansion">Nombre de la tda</th>' +
 					'<th width="5%" class="gris negrita t12">Categor&iacute;a</th>' +
 					'<th width="5%" class="gris negrita t12">Puntuaci&oacute;n</th>' +
@@ -296,7 +297,8 @@ function initTablaMemoriasTablero(nombreDiv, datosDesgloseMemorias, nombreTabla)
 	tablaMemoriasTablero = $("#" + nombreTabla).dataTable(
 			{"aaData": datosDesgloseMemorias,
 				"aoColumns": [
-							{"sClass":"izquierda padding padding_right","bSearchable":true},
+						   {"bSearchable":false},
+						   {"sClass":"izquierda padding padding_right","bSearchable":true},
 				           {"bSearchable":true},
 				           {"sClass":"izquierda padding","bSearchable":true},
 				           {"sClass":"imagen izquierda padding","bSearchable":true},
@@ -326,7 +328,7 @@ function initTablaMemoriasTablero(nombreDiv, datosDesgloseMemorias, nombreTabla)
 			 "bScrollCollapse": false,
 			 "sScrollY": "70vh",
 			 "fixedColumns":   {
-		            "leftColumns": 2
+		            "leftColumns": 3
 		        },
 		     "scrollX":        true,
 		     "scrollCollapse": true,

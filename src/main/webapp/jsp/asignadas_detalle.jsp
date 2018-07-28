@@ -122,6 +122,9 @@
 			<div class="col-lg-12 menupr_estilos fblanco altura1">
 			<div class="col-12 titulo_seccion">
 				<span id="nombreMd" class="negrita azul t14">---</span><br/>
+				<div class="float_right" style="top: -17px;">
+					<span><img id="mensajesMD" title="Ver mensajes" class="autorizado" onclick="muestraChatXMd();" style="cursor: pointer;" src="img/iconos_COMENTARIOS.png">&nbsp;</span>
+				</div>
 			</div>
 				<div style="width: 50%;position: relative; float: left;text-align: center">
 					<span class="azul t12" style="font-size: .7em;">Creado por <span id="creadorMd">---</span></span><br/>
@@ -359,14 +362,14 @@
 						<div style="width: 100%; text-align: center;margin-top: 35px;">
 							<div style="width: 100%"><span class="azul t12">GENERADORES DE TRÁFICO</span></div>
 							<div style="width: 100%">
-								<div style="width: 33%; position: relative; float: left;"><div style="width: 100%"><img width="30px" src="img/generadores/iconos_iglesia.png"></div><div style="width: 100%; text-align: center"><span class="subtituloIconos">Iglesia</span></div></div>
-								<div style="width: 33%; position: relative; float: left;"><div style="width: 100%"><img width="30px" src="img/generadores/iconos_tortilleria.png"></div><div style="width: 100%; text-align: center"><span class="subtituloIconos">Tortillería</span></div></div>
-								<div style="width: 33%; position: relative; float: left;"><div style="width: 100%"><img width="30px" src="img/generadores/iconos_escuela.png"></div><div style="width: 100%; text-align: center"><span class="subtituloIconos">Escuela</span></div></div>
+								<div style="width: 33%; position: relative; float: left;"><div style="width: 100%"><img width="30px" src="img/generadores/iglesia.png"></div><div style="width: 100%; text-align: center"><span class="subtituloIconos">Iglesia</span></div></div>
+								<div style="width: 33%; position: relative; float: left;"><div style="width: 100%"><img width="30px" src="img/generadores/tortilleria.png"></div><div style="width: 100%; text-align: center"><span class="subtituloIconos">Tortillería</span></div></div>
+								<div style="width: 33%; position: relative; float: left;"><div style="width: 100%"><img width="30px" src="img/generadores/escuela.png"></div><div style="width: 100%; text-align: center"><span class="subtituloIconos">Escuela</span></div></div>
 							</div>
 							<div style="width: 100%">
-								<div style="width: 33%; position: relative; float: left;"><div style="width: 100%"><img width="30px" src="img/generadores/iconos_recauderia.png"></div><div style="width: 100%; text-align: center"><span class="subtituloIconos">Recaudería</span></div></div>
-								<div style="width: 33%; position: relative; float: left;"><div style="width: 100%"><img width="30px" src="img/generadores/iconos_mercado.png"></div><div style="width: 100%; text-align: center"><span class="subtituloIconos">Mercado</span></div></div>
-								<div style="width: 33%; position: relative; float: left;"><div style="width: 100%"><img width="30px" src="img/generadores/iconos_carniceria.png"></div><div style="width: 100%; text-align: center"><span class="subtituloIconos">Carnicería</span></div></div>
+								<div style="width: 33%; position: relative; float: left;"><div style="width: 100%"><img width="30px" src="img/generadores/recauderia.png"></div><div style="width: 100%; text-align: center"><span class="subtituloIconos">Recaudería</span></div></div>
+								<div style="width: 33%; position: relative; float: left;"><div style="width: 100%"><img width="30px" src="img/generadores/mercado.png"></div><div style="width: 100%; text-align: center"><span class="subtituloIconos">Mercado</span></div></div>
+								<div style="width: 33%; position: relative; float: left;"><div style="width: 100%"><img width="30px" src="img/generadores/carniceria.png"></div><div style="width: 100%; text-align: center"><span class="subtituloIconos">Carnicería</span></div></div>
 							</div>
 						</div>
 					</div>
@@ -478,7 +481,17 @@
 			</div>
 			
 				<div class="row div_header_sub">
-					<span class="blanco t12 sangria_doble_cuerpo">PROMEDIO: </span><span id="promedioConteos" class="negrita blanco t14 sangria_cuerpo">---</span><br/>
+					<span class="blanco t12 sangria_doble_cuerpo">PROMEDIO: </span>
+					<span id="promedioConteos" class="negrita blanco t14 sangria_cuerpo">---</span><br/>
+					
+					<div class="contenedorConteos" id="preConteos" style="display: none;">
+						<input id="totalConteoAuditor" placeholder="Captura el promedio peatonal" onkeypress="return isNumberKey(event,this)" id="conteosAuditor" style="top: -6px; position: relative;left: 139px; width: 230px;">
+						<div id="subeConteo" class="btn btnBlanco" style="position: relative;top: -13px;left: 144px;">Aceptar</div>
+					</div>
+					<div class="contenedorConteos" id="posConteos" style="display: none;">
+					<span class="blanco t12 sangria_doble_cuerpo">PROMEDIO AUDITORIA: </span>
+						<span id="promedioConteosAuditoria" class="negrita blanco t14 sangria_cuerpo">---</span><br/>
+					</div>
 				</div>
 				<div class="row div_header_sub">
 					<div class="col-lg-12"><div id="contenedorFlujoPeatonal" style="width: 100%; height: 70%; margin: 0 auto"></div></div>
@@ -520,7 +533,7 @@
 				<div class="row divs_p">
 					<div class="col-lg-12 menupr_estilos fazul altura1">
 						<div class="col-12 titulo_seccion">
-							<span class="negrita blanco t14">8) Autorizacón final</span>
+							<span class="negrita blanco t14">8) Autorización final</span>
 							<div class="float_right">
 								<span> <img id="autoriza9" title="Autoriza punto"
 									class="sin_autorizar b_autorizar" onclick="finalizaMD(1);"

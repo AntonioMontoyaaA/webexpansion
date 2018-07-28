@@ -188,51 +188,50 @@ function salir(){
 
 var notificaciones="";
 function consultaNotificaciones(){
-	
-	 $.ajax({
-	        type     : "POST",
-	        url      : 'notificacionesAction',
-	        data     : {},
-	        async	 : false,
-	        beforeSend : function(){
-	        	cargaLoading();
-	        },
-	success  : function(data) {
-	if(data.codigo != 200){
-	
-	}
-	else{
-		var noti=data.notificaciones;
-		
-		notificaciones="";
-		notificaciones+="<div>";
-		notificaciones+="<div class='t12 negrita azul titulo_avisos'>Avisos</div>";
-		notificaciones+="<div class='t12 negrita azul avisos'>";
-		
-		for(var i=0;i<noti.length;i++){
-			var estatus= noti[i].estatus;
-			
-			if(estatus==1){
-				notificaciones+="<div mdId='"+noti[i].mdId+"' tipoNotificacion='"+noti[i].tipoNotificacion+
-				"' fechaRegistro='"+noti[i].fechaRegistro+"' nivelEstatusAreaId='"+noti[i].nivelEstatusAreaId+
-				"' nombreSitio='"+noti[i].nombreSitio+
-				"' class='t12 leido cursor style='font-weight:normal' onclick='marca_notificacion(this)'><span>"+
-				noti[i].mensaje+"</span><span class='t10'>&emsp;"+noti[i].fechaRegistro+"</span></div>";
+	 
+	 invocarJSONServiceAction("notificacionesAction", 
+				{}, 
+				'cargaNotificaciones', 
+				function() {
+					cierraLoading();
+				},
+				function() {
+					cierraLoading();
+				});
+	 cargaNotificaciones = function(data) {
+			if(data.codigo != 200){
+				
+			}else{
+				var noti=data.notificaciones;
+				
+				notificaciones="";
+				notificaciones+="<div>";
+				notificaciones+="<div class='t12 negrita azul titulo_avisos'>Avisos</div>";
+				notificaciones+="<div class='t12 negrita azul avisos'>";
+				
+				for(var i=0;i<noti.length;i++){
+					var estatus= noti[i].estatus;
+					
+					if(estatus==1){
+						notificaciones+="<div mdId='"+noti[i].mdId+"' tipoNotificacion='"+noti[i].tipoNotificacion+
+						"' fechaRegistro='"+noti[i].fechaRegistro+"' nivelEstatusAreaId='"+noti[i].nivelEstatusAreaId+
+						"' nombreSitio='"+noti[i].nombreSitio+
+						"' class='t12 leido cursor style='font-weight:normal' onclick='marca_notificacion(this)'><span>"+
+						noti[i].mensaje+"</span><span class='t10'>&emsp;"+noti[i].fechaRegistro+"</span></div>";
+					}
+					else{
+						notificaciones+="<div mdId='"+noti[i].mdId+"' tipoNotificacion='"+noti[i].tipoNotificacion+
+						"' fechaRegistro='"+noti[i].fechaRegistro+"' nivelEstatusAreaId='"+noti[i].nivelEstatusAreaId+
+						"' nombreSitio='"+noti[i].nombreSitio+
+						"' class='t12 noleido cursor style='font-weight:normal' onclick='marca_notificacion(this)'><span>"+
+						noti[i].mensaje+"</span><span class='t10'>&emsp;"+noti[i].fechaRegistro+"</span></div>";
+					}
+					
+				}
+				notificaciones+="</div>";
+				notificaciones+="</div>";
 			}
-			else{
-				notificaciones+="<div mdId='"+noti[i].mdId+"' tipoNotificacion='"+noti[i].tipoNotificacion+
-				"' fechaRegistro='"+noti[i].fechaRegistro+"' nivelEstatusAreaId='"+noti[i].nivelEstatusAreaId+
-				"' nombreSitio='"+noti[i].nombreSitio+
-				"' class='t12 noleido cursor style='font-weight:normal' onclick='marca_notificacion(this)'><span>"+
-				noti[i].mensaje+"</span><span class='t10'>&emsp;"+noti[i].fechaRegistro+"</span></div>";
 			}
-			
-		}
-		notificaciones+="</div>";
-		notificaciones+="</div>";
-	}
-	}
-});
 }
 
 function marca_notificacion(valor){

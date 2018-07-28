@@ -27,9 +27,11 @@ var dropzoneOptions;
 var ARCHIVO_SUBIDO = false;
 var ARCHIVOS_MD;
 
+var areaExpansion = 1;
+var areaGestoria = 2;
 var areaConstruccion = 3;
-var areaOperaciones = 5;
 var areaAuditoria = 4;
+var areaOperaciones = 5;
 
 var AREA_USUARIO;
 
@@ -43,10 +45,15 @@ var ESTATUS_CORRECCION_LAYOUT = 18;
 var ESTATUS_CORRECCION_PRESUPUESTO_CONSTRUCCION = 19;
 var ESTATUS_CORRECCION_PRESUPUESTO_AUDITORIA = 20;
 
+var HORAI;
+var HORAF;
+
+var AREAS_A;
+
 $(function(){
 	TIPOMD = parseInt($("#tipoMd").val());
 	AREA_USUARIO = parseInt($('#areaUsuario').val());
-	
+	 
 	if(TIPOMD == 0){
 		$('#idasignadas').addClass('resaltado');
 		$('#titulo_tipo').text('EN PROCESO');
@@ -242,6 +249,19 @@ function inicializaFactores(){
 	FACTORES[5] = new FactorAutorizacion(5,'Construccion',false);
 	FACTORES[6] = new FactorAutorizacion(6,'Generalidades',false);
 	FACTORES[7] = new FactorAutorizacion(7,'Flujo peatonal',false);
+	
+	AREAS_A = {};
+	AREAS_A[areaExpansion] = false;
+	AREAS_A[areaGestoria] = false;
+	AREAS_A[areaAuditoria] = false;
+	AREAS_A[areaConstruccion] = false;
+	AREAS_A[areaOperaciones] = false;
+}
+
+function muestraChatXMd() {
+	mdId = $("#mdIdAutorizacion").val();
+	$("#mdIdChat").val(mdId);
+	$("#chatPorMd").submit();
 }
 
 function validaEstatusAtencion(estatus, idObjetos){
@@ -249,13 +269,7 @@ function validaEstatusAtencion(estatus, idObjetos){
 	$('#autoriza8').hide();
 	$('#rechaza8').hide();
 	
-	if(TIPOMD > 2){
-		$('#autoriza' + idObjetos).hide();
-		$('#rechaza' + idObjetos).hide();
-		return;
-	}
-	
-	if(PERMISOS[idObjetos] != undefined && PERMISOS[idObjetos].permiteAutorizar == 1){
+	if(PERMISOS[idObjetos] != undefined && PERMISOS[idObjetos].permiteAutorizar == 1 && ESTATUS_MD < ESTATUS_VALIDACION_LAYOUT){
 		
 		$('#autoriza' + idObjetos).show();
 		$('#rechaza' + idObjetos).show();
@@ -315,11 +329,8 @@ function dibujaGraficaAutorizaciones(){
 		  trailWidth: 2,
 		  svgStyle: null
 		});
-	
-	if(TIPOMD != 3)
-		progreso = atendidos/TOTAL_ATENCIONES;
-	else
-		progreso = 1;
+		
+	progreso = atendidos/TOTAL_ATENCIONES;
 	
 	bar.set(progreso, {
 	    from: {color: '#000000', width: 5},
@@ -340,13 +351,11 @@ function dibujaGraficaAutorizaciones(){
 		if(!motivoDefinitivo)
 			$('#autoriza8').show();
 		
-		if(TIPOMD == 1){
+		if(AREAS_A[AREA_USUARIO]){
 			$('#autoriza8').removeClass('sin_autorizar');
 			$('#autoriza8').addClass('autorizado');
-		}else if(TIPOMD == 2){
-			$('#rechaza8').removeClass('sin_autorizar');
-			$('#rechaza8').addClass('autorizado');
 		}
+		
 	}else{
 		$('#autoriza8').hide();
 		$('#rechaza8').hide();
@@ -404,6 +413,8 @@ function dibujaAreasCompletadas(AREAS){
 					content : contentPopGerente
 				});
 				
+				AREAS_A[areaExpansion] = true;
+				
 				if(AREAS[i].EXPANSION[0].diasVencidos > 0) {
 					$("#gerenteExpansionImg").css("display", "inline");
 				}
@@ -418,6 +429,8 @@ function dibujaAreasCompletadas(AREAS){
 					html: true, 
 					content : contentPopExpansion
 				});
+				
+				AREAS_A[areaExpansion] = true;
 				
 				if(AREAS[i].EXPANSION[0].diasVencidos > 0) {
 					$("#expansionImg").css("display", "inline");
@@ -437,6 +450,8 @@ function dibujaAreasCompletadas(AREAS){
 				content : contentPopGestoria
 			});
 				
+			AREAS_A[areaGestoria] = true;
+			
 			if(AREAS[i].GESTORIA[0].diasVencidos > 0) {
 				$("#gestoriaImg").css("display", "inline");
 			}
@@ -454,6 +469,8 @@ function dibujaAreasCompletadas(AREAS){
 				html: true, 
 				content : contentPopConstruccion
 			});
+			
+			AREAS_A[areaConstruccion] = true;
 				
 			if(AREAS[i].CONSTRUCCION[0].diasVencidos > 0) {
 				$("#construccionImg").css("display", "inline");
@@ -473,6 +490,8 @@ function dibujaAreasCompletadas(AREAS){
 				content : contentPopOperaciones
 			});
 				
+			AREAS_A[areaOperaciones] = true;
+			
 			if(AREAS[i].OPERACIONES[0].diasVencidos > 0) {
 				$("#operacionesImg").css("display", "inline");
 			}
@@ -489,6 +508,8 @@ function dibujaAreasCompletadas(AREAS){
 				content : contentPopAuditoria
 			});
 				
+			AREAS_A[areaAuditoria] = true;
+			
 			if(AREAS[i].AUDITORIA[0].diasVencidos > 0) {
 				$("#auditoriaImg").css("display", "inline");
 			}
@@ -522,6 +543,7 @@ function buscaDetalleMD(mdId) {
 			MOTIVOS_RECHAZO = {};
 			ARCHIVOS_MD = new Array();
 			
+			ESTATUS_MD = parseInt(data.nivelEstatusMdId);
 			$("#mdIdAutorizacion").val(mdId);
 			ESTATUS_FINALIZA_MD = -1;
 			
@@ -694,7 +716,6 @@ function buscaDetalleMD(mdId) {
 			dibujaGraficaAutorizaciones();
 			
 			/* DATOS Seguimiento */
-			ESTATUS_MD = parseInt(data.nivelEstatusMdId);
 			
 			if(data.seguimiento != undefined) {
 				if(data.seguimiento.PRECONSTRUCCION != undefined
@@ -716,7 +737,7 @@ function buscaDetalleMD(mdId) {
 			}
 			
 			if((ESTATUS_MD == ESTATUS_PRESUPUESTO_CONSTRUCCION || ESTATUS_MD == ESTATUS_CORRECCION_PRESUPUESTO_CONSTRUCCION)
-					&& TIPOMD == 3 && AREA_USUARIO == areaConstruccion){
+					&& AREA_USUARIO == areaConstruccion){
 				ARCHIVOS_MD =  new Array();
 				if(data.seguimiento != undefined) {
 					if(eval(data)["seguimiento"]["PRESUPUESTO OBRA"] != undefined
@@ -736,7 +757,7 @@ function buscaDetalleMD(mdId) {
 					}
 				}
 			}else if((ESTATUS_MD == ESTATUS_PRESUPUESTO_AUDITORIA || ESTATUS_MD == ESTATUS_CORRECCION_PRESUPUESTO_AUDITORIA)
-					&& TIPOMD == 3 && AREA_USUARIO == areaAuditoria){
+					&& AREA_USUARIO == areaAuditoria){
 				ARCHIVOS_MD =  new Array();
 				if(data.seguimiento != undefined) {
 					if(eval(data)["seguimiento"]["PRESUPUESTO OBRA"] != undefined
@@ -848,6 +869,10 @@ function datosFlujoPeatonal(flujoPeatonal){
 	var totalconteos = 0;
 	var promedio;
 
+	var sumatoriaConteosAud = 0;
+	var totalconteosAud = 0;
+	var promedioAud;
+	
 	if(flujoPeatonal.EXPANSION != undefined){
 	
 		$("#puntosConteos").text(flujoPeatonal.EXPANSION.puntos);
@@ -867,10 +892,14 @@ function datosFlujoPeatonal(flujoPeatonal){
 	
 		for(var i = 0; i < flujoPeatonal.EXPANSION.conteos.length; i++) {
 			id = flujoPeatonal.EXPANSION.conteos[i].detalleId;
+			
 			if(horarios[id] == undefined){
 				horarios[id] = new Array();
 				horarios[id].push(flujoPeatonal.EXPANSION.conteos[i].horaInicio 
 						+ "-" + flujoPeatonal.EXPANSION.conteos[i].horaFinal);
+				
+				HORAI = flujoPeatonal.EXPANSION.conteos[i].horaInicio;
+				HORAF = flujoPeatonal.EXPANSION.conteos[i].horaFinal;
 			}
 			horarios[id].push(flujoPeatonal.EXPANSION.conteos[i].total);
 			sumatoriaConteos += flujoPeatonal.EXPANSION.conteos[i].total;
@@ -893,6 +922,35 @@ function datosFlujoPeatonal(flujoPeatonal){
 		
 		cargaFlujoPeatonal(colores,rows);
 	}
+	
+	if(flujoPeatonal.AUDITORIA != undefined){
+		for(var i = 0; i < flujoPeatonal.AUDITORIA.conteos.length; i++) {
+			sumatoriaConteosAud += flujoPeatonal.AUDITORIA.conteos[i].total;
+			totalconteosAud++;
+		}
+		
+		promedioAud = Math.trunc(sumatoriaConteosAud/totalconteosAud);
+		$("#promedioConteosAuditoria").text(promedioAud);
+	}
+	
+	if(AREA_USUARIO != areaAuditoria || AREAS_A[areaAuditoria])
+		$('#posConteos').show();
+	else{
+		$('#preConteos').show();
+		
+		$('#subeConteo').unbind('click');
+		$('#subeConteo').click(function(){
+			total = $("#totalConteoAuditor").val();
+			
+			if(total == '')
+				cargaMensajeModal('DETALLE MD', 
+						'Agrega el promedio peatonal',
+						TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA);
+			else
+				guardaConteoAuditor(total);
+		});
+	}
+	
 }
 
 function redireccionaAsignadas() {
@@ -952,7 +1010,7 @@ function cargaFlujoPeatonal(colores,rows) {
 }
 
 function autorizaPantalla(modulo, elemento) {
-	if($(elemento).hasClass('sin_autorizar') && TIPOMD == 0){
+	if($(elemento).hasClass('sin_autorizar') && ESTATUS_MD < ESTATUS_PRESUPUESTO_CONSTRUCCION && !AREAS_A[AREA_USUARIO]){
 		$("#tituloModalAutorizacion").text("¿Estás seguro de autorizar " + FACTORES[modulo].nombre + "?");
 		$("#tipoAutorizacion").val(AUTORIZA_MODULO);
 		$("#finaliza").val(0);
@@ -965,7 +1023,7 @@ function autorizaPantalla(modulo, elemento) {
 }
 
 function rechazaPantalla(modulo, elemento) {
-	if($(elemento).hasClass('sin_autorizar') && TIPOMD == 0){
+	if($(elemento).hasClass('sin_autorizar') && ESTATUS_MD < ESTATUS_PRESUPUESTO_CONSTRUCCION && !AREAS_A[AREA_USUARIO]){
 		cargaLoading();
 		buscaMotivosRechazo(modulo);
 	}
@@ -1005,7 +1063,7 @@ function cargaComboMotivos(modulo){
 }
 
 function finalizaMD(estatus){
-	if(TIPOMD == 0){
+	if(!AREAS_A[AREA_USUARIO]){
 		ESTATUS_FINALIZA_MD = estatus;
 		permiteAutorizacion = true;
 		if(AREA_USUARIO == areaConstruccion && !ARCHIVO_SUBIDO){
@@ -1038,7 +1096,7 @@ function finalizaMD(estatus){
 				consultaMotivosRechazo(0, 1);
 			}
 		}
-	}else if(TIPOMD == 3 && AREA_USUARIO == areaOperaciones){
+	}else if(ESTATUS_MD == ESTATUS_VOBO_FINAL && AREA_USUARIO == areaOperaciones){
 		ESTATUS_FINALIZA_MD = estatus;
 		if(estatus == 1){
 			cargaMensajeModal('DETALLE MD', 
@@ -1257,7 +1315,8 @@ function parseaPermisos(){
 
 function inicializaDropzone(){
 
-	if(TIPOMD == 0 && AREA_USUARIO == areaConstruccion && (ESTATUS_MD < 9 || ESTATUS_MD == ESTATUS_CORRECCION_LAYOUT)){
+	//LAYOUT
+	if(AREA_USUARIO == areaConstruccion && (ESTATUS_MD < 9 || ESTATUS_MD == ESTATUS_CORRECCION_LAYOUT)){
 		$('#manejadorArchivos').show();
 		$('#montoPresupuesto').hide();
 		$('.simbolo').hide();
@@ -1352,7 +1411,8 @@ function inicializaDropzone(){
 	        		}
 	        	}
 	        });
-	}else if(TIPOMD == 3 && AREA_USUARIO == areaOperaciones 
+	}//Vaslidacion Layout
+	else if(AREA_USUARIO == areaOperaciones 
 			&& ESTATUS_MD == ESTATUS_VALIDACION_LAYOUT){
 		$('#manejadorArchivos').show();
 		$('#subeArchivo').hide();
@@ -1366,8 +1426,8 @@ function inicializaDropzone(){
 		$('#msjUploader').show();
 		
 		dibujaArchivos();
-	}else if(TIPOMD == 3 
-			&& AREA_USUARIO == areaConstruccion 
+	}//PRESUPUESTO OBRA Construccion
+	else if(AREA_USUARIO == areaConstruccion 
 			&& (ESTATUS_MD == ESTATUS_PRESUPUESTO_CONSTRUCCION
 					|| ESTATUS_MD == ESTATUS_CORRECCION_PRESUPUESTO_CONSTRUCCION)){
 		$('#manejadorArchivos').show();
@@ -1481,8 +1541,8 @@ function inicializaDropzone(){
 	        	}else
 	        		cargaMensajeModal('DETALLE MD', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR);
 	        });
-	}else if(TIPOMD == 3 
-			&& AREA_USUARIO == areaAuditoria 
+	}//PRESUPUESTO OBRA AUDITORIA
+	else if(AREA_USUARIO == areaAuditoria 
 			&& (ESTATUS_MD == ESTATUS_PRESUPUESTO_AUDITORIA || ESTATUS_MD == ESTATUS_CORRECCION_PRESUPUESTO_AUDITORIA)){
 		$('#manejadorArchivos').show();
 		$('#montoPresupuesto').show();
@@ -1595,7 +1655,7 @@ function inicializaDropzone(){
 	        	}else
 	        		cargaMensajeModal('DETALLE MD', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR);
 	        });
-	}else if(TIPOMD == 3 && ESTATUS_MD == ESTATUS_VOBO_FINAL){
+	}else if(ESTATUS_MD == ESTATUS_VOBO_FINAL){
 		$('#autoriza9').hide();
 		$('#rechaza9').hide();
 		if(AREA_USUARIO == areaOperaciones){
@@ -1875,7 +1935,7 @@ function initMap(latitudSitio, longitudSitio, listaCompetencias, listaGeneradore
 	
 	var iconos = {
 			  "sitio": {
-				  icon: 'img/iconos_tiendita.png'
+				  icon: 'img/MD.png'
 			  },
 	          "1": {
 	            icon: 'img/competencia/iconos_3b.png'
@@ -1896,29 +1956,29 @@ function initMap(latitudSitio, longitudSitio, listaCompetencias, listaGeneradore
 		        icon: 'img/competencia/iconos_seven.png'
 		      },
 		      "5": {
-		            icon: 'img/generadores/iconos_iglesia.png'
+		            icon: 'img/generadores/iglesia.png'
 		       },
 		       "6": {
-		            icon: 'img/generadores/iconos_mercado.png'
+		            icon: 'img/generadores/mercado.png'
 		       },
 		       "7": {
-		            icon: 'img/generadores/iconos_escuela.png'
+		            icon: 'img/generadores/escuela.png'
 		       },
 		       "8": {
-			        icon: 'img/generadores/iconos_parada.png'
+			        icon: 'img/generadores/parada.png'
 			   }
 	        };
 	
 	
 
     var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 10,
+      zoom: 15,
       center: myLatLng
     });
 
     var marker = new google.maps.Marker({
       position: myLatLng,
-      icon: 'img/iconos_tiendita.png',
+      icon: 'img/MD.png',
       map: map,
       title: ''
     });
@@ -1952,7 +2012,7 @@ function initMap(latitudSitio, longitudSitio, listaCompetencias, listaGeneradore
 			});
     
     var mapZonificacion = new google.maps.Map(document.getElementById('mapaZonificacion'), {
-        zoom: 10,
+        zoom: 15,
         center: myLatLng
       });
 
@@ -2102,6 +2162,40 @@ function editaGeneralidadesAction() {
 			} else {
 				cargaMensajeModal('EDITA MD', "Datos modificados con éxito", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_EXITO, null);
 			}
+		}
+	}
+}
+
+function guardaConteoAuditor(total){
+	cargaLoading();
+	
+	
+	var date = new Date();
+	fecha = date.format("dd/mm/yyyy");
+	
+	invocarJSONServiceAction("guardaConteoAuditor", 
+			{'mdId': $("#mdIdAutorizacion").val(),
+			 'horaI':HORAI,
+			 'horaF':HORAF,
+			 'fecha': fecha,
+			 'total' : total
+			 }, 
+			'responseGuardarConteo', 
+			function() {
+				cierraLoading();
+			},
+			function() {
+				cierraLoading();
+			});
+	
+	responseGuardarConteo =  function(data){
+		if(data.codigo != 200) {
+			cargaMensajeModal('DETALLE MD', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
+			$('totalConteoAuditor').val('');
+		}else{
+			$('#preConteos').hide();
+			$('#promedioConteosAuditoria').html(total);
+			$('#pos Conteos').show();
 		}
 	}
 }

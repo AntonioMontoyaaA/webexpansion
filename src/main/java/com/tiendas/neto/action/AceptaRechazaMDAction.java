@@ -48,7 +48,7 @@ public class AceptaRechazaMDAction extends ActionSupport implements SessionAware
 			if(usuario == null){
 				RespuestaVo respuestaVo = new RespuestaVo();
 				respuestaVo.setCodigo(501);
-				respuestaVo.setMensaje("Error en la sesión");
+				respuestaVo.setMensaje("Error en la sesiï¿½n");
 				sendJSONObjectToResponse(respuestaVo);
 				
 				return null;
@@ -56,7 +56,7 @@ public class AceptaRechazaMDAction extends ActionSupport implements SessionAware
 				String numeroEmpleado = String.valueOf(usuario.getPerfil().getNumeroEmpleado());
 				String puestoId = String.valueOf(usuario.getPerfil().getPuestoId());
 				String areaId = "";
-				if(comentario.isEmpty())
+				if(comentario.isEmpty() || comentario.equals(" "))
 					comentario = "''";
 				if(usuario.getPerfil().getAreasxpuesto().length > 0) {
 					areaId = String.valueOf(usuario.getPerfil().getAreasxpuesto()[0].getAreaId());
@@ -72,7 +72,7 @@ public class AceptaRechazaMDAction extends ActionSupport implements SessionAware
 					.add("factorId", modulo)
 					.add("estatusValidacion", validacion)
 					.add("motivoRechazo", motivo)
-					.add("comentarios", comentario)
+					.add("comentarios", comentario.trim())
 					.add("finalizaValidacion", finaliza)
 					.add("puestoId", puestoId)
 					.add("areaId", areaId)

@@ -2190,10 +2190,10 @@ function guardaConteoAuditor(total){
 			cargaMensajeModal('DETALLE MD', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
 			$('totalConteoAuditor').val('');
 		}else{
-			$('#preConteos').hide();
+			//$('#preConteos').hide();
 			$('#promedioConteosAuditoria').html(total);
 			//$('#posConteos').show();
-			$("#totalConteoAuditor").val(total);
+			$("#totalConteoAuditor").val('');
 		}
 	}
 }

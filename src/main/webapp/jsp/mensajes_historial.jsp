@@ -157,8 +157,8 @@
 	<input type="hidden" name="tipoMd" id="tipoMd" value=""/>
 </form>
 
-<form action='mensajes_historial'  id="chatPorMd" method="post">
-	<s:textfield id="mdIdChat" name="mdIdChat" label="" cssStyle="display: block"></s:textfield>
+<form style="display:none;" action='mensajes_historial'  id="chatPorMd" method="post">
+	<s:textfield id="mdIdChat" name="mdIdChat" label="" cssStyle="display: none"></s:textfield>
 	<input type="hidden" id="usuarioLogin" value="${usr.perfil.numeroEmpleado}" />
 </form>
 	

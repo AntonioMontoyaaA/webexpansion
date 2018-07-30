@@ -413,7 +413,7 @@ function dibujaAreasCompletadas(AREAS){
 					content : contentPopGerente
 				});
 				
-				AREAS_A[areaExpansion] = true;
+				//AREAS_A[areaExpansion] = true;
 				
 				if(AREAS[i].EXPANSION[0].diasVencidos > 0) {
 					$("#gerenteExpansionImg").css("display", "inline");

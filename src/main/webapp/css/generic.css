@@ -251,6 +251,24 @@ a.links{
 }
 
 /* ------------------------------  NAVBAR / HEADERS   */
+#alerta_circulo{
+	padding-top:3px;
+	background-color:red;
+	text-align:center;
+	font-size: 10px;
+    width: 15px;
+    height: 15px;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    color:white;
+    line-height:1;
+    position:relative;
+    float:left;
+    left:14px;
+    bottom:3px;
+    display:none;
+}
 
 .custom-toggler .navbar-toggler-icon {
 background-image: url('https://mdbootstrap.com/img/svg/hamburger7.svg?color=0069ac');

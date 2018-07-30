@@ -36,7 +36,7 @@
 		 	<div class="popover-body"></div>
 		 </div>' 
 		 
-		 ><img src="img/web_AVISOS.png"  style="margin-bottom:13px;"></a></span>
+		 ><img src="img/web_AVISOS.png"  style="margin-bottom:12px;"><div id="alerta_circulo"></div></a></span>
 		&nbsp;
 		
 		<span class="my-2 my-sm-0"><a id="salir" tabindex="0" role="tooltip" data-toggle="popover" data-trigger="focus" data-placement="bottom"

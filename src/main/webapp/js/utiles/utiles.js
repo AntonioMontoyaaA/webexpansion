@@ -208,7 +208,9 @@ function consultaNotificaciones(){
 				notificaciones+="<div>";
 				notificaciones+="<div class='t12 negrita azul titulo_avisos'>Avisos</div>";
 				notificaciones+="<div class='t12 negrita azul avisos'>";
+				var positivo=0;
 				
+				if(noti.length>0){
 				for(var i=0;i<noti.length;i++){
 					var estatus= noti[i].estatus;
 					
@@ -216,20 +218,33 @@ function consultaNotificaciones(){
 						notificaciones+="<div mdId='"+noti[i].mdId+"' tipoNotificacion='"+noti[i].tipoNotificacion+
 						"' fechaRegistro='"+noti[i].fechaRegistro+"' nivelEstatusAreaId='"+noti[i].nivelEstatusAreaId+
 						"' nombreSitio='"+noti[i].nombreSitio+
-						"' class='t12 leido cursor style='font-weight:normal' onclick='marca_notificacion(this)'><span>"+
+						"' class='t12 leido cursor' style='font-weight:normal' onclick='marca_notificacion(this)'><span>"+
 						noti[i].mensaje+"</span><span class='t10'>&emsp;"+noti[i].fechaRegistro+"</span></div>";
 					}
 					else{
+						positivo++;
 						notificaciones+="<div mdId='"+noti[i].mdId+"' tipoNotificacion='"+noti[i].tipoNotificacion+
 						"' fechaRegistro='"+noti[i].fechaRegistro+"' nivelEstatusAreaId='"+noti[i].nivelEstatusAreaId+
 						"' nombreSitio='"+noti[i].nombreSitio+
-						"' class='t12 noleido cursor style='font-weight:normal' onclick='marca_notificacion(this)'><span>"+
+						"' class='t12 noleido cursor' style='font-weight:normal' onclick='marca_notificacion(this)'><span>"+
 						noti[i].mensaje+"</span><span class='t10'>&emsp;"+noti[i].fechaRegistro+"</span></div>";
 					}
 					
 				}
+				}
+				else{
+					notificaciones+="<div class='t12 leido cursor' style='font-weight:normal;'><span>No existen avisos nuevos</span></div>";
+				}
 				notificaciones+="</div>";
 				notificaciones+="</div>";
+				
+				if(positivo>0){
+					$('#alerta_circulo').text(positivo);
+					$('#alerta_circulo').show();
+				}
+				else{
+					$('#alerta_circulo').hide();
+				}
 			}
 			}
 }
@@ -242,7 +257,6 @@ function marca_notificacion(valor){
 	var nivelEstatusAreaId=$(valor).attr('nivelEstatusAreaId');
 	var nombreSitio=$(valor).attr('nombreSitio');
 
-	console.log(id+" "+tipoNotificacion+" "+fechaRegistro+" "+nivelEstatusAreaId+" "+nombreSitio);
 	invocarJSONServiceAction("marcaNotificacionAction",
 			{'mdId':id,
 			 'tipoNotificacion':tipoNotificacion,

@@ -348,28 +348,41 @@
 				<div class="row div_header_sub">
 					<div class="col-lg-9 col-6"><div id="mapaZonificacion" style="width: 100%; height: 85%; position: relative; float: left;"></div></div>
 					<div class="col-lg-3 col-6">
-						<div style="width: 100%;text-align: center;">
-							<span class="azul t12">COMPETENCIA</span><br/>
-							<div>
-								<img width="30px" src="img/competencia/iconos_3b.png">&nbsp;
-								<img width="30px" src="img/competencia/iconos_express.png">&nbsp;
-								<img width="30px" src="img/competencia/iconos_oxxo.png">&nbsp;
-								<img width="30px" src="img/competencia/iconos_seven.png">&nbsp;
-								<img width="30px" src="img/competencia/iconos_k.png">&nbsp;
-								<img width="30px" src="img/competencia/iconos_otros.png">&nbsp;
+						<div class="row">
+							<div style="width: 100%;text-align: center;">
+								<span class="azul t12">COMPETENCIA</span><br/>
+								<div>
+									<img width="30px" src="img/competencia/iconos_3b.png">&nbsp;
+									<img width="30px" src="img/competencia/iconos_express.png">&nbsp;
+									<img width="30px" src="img/competencia/iconos_oxxo.png">&nbsp;
+									<!--  <img width="30px" src="img/competencia/iconos_seven.png">&nbsp;-->
+									<!--  <img width="30px" src="img/competencia/iconos_k.png">&nbsp;-->
+									<img width="30px" src="img/competencia/icono_otros_2.png">&nbsp;
+								</div>
 							</div>
 						</div>
-						<div style="width: 100%; text-align: center;margin-top: 35px;">
-							<div style="width: 100%"><span class="azul t12">GENERADORES DE TRÁFICO</span></div>
-							<div style="width: 100%">
-								<div style="width: 33%; position: relative; float: left;"><div style="width: 100%"><img width="30px" src="img/generadores/iglesia.png"></div><div style="width: 100%; text-align: center"><span class="subtituloIconos">Iglesia</span></div></div>
-								<div style="width: 33%; position: relative; float: left;"><div style="width: 100%"><img width="30px" src="img/generadores/tortilleria.png"></div><div style="width: 100%; text-align: center"><span class="subtituloIconos">Tortillería</span></div></div>
-								<div style="width: 33%; position: relative; float: left;"><div style="width: 100%"><img width="30px" src="img/generadores/escuela.png"></div><div style="width: 100%; text-align: center"><span class="subtituloIconos">Escuela</span></div></div>
+						<div class="row" style="padding-top: 30px;">
+							<div class="col-lg-12 col-12"><span class="azul t12">GENERADORES DE TRÁFICO</span></div>
+							<div class="col-lg-12 col-12" style="padding-top: 10px;">
+								<div class="row">
+									<div class="col-lg-4 col-4"><img width="30px" src="img/generadores/iglesia.png"><br/><span class="subtituloIconos">Iglesia</span></div>
+									<div class="col-lg-4 col-4"><img width="30px" src="img/generadores/tortilleria.png"><br/><span class="subtituloIconos">Tortillería</span></div>
+									<div class="col-lg-4 col-4"><img width="30px" src="img/generadores/escuela.png"><br/><span class="subtituloIconos">Escuela</span></div>
+								</div>
 							</div>
-							<div style="width: 100%">
-								<div style="width: 33%; position: relative; float: left;"><div style="width: 100%"><img width="30px" src="img/generadores/recauderia.png"></div><div style="width: 100%; text-align: center"><span class="subtituloIconos">Recaudería</span></div></div>
-								<div style="width: 33%; position: relative; float: left;"><div style="width: 100%"><img width="30px" src="img/generadores/mercado.png"></div><div style="width: 100%; text-align: center"><span class="subtituloIconos">Mercado</span></div></div>
-								<div style="width: 33%; position: relative; float: left;"><div style="width: 100%"><img width="30px" src="img/generadores/carniceria.png"></div><div style="width: 100%; text-align: center"><span class="subtituloIconos">Carnicería</span></div></div>
+							<div class="col-lg-12 col-12">
+								<div class="row">
+									<div class="col-lg-4 col-4"><img width="30px" src="img/generadores/recauderia.png"><br/><span class="subtituloIconos">Recaudería</span></div>
+									<div class="col-lg-4 col-4"><img width="30px" src="img/generadores/mercado.png"><br/><span class="subtituloIconos">Mercado</span></div>
+									<div class="col-lg-4 col-4"><img width="30px" src="img/generadores/carniceria.png"><br/><span class="subtituloIconos">Carnicería</span></div>
+								</div>
+							</div>
+							<div class="col-lg-12 col-12">
+								<div class="row">
+									<div class="col-lg-4 col-4"><img width="30px" src="img/generadores/icono_otros_generadores.png"><br/><span class="subtituloIconos">Otros</span></div>
+									<div class="col-lg-4 col-4">&nbsp;</div>
+									<div class="col-lg-4 col-4">&nbsp;</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -485,8 +498,8 @@
 					<span id="promedioConteos" class="negrita blanco t14 sangria_cuerpo">---</span><br/>
 					
 					<div class="contenedorConteos" id="preConteos" style="display: none;">
-						<input id="totalConteoAuditor" placeholder="Captura el promedio peatonal" onkeypress="return isNumberKey(event,this)" id="conteosAuditor" style="top: -6px; position: relative;left: 139px; width: 230px;">
-						<div id="subeConteo" class="btn btnBlanco" style="position: relative;top: -13px;left: 144px;">Aceptar</div>
+						<input id="totalConteoAuditor" placeholder="Captura el promedio peatonal" onkeypress="return isNumberKey(event,this)" id="conteosAuditor" style="top: -6px; position: relative;left: 30px; width: 230px;height: 20px; font-size: 0.8em">
+						<div id="subeConteo" class="btn btnBlanco" style="position: relative;top: -13px;left: 40px;height: 20px; padding-top: 1px; font-size: 0.8em">Aceptar</div>
 					</div>
 					<div class="contenedorConteos" id="posConteos" style="display: none;">
 					<span class="blanco t12 sangria_doble_cuerpo">PROMEDIO AUDITORIA: </span>
@@ -494,7 +507,7 @@
 					</div>
 				</div>
 				<div class="row div_header_sub">
-					<div class="col-lg-12"><div id="contenedorFlujoPeatonal" style="width: 100%; height: 70%; margin: 0 auto"></div></div>
+					<div class="col-lg-12"><div id="contenedorFlujoPeatonal" style="width: 100%; height: 68%; margin: 0 auto"></div></div>
 				</div>
 			</div>
 		</div>
@@ -591,7 +604,7 @@
 		</div>
 </div>
 
-<form action='memoria_detalle'  id="detalleMemoriaAsignadaAction" method="post">
+<form style="display: none;" action='memoria_detalle'  id="detalleMemoriaAsignadaAction" method="post">
 	<s:textfield id="mdId" name="mdId" label="" cssStyle="display: none"></s:textfield>
 	<s:textfield id="nombreMd" name="nombreMd" label="" cssStyle="display: none"></s:textfield>	
 	<s:textfield id="tipoMd" name="tipoMd" label="" cssStyle="display: none"></s:textfield>	

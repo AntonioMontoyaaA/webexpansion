@@ -1947,13 +1947,7 @@ function initMap(latitudSitio, longitudSitio, listaCompetencias, listaGeneradore
 	            icon: 'img/competencia/iconos_express.png'
 	          },
 	          "4": {
-		            icon: 'img/competencia/iconos_otros.png'
-		      },
-		      "9": {
-		            icon: 'img/competencia/iconos_k.png'
-		      },
-	          "10": {
-		        icon: 'img/competencia/iconos_seven.png'
+		            icon: 'img/competencia/icono_otros_2.png'
 		      },
 		      "5": {
 		            icon: 'img/generadores/iglesia.png'
@@ -1966,6 +1960,9 @@ function initMap(latitudSitio, longitudSitio, listaCompetencias, listaGeneradore
 		       },
 		       "8": {
 			        icon: 'img/generadores/parada.png'
+			   },
+			   "9": {
+			        icon: 'img/generadores/icono_otros_generadores.png'
 			   }
 	        };
 	
@@ -2195,7 +2192,8 @@ function guardaConteoAuditor(total){
 		}else{
 			$('#preConteos').hide();
 			$('#promedioConteosAuditoria').html(total);
-			$('#pos Conteos').show();
+			//$('#posConteos').show();
+			$("#totalConteoAuditor").val(total);
 		}
 	}
 }

@@ -444,12 +444,14 @@ span.gris{
 	color:#22A0BC;
 	padding-left:10px;
 	padding-right:10px;
+	border-bottom:1px solid #D1D1D1;
 
 }
 .leido{
 	color:#D1D1D1;
 	padding-left:10px;
 	padding-right:10px;
+		border-bottom:1px solid #D1D1D1;
 	
 }
 .leido:hover, .noleido:hover{

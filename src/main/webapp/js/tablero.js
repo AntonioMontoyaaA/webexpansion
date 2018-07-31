@@ -171,6 +171,9 @@ function creatabla(){
 						var claseEstatus = "";
 						if(resultadoTablero[i].PRE_OPERACIONES.validacion == "NO") {
 							claseEstatus = "text_sin_atencion";
+							if(resultadoTablero[i].PRE_OPERACIONES.estatus == "ATRASADA") {
+								esMdAtrasada = true;
+							}
 						} else if(resultadoTablero[i].PRE_OPERACIONES.estatus == "EN TIEMPO") {
 							claseEstatus = "text_en_tiempo";
 						} else {
@@ -193,6 +196,9 @@ function creatabla(){
 						var claseEstatus = "";
 						if(resultadoTablero[i].PRE_GESTORIA.validacion == "NO") {
 							claseEstatus = "text_sin_atencion";
+							if(resultadoTablero[i].PRE_GESTORIA.estatus == "ATRASADA") {
+								esMdAtrasada = true;
+							}
 						} else if(resultadoTablero[i].PRE_GESTORIA.estatus == "EN TIEMPO") {
 							claseEstatus = "text_en_tiempo";
 						} else {
@@ -210,6 +216,9 @@ function creatabla(){
 						var claseEstatus = "";
 						if(resultadoTablero[i].PRE_CONSTRUCCION.validacion == "NO") {
 							claseEstatus = "text_sin_atencion";
+							if(resultadoTablero[i].PRE_CONSTRUCCION.estatus == "ATRASADA") {
+								esMdAtrasada = true;
+							}
 						} else if(resultadoTablero[i].PRE_CONSTRUCCION.estatus == "EN TIEMPO") {
 							claseEstatus = "text_en_tiempo";
 						} else {
@@ -227,6 +236,9 @@ function creatabla(){
 						var claseEstatus = "";
 						if(resultadoTablero[i].VOBO_LAYOUT.validacion == "NO") {
 							claseEstatus = "text_sin_atencion";
+							if(resultadoTablero[i].VOBO_LAYOUT.estatus == "ATRASADA") {
+								esMdAtrasada = true;
+							}
 						} else if(resultadoTablero[i].VOBO_LAYOUT.estatus == "EN TIEMPO") {
 							claseEstatus = "text_en_tiempo";
 						} else {
@@ -254,6 +266,9 @@ function creatabla(){
 						var claseEstatus = "";
 						if(resultadoTablero[i].TRAMITES.validacion == "NO") {
 							claseEstatus = "text_sin_atencion";
+							if(resultadoTablero[i].TRAMITES.estatus == "ATRASADA") {
+								esMdAtrasada = true;
+							}
 						} else if(resultadoTablero[i].TRAMITES.estatus == "EN TIEMPO") {
 							claseEstatus = "text_en_tiempo";
 						} else {
@@ -271,6 +286,9 @@ function creatabla(){
 						var claseEstatus = "";
 						if(resultadoTablero[i].VOBOFNL_OPERACIONES.validacion == "NO") {
 							claseEstatus = "text_sin_atencion";
+							if(resultadoTablero[i].VOBOFNL_OPERACIONES.estatus == "ATRASADA") {
+								esMdAtrasada = true;
+							}
 						} else if(resultadoTablero[i].VOBOFNL_OPERACIONES.estatus == "EN TIEMPO") {
 							claseEstatus = "text_en_tiempo";
 						} else {
@@ -288,6 +306,9 @@ function creatabla(){
 						var claseEstatus = "";
 						if(resultadoTablero[i].FIRMA_CONTRATO.validacion == "NO") {
 							claseEstatus = "text_sin_atencion";
+							if(resultadoTablero[i].FIRMA_CONTRATO.estatus == "ATRASADA") {
+								esMdAtrasada = true;
+							}
 						} else if(resultadoTablero[i].FIRMA_CONTRATO.estatus == "EN TIEMPO") {
 							claseEstatus = "text_en_tiempo";
 						} else {
@@ -305,6 +326,9 @@ function creatabla(){
 						var claseEstatus = "";
 						if(resultadoTablero[i].INICIO_OBRA.validacion == "NO") {
 							claseEstatus = "text_sin_atencion";
+							if(resultadoTablero[i].INICIO_OBRA.estatus == "ATRASADA") {
+								esMdAtrasada = true;
+							}
 						} else if(resultadoTablero[i].INICIO_OBRA.estatus == "EN TIEMPO") {
 							claseEstatus = "text_en_tiempo";
 						} else {

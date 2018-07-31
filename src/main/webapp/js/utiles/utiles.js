@@ -154,8 +154,17 @@ function mueveReloj(){
 	mes = mesesarr[f.getMonth()];
 	dia = f.getDate();
 	año = f.getFullYear();
+	minutos=f.getMinutes();
+	horas=f.getHours();
 	
-	fecha_header=dia+' de '+mes+' del '+año+' '+f.getHours()+':'+f.getMinutes()+' hrs';
+	if(minutos<10){
+		minutos='0'+minutos;
+	}
+	if(horas<10){
+		horas='0'+horas;
+	}
+	
+	fecha_header=dia+' de '+mes+' del '+año+' '+horas+':'+minutos+' hrs';
      $('#fecha_header').text(fecha_header);
 
      //La función se tendrá que llamar así misma para que sea dinámica, 

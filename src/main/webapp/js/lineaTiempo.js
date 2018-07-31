@@ -54,7 +54,6 @@ function inicializaGrantt(datos){
 	$('#contenedor_gantt').text('');
 	$('#contenedor_gantt').append('<svg id="gantt"></svg>');
 	
-	
 	var data=datos.detalleSeguimiento;
 	
 	function stopEvent(event) {
@@ -66,15 +65,17 @@ function inicializaGrantt(datos){
 	var fecha_finalMd;
 	
 	if(data[data.length-1].fechaFinal!=""){
-		fecha_finalMd=data[data.length-1].fechaFinal.substring(0,10);
+		fecha_finalMd = data[data.length-1].fechaFinal.substring(0,10);
+		fecha_finalMd=reformat(fecha_finalMd);
+	}
+	else if(data[data.length-1].fechaRealEstimada!=""){
+		fecha_finalMd = data[data.length-1].fechaRealEstimada.substring(0,10);
+		fecha_finalMd=reformat(fecha_finalMd);
 	}
 	else{
-		fecha_finalMd=data[data.length-1].fechaRealEstimada.substring(0,10);
+		fecha_finalMd = new Date();
 	}
-	
-	
 	fecha_inicioMd=reformat(fecha_inicioMd);
-	fecha_finalMd=reformat(fecha_finalMd);
 	
 	var task=new Array();	
 	tasks = [

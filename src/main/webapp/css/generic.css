@@ -469,7 +469,7 @@ span.gris{
 	color:#D1D1D1;
 	padding-left:10px;
 	padding-right:10px;
-		border-bottom:1px solid #D1D1D1;
+	border-bottom:1px solid #D1D1D1;
 	
 }
 .leido:hover, .noleido:hover{
@@ -479,8 +479,6 @@ span.gris{
 .avisos{
 	overflow-y:auto;
 	max-height:200px;
-	padding-top:3px;
-	padding-bottom:3px;
 }
 #logout{
 	margin:0;

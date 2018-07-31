@@ -27,8 +27,8 @@
 	
 	<div class="col-lg-12">
 		<div class="row">
-				<button class="btn desp rechargue" type="button">
-  								<img src="${pageContext.request.contextPath}/img/refresh_sf.png" />
+				<button class="btn desp atras" type="button" onclick="history.back()">
+  								<img src="${pageContext.request.contextPath}/img/regresarOFF.png" />
   				</button>
 		</div>
 		

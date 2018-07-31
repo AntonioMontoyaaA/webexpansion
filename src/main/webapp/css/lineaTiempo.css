@@ -12,6 +12,9 @@
     -moz-border-radius: 2px;
     -webkit-border-radius:2px;
 }
+#atras{
+	width:25px;
+}
 .cuadroeditar{
 	background-image:url('../img/aprobadas/editarB.png');
 	background-color:#40BCD8;

@@ -167,7 +167,11 @@ function creatabla(){
 					datosMemorias[i][6] = "<span style='"  + "'>---</span>";
 				}
 				if(resultadoTablero[i].PRE_OPERACIONES != undefined) {
-					datosMemorias[i][7] = "<span class=''>" + resultadoTablero[i].PRE_OPERACIONES.fechaValidacion + "</span>";
+					if(resultadoTablero[i].PRE_OPERACIONES.fechaValidacion != undefined) {
+						datosMemorias[i][7] = "<span class=''>" + resultadoTablero[i].PRE_OPERACIONES.fechaValidacion + "</span>";
+					} else {
+						datosMemorias[i][7] = "<span class='text_sin_atencion'>---</span>";
+					}
 				} else {
 					datosMemorias[i][7] = "<span class='text_sin_atencion'>---</span>";
 				}
@@ -177,17 +181,29 @@ function creatabla(){
 					datosMemorias[i][8] = "<span class='text_sin_atencion'>---</span>";
 				}
 				if(resultadoTablero[i].PRE_GESTORIA != undefined) {
-					datosMemorias[i][9] = "<span class=''>" + resultadoTablero[i].PRE_GESTORIA.fechaValidacion + "</span>";
+					if(resultadoTablero[i].PRE_GESTORIA.fechaValidacion != undefined) {
+						datosMemorias[i][9] = "<span class=''>" + resultadoTablero[i].PRE_GESTORIA.fechaValidacion + "</span>";
+					} else {
+						datosMemorias[i][9] = "<span class='text_sin_atencion'>---</span>";
+					}
 				} else {
 					datosMemorias[i][9] = "<span class='text_sin_atencion'>---</span>";
 				}
 				if(resultadoTablero[i].PRE_CONSTRUCCION != undefined) {
-					datosMemorias[i][10] = "<span class=''>" + resultadoTablero[i].PRE_CONSTRUCCION.fechaValidacion + "</span>";
+					if(resultadoTablero[i].PRE_CONSTRUCCION.fechaValidacion != undefined) {
+						datosMemorias[i][10] = "<span class=''>" + resultadoTablero[i].PRE_CONSTRUCCION.fechaValidacion + "</span>";
+					} else {
+						datosMemorias[i][10] = "<span class='text_sin_atencion'>---</span>";
+					}
 				} else {
 					datosMemorias[i][10] = "<span class='text_sin_atencion'>---</span>";
 				}
 				if(resultadoTablero[i].VOBO_LAYOUT != undefined) {
-					datosMemorias[i][11] = "<span class=''>" + resultadoTablero[i].VOBO_LAYOUT.fechaValidacion + "</span>";
+					if(resultadoTablero[i].VOBO_LAYOUT.fechaValidacion != undefined) {
+						datosMemorias[i][11] = "<span class=''>" + resultadoTablero[i].VOBO_LAYOUT.fechaValidacion + "</span>";
+					} else {
+						datosMemorias[i][11] = "<span class='text_sin_atencion'>---</span>";
+					}
 				} else {
 					datosMemorias[i][11] = "<span class='text_sin_atencion'>---</span>";
 				}
@@ -202,22 +218,38 @@ function creatabla(){
 					datosMemorias[i][13] = "<span class='text_sin_atencion'>---</span>";
 				}
 				if(resultadoTablero[i].TRAMITES != undefined) {
-					datosMemorias[i][14] = "<span class=''>" + resultadoTablero[i].TRAMITES.fechaValidacion + "</span>";
+					if(resultadoTablero[i].TRAMITES.fechaValidacion != undefined) {
+						datosMemorias[i][14] = "<span class=''>" + resultadoTablero[i].TRAMITES.fechaValidacion + "</span>";
+					} else {
+						datosMemorias[i][14] = "<span class='text_sin_atencion'>---</span>";
+					}
 				} else {
 					datosMemorias[i][14] = "<span class='text_sin_atencion'>---</span>";
 				}
 				if(resultadoTablero[i].VOBOFNL_OPERACIONES != undefined) {
-					datosMemorias[i][15] = "<span class=''>" + resultadoTablero[i].VOBOFNL_OPERACIONES.fechaValidacion + "</span>";
+					if(resultadoTablero[i].VOBOFNL_OPERACIONES.fechaValidacion != undefined) {
+						datosMemorias[i][15] = "<span class=''>" + resultadoTablero[i].VOBOFNL_OPERACIONES.fechaValidacion + "</span>";
+					} else {
+						datosMemorias[i][15] = "<span class='text_sin_atencion'></span>";
+					}
 				} else {
 					datosMemorias[i][15] = "<span class='text_sin_atencion'>---</span>";
 				}
 				if(resultadoTablero[i].FIRMA_CONTRATO != undefined) {
-					datosMemorias[i][16] = "<span class=''>" + resultadoTablero[i].FIRMA_CONTRATO.fechaValidacion + "</span>";
+					if(resultadoTablero[i].FIRMA_CONTRATO.fechaValidacion != undefined) {
+						datosMemorias[i][16] = "<span class=''>" + resultadoTablero[i].FIRMA_CONTRATO.fechaValidacion + "</span>";
+					} else {
+						datosMemorias[i][16] = "<span class='text_sin_atencion'>---</span>";
+					}
 				} else {
 					datosMemorias[i][16] = "<span class='text_sin_atencion'>---</span>";
 				}
 				if(resultadoTablero[i].INICIO_OBRA != undefined) {
-					datosMemorias[i][17] = "<span class=''>" + resultadoTablero[i].INICIO_OBRA.fechaValidacion + "</span>";
+					if(resultadoTablero[i].INICIO_OBRA.fechaValidacion != undefined) {
+						datosMemorias[i][17] = "<span class=''>" + resultadoTablero[i].INICIO_OBRA.fechaValidacion + "</span>";
+					} else {
+						datosMemorias[i][17] = "<span class='text_sin_atencion'>---</span>";
+					}
 				} else {
 					datosMemorias[i][17] = "<span class='text_sin_atencion'>---</span>";
 				}

@@ -16,6 +16,7 @@ $(function(){
 	}else if(TIPOMD == 5){
 		$('#idtablero').addClass('resaltado');
 		$('#titulo_tipo').text('TABLERO');
+		
 	}
 	
 	consultaLinea();

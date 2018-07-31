@@ -8,7 +8,6 @@ var TIPO_ESTATUS_EXITO		= 2;
 var funcionEvalSi			= "";
 
 $(function(){
-	
 	consultaNotificaciones();
 	popover();
 	mueveReloj();

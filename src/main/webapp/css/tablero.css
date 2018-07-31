@@ -126,6 +126,15 @@ span.circulo {
 .padding_right {
 	padding-right: 10px;
 }
+.padding_left {
+	padding-left: 10px;
+}
+.padding_right_5 {
+	padding-right: 5px;
+}
+.padding_left_5 {
+	padding-left: 5px;
+}
 /* 
 .txt_expansion {
 	color: #37AFCE;

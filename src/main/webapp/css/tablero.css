@@ -114,14 +114,26 @@ span.circulo {
 	border-radius: 50%;
     width: 0.8em;
     height: 0.8em;
-    background: #8E9ABA;
+    background: #CCCCCC;
     float: left;
     margin-top: 2px;
     margin-left: 10px;
 }
+.cicle_tiempo_sem_selecc {
+	background: #733535;
+}
 
 .padding_right {
 	padding-right: 10px;
+}
+.padding_left {
+	padding-left: 10px;
+}
+.padding_right_5 {
+	padding-right: 5px;
+}
+.padding_left_5 {
+	padding-left: 5px;
 }
 /* 
 .txt_expansion {
@@ -186,4 +198,13 @@ span.circulo {
 }
 .text_seleccion_dos:hover {
 	text-decoration: italic;
+}
+.text_en_tiempo {
+	color: #1E9D42;
+}
+.text_atrasada {
+	color: #FF5B16;
+}
+.text_sin_atencion {
+	color: #CCCCCC;
 }

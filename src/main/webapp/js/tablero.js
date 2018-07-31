@@ -171,6 +171,10 @@ function creatabla(){
 						var claseEstatus = "";
 						if(resultadoTablero[i].PRE_OPERACIONES.validacion == "NO") {
 							claseEstatus = "text_sin_atencion";
+						} else if(resultadoTablero[i].PRE_OPERACIONES.estatus == "EN TIEMPO") {
+							claseEstatus = "text_en_tiempo";
+						} else {
+							claseEstatus = "text_atrasada";
 						}
 						datosMemorias[i][7] = "<span class='" + claseEstatus + "'>" + resultadoTablero[i].PRE_OPERACIONES.fechaValidacion + "</span>";
 					} else {
@@ -189,6 +193,10 @@ function creatabla(){
 						var claseEstatus = "";
 						if(resultadoTablero[i].PRE_GESTORIA.validacion == "NO") {
 							claseEstatus = "text_sin_atencion";
+						} else if(resultadoTablero[i].PRE_GESTORIA.estatus == "EN TIEMPO") {
+							claseEstatus = "text_en_tiempo";
+						} else {
+							claseEstatus = "text_atrasada";
 						}
 						datosMemorias[i][9] = "<span class='" + claseEstatus + "'>" + resultadoTablero[i].PRE_GESTORIA.fechaValidacion + "</span>";
 					} else {
@@ -202,6 +210,10 @@ function creatabla(){
 						var claseEstatus = "";
 						if(resultadoTablero[i].PRE_CONSTRUCCION.validacion == "NO") {
 							claseEstatus = "text_sin_atencion";
+						} else if(resultadoTablero[i].PRE_CONSTRUCCION.estatus == "EN TIEMPO") {
+							claseEstatus = "text_en_tiempo";
+						} else {
+							claseEstatus = "text_atrasada";
 						}
 						datosMemorias[i][10] = "<span class='" + claseEstatus + "'>" + resultadoTablero[i].PRE_CONSTRUCCION.fechaValidacion + "</span>";
 					} else {
@@ -215,6 +227,10 @@ function creatabla(){
 						var claseEstatus = "";
 						if(resultadoTablero[i].VOBO_LAYOUT.validacion == "NO") {
 							claseEstatus = "text_sin_atencion";
+						} else if(resultadoTablero[i].VOBO_LAYOUT.estatus == "EN TIEMPO") {
+							claseEstatus = "text_en_tiempo";
+						} else {
+							claseEstatus = "text_atrasada";
 						}
 						datosMemorias[i][11] = "<span class='" + claseEstatus + "'>" + resultadoTablero[i].VOBO_LAYOUT.fechaValidacion + "</span>";
 					} else {
@@ -238,6 +254,10 @@ function creatabla(){
 						var claseEstatus = "";
 						if(resultadoTablero[i].TRAMITES.validacion == "NO") {
 							claseEstatus = "text_sin_atencion";
+						} else if(resultadoTablero[i].TRAMITES.estatus == "EN TIEMPO") {
+							claseEstatus = "text_en_tiempo";
+						} else {
+							claseEstatus = "text_atrasada";
 						}
 						datosMemorias[i][14] = "<span class='" + claseEstatus + "'>" + resultadoTablero[i].TRAMITES.fechaValidacion + "</span>";
 					} else {
@@ -251,6 +271,10 @@ function creatabla(){
 						var claseEstatus = "";
 						if(resultadoTablero[i].VOBOFNL_OPERACIONES.validacion == "NO") {
 							claseEstatus = "text_sin_atencion";
+						} else if(resultadoTablero[i].VOBOFNL_OPERACIONES.estatus == "EN TIEMPO") {
+							claseEstatus = "text_en_tiempo";
+						} else {
+							claseEstatus = "text_atrasada";
 						}
 						datosMemorias[i][15] = "<span class='" + claseEstatus + "'>" + resultadoTablero[i].VOBOFNL_OPERACIONES.fechaValidacion + "</span>";
 					} else {
@@ -264,6 +288,10 @@ function creatabla(){
 						var claseEstatus = "";
 						if(resultadoTablero[i].FIRMA_CONTRATO.validacion == "NO") {
 							claseEstatus = "text_sin_atencion";
+						} else if(resultadoTablero[i].FIRMA_CONTRATO.estatus == "EN TIEMPO") {
+							claseEstatus = "text_en_tiempo";
+						} else {
+							claseEstatus = "text_atrasada";
 						}
 						datosMemorias[i][16] = "<span class='" + claseEstatus + "'>" + resultadoTablero[i].FIRMA_CONTRATO.fechaValidacion + "</span>";
 					} else {
@@ -277,6 +305,10 @@ function creatabla(){
 						var claseEstatus = "";
 						if(resultadoTablero[i].INICIO_OBRA.validacion == "NO") {
 							claseEstatus = "text_sin_atencion";
+						} else if(resultadoTablero[i].INICIO_OBRA.estatus == "EN TIEMPO") {
+							claseEstatus = "text_en_tiempo";
+						} else {
+							claseEstatus = "text_atrasada";
 						}
 						datosMemorias[i][17] = "<span class='" + claseEstatus + "'>" + resultadoTablero[i].INICIO_OBRA.fechaValidacion + "</span>";
 					} else {

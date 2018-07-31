@@ -40,9 +40,17 @@ function dibujaEstatus(resumen) {
 	var totalAtrasadas = 0;
 	
 	for(var i = 0; i < resumen.length; i++) {
+		var busqueda = "";
+		
+		if(resumen[i].estatus == "PREGESTORIA - GESTORIA") {
+			busqueda = "PREGES_GES"
+		} else if(resumen[i].estatus == "VOBO INICIAL OPERACIONES - OPERACIONES") {
+			busqueda = "VOBOINICOPER"
+		}
+		
 		datos += '<div onclick="filtraEstatus(\'' + resumen[i].estatus + '\', this)" class="tabla_pendientes" style="width: 65%;"><span>' + resumen[i].estatus + '</span></div>' +
 				'<div class="tabla_pendientes" style="width: 18%;padding-left: 10px;"><span>' + resumen[i].total + '</span></div>' +
-				'<div onclick="filtraEstatus(\'' + resumen[i].estatus + '\', this)" class="tabla_pendientes" style="width: 17%;padding-left: 10px;"><span>' + resumen[i].atrasadas + '</span></div>';
+				'<div onclick="filtraEstatus(\'&ATR_' + busqueda + '\', this)" class="tabla_pendientes" style="width: 17%;padding-left: 10px;"><span>' + resumen[i].atrasadas + '</span></div>';
 		total += resumen[i].total;
 		totalAtrasadas += resumen[i].atrasadas;
 	}
@@ -172,6 +180,7 @@ function creatabla(){
 						if(resultadoTablero[i].PRE_OPERACIONES.validacion == "NO") {
 							claseEstatus = "text_sin_atencion";
 							if(resultadoTablero[i].PRE_OPERACIONES.estatus == "ATRASADA") {
+								cadenaAtraso += "&ATR_VOBOINICOPER";
 								esMdAtrasada = true;
 							}
 						} else if(resultadoTablero[i].PRE_OPERACIONES.estatus == "EN TIEMPO") {
@@ -197,6 +206,7 @@ function creatabla(){
 						if(resultadoTablero[i].PRE_GESTORIA.validacion == "NO") {
 							claseEstatus = "text_sin_atencion";
 							if(resultadoTablero[i].PRE_GESTORIA.estatus == "ATRASADA") {
+								cadenaAtraso += "&ATR_PREGES_GES";
 								esMdAtrasada = true;
 							}
 						} else if(resultadoTablero[i].PRE_GESTORIA.estatus == "EN TIEMPO") {
@@ -217,6 +227,7 @@ function creatabla(){
 						if(resultadoTablero[i].PRE_CONSTRUCCION.validacion == "NO") {
 							claseEstatus = "text_sin_atencion";
 							if(resultadoTablero[i].PRE_CONSTRUCCION.estatus == "ATRASADA") {
+								cadenaAtraso += "&ATR_PRECONS_CONS";
 								esMdAtrasada = true;
 							}
 						} else if(resultadoTablero[i].PRE_CONSTRUCCION.estatus == "EN TIEMPO") {
@@ -237,6 +248,7 @@ function creatabla(){
 						if(resultadoTablero[i].VOBO_LAYOUT.validacion == "NO") {
 							claseEstatus = "text_sin_atencion";
 							if(resultadoTablero[i].VOBO_LAYOUT.estatus == "ATRASADA") {
+								cadenaAtraso += "&ATR_VOBOLAY";
 								esMdAtrasada = true;
 							}
 						} else if(resultadoTablero[i].VOBO_LAYOUT.estatus == "EN TIEMPO") {
@@ -267,6 +279,7 @@ function creatabla(){
 						if(resultadoTablero[i].TRAMITES.validacion == "NO") {
 							claseEstatus = "text_sin_atencion";
 							if(resultadoTablero[i].TRAMITES.estatus == "ATRASADA") {
+								cadenaAtraso += "&ATR_TRM_GES";
 								esMdAtrasada = true;
 							}
 						} else if(resultadoTablero[i].TRAMITES.estatus == "EN TIEMPO") {
@@ -287,6 +300,7 @@ function creatabla(){
 						if(resultadoTablero[i].VOBOFNL_OPERACIONES.validacion == "NO") {
 							claseEstatus = "text_sin_atencion";
 							if(resultadoTablero[i].VOBOFNL_OPERACIONES.estatus == "ATRASADA") {
+								cadenaAtraso += "&ATR_VOBOFINOPER";
 								esMdAtrasada = true;
 							}
 						} else if(resultadoTablero[i].VOBOFNL_OPERACIONES.estatus == "EN TIEMPO") {
@@ -307,6 +321,7 @@ function creatabla(){
 						if(resultadoTablero[i].FIRMA_CONTRATO.validacion == "NO") {
 							claseEstatus = "text_sin_atencion";
 							if(resultadoTablero[i].FIRMA_CONTRATO.estatus == "ATRASADA") {
+								cadenaAtraso += "&ATR_FIRMACONTR";
 								esMdAtrasada = true;
 							}
 						} else if(resultadoTablero[i].FIRMA_CONTRATO.estatus == "EN TIEMPO") {
@@ -327,6 +342,7 @@ function creatabla(){
 						if(resultadoTablero[i].INICIO_OBRA.validacion == "NO") {
 							claseEstatus = "text_sin_atencion";
 							if(resultadoTablero[i].INICIO_OBRA.estatus == "ATRASADA") {
+								cadenaAtraso += "&ATR_INICOBRA";
 								esMdAtrasada = true;
 							}
 						} else if(resultadoTablero[i].INICIO_OBRA.estatus == "EN TIEMPO") {

@@ -610,6 +610,13 @@ function buscaDetalleMD(mdId) {
 				$("#fechaVistaLateral2").text(data.superficie.fechaLateral2);
 				$("#horaVistaLateral2").text(data.superficie.horaLateral2);
 				
+				//nuevos valores
+				$("#negocios").text('70');
+				$("#negocios_comida").text('72');
+				$('#esquina').text('SI');
+				
+				
+				
 				var contentPopSuperficie ='<div class="row" style="padding-top:3px;">' + 
 				   '<div class="col-6"><span class="t14 blanco">Frente mínimo:</span></div>' +
 				   '<div class="col-6"><span class="t14 blanco negrita">' + data.superficie.frente + ' mts</span></div>' +

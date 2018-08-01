@@ -24,7 +24,7 @@
 
 <div class="container-fluid">
 	<div class="row padding_p" style="padding-top:0px;">
-		<div class="col-lg-12 titulo azul t12 negrita">DASHBOARD ${usr.perfil.areasxpuesto[0].areaNom} > APROBADAS > TIEMPOS </div>
+		<div class="col-lg-12 titulo azul t12 negrita">DASHBOARD ${usr.perfil.areasxpuesto[0].areaNom} > TABLERO > TIEMPOS > <span id="nombre_md" ></span> </div>
 	
 	<div class="col-lg-12">
 		<div class="row">

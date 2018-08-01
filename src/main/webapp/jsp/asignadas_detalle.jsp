@@ -244,7 +244,20 @@
 
 							</div>
 						</div>
-
+						<div class="col-12"style="padding-left:0px;">
+						<span class="blanco t12">LOCAL EN ESQUINA</span>&nbsp;&nbsp;&nbsp;<span
+									 id="esquina" class="negrita blanco t14">---</span>
+						</div>
+						
+						<div class="col-12" style="padding-left:0px;">
+									<span class="blanco t12">NEGOCIOS</span>&nbsp;&nbsp;&nbsp;<span
+									id="negocios" class="negrita blanco t14">---</span>
+						</div>
+						<div class="col-12"style="padding-left:0px;">
+						<span class="blanco t12">NEGOCIOS DE COMIDA</span>&nbsp;&nbsp;&nbsp;<span
+									 id="negocios_comida" class="negrita blanco t14">---</span>
+						</div>
+						
 						<div class="row div_header_sub">
 							<div class="col-lg-4">
 								<span class="blanco t12">FRENTE</span>&nbsp;&nbsp;&nbsp;<span
@@ -255,7 +268,7 @@
 									id="profundidadMd" class="negrita blanco t14 sangria_cuerpo">---</span>
 							</div>
 							<div class="col-lg-4">
-								<span class="blanco t12">TOTAL</span>&nbsp;&nbsp;&nbsp;<span
+								<span class="blanco t12">SUPERFICIE TOTAL</span>&nbsp;&nbsp;&nbsp;<span
 									id="tamanioTotalMd" class="negrita blanco t14 sangria_cuerpo">---</span>
 							</div>
 						</div>

@@ -256,7 +256,7 @@ function Resumen_grafica_dirGeneral(data){
 	        	},{
 	                name: 'Otras',
 	                color: '#C9C9C9',
-	                y: sum_totales-sum_asignadas, 
+	                y: (E.total+G.total+C.total+O.total+A.total)-(E.asignadas+G.asignadas+C.asignadas+O.asignadas+A.asignadas), 
 	                dataLabels: {
 	                    enabled: false}
 	            }]
@@ -347,7 +347,7 @@ function Resumen_grafica_dirGeneral(data){
         	},{
                 name: 'Otras',
                 color: '#C9C9C9',
-                y: sum_totales-sum_atrasadas, 
+                y: (E.asignadas+G.asignadas+C.asignadas+O.asignadas+A.asignadas)-(E.atrasadas+G.atrasadas+C.atrasadas+O.atrasadas+A.atrasadas), 
                 dataLabels: {
                     enabled: false}
             }]	        
@@ -438,7 +438,7 @@ function Resumen_grafica_dirGeneral(data){
         	},{
                 name: 'Otras',
                 color: 'white',
-                y: sum_totales-sum_autorizadas, 
+                y: (E.total+G.total+C.total+O.total+A.total)-(E.autorizadas+G.autorizadas+C.autorizadas+O.autorizadas+A.autorizadas), 
                 dataLabels: {
                     enabled: false}
             }]
@@ -529,7 +529,7 @@ function Resumen_grafica_dirGeneral(data){
         	},{
                 name: 'Otras',
                 color: 'white',
-                y: sum_totales-sum_rechazadas, 
+                y: (E.total+G.total+C.total+O.total+A.total)-(E.rechazadas+G.rechazadas+C.rechazadas+O.rechazadas+A.rechazadas),
                 dataLabels: {
                     enabled: false}
             }]

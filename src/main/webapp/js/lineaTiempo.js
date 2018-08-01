@@ -78,6 +78,8 @@ function inicializaGrantt(datos){
 	}
 	fecha_inicioMd=reformat(fecha_inicioMd);
 	
+	$('#nombre_md').text($('#nombreMd').val());
+	
 	var task=new Array();	
 	tasks = [
 		{

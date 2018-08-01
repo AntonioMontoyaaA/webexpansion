@@ -27,6 +27,9 @@ public class TableroVo implements Serializable {
 	private String inicioObra;
 	private String finObra;
 	private String inauguracion;
+	private String jefeExpansion;
+	private String gerenteExpansion;
+	private String regional;
 	/**
 	 * @return the mdId
 	 */
@@ -254,6 +257,42 @@ public class TableroVo implements Serializable {
 	 */
 	public void setInauguracion(String inauguracion) {
 		this.inauguracion = inauguracion;
+	}
+	/**
+	 * @return the jefeExpansion
+	 */
+	public String getJefeExpansion() {
+		return jefeExpansion;
+	}
+	/**
+	 * @param jefeExpansion the jefeExpansion to set
+	 */
+	public void setJefeExpansion(String jefeExpansion) {
+		this.jefeExpansion = jefeExpansion;
+	}
+	/**
+	 * @return the gerenteExpansion
+	 */
+	public String getGerenteExpansion() {
+		return gerenteExpansion;
+	}
+	/**
+	 * @param gerenteExpansion the gerenteExpansion to set
+	 */
+	public void setGerenteExpansion(String gerenteExpansion) {
+		this.gerenteExpansion = gerenteExpansion;
+	}
+	/**
+	 * @return the regional
+	 */
+	public String getRegional() {
+		return regional;
+	}
+	/**
+	 * @param regional the regional to set
+	 */
+	public void setRegional(String regional) {
+		this.regional = regional;
 	}
 	
 	

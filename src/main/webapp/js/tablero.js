@@ -349,27 +349,7 @@ function creatabla(){
 				} else {
 					datosMemorias[i][13] = "<span class='text_sin_atencion'>---</span>";
 				}
-				if(resultadoTablero[i].TRAMITES != undefined) {
-					if(resultadoTablero[i].TRAMITES.fechaValidacion != undefined) {
-						var claseEstatus = "";
-						if(resultadoTablero[i].TRAMITES.validacion == "NO") {
-							claseEstatus = "text_sin_atencion";
-						} else if(resultadoTablero[i].TRAMITES.estatus == "EN TIEMPO") {
-							claseEstatus = "text_en_tiempo";
-						} else {
-							claseEstatus = "text_atrasada";
-						}
-						datosMemorias[i][14] = "<span class='" + claseEstatus + "'>" + resultadoTablero[i].TRAMITES.fechaValidacion + "</span>";
-						if(resultadoTablero[i].TRAMITES.estatus == "ATRASADA") {
-							cadenaAtraso += "&ATR_TRM_GES";
-							esMdAtrasada = true;
-						}
-					} else {
-						datosMemorias[i][14] = "<span class='text_sin_atencion'>---</span>";
-					}
-				} else {
-					datosMemorias[i][14] = "<span class='text_sin_atencion'>---</span>";
-				}
+				
 				if(resultadoTablero[i].VOBOFNL_OPERACIONES != undefined) {
 					if(resultadoTablero[i].VOBOFNL_OPERACIONES.fechaValidacion != undefined) {
 						var claseEstatus = "";
@@ -380,16 +360,16 @@ function creatabla(){
 						} else {
 							claseEstatus = "text_atrasada";
 						}
-						datosMemorias[i][15] = "<span class='" + claseEstatus + "'>" + resultadoTablero[i].VOBOFNL_OPERACIONES.fechaValidacion + "</span>";
+						datosMemorias[i][14] = "<span class='" + claseEstatus + "'>" + resultadoTablero[i].VOBOFNL_OPERACIONES.fechaValidacion + "</span>";
 						if(resultadoTablero[i].VOBOFNL_OPERACIONES.estatus == "ATRASADA") {
 							cadenaAtraso += "&ATR_VOBOFINOPER";
 							esMdAtrasada = true;
 						}
 					} else {
-						datosMemorias[i][15] = "<span class='text_sin_atencion'></span>";
+						datosMemorias[i][14] = "<span class='text_sin_atencion'></span>";
 					}
 				} else {
-					datosMemorias[i][15] = "<span class='text_sin_atencion'>---</span>";
+					datosMemorias[i][14] = "<span class='text_sin_atencion'>---</span>";
 				}
 				if(resultadoTablero[i].FIRMA_CONTRATO != undefined) {
 					if(resultadoTablero[i].FIRMA_CONTRATO.fechaValidacion != undefined) {
@@ -401,9 +381,30 @@ function creatabla(){
 						} else {
 							claseEstatus = "text_atrasada";
 						}
-						datosMemorias[i][16] = "<span class='" + claseEstatus + "'>" + resultadoTablero[i].FIRMA_CONTRATO.fechaValidacion + "</span>";
+						datosMemorias[i][15] = "<span class='" + claseEstatus + "'>" + resultadoTablero[i].FIRMA_CONTRATO.fechaValidacion + "</span>";
 						if(resultadoTablero[i].FIRMA_CONTRATO.estatus == "ATRASADA") {
 							cadenaAtraso += "&ATR_FIRMACONTR";
+							esMdAtrasada = true;
+						}
+					} else {
+						datosMemorias[i][15] = "<span class='text_sin_atencion'>---</span>";
+					}
+				} else {
+					datosMemorias[i][15] = "<span class='text_sin_atencion'>---</span>";
+				}
+				if(resultadoTablero[i].TRAMITES != undefined) {
+					if(resultadoTablero[i].TRAMITES.fechaValidacion != undefined) {
+						var claseEstatus = "";
+						if(resultadoTablero[i].TRAMITES.validacion == "NO") {
+							claseEstatus = "text_sin_atencion";
+						} else if(resultadoTablero[i].TRAMITES.estatus == "EN TIEMPO") {
+							claseEstatus = "text_en_tiempo";
+						} else {
+							claseEstatus = "text_atrasada";
+						}
+						datosMemorias[i][16] = "<span class='" + claseEstatus + "'>" + resultadoTablero[i].TRAMITES.fechaValidacion + "</span>";
+						if(resultadoTablero[i].TRAMITES.estatus == "ATRASADA") {
+							cadenaAtraso += "&ATR_TRM_GES";
 							esMdAtrasada = true;
 						}
 					} else {
@@ -537,19 +538,6 @@ function creatabla(){
 								}
 								break;
 							case 14:
-								if(resultadoTablero[i].TRAMITES.validacion == "SI") {
-									var usuario = resultadoTablero[i].TRAMITES.usuario != null ? resultadoTablero[i].TRAMITES.usuario : '-';
-									
-									var mensaje = "¿Quién autorizó? " + usuario + "<br/>" +
-											"Del área: " + resultadoTablero[i].TRAMITES.Area + "<br/>" +
-											"En la fecha: " +  resultadoTablero[i].TRAMITES.fechaValidacion;
-									cargaMensajeModal('GESTORÍA', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_EXITO, null);
-								} else {
-									var mensaje = "ATENCIÓN: Este estatus no ha sido validado.";
-									cargaMensajeModal('GESTORÍA', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
-								}
-								break;
-							case 15:
 								if(resultadoTablero[i].VOBOFNL_OPERACIONES.validacion == "SI") {
 									var usuario = resultadoTablero[i].VOBOFNL_OPERACIONES.usuario != null ? resultadoTablero[i].VOBOFNL_OPERACIONES.usuario : '-';
 									
@@ -562,7 +550,7 @@ function creatabla(){
 									cargaMensajeModal('VOBO FINAL OPERACIONES', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
 								}
 								break;
-							case 16:
+							case 15:
 								if(resultadoTablero[i].FIRMA_CONTRATO.validacion == "SI") {
 									var usuario = resultadoTablero[i].FIRMA_CONTRATO.usuario != null ? resultadoTablero[i].FIRMA_CONTRATO.usuario : '-';
 									
@@ -573,6 +561,19 @@ function creatabla(){
 								} else {
 									var mensaje = "ATENCIÓN: Este estatus no ha sido validado.";
 									cargaMensajeModal('CONTRATO FIRMADO', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
+								}
+								break;
+							case 16:
+								if(resultadoTablero[i].TRAMITES.validacion == "SI") {
+									var usuario = resultadoTablero[i].TRAMITES.usuario != null ? resultadoTablero[i].TRAMITES.usuario : '-';
+									
+									var mensaje = "¿Quién autorizó? " + usuario + "<br/>" +
+											"Del área: " + resultadoTablero[i].TRAMITES.Area + "<br/>" +
+											"En la fecha: " +  resultadoTablero[i].TRAMITES.fechaValidacion;
+									cargaMensajeModal('GESTORÍA', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_EXITO, null);
+								} else {
+									var mensaje = "ATENCIÓN: Este estatus no ha sido validado.";
+									cargaMensajeModal('GESTORÍA', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
 								}
 								break;
 							case 17:

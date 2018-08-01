@@ -280,9 +280,9 @@ function initTablaMemoriasTablero(nombreDiv, datosDesgloseMemorias, nombreTabla)
 					'<th width="5%" class="gris negrita t12 txt_operaciones">VoBo layout operaciones</th>' +
 					'<th width="5%" class="gris negrita t12 center txt_construccion">Presupuesto construcci&oacute;n</th>' +
 					'<th width="5%" class="gris negrita t12 center txt_auditoria">Presupuesto auditor&iacute;a</th>' +
-					'<th width="5%" class="gris negrita t12 txt_gestoria">Gestor&iacute;a</th>' +
 					'<th width="5%" class="gris negrita t12 txt_operaciones">VoBo final operaciones</th>' +
 					'<th width="5%" class="gris negrita t12 txt_expansion">Contrato firmado</th>' +
+					'<th width="5%" class="gris negrita t12 txt_gestoria">Gestor&iacute;a</th>' +
 					'<th width="7%" class="gris negrita t12 txt_construccion">Inicio obra</th>' +
 					'<th width="7%" class="gris negrita t12 txt_construccion">Fin obra</th>' +
 					'<th width="6%" class="gris negrita t12">Inauguraci&oacute;n</th>' +

@@ -370,7 +370,7 @@ function generaPopAutorizacion(titulo, datos){
 	else if(dias == 0)
 		texto = 'En tiempo';
 	else if(dias > 0)
-		texto = dias + ' días después';
+		texto = ' ' + dias + ' días después';
 	var popAutorizacion = '<div class="col-12 center"><span class="negrita blanco t14">' + titulo + '<br/></span></div>' + 
 	 '<div class="row">'+
 	   '<div class="col-6">'+

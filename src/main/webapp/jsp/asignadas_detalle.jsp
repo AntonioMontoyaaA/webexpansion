@@ -244,7 +244,8 @@
 
 							</div>
 						</div>
-						<div class="col-12"style="padding-left:0px;">
+						
+						<%-- <div class="col-12"style="padding-left:0px;">
 						<span class="blanco t12">LOCAL EN ESQUINA</span>&nbsp;&nbsp;&nbsp;<span
 									 id="esquina" class="negrita blanco t14">---</span>
 						</div>
@@ -256,7 +257,7 @@
 						<div class="col-12"style="padding-left:0px;">
 						<span class="blanco t12">NEGOCIOS DE COMIDA</span>&nbsp;&nbsp;&nbsp;<span
 									 id="negocios_comida" class="negrita blanco t14">---</span>
-						</div>
+						</div> --%>
 						
 						<div class="row div_header_sub">
 							<div class="col-lg-4">

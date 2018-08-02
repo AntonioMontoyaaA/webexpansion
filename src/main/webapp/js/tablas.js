@@ -335,10 +335,10 @@ function initTablaMemoriasTablero(nombreDiv, datosDesgloseMemorias, nombreTabla)
 		     "scrollX":        true,
 		     "scrollCollapse": true,
 			 "aoColumnDefs": [ {
-					"sClass": "center",
-					"aTargets": [ 0,2 ]
-			} ]
-			 
+									"sClass": "center",
+									"aTargets": [ 0,1 ]
+			 					},{ "sType": 'extract-date', "aTargets": [2,7,9,10,11,14,15,16,17,18,19] }
+			 			]
 	});	
 	
 	$("#" + nombreTabla + "_DTTT_container").hide();
@@ -500,3 +500,17 @@ var idiomaEspanolTablero = {
 	        "sSortDescending": ": activar para Ordendar Descendentemente"
 	    }
 	};
+
+jQuery.extend(jQuery.fn.dataTableExt.oSort, {
+    "extract-date-pre": function(value) {
+        var date = $(value).text();
+        date = date.split('/');
+        return Date.parse(date[1] + '/' + date[0] + '/' + date[2])
+    },
+    "extract-date-asc": function(a, b) {
+        return ((a < b) ? -1 : ((a > b) ? 1 : 0));
+    },
+    "extract-date-desc": function(a, b) {
+        return ((a < b) ? 1 : ((a > b) ? -1 : 0));
+    }
+});

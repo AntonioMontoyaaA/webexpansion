@@ -201,10 +201,10 @@ function consultaNotificaciones(){
 				{}, 
 				'cargaNotificaciones', 
 				function() {
-					cierraLoading();
+					//cierraLoading();
 				},
 				function() {
-					cierraLoading();
+					//cierraLoading();
 				});
 	 cargaNotificaciones = function(data) {
 			if(data.codigo != 200){

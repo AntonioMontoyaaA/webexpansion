@@ -111,6 +111,11 @@
          	<result name = "success">jsp/asignadas_detalle.jsp</result>
       	</action>
       	
+      	<action name = "consultaScoreAction" 
+         		class = "com.tiendas.neto.action.DetalleMemoriaXIdAction" 
+         		method = "consultaScoreAction">
+      	</action>
+      	
       	<action name ="motivosRechazo" 
          		class = "com.tiendas.neto.action.MotivosRechazoAction" 
          		method = "execute">

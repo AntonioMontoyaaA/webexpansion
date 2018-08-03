@@ -5,7 +5,7 @@ var TERCER_HORARIO_CONTEO	=	3;
 var AUTORIZA_MODULO			= 1;
 var RECHAZA_MODULO			= 0;
 
-var TOTAL_ATENCIONES = 0;
+var TOTAL_ATENCIONES = 1;
 var MOTIVOS_RECHAZO = {};
 var FACTORES = {};
 var PERMISOS = {};
@@ -82,6 +82,7 @@ $(function(){
 		});
 		
 	funcionesAutorizacion();
+	
 });
 
 function inicializaModulosEdicion(modulos, datosSitio, datosPropietario, generalidades) {
@@ -319,6 +320,9 @@ function dibujaGraficaAutorizaciones(){
 		if(FACTORES[i].atendido)
 			atendidos++;
 	}
+	
+	if(!AREAS_A[AREA_USUARIO])
+		atendidos = TOTAL_ATENCIONES;
 	
 	var bar = new ProgressBar.Circle(containerProgreso, {
 		  strokeWidth: 4,
@@ -614,6 +618,9 @@ function buscaDetalleMD(mdId) {
 				$("#negocios").text('70');
 				$("#negocios_comida").text('72');
 				$('#esquina').text('SI');
+				$('#tienda_localidad').text('SI');
+				$('#competencia_localidad').text('SI');
+				
 				
 				
 				
@@ -1071,6 +1078,7 @@ function cargaComboMotivos(modulo){
 
 function finalizaMD(estatus){
 	if(!AREAS_A[AREA_USUARIO]){
+
 		ESTATUS_FINALIZA_MD = estatus;
 		permiteAutorizacion = true;
 		if(AREA_USUARIO == areaConstruccion && !ARCHIVO_SUBIDO){
@@ -2203,4 +2211,42 @@ function guardaConteoAuditor(total){
 			$("#totalConteoAuditor").val('');
 		}
 	}
+}
+var grados=0;
+function rotar(valor){
+	if(valor==1){
+		grados=grados+90;
+		$('#imageModal').css('-webkit-transform','rotate('+grados+'deg)');
+		
+	}
+	if(valor==0){
+		grados=grados-90;
+		$('#imageModal').css('-webkit-transform','rotate('+grados+'deg)');
+	}
+	if(valor==2){
+		grados=0;
+		$('#imageModal').css('-webkit-transform','rotate('+grados+'deg)');
+	}
+}
+function consultaScore(){
+	
+	invocarJSONServiceAction("consultaScoreAction", 
+			{'mdId': $("#mdIdAutorizacion").val()
+			 }, 
+			'scoreRespuesta', 
+			function() {
+				cierraLoading();
+			},
+			function() {
+				cierraLoading();
+			});
+	
+	scoreRespuesta =  function(data){
+		if(data.codigo != 200) {
+		
+		}else{
+			$('#score_card').modal('show');
+		}
+		}
+
 }

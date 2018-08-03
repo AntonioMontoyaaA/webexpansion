@@ -3,6 +3,7 @@
  */
 
 function modalImage(img){
+	rotar(2); //reestablece imagen
 	modal = document.getElementById('modalImages');
 	modalImg = document.getElementById('imageModal');
 	captionText = document.getElementById('captionModal');

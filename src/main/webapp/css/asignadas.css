@@ -1,5 +1,48 @@
+#autoriza1, #autoriza2, #autoriza3, #autoriza4, #autoriza5, #autoriza6, #autoriza7,
+#rechaza1, #rechaza2, #rechaza3, #rechaza4, #rechaza5, #rechaza6, #rechaza7{
+	display:none !important;
+}
+#captionModal{
+	margin-left:10%;
+}
+
+#imageModal {
+	margin-top:80px;
+            -webkit-transition: all .6s ease-in-out;    /* safari - Chrome*/
+            -moz-transition: all .6s ease-in-out;       /* Firefox */
+            -o-transition: all .6s ease-in-out;         /* Opera */
+            transition: all .6s ease-in-out;
+        }
+.desp{
+	font-size:12px;
+	font-family:"Helvetica Neue";
+	background-color:white;
+	color:#00437e;
+	border:0;
+	height:20px !important;
+	padding:0px 10px;
+	margin-left:5px;
+	margin-top:1px;
+	border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius:2px;
+}
 .altura1{
 	height:350px;
+}
+.altura2{
+	height:500px;
+}
+.icono_mapa{
+	padding:5px 15px;
+	position:relative;
+}
+.icono_imagen{
+	height:33px;
+}
+.titulo_mapa{
+	padding-top:5px;
+	padding-bottom:5px;
 }
 .ui-datepicker-trigger {
 	display: none !important;

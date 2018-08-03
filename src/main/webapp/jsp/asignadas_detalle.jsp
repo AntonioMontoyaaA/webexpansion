@@ -170,8 +170,6 @@
 					<span id="calleMd" class="azul t12 sangria_doble_cuerpo">---</span><br/>
 					<span class="negrita azul t14 sangria_cuerpo">Colonia</span><br/>
 					<span id="coloniaMd" class="azul t12 sangria_doble_cuerpo">---</span><br/>
-					<span class="negrita azul t14 sangria_cuerpo">Municipio</span><br/>
-					<span id="municipioMd" class="azul t12 sangria_doble_cuerpo">---</span><br/>
 					<span class="negrita azul t14 sangria_cuerpo">Ciudad</span><br/>
 					<span id="ciudadMd" class="azul t12 sangria_doble_cuerpo">---</span><br/>
 					<span class="negrita azul t14 sangria_cuerpo">Estado</span><br/>
@@ -244,22 +242,13 @@
 
 							</div>
 						</div>
-						
-						<%-- <div class="col-12"style="padding-left:0px;">
-						<span class="blanco t12">LOCAL EN ESQUINA</span>&nbsp;&nbsp;&nbsp;<span
-									 id="esquina" class="negrita blanco t14">---</span>
-						</div>
-						
-						<div class="col-12" style="padding-left:0px;">
-									<span class="blanco t12">NEGOCIOS</span>&nbsp;&nbsp;&nbsp;<span
-									id="negocios" class="negrita blanco t14">---</span>
-						</div>
-						<div class="col-12"style="padding-left:0px;">
-						<span class="blanco t12">NEGOCIOS DE COMIDA</span>&nbsp;&nbsp;&nbsp;<span
-									 id="negocios_comida" class="negrita blanco t14">---</span>
-						</div> --%>
-						
+
 						<div class="row div_header_sub">
+						
+						<div class="col-12" style="margin-bottom:10px;">
+								<span class="blanco t12"><img src="img/icono_factor.png"/></span><span class="blanco t12 sangria_cuerpo">LOCAL EN ESQUINA</span>
+						</div>
+						
 							<div class="col-lg-4">
 								<span class="blanco t12">FRENTE</span>&nbsp;&nbsp;&nbsp;<span
 									id="frenteMd" class="negrita blanco t14">---</span>
@@ -338,7 +327,7 @@
 
 			<div class="col-lg-8 col-12">
 		<div class="row divs_p">
-			<div class="col-lg-12 menupr_estilos fblanco altura1">
+			<div class="col-lg-12 menupr_estilos fblanco altura2">
 			
 			<div class="col-12 titulo_seccion">
 				<span class="negrita azul t14">4) Zonificación</span>
@@ -360,45 +349,79 @@
 			</div>
 			
 				<div class="row div_header_sub">
-					<div class="col-lg-9 col-6"><div id="mapaZonificacion" style="width: 100%; height: 85%; position: relative; float: left;"></div></div>
-					<div class="col-lg-3 col-6">
+							
+							<div class="col-12">
+							<span class="azul negrita t12">MICRO UBICACION</span>
+							</div>
+							<div class="col-lg-4">
+								<span class="azul t12">NEGOCIOS</span>&nbsp;&nbsp;&nbsp;<span
+									id="negocios" class="negrita azul t14">---</span>
+							</div>
+							<div class="col-lg-4">
+								<span class="azul t12">NEGOCIOS DE COMIDA</span>&nbsp;&nbsp;&nbsp;<span
+									id="negocios_comida" class="negrita azul t14">---</span>
+							</div>
+						
+				</div>
+				<div class="row div_header_sub">
+					<div class="col-lg-9 col-md-7"><div id="mapaZonificacion" style="width: 100%; height: 79%; position: relative; float: left;"></div></div>
+					<div class="col-lg-3 col-md-5" style="max-height:404px; overflow:auto;">
+					
+					
+					<div class="row">
+							<div class="col-lg-12 titulo_mapa"><span class="azul t12">TENDA NETO</span></div>
+							<div class="icono_mapa"><img class="icono_imagen" src="img/neto_neto.png"></div>
+							
+					</div>
+					
 						<div class="row">
-							<div style="width: 100%;text-align: center;">
-								<span class="azul t12">COMPETENCIA</span><br/>
-								<div>
-									<img width="30px" src="img/competencia/iconos_3b.png">&nbsp;
-									<img width="30px" src="img/competencia/iconos_express.png">&nbsp;
-									<img width="30px" src="img/competencia/iconos_oxxo.png">&nbsp;
-									<!--  <img width="30px" src="img/competencia/iconos_seven.png">&nbsp;-->
-									<!--  <img width="30px" src="img/competencia/iconos_k.png">&nbsp;-->
-									<img width="30px" src="img/competencia/icono_otros_2.png">&nbsp;
-								</div>
-							</div>
+							<div class="col-lg-12 titulo_mapa"><span class="azul t12">COMPETENCIAS</span></div>
+							
+							<div class="icono_mapa"><img class="icono_imagen" src="img/competencia/iconos_3b.png"></div>
+							<div class="icono_mapa"><img class="icono_imagen" src="img/competencia/iconos_express.png"></div>
+							<div class="icono_mapa"><img class="icono_imagen" src="img/competencia/iconos_oxxo.png"></div>
+							<!-- <div class="icono_mapa"><img class="icono_imagen" src="img/competencia/iconos_seven.png"></div>
+							<div class="icono_mapa"><img class="icono_imagen" src="img/competencia/iconos_k.png"></div> -->
+							<div class="icono_mapa"><img class="icono_imagen" src="img/competencia/icono_otros_2.png"></div>
 						</div>
-						<div class="row" style="padding-top: 30px;">
-							<div class="col-lg-12 col-12"><span class="azul t12">GENERADORES DE TRÁFICO</span></div>
-							<div class="col-lg-12 col-12" style="padding-top: 10px;">
-								<div class="row">
-									<div class="col-lg-4 col-4"><img width="30px" src="img/generadores/iglesia.png"><br/><span class="subtituloIconos">Iglesia</span></div>
-									<div class="col-lg-4 col-4"><img width="30px" src="img/generadores/tortilleria.png"><br/><span class="subtituloIconos">Tortillería</span></div>
-									<div class="col-lg-4 col-4"><img width="30px" src="img/generadores/escuela.png"><br/><span class="subtituloIconos">Escuela</span></div>
-								</div>
-							</div>
-							<div class="col-lg-12 col-12">
-								<div class="row">
-									<div class="col-lg-4 col-4"><img width="30px" src="img/generadores/recauderia.png"><br/><span class="subtituloIconos">Recaudería</span></div>
-									<div class="col-lg-4 col-4"><img width="30px" src="img/generadores/mercado.png"><br/><span class="subtituloIconos">Mercado</span></div>
-									<div class="col-lg-4 col-4"><img width="30px" src="img/generadores/carniceria.png"><br/><span class="subtituloIconos">Carnicería</span></div>
-								</div>
-							</div>
-							<div class="col-lg-12 col-12">
-								<div class="row">
-									<div class="col-lg-4 col-4"><img width="30px" src="img/generadores/icono_otros_generadores.png"><br/><span class="subtituloIconos">Otros</span></div>
-									<div class="col-lg-4 col-4">&nbsp;</div>
-									<div class="col-lg-4 col-4">&nbsp;</div>
-								</div>
-							</div>
+						
+						<div class="row">
+							<div class="col-lg-12 titulo_mapa" style="border-top:1px solid #C9C9C9;">
+							<span class="azul t12">NEGOCIOS</span></div>
+							<div class="icono_mapa"><img class="icono_imagen" src="img/generadores/parada.png"><br>
+							<span class="t10 azul">Parada de<br>autobús</span></div>
+							<div class="icono_mapa"><img class="icono_imagen" src="img/generadores/mercado.png"><br>
+							<span class="t10 azul">Mercado</span></div>
+							<div class="icono_mapa"><img class="icono_imagen" src="img/generadores/tianguis.png"><br>
+							<span class="t10 azul">Tianguis</span></div>			
+							<div class="icono_mapa"><img class="icono_imagen" src="img/generadores/tortilleria.png"><br>
+							<span class="t10 azul">Tortillería</span></div>
+							<div class="icono_mapa"><img class="icono_imagen" src="img/generadores/recauderia.png"><br>
+							<span class="t10 azul">Recaudería</span></div>
+							<div class="icono_mapa"><img class="icono_imagen" src="img/generadores/carniceria.png"><br>
+							<span class="t10 azul">Carnicería</span></div>
 						</div>
+						
+						<div class="row">
+							<div class="col-lg-12 titulo_mapa" style="border-top:1px solid #C9C9C9;">
+							<span class="azul t12">NEGOCIOS DE COMIDA</span></div>
+							<div class="icono_mapa"><img class="icono_imagen" src="img/generadores/negociocomida.png"><br>
+							<span class="t10 azul">Negocio de<br>comida</span></div>					
+						</div>
+						
+						<div class="row">
+							<div class="col-lg-12 titulo_mapa" style="border-top:1px solid #C9C9C9;">
+							<span class="azul t12">OTROS GENERADORES</span></div>
+							
+							<div class="icono_mapa"><img class="icono_imagen" src="img/generadores/iglesia.png"><br>
+							<span class="t10 azul">Iglesia</span></div>
+							<div class="icono_mapa"><img class="icono_imagen" src="img/generadores/escuela.png"><br>
+							<span class="t10 azul">Escuela</span></div>
+							<div class="icono_mapa"><img class="icono_imagen" src="img/generadores/icono_otros_generadores.png"><br>
+							<span class="t10 azul">Otros<br>generadores</span></div>						
+						</div>
+						
+						
 					</div>
 				</div>
 			</div>
@@ -407,7 +430,7 @@
 		
 		<div class="col-lg-4 col-12">
 		<div class="row divs_p">
-			<div class="col-lg-12 menupr_estilos fblanco altura1">
+			<div class="col-lg-12 menupr_estilos fblanco altura2">
 			
 			<div class="col-12 titulo_seccion">
 				<span class="negrita azul t14">5) Construcción</span>
@@ -428,7 +451,7 @@
 				</div>
 			</div>
 			
-				<div id="factoresConstruccion" style="width: 100%; height: 150px;  overflow-y: scroll; position: relative; float: left;text-align: left">
+				<div id="factoresConstruccion" style="width: 100%; height: 150px;  overflow-y: auto; position: relative; float: left;text-align: left">
 				</div>
 				<div id="condicionesConstruccion" style="width: 100%;position: relative; float: left;text-align: left">
 					<span class="azul t12 sangria_cuerpo">CONDICIONES GENERALES</span><br/>
@@ -531,6 +554,7 @@
 					<div id="divCalificacionFinal" class="col-lg-12 menupr_estilos fazul altura1">
 						<div class="col-12 titulo_seccion">
 							<span class="negrita blanco t14">8) Autorización final</span>
+							 <input type="button" class="btn desp" onclick="consultaScore()" value="Score Card">
 							<div class="float_right">
 								<span> <img id="autoriza8" title="Autoriza punto"
 									class="sin_autorizar b_autorizar" onclick="finalizaMD(1);"
@@ -578,7 +602,7 @@
 				</div>
 			</div>
 
-			<div class="col-lg-12" " id="manejadorArchivos" style="display: none;">
+			<div class="col-lg-12" id="manejadorArchivos" style="display: none;">
 				<div class="row divs_p">
 					<div class="col-lg-12 menupr_estilos fazul altura1">
 						<div class="col-12 titulo_seccion">
@@ -617,6 +641,25 @@
 		</div>
 </div>
 
+	<div id="score_card" class="modal" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Score Card</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body" id="score_info">x</div>
+					<div class="modal-footer">
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
 <form style="display: none;" action='memoria_detalle'  id="detalleMemoriaAsignadaAction" method="post">
 	<s:textfield id="mdId" name="mdId" label="" cssStyle="display: none"></s:textfield>
 	<s:textfield id="nombreMd" name="nombreMd" label="" cssStyle="display: none"></s:textfield>	
@@ -628,10 +671,28 @@
 </form>
 
 <div id="modalImages" class="modalImagen">
-  <span class="closeModal">&times;</span>
-  <img class="modal-content" id="imageModal">
-  <div id="captionModal"></div>
-</div>
+ <span class="closeModal">&times;</span>
+	
+	<div class="row">
+		<div class="col-6">
+			<div class="t12 blanco negrita" id="captionModal"></div>
+		</div>
+		<div class="col-5 right">
+			<input type="button" class="btn t12" value="Rotar izquierda" onclick="rotar(0);">
+			<input type="button" class="btn t12" value="Rotar derecha" onclick="rotar(1);">
+		</div>
+	</div>
+	
+	
+	<div style="position:relative"><img class="modal-content rotate_left" id="imageModal"></div>
+
+		
+
+
+
+
+
+	</div>
 
 <jsp:include page="/jsp/generic/loading.jsp" />
 <jsp:include page="/jsp/generic/mensajes.jsp" />

@@ -2245,6 +2245,11 @@ function consultaScore(){
 		if(data.codigo != 200) {
 		
 		}else{
+			elementos=""
+			elementos+="<div><span class='t12 azul'>Categoría: </span><span class='t12 azul negrita'>"+data.nomcategoria+"</span></div>";
+			elementos+="<div><span class='t12 azul'>Total de puntos: </span><span class='t12 azul negrita'>"+data.totalPuntos+"</span></div>";
+			
+			$('#score_info').html(elementos);
 			$('#score_card').modal('show');
 		}
 		}

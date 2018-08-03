@@ -644,14 +644,14 @@
 	<div id="score_card" class="modal" tabindex="-1" role="dialog">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
-					<div class="modal-header">
+					<div class="modal-header" style="padding: 10 1rem">
 						<h5 class="modal-title">Score Card</h5>
 						<button type="button" class="close" data-dismiss="modal"
 							aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<div class="modal-body" id="score_info">x</div>
+					<div class="modal-body" id="score_info"></div>
 					<div class="modal-footer">
 					</div>
 				</div>

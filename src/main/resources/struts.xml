@@ -202,7 +202,26 @@
          	class = "com.tiendas.neto.action.AgendaAction" 
          	method = "enviaDatos" />
   <!-- ************************************ FIN-AGENDA ******* -->
-   
+  
+     <!-- ===== LOCALIZADOR === -->
+     <action name = "guardarRadiosLocalizados" 
+         	class = "com.tiendas.neto.action.LocalizadorRadiosAction" 
+         	method = "altaRadiosLocalizador" />
+         	
+	 <action name = "obtenerEmpleadosZona" 
+	  	class = "com.tiendas.neto.action.LocalizadorRadiosAction" 
+	  	method = "getEmpleadosZona" />
+         	
+     <action name = "asignarRadioLocalizado" 
+	  	class = "com.tiendas.neto.action.LocalizadorRadiosAction" 
+	  	method = "setAsignaRadio" />
+         	
+     <action name = "obtieneRadiosLocalizados" 
+	  	class = "com.tiendas.neto.action.LocalizadorRadiosAction" 
+	  	method = "getRadiosLocalizados" />
+
+    <!-- ===== END- LOCALIZADOR === -->
+    
       	<action name = "DashboardGeneralAction" class="com.tiendas.neto.action.DashboardGeneralAction"
       	 method = "execute"/>
       	<action name = "DashboardPlanAperturaMAction" class="com.tiendas.neto.action.DashboardPlanAperturaMAction"

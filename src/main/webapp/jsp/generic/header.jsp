@@ -18,7 +18,7 @@
 						<li class="nav-item"><a id="idautorizadas" class="nav-link blanco t12" href="autorizadas">Autorizadas</a></li>
 						<li class="nav-item"><a id="idrechazadas" class="nav-link blanco t12" href="rechazadas">Rechazadas</a></li>
 						<li class="nav-item"><a id="idagenda" class="nav-link blanco t12" href="agenda">Agenda</a></li>	
-						<li class="nav-item"><a id="idlocalizador" class="nav-link blanco t12" href="localizador" style="display: none">Localizador</a></li>	
+						<li class="nav-item"><a id="idlocalizador" class="nav-link blanco t12" href="localizador">Localizador</a></li>	
 						<li class="nav-item"><a id="idaprobadas" class="nav-link blanco t12" href="aprobadas" style="display: none;">Aprobadas</a></li>	
 					</ul>
 					

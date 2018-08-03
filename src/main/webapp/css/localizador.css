@@ -1,0 +1,143 @@
+h5{
+	margin-bottom:0px;
+}
+
+/* ------------------------------- BOTONES */
+.titleDivContent{
+	cursor: pointer;
+}
+.contentDetalle{
+	padding-bottom: 15px;
+    padding-top: 5px;
+}
+
+ .contentLocalizador{
+	z-index: 100;
+    width: 300px;
+    height: auto;
+    position: fixed;
+    background: #ffffff;
+    padding-left: 10px;
+    padding-right: 13px;
+    margin: 2% 0%;
+ }
+ 
+ .content{
+     padding: 10px;
+ }
+ 
+ #drop{
+	border:2px dashed #bbb;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
+	padding:25px;
+	text-align:center;
+	color:#bbb
+}
+
+#b64data{
+	width:100%;
+}
+
+a { text-decoration: none }
+
+ .bordeDiv{
+ 	border-bottom: 2px solid #dcdcdc;
+    border-top: 1px solid #b9b9b9;
+ }
+
+ 
+ .hidden{
+ 	display:none;
+ }
+ 
+.btn{
+    padding: 1px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.btn_cancelar{float: right;}
+
+.btn_aceptar{
+	color:#ffffff;    
+	font-size: 12px;
+    padding: 0px 7px 0 6px;
+}
+
+.btn.evento:hover{
+	background:#c8c8c8;
+}
+
+#select_employee{
+    width: 250px;	
+}
+/* === INFO RADIO LOCALIZADO === */
+
+#containerInfoRadio{
+    width: 580px;
+    background: white;
+}
+
+#contentInfoDemograf{
+    float: left;
+    text-align: center;
+}
+
+.classContents{
+    padding: 8px 3px 0 25px;
+}
+
+.titleInfoRadio{
+    text-align: center;
+    padding-top: 12px;
+    color: #00417F;	
+}
+
+.subtitleInfoRadio {
+    text-align: center;
+    padding-top: 0px;
+    color: #00417F;
+}
+    
+table {
+    width: 273px;
+}
+
+#tableInfoDireccion {
+    width: 554px;
+}
+
+thead {
+   backround : green;
+   height: 35px;
+    width: 350px;
+    border-collapse: collapse;
+    background: #e8e8e8;
+}
+
+table thead tr{
+     height: 34px;
+     text-align: center;
+}
+
+.atrasadas{background:#FF5B16;}
+.realizadas{background:#5D5D5D;}
+.porRealizar{background:#071B36;}
+
+/* === BACKGROUNG COLOR === */
+.back_1{background-color:#FF7C17;}
+.back_2{background-color:#00417F;}
+.back_3{background-color:#40BCD8;}
+.back_4{background-color:#1E9D42;}
+.back_5{background-color:#071B36;}
+.back_6{background-color:#ff80c0;}
+.back_7{background-color:#000000;}
+.back_8{background-color:#804000;}
+.back_9{background-color:#808000;}
+.back_10{background-color:#400080;}
+
+/* === BACKGROUNG COLOR === */
+.color_5{color:#071B36;}
+.color_3{color:#40BCD8;}

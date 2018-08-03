@@ -11,6 +11,7 @@ $(function(){
 	consultaNotificaciones();
 	popover();
 	mueveReloj();
+	$('#buscador').val('');
 	
 	$("#botonMensajeAceptar").unbind("click");
 	$("#botonMensajeAceptar").click(function() {

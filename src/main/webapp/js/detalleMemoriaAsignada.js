@@ -566,15 +566,33 @@ function buscaDetalleMD(mdId) {
 				$("#creadorMd").text(data.generales.creador);
 				$("#categoriaMd").text(data.generales.categoria);
 				estrella = "<img class='estrellaPuntuacionDetalle' src='img/estrella.png'>";
+				estrellag = "<img class='estrellaPuntuacionDetalle' style='width:30px;' src='img/estrella.png'>";
 				if(data.generales.categoria == 'A') {
-					$("#estrellasMd").html(estrella + estrella + estrella);
+					$("#estrellasMd").html(estrella + estrellag + estrella);
 				} else if(data.generales.categoria == 'B') {
 					$("#estrellasMd").html(estrella + estrella);
 				} else {
 					$("#estrellasMd").html(estrella);
+				}			
+				var imagen_tipo;
+				var simbolo=" puntos";
+				if(data.generales.tipoUbicacion=="RURAL"){
+					imagen_tipo="<img src='img/generadores/w_rural.png'>";
+					$("#tipoMdImagen").html(imagen_tipo);
+					$("#tipoMd").text(data.generales.tipoUbicacion);
+					$('#tipoMdTitulo').show();
+					simbolo="%";
 				}
+				else if(data.generales.tipoUbicacion=="CIUDAD"){
+					imagen_tipo="<img src='img/generadores/w_ciudad.png'>";
+					$("#tipoMdImagen").html(imagen_tipo);
+					$("#tipoMd").text(data.generales.tipoUbicacion);
+					$('#tipoMdTitulo').show();
+					simbolo="%";
+				}
+
 				$("#fechaCreacion").text(data.generales.fechaCreacion);
-				$("#puntuacionMd").text(data.generales.totalPuntos);
+				$("#puntuacionMd").text(data.generales.totalPuntos+simbolo);
 			}
 			/* Datos del sitio */
 			if(data.datosSitio != undefined) {
@@ -615,15 +633,10 @@ function buscaDetalleMD(mdId) {
 				$("#horaVistaLateral2").text(data.superficie.horaLateral2);
 				
 				//nuevos valores
-				$("#negocios").text('70');
-				$("#negocios_comida").text('72');
-				$('#esquina').text('SI');
-				$('#tienda_localidad').text('SI');
-				$('#competencia_localidad').text('SI');
-				
-				
-				
-				
+				if(data.superficie.esquina==true){
+					var esq='<span class="blanco t12"><img src="img/icono_factor.png"/></span><span class="blanco t12 sangria_cuerpo">LOCAL EN ESQUINA</span>';
+					$('#esquina').html(esq);
+				}
 				var contentPopSuperficie ='<div class="row" style="padding-top:3px;">' + 
 				   '<div class="col-6"><span class="t14 blanco">Frente mínimo:</span></div>' +
 				   '<div class="col-6"><span class="t14 blanco negrita">' + data.superficie.frente + ' mts</span></div>' +
@@ -2008,13 +2021,26 @@ function initMap(latitudSitio, longitudSitio, listaCompetencias, listaGeneradore
     }
     
     if(listaGeneradores != undefined){
+    	var negocios=0;
+    	var negocios_comida=0;
+    	
 	    for(var i = 0; i < listaGeneradores.length; i++) {
 	    	puntosZonificacion.push(
 	    			{
 	    				position: new google.maps.LatLng(listaGeneradores[i].latitud, listaGeneradores[i].longitud),
 	    				type: listaGeneradores[i].generadorId
 	    			});
+	    	
+	    	if(listaGeneradores[i].nombre=="NEGOCIO"){
+	    		negocios++;
+	    	}
+	    	else if (listaGeneradores[i].nombre=="NEGOCIO COMIDA"){
+	    		negocios_comida++;
+	    	}
 	    }
+	    
+	    $("#negocios").text(negocios);
+		$("#negocios_comida").text(negocios_comida);
     }
     
     puntosZonificacion.push(
@@ -2245,9 +2271,38 @@ function consultaScore(){
 		if(data.codigo != 200) {
 		
 		}else{
-			elementos=""
-			elementos+="<div><span class='t12 azul'>Categoría: </span><span class='t12 azul negrita'>"+data.nomcategoria+"</span></div>";
-			elementos+="<div><span class='t12 azul'>Total de puntos: </span><span class='t12 azul negrita'>"+data.totalPuntos+"</span></div>";
+			var signo="";
+			if(data.ubicacionMD!="GENERAL"){
+				signo="%";
+				
+				elementos="";
+				elementos+="<tr><td class='t14 negrita' style='border:0;'>Tipo de MD</td><td style='border:0;' class='t14 negrita'>"+data.ubicacionMD+"</td></tr>";
+				elementos+="<tr><td class='t14 negrita' style='border:0;'>Categoría</td><td style='border:0;' class='t14 negrita'>"+data.nomcategoria+"</td></tr>";
+				elementos+="<tr><td class='t14 negrita' style='border:0;'>Objetivo</td><td style='border:0;' class='t14 negrita'>"+data.totalPuntos+signo+"</td></tr>";
+				elementos+="<tr><th class='t14'>Condición</th><th class='t14'>Peso</th><th class='t14'>Objetivo</th></tr>";
+				
+				for(var i=0; i<data.factores.length;i++){
+					elementos+="<tr><td class='t14'>"+data.factores[i].nombrenivel+"</td>" +
+							"<td class='t14 negrita'>"+data.factores[i].puntuacion+signo+"</td>" +
+							"<td class='t14 negrita'>"+'100%'+"</td>" +
+									"</tr>";				
+				}
+			}
+			else{
+				signo=" puntos";
+				
+				elementos="";
+				elementos+="<tr><td class='t14 negrita' style='border:0;'>Tipo de MD</td><td style='border:0;' class='t14 negrita'>"+data.ubicacionMD+"</td></tr>";
+				elementos+="<tr><td class='t14 negrita' style='border:0;'>Categoría</td><td style='border:0;' class='t14 negrita'>"+data.nomcategoria+"</td></tr>";
+				elementos+="<tr><td class='t14 negrita' style='border:0;'>Objetivo</td><td style='border:0;' class='t14 negrita'>"+data.totalPuntos+signo+"</td></tr>";
+				elementos+="<tr><th class='t14'>Condición</th><th class='t14'>Peso</th></tr>";
+				
+				for(var i=0; i<data.factores.length;i++){
+					elementos+="<tr><td class='t14'>"+data.factores[i].nombrenivel+"</td><td class='t14 negrita'>"+data.factores[i].puntuacion+signo+"</td></tr>";				
+				}
+			}
+			
+			
 			
 			$('#score_info').html(elementos);
 			$('#score_card').modal('show');

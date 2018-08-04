@@ -27,6 +27,27 @@
     -moz-border-radius: 2px;
     -webkit-border-radius:2px;
 }
+#score_card .modal-body{
+	height:480px;
+    overflow-y: auto;
+}
+#score_card .modal-dialog {
+overflow-y: initial !important;
+ max-width:800px;
+}
+#score_info{
+	width:100%;
+}
+#score_info th{
+	padding-top:10px;
+	padding-bottom:10px;
+	border:1px solid #C9C9C9;
+}
+#score_info td{
+	padding-top:5px;
+	padding-bottom:5px;
+	border:1px solid #C9C9C9;
+}
 .altura1{
 	height:350px;
 }
@@ -101,32 +122,19 @@ span.circulo {
 	background: #40BCD8;
 }
 
-@media (max-height: 500px) {
-#map{height:45%;}
+#map{
+	height:50%;
+	top:140;
 }
 @media (min-height: 500px) {
-#map{height:54%;}
+#map{height:50%;  top:160;}
+.altura1{height:400px;}
 }
 @media (min-height: 600px) {
-#map{height:45%;}
-}
-@media (min-height: 690px) {
-#map{height:46.5%;}
-}
-@media (min-height: 800px) {
-#map{height:47%;}
-}
-@media (min-height: 900px) {
-#map{height:48%;}
-} 
-@media (min-height: 1020px) {
-#map{height:49%;}
+#map{height:54%; top:135;}
 }
 @media (min-height: 1200px) {
-#map{height:49.5%;}
-}
-@media (min-height: 1300px) {
-#map{height:50%;}
+#map{height:55%; top:125;}
 }
 
 @media (max-height: 500px) {
@@ -264,8 +272,9 @@ Left
 
 .estrellaPuntuacionDetalle {
 	margin-top: 2px;
-    margin-left: 8px;
-    width: 28px;
+    margin-left: 2px;
+    margin-right: 2px;
+    width: 18px;
 }
 
 .div_header {

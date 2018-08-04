@@ -120,31 +120,37 @@
 			<div class="col-lg-4 col-12">
 		<div class="row divs_p">
 			<div class="col-lg-12 menupr_estilos fblanco altura1">
-			<div class="col-12 titulo_seccion">
-				<span id="nombreMd" class="negrita azul t14">---</span><br/>
-				<div class="float_right" style="top: -17px;">
-					<span><img id="mensajesMD" title="Ver mensajes" class="autorizado" onclick="muestraChatXMd();" style="cursor: pointer;" src="img/iconos_COMENTARIOS.png">&nbsp;</span>
-				</div>
+			<div class="col-12 titulo_seccion">	
+			<div class="row">
+			<div class="col-lg-6"><span id="nombreMd" class="negrita azul t14">---</span></div>
+			<div class="col-lg-6 right">
+			<span>
+				<img id="mensajesMD" title="Ver mensajes" class="autorizado" onclick="muestraChatXMd();" style="cursor: pointer;" src="img/iconos_COMENTARIOS.png">&nbsp;
+			</span>
 			</div>
-				<div style="width: 50%;position: relative; float: left;text-align: center">
-					<span class="azul t12" style="font-size: .7em;">Creado por <span id="creadorMd">---</span></span><br/>
-					<span class="negrita azul t14">CATEGORÍA</span><br/>
-					<span id="categoriaMd" class="circulo negrita">---</span>
-				</div>
-				<div style="width: 50%;position: relative; float: left;text-align: center;">
-					<span class="azul t12">Creada el <span id="fechaCreacion">---</span></span><br/>
-					<span class="negrita azul t14">PUNTUACIÓN</span><br/>
-					<span class="azul t12"><span id="puntuacionMd">---</span> puntos</span><br/>
-					<span id="estrellasMd" class="azul t12"></span>
-				</div>
-				<div style="width: 100%;position: relative; float: left;text-align: center">
+			
+			<div class="col-lg-6"><span class="azul t12" style="font-size: .7em;">Creado por <span id="creadorMd">---</span></span></div>
+			<div class="col-lg-6 right">
+				<span class="azul t12">Creada el <span id="fechaCreacion">---</span></span>
+			</div>
+			<div class="col-4 center"><span class="t12 negrita center">CATEGORÍA</span><br>
+				<span id="categoriaMd" class="circulo negrita">---</span></div>
+			<div class="col-4 center"><span class="t12 negrita center">PUNTUACIÓN</span><br>
+				<span id="estrellasMd" class="azul t12"></span><br>
+				<span class="azul t12"><span id="puntuacionMd">---</span></span><br/>
+			</div>
+			<div class="col-4 center"><span class="t12 negrita center" id="tipoMdTitulo" style="display:none;">TIPO</span><br>
+				<span id="tipoMdImagen" class="azul t12"></span><br>
+				<span class="azul t12"><span id="tipoMd"></span></span>
+			</div>	
+			</div>
+				<div class="row center">
 					<span class="negrita azul t14">UBICACIÓN</span>
 				</div>
-				<div style="width: 100%;position: relative; float: left;text-align: center">
+			</div>
 				<div class="col-12" id="map"></div>
 					<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCuFdkYUDivTv_TrR4RZMWP1NYCA0MK2YM">
 					</script>
-				</div>
 			</div>
 		</div>
 		</div>
@@ -245,9 +251,7 @@
 
 						<div class="row div_header_sub">
 						
-						<div class="col-12" style="margin-bottom:10px;">
-								<span class="blanco t12"><img src="img/icono_factor.png"/></span><span class="blanco t12 sangria_cuerpo">LOCAL EN ESQUINA</span>
-						</div>
+						<div class="col-12" style="margin-bottom:10px;" id="esquina"></div>
 						
 							<div class="col-lg-4">
 								<span class="blanco t12">FRENTE</span>&nbsp;&nbsp;&nbsp;<span
@@ -651,7 +655,9 @@
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<div class="modal-body" id="score_info"></div>
+					<div class="modal-body">
+					<table id="score_info"></table>
+					</div>
 					<div class="modal-footer">
 					</div>
 				</div>

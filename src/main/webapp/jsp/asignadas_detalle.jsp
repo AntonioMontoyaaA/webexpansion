@@ -139,9 +139,9 @@
 				<span id="estrellasMd" class="azul t12"></span><br>
 				<span class="azul t12"><span id="puntuacionMd">---</span></span><br/>
 			</div>
-			<div class="col-4 center"><span class="t12 negrita center" id="tipoMdTitulo" style="display:none;">TIPO</span><br>
+			<div class="col-4 center"><span class="t12 negrita center" id="tipoMdTitulo" style="display:none;">TIPO </span><span class="azul t12"><span id="tipoMd"></span></span><br>
 				<span id="tipoMdImagen" class="azul t12"></span><br>
-				<span class="azul t12"><span id="tipoMd"></span></span>
+				<span class="azul t12 cursor" style="text-decoration:underline;" onclick="consultaScore()"><span>Ver detalle</span></span>
 			</div>	
 			</div>
 				<div class="row center">
@@ -546,7 +546,6 @@
 					<div id="divCalificacionFinal" class="col-lg-12 menupr_estilos fazul altura1">
 						<div class="col-12 titulo_seccion">
 							<span class="negrita blanco t14">8) Autorización final</span>
-							 <input type="button" class="btn desp" onclick="consultaScore()" value="Score Card">
 							<div class="float_right">
 								<span> <img id="autoriza8" title="Autoriza punto"
 									class="sin_autorizar b_autorizar" onclick="finalizaMD(1);"

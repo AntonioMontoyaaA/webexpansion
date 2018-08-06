@@ -2307,7 +2307,7 @@ function consultaScore(){
 				for(var i=0; i<data.factores.length;i++){
 					elementos+="<tr><td class='t14'>"+data.factores[i].nombrenivel+"</td>" +
 							"<td class='t14 negrita'>"+data.factores[i].puntuacion+signo+"</td>" +
-							"<td class='t14 negrita'>"+'100%'+"</td>" +
+							"<td class='t14 negrita'>"+data.factores[i].totalxfactor+"</td>" +
 									"</tr>";				
 				}
 			}

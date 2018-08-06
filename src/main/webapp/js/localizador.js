@@ -23,11 +23,11 @@ var radiosArray = [];
 var markerId = 0;
 var radioSeleccionado;
 var objArrayEmployee;
-var iconMarkerSelect = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
-var iconMarker = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
+var iconMarke  = {GRAY : 'img/marker-gray.png', GREEN : 'img/marker-green.png', BLUE : 'img/marker-blue.png'};
+var colors = {GRAY:"gray", GREEN:"green", BLUE : "blue"};
+
 var element_call;
-
-
+var idRadioDesAsignar = -1;
 
 
 /* =================== MAIN FUNCTION *-JS-*  ==================*/
@@ -37,7 +37,7 @@ $(function(){
 	$('#altaRadio').click(function(){ showContentRadios(this);});
 	$('#btonGuardarRadios').click(function(){ guardaRadiosLocalizados();});
 	$('#btonCancelarRadios').click(function(){ clearMarkers();});
-	$("#btnAsignarRadio").click(function(){ asignarRadio();});
+	$("#btnAsignarRadio").click(function(){ asignarRadio(1);});
 	$("#btnRemovelAsign").click(function(){ cancelarSelecRadio();});
 });
 
@@ -52,6 +52,7 @@ function showContentRadios(element_call_){
 	  showOptionAction();
   }
 }
+
 
 function showOptionAction(){
     $(element_call).parent().parent().children().children("div").addClass("hidden");
@@ -139,7 +140,7 @@ function addMarker(obj, map) {
 
   google.maps.event.addListener(marker, 'dragend', function (evt) {
 	  var center = new CoordenadaClass(evt.latLng.lat(), evt.latLng.lng());
-	  objArray[obj.idMarker].circle = crearCirculo(center,"red");
+	  objArray[obj.idMarker].circle = crearCirculo(center,colors.GREEN);
 
 	    //document.getElementById('current').innerHTML = '<p>Marker dropped: Current Lat: ' + evt.latLng.lat().toFixed(3) + ' Current Lng: ' + evt.latLng.lng().toFixed(3) + '</p>';
 	});
@@ -170,7 +171,7 @@ function addMarker(obj, map) {
   bounds.extend(marker.position);
   
 	obj.marker   = marker;
-	obj.circle   = crearCirculo(obj.coordenada,"red",obj.longRadio);
+	obj.circle   = crearCirculo(obj.coordenada,colors.GREEN,obj.longRadio);
 	markerId++;
 
 }
@@ -211,14 +212,27 @@ function crearCirculo(location,color, radius){
 }
 
 function crearInfoRadioLocalizado(obj){
-
+	var usuarioAsignado = "";
+	var colorTitle      = "";
+	var buttonAsig      = "";
+	
 	if(obj.infoMarker == undefined){
 		return "Sin información del radio.";
 	}
 	
+	if(obj.estatusId == 2 && (obj.usuarioId != undefined && obj.usuarioId != "")){
+		usuarioAsignado = '<h6 class="subtitleInfoRadio" style="color:red">Asignado : '+obj.NombreUsr+'</h6> ';
+		buttonAsig = '<button type="button" id="btonDescAsig" value="'+obj.idMarker+'" class="btn back_5 btn_aceptar">Quitar asignación </button>';
+		colorTitle = colors.GRAY;
+		
+	}
+	
+	
 	var infoHtml =  '<div id="containerInfoRadio">'+
-	'	   <h2 class="titleInfoRadio">'+validaValorObj(obj.infoMarker.fcSitio)+'</h2>'+
-	 '<h6 class="subtitleInfoRadio">'+validaValorObj(obj.infoMarker.fcEstrategia)+'</h6>'+
+	buttonAsig+
+	usuarioAsignado+
+	' <h2 class="titleInfoRadio"style="color:'+colorTitle+'">'+validaValorObj(obj.infoMarker.fcSitio)+'</h2>'+
+	'<h6 class="subtitleInfoRadio" style="color:'+colorTitle+'">'+validaValorObj(obj.infoMarker.fcEstrategia)+'</h6>'+
 	'		<div id="contentInfoDemograf" class="classContents">'+
 	'		  <table>'+
 	'		   <thead><tr><th colspan="2">Información Socio demográfica</th></tr> </thead>'+
@@ -335,13 +349,15 @@ function deleteObjMarkerMap(markerId){
 
 /* =================== CLASS OBJ RADIOS  ==================*/
 
-function RadiosClass(idZona,coordenada, idMarker,marker, circle){
+function RadiosClass(idZona,coordenada, idMarker,marker, circle, estatusId, usuarioId, NombreUsr){
 	this.idZona     = idZona;
 	this.coordenada = coordenada;
 	this.marker     = marker;
 	this.idMarker   = idMarker;
 	this.circle     = circle;
-	this.estatus    = 1;
+	this.estatusId  = estatusId;
+	this.usuarioId  = usuarioId;
+	this.NombreUsr  = NombreUsr; 
 	this.longRadio;
 	this.infoMarker;
 
@@ -546,100 +562,145 @@ var do_file = (function() {
 
 	/* ---------- Adds a marker to the map. STATIC--------*/
 	function addMarkerAsigna(obj, map) {
+      var iconTipo;
+	  var colorCicle;
+      
+      iconTipo   = obj.estatusId == 2? iconMarke.GRAY : iconMarke.GREEN;
+      colorCicle = obj.estatusId == 2? colors.GRAY : colors.GREEN;
+      
 	  var marker = new google.maps.Marker({
-	    position: obj.coordenada,
-	    draggable: false,
-	    animation: google.maps.Animation.DROP,
-	    map: map,
-	    id : obj.idMarker,
-	    icon : iconMarker
-	  });
-
+		    position: obj.coordenada,
+		    draggable: false,
+		    animation: google.maps.Animation.DROP,
+		    map: map,
+		    id : obj.idMarker,
+		    icon : iconTipo
+		  }); 
+	  
 	 bounds.extend(marker.position);
 	 marker.addListener("click", function() {
-	   
     	if(infowindow == undefined){
-    		obj.marker.setIcon(iconMarkerSelect);
+    		infowindow =  new  google.maps.InfoWindow({ content: crearInfoRadioLocalizado(obj) });
+    		infowindow.open(map,marker);
+ 
     		
-      	infowindow =  new  google.maps.InfoWindow({
-    	    content: crearInfoRadioLocalizado(obj)
-    	  });
-      	
-    	infowindow.open(map,marker);
-    	objArray[obj.idMarker].circle.setMap(null);
-    	 objArray[obj.idMarker].circle = crearCirculo(obj.coordenada,"blue",obj.longRadio);
-    	 radioSeleccionado = objArray[obj.idMarker];
+    		if(obj.estatusId != 2){
+    			obj.marker.setIcon(iconMarke.BLUE);
+    			objArray[obj.idMarker].circle.setMap(null);
+    			objArray[obj.idMarker].circle = crearCirculo(obj.coordenada,colors.BLUE,obj.longRadio);	
+   		 	}
     	 
+    		radioSeleccionado = objArray[obj.idMarker];   			 
     	}else{
-
+    		
+    		
     		if(radioSeleccionado.idMarker != obj.idMarker){
-    			obj.marker.setIcon(iconMarkerSelect);
     			infowindow.close();
-
-    			infowindow = new  google.maps.InfoWindow({
-    				content: crearInfoRadioLocalizado(obj)
-    			});
-
-    			if(radioSeleccionado.idMarker != -1){
-    				radioSeleccionado.circle.setMap(null);
-    				radioSeleccionado.circle = crearCirculo(radioSeleccionado.coordenada,"red",radioSeleccionado.longRadio);
-    				radioSeleccionado.marker.setIcon(iconMarker);
+    			//obj.marker.setIcon(iconMarke.BLUE);
+    			
+    			infowindow = new  google.maps.InfoWindow({ content: crearInfoRadioLocalizado(obj) });
+    			infowindow.open(map,marker);
+    			
+    			if(obj.estatusId != 2){
+    				obj.marker.setIcon(iconMarke.BLUE);   
+        			objArray[obj.idMarker].circle.setMap(null);
+        			objArray[obj.idMarker].circle = crearCirculo(obj.coordenada,colors.BLUE,obj.longRadio);
     			}
 
-    			infowindow.open(map,marker);
-    			objArray[obj.idMarker].circle.setMap(null);
-    			objArray[obj.idMarker].circle = crearCirculo(obj.coordenada,"blue",obj.longRadio);
+    			if(radioSeleccionado.idMarker != -1 && radioSeleccionado.estatusId != 2){
+    				radioSeleccionado.circle.setMap(null);
+    				radioSeleccionado.circle = crearCirculo(radioSeleccionado.coordenada,colors.GREEN,radioSeleccionado.longRadio);
+    				radioSeleccionado.marker.setIcon(iconMarke.GREEN);
+    			}
 
     			radioSeleccionado = objArray[obj.idMarker];
     			
     		}else 
-    			if(radioSeleccionado.idMarker == obj.idMarker){
+    			if(radioSeleccionado.idMarker == obj.idMarker ){
+    				if(radioSeleccionado.estatusId != 2){
+    					radioSeleccionado.circle.setMap(null);
+    					radioSeleccionado.circle = crearCirculo(radioSeleccionado.coordenada,colors.GREEN,radioSeleccionado.longRadio);
+    					radioSeleccionado.marker.setIcon(iconMarke.GREEN);    					
+    				}
+
     				infowindow.close();
-    				radioSeleccionado.circle.setMap(null);
-    				radioSeleccionado.circle = crearCirculo(radioSeleccionado.coordenada,"red",radioSeleccionado.longRadio);
-    				radioSeleccionado.marker.setIcon(iconMarker);
     				radioSeleccionado = undefined;
     				infowindow = undefined;
     			}
     	}
+    	
+    	setTimeout(function(){
+    		$("#btonDescAsig").unbind();
+    		$("#btonDescAsig").click(function(){desAsignarRadio(); idRadioDesAsignar = this.value; });    		
+    	},250);
+    	
 	});
 
 		obj.marker   = marker;
-		obj.circle   = crearCirculo(obj.coordenada,"red",obj.longRadio);
+		obj.circle   = crearCirculo(obj.coordenada, colorCicle, obj.longRadio);
 		markerId++;
-	}
+}
 
 /* === Cancelar Select  ===*/
 function cancelarSelecRadio(){
 		if(infowindow != undefined){
+			if(radioSeleccionado.estatusId != 2){
+				radioSeleccionado.circle.setMap(null);
+				radioSeleccionado.circle = crearCirculo(radioSeleccionado.coordenada,colors.GREEN,radioSeleccionado.longRadio);
+				radioSeleccionado.marker.setIcon(iconMarke.GREEN);
+			}
 			infowindow.close();
-			radioSeleccionado.circle.setMap(null);
-			radioSeleccionado.circle = crearCirculo(radioSeleccionado.coordenada,"red",radioSeleccionado.longRadio);
-			radioSeleccionado.marker.setIcon(iconMarker);
 			radioSeleccionado = undefined;
 			infowindow = undefined;
 		}
 	}
 	
+function desAsignarRadio(){
+	 cargaMensajeModal("Localizador", "¿Estás seguro que deseas desasignar el radio ?", TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, asignarRadio);
+}
+
 	/* ---------- Consume WS Empleados --------*/
-	function asignarRadio(){
+	function asignarRadio(tipoAction){
+		
+		if(tipoAction == 1){
+			idRadioDesAsignar = -1;
+		}else if(tipoAction == 2){
+			
+		}
+		
 		cargaLoading();
+		var valorAsigna = 1;
 		var idJefeExpansion = $("#select_employee option:selected").val();
 		var idRadioAginar   =  radioSeleccionado == undefined ? undefined :  radioSeleccionado.idMarker;
 
-		if(idJefeExpansion == 0){
-			cargaMensajeModal("Localizador","Seleccione a quien se le asignara el radio.", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
-			cierraLoading();
-			return false;
+		if(objArray[idRadioDesAsignar] != undefined && objArray[idRadioDesAsignar].estatusId == 2){
+			valorAsigna = objArray[idRadioDesAsignar].estatusId == 2? 2 : 1;
+			idRadioAginar = idRadioDesAsignar;
+		}else{
+			
+			
+				if(idJefeExpansion == 0){
+					cargaMensajeModal("Localizador","Seleccione a quien se le asignara el radio.", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+					cierraLoading();
+					return false;
+				}
+				
+				if(idRadioAginar == undefined || idRadioAginar == -1 || radioSeleccionado.estatusId == 2){
+					cargaMensajeModal("Localizador","Seleccione un radio.", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+					cierraLoading();
+					return false;
+				}
+				
+				if(objArray[idRadioAginar].estatusId == 2){
+					cierraLoading();
+					cargaMensajeModal("Localizador","Seleccione un radio.", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+					return false;
+				}
 		}
+		
+		
 
-		if(idRadioAginar == undefined || idRadioAginar == -1){
-			cargaMensajeModal("Localizador","Seleccione un radio.", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
-			cierraLoading();
-			return false;
-		}
-
-		invocarJSONServiceAction("asignarRadioLocalizado",{"idJefeExpansion" : idJefeExpansion,"idRadioAginar":idRadioAginar },
+		invocarJSONServiceAction("asignarRadioLocalizado",{"idJefeExpansion" : idJefeExpansion,"idRadioAginar":idRadioAginar , valorAsigna: valorAsigna},
 				'responseAsignacionRadio',
 				function() {
 					//Funcion de error
@@ -657,8 +718,11 @@ function cancelarSelecRadio(){
 			if(data.codigo == 200){
 				 deleteObjMarkerMap(radioSeleccionado.idMarker);
 				 radioSeleccionado.idMarker = -1 ;
+				 getRadiosLocalizados();
 			}
 		}
+		$("#select_employee").val(0);
+		idRadioDesAsignar = -1;
 	}
 	
 
@@ -714,7 +778,6 @@ function cancelarSelecRadio(){
 				},
 				function() {
 					//Función al finalizar
-					
 				});
 
 		responseRadiosLocalizados_ = function(data){
@@ -728,9 +791,15 @@ function cancelarSelecRadio(){
 			bounds = new google.maps.LatLngBounds();
 			data.radios.forEach(function(element,index){
 
+				//RadiosClass(idZona,coordenada, idMarker,marker, circle,idEstatus,idUsuario)
 				objArray[element.radioId] = new RadiosClass(element.zona.trim(),
 													new  CoordenadaClass(parseFloat(element.latitud),parseFloat(element.longitud)),
-													element.radioId);
+													element.radioId,
+													null,
+													null,
+													element.estatusId,
+													element.usuarioId,
+													element.NombreUsr );
 				
 				objArray[element.radioId].setLongRadio(element.longRadio);
 				

@@ -230,8 +230,9 @@
                                 <span><img id="edita3" title="Guarda cambios" onclick="editaPantalla(3, this);" style="cursor: pointer;" src="img/edita_mark.png"></span>
                             </div>
 							<div id="modulo3Creacion" class="float_right">
-								<span class="negrita blanco t14">Puntos: </span> <span
-									id="puntosSuperficie" class="negrita blanco t14">---</span> <span>
+								<%-- <span class="negrita blanco t14">Puntos: </span> <span
+									id="puntosSuperficie" class="negrita blanco t14">---</span>  --%>
+									<span>
 									<img id="autoriza3" title="Autoriza punto"
 									class="sin_autorizar b_autorizar"
 									onclick="autorizaPantalla(3, this);" style="cursor: pointer;"
@@ -340,8 +341,8 @@
                     <span><img id="edita4" title="Guarda cambios" onclick="editaPantalla(4, this);" style="cursor: pointer;" src="img/edita_mark.png"></span>
                 </div>
 				<div id="modulo4Creacion" class="float_right">
-					<span class="negrita azul t14">Puntos: </span> <span id="puntosZonificacion" class="negrita azul t14">---</span>
-					<span>
+<%-- 					<span class="negrita azul t14">Puntos: </span> <span id="puntosZonificacion" class="negrita azul t14">---</span>
+ --%>					<span>
 						<img id="autoriza4" title="Autoriza punto" class="sin_autorizar b_autorizar" onclick="autorizaPantalla(4, this);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
 					</span>
 					<span>
@@ -352,21 +353,7 @@
 				</div>
 			</div>
 			
-				<div class="row div_header_sub">
-							
-							<div class="col-12">
-							<span class="azul negrita t12">MICRO UBICACION</span>
-							</div>
-							<div class="col-lg-4">
-								<span class="azul t12">NEGOCIOS</span>&nbsp;&nbsp;&nbsp;<span
-									id="negocios" class="negrita azul t14">---</span>
-							</div>
-							<div class="col-lg-4">
-								<span class="azul t12">NEGOCIOS DE COMIDA</span>&nbsp;&nbsp;&nbsp;<span
-									id="negocios_comida" class="negrita azul t14">---</span>
-							</div>
-						
-				</div>
+				
 				<div class="row div_header_sub">
 					<div class="col-lg-9 col-md-7"><div id="mapaZonificacion" style="width: 100%; height: 79%; position: relative; float: left;"></div></div>
 					<div class="col-lg-3 col-md-5" style="max-height:404px; overflow:auto;">
@@ -374,7 +361,7 @@
 					
 					<div class="row">
 							<div class="col-lg-12 titulo_mapa"><span class="azul t12">TENDA NETO</span></div>
-							<div class="icono_mapa"><img class="icono_imagen" src="img/neto_neto.png"></div>
+							<div class="icono_mapa"><img class="icono_imagen" src="img/competencia/w_neto.png"></div>
 							
 					</div>
 					
@@ -401,7 +388,7 @@
 							<div class="icono_mapa"><img class="icono_imagen" src="img/generadores/tortilleria.png"><br>
 							<span class="t10 azul">Tortillería</span></div>
 							<div class="icono_mapa"><img class="icono_imagen" src="img/generadores/recauderia.png"><br>
-							<span class="t10 azul">Recaudería</span></div>
+							<span class="t10 azul">Frutas y verduras</span></div>
 							<div class="icono_mapa"><img class="icono_imagen" src="img/generadores/carniceria.png"><br>
 							<span class="t10 azul">Carnicería</span></div>
 						</div>
@@ -443,8 +430,8 @@
                     <span><img id="edita5" title="Guarda cambios" onclick="editaPantalla(5, this);" style="cursor: pointer;" src="img/edita_mark.png"></span>
                 </div>
 				<div id="modulo5Creacion" class="float_right">
-						<span class="negrita azul t14">Puntos: </span> <span id="puntosConstruccion" class="negrita azul t14">---</span>
-					<span>
+<%-- 						<span class="negrita azul t14">Puntos: </span> <span id="puntosConstruccion" class="negrita azul t14">---</span>
+ --%>					<span>
 						<img id="autoriza5" title="Autoriza punto" class="sin_autorizar b_autorizar" onclick="autorizaPantalla(5, this);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
 					</span>
 					<span>
@@ -480,8 +467,8 @@
                     <span><img id="edita6" title="Guarda cambios" onclick="editaPantalla(6, this);" style="cursor: pointer;" src="img/edita_mark.png"></span>
                 </div>
 				<div id="modulo6Creacion" class="">
-						<span class="negrita blanco t14">Puntos: </span> <span id="puntosGeneralidades" class="negrita blanco t14">---</span>
-					<span>
+<%-- 						<span class="negrita blanco t14">Puntos: </span> <span id="puntosGeneralidades" class="negrita blanco t14">---</span>
+ --%>					<span>
 						<img id="autoriza6" title="Autoriza punto" class="sin_autorizar b_autorizar" onclick="autorizaPantalla(6, this);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
 					</span>
 					<span>
@@ -521,8 +508,8 @@
                     <span><img id="edita7" title="Guarda cambios" onclick="editaPantalla(7, this);" style="cursor: pointer;" src="img/edita_mark.png"></span>
                 </div>
 				<div id="modulo7Creacion" class="float_right">
-						<span class="negrita blanco t14">Puntos: </span> <span id="puntosConteos" class="negrita blanco t14">---</span>
-					<span>
+<%-- 						<span class="negrita blanco t14">Puntos: </span> <span id="puntosConteos" class="negrita blanco t14">---</span>
+ --%>					<span>
 						<img id="autoriza7" title="Autoriza punto" class="sin_autorizar b_autorizar" onclick="autorizaPantalla(7, this);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
 					</span>
 					<span>
@@ -577,7 +564,7 @@
 						<div
 							style="width: 100%; position: relative; float: left; text-align: center; padding-top: 20px;">
 							<span class="subtituloIconos blanco">Progreso autorización
-								puntos</span>
+								</span>
 						</div>
 					</div>
 				</div>

@@ -1991,7 +1991,30 @@ function initMap(latitudSitio, longitudSitio, listaCompetencias, listaGeneradore
 			   },
 			   "9": {
 			        icon: 'img/generadores/icono_otros_generadores.png'
+			   },
+			   "10": {
+			        icon: 'img/competencia/w_neto.png'
+			   },
+			   "11": {
+			        icon: 'img/generadores/recauderia.png'
+			   },
+			   "12": {
+			        icon: 'img/generadores/negociocomida.png'
+			   },
+			   "14": {
+			        icon: 'img/generadores/tianguis.png'
+			   },
+			   "15": {
+			        icon: 'img/generadores/tortilleria.png'
+			   },
+			   "16": {
+			        icon: 'img/generadores/carniceria.png'
+			   },
+			   "17": {
+			        icon: 'img/generadores/parada.png'
 			   }
+			   
+			   
 	        };
 	
 	

@@ -135,7 +135,7 @@ function addMarker(obj, map) {
     animation: google.maps.Animation.DROP,
     map: map,
     id : obj.idMarker,
-    icon : iconMarker
+    icon : iconMarke.GREEN
   });
 
   google.maps.event.addListener(marker, 'dragend', function (evt) {

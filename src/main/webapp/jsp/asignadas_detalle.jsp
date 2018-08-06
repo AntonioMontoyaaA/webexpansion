@@ -358,16 +358,9 @@
 					<div class="col-lg-9 col-md-7"><div id="mapaZonificacion" style="width: 100%; height: 79%; position: relative; float: left;"></div></div>
 					<div class="col-lg-3 col-md-5" style="max-height:404px; overflow:auto;">
 					
-					
-					<div class="row">
-							<div class="col-lg-12 titulo_mapa"><span class="azul t12">TENDA NETO</span></div>
-							<div class="icono_mapa"><img class="icono_imagen" src="img/competencia/w_neto.png"></div>
-							
-					</div>
-					
 						<div class="row">
 							<div class="col-lg-12 titulo_mapa"><span class="azul t12">COMPETENCIAS</span></div>
-							
+							<div class="icono_mapa"><img class="icono_imagen" src="img/competencia/w_neto.png"></div>
 							<div class="icono_mapa"><img class="icono_imagen" src="img/competencia/iconos_3b.png"></div>
 							<div class="icono_mapa"><img class="icono_imagen" src="img/competencia/iconos_express.png"></div>
 							<div class="icono_mapa"><img class="icono_imagen" src="img/competencia/iconos_oxxo.png"></div>

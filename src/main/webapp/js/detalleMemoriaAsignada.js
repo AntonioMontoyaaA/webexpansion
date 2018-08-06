@@ -2011,7 +2011,7 @@ function initMap(latitudSitio, longitudSitio, listaCompetencias, listaGeneradore
 			        icon: 'img/generadores/carniceria.png'
 			   },
 			   "17": {
-			        icon: 'img/generadores/parada.png'
+			        icon: 'img/generadores/w_metro.png'
 			   }
 			   
 			   

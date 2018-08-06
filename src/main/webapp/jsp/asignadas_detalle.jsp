@@ -379,8 +379,6 @@
 						<div class="row">
 							<div class="col-lg-12 titulo_mapa" style="border-top:1px solid #C9C9C9;">
 							<span class="azul t12">NEGOCIOS</span></div>
-							<div class="icono_mapa"><img class="icono_imagen" src="img/generadores/parada.png"><br>
-							<span class="t10 azul">Parada de<br>autobús</span></div>
 							<div class="icono_mapa"><img class="icono_imagen" src="img/generadores/mercado.png"><br>
 							<span class="t10 azul">Mercado</span></div>
 							<div class="icono_mapa"><img class="icono_imagen" src="img/generadores/tianguis.png"><br>
@@ -398,6 +396,16 @@
 							<span class="azul t12">NEGOCIOS DE COMIDA</span></div>
 							<div class="icono_mapa"><img class="icono_imagen" src="img/generadores/negociocomida.png"><br>
 							<span class="t10 azul">Negocio de<br>comida</span></div>					
+						</div>
+						
+						<div class="row">
+							<div class="col-lg-12 titulo_mapa" style="border-top:1px solid #C9C9C9;">
+							<span class="azul t12">TRANSPORTE PUBLICO</span></div>
+							<div class="icono_mapa"><img class="icono_imagen" src="img/generadores/parada.png"><br>
+							<span class="t10 azul">Parada de<br>autobús</span></div>
+							<div class="icono_mapa"><img class="icono_imagen" src="img/generadores/w_metro.png"><br>
+							<span class="t10 azul">Parada de<br>metro</span></div>
+												
 						</div>
 						
 						<div class="row">

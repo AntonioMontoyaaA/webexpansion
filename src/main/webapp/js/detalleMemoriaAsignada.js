@@ -25,6 +25,7 @@ var uploader;
 var dropzoneLayouts;
 var dropzoneOptions;
 var ARCHIVO_SUBIDO = false;
+var CONTEO_GUARDADO = false;
 var ARCHIVOS_MD;
 
 var areaExpansion = 1;
@@ -1010,7 +1011,7 @@ function datosFlujoPeatonal(flujoPeatonal){
 		$('#posConteos').show();
 	else{
 		$('#preConteos').show();
-		
+		CONTEO_GUARDADO = false;
 		$('#subeConteo').unbind('click');
 		$('#subeConteo').click(function(){
 			total = $("#totalConteoAuditor").val();
@@ -1140,10 +1141,16 @@ function finalizaMD(estatus){
 
 		ESTATUS_FINALIZA_MD = estatus;
 		permiteAutorizacion = true;
+		
 		if(AREA_USUARIO == areaConstruccion && !ARCHIVO_SUBIDO){
 			permiteAutorizacion = false;
 			cargaMensajeModal('DETALLE MD', 
 					'Debes adjuntar el archivo de layout antes de autorizar',
+					TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA);
+		}else if(AREA_USUARIO == areaAuditoria && !CONTEO_GUARDADO){
+			permiteAutorizacion = false;
+			cargaMensajeModal('DETALLE MD', 
+					'Debes cargar el promedio peatonal antes de autorizar',
 					TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA);
 		}
 		
@@ -2304,6 +2311,7 @@ function guardaConteoAuditor(total){
 			$('#promedioConteosAuditoria').html(total);
 			//$('#posConteos').show();
 			$("#totalConteoAuditor").val('');
+			CONTEO_GUARDADO = true;
 		}
 	}
 }

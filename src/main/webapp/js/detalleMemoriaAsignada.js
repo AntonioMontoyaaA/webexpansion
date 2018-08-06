@@ -25,6 +25,7 @@ var uploader;
 var dropzoneLayouts;
 var dropzoneOptions;
 var ARCHIVO_SUBIDO = false;
+var CONTEO_GUARDADO = false;
 var ARCHIVOS_MD;
 
 var areaExpansion = 1;
@@ -51,7 +52,7 @@ var HORAF;
 var AREAS_A;
 
 $(function(){
-	TIPOMD = parseInt($("#tipoMd").val());
+	TIPOMD = $("#tipoMd").val();
 	AREA_USUARIO = parseInt($('#areaUsuario').val());
 	 
 	if(TIPOMD == 0){
@@ -69,6 +70,10 @@ $(function(){
 	}else if(TIPOMD == 4 || TIPOMD == 5){
 		$('#idtablero').addClass('resaltado');
 		$('#titulo_tipo').text('TABLERO');
+	}
+	else{
+		$('#idasignadas').addClass('resaltado');
+		$('#titulo_tipo').text('EN PROCESO');
 	}
 	
 	inicializaFactores();
@@ -626,14 +631,14 @@ function buscaDetalleMD(mdId) {
 				if(data.generales.tipoUbicacion=="RURAL"){
 					imagen_tipo="<img src='img/generadores/w_rural.png'>";
 					$("#tipoMdImagen").html(imagen_tipo);
-					$("#tipoMd").text(data.generales.tipoUbicacion);
+					$("#tipoMdtexto").text(data.generales.tipoUbicacion);
 					$('#tipoMdTitulo').show();
 					simbolo="%";
 				}
 				else if(data.generales.tipoUbicacion=="CIUDAD"){
 					imagen_tipo="<img src='img/generadores/w_ciudad.png'>";
 					$("#tipoMdImagen").html(imagen_tipo);
-					$("#tipoMd").text(data.generales.tipoUbicacion);
+					$("#tipoMdtexto").text(data.generales.tipoUbicacion);
 					$('#tipoMdTitulo').show();
 					simbolo="%";
 				}
@@ -1010,7 +1015,7 @@ function datosFlujoPeatonal(flujoPeatonal){
 		$('#posConteos').show();
 	else{
 		$('#preConteos').show();
-		
+		CONTEO_GUARDADO = false;
 		$('#subeConteo').unbind('click');
 		$('#subeConteo').click(function(){
 			total = $("#totalConteoAuditor").val();
@@ -1140,10 +1145,16 @@ function finalizaMD(estatus){
 
 		ESTATUS_FINALIZA_MD = estatus;
 		permiteAutorizacion = true;
+		
 		if(AREA_USUARIO == areaConstruccion && !ARCHIVO_SUBIDO){
 			permiteAutorizacion = false;
 			cargaMensajeModal('DETALLE MD', 
 					'Debes adjuntar el archivo de layout antes de autorizar',
+					TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA);
+		}else if(AREA_USUARIO == areaAuditoria && !CONTEO_GUARDADO){
+			permiteAutorizacion = false;
+			cargaMensajeModal('DETALLE MD', 
+					'Debes cargar el promedio peatonal antes de autorizar',
 					TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA);
 		}
 		
@@ -2021,43 +2032,43 @@ function initMap(latitudSitio, longitudSitio, listaCompetencias, listaGeneradore
 	            icon: 'img/competencia/iconos_express.png'
 	          },
 	          "4": {
-		            icon: 'img/competencia/icono_otros_2.png'
+		            icon: 'img/competencia/icono_otros_2_c.png'
 		      },
 		      "5": {
-		            icon: 'img/generadores/iglesia.png'
+		            icon: 'img/generadores/iglesia_c.png'
 		       },
 		       "6": {
-		            icon: 'img/generadores/mercado.png'
+		            icon: 'img/generadores/mercado_c.png'
 		       },
 		       "7": {
-		            icon: 'img/generadores/escuela.png'
+		            icon: 'img/generadores/escuela_c.png'
 		       },
 		       "8": {
-			        icon: 'img/generadores/parada.png'
+			        icon: 'img/generadores/parada_c.png'
 			   },
 			   "9": {
-			        icon: 'img/generadores/icono_otros_generadores.png'
+			        icon: 'img/generadores/icono_otros_generadores_c.png'
 			   },
 			   "10": {
-			        icon: 'img/competencia/w_neto.png'
+			        icon: 'img/competencia/w_neto_c.png'
 			   },
 			   "11": {
-			        icon: 'img/generadores/recauderia.png'
+			        icon: 'img/generadores/recauderia_c.png'
 			   },
 			   "12": {
-			        icon: 'img/generadores/negociocomida.png'
+			        icon: 'img/generadores/negociocomida_c.png'
 			   },
 			   "14": {
-			        icon: 'img/generadores/tianguis.png'
+			        icon: 'img/generadores/tianguis_c.png'
 			   },
 			   "15": {
-			        icon: 'img/generadores/tortilleria.png'
+			        icon: 'img/generadores/tortilleria_c.png'
 			   },
 			   "16": {
-			        icon: 'img/generadores/carniceria.png'
+			        icon: 'img/generadores/carniceria_c.png'
 			   },
 			   "17": {
-			        icon: 'img/generadores/w_metro.png'
+			        icon: 'img/generadores/w_metro_c.png'
 			   }
 			   
 			   
@@ -2304,6 +2315,7 @@ function guardaConteoAuditor(total){
 			$('#promedioConteosAuditoria').html(total);
 			//$('#posConteos').show();
 			$("#totalConteoAuditor").val('');
+			CONTEO_GUARDADO = true;
 		}
 	}
 }

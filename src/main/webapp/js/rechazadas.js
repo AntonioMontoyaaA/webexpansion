@@ -119,7 +119,7 @@ function creatabla(){
 				datosMemoriasRechazadas[i] = new Array();	 	 		 			 
 				datosMemoriasRechazadas[i][0] = "<span>" + resultados[i].nombreMd + "</span>"; 
 				datosMemoriasRechazadas[i][1] = "<span>" + resultados[i].categoria + "</span>";
-				datosMemoriasRechazadas[i][2] = "<span>" + resultados[i].puntuacion + '</span><span> puntos '+ estrellas+"</span>";
+				datosMemoriasRechazadas[i][2] = "<span>" + resultados[i].puntuacion + '</span><span> '+ estrellas+"</span>";
 				datosMemoriasRechazadas[i][3] = "<span>" + resultados[i].creador + "</span>";
 				datosMemoriasRechazadas[i][4] = "<span>" + resultados[i].fechaCreacion + "</span>";
 				datosMemoriasRechazadas[i][5] = listaiconos;
@@ -183,7 +183,7 @@ function creatabla(){
 				datosMemoriasRechazadas[i] = new Array();	 	 		 			 
 				datosMemoriasRechazadas[i][0] = "<span>" + resultados[i].nombreMd + "</span>"; 
 				datosMemoriasRechazadas[i][1] = "<span>" + resultados[i].categoria + "</span>";
-				datosMemoriasRechazadas[i][2] = "<span>" + resultados[i].puntuacion + '</span><span> puntos '+ estrellas+"</span>";
+				datosMemoriasRechazadas[i][2] = "<span>" + resultados[i].puntuacion + '</span><span> '+ estrellas+"</span>";
 				datosMemoriasRechazadas[i][3] = "<span>" + resultados[i].creador + "</span>";
 				datosMemoriasRechazadas[i][4] = "<span>" + resultados[i].fechaCreacion + "</span>";
 				datosMemoriasRechazadas[i][5] = "<span>" + resultados[i].nombreRechazo + "</span>";

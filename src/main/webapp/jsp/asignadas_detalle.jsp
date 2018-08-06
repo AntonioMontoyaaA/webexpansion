@@ -250,9 +250,11 @@
 							</div>
 						</div>
 
-						<div class="row div_header_sub">
-						
-						<div class="col-12" style="margin-bottom:10px;" id="esquina"></div>
+						<div class="row div_header_sub" id="modulo3Datos">
+						<div class="col-12" style="margin-bottom:10px; margin-left:20px;">
+							<input type="checkbox" class="form-check-input" id="esquina"  onclick="return false;">
+    						<label class="blanco t12" for="esquina">Local en esquina</label>
+						</div>
 						
 							<div class="col-lg-4">
 								<span class="blanco t12">FRENTE</span>&nbsp;&nbsp;&nbsp;<span
@@ -371,15 +373,11 @@
 						
 						<div class="row">
 							<div class="col-lg-12 titulo_mapa" style="border-top:1px solid #C9C9C9;">
-							<span class="azul t12">NEGOCIOS</span></div>
-							<div class="icono_mapa"><img class="icono_imagen" src="img/generadores/mercado.png"><br>
-							<span class="t10 azul">Mercado</span></div>
-							<div class="icono_mapa"><img class="icono_imagen" src="img/generadores/tianguis.png"><br>
-							<span class="t10 azul">Tianguis</span></div>			
+							<span class="azul t12">NEGOCIOS</span></div>		
 							<div class="icono_mapa"><img class="icono_imagen" src="img/generadores/tortilleria.png"><br>
 							<span class="t10 azul">Tortillería</span></div>
 							<div class="icono_mapa"><img class="icono_imagen" src="img/generadores/recauderia.png"><br>
-							<span class="t10 azul">Frutas y verduras</span></div>
+							<span class="t10 azul">Frutas y<br> verduras</span></div>
 							<div class="icono_mapa"><img class="icono_imagen" src="img/generadores/carniceria.png"><br>
 							<span class="t10 azul">Carnicería</span></div>
 						</div>
@@ -398,6 +396,21 @@
 							<span class="t10 azul">Parada de<br>autobús</span></div>
 							<div class="icono_mapa"><img class="icono_imagen" src="img/generadores/w_metro.png"><br>
 							<span class="t10 azul">Parada de<br>metro</span></div>
+												
+						</div>
+						
+						<div class="row">
+							<div class="col-lg-12 titulo_mapa" style="border-top:1px solid #C9C9C9;">
+							<span class="azul t12">MERCADO PUBLICO</span></div>
+							<div class="icono_mapa"><img class="icono_imagen" src="img/generadores/mercado.png"><br>
+							<span class="t10 azul">Mercado</span></div>				
+						</div>
+						
+						<div class="row">
+							<div class="col-lg-12 titulo_mapa" style="border-top:1px solid #C9C9C9;">
+							<span class="azul t12">TIANGUIS</span></div>
+							<div class="icono_mapa"><img class="icono_imagen" src="img/generadores/tianguis.png"><br>
+							<span class="t10 azul">Tianguis</span></div>	
 												
 						</div>
 						
@@ -546,7 +559,7 @@
 					<div id="divCalificacionFinal" class="col-lg-12 menupr_estilos fazul altura1">
 						<div class="col-12 titulo_seccion">
 							<span class="negrita blanco t14">8) Autorización final</span>
-							<div class="float_right">
+							<%-- <div class="float_right">
 								<span> <img id="autoriza8" title="Autoriza punto"
 									class="sin_autorizar b_autorizar" onclick="finalizaMD(1);"
 									style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
@@ -554,17 +567,28 @@
 									class="sin_autorizar b_rechazar" onclick="finalizaMD(0);"
 									style="cursor: pointer;" src="img/rechaza_mark.png">
 								</span>
-							</div>
+							</div> --%>
 						</div>
 
-						<div
+						<%-- <div
 							style="width: 100%; position: relative; float: left; text-align: left; padding-top: 20px;">
 							<div id="containerProgreso"></div>
 						</div>
 						<div
 							style="width: 100%; position: relative; float: left; text-align: center; padding-top: 20px;">
-							<span class="subtituloIconos blanco">Progreso autorización
-								</span>
+							<span class="subtituloIconos blanco"></span>
+						</div> --%>
+						
+						<div class="row center" style="padding-top: 130px;">
+							<span class="subtituloIconos blanco">¿La MD cuenta con todos los puntos necesarios?</span>
+						</div>
+						<div class="row">
+							<div class="col-6 right">
+								<button id="rechaza8" class="btn desp" type="button" onclick="finalizaMD(0);">No</button>
+							</div>
+							<div class="col-6 left">
+								<button id="autoriza8" class="btn desp" type="button" onclick="finalizaMD(1);">Si</button>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -643,7 +667,9 @@
 						</button>
 					</div>
 					<div class="modal-body">
+					<div class="row" id="cabecera_score"></div>
 					<table id="score_info"></table>
+					<div class="col-12" style='padding-left:0px;' id="total_score"></div>
 					</div>
 					<div class="modal-footer">
 					</div>

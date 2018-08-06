@@ -85,7 +85,7 @@ $(function(){
 	
 });
 
-function inicializaModulosEdicion(modulos, datosSitio, datosPropietario, generalidades) {
+function inicializaModulosEdicion(modulos, datosSitio, datosPropietario, generalidades,superficie) {
 	$("#modulo1Creacion").hide();
 	$("#modulo2Creacion").hide();
 	$("#modulo3Creacion").hide();
@@ -154,7 +154,46 @@ function inicializaModulosEdicion(modulos, datosSitio, datosPropietario, general
 			break;
 		case 3:
 			if(modulos[i].editable == 1) {
+				var datos = "";
 				$("#modulo3Edita").show();
+				
+				datos+='<div class="col-12" style="margin-bottom:10px;">';
+				datos+='<input type="checkbox" class="form-check-input" id="esquina">';
+				datos+='<label class="azul t12" for="esquina">Local en esquina</label>';
+				datos+='</div>';
+			
+				datos+='<div class="col-lg-4">';
+				datos+='<span class="blanco t12">FRENTE</span>&nbsp;&nbsp;&nbsp;';
+				datos+='<input id="frenteMd" type="text" class="text_edita"/><br/>';
+				datos+='</div>';
+				datos+='<div class="col-lg-4">';
+				datos+='<span class="blanco t12">PROFUNDIDAD</span>&nbsp;&nbsp;&nbsp;';
+				datos+='<input id="profundidadMd" type="text" class="text_edita"/><br/>';
+				datos+='</div>';
+				datos+='<div class="col-lg-4">';
+				datos+='<span class="blanco t12">SUPERFICIE TOTAL</span>&nbsp;&nbsp;&nbsp;';
+				datos+='<input id="tamanioTotalMd" type="text" class="text_edita"/><br/>';
+				datos+='</div>';
+				$("#modulo3Datos").html(datos);
+				
+				if(superficie.esquina==true){
+					$("#esquina").prop('checked', true);
+				}
+				
+				$("#puntosSuperficie").text(superficie.puntos);
+				$("#frenteMd").val(formatear(superficie.frente, true) + " mts");
+				$("#profundidadMd").val(formatear(superficie.profundidad, true) + " mts");
+				$("#tamanioTotalMd").val(formatear(superficie.total, true) + " mts<sup>2</sup>");
+				$("#vistaFrontalMd").attr("src", superficie.vistaFrontal);
+				$("#fechaVistaFrontal").text(superficie.fechaFrontal);
+				$("#horaVistaFrontal").text(superficie.horaFrontal);
+				$("#vistaLateral1Md").attr("src", superficie.lateral1);
+				$("#fechaVistaLateral1").text(superficie.fechaLateral1);
+				$("#horaVistaLateral1").text(superficie.horaLateral1);
+				$("#vistaLateral2Md").attr("src", superficie.lateral2);
+				$("#fechaVistaLateral2").text(superficie.fechaLateral2);
+				$("#horaVistaLateral2").text(superficie.horaLateral2);
+				
 			}
 			break;
 		case 4:
@@ -269,6 +308,7 @@ function validaEstatusAtencion(estatus, idObjetos){
 	
 	$('#autoriza8').hide();
 	$('#rechaza8').hide();
+	$('#voboMD').hide();
 	
 	if(PERMISOS[idObjetos] != undefined && PERMISOS[idObjetos].permiteAutorizar == 1 && ESTATUS_MD < ESTATUS_VALIDACION_LAYOUT){
 		
@@ -314,6 +354,7 @@ function dibujaGraficaAutorizaciones(){
 	$('#containerProgreso').html('');
 	$('#autoriza8').hide();
 	$('#rechaza8').hide();
+	$('#voboMD').hide();
 	atendidos = 0;
 	
 	for(i in FACTORES){
@@ -324,7 +365,7 @@ function dibujaGraficaAutorizaciones(){
 	if(!AREAS_A[AREA_USUARIO])
 		atendidos = TOTAL_ATENCIONES;
 	
-	var bar = new ProgressBar.Circle(containerProgreso, {
+	/*var bar = new ProgressBar.Circle(containerProgreso, {
 		  strokeWidth: 4,
 		  easing: 'easeInOut',
 		  duration: 1400,
@@ -332,13 +373,13 @@ function dibujaGraficaAutorizaciones(){
 		  color: '#A3D9FF',
 		  trailWidth: 2,
 		  svgStyle: null
-		});
+		});*/
 		
 	progreso = atendidos/TOTAL_ATENCIONES;
 	
-	bar.set(progreso, {
+	/*bar.set(progreso, {
 	    from: {color: '#000000', width: 5},
-	    to: {color: "#00FF00", width: 5} });
+	    to: {color: "#00FF00", width: 5} });*/
 	
 	if(atendidos == TOTAL_ATENCIONES && TOTAL_ATENCIONES > 0){
 		
@@ -352,17 +393,23 @@ function dibujaGraficaAutorizaciones(){
 		}
 		
 		$('#rechaza8').show();
-		if(!motivoDefinitivo)
+		if(!motivoDefinitivo){
 			$('#autoriza8').show();
+			$('#voboMD').show();
+			
+		}
+			
 		
 		if(AREAS_A[AREA_USUARIO]){
 			$('#autoriza8').removeClass('sin_autorizar');
 			$('#autoriza8').addClass('autorizado');
+			
 		}
 		
 	}else{
 		$('#autoriza8').hide();
 		$('#rechaza8').hide();
+		$('#voboMD').hide();
 	}
 }
 
@@ -552,7 +599,7 @@ function buscaDetalleMD(mdId) {
 			ESTATUS_FINALIZA_MD = -1;
 			
 			if(TIPOMD == DETALLE_MD_EDITAR && data.modulos != undefined) {
-				inicializaModulosEdicion(data.modulos, data.datosSitio, data.datosPropietario, data.generalidades);
+				inicializaModulosEdicion(data.modulos, data.datosSitio, data.datosPropietario, data.generalidades, data.superficie);
 			}
 			/* Datos de áreas que ya han autorizado */
 			if(data.areasAutorizadas != undefined && data.areasAutorizadas.length > 0) {
@@ -634,8 +681,7 @@ function buscaDetalleMD(mdId) {
 				
 				//nuevos valores
 				if(data.superficie.esquina==true){
-					var esq='<span class="blanco t12"><img src="img/icono_factor.png"/></span><span class="blanco t12 sangria_cuerpo">LOCAL EN ESQUINA</span>';
-					$('#esquina').html(esq);
+					$('#esquina').prop('checked', true);
 				}
 				var contentPopSuperficie ='<div class="row" style="padding-top:3px;">' + 
 				   '<div class="col-6"><span class="t14 blanco">Frente mínimo:</span></div>' +
@@ -2292,42 +2338,64 @@ function consultaScore(){
 	
 	scoreRespuesta =  function(data){
 		if(data.codigo != 200) {
-		
 		}else{
+			var macro="";
+			var micro="";
+			var total="";
 			var signo="";
 			if(data.ubicacionMD!="GENERAL"){
 				signo="%";
 				
-				elementos="";
-				elementos+="<tr><td class='t14 negrita' style='border:0;'>Tipo de MD</td><td style='border:0;' class='t14 negrita'>"+data.ubicacionMD+"</td></tr>";
-				elementos+="<tr><td class='t14 negrita' style='border:0;'>Categoría</td><td style='border:0;' class='t14 negrita'>"+data.nomcategoria+"</td></tr>";
-				elementos+="<tr><td class='t14 negrita' style='border:0;'>Objetivo</td><td style='border:0;' class='t14 negrita'>"+data.totalPuntos+signo+"</td></tr>";
-				elementos+="<tr><th class='t14'>Condición</th><th class='t14'>Peso</th><th class='t14'>Objetivo</th></tr>";
 				
-				for(var i=0; i<data.factores.length;i++){
-					elementos+="<tr><td class='t14'>"+data.factores[i].nombrenivel+"</td>" +
-							"<td class='t14 negrita'>"+data.factores[i].puntuacion+signo+"</td>" +
-							"<td class='t14 negrita'>"+data.factores[i].totalxfactor+"</td>" +
-									"</tr>";				
+				cab_elementos="";
+				cab_elementos+="<div class='col-6 t14 negrita'> Tipo de MD: "+data.ubicacionMD+"</div>";
+				cab_elementos+="<div class='col-6 t14 negrita'> Categoría: "+data.nomcategoria+"</div>";				
+				
+			
+				macro="<tr><td class='t14 negrita' style='border:0;'>Macro Ubicación</td><td style='border:0;' class='t14'></td><td style='border:0;'></td></tr>";
+				micro="<tr><td class='t14 negrita' style='border:0;'>Micro Ubicación</td><td style='border:0;' class='t14'></td><td style='border:0;'></td></tr>";
+
+				
+				
+				for(var i=0; i<data.factores.length-1;i++){
+					if(data.factores[i].rangoubicaid==0){
+						macro+="<tr><td class='t14'>"+data.factores[i].nombrenivel+"</td>" +
+						"<td class='t14 negrita'>"+data.factores[i].puntuacion+signo+"</td>" +
+						"<td class='t14 negrita'>"+data.factores[i].totalxfactor+signo+"</td>" +
+								"</tr>";				
+					}
+					else{
+						micro+="<tr><td class='t14'>"+data.factores[i].nombrenivel+"</td>" +
+						"<td class='t14 negrita'>"+data.factores[i].puntuacion+signo+"</td>" +
+						"<td class='t14 negrita'>"+data.factores[i].totalxfactor+signo+"</td>" +
+								"</tr>";	
+					}
 				}
+				total="<span class='t14 negrita'> Total "+data.factores[i].puntuacion+signo+"</span>"
+				$('#cabecera_score').html(cab_elementos);
+				$('#score_info').html(macro+micro);
+				$('#total_score').html(total);
 			}
 			else{
 				signo=" puntos";
 				
+				cab_elementos="";
+				cab_elementos+="<div class='col-6 t14 negrita'> Tipo de MD: "+data.ubicacionMD+"</div>";
+				cab_elementos+="<div class='col-6 t14 negrita'> Categoría: "+data.nomcategoria+"</div>";
+				
 				elementos="";
-				elementos+="<tr><td class='t14 negrita' style='border:0;'>Tipo de MD</td><td style='border:0;' class='t14 negrita'>"+data.ubicacionMD+"</td></tr>";
-				elementos+="<tr><td class='t14 negrita' style='border:0;'>Categoría</td><td style='border:0;' class='t14 negrita'>"+data.nomcategoria+"</td></tr>";
-				elementos+="<tr><td class='t14 negrita' style='border:0;'>Objetivo</td><td style='border:0;' class='t14 negrita'>"+data.totalPuntos+signo+"</td></tr>";
 				elementos+="<tr><th class='t14'>Condición</th><th class='t14'>Peso</th></tr>";
 				
 				for(var i=0; i<data.factores.length;i++){
 					elementos+="<tr><td class='t14'>"+data.factores[i].nombrenivel+"</td><td class='t14 negrita'>"+data.factores[i].puntuacion+signo+"</td></tr>";				
 				}
+				$('#cabecera_score').html(cab_elementos);
+				$('#score_info').html(elementos);
 			}
 			
 			
 			
-			$('#score_info').html(elementos);
+			
 			$('#score_card').modal('show');
 		}
 		}

@@ -51,8 +51,9 @@ public class Login  extends HttpServlet {
     	try{
     	usuario=comprueba_login(user,pass);
     	codigo=usuario.getCodigo();
-    	
-			if (codigo == 200) {
+			
+    	if (codigo == 200) {
+    		
 				try {
 					HttpSession sesion = request.getSession();
 					sesion.setAttribute("usr", usuario);
@@ -61,11 +62,9 @@ public class Login  extends HttpServlet {
 				}
 				RequestDispatcher despachador = getServletContext().getRequestDispatcher("/jsp/dashboard.jsp");
 				despachador.include(request, response);
-				System.out.println("login");
 			} else {
 				RequestDispatcher despachador = getServletContext().getRequestDispatcher("/jsp/login_error.jsp");
 				despachador.include(request, response);
-				System.out.println("error");
 			}
     	}catch(Exception e){
     	String clase  ="clase: "+ new String (Thread.currentThread().getStackTrace()[1].getClassName());	

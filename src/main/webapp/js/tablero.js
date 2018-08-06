@@ -340,7 +340,7 @@ function creatabla(){
 							datosMemorias[i][13] = "<span class='" + claseEstatus + "'>---</span>";
 						}
 						if(resultadoTablero[i].JSONPTOAUDITORIA.estatus == "ATRASADA") {
-							cadenaAtraso += "&ATR_PPTO_CONS";
+							cadenaAtraso += "&ATR_PPTO_AUDIT";
 							esMdAtrasada = true;
 						}
 					} else {

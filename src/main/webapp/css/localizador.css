@@ -6,6 +6,12 @@ h5{
 .titleDivContent{
 	cursor: pointer;
 }
+
+#xlf{
+    width: 257px;
+    font-size: 12px;	
+}
+
 .contentDetalle{
 	padding-bottom: 15px;
     padding-top: 5px;

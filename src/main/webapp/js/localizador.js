@@ -39,6 +39,7 @@ $(function(){
 	$('#btonCancelarRadios').click(function(){ clearMarkers();});
 	$("#btnAsignarRadio").click(function(){ asignarRadio(1);});
 	$("#btnRemovelAsign").click(function(){ cancelarSelecRadio();});
+	$("#select_employee").change(function(){ radiosUsuario(this);});
 });
 
 
@@ -64,6 +65,7 @@ function showOptionAction(){
     if(element_call.id == "asignarRadio"){
     	getRadiosLocalizados();
     	getObtenerEmpleados();
+    	$("#select_employee").val(0);
     }
 }
 
@@ -579,11 +581,11 @@ var do_file = (function() {
 	  
 	 bounds.extend(marker.position);
 	 marker.addListener("click", function() {
+		 
     	if(infowindow == undefined){
     		infowindow =  new  google.maps.InfoWindow({ content: crearInfoRadioLocalizado(obj) });
     		infowindow.open(map,marker);
  
-    		
     		if(obj.estatusId != 2){
     			obj.marker.setIcon(iconMarke.BLUE);
     			objArray[obj.idMarker].circle.setMap(null);
@@ -596,8 +598,7 @@ var do_file = (function() {
     		
     		if(radioSeleccionado.idMarker != obj.idMarker){
     			infowindow.close();
-    			//obj.marker.setIcon(iconMarke.BLUE);
-    			
+
     			infowindow = new  google.maps.InfoWindow({ content: crearInfoRadioLocalizado(obj) });
     			infowindow.open(map,marker);
     			
@@ -815,4 +816,38 @@ function desAsignarRadio(){
 			setTimeout(function(){cierraLoading();},500);
 		}
 	}
+
+/* === MOSTRAR SOLO CIRCULOS ===*/
+function radiosUsuario(select){
+
+	 if(Object.keys(objArray).length <= 0){
+		 cierraLoading();
+		 return false;
+	 }
+
+	 Object.keys(objArray).forEach(function (key){
+		 if(select.value  == 0){
+			 if( objArray[key].marker.getMap() == null && objArray[key].circle.getMap() == null){
+				 addMarkerAsigna( objArray[key] , map);
+			 } 
+		 }else{
+			 if( objArray[key].usuarioId == select.value &&  objArray[key].estatusId == 2){	 
+				 if( objArray[key].marker.getMap() == null && objArray[key].circle.getMap() == null){
+					 addMarkerAsigna( objArray[key] , map);
+				 } 
+			 }else{
+				 if(objArray[key].estatusId == 1){
+					 //**		 
+				 }else if(objArray[key].estatusId == 2){
+					 objArray[key].marker.setMap(null);
+					 objArray[key].circle.setMap(null);	
+				 }
+			 }
+		 }
+ 
+	});
+}
+
+
+
 

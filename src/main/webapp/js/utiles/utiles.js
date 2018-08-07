@@ -290,12 +290,12 @@ function marca_notificacion(valor){
 		}
 		
 		
-	if(tipoNotificacion==1){
+	/*if(tipoNotificacion==1){
 		$("#nombreMd").val(nombreSitio);
 		$("#mdId").val(id);
 		$("#detalleMemoriaAsignadaAction").submit();
-	}
-	else if(tipoNotificacion==2||tipoNotificacion==4){
+	}*/
+	if(tipoNotificacion==1||tipoNotificacion==2||tipoNotificacion==4){
 		$("#mdIdChat").val(id);
 		$("#chatPorMd").submit();
 	}

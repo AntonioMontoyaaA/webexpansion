@@ -334,7 +334,7 @@
 
 			<div class="col-lg-8 col-12">
 		<div class="row divs_p">
-			<div class="col-lg-12 menupr_estilos fblanco altura2">
+			<div class="col-lg-12 menupr_estilos fblanco div_mapa">
 			
 			<div class="col-12 titulo_seccion">
 				<span class="negrita azul t14">4) Zonificación</span>
@@ -357,8 +357,8 @@
 			
 				
 				<div class="row div_header_sub">
-					<div class="col-lg-9 col-md-7"><div id="mapaZonificacion" style="width: 100%; height: 79%; position: relative; float: left;"></div></div>
-					<div class="col-lg-3 col-md-5" style="max-height:404px; overflow:auto;">
+					<div class="col-lg-9 col-md-7 altura2"><div id="mapaZonificacion" style="width: 100%; height: 79%; position: relative; float: left;"></div></div>
+					<div class="col-lg-3 col-md-5 altura2" style="max-height:404px; overflow:auto;">
 					
 						<div class="row">
 							<div class="col-lg-12 titulo_mapa"><span class="azul t12">COMPETENCIAS</span></div>

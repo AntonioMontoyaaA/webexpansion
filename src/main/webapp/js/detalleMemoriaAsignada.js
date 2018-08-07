@@ -2014,7 +2014,7 @@ function initMap(latitudSitio, longitudSitio, listaCompetencias, listaGeneradore
 			        icon: 'img/generadores/icono_otros_generadores_c.png'
 			   },
 			   "10": {
-			        icon: 'img/competencia/w_neto_c.png'
+			        icon: 'img/competencia/w_neto.png' //competencia tienda neto
 			   },
 			   "11": {
 			        icon: 'img/generadores/recauderia_c.png'

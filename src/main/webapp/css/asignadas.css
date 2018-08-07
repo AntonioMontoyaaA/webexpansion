@@ -55,6 +55,9 @@ overflow-y: initial !important;
 .altura2{
 	height:500px;
 }
+.div_mapa{
+	height:500px;
+}
 .icono_mapa{
 	padding:5px 15px;
 	position:relative;
@@ -127,15 +130,11 @@ span.circulo {
 	height:50%;
 	top:140;
 }
-@media (min-height: 500px) {
-#map{height:50%;  top:160;}
-.altura1{height:400px;}
+@media (min-width: 1015px) {
+#map{height:55%; top:122px;}
 }
-@media (min-height: 600px) {
-#map{height:54%; top:135;}
-}
-@media (min-height: 1200px) {
-#map{height:55%; top:125;}
+@media (max-width: 767px) {
+ .div_mapa{height:950px;}
 }
 
 @media (max-height: 500px) {

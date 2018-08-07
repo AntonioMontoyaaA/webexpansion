@@ -131,6 +131,8 @@ public class LocalizadorRadiosAction extends ExpansionAction implements  Session
 	public String setAsignaRadio()throws Exception{	
 		String idJefeExpansion = ServletActionContext.getRequest().getParameter("idJefeExpansion");
 		String idRadio = ServletActionContext.getRequest().getParameter("idRadioAginar");
+		String valorAsigna = ServletActionContext.getRequest().getParameter("valorAsigna");
+		
 		session();
 
 		try {
@@ -148,7 +150,8 @@ public class LocalizadorRadiosAction extends ExpansionAction implements  Session
 			FormBody.Builder formBuilder = new FormBody.Builder()
 			 .add("usuarioId", numeroEmpleado)
 			 .add("usuarioAsignaId", idJefeExpansion)
-			 .add("radioId", idRadio);
+			 .add("radioId", idRadio)
+			 .add("valorAsigna", valorAsigna);
 			
 			 RequestBody formBody = formBuilder.build();
 			 Request request = new Request.Builder()

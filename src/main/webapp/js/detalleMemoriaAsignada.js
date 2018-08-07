@@ -38,6 +38,7 @@ var AREA_USUARIO;
 
 var ESTATUS_MD;
 
+var ESTATUS_LAYOUT = 7;
 var ESTATUS_VALIDACION_LAYOUT = 9;
 var ESTATUS_PRESUPUESTO_CONSTRUCCION = 10;
 var ESTATUS_PRESUPUESTO_AUDITORIA = 11;
@@ -50,6 +51,8 @@ var HORAI;
 var HORAF;
 
 var AREAS_A;
+
+var ATENCION_POR_ESTATUS;
 
 $(function(){
 	TIPOMD = parseInt($("#tipoMd").val());
@@ -297,6 +300,11 @@ function inicializaFactores(){
 	AREAS_A[areaAuditoria] = false;
 	AREAS_A[areaConstruccion] = false;
 	AREAS_A[areaOperaciones] = false;
+	
+	ATENCION_POR_ESTATUS = {};
+	ATENCION_POR_ESTATUS[3] = [areaExpansion, areaOperaciones];
+	ATENCION_POR_ESTATUS[5] = [areaGestoria];
+	ATENCION_POR_ESTATUS[7] = [areaAuditoria, areaConstruccion];
 }
 
 function muestraChatXMd() {
@@ -351,67 +359,22 @@ function validaEstatusAtencion(estatus, idObjetos){
 	}
 }
 
+function permiteAutorizacion(){
+	return $.inArray(AREA_USUARIO, ATENCION_POR_ESTATUS[ESTATUS_MD]) != -1;
+}
+
 function dibujaGraficaAutorizaciones(){
 	$('#containerProgreso').html('');
 	$('#autoriza8').hide();
 	$('#rechaza8').hide();
 	$('#voboMD').hide();
-	atendidos = 0;
 	
-	for(i in FACTORES){
-		if(FACTORES[i].atendido)
-			atendidos++;
-	}
-	
-	if(!AREAS_A[AREA_USUARIO])
-		atendidos = TOTAL_ATENCIONES;
-	
-	/*var bar = new ProgressBar.Circle(containerProgreso, {
-		  strokeWidth: 4,
-		  easing: 'easeInOut',
-		  duration: 1400,
-		  trailColor: '#eee',
-		  color: '#A3D9FF',
-		  trailWidth: 2,
-		  svgStyle: null
-		});*/
-		
-	progreso = atendidos/TOTAL_ATENCIONES;
-	
-	/*bar.set(progreso, {
-	    from: {color: '#000000', width: 5},
-	    to: {color: "#00FF00", width: 5} });*/
-	
-	if(atendidos == TOTAL_ATENCIONES && TOTAL_ATENCIONES > 0){
-		
-		motivoDefinitivo = false;
-		
-		for(i in FACTORES){
-			if(FACTORES[i].motivoRechazoDefinitivo){
-				motivoDefinitivo = true;
-				break;
-			}
-		}
-		
+	if(permiteAutorizacion() && !AREAS_A[AREA_USUARIO] ){
+		$('#autoriza8').show();
+		$('#voboMD').show();
 		$('#rechaza8').show();
-		if(!motivoDefinitivo){
-			$('#autoriza8').show();
-			$('#voboMD').show();
-			
-		}
-			
-		
-		if(AREAS_A[AREA_USUARIO]){
-			$('#autoriza8').removeClass('sin_autorizar');
-			$('#autoriza8').addClass('autorizado');
-			
-		}
-		
-	}else{
-		$('#autoriza8').hide();
-		$('#rechaza8').hide();
-		$('#voboMD').hide();
 	}
+	
 }
 
 function generaPopAutorizacion(titulo, datos){
@@ -1397,7 +1360,7 @@ function parseaPermisos(){
 function inicializaDropzone(){
 
 	//LAYOUT
-	if(AREA_USUARIO == areaConstruccion && (ESTATUS_MD < 9 || ESTATUS_MD == ESTATUS_CORRECCION_LAYOUT)){
+	if(AREA_USUARIO == areaConstruccion && !AREAS_A[areaConstruccion] && (ESTATUS_MD == ESTATUS_LAYOUT || ESTATUS_MD == ESTATUS_CORRECCION_LAYOUT)){
 		$('#manejadorArchivos').show();
 		$('#montoPresupuesto').hide();
 		$('.simbolo').hide();

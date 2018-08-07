@@ -306,7 +306,8 @@ function inicializaFactores(){
 	AREAS_A[areaOperaciones] = false;
 	
 	ATENCION_POR_ESTATUS = {};
-	ATENCION_POR_ESTATUS[3] = [areaExpansion, areaOperaciones];
+	ATENCION_POR_ESTATUS[3] = [areaExpansion];
+	ATENCION_POR_ESTATUS[8] = [areaExpansion, areaOperaciones];
 	ATENCION_POR_ESTATUS[5] = [areaGestoria];
 	ATENCION_POR_ESTATUS[7] = [areaAuditoria, areaConstruccion];
 }

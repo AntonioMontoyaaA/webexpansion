@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import com.google.gson.Gson;
 import com.tiendas.neto.dao.Expansionlog;
 import com.tiendas.neto.singleton.SingletonProperties;
+import com.tiendas.neto.vo.PerfilesxusuarioVO;
 import com.tiendas.neto.vo.UsuarioLoginVO;
 
 import okhttp3.FormBody;
@@ -51,9 +52,10 @@ public class Login  extends HttpServlet {
     	try{
     	usuario=comprueba_login(user,pass);
     	codigo=usuario.getCodigo();
+    	Integer perfil;
+    	perfil=usuario.getPerfil().getPerfilesxusuario()[0].getPerfilid();
 			
-    	if (codigo == 200) {
-    		
+    	if (codigo == 200 && perfil!=1 && perfil!=2) {
 				try {
 					HttpSession sesion = request.getSession();
 					sesion.setAttribute("usr", usuario);

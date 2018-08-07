@@ -2326,13 +2326,10 @@ function consultaScore(){
 				cab_elementos="";
 				cab_elementos+="<div class='col-6 t14 negrita'> Tipo de MD: "+data.ubicacionMD+"</div>";
 				cab_elementos+="<div class='col-6 t14 negrita'> Categoría: "+data.nomcategoria+"</div>";				
-				
-			
+						
 				macro="<tr><td class='t14 negrita' style='border:0;'>Macro Ubicación</td><td style='border:0;' class='t14 negrita'>Real</td><td class='t14 negrita' style='border:0;'>Objetivo</td></tr>";
 				micro="<tr><td class='t14 negrita' style='border:0;'>Micro Ubicación</td><td style='border:0;' class='t14 negrita'>Real</td><td class='t14 negrita' style='border:0;'>Objetivo</td></tr>";
 
-				
-				
 				for(var i=0; i<data.factores.length-1;i++){
 					if(data.factores[i].rangoubicaid==0){
 						macro+="<tr><td class='t14'>"+data.factores[i].nombrenivel+"</td>" +

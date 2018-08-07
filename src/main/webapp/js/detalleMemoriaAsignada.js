@@ -2328,8 +2328,8 @@ function consultaScore(){
 				cab_elementos+="<div class='col-6 t14 negrita'> Categoría: "+data.nomcategoria+"</div>";				
 				
 			
-				macro="<tr><td class='t14 negrita' style='border:0;'>Macro Ubicación</td><td style='border:0;' class='t14'></td><td style='border:0;'></td></tr>";
-				micro="<tr><td class='t14 negrita' style='border:0;'>Micro Ubicación</td><td style='border:0;' class='t14'></td><td style='border:0;'></td></tr>";
+				macro="<tr><td class='t14 negrita' style='border:0;'>Macro Ubicación</td><td style='border:0;' class='t14 negrita'>Real</td><td class='t14 negrita' style='border:0;'>Objetivo</td></tr>";
+				micro="<tr><td class='t14 negrita' style='border:0;'>Micro Ubicación</td><td style='border:0;' class='t14 negrita'>Real</td><td class='t14 negrita' style='border:0;'>Objetivo</td></tr>";
 
 				
 				

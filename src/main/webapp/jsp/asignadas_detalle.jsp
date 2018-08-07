@@ -669,7 +669,7 @@
 					<div class="modal-body">
 					<div class="row" id="cabecera_score"></div>
 					<table id="score_info"></table>
-					<div class="col-12" style='padding-left:0px;' id="total_score"></div>
+					<div class="col-12 right" style='margin-top:20px;' id="total_score"></div>
 					</div>
 					<div class="modal-footer">
 					</div>

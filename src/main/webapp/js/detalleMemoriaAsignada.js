@@ -2344,7 +2344,7 @@ function consultaScore(){
 								"</tr>";	
 					}
 				}
-				total="<span class='t14 negrita'> Total "+data.factores[i].puntuacion+signo+"</span>"
+				total="<span class='t18 negrita'> Total "+data.factores[i].puntuacion+signo+"</span>"
 				$('#cabecera_score').html(cab_elementos);
 				$('#score_info').html(macro+micro);
 				$('#total_score').html(total);

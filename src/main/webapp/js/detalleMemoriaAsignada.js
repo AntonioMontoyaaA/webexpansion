@@ -38,7 +38,7 @@ var AREA_USUARIO;
 
 var ESTATUS_MD;
 
-var ESTATUS_LAYOUT = 7;
+var ESTATUS_LAYOUT = [6,7];
 var ESTATUS_VALIDACION_LAYOUT = 9;
 var ESTATUS_PRESUPUESTO_CONSTRUCCION = 10;
 var ESTATUS_PRESUPUESTO_AUDITORIA = 11;
@@ -309,6 +309,7 @@ function inicializaFactores(){
 	ATENCION_POR_ESTATUS[3] = [areaExpansion];
 	ATENCION_POR_ESTATUS[8] = [areaExpansion, areaOperaciones];
 	ATENCION_POR_ESTATUS[5] = [areaGestoria];
+	ATENCION_POR_ESTATUS[6] = [areaConstruccion];
 	ATENCION_POR_ESTATUS[7] = [areaAuditoria, areaConstruccion];
 }
 
@@ -366,6 +367,10 @@ function validaEstatusAtencion(estatus, idObjetos){
 
 function permiteAutorizacion(){
 	return $.inArray(AREA_USUARIO, ATENCION_POR_ESTATUS[ESTATUS_MD]) != -1;
+}
+
+function permiteLayout(){
+	return $.inArray(ESTATUS_MD, ESTATUS_LAYOUT) != -1;
 }
 
 function dibujaGraficaAutorizaciones(){
@@ -1365,7 +1370,10 @@ function parseaPermisos(){
 function inicializaDropzone(){
 
 	//LAYOUT
-	if(AREA_USUARIO == areaConstruccion && !AREAS_A[areaConstruccion] && (ESTATUS_MD == ESTATUS_LAYOUT || ESTATUS_MD == ESTATUS_CORRECCION_LAYOUT)){
+	if(AREA_USUARIO == areaConstruccion 
+			&& !AREAS_A[areaConstruccion] 
+			&& (permiteLayout() 
+					|| ESTATUS_MD == ESTATUS_CORRECCION_LAYOUT)){
 		$('#manejadorArchivos').show();
 		$('#montoPresupuesto').hide();
 		$('.simbolo').hide();

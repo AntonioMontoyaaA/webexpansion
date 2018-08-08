@@ -75,7 +75,7 @@ public class Login  extends HttpServlet {
     	elog.error(clase, metodo, e+"", user, pass);
 		RequestDispatcher despachador = getServletContext().getRequestDispatcher("/jsp/login_error.jsp");
 		despachador.include(request, response);
-		System.out.println("fatal error");
+		e.printStackTrace();
 
 		}
 	}

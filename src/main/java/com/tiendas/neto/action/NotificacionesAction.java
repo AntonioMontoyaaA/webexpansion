@@ -126,10 +126,7 @@ public class NotificacionesAction extends ExpansionAction{
 		response2.setContentType("application/json");
 		response2.setCharacterEncoding("UTF-8");
 		
-		try{
-			
-			System.out.println(numeroEmpleado+" "+getTipoNotificacion()+" "+getMdId()+" "+getFecha()+" "+getNivelEstatusArea());
-			
+		try{			
 		final OkHttpClient client = new OkHttpClient();
 		FormBody.Builder formBuilder = new FormBody.Builder()
          .add("usuarioId", numeroEmpleado)

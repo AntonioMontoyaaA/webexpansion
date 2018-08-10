@@ -65,7 +65,8 @@ public class Login  extends HttpServlet {
 				RequestDispatcher despachador = getServletContext().getRequestDispatcher("/jsp/dashboard.jsp");
 				despachador.include(request, response);
 			} else {
-				RequestDispatcher despachador = getServletContext().getRequestDispatcher("/jsp/login_error.jsp");
+				request.setAttribute("respuesta", "error");
+				RequestDispatcher despachador = getServletContext().getRequestDispatcher("/jsp/login.jsp");
 				despachador.include(request, response);
 			}
     	}catch(Exception e){
@@ -73,7 +74,9 @@ public class Login  extends HttpServlet {
     	String metodo ="metodo: "+ new String (Thread.currentThread().getStackTrace()[1].getMethodName());
     	
     	elog.error(clase, metodo, e+"", user, pass);
-		RequestDispatcher despachador = getServletContext().getRequestDispatcher("/jsp/login_error.jsp");
+
+    	request.setAttribute("respuesta", "error");
+		RequestDispatcher despachador = getServletContext().getRequestDispatcher("/jsp/login.jsp");
 		despachador.include(request, response);
 		e.printStackTrace();
 

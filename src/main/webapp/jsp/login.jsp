@@ -38,7 +38,7 @@
 				</div>
 			</div>
 			
-			<form action='Login' method="POST" onsubmit="return validacion();">	
+			<form action='Login' method="POST" onsubmit="return validacion();" id="login_submit">	
 			<div class="row center margenVEntreExagonos">
 				<div class="center margenHEntreExagonos altoExagono">
 					<div class="hexagonB">
@@ -53,6 +53,7 @@
 												</div>
 												<div class="row inicio_user2 center">
 														<div class="imagen"><img src="img/neto-user.png" class="img-exagono-max"></div>
+															<div class="mensajeerror">Usuario incorrecto! </div>															
 															<input type="text" value="" id="user" placeholder="Escribe tu usuario" class="form-control input_login" name="user">
 												</div>
 											</div>
@@ -79,6 +80,7 @@
 													<div class="imagen">
 														<img src="img/contra.png" class="img-exagono-max" alt="Tiendas Neto">
 													</div>
+														<div class="mensajeerror">Contraseña incorrecta!</div>	
 														<input id="pass" type="password" value="" placeholder="Escribe tu contraseña" class="form-control input_login" name="pass">
 													<div class="col col-12">
 														<a class="btn btnOlvidoContrasena" href="#">Olvidaste&nbsp;tu&nbsp;contraseña?</a>
@@ -124,8 +126,10 @@
 			</div>
 		</div>
 	</div>
+	<div class="text-center"><button class="btn entrar" onclick='entrar_boton()'>Entrar</button></div>
 	</div>
 
+	<input type="hidden" value='${respuesta}' id="respuesta"/>
 	<script	src="${pageContext.request.contextPath}/js/jquery/jquery.min.js"></script>	
 		<script src="${pageContext.request.contextPath}/js/jquery/popper.js"></script>
 	<script	src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>

@@ -1,3 +1,22 @@
+.mensajeerror{
+	display:none;
+}
+.entrar{
+	display:none;
+	position:relative;
+	top:-130;
+	margin: 0 auto;
+	background:white;
+    padding: .375rem .75rem;
+    border-radius: .15rem;
+}
+.entrar:hover {
+    border: 1px solid white !important;
+    color: white !important;
+}
+@media (max-width: 576px) {
+	.entrar{display:block;}
+}
 * {
 	margin: 0;
 	padding: 0;

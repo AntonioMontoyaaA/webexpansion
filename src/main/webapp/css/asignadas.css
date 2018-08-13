@@ -1,3 +1,9 @@
+#nombreMd:disabled, #nombreMd[readonly] {
+	background-color:transparent;
+	border:0;
+	padding-left:0;
+	cursor:context-menu;
+}
 #autoriza1, #autoriza2, #autoriza3, #autoriza4, #autoriza5, #autoriza6, #autoriza7,
 #rechaza1, #rechaza2, #rechaza3, #rechaza4, #rechaza5, #rechaza6, #rechaza7{
 	display:none !important;
@@ -12,7 +18,8 @@
             -moz-transition: all .6s ease-in-out;       /* Firefox */
             -o-transition: all .6s ease-in-out;         /* Opera */
             transition: all .6s ease-in-out;
-        }
+}
+
 .desp{
 	width:70px;
 	font-size:12px;

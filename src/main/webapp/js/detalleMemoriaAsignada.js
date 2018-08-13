@@ -107,6 +107,8 @@ function inicializaModulosEdicion(modulos, datosSitio, datosPropietario, general
 		case 1:
 			if(modulos[i].editable == 1) {
 				var datos = "";
+				$('#labelNombre').text("Nombre ");	
+				$('#nombreMd').removeAttr("readonly");	
 				$("#modulo1Edita").show();
 				
 				datos += '<span class="negrita azul t14 sangria_cuerpo">Calle</span><br/>' +
@@ -161,26 +163,26 @@ function inicializaModulosEdicion(modulos, datosSitio, datosPropietario, general
 			}
 			break;
 		case 3:
-			if(modulos[i].editable == 1) {
+			if(modulos[i].editable == 0) {
 				var datos = "";
 				$("#modulo3Edita").show();
 				
-				datos+='<div class="col-12" style="margin-bottom:10px;">';
+				datos+='<div class="col-12" style="margin-bottom:10px; margin-left:20px;">';
 				datos+='<input type="checkbox" class="form-check-input" id="esquina">';
-				datos+='<label class="azul t12" for="esquina">Local en esquina</label>';
+				datos+='<label class="blanco t12" for="esquina">Local en esquina</label>';
 				datos+='</div>';
 			
 				datos+='<div class="col-lg-4">';
-				datos+='<span class="blanco t12">FRENTE</span>&nbsp;&nbsp;&nbsp;';
-				datos+='<input id="frenteMd" type="text" class="text_edita"/><br/>';
+				datos+='<span class="blanco t12">FRENTE&nbsp;&nbsp;&nbsp;';
+				datos+='<input id="frenteMd" type="text" class="text_edita"/>mts</span><br/>';
 				datos+='</div>';
 				datos+='<div class="col-lg-4">';
-				datos+='<span class="blanco t12">PROFUNDIDAD</span>&nbsp;&nbsp;&nbsp;';
-				datos+='<input id="profundidadMd" type="text" class="text_edita"/><br/>';
+				datos+='<span class="blanco t12">PROFUNDIDAD&nbsp;&nbsp;&nbsp;';
+				datos+='<input id="profundidadMd" type="text" class="text_edita"/> mts</span><br/>';
 				datos+='</div>';
 				datos+='<div class="col-lg-4">';
-				datos+='<span class="blanco t12">SUPERFICIE TOTAL</span>&nbsp;&nbsp;&nbsp;';
-				datos+='<input id="tamanioTotalMd" type="text" class="text_edita"/><br/>';
+				datos+='<span class="blanco t12">SUPERFICIE TOTAL&nbsp;&nbsp;&nbsp;';
+				datos+='<input id="tamanioTotalMd" type="text" class="text_edita"/> mts<sup>2</sup></span><br/>';
 				datos+='</div>';
 				$("#modulo3Datos").html(datos);
 				
@@ -189,9 +191,9 @@ function inicializaModulosEdicion(modulos, datosSitio, datosPropietario, general
 				}
 				
 				$("#puntosSuperficie").text(superficie.puntos);
-				$("#frenteMd").val(formatear(superficie.frente, true) + " mts");
-				$("#profundidadMd").val(formatear(superficie.profundidad, true) + " mts");
-				$("#tamanioTotalMd").val(formatear(superficie.total, true) + " mts<sup>2</sup>");
+				$("#frenteMd").val(formatear(superficie.frente, true));
+				$("#profundidadMd").val(formatear(superficie.profundidad, true));
+				$("#tamanioTotalMd").val(formatear(superficie.total, true));
 				$("#vistaFrontalMd").attr("src", superficie.vistaFrontal);
 				$("#fechaVistaFrontal").text(superficie.fechaFrontal);
 				$("#horaVistaFrontal").text(superficie.horaFrontal);
@@ -240,7 +242,7 @@ function inicializaModulosEdicion(modulos, datosSitio, datosPropietario, general
 				}
 				datos += '</select><br/>' +
 				'<input id="disponibilidadFechaText" readonly style="display: none;margin-top: 5px;margin-bottom: 10px;" type="text" class="text_edita" placeholder="dd/MM/yyyy"></div>' +
-				'<span class="negrita blanco t14 sangria_cuerpo">Amortización (%)</span><br/>' +
+				'<span class="negrita blanco t14 sangria_cuerpo">Amortización (MXN)</span><br/>' +
 				'<input id="amortizacionText" type="text" class="text_edita"><br/>' +
 				'<span class="negrita blanco t14 sangria_cuerpo">Tiempo de amortización (meses)</span><br/>' +
 				'<input id="tiempoAmortizacionText" type="text" class="text_edita"><br/>' +
@@ -582,7 +584,8 @@ function buscaDetalleMD(mdId) {
 			
 			/* Datos generales de la MD */
 			if(data.generales != undefined) {
-				$("#nombreMd").text(data.generales.nombreMd);
+				
+				$("#nombreMd").val(data.generales.nombreMd);
 				$("#nombreMdTxt").text(data.generales.nombreMd);
 				$("#creadorMd").text(data.generales.creador);
 				$("#categoriaMd").text(data.generales.categoria);
@@ -733,12 +736,12 @@ function buscaDetalleMD(mdId) {
 			if(data.generalidades != undefined) {
 				$("#montoRenta").text('$' + formatear(data.generalidades.renta, true) + " al mes");
 				$("#disponibilidad").text(data.generalidades.disponibilidad);
-				$("#amortizacion").text(data.generalidades.porcentajeAmortizacion);
+				$("#amortizacion").text('$'+formatear(data.generalidades.porcentajeAmortizacion, true) + " MXN");
 				$("#tiempoAmortizacion").text(data.generalidades.periodoAmortizacion);
 				$("#periodoGracia").text(data.generalidades.periodoGracia);
 				$("#puntosGeneralidades").text(data.generalidades.puntos);
 				
-				var contentPopGeneralidades = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 14px;">Agrega tips para que tus buscadores encuentren sitios mejores</span></div></div>';
+ 				var contentPopGeneralidades = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 14px;">Agrega tips para que tus buscadores encuentren sitios mejores</span></div></div>';
 				if(data.generalidades.tips != undefined && data.generalidades.tips.length > 0) {
 					contentPopGeneralidades = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 14px;">' + data.generalidades.tips[0] + '</span></div></div>';
 				}

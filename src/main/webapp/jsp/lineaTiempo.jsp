@@ -26,13 +26,11 @@
 	<div class="row padding_p" style="padding-top:0px;">
 		<div class="col-lg-12 titulo azul t12 negrita">DASHBOARD ${usr.perfil.areasxpuesto[0].areaNom} > TABLERO > TIEMPOS > <span id="nombre_md" ></span> </div>
 	
-	<div class="col-lg-12">
-		<div class="row">
-				<button class="btn desp atras" type="button" onclick="history.back()">
-  								<img src="${pageContext.request.contextPath}/img/regresarOFF.png" />
-  				</button>
+	<div class="col-12"  style="padding-left:0;">
+				<button class="btn atras" type="button" onclick="history.back()" style="margin-bottom:0px;"></button>
 		</div>
-		
+	
+	<div class="col-lg-12">
 		<div class="row padding_p">
 				<div class="col-lg-12 menupr_estilos fblanco" id="contenedor_gantt"  style="padding:0;"></div>
 		</div>

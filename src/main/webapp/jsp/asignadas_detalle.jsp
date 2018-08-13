@@ -29,9 +29,10 @@
 <div class="container-fluid">
 	<div class="row padding_p">
 	<div class="col-lg-12 titulo azul t12 negrita">DASHBOARD ${usr.perfil.areasxpuesto[0].areaNom} > <span id="titulo_tipo"></span> > <span id="nombreMdTxt"></span>></div>
-
-			<div class="col-lg-12"
-				style="padding-left: 20px; padding-right: 20px;">
+			<div class="col-12"  style="padding-left:0;">
+				<button class="btn atras" type="button" onclick="history.back()"></button>
+			</div>
+			<div class="col-lg-12" style="padding-left: 20px; padding-right: 20px;">
 				<div class="row div_header menupr_estilos fazul"
 					style="margin-bottom: 10px;">
 
@@ -122,7 +123,9 @@
 			<div class="col-lg-12 menupr_estilos fblanco altura1">
 			<div class="col-12 titulo_seccion">	
 			<div class="row">
-			<div class="col-lg-6"><span id="nombreMd" class="negrita azul t14">---</span></div>
+			<div class="col-lg-6">
+			<span class="t12 azul" id="labelNombre"></span><input class="negrita azul t14" value="---" type="text" id="nombreMd" readonly />
+			</div>
 			<div class="col-lg-6 right">
 			<span>
 				<img id="mensajesMD" title="Ver mensajes" class="autorizado" onclick="muestraChatXMd();" style="cursor: pointer;" src="img/iconos_COMENTARIOS.png">&nbsp;

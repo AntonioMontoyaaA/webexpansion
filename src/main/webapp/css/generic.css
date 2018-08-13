@@ -3,6 +3,17 @@
 .cursor{
 	cursor:pointer;
 }
+.atras{
+	width:30px !important;
+	height:25px !important;
+	background-color:white;
+	background-image: url(../img/regresarOFF.png);
+	background-position: center;
+    background-repeat: no-repeat;
+    margin-left:5px;
+    margin-bottom:5px;
+	
+}
 .loadingPagina {
 	position: absolute;
     padding: 0px;

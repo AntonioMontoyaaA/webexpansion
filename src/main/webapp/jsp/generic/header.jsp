@@ -12,15 +12,17 @@
 				</button>
 				<div class="navbar-collapse collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav mr-auto ml-auto mt-2 mt-lg-0" >
-						<li class="nav-item"><a id="iddashboard" class="nav-link blanco t12" href="dashboard">Dashboard</a></li>
-						<li class="nav-item"><a id="idtablero" class="nav-link blanco t12" href="tablero">Tablero</a></li>
-						<li class="nav-item"><a id="idasignadas" class="nav-link blanco t12" href="asignadas">En Proceso</a></li>
-						<li class="nav-item"><a id="idautorizadas" class="nav-link blanco t12" href="autorizadas">Autorizadas</a></li>
-						<li class="nav-item"><a id="idrechazadas" class="nav-link blanco t12" href="rechazadas">Rechazadas</a></li>
-						<li class="nav-item"><a id="idagenda" class="nav-link blanco t12" href="agenda">Agenda</a></li>	
-						<li class="nav-item"><a id="idlocalizador" class="nav-link blanco t12" href="localizador">Localizador</a></li>	
-						<li class="nav-item"><a id="idaprobadas" class="nav-link blanco t12" href="aprobadas" style="display: none;">Aprobadas</a></li>	
+						<li id="dashboardMenu" class="nav-item"><a id="iddashboard" class="nav-link blanco t12" href="dashboard">Dashboard</a></li>
+						<li id="tableroMenu" class="nav-item"><a id="idtablero" class="nav-link blanco t12" href="tablero">Tablero</a></li>
+						<li id="enProcesoMenu" class="nav-item"><a id="idasignadas" class="nav-link blanco t12" href="asignadas">En Proceso</a></li>
+						<li id="autorizadasMenu" class="nav-item"><a id="idautorizadas" class="nav-link blanco t12" href="autorizadas">Autorizadas</a></li>
+						<li id="rechazadasMenu" class="nav-item"><a id="idrechazadas" class="nav-link blanco t12" href="rechazadas">Rechazadas</a></li>
+						<li id="agendaMenu" class="nav-item"><a id="idagenda" class="nav-link blanco t12" href="agenda">Agenda</a></li>	
+						<li id="localizadorMenu" class="nav-item"><a id="idlocalizador" class="nav-link blanco t12" href="localizador"> Localizador</a></li>	
+						<li id="aprobadasMenu" class="nav-item"><a id="idaprobadas" class="nav-link blanco t12" href="aprobadas">Aprobadas</a></li>	
 					</ul>
+					
+					<input id="perfilLogin" type="hidden" value="${usr.perfil.puestoId}"/>
 					
 		<form class="form-inline my-2 my-lg-0">
 		<div class="text-right" style="padding-bottom:5px;">

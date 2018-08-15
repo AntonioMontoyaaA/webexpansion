@@ -1,3 +1,4 @@
+var ANALISTA_RADIOS = 15;
 
 var earthRadii = {
         mi: 3963.1676,
@@ -32,6 +33,17 @@ var idRadioDesAsignar = -1;
 
 /* =================== MAIN FUNCTION *-JS-*  ==================*/
 $(function(){
+	
+	if($("#perfilLogin").val() == ANALISTA_RADIOS) {
+		$("#dashboardMenu").hide();
+		$("#tableroMenu").hide();
+		$("#enProcesoMenu").hide();
+		$("#autorizadasMenu").hide();
+		$("#rechazadasMenu").hide();
+		$("#agendaMenu").hide();
+		$("#aprobadasMenu").hide();
+	}
+	
 	$('#idlocalizador').addClass('resaltado');
 	$('#asignarRadio').click(function(){ showContentRadios(this);});
 	$('#altaRadio').click(function(){ showContentRadios(this);});

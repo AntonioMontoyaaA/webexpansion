@@ -23,6 +23,7 @@ import okhttp3.Response;
 
 @SuppressWarnings("serial")
 public class Login  extends HttpServlet {
+	private final int ANALISTA_RADIOS = 15;
 	Expansionlog elog=new Expansionlog();
 	SingletonProperties sp=SingletonProperties.getInstancia();
 	private String user;
@@ -43,6 +44,7 @@ public class Login  extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	UsuarioLoginVO usuario=new UsuarioLoginVO();
+    	RequestDispatcher despachador = null;
     	int codigo;
     	response.setContentType("text/html;charset=UTF-8");
 
@@ -62,11 +64,16 @@ public class Login  extends HttpServlet {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				RequestDispatcher despachador = getServletContext().getRequestDispatcher("/jsp/dashboard.jsp");
+				
+				if(usuario.getPerfil().getPuestoId() == ANALISTA_RADIOS) {
+					despachador = getServletContext().getRequestDispatcher("/jsp/localizador.jsp");
+				} else {
+					despachador = getServletContext().getRequestDispatcher("/jsp/dashboard.jsp");
+				}
 				despachador.include(request, response);
 			} else {
 				request.setAttribute("respuesta", "error");
-				RequestDispatcher despachador = getServletContext().getRequestDispatcher("/jsp/login.jsp");
+				despachador = getServletContext().getRequestDispatcher("/jsp/login.jsp");
 				despachador.include(request, response);
 			}
     	}catch(Exception e){
@@ -76,7 +83,7 @@ public class Login  extends HttpServlet {
     	elog.error(clase, metodo, e+"", user, pass);
 
     	request.setAttribute("respuesta", "error");
-		RequestDispatcher despachador = getServletContext().getRequestDispatcher("/jsp/login.jsp");
+		despachador = getServletContext().getRequestDispatcher("/jsp/login.jsp");
 		despachador.include(request, response);
 		e.printStackTrace();
 

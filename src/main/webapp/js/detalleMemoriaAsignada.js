@@ -54,6 +54,9 @@ var AREAS_A;
 
 var ATENCION_POR_ESTATUS;
 
+var predialImg;
+var fechaPredial;
+
 $(function(){
 	TIPOMD = $("#tipoMd").val();
 	AREA_USUARIO = parseInt($('#areaUsuario').val());
@@ -655,6 +658,15 @@ function buscaDetalleMD(mdId) {
 				$("#vistaLateral2Md").attr("src", data.superficie.lateral2);
 				$("#fechaVistaLateral2").text(data.superficie.fechaLateral2);
 				$("#horaVistaLateral2").text(data.superficie.horaLateral2);
+				
+				//predial
+				if(data.superficie.predial != undefined && data.superficie.predial != "") {
+					$("#muestraPredial").show();
+					predialImg = data.superficie.predial;
+					fechaPredial = data.superficie.fechaPredial + " " + data.superficie.horaPredial;
+				} else {
+					$("#muestraPredial").hide();
+				}
 				
 				//nuevos valores
 				if(data.superficie.esquina==true){
@@ -2383,5 +2395,8 @@ function consultaScore(){
 			$('#score_card').modal('show');
 		}
 		}
+}
 
+function muestraPredial() {
+	modalImage(undefined, predialImg, "Tomada el día: " + fechaPredial);
 }

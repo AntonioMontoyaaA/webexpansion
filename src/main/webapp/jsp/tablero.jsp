@@ -10,6 +10,7 @@
  -->  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/jquery-ui.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/pretty-checkbox.min.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/generic.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/tablas.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/tablero.css" />
@@ -33,8 +34,8 @@
             <div class="col-lg-5"></div>--%>
             
             
-            <div class="col-lg-2 titulogrande azul t18">TABLERO ${usr.perfil.areasxpuesto[0].areaNom}</div>
-            <div class="col-lg-4">
+            <div class="col-lg-2 col-2 titulogrande azul t18">TABLERO ${usr.perfil.areasxpuesto[0].areaNom}</div>
+            <div class="col-lg-4 col-4">
             	<div class="slide-toggle">
             		<div class="row">
             			<div class="header_boton" style="border-right: 1px solid #ccc;width: 64%;"><img id="imgTableroPend" src="${pageContext.request.contextPath}/img/arrowDown.png" />&nbsp;&nbsp;&nbsp;Área</div>
@@ -49,7 +50,17 @@
             		</div>
             	</div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-1 col-1">
+            	<div class="row" style="margin-top: 5px;">
+            		<div class="pretty p-default p-round">
+        				<input id="checkTipoTablero" type="checkbox" />
+        				<div class="state p-primary-o">
+            			<label style="font-size: 12px;">Ver canceladas</label>
+        				</div>
+    				</div>
+            	</div>
+            </div>
+            <div class="col-lg-5 col-5">
                 <form class="form-inline float-right">
                 <div class="buscador">
                         <input type="text"  placeholder="Buscar" id="buscador" class="form-control buscadorInput t12" onkeyup="ejecutaBusquedaTablero()"/>
@@ -70,7 +81,7 @@
                 </form>
             </div>
             
-            <div class="col-lg-12">
+            <div class="col-lg-12 col-12">
                 <div class="row padding_p">
                     <div class="col-lg-12 menupr_estilos fblanco tabla_container">
                         <!--Tabla-->

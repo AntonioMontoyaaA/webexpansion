@@ -39,10 +39,12 @@ public class TableroInfoAction extends ExpansionAction implements SessionAware, 
 		try {
 			if(usuario != null) {
 				String fecha = ServletActionContext.getRequest().getParameter("fechaConsulta");
+				String estatus = ServletActionContext.getRequest().getParameter("estatus");
 				
 				final OkHttpClient client = new OkHttpClient();
 				FormBody.Builder formBuilder = new FormBody.Builder()
 				 .add("fechaIni", fecha)
+				 .add("estatus", estatus)
 				 .add("usuarioId", String.valueOf(usuario.getPerfil().getNumeroEmpleado()));
 				
 				 RequestBody formBody = formBuilder.build();
@@ -60,7 +62,7 @@ public class TableroInfoAction extends ExpansionAction implements SessionAware, 
 			} else {
 				RespuestaVo respuestaVo = new RespuestaVo();
 				respuestaVo.setCodigo(501);
-				respuestaVo.setMensaje("Error en la sesión");
+				respuestaVo.setMensaje("Error en la sesiï¿½n");
 				sendJSONObjectToResponse(respuestaVo);
 				return null;
 			}

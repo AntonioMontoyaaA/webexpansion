@@ -252,13 +252,16 @@
 
 							</div>
 						</div>
-
-						<div class="row div_header_sub" id="modulo3Datos">
-						<div class="col-12" style="margin-bottom:10px; margin-left:20px;">
-							<input type="checkbox" class="form-check-input" id="esquina"  onclick="return false;">
-    						<label class="blanco t12" for="esquina">Local en esquina</label>
+						<div class="row div_header_sub">
+							<div class="col-lg-6 col-6" style="margin-bottom:10px; margin-left:20px;">
+								<input type="checkbox" class="form-check-input" id="esquina"  onclick="return false;">
+    							<label class="blanco t12" for="esquina">Local en esquina</label>
+							</div>
+							<div class="col-lg-5 col-5" onclick="muestraPredial()">
+								<span id="muestraPredial" style="color: #FFF; text-decoration: underline; cursor: pointer;font-size: 14px;display: none;">Ver predial</span>
+							</div>
 						</div>
-						
+						<div class="row div_header_sub" id="modulo3Datos">
 							<div class="col-lg-4">
 								<span class="blanco t12">FRENTE</span>&nbsp;&nbsp;&nbsp;<span
 									id="frenteMd" class="negrita blanco t14">---</span>

@@ -28,6 +28,10 @@ $(function(){
 		$("#submitBotonTablero").click();
 	});
 	
+	$("#checkTipoTablero").click(function() {
+		creatabla();
+	});
+	
 	$(".slide-toggle").click(function(){
         $(".box").slideToggle();
     });
@@ -113,8 +117,13 @@ function inicializaCalendarios() {
 
 function creatabla(){
 	
+	var tipoTabla = 0;
+	if(!$("#checkTipoTablero").is(":checked")) {
+		tipoTabla = 1;
+	}
+	
 	invocarJSONServiceAction("tablero_info", 
-				{'fechaConsulta': $( "#datepicker1").val()}, 
+				{'fechaConsulta': $( "#datepicker1").val(), "estatus": tipoTabla}, 
 				'obtieneTableroResponse', 
 				function() {
 					//Funcion de error

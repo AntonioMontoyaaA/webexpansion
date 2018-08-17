@@ -29,7 +29,7 @@ function initTablaMemoriasAsignadas(nombreDiv, datosDesgloseVenta, nombreTabla){
 				           {"bSearchable":true},
 				           {"sClass": "seguimiento","bSearchable":true},
 				           {"sClass": "liga_chat","bSearchable":true},
-				           {"sClass": "oculto mdId", "bSearchable": false }],		
+				           {"sClass": "oculto mdId", "bSearchable": true }],		
 			"bJQueryUI": false,
 			"order": [],
 			"sPaginationType": "full_numbers",
@@ -41,7 +41,7 @@ function initTablaMemoriasAsignadas(nombreDiv, datosDesgloseVenta, nombreTabla){
 			 "aoColumnDefs": [ {
 					"sClass": "center",
 					"aTargets": [ 0,2 ]
-			} ]
+			}, { "sType": 'extract-date', "aTargets": [4,5] } ]
 			 
 	});	
 	

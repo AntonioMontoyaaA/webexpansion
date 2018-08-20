@@ -103,10 +103,10 @@ public class CreaExcelTablero {
         cell.setCellValue(new HSSFRichTextString("NOMBRE DE LA TDA"));
         cell = row.createCell(4);
         cell.setCellStyle(headerCellStyle);
-        cell.setCellValue(new HSSFRichTextString("JEFE DE EXPANSIÓN"));
+        cell.setCellValue(new HSSFRichTextString("JEFE DE EXPANSION"));
         cell = row.createCell(5);
         cell.setCellStyle(headerCellStyle);
-        cell.setCellValue(new HSSFRichTextString("GERENTE DE EXPANSIÓN"));
+        cell.setCellValue(new HSSFRichTextString("GERENTE DE EXPANSION"));
         cell = row.createCell(6);
         cell.setCellStyle(headerCellStyle);
         cell.setCellValue(new HSSFRichTextString("REGIONAL"));
@@ -115,7 +115,7 @@ public class CreaExcelTablero {
         cell.setCellValue(new HSSFRichTextString("CATEGORIA"));
         cell = row.createCell(8);
         cell.setCellStyle(headerCellStyle);
-        cell.setCellValue(new HSSFRichTextString("PUNTUACIÓN"));
+        cell.setCellValue(new HSSFRichTextString("PUNTUACION"));
         cell = row.createCell(9);
         cell.setCellStyle(headerCellStyle);
         cell.setCellValue(new HSSFRichTextString("VOBO INICIAL OPERACIONES"));

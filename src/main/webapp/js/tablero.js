@@ -68,15 +68,33 @@ function dibujaEstatus(resumen) {
             busqueda = "RECH_EXPAN";
         }
 		
+		var busquedaCadena = "";
+		if(resumen[i].atrasadas != "NA") {
+			busquedaCadena = 'onclick="filtraEstatus(\'' + resumen[i].estatus + ' &ATR_' + busqueda + '\', this)"';
+		} else {
+			busquedaCadena = '';
+		}
+		
 		datos += '<div onclick="filtraEstatus(\'' + resumen[i].estatus + '\', this)" class="tabla_pendientes" style="width: 65%;"><span>' + resumen[i].estatus + '</span></div>' +
 				'<div onclick="filtraEstatus(\'' + resumen[i].estatus + '\', this)" class="tabla_pendientes" style="width: 18%;padding-left: 10px;"><span>' + resumen[i].total + '</span></div>' +
-				'<div onclick="filtraEstatus(\'' + resumen[i].estatus + ' &ATR_' + busqueda + '\', this)" class="tabla_pendientes" style="width: 17%;padding-left: 10px;"><span>' + resumen[i].atrasadas + '</span></div>';
+				'<div ' + busquedaCadena + ' class="tabla_pendientes" style="width: 17%;padding-left: 10px;"><span>' + resumen[i].atrasadas + '</span></div>';
 		total += resumen[i].total;
-		totalAtrasadas += resumen[i].atrasadas;
+		if(resumen[i].atrasadas != "NA") {
+			totalAtrasadas += resumen[i].atrasadas;
+		} else {
+			totalAtrasadas = -1;
+		}
 	}
-	datos += '<div onclick="filtraEstatus(\'\', this)" class="tabla_pendientes" style="border-top: 2px solid #FFF;width: 65%;"><span>Total</span></div>' +
-			'<div class="tabla_pendientes" style="border-top: 2px solid #FFF;width: 18%;padding-left: 10px;"><span id="totalPendientes">' + total + '</span></div>' +
-			'<div class="tabla_pendientes" style="border-top: 2px solid #FFF;width: 17%;padding-left: 10px;"><span id="totalPendientes">' + totalAtrasadas + '</span></div>';
+	
+	if(totalAtrasadas == -1) {
+		datos += '<div  class="tabla_pendientes" style="border-top: 2px solid #FFF;width: 65%;"><span>Total</span></div>' +
+		'<div class="tabla_pendientes" style="border-top: 2px solid #FFF;width: 18%;padding-left: 10px;"><span id="totalPendientes">' + total + '</span></div>' +
+		'<div class="tabla_pendientes" style="border-top: 2px solid #FFF;width: 17%;padding-left: 10px;"><span id="totalPendientes">NA</span></div>';
+	} else {
+		datos += '<div onclick="filtraEstatus(\'\', this)" class="tabla_pendientes" style="border-top: 2px solid #FFF;width: 65%;"><span>Total</span></div>' +
+		'<div onclick="filtraEstatus(\'\', this)" class="tabla_pendientes" style="border-top: 2px solid #FFF;width: 18%;padding-left: 10px;"><span id="totalPendientes">' + total + '</span></div>' +
+		'<div onclick="filtraEstatus(\'\', this)" class="tabla_pendientes" style="border-top: 2px solid #FFF;width: 17%;padding-left: 10px;"><span id="totalPendientes">' + totalAtrasadas + '</span></div>';
+	}
 	$("#box-inner").html(datos);
 }
 

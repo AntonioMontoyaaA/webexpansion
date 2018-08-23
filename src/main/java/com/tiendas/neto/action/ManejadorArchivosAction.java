@@ -203,7 +203,7 @@ public class ManejadorArchivosAction
 		String total = ServletActionContext.getRequest().getParameter("total");
 		
 		String cero = "0";
-		String uno = "1";
+		String dos = "2";
 		
 		try{
 			
@@ -230,7 +230,7 @@ public class ManejadorArchivosAction
 					.add("bajaConteos", cero)
 					.add("numTelefono", cero)
 					.add("versionApp", cero)
-					.add("tipoServicio", uno);
+					.add("tipoServicio", dos);
 				
 				RequestBody body = builder.build();
 				Request request = new Request.Builder()

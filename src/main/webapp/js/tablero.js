@@ -69,7 +69,7 @@ function dibujaEstatus(resumen) {
         }
 		
 		datos += '<div onclick="filtraEstatus(\'' + resumen[i].estatus + '\', this)" class="tabla_pendientes" style="width: 65%;"><span>' + resumen[i].estatus + '</span></div>' +
-				'<div class="tabla_pendientes" style="width: 18%;padding-left: 10px;"><span>' + resumen[i].total + '</span></div>' +
+				'<div onclick="filtraEstatus(\'' + resumen[i].estatus + '\', this)" class="tabla_pendientes" style="width: 18%;padding-left: 10px;"><span>' + resumen[i].total + '</span></div>' +
 				'<div onclick="filtraEstatus(\'' + resumen[i].estatus + ' &ATR_' + busqueda + '\', this)" class="tabla_pendientes" style="width: 17%;padding-left: 10px;"><span>' + resumen[i].atrasadas + '</span></div>';
 		total += resumen[i].total;
 		totalAtrasadas += resumen[i].atrasadas;

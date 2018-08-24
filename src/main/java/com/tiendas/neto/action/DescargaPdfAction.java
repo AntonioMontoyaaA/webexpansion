@@ -317,6 +317,7 @@ public class DescargaPdfAction extends ExpansionAction{
 		}
 		parameters.put("conteos", listaObjetos);
 		
+		
 		// ------------------------ imagen de estrellas segun categoria
 		if(pdfcategoriaMd.equals("A")) {
 			parameters.put("estrellas", urlimagenes+"estrellasA.png");

@@ -87,7 +87,7 @@ function escribirMensajes(mensajes){
 				
 				if(data.tipoComentario == 3) {
 					html=html+'<div class="msj_icono">'+icono+'</div>';
-					html=html+'<div class="msj_texto azul mensaje_evento" style="width:91%">'+data.autor + ' ' + data.comentario+'<br><span style="font-size: 9px;">' + data.fecha + '</span></div>';
+					html=html+'<div class="msj_texto azul mensaje_evento" style="width:91%">'+data.comentario+'<br><span style="font-size: 9px;">' + data.fecha + '</span></div>';
 				} else if(data.usuarioId != $("#usuarioLogin").val())  {
 					var pantalla = "En pantalla ";
 					if(data.nombreFactor != undefined && data.nombreFactor != null && data.nombreFactor != "null") {
@@ -96,7 +96,7 @@ function escribirMensajes(mensajes){
 						pantalla = "";
 					}
 					html=html+'<div class="msj_icono">'+icono+'</div>';
-					html=html+'<div class="msj_texto azul mensaje_recibido"><font class="area">'+data.autor+'</font><br>' + pantalla + data.comentario+'<br><span style="font-size: 9px;">' + data.fecha + '</span></div>';
+					html=html+'<div class="msj_texto azul mensaje_recibido"><font class="area">'+data.puesto+'</font><br>' + pantalla + data.comentario+'<br><span style="font-size: 9px;">' + data.fecha + '</span></div>';
 				} else {
 					var pantalla = "En pantalla ";
 					if(data.nombreFactor != undefined && data.nombreFactor != null && data.nombreFactor != "null") {
@@ -108,7 +108,7 @@ function escribirMensajes(mensajes){
 						pantalla += data.nombreFactor + ": ";
 					}
 					html=html+'<div class="msj_icono" style="width: 50%">&nbsp;</div>';
-					html=html+'<div class="msj_texto azul mensaje_enviado" style="width: 50%"><font class="area">'+ data.autor+'</font><br>'+  pantalla + data.comentario+'<br><span style="font-size: 9px;">' + data.fecha + '</span></div>';
+					html=html+'<div class="msj_texto azul mensaje_enviado" style="width: 50%"><font class="area">'+ data.puesto+'</font><br>'+  pantalla + data.comentario+'<br><span style="font-size: 9px;">' + data.fecha + '</span></div>';
 				}
 				html=html+'</div>';
 				$('#jefe_expansion').append(html);
@@ -143,7 +143,7 @@ function escribirMensajes(mensajes){
 				
 				if(data.tipoComentario == 3) {
 					html=html+'<div class="msj_icono">'+icono+'</div>';
-					html=html+'<div class="msj_texto azul mensaje_evento" style="width:91%">'+data.autor + ' ' + data.comentario+'<br><span style="font-size: 9px;">' + data.fecha + '</span></div>';
+					html=html+'<div class="msj_texto azul mensaje_evento" style="width:91%">'+data.comentario+'<br><span style="font-size: 9px;">' + data.fecha + '</span></div>';
 				} else if(data.usuarioId != $("#usuarioLogin").val())  {
 					var pantalla = "En pantalla ";
 					if(data.nombreFactor != undefined && data.nombreFactor != null && data.nombreFactor != "null") {
@@ -152,7 +152,7 @@ function escribirMensajes(mensajes){
 						pantalla = "";
 					}
 					html=html+'<div class="msj_icono">'+icono+'</div>';
-					html=html+'<div class="msj_texto azul mensaje_recibido"><font class="area">'+data.autor+'</font><br>' + pantalla + data.comentario+'<br><span style="font-size: 9px;">' + data.fecha + '</span></div>';
+					html=html+'<div class="msj_texto azul mensaje_recibido"><font class="area">'+data.puesto+'</font><br>' + pantalla + data.comentario+'<br><span style="font-size: 9px;">' + data.fecha + '</span></div>';
 				} else {
 					var pantalla = "En pantalla ";
 					if(data.nombreFactor != undefined && data.nombreFactor != null && data.nombreFactor != "null") {
@@ -164,7 +164,7 @@ function escribirMensajes(mensajes){
 						pantalla += data.nombreFactor + ": ";
 					}
 					html=html+'<div class="msj_icono" style="width: 50%">&nbsp;</div>';
-					html=html+'<div class="msj_texto azul mensaje_enviado" style="width: 50%"><font class="area">'+ data.autor+'</font><br>'+  pantalla + data.comentario+'<br><span style="font-size: 9px;">' + data.fecha + '</span></div>';
+					html=html+'<div class="msj_texto azul mensaje_enviado" style="width: 50%"><font class="area">'+ data.puesto+'</font><br>'+  pantalla + data.comentario+'<br><span style="font-size: 9px;">' + data.fecha + '</span></div>';
 				}
 				html=html+'</div>';
 				$('#gerente_expansion').append(html);
@@ -199,7 +199,7 @@ function escribirMensajes(mensajes){
 				
 				if(data.tipoComentario == 3) {
 					html=html+'<div class="msj_icono">'+icono+'</div>';
-					html=html+'<div class="msj_texto azul mensaje_evento" style="width:91%">'+data.autor + ' ' + data.comentario+'<br><span style="font-size: 9px;">' + data.fecha + '</span></div>';
+					html=html+'<div class="msj_texto azul mensaje_evento" style="width:91%">'+data.comentario+'<br><span style="font-size: 9px;">' + data.fecha + '</span></div>';
 				} else if(data.usuarioId != $("#usuarioLogin").val())  {
 					var pantalla = "En pantalla ";
 					if(data.nombreFactor != undefined && data.nombreFactor != null && data.nombreFactor != "null") {
@@ -208,7 +208,7 @@ function escribirMensajes(mensajes){
 						pantalla = "";
 					}
 					html=html+'<div class="msj_icono">'+icono+'</div>';
-					html=html+'<div class="msj_texto azul mensaje_recibido"><font class="area">'+data.autor+'</font><br>' + pantalla + data.comentario+'<br><span style="font-size: 9px;">' + data.fecha + '</span></div>';
+					html=html+'<div class="msj_texto azul mensaje_recibido"><font class="area">'+data.puesto+'</font><br>' + pantalla + data.comentario+'<br><span style="font-size: 9px;">' + data.fecha + '</span></div>';
 				} else {
 					var pantalla = "En pantalla ";
 					if(data.nombreFactor != undefined && data.nombreFactor != null && data.nombreFactor != "null") {
@@ -220,7 +220,7 @@ function escribirMensajes(mensajes){
 						pantalla += data.nombreFactor + ": ";
 					}
 					html=html+'<div class="msj_icono" style="width: 50%">&nbsp;</div>';
-					html=html+'<div class="msj_texto azul mensaje_enviado" style="width: 50%"><font class="area">'+ data.autor+'</font><br>'+  pantalla + data.comentario+'<br><span style="font-size: 9px;">' + data.fecha + '</span></div>';
+					html=html+'<div class="msj_texto azul mensaje_enviado" style="width: 50%"><font class="area">'+ data.puesto+'</font><br>'+  pantalla + data.comentario+'<br><span style="font-size: 9px;">' + data.fecha + '</span></div>';
 				}
 				html=html+'</div>';
 				$('#expansion').append(html);
@@ -255,7 +255,7 @@ function escribirMensajes(mensajes){
 				
 				if(data.tipoComentario == 3) {
 					html=html+'<div class="msj_icono">'+icono+'</div>';
-					html=html+'<div class="msj_texto azul mensaje_evento" style="width:91%">'+data.autor + ' ' + data.comentario+'<br><span style="font-size: 9px;">' + data.fecha + '</span></div>';
+					html=html+'<div class="msj_texto azul mensaje_evento" style="width:91%">'+data.comentario+'<br><span style="font-size: 9px;">' + data.fecha + '</span></div>';
 				} else if(data.usuarioId != $("#usuarioLogin").val())  {
 					var pantalla = "En pantalla ";
 					if(data.nombreFactor != undefined && data.nombreFactor != null && data.nombreFactor != "null") {
@@ -264,7 +264,7 @@ function escribirMensajes(mensajes){
 						pantalla = "";
 					}
 					html=html+'<div class="msj_icono">'+icono+'</div>';
-					html=html+'<div class="msj_texto azul mensaje_recibido"><font class="area">'+data.autor+'</font><br>' + pantalla + data.comentario+'<br><span style="font-size: 9px;">' + data.fecha + '</span></div>';
+					html=html+'<div class="msj_texto azul mensaje_recibido"><font class="area">'+data.puesto+'</font><br>' + pantalla + data.comentario+'<br><span style="font-size: 9px;">' + data.fecha + '</span></div>';
 				} else {
 					var pantalla = "En pantalla ";
 					if(data.nombreFactor != undefined && data.nombreFactor != null && data.nombreFactor != "null") {
@@ -276,7 +276,7 @@ function escribirMensajes(mensajes){
 						pantalla += data.nombreFactor + ": ";
 					}
 					html=html+'<div class="msj_icono" style="width: 50%">&nbsp;</div>';
-					html=html+'<div class="msj_texto azul mensaje_enviado" style="width: 50%"><font class="area">'+ data.autor+'</font><br>'+  pantalla + data.comentario+'<br><span style="font-size: 9px;">' + data.fecha + '</span></div>';
+					html=html+'<div class="msj_texto azul mensaje_enviado" style="width: 50%"><font class="area">'+ data.puesto+'</font><br>'+  pantalla + data.comentario+'<br><span style="font-size: 9px;">' + data.fecha + '</span></div>';
 				}
 				html=html+'</div>';
 				$('#gestoria').append(html);
@@ -311,7 +311,7 @@ function escribirMensajes(mensajes){
 				
 				if(data.tipoComentario == 3) {
 					html=html+'<div class="msj_icono">'+icono+'</div>';
-					html=html+'<div class="msj_texto azul mensaje_evento" style="width:91%">'+data.autor + ' ' + data.comentario+'<br><span style="font-size: 9px;">' + data.fecha + '</span></div>';
+					html=html+'<div class="msj_texto azul mensaje_evento" style="width:91%">'+data.comentario+'<br><span style="font-size: 9px;">' + data.fecha + '</span></div>';
 				} else if(data.usuarioId != $("#usuarioLogin").val())  {
 					var pantalla = "En pantalla ";
 					if(data.nombreFactor != undefined && data.nombreFactor != null && data.nombreFactor != "null") {
@@ -320,7 +320,7 @@ function escribirMensajes(mensajes){
 						pantalla = "";
 					}
 					html=html+'<div class="msj_icono">'+icono+'</div>';
-					html=html+'<div class="msj_texto azul mensaje_recibido"><font class="area">'+data.autor+'</font><br>' + pantalla + data.comentario+'<br><span style="font-size: 9px;">' + data.fecha + '</span></div>';
+					html=html+'<div class="msj_texto azul mensaje_recibido"><font class="area">'+data.puesto+'</font><br>' + pantalla + data.comentario+'<br><span style="font-size: 9px;">' + data.fecha + '</span></div>';
 				} else {
 					var pantalla = "En pantalla ";
 					if(data.nombreFactor != undefined && data.nombreFactor != null && data.nombreFactor != "null") {
@@ -332,7 +332,7 @@ function escribirMensajes(mensajes){
 						pantalla += data.nombreFactor + ": ";
 					}
 					html=html+'<div class="msj_icono" style="width: 50%">&nbsp;</div>';
-					html=html+'<div class="msj_texto azul mensaje_enviado" style="width: 50%"><font class="area">'+ data.autor+'</font><br>'+  pantalla + data.comentario+'<br><span style="font-size: 9px;">' + data.fecha + '</span></div>';
+					html=html+'<div class="msj_texto azul mensaje_enviado" style="width: 50%"><font class="area">'+ data.puesto+'</font><br>'+  pantalla + data.comentario+'<br><span style="font-size: 9px;">' + data.fecha + '</span></div>';
 				}
 				html=html+'</div>';
 				$('#construccion').append(html);
@@ -367,7 +367,7 @@ function escribirMensajes(mensajes){
 				
 				if(data.tipoComentario == 3) {
 					html=html+'<div class="msj_icono">'+icono+'</div>';
-					html=html+'<div class="msj_texto azul mensaje_evento" style="width:91%">'+data.autor + ' ' + data.comentario+'<br><span style="font-size: 9px;">' + data.fecha + '</span></div>';
+					html=html+'<div class="msj_texto azul mensaje_evento" style="width:91%">'+data.comentario+'<br><span style="font-size: 9px;">' + data.fecha + '</span></div>';
 				} else if(data.usuarioId != $("#usuarioLogin").val())  {
 					var pantalla = "En pantalla ";
 					if(data.nombreFactor != undefined && data.nombreFactor != null && data.nombreFactor != "null") {
@@ -376,7 +376,7 @@ function escribirMensajes(mensajes){
 						pantalla = "";
 					}
 					html=html+'<div class="msj_icono">'+icono+'</div>';
-					html=html+'<div class="msj_texto azul mensaje_recibido"><font class="area">'+data.autor+'</font><br>' + pantalla + data.comentario+'<br><span style="font-size: 9px;">' + data.fecha + '</span></div>';
+					html=html+'<div class="msj_texto azul mensaje_recibido"><font class="area">'+data.puesto+'</font><br>' + pantalla + data.comentario+'<br><span style="font-size: 9px;">' + data.fecha + '</span></div>';
 				} else {
 					var pantalla = "En pantalla ";
 					if(data.nombreFactor != undefined && data.nombreFactor != null && data.nombreFactor != "null") {
@@ -388,7 +388,7 @@ function escribirMensajes(mensajes){
 						pantalla += data.nombreFactor + ": ";
 					}
 					html=html+'<div class="msj_icono" style="width: 50%">&nbsp;</div>';
-					html=html+'<div class="msj_texto azul mensaje_enviado" style="width: 50%"><font class="area">'+ data.autor+'</font><br>'+  pantalla + data.comentario+'<br><span style="font-size: 9px;">' + data.fecha + '</span></div>';
+					html=html+'<div class="msj_texto azul mensaje_enviado" style="width: 50%"><font class="area">'+ data.puesto+'</font><br>'+  pantalla + data.comentario+'<br><span style="font-size: 9px;">' + data.fecha + '</span></div>';
 				}
 				html=html+'</div>';
 				$('#operaciones').append(html);
@@ -409,7 +409,7 @@ function insertChat(mensajes, usuario){
                             '<div class="msj macro">' +
                                 '<div class="text-l">' +
                         		'<div class="texto_chat azul"><font class="area">'+
-                        		data.autor + '</font><br>'+ data.comentario +'</div>'+
+                        		data.puesto + '</font><br>'+ data.comentario +'</div>'+
                         		'<div class="hora azul">'+
                         		data.fecha +'</div>'+
                                 '</div>' +
@@ -420,7 +420,7 @@ function insertChat(mensajes, usuario){
                             '<div class="msj-rta macro">' +
                                 '<div class="text-r">' +
                                 '<div class="texto_chat azul"><font class="area">'+
-                        		data.autor +'</font><br>'+ data.comentario +'</div>'+
+                        		data.puesto +'</font><br>'+ data.comentario +'</div>'+
             						'<div class="hora azul">'+
                             		data.fecha +'</div>'+
                                 '</div>' +

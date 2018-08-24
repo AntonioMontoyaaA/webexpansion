@@ -244,9 +244,9 @@ public class DescargaPdfAction extends ExpansionAction{
 	}
 	
 	public String exportPdf() throws Exception{
-		String url=System.getProperty("jboss.server.base.dir")+File.separator+"deployments\\Expansion.war\\reportes"+File.separator;
-		String urlimagenes=System.getProperty("jboss.server.base.dir")+File.separator+"deployments\\Expansion.war\\reportes\\imagenes"+File.separator;
-		String urlweb=System.getProperty("jboss.server.base.dir")+File.separator+"deployments\\Expansion.war\\";
+		String url=System.getProperty("jboss.server.base.dir")+File.separator+"deployments"+File.separator+"Expansion.war"+File.separator+"reportes"+File.separator;
+		String urlimagenes=System.getProperty("jboss.server.base.dir")+File.separator+"deployments"+File.separator+"Expansion.war"+File.separator+"reportes"+File.separator+"imagenes"+File.separator;
+		String urlweb=System.getProperty("jboss.server.base.dir")+File.separator+"deployments"+File.separator+"Expansion.war"+File.separator;
 
 		
 		
@@ -353,7 +353,7 @@ public class DescargaPdfAction extends ExpansionAction{
 		
 		JasperReport report = null;
 		
-			 JasperCompileManager.compileReportToFile(url+"pag5.jrxml", url+"pag5.jasper");
+			// JasperCompileManager.compileReportToFile(url+"pag5.jrxml", url+"pag5.jasper");
 			 JasperCompileManager.compileReportToFile(url+"pag4.jrxml", url+"pag4.jasper");
 			 JasperCompileManager.compileReportToFile(url+"pag3.jrxml", url+"pag3.jasper");
 			 JasperCompileManager.compileReportToFile(url+"pag2.jrxml", url+"pag2.jasper");

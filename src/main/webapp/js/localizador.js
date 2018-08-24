@@ -236,9 +236,18 @@ function guardaRadiosLocalizados(){
 			});
 
 	responseGuardarLocalizados = function(data){
-		console.log(data);
-		cargaMensajeModal("Localizador",data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+		//console.log(data);
+		
+		if(data.codigo == 403){
+			cargaMensajeModal("Localizador","Revisar el registro de la fila "+data.jsonError.indexXSLX+" <br>"+ data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+			
+		}else{
+			cargaMensajeModal("Localizador",data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+			
+		}
+
 		clearMarkers();
+		closePopUpInfo();
 		radiosArray = [];
 	}
 }
@@ -426,7 +435,7 @@ function pintarCirculosXslx(arrayDatosRadios){
 			objArray[markerId].setInfoMarker(new InfoRadiosLocalizados(element[3],element[4],element[5],element[6],element[7],
 												 element[8],element[9],element[10],element[11],element[12],
 												 element[13],element[14],element[15], element[16],
-												 element[17], element[18],element[19],element[20],index ));
+												 element[17], element[18],element[19],element[20],index+1 ));
 
 			addMarker(objArray[markerId], map);
 		}
@@ -607,7 +616,8 @@ var process_wb = (function() {
 
 		pintarCirculosXslx(JSON.parse(to_json(wb)).Radios);
 
-		if(typeof console !== 'undefined') console.log("output", new Date());
+		//if(typeof console !== 'undefined') 
+			//console.log("output", new Date());
 
 	};
 })();
@@ -637,7 +647,8 @@ var do_file = (function() {
 		var f = files[0];
 		var reader = new FileReader();
 		reader.onload = function(e) {
-			if(typeof console !== 'undefined') console.log("onload", new Date(), rABS, use_worker);
+			if(typeof console !== 'undefined') 
+				//console.log("onload", new Date(), rABS, use_worker);
 			var data = e.target.result;
 			if(!rABS) data = new Uint8Array(data);
 			if(use_worker) xw(data, process_wb);
@@ -1020,7 +1031,7 @@ function consultarRutaRecorridaJefe(){
 			});
 
 	pintarRudaMaps = function(data){
-		console.log(data);
+		//console.log(data);
 		if(data.codigo == 400 || data.codigo == 205){
 			cargaMensajeModal("Localizador",data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
 			return false;
@@ -1133,8 +1144,8 @@ function inicializaCalendarios() {
 		autoSize : true,
 		showOn: 'both',
 		showAnim: 'slideDown',
-        buttonImageOnly: true,
-        buttonImage: 'img/calendar_icon.png',
+        buttonImageOnly: false,
+        //buttonImage: 'img/calendar_icon.png',
         onClose: function( selectedDate ) {
 			var date = $(this).datepicker('getDate');			
 			var endDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
@@ -1201,7 +1212,7 @@ function getObtenerMDs(){
 			});
 
 	responseMdsAutorizadas = function(data){
-		console.log(data);
+		//console.log(data);
 		if(data.codigo == 400){
 			cargaMensajeModal("Localizador",data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
 			return false;
@@ -1228,11 +1239,17 @@ function clearMapsMds(array_){
 }
 
 function pintarMdsMaps(md_){
+	
+	var icon = {
+			url: iconMarke.MD, // url
+			scaledSize: new google.maps.Size(35, 35)// scaled size
+		};
+	
 	return  new google.maps.Marker({
 		position: md_,
 		animation: google.maps.Animation.DROP,
 		map: map,
-		icon: iconMarke.MD,
+		icon: icon,
 		map_icon_label: '<span class="map-icon map-icon-point-of-interest"></span>'
 	});
 }
@@ -1260,7 +1277,7 @@ function getObtenerEmpleadosGerentes(){
 
 	llenarComboEmpleados = function(data){
 		
-		console.log(data);
+		//console.log(data);
 		if(data.codigo == 400){
 			cargaMensajeModal("Localizador",data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
 			return false;
@@ -1348,7 +1365,7 @@ function obtieneDetalleMd(nombreMd, mdId) {
 
 		responseRadiosMds = function(data){
 			
-			console.log(data);
+			//console.log(data);
 			if(data.codigo == 400){
 				cargaMensajeModal("Localizador",data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
 				return false;

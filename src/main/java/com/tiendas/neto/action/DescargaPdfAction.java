@@ -244,9 +244,11 @@ public class DescargaPdfAction extends ExpansionAction{
 	}
 	
 	public String exportPdf() throws Exception{
-		String url=System.getProperty("jboss.server.base.dir")+File.separator+"deployments"+File.separator+"Expansion.war"+File.separator+"reportes"+File.separator;
-		String urlimagenes=System.getProperty("jboss.server.base.dir")+File.separator+"deployments"+File.separator+"Expansion.war"+File.separator+"reportes"+File.separator+"imagenes"+File.separator;
-		String urlweb=System.getProperty("jboss.server.base.dir")+File.separator+"deployments"+File.separator+"Expansion.war"+File.separator;
+		String url=System.getProperty("jboss.server.config.dir")+"/expansion/reportes/";
+		String urlimagenes=System.getProperty("jboss.server.config.dir")+"/expansion/config/reportes/imagenes/";
+		//String url=System.getProperty("jboss.server.base.dir")+File.separator+"deployments"+File.separator+"Expansion.war"+File.separator+"reportes"+File.separator;
+		//String urlimagenes=System.getProperty("jboss.server.base.dir")+File.separator+"deployments"+File.separator+"Expansion.war"+File.separator+"reportes"+File.separator+"imagenes"+File.separator;
+		//String urlweb=System.getProperty("jboss.server.base.dir")+File.separator+"deployments"+File.separator+"Expansion.war"+File.separator;
 
 		
 		
@@ -257,7 +259,7 @@ public class DescargaPdfAction extends ExpansionAction{
 		//pag1
 		parameters.put("url", urlimagenes);
 		parameters.put("url_subreport", url);
-		parameters.put("urlweb", urlweb);
+	//	parameters.put("urlweb", urlweb);
 		parameters.put("mdId", pdfmdId);
 		parameters.put("nombreMd", pdfnombreMd);
 		parameters.put("categoriaMd", pdfcategoriaMd);

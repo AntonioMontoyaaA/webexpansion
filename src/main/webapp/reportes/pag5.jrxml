@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporte" language="groovy" pageWidth="612" pageHeight="792" whenNoDataType="AllSectionsNoDetail" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="0" bottomMargin="0" uuid="6e2664b2-3a57-4cf4-b74c-6054a1b0894a">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="648"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#999999"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#C3CFD9">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#999999"/>
+			<bottomPen lineWidth="0.5" lineColor="#999999"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#E6F3FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#999999"/>
+			<bottomPen lineWidth="0.5" lineColor="#999999"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#999999"/>
+			<bottomPen lineWidth="0.5" lineColor="#999999"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 5">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 5_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 5_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 5_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 6">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 6_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 6_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 6_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<parameter name="mdId" class="java.lang.String"/>
+	<parameter name="nombreMd" class="java.lang.String"/>
+	<parameter name="categoriaMd" class="java.lang.String"/>
+	<parameter name="puntos" class="java.lang.String"/>
+	<parameter name="direccion" class="java.lang.String"/>
+	<parameter name="nombrePropietario" class="java.lang.String"/>
+	<parameter name="telefonoPropietario" class="java.lang.String"/>
+	<parameter name="emailPropietario" class="java.lang.String"/>
+	<parameter name="url" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["E:\\Users\\kcortes\\Documents\\Workspace\\expansionweb\\src\\main\\webapp\\reportes\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="url_subreport" class="java.lang.String"/>
+	<parameter name="vistaLateral2Md" class="java.lang.String"/>
+	<parameter name="vistaLateral1Md" class="java.lang.String"/>
+	<parameter name="vistaFrontalMd" class="java.lang.String"/>
+	<parameter name="tamanioTotalMd" class="java.lang.String"/>
+	<parameter name="profundidadMd" class="java.lang.String"/>
+	<parameter name="frenteMd" class="java.lang.String"/>
+	<parameter name="imagen1" class="java.lang.String"/>
+	<parameter name="imagen2" class="java.lang.String"/>
+	<parameter name="imagen3" class="java.lang.String"/>
+	<parameter name="imagen4" class="java.lang.String"/>
+	<parameter name="imagen5" class="java.lang.String"/>
+	<parameter name="imagendesc1" class="java.lang.String"/>
+	<parameter name="imagendesc2" class="java.lang.String"/>
+	<parameter name="imagendesc3" class="java.lang.String"/>
+	<parameter name="imagendesc4" class="java.lang.String"/>
+	<parameter name="imagendesc5" class="java.lang.String"/>
+	<parameter name="condicion" class="java.lang.String"/>
+	<parameter name="condiciondesc" class="java.lang.String"/>
+	<parameter name="comentarios" class="java.lang.String"/>
+	<parameter name="tipo" class="java.lang.String"/>
+	<parameter name="imagen6" class="java.lang.String"/>
+	<parameter name="imagen7" class="java.lang.String"/>
+	<parameter name="imagen8" class="java.lang.String"/>
+	<parameter name="imagendesc6" class="java.lang.String"/>
+	<parameter name="imagendesc7" class="java.lang.String"/>
+	<parameter name="imagendesc8" class="java.lang.String"/>
+	<parameter name="renta" class="java.lang.String"/>
+	<parameter name="amortizacion" class="java.lang.String"/>
+	<parameter name="disponibilidad" class="java.lang.String"/>
+	<parameter name="tiempo_amortizacion" class="java.lang.String"/>
+	<parameter name="gracia" class="java.lang.String"/>
+	<field name="conteos" class="java.lang.Object[]"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="216" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="576" splitType="Stretch">
+			<line>
+				<reportElement x="352" y="18" width="240" height="1" forecolor="#CCCCCC" uuid="7272e94a-8ab0-4a3f-9785-7c9b905109b7"/>
+			</line>
+			<line>
+				<reportElement x="-21" y="19" width="240" height="1" forecolor="#CCCCCC" uuid="fd4f4df4-7e4e-4556-a1cc-9db656fb9a1e"/>
+			</line>
+			<staticText>
+				<reportElement x="223" y="9" width="126" height="20" forecolor="#000033" uuid="0a84106a-64a6-4577-ad33-52c9dec88615"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GENERALIDADES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="60" width="100" height="20" forecolor="#999999" uuid="3abda4fe-cedf-43ab-8577-31d406c8114f"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Renta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="123" width="100" height="20" forecolor="#999999" uuid="a71ba8e7-2488-4698-a819-f9f28fe331b9"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Disponibilidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="286" y="60" width="100" height="20" forecolor="#999999" uuid="dd1ec648-88ba-4643-b17a-7542c07babe3"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Amortización]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="286" y="123" width="190" height="20" forecolor="#999999" uuid="57f004ae-4829-4fa4-9c6c-d03cde91c474"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tiempo de amortización]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="185" width="190" height="20" forecolor="#999999" uuid="6b2672ad-e913-428c-84a1-c5ae1314f10d"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Periodo de gracia]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="27" y="91" width="196" height="20" uuid="c6c80fb7-4ef0-4c68-970b-e7c125c0a692"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{renta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="286" y="91" width="196" height="20" uuid="9e5d7862-694d-4e49-af8b-f7c6e88f9926"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{amortizacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="26" y="153" width="196" height="20" uuid="7805da8c-8c51-4d47-8a08-05c92475ef6a"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{disponibilidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="286" y="153" width="196" height="20" uuid="707945f5-999a-4b4f-9908-218504aeb95f"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tiempo_amortizacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="27" y="217" width="196" height="20" uuid="b4b04066-dc9d-4a8c-9e88-6711ab539f8e"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{gracia}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+</jasperReport>

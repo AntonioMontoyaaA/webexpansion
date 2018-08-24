@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporte" language="groovy" pageWidth="612" pageHeight="792" whenNoDataType="AllSectionsNoDetail" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="0" bottomMargin="0" uuid="7f77d3e7-587b-4bb5-9595-01b37de30073">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="743"/>
+	<parameter name="mdId" class="java.lang.String"/>
+	<parameter name="nombreMd" class="java.lang.String"/>
+	<parameter name="categoriaMd" class="java.lang.String"/>
+	<parameter name="puntos" class="java.lang.String"/>
+	<parameter name="direccion" class="java.lang.String"/>
+	<parameter name="nombrePropietario" class="java.lang.String"/>
+	<parameter name="telefonoPropietario" class="java.lang.String"/>
+	<parameter name="emailPropietario" class="java.lang.String"/>
+	<parameter name="url" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["E:\\Users\\kcortes\\Documents\\Workspace\\expansionweb\\src\\main\\webapp\\reportes\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="url_subreport" class="java.lang.String"/>
+	<parameter name="vistaLateral2Md" class="java.lang.String"/>
+	<parameter name="vistaLateral1Md" class="java.lang.String"/>
+	<parameter name="vistaFrontalMd" class="java.lang.String"/>
+	<parameter name="tamanioTotalMd" class="java.lang.String"/>
+	<parameter name="profundidadMd" class="java.lang.String"/>
+	<parameter name="frenteMd" class="java.lang.String"/>
+	<parameter name="imagen1" class="java.lang.String"/>
+	<parameter name="imagen2" class="java.lang.String"/>
+	<parameter name="imagen3" class="java.lang.String"/>
+	<parameter name="imagen4" class="java.lang.String"/>
+	<parameter name="imagen5" class="java.lang.String"/>
+	<parameter name="imagendesc1" class="java.lang.String"/>
+	<parameter name="imagendesc2" class="java.lang.String"/>
+	<parameter name="imagendesc3" class="java.lang.String"/>
+	<parameter name="imagendesc4" class="java.lang.String"/>
+	<parameter name="imagendesc5" class="java.lang.String"/>
+	<parameter name="condicion" class="java.lang.String"/>
+	<parameter name="condiciondesc" class="java.lang.String"/>
+	<parameter name="comentarios" class="java.lang.String"/>
+	<parameter name="tipo" class="java.lang.String"/>
+	<parameter name="imagen6" class="java.lang.String"/>
+	<parameter name="imagen7" class="java.lang.String"/>
+	<parameter name="imagen8" class="java.lang.String"/>
+	<parameter name="imagendesc6" class="java.lang.String"/>
+	<parameter name="imagendesc7" class="java.lang.String"/>
+	<parameter name="imagendesc8" class="java.lang.String"/>
+	<parameter name="renta" class="java.lang.String"/>
+	<parameter name="amortizacion" class="java.lang.String"/>
+	<parameter name="disponibilidad" class="java.lang.String"/>
+	<parameter name="tiempo_amortizacion" class="java.lang.String"/>
+	<parameter name="gracia" class="java.lang.String"/>
+	<parameter name="listacompetencias" class="java.lang.Object[]"/>
+	<parameter name="listageneradores" class="java.lang.Object[]"/>
+	<parameter name="lat" class="java.lang.Float"/>
+	<parameter name="lon" class="java.lang.Float"/>
+	<field name="field1" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="216"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="576" splitType="Stretch">
+			<line>
+				<reportElement x="343" y="18" width="249" height="1" forecolor="#CCCCCC" uuid="7737324d-3e39-4a12-be58-035f368e02fc"/>
+			</line>
+			<line>
+				<reportElement x="-21" y="19" width="249" height="1" forecolor="#CCCCCC" uuid="a7014002-0c15-4a19-a562-68f3058720fa"/>
+			</line>
+			<staticText>
+				<reportElement x="235" y="9" width="100" height="20" forecolor="#000033" uuid="0a34d2dc-19d6-4220-997e-f374ca313a2c"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SUPERFICIE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="45" width="100" height="20" forecolor="#999999" uuid="6dd90dd7-b2da-49b9-b2ea-760d2b6fc3aa"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FRENTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="443" y="45" width="100" height="20" forecolor="#999999" uuid="e666c687-cffe-4b9c-ba79-d6879dabe311"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="236" y="45" width="107" height="20" forecolor="#999999" uuid="78afbe08-b726-4826-8614-6a4388e1d962"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PROFUNDIDAD]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="27" y="65" width="100" height="20" uuid="3b437bdd-49a3-48c2-b93a-746144749608"/>
+				<textFieldExpression><![CDATA[$P{frenteMd}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="236" y="65" width="100" height="20" uuid="baa96c0f-1b85-4b6f-a80e-21844cd54ca3"/>
+				<textFieldExpression><![CDATA[$P{profundidadMd}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="443" y="65" width="100" height="20" uuid="ba12e4f9-3d35-4f49-9e03-41d9b208da95"/>
+				<textFieldExpression><![CDATA[$P{tamanioTotalMd}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="27" y="105" width="124" height="20" forecolor="#999999" uuid="42dab5b3-c306-476e-a19e-c42a39e71821"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FOTO FRONTAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="298" y="105" width="118" height="20" forecolor="#999999" uuid="8f5a5dfc-7428-4f64-93cb-dab6787cd91e"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FOTO LATERAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="26" y="306" width="118" height="20" forecolor="#999999" uuid="452ec6be-f0ac-4381-9a5c-c77d55a3890d"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FOTO LATERAL]]></text>
+			</staticText>
+			<image>
+				<reportElement x="26" y="136" width="259" height="160" uuid="018ab780-5af0-4dd5-ae49-a96f51de62a8"/>
+				<imageExpression><![CDATA[$P{vistaFrontalMd}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="298" y="136" width="259" height="160" uuid="ef94e474-2dd4-498e-9455-e8af0f4156bb"/>
+				<imageExpression><![CDATA[$P{vistaLateral1Md}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="26" y="339" width="259" height="160" uuid="a127b279-348a-4ebd-8d4b-598e572b1846"/>
+				<imageExpression><![CDATA[$P{vistaLateral2Md}]]></imageExpression>
+			</image>
+		</band>
+	</columnHeader>
+	<summary>
+		<band height="26">
+			<subreport>
+				<reportElement x="-20" y="0" width="612" height="26" uuid="35bb219f-71ea-438f-bc10-3769fda408bf"/>
+				<subreportParameter name="direccion">
+					<subreportParameterExpression><![CDATA[$P{direccion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="emailPropietario">
+					<subreportParameterExpression><![CDATA[$P{emailPropietario}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="imagen8">
+					<subreportParameterExpression><![CDATA[$P{imagen8}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="tamanioTotalMd">
+					<subreportParameterExpression><![CDATA[$P{tamanioTotalMd}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="imagen7">
+					<subreportParameterExpression><![CDATA[$P{imagen7}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nombreMd">
+					<subreportParameterExpression><![CDATA[$P{nombreMd}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nombrePropietario">
+					<subreportParameterExpression><![CDATA[$P{nombrePropietario}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="imagen4">
+					<subreportParameterExpression><![CDATA[$P{imagen4}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="imagen3">
+					<subreportParameterExpression><![CDATA[$P{imagen3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="imagen6">
+					<subreportParameterExpression><![CDATA[$P{imagen6}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="imagen5">
+					<subreportParameterExpression><![CDATA[$P{imagen5}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="gracia">
+					<subreportParameterExpression><![CDATA[$P{gracia}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="amortizacion">
+					<subreportParameterExpression><![CDATA[$P{amortizacion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="condiciondesc">
+					<subreportParameterExpression><![CDATA[$P{condiciondesc}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="mdId">
+					<subreportParameterExpression><![CDATA[$P{mdId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="tiempo_amortizacion">
+					<subreportParameterExpression><![CDATA[$P{tiempo_amortizacion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="comentarios">
+					<subreportParameterExpression><![CDATA[$P{comentarios}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="imagendesc2">
+					<subreportParameterExpression><![CDATA[$P{imagendesc2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="imagendesc3">
+					<subreportParameterExpression><![CDATA[$P{imagendesc3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="imagendesc1">
+					<subreportParameterExpression><![CDATA[$P{imagendesc1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="vistaLateral2Md">
+					<subreportParameterExpression><![CDATA[$P{vistaLateral2Md}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="renta">
+					<subreportParameterExpression><![CDATA[$P{renta}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="telefonoPropietario">
+					<subreportParameterExpression><![CDATA[$P{telefonoPropietario}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="url">
+					<subreportParameterExpression><![CDATA[$P{url}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="SUBREPORT_DIR"/>
+				<subreportParameter name="puntos">
+					<subreportParameterExpression><![CDATA[$P{puntos}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="imagen1">
+					<subreportParameterExpression><![CDATA[$P{imagen1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="imagen2">
+					<subreportParameterExpression><![CDATA[$P{imagen2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="vistaLateral1Md">
+					<subreportParameterExpression><![CDATA[$P{vistaLateral1Md}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="profundidadMd">
+					<subreportParameterExpression><![CDATA[$P{profundidadMd}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="imagendesc8">
+					<subreportParameterExpression><![CDATA[$P{imagendesc8}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="condicion">
+					<subreportParameterExpression><![CDATA[$P{condicion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="imagendesc7">
+					<subreportParameterExpression><![CDATA[$P{imagendesc7}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="url_subreport">
+					<subreportParameterExpression><![CDATA[$P{url_subreport}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="categoriaMd">
+					<subreportParameterExpression><![CDATA[$P{categoriaMd}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="imagendesc6">
+					<subreportParameterExpression><![CDATA[$P{imagendesc6}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="disponibilidad">
+					<subreportParameterExpression><![CDATA[$P{disponibilidad}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="imagendesc5">
+					<subreportParameterExpression><![CDATA[$P{imagendesc5}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="tipo">
+					<subreportParameterExpression><![CDATA[$P{tipo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="imagendesc4">
+					<subreportParameterExpression><![CDATA[$P{imagendesc4}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="frenteMd">
+					<subreportParameterExpression><![CDATA[$P{frenteMd}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="vistaFrontalMd">
+					<subreportParameterExpression><![CDATA[$P{vistaFrontalMd}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="listacompetencias">
+					<subreportParameterExpression><![CDATA[$P{listacompetencias}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="listageneradores">
+					<subreportParameterExpression><![CDATA[$P{listageneradores}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lat">
+					<subreportParameterExpression><![CDATA[$P{lat}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lon">
+					<subreportParameterExpression><![CDATA[$P{lon}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{url_subreport} + "pag3.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

@@ -128,6 +128,9 @@
 			</div>
 			<div class="col-lg-6 right">
 			<span>
+				<img id="botondescarga" title="Descarga PDF" class="autorizado" style="cursor: pointer;" src="img/iconos_DOWNLOAD.png">&nbsp;
+			</span>
+			<span>
 				<img id="mensajesMD" title="Ver mensajes" class="autorizado" onclick="muestraChatXMd();" style="cursor: pointer;" src="img/iconos_COMENTARIOS.png">&nbsp;
 			</span>
 			</div>
@@ -374,7 +377,8 @@
 							<div class="icono_mapa"><img class="icono_imagen" src="img/competencia/iconos_oxxo.png"></div>
 							<!-- <div class="icono_mapa"><img class="icono_imagen" src="img/competencia/iconos_seven.png"></div>
 							<div class="icono_mapa"><img class="icono_imagen" src="img/competencia/iconos_k.png"></div> -->
-							<div class="icono_mapa"><img class="icono_imagen" src="img/competencia/icono_otros_2.png"></div>
+							<div class="icono_mapa"><img class="icono_imagen" src="img/competencia/icono_otros_2.png"><br>
+							<span class="t10 azul">Tienda de abarrotes</span></div>
 						</div>
 						
 						<div class="row">
@@ -695,6 +699,48 @@
 	<input type="hidden" name="mdIdChat" id="mdIdChat" value=""/>
 </form>
 
+<!-- --------------------------------------- -->
+
+<form style="display: hidden" action="descargaPdfAction" method="POST">
+	<input type="hidden" name="pdfmdId" id="pdfmdId">
+	<input type="hidden" name="pdfnombreMd" id="pdfnombreMd">
+	<input type="hidden" name="pdfcategoriaMd" id="pdfcategoriaMd">
+	<input type="hidden" name="pdfpuntos" id="pdfpuntos">
+	<input type="hidden" name="pdfdireccion" id="pdfdireccion">
+	<input type="hidden" name="pdfnombrePropietario" id="pdfnombrePropietario">
+	<input type="hidden" name="pdftelefonoPropietario" id="pdftelefonoPropietario">
+	<input type="hidden" name="pdfemailPropietario" id="pdfemailPropietario">
+	<input type="hidden" name="pdflat" id="pdflat">
+	<input type="hidden" name="pdflon" id="pdflon">
+	<input type="hidden" name="pdfmarkers_comp" id="pdfmarkers_comp">
+	<input type="hidden" name="pdfmarkers_gen" id="pdfmarkers_gen">
+	
+	<input type="hidden" name="pdffrenteMd" id="pdffrenteMd">
+	<input type="hidden" name="pdfprofundidadMd" id="pdfprofundidadMd">
+	<input type="hidden" name="pdftamanioTotalMd" id="pdftamanioTotalMd">
+	<input type="hidden" name="pdfvistaFrontalMd" id="pdfvistaFrontalMd">
+	<input type="hidden" name="pdfvistaLateral1Md" id="pdfvistaLateral1Md">
+	<input type="hidden" name="pdfvistaLateral2Md" id="pdfvistaLateral2Md">
+	
+	<input type="hidden" name="pdffactor" id="pdffactor">
+	<input type="hidden" name="pdftipo" id="pdftipo">
+	<input type="hidden" name="pdfsubfactores" id="pdfsubfactores">
+	<input type="hidden" name="pdfsubfactoresdesc" id="pdfsubfactoresdesc">
+	<input type="hidden" name="pdfcomentarios" id="pdfcomentarios">
+	
+	<input type="hidden" name="pdfrenta" id="pdfrenta">
+	<input type="hidden" name="pdfamortizacion" id="pdfamortizacion">
+	<input type="hidden" name="pdfdisponibilidad" id="pdfdisponibilidad">
+	<input type="hidden" name="pdftiempo_amortizacion" id="pdftiempo_amortizacion">
+	<input type="hidden" name="pdfgracia" id="pdfgracia">
+	
+	<input type="hidden" name="pdfconteos" id="pdfconteos">
+
+	<input type="submit" id="submitBotonDescargaPdf" style="display:none" />
+</form>
+<!-- --------------------------------------- -->
+
+
 <div id="modalImages" class="modalImagen">
  <span class="closeModal">&times;</span>
 	
@@ -743,5 +789,6 @@
 	<script	src="${pageContext.request.contextPath}/js/dropzone/dateFormat.js"></script>
 	<script	src="${pageContext.request.contextPath}/js/detalleMemoriaAsignada.js"></script>
 	<script	src="${pageContext.request.contextPath}/js/utiles/modalImages.js"></script>
+	<script	src="${pageContext.request.contextPath}/js/descargaPdf.js"></script>
 	</body>
 </html>

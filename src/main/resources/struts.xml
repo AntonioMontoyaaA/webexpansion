@@ -285,7 +285,12 @@
            <result name = "success">jsp/aprobadas.jsp</result>
         </action>
       	 <!-- ************************************ ACCIONES SEGUIMIENTO ******* -->
-      	
+      	<!-- ****************************** DESCARGA DE PDF**************************************** -->
+	<action name = "descargaPdfAction" 
+         		class = "com.tiendas.neto.action.DescargaPdfAction" 
+         		method = "exportPdf">
+    </action>
+    <!-- ********************************************************************** -->  	
       	
 	</package>
 	

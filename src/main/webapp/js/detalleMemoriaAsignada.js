@@ -166,7 +166,7 @@ function inicializaModulosEdicion(modulos, datosSitio, datosPropietario, general
 			}
 			break;
 		case 3:
-			if(modulos[i].editable == 0) {
+			if(modulos[i].editable == 1) {
 				var datos = "";
 				$("#modulo3Edita").show();
 				
@@ -570,6 +570,11 @@ function buscaDetalleMD(mdId) {
 		if(data.codigo != 200) {
 			cargaMensajeModal('DETALLE MD', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, redireccionaAsignadas);
 		} else {
+			
+			$("#botondescarga").click(function(){
+				descargaExcel(data);
+			});
+			
 			MOTIVOS_RECHAZO = {};
 			ARCHIVOS_MD = new Array();
 			

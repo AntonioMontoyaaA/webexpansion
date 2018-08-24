@@ -32,7 +32,8 @@ var markerId = 0;
 var radioSeleccionado;
 var objArrayEmployee;
 var iconMarke = {NUEVO : "img/icon-marker-new.svg",ASIGNADO: "img/markers_NA.svg", EN_PROCESO: "img/icon-marker-proceso.svg", CONCLUIDO: "img/icon-marker-concluido.svg",
-			     CANCELADO:"img/icon-marker-cancelado.svg", SELECTED:"img/markers_RADIOblue.svg",HERE: 'img/markers_NA.svg', MD : 'img/markers_MD.svg' };
+			     CANCELADO:"img/icon-marker-cancelado.svg", SELECTED:"img/markers_RADIOblue.svg",HERE: 'img/markers_NA.svg', MD : 'img/icon_conMD.svg' }; //img/markers_MD.svg
+
 
 var PANT_OPCION   = {ALTARADIOS : 0, ASIGNARRADIOS : 1, LOCALIZACION : 2, MISMDS : 3, RADIOSXMD : 4};
 var colors = {NUEVO:"#FFC300", ASIGNADO:"gray" ,EN_PROCESO : "#00bf5f",  CONCLUIDO : "#007fff", CANCELADO : "#ff5656"};
@@ -1226,7 +1227,12 @@ function getObtenerMDs(){
 				addMarkerMDs(MdsArray[item.mdId], map,bounds,MdsArray);
 			});
 		});
-		map.fitBounds(bounds);
+		
+		if(MdsArray.length >= 0){			
+			cargaMensajeModal("Localizador","No se encontraron MD´s.", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+		}else{
+			map.fitBounds(bounds);			
+		}
 	}
 }
 

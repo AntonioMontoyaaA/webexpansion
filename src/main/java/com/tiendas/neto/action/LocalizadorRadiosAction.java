@@ -76,6 +76,7 @@ public class LocalizadorRadiosAction extends ExpansionAction implements  Session
 					response2.getWriter().write(respuesta);
 				
 
+					
 			}
 		}catch(Exception ex) {
 			String clase  ="clase: "+ new String (Thread.currentThread().getStackTrace()[1].getClassName());	

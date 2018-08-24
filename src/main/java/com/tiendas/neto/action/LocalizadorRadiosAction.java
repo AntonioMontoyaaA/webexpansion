@@ -1,6 +1,7 @@
 package com.tiendas.neto.action;
 
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -49,27 +50,38 @@ public class LocalizadorRadiosAction extends ExpansionAction implements  Session
 			}else{			
 				String jsonRadiosLocalizados = ServletActionContext.getRequest().getParameter("radiosLocalizados");
 
-				final OkHttpClient client = new OkHttpClient();
+				final OkHttpClient client = new OkHttpClient.Builder()
+				        .connectTimeout(40, TimeUnit.SECONDS)
+				        .readTimeout(40, TimeUnit.SECONDS)
+				        .writeTimeout(40, TimeUnit.SECONDS)
+				        .build();
+
 				FormBody.Builder formBuilder = new FormBody.Builder()
 				 .add("usuarioId", numeroEmpleado)
 				 .add("arregloRadio", jsonRadiosLocalizados);
-				
+
 				 RequestBody formBody = formBuilder.build();
+	
 				 Request request = new Request.Builder()
 						 .url(sp.getPropiedad("obtieneRadiosGuardaRadios"))
 		                 .post(formBody)
 		                 .build();
-				
+
 				 Response response = client.newCall(request).execute();
 				 respuesta = response.body().string();
+				 
 				 HttpServletResponse response2 = ServletActionContext.getResponse();
 					response2.setContentType("application/json");
 					response2.setCharacterEncoding("UTF-8");
 					response2.getWriter().write(respuesta);
 				
-					//elog.error(clase,metodo,ex + "", "ID empleado: " + usuario.getPerfil().getNumeroEmpleado(), "Fecha consulta: " );
+
 			}
 		}catch(Exception ex) {
+			String clase  ="clase: "+ new String (Thread.currentThread().getStackTrace()[1].getClassName());	
+			String metodo ="metodo: "+ new String (Thread.currentThread().getStackTrace()[1].getMethodName());
+			elog.error(clase,metodo,ex + "", "ID empleado: " + usuario.getPerfil().getNumeroEmpleado(), "Fecha consulta: " ); 			
+		}catch(Error ex) {
 			String clase  ="clase: "+ new String (Thread.currentThread().getStackTrace()[1].getClassName());	
 			String metodo ="metodo: "+ new String (Thread.currentThread().getStackTrace()[1].getMethodName());
 			elog.error(clase,metodo,ex + "", "ID empleado: " + usuario.getPerfil().getNumeroEmpleado(), "Fecha consulta: " ); 			

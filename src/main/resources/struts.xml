@@ -220,6 +220,32 @@
 	  	class = "com.tiendas.neto.action.LocalizadorRadiosAction" 
 	  	method = "getRadiosLocalizados" />
 
+	 <action name = "download_format_radius" 
+    	class = "com.tiendas.neto.action.excel.ExcelPlantillaRadios" 
+       	method = "execute">
+    </action>
+      	
+	 <action name = "obtenerEmpleadosGerentes" 
+    	class = "com.tiendas.neto.action.LocalizadorRadiosAction" 
+       	method = "getEmpleadosGerentes">
+    </action>    
+    
+	 <action name = "consultaRutaRecorrida" 
+    	class = "com.tiendas.neto.action.LocalizadorRadiosAction" 
+       	method = "getRutaRecorridaJefe">
+    </action>     
+    
+	 <action name = "obtenerMdsAutorizadas" 
+    	class = "com.tiendas.neto.action.LocalizadorRadiosAction" 
+       	method = "getObtenerMdsAutorizadas">
+    </action>          	
+    
+    <action name = "obtenerRadiosXEstatusMds" 
+    	class = "com.tiendas.neto.action.LocalizadorRadiosAction" 
+       	method = "getObtenerRadiosEstatus">
+    </action>          	
+    
+    
     <!-- ===== END- LOCALIZADOR === -->
     
       	<action name = "DashboardGeneralAction" class="com.tiendas.neto.action.DashboardGeneralAction"

@@ -9,7 +9,311 @@ h5{
 /* ------------------------------- BOTONES */
 .titleDivContent{
 	cursor: pointer;
+    padding-left: 25px;
+    color: #747474;
 }
+
+.titleDivContent:hover{
+    color: #40BCD8;
+}
+
+.spanText{
+	color: #747474;
+
+}
+
+.spanText_{
+	color: #747474;
+		padding-left: 15px;
+}
+
+#spand_nuevo::before {
+    content: '';
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    -moz-border-radius: 7.5px;
+    -webkit-border-radius: 7.5px;
+    border-radius: 7.5px;
+    background-color: #fbb110;
+    position: absolute;
+        margin-top: 1%;
+    margin-left: -6%;
+}
+
+#spand_proceso::before {
+    content: '';
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    -moz-border-radius: 7.5px;
+    -webkit-border-radius: 7.5px;
+    border-radius: 7.5px;
+    background-color: #00bf5f;
+    position: absolute;
+        margin-top: 1%;
+    margin-left: -6%;
+}
+
+#spand_asignado::before {
+    content: '';
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    -moz-border-radius: 7.5px;
+    -webkit-border-radius: 7.5px;
+    border-radius: 7.5px;
+    background-color: #1d2b4a;
+    position: absolute;
+       margin-top: 1%;
+    margin-left: -6%;
+}
+
+#spand_cancelado::before {
+    content: '';
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    -moz-border-radius: 7.5px;
+    -webkit-border-radius: 7.5px;
+    border-radius: 7.5px;
+    background-color: #ff5656;
+    position: absolute;
+       margin-top: 1%;
+    margin-left: -6%;
+}
+
+#spand_concluido::before {
+    content: '';
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    -moz-border-radius: 7.5px;
+    -webkit-border-radius: 7.5px;
+    border-radius: 7.5px;
+    background-color: #007fff;
+    position: absolute;
+        margin-top: 1%;
+    margin-left: -6%;
+}
+
+#spand_mds::before {
+    content: '';
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    -moz-border-radius: 7.5px;
+    -webkit-border-radius: 7.5px;
+    border-radius: 7.5px;
+    background-color: #ff5b15;
+    position: absolute;
+       margin-top: 1%;
+    margin-left: -6%;
+}
+
+
+
+#altaRadio::before { 
+	background-image: url(../img/iconos_radios.svg);
+    background-size: 25px 25px;
+    background-repeat: no-repeat;
+    background-position: -1px -1px;
+    display: inline-block;
+    width: 29px;
+    height: 30px;
+    position: absolute;
+    content: "";
+    left: 5%;
+  
+}
+
+#altaRadio:hover::before { 
+	background-image: url('../img/iconos_radiosON.svg');
+    background-size: 25px 25px;
+    background-repeat: no-repeat;
+    background-position: -1px -1px;
+    display: inline-block;
+    width: 29px;
+    height: 30px;
+    position: absolute;
+    content: "";
+    left: 5%;
+ }
+
+#altaRadio.color_3::before { 
+	background-image: url(../img/iconos_radiosON.svg);
+    background-size: 25px 25px;
+    background-repeat: no-repeat;
+    background-position: -1px -1px;
+    display: inline-block;
+    width: 29px;
+    height: 30px;
+    position: absolute;
+    content: "";
+    left: 5%;
+}
+
+
+#asignarRadio::before { 
+	background-image: url(../img/iconos_asignar.svg);
+    background-size: 25px 25px;
+    background-repeat: no-repeat;
+    background-position: -1px -1px;
+    display: inline-block;
+    width: 29px;
+    height: 30px;
+    position: absolute;
+    content: "";
+    left: 5%;
+}
+
+#asignarRadio:hover::before { 
+	background-image: url('../img/iconos_asignarON.svg');
+    background-size: 25px 25px;
+    background-repeat: no-repeat;
+    background-position: -1px -1px;
+    display: inline-block;
+    width: 29px;
+    height: 30px;
+    position: absolute;
+    content: "";
+    left: 5%;
+}
+
+#asignarRadio.color_3::before { 
+	background-image: url(../img/iconos_asignarON.svg);
+    background-size: 25px 25px;
+    background-repeat: no-repeat;
+    background-position: -1px -1px;
+    display: inline-block;
+    width: 29px;
+    height: 30px;
+    position: absolute;
+    content: "";
+    left: 5%;
+}
+
+
+#localizaTime::before { 
+	background-image: url(../img/iconos_Ruta.svg);
+    background-size: 25px 25px;
+    background-repeat: no-repeat;
+    background-position: -1px -1px;
+    display: inline-block;
+    width: 29px;
+    height: 30px;
+    position: absolute;
+    content: "";
+    left: 5%;
+}
+
+#localizaTime:hover::before { 
+	background-image: url('../img/iconos_RutaON.svg');
+    background-size: 25px 25px;
+    background-repeat: no-repeat;
+    background-position: -1px -1px;
+    display: inline-block;
+    width: 29px;
+    height: 30px;
+    position: absolute;
+    content: "";
+    left: 5%;
+}
+
+#localizaTime.color_3::before { 
+	background-image: url(../img/iconos_RutaON.svg);
+    background-size: 25px 25px;
+    background-repeat: no-repeat;
+    background-position: -1px -1px;
+    display: inline-block;
+    width: 29px;
+    height: 30px;
+    position: absolute;
+    content: "";
+    left: 5%;
+}
+
+
+#verMds::before { 
+	background-image: url(../img/iconos_MD.svg);
+    background-size: 25px 25px;
+    background-repeat: no-repeat;
+    background-position: -1px -1px;
+    display: inline-block;
+    width: 29px;
+    height: 30px;
+    position: absolute;
+    content: "";
+    left: 5%;
+}
+
+#verMds:hover::before { 
+	background-image: url('../img/iconos_MD_ON.svg');
+    background-size: 25px 25px;
+    background-repeat: no-repeat;
+    background-position: -1px -1px;
+    display: inline-block;
+    width: 29px;
+    height: 30px;
+    position: absolute;
+    content: "";
+    left: 5%;
+}
+
+#verMds.color_3::before { 
+	background-image: url(../img/iconos_MD_ON.svg);
+    background-size: 25px 25px;
+    background-repeat: no-repeat;
+    background-position: -1px -1px;
+    display: inline-block;
+    width: 29px;
+    height: 30px;
+    position: absolute;
+    content: "";
+    left: 5%;
+}
+
+
+#verRadiosEstatus::before { 
+	background-image: url(../img/iconos_Radio_General.svg);
+    background-size: 25px 25px;
+    background-repeat: no-repeat;
+    background-position: -1px -1px;
+    display: inline-block;
+    width: 29px;
+    height: 30px;
+    position: absolute;
+    content: "";
+    left: 5%;
+}
+
+#verRadiosEstatus:hover::before { 
+	background-image: url('../img/iconos_Radio_GeneralON.svg');
+    background-size: 25px 25px;
+    background-repeat: no-repeat;
+    background-position: -1px -1px;
+    display: inline-block;
+    width: 29px;
+    height: 30px;
+    position: absolute;
+    content: "";
+    left: 5%;
+}
+
+#verRadiosEstatus.color_3::before { 
+	background-image: url(../img/iconos_Radio_GeneralON.svg);
+    background-size: 25px 25px;
+    background-repeat: no-repeat;
+    background-position: -1px -1px;
+    display: inline-block;
+    width: 29px;
+    height: 30px;
+    position: absolute;
+    content: "";
+    left: 5%;
+}
+
+
 
 #xlf{
     width: 257px;
@@ -17,8 +321,8 @@ h5{
 }
 
 .contentDetalle{
-	padding-bottom: 15px;
-    padding-top: 5px;
+	padding-bottom: 10px;
+    padding-top: 10px;
 }
 
  .contentLocalizador{
@@ -37,13 +341,18 @@ h5{
  }
  
  #drop{
-	border:2px dashed #bbb;
-	-moz-border-radius:5px;
-	-webkit-border-radius:5px;
-	border-radius:5px;
-	padding:25px;
-	text-align:center;
-	color:#bbb
+    border: 2px dashed #bbb;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    padding: 50px 0px 0px;
+    text-align: center;
+    color: #bbb;
+    background-image: url(../img/icon-upload-file.svg);
+    background-repeat: no-repeat;
+    background-size: 27%;
+    background-position: 46% -5px;
+    font-size: 14px;
 }
 
 #b64data{
@@ -53,8 +362,7 @@ h5{
 a { text-decoration: none }
 
  .bordeDiv{
- 	border-bottom: 2px solid #dcdcdc;
-    border-top: 1px solid #b9b9b9;
+ 	    border-bottom: 1.3px solid #999898;
  }
 
  
@@ -80,8 +388,11 @@ a { text-decoration: none }
 	background:#c8c8c8;
 }
 
-#select_employee{
-    width: 250px;	
+.motivoRechazo{
+	width: 250px;
+    border: 1px solid #000c48;
+    padding-left: 4%;
+    border-radius: 4px;
 }
 /* === INFO RADIO LOCALIZADO === */
 
@@ -113,10 +424,11 @@ a { text-decoration: none }
     
 table {
     width: 273px;
+        font-size: 13px;
 }
 
-#tableInfoDireccion {
-    width: 554px;
+#contentInfoDireccion {
+        float: left;
 }
 
 thead {
@@ -135,6 +447,148 @@ table thead tr{
 .atrasadas{background:#FF5B16;}
 .realizadas{background:#5D5D5D;}
 .porRealizar{background:#071B36;}
+
+.fechaInicialCalendario {    
+    width: 251px;
+    height: 25px;
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border: 1px solid #000c48;
+    font-size: 14px;
+    margin-left: 0px;
+    background-image: url(../img/icon-calendar-n.svg);
+    background-position: 4%;
+    background-repeat: no-repeat;
+    background-size: 20px;
+    background-origin: initial;
+    padding-left: 45px;
+    cursor: pointer;
+}
+
+.ui-datepicker-trigger {
+    display: none !important;
+}
+
+
+/* === 	CONTENT POP UP ===== */
+.contentPopUpInfo {
+    z-index: 100;
+    width: 16%;
+    height: auto;
+    position: fixed;
+    background: #000000;
+    opacity: 0.90;
+    padding-left: 10px;
+    padding-right: 13px;
+    margin: 4% 0% 0 83.1%;
+}
+
+.titulo_info{
+    color: #Fbb110;
+    text-align: center;
+    font-family: "Helvetica Neue Bold" !important;
+    font-size: 18px;	
+}
+
+.subtitleInfo {
+    text-align: left;
+    padding-top: 0px;
+    color: #ffffff;
+    font-size: 14px;
+}
+
+.bordeDivInfo {
+    border-top: 1px solid #ffffffcf;
+}
+
+.subTitleInfo {
+    color: white;
+    font-size: 14px;
+}
+
+.infoValue{
+	text-align: right;
+}
+
+.left_float{
+	float : left;
+}
+
+.btn_infoClose{
+	font-size: 22px;
+    margin-left: 100%;
+    margin-top: -4%;
+    cursor: pointer;
+}
+
+/* === MDS ===*/
+.contentPopUpInfoMD {
+    z-index: 100;
+    width: 16%;
+    height: auto;
+    position: fixed;
+    background: #000000;
+    opacity: 0.90;
+    padding-left: 10px;
+    padding-right: 13px;
+    margin: 4% 0% 0 83.1%;
+}
+
+.divTituloFixed{
+	position: fixed;
+    width: 19.5%;
+    height: 6%;
+    background: black;
+}
+
+
+.contentPopUpInfo {
+    z-index: 100;
+    width: 22%;
+    height: 71%;
+    position: fixed;
+    background: #000000;
+    opacity: 0.90;
+    padding-left: 10px;
+    padding-right: 13px;
+    margin: 2% 0% 0 77.1%;
+    overflow: auto;
+}
+
+
+.contentPopUpInfoMD {
+	z-index: 100;
+    width: 21%;
+    height: auto;
+    position: fixed;
+    background: #000000;
+    opacity: 0.90;
+    padding-left: 10px;
+    padding-right: 13px;
+    margin: 4% 0% 0 78.1%;
+}
+
+.btonCenterPosition{
+	margin-left: 35%;
+}
+
+.back_btonOrange {
+    background-color: #ffac00cc;
+}
+
+.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
+
+}
+
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover {
+
+    font-weight: normal;
+    border: 1px solid #1d2124;
+    background: #173a5f;
+    color: #ffffff;
+}
+
 
 /* === BACKGROUNG COLOR === */
 .back_1{background-color:#FF7C17;}

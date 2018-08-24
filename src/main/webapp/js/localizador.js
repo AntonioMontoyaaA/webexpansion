@@ -13,23 +13,47 @@ var earthRadii = {
         rd: 1268213.63,
         fr: 31705.3408
     };
+
+var boundsAsig;
 var bounds;
+var boundsRadiosEstatus;
+var boundsMds;
+var boundsGeneral;
+
 var infowindow;
 var labelIndex = 0;
-var bangalore = { lat: 12.97, lng: 77.59 };
 var map;
 var json_excel;
 var objArray = {};
 var radiosArray = [];
+var MdsArray = [];
+
 var markerId = 0;
 var radioSeleccionado;
 var objArrayEmployee;
-var iconMarke  = {GRAY : 'img/marker-gray.png', GREEN : 'img/marker-green.png', BLUE : 'img/marker-blue.png'};
-var colors = {GRAY:"gray", GREEN:"green", BLUE : "blue"};
+var iconMarke = {NUEVO : "img/icon-marker-new.svg",ASIGNADO: "img/markers_NA.svg", EN_PROCESO: "img/icon-marker-proceso.svg", CONCLUIDO: "img/icon-marker-concluido.svg",
+			     CANCELADO:"img/icon-marker-cancelado.svg", SELECTED:"img/markers_RADIOblue.svg",HERE: 'img/markers_NA.svg', MD : 'img/markers_MD.svg' };
+
+var PANT_OPCION   = {ALTARADIOS : 0, ASIGNARRADIOS : 1, LOCALIZACION : 2, MISMDS : 3, RADIOSXMD : 4};
+var colors = {NUEVO:"#FFC300", ASIGNADO:"gray" ,EN_PROCESO : "#00bf5f",  CONCLUIDO : "#007fff", CANCELADO : "#ff5656"};
+
 
 var element_call;
 var idRadioDesAsignar = -1;
 
+/* == MDS RADIOS X MDS == */
+var ARRAYOBJGERENTES;
+var ARRAYOBJJEFES;
+
+
+/* === LOCALIZACION RUTA === */
+var MARKER_HERE;
+var UBICACIONACTUAL;
+var INICIO_UBICACION;
+var LIST_UBICACIONES;
+var ESTATUS_CONSULTA = false;
+var directionsDisplay;
+var directionsService;
 
 /* =================== MAIN FUNCTION *-JS-*  ==================*/
 $(function(){
@@ -44,15 +68,69 @@ $(function(){
 		$("#aprobadasMenu").hide();
 	}
 	
+	inicializaCalendarios();
 	$('#idlocalizador').addClass('resaltado');
 	$('#asignarRadio').click(function(){ showContentRadios(this);});
 	$('#altaRadio').click(function(){ showContentRadios(this);});
+	$('#localizaTime') .click(function(){ showContentRadios(this);});
+	$('#verMds')	   .click(function(){ showContentRadios(this);});
+	$('#verRadiosEstatus')	   .click(function(){ showContentRadios(this);});
+	
+	
 	$('#btonGuardarRadios').click(function(){ guardaRadiosLocalizados();});
 	$('#btonCancelarRadios').click(function(){ clearMarkers();});
 	$("#btnAsignarRadio").click(function(){ asignarRadio(1);});
-	$("#btnRemovelAsign").click(function(){ cancelarSelecRadio();});
+	$("#download_plantillaRadios").click(function(){ download_ejemplo(); });
+	$("#btnRemovelAsign").click(function(){ closePopUpInfo();  var selet = {value:0};	radiosUsuario(selet); });
+	
 	$("#select_employee").change(function(){ radiosUsuario(this);});
+	$("#select_employeeMDGere").change(function(){ cargarJefesXGerente(this);});
+	
+	$("#btnUbicacionTR").click(function(){ consultarRutaRecorridaJefe();});
+	$("#checkTodaRuta").change(function(){ 
+		if(validaFechaConsultada(1))
+			return false;
+			
+		verRutaUbicacion();
+		});
+	
+	/*-- ver MD's --*/
+	$("#btnVerMds").click(function(){ getObtenerMDs();});
+	
+	
+	/* === RADIOS POR MDS ===*/
+	$("#check_nuevos").change(function(){clearMapsRadiosMDs(this.value);    pintarMarkersMaps(this.value,this.checked);}); 
+	$("#check_asignados").change(function(){clearMapsRadiosMDs(this.value); pintarMarkersMaps(this.value,this.checked);});
+	$("#check_proceso").change(function(){clearMapsRadiosMDs(this.value);   pintarMarkersMaps(this.value,this.checked);}); 
+	$("#check_concluido").change(function(){clearMapsRadiosMDs(this.value); pintarMarkersMaps(this.value,this.checked);});
+	$("#check_cancelado").change(function(){clearMapsRadiosMDs(this.value); pintarMarkersMaps(this.value,this.checked);}); 
+
+	$("#check_MdsRadios").change(function(){verMdsAutorizadasMaps(); });
+	$(".btn_infoClose").click(function(){closePopUpInfo();});
+	
+	$("#datepicker1").change(function(){validaFechaConsultada(2);});
+	
+	
 });
+
+/* === DOWNLOAD PLANTILLA ===*/
+function download_ejemplo(){
+	cargaLoading();
+
+	$.fileDownload('download_format_radius')
+    .done(function () { 
+    	setTimeout(function(){cierraLoading();},500);
+    		alert('File download a success!'); })
+    .fail(function () {
+    	setTimeout(function(){cierraLoading();},500);
+    		alert('File download failed!'); });
+	
+	setTimeout(function(){cierraLoading();},250);
+	
+	$("#download_plantillaRadios").unbind();
+	setTimeout(function(){ $("#download_plantillaRadios").bind();  $("#download_plantillaRadios").click(function(){ download_ejemplo(); });},5500);
+	
+}
 
 
 
@@ -76,10 +154,57 @@ function showOptionAction(){
     
     if(element_call.id == "asignarRadio"){
     	getRadiosLocalizados();
-    	getObtenerEmpleados();
+    	getObtenerEmpleados($('#select_employee'));
     	$("#select_employee").val(0);
     }
-}
+    
+    /* === VER MIS MDS ===*/
+    if(element_call.id == "verMds"){
+    	if(ARRAYOBJGERENTES == undefined || Object.keys(ARRAYOBJGERENTES).length < 0){
+    		getObtenerEmpleadosGerentes();    		
+    	}else{
+    		$("#select_employeeMDGere").val(0);
+    	}
+    }
+    
+    /*=== INTI LOCALIZACION EN TIEMPO REAL ===*/
+    if(element_call.id == "localizaTime"){
+	    if(ARRAYOBJJEFES == undefined || Object.keys(ARRAYOBJJEFES).length < 0){
+	    	getObtenerEmpleados($('#select_employeeLocalizar'));
+	    }else{
+    		var dateHoy = new Date();
+    		var FECHA_HOY = $.datepicker.formatDate('dd/mm/yy',dateHoy);
+    		
+	    		$("#datepicker1").val(FECHA_HOY);
+	    		$("#checkTodaRuta").prop("checked", false);
+		    	$('#select_employeeLocalizar').val(0);	    	
+	    }
+    }
+    
+	    /*=== INIT VER RADIOS CON MDS ===*/
+	    if(element_call.id == "verRadiosEstatus"){
+	    	getObtenerRadiosXMDs();
+	    	$("#check_nuevos").prop("checked",true);
+	    	$("#check_asignados").prop("checked",true);
+	    	$("#check_proceso").prop("checked",true);
+	    	$("#check_concluido").prop("checked",true);
+	    	$("#check_cancelado").prop("checked",true);
+	    	$("#check_MdsRadios").prop("checked",false);
+	
+	    }
+	    
+		clearMapsRadiosMDsBuscar(arrayRadios_4);
+		clearMapsRadiosMDsBuscar(arrayMds_4);
+		directionsDisplay.setDirections({routes: []});
+		quitarPinUbicacionActual();
+		
+		clearMapsMds(MdsArray);
+		
+		ESTATUS_CONSULTA = false; 
+		positionMapInit();
+		$(".contentPopUpInfo").hide();
+		$(".contentPopUpInfoMD").hide();
+   }
 
 /* ---------- Consume WS GUARDA RADIOS --------*/
 function guardaRadiosLocalizados(){
@@ -111,6 +236,7 @@ function guardaRadiosLocalizados(){
 			});
 
 	responseGuardarLocalizados = function(data){
+		console.log(data);
 		cargaMensajeModal("Localizador",data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
 		clearMarkers();
 		radiosArray = [];
@@ -137,24 +263,43 @@ function initMap() {
 		addMarker(objArray[markerId], map);
   });*/
   bounds = new google.maps.LatLngBounds();
+  boundsRadiosEstatus = new google.maps.LatLngBounds();
+  boundsMds = new google.maps.LatLngBounds();
+  boundsAsig = new google.maps.LatLngBounds();
+  
   setTimeout(function(){cierraLoading();},1850);
+  
+  
+  directionsService = new google.maps.DirectionsService;
+  directionsDisplay = new google.maps.DirectionsRenderer({
+    draggable: false,
+    map: map,
+    panel: document.getElementById('right-panel')
+  });
+
 }
 
 
 /* ---------- Adds a marker to the map. --------*/
 function addMarker(obj, map) {
+	
+	var icon = {
+			url: iconMarke.NUEVO, // url
+			scaledSize: new google.maps.Size(35, 35)// scaled size
+		};
+	
   var marker = new google.maps.Marker({
     position: obj.coordenada,
     //draggable: true,
     animation: google.maps.Animation.DROP,
     map: map,
     id : obj.idMarker,
-    icon : iconMarke.GREEN
+    icon : icon
   });
 
   google.maps.event.addListener(marker, 'dragend', function (evt) {
 	  var center = new CoordenadaClass(evt.latLng.lat(), evt.latLng.lng());
-	  objArray[obj.idMarker].circle = crearCirculo(center,colors.GREEN);
+	  objArray[obj.idMarker].circle = crearCirculo(center,colors.NUEVO);
 
 	    //document.getElementById('current').innerHTML = '<p>Marker dropped: Current Lat: ' + evt.latLng.lat().toFixed(3) + ' Current Lng: ' + evt.latLng.lng().toFixed(3) + '</p>';
 	});
@@ -164,7 +309,7 @@ function addMarker(obj, map) {
 	});
 
   marker.addListener("click", function() {
-  	if(infowindow == undefined){
+  	/*if(infowindow == undefined){
     	infowindow =  new  google.maps.InfoWindow({ content: crearInfoRadioLocalizado(obj)  });
 		  infowindow.open(map,marker);
       radioSeleccionado = objArray[obj.idMarker];
@@ -175,7 +320,27 @@ function addMarker(obj, map) {
   			infowindow.open(map,marker);
         radioSeleccionado = objArray[obj.idMarker];
   		}
-  	}
+  	}*/
+	  
+		 if (marker.getAnimation() !== null) {
+	          marker.setAnimation(null);
+	          $(".contentPopUpInfo").hide();
+	          map.fitBounds(bounds);
+	          
+	        } else {
+	          if(radioSeleccionado != undefined && radioSeleccionado != null)
+	        	  radioSeleccionado.marker.setAnimation(null);
+	          
+	          
+	          marker.setAnimation(google.maps.Animation.BOUNCE);
+	          radioSeleccionado = objArray[obj.idMarker];
+	          verInformacionRadio(radioSeleccionado, PANT_OPCION.ALTARADIOS);	  
+	          map.setCenter(new google.maps.LatLng(radioSeleccionado.coordenada.lat , radioSeleccionado.coordenada.lng));
+	          map.setZoom(15);
+	          $(".contentPopUpInfo").show();
+	        }
+	  
+  	
 	});
 
 	google.maps.event.addListener(marker, 'dragstart', function (evt) {
@@ -185,7 +350,7 @@ function addMarker(obj, map) {
   bounds.extend(marker.position);
   
 	obj.marker   = marker;
-	obj.circle   = crearCirculo(obj.coordenada,colors.GREEN,obj.longRadio);
+	obj.circle   = crearCirculo(obj.coordenada,colors.NUEVO,obj.infoMarker.fcRadio);
 	markerId++;
 
 }
@@ -215,77 +380,16 @@ function crearCirculo(location,color, radius){
 	 return new google.maps.Circle({
 	    	strokeColor: 'white',
 	    	 position: location,
-	        strokeOpacity: 0.8,
+	        strokeOpacity: 0.5,
 	        strokeWeight: .5,
 	        fillColor: color,
-	        fillOpacity: 0.2,
+	        fillOpacity: 0.4,
 	        map: map,
 	        center: location,
 	        radius: radius
 	      });
 }
 
-function crearInfoRadioLocalizado(obj){
-	var usuarioAsignado = "";
-	var colorTitle      = "";
-	var buttonAsig      = "";
-	
-	if(obj.infoMarker == undefined){
-		return "Sin información del radio.";
-	}
-	
-	if(obj.estatusId == 2 && (obj.usuarioId != undefined && obj.usuarioId != "")){
-		usuarioAsignado = '<h6 class="subtitleInfoRadio" style="color:red">Asignado : '+obj.NombreUsr+'</h6> ';
-		buttonAsig = '<button type="button" id="btonDescAsig" value="'+obj.idMarker+'" class="btn back_5 btn_aceptar">Quitar asignación </button>';
-		colorTitle = colors.GRAY;
-		
-	}
-	
-	
-	var infoHtml =  '<div id="containerInfoRadio">'+
-	buttonAsig+
-	usuarioAsignado+
-	' <h2 class="titleInfoRadio"style="color:'+colorTitle+'">'+validaValorObj(obj.infoMarker.fcSitio)+'</h2>'+
-	'<h6 class="subtitleInfoRadio" style="color:'+colorTitle+'">'+validaValorObj(obj.infoMarker.fcEstrategia)+'</h6>'+
-	'		<div id="contentInfoDemograf" class="classContents">'+
-	'		  <table>'+
-	'		   <thead><tr><th colspan="2">Información Socio demográfica</th></tr> </thead>'+
-	'			  <tbody>'+
-	'			  	<tr><td>Población total</td><td>'+validaValorObj(obj.infoMarker.fcPoblacionTotal)+'</td></tr>'+
-	'			  	<tr><td>PEA</td><td>'+validaValorObj(obj.infoMarker.fcPea)+'</td></tr>'+
-	'			  	<tr><td>Viviendas</td><td>'+validaValorObj(obj.infoMarker.fcViviendas)+'</td></tr>'+
-	'			  	<tr><td>NSE</td><td>'+validaValorObj(obj.infoMarker.fcNse)+'</td></tr>'+
-	'			  </tbody>'+
-	'		  </table>'+
-	'		</div>'+
-
-	'		<div id="contentInfoGenerado" class="classContents">'+
-	'		<table>'+
-	'		   <thead><tr><th colspan="2">Generadores</th></tr> </thead>'+
-	'		 <tbody>'+
-	'			  	<tr><td>Mercados</td><td>'+validaValorObj(obj.infoMarker.fcMercados)+'</td></tr>'+
-	'			  	<tr><td>Escuelas</td><td>'+validaValorObj(obj.infoMarker.fcEscuelas)+'</td></tr>'+
-	'			  	<tr><td>Hospitales</td><td>'+validaValorObj(obj.infoMarker.fcHospitales)+'</td></tr>'+
-	'			  	<tr><td>Templos</td><td>'+validaValorObj(obj.infoMarker.fcTemplos)+'</td></tr>'+
-	'			  </tbody>'+
-	'		  </table>'+
-	'		</div>'+
-
-	'		<div id="contentInfoDireccion" class="classContents">'+
-	'		<table id="tableInfoDireccion">'+
-	'		   <thead><tr><th colspan="2">Ubicación</th></tr> </thead>'+
-	'		 <tbody>'+
-	'			  	<tr><td>Calle</td><td>'+validaValorObj(obj.infoMarker.fcCallePrin)+'</td></tr>'+
-	'			  	<tr><td>Entre Calle 1</td><td>'+validaValorObj(obj.infoMarker.fcCalle1)+'</td></tr>'+
-	'			  	<tr><td>Entre Calle 2</td><td>'+validaValorObj(obj.infoMarker.fcCalle2)+'</td></tr>'+
-	'			  </tbody>'+
-	'		  </table>'+
-	'		</div>		'+
-	'	</div>';
-
-	return infoHtml;
-
-}
 
 function positionMapInit(){
 	 map.setZoom(6);
@@ -299,6 +403,15 @@ function validaValorObj(valor){
 	return valor;
 }
 
+function validaValorObjRadio(valor){
+	if(valor == undefined){
+		valor = "Sin asignar";
+	}else{
+		valor += "m";
+	}
+	return valor ;
+}
+
 
 /* ----------- Crear Radios con XSL-X -----------*/
 function pintarCirculosXslx(arrayDatosRadios){
@@ -308,11 +421,13 @@ function pintarCirculosXslx(arrayDatosRadios){
 	arrayDatosRadios.forEach(function(element,index){
 		if(index != 0 && index != 1){
 			objArray[markerId] = new RadiosClass(element[2],
-												new  CoordenadaClass(parseFloat(element[0]),parseFloat(element[1])),
-												markerId);
+												new  CoordenadaClass(parseFloat(element[0]),parseFloat(element[1])), markerId);
 
-			objArray[markerId].setInfoMarker(new InfoRadiosLocalizados(element[3],element[4],element[5],element[6],element[7],element[8],element[9],element[10],element[11],element[12],element[13],element[14],element[15]));
-			objArray[markerId].setLongRadio(element[16]);
+			objArray[markerId].setInfoMarker(new InfoRadiosLocalizados(element[3],element[4],element[5],element[6],element[7],
+												 element[8],element[9],element[10],element[11],element[12],
+												 element[13],element[14],element[15], element[16],
+												 element[17], element[18],element[19],element[20],index ));
+
 			addMarker(objArray[markerId], map);
 		}
 	});
@@ -430,20 +545,31 @@ function RadiosLocalizados(lat, lng, zonaId, infoRadioLocalizado, longRadio){
 }
 
 /* -- class Info --*/
-function InfoRadiosLocalizados(fcEstrategia, fcPoblacionTotal, fcPea, fcViviendas, fcNse, fcMercados, fcEscuelas, fcHospitales, fcTemplos, fcCallePrin, fcCalle1, fcCalle2, fcSitio){
+function InfoRadiosLocalizados(fcEstrategia, fcPoblacionTotal, fcPea, fcViviendas, fcNse, fcMercados, fcEscuelas,
+								fcHospitales, fcTemplos, fcCallePrin, fcCalle1, fcCalle2, fcSitio, fcRadio, fcCedis, fcDistancia, fcTipot, fcTiempo,indexXSLX){
 	this.fcEstrategia = fcEstrategia;
 	this.fcPoblacionTotal = fcPoblacionTotal;
-	this.fcPea = fcPea;
-	this.fcViviendas = fcViviendas;
-	this.fcNse = fcNse;
-	this.fcMercados = fcMercados;
-	this.fcEscuelas = fcEscuelas;
+	this.fcPea        = fcPea;
+	this.fcViviendas  = fcViviendas;
+	this.fcNse        = fcNse;
+	this.fcMercados   = fcMercados;
+	this.fcEscuelas   = fcEscuelas;
 	this.fcHospitales = fcHospitales;
-	this.fcTemplos = fcTemplos;
-	this.fcCallePrin = fcCallePrin;
-	this.fcCalle1 = fcCalle1;
-	this.fcCalle2 = fcCalle2;
-	this.fcSitio  = fcSitio;
+	this.fcTemplos    = fcTemplos;
+	this.fcCallePrin  = fcCallePrin;
+	this.fcCalle1     = fcCalle1;
+	this.fcCalle2     = fcCalle2;
+	this.fcSitio      = fcSitio;
+	this.fcRadio      = fcRadio;
+	
+	//== CEDIS
+	this.fcCedis      = fcCedis;
+	this.fcDistancia  = fcDistancia;
+	this.fcTipot      = fcTipot;
+	this.fcTiempo     = fcTiempo;
+	this.indexXSLX    = indexXSLX;
+	
+	
 }
 
 
@@ -572,15 +698,21 @@ var do_file = (function() {
 
 
 
-	/* =================== ASIGNAR RADIOS ==================*/
+	/* ========================= ASIGNAR RADIOS =========================*/
 
 	/* ---------- Adds a marker to the map. STATIC--------*/
 	function addMarkerAsigna(obj, map) {
       var iconTipo;
 	  var colorCicle;
       
-      iconTipo   = obj.estatusId == 2? iconMarke.GRAY : iconMarke.GREEN;
-      colorCicle = obj.estatusId == 2? colors.GRAY : colors.GREEN;
+      iconTipo   = obj.estatusId == 2? iconMarke.ASIGNADO : iconMarke.NUEVO;
+      colorCicle = obj.estatusId == 2? colors.ASIGNADO : colors.NUEVO;
+      
+      
+  	var icon = {
+			url: iconTipo, // url
+			scaledSize: new google.maps.Size(35, 35)// scaled size
+		};
       
 	  var marker = new google.maps.Marker({
 		    position: obj.coordenada,
@@ -588,69 +720,33 @@ var do_file = (function() {
 		    animation: google.maps.Animation.DROP,
 		    map: map,
 		    id : obj.idMarker,
-		    icon : iconTipo
+		    icon : icon
 		  }); 
 	  
-	 bounds.extend(marker.position);
+	  boundsAsig.extend(marker.position);
 	 marker.addListener("click", function() {
-		 
-    	if(infowindow == undefined){
-    		infowindow =  new  google.maps.InfoWindow({ content: crearInfoRadioLocalizado(obj) });
-    		infowindow.open(map,marker);
- 
-    		if(obj.estatusId != 2){
-    			obj.marker.setIcon(iconMarke.BLUE);
-    			objArray[obj.idMarker].circle.setMap(null);
-    			objArray[obj.idMarker].circle = crearCirculo(obj.coordenada,colors.BLUE,obj.longRadio);	
-   		 	}
-    	 
-    		radioSeleccionado = objArray[obj.idMarker];   			 
-    	}else{
-    		
-    		
-    		if(radioSeleccionado.idMarker != obj.idMarker){
-    			infowindow.close();
+		 if (marker.getAnimation() !== null) {
+	          marker.setAnimation(null);
+	          $(".contentPopUpInfo").hide();
+	          map.fitBounds(boundsAsig);
+	          
+	        } else {
+	          if(radioSeleccionado != undefined && radioSeleccionado != null)
+	        	  radioSeleccionado.marker.setAnimation(null);
 
-    			infowindow = new  google.maps.InfoWindow({ content: crearInfoRadioLocalizado(obj) });
-    			infowindow.open(map,marker);
-    			
-    			if(obj.estatusId != 2){
-    				obj.marker.setIcon(iconMarke.BLUE);   
-        			objArray[obj.idMarker].circle.setMap(null);
-        			objArray[obj.idMarker].circle = crearCirculo(obj.coordenada,colors.BLUE,obj.longRadio);
-    			}
-
-    			if(radioSeleccionado.idMarker != -1 && radioSeleccionado.estatusId != 2){
-    				radioSeleccionado.circle.setMap(null);
-    				radioSeleccionado.circle = crearCirculo(radioSeleccionado.coordenada,colors.GREEN,radioSeleccionado.longRadio);
-    				radioSeleccionado.marker.setIcon(iconMarke.GREEN);
-    			}
-
-    			radioSeleccionado = objArray[obj.idMarker];
-    			
-    		}else 
-    			if(radioSeleccionado.idMarker == obj.idMarker ){
-    				if(radioSeleccionado.estatusId != 2){
-    					radioSeleccionado.circle.setMap(null);
-    					radioSeleccionado.circle = crearCirculo(radioSeleccionado.coordenada,colors.GREEN,radioSeleccionado.longRadio);
-    					radioSeleccionado.marker.setIcon(iconMarke.GREEN);    					
-    				}
-
-    				infowindow.close();
-    				radioSeleccionado = undefined;
-    				infowindow = undefined;
-    			}
-    	}
-    	
-    	setTimeout(function(){
-    		$("#btonDescAsig").unbind();
-    		$("#btonDescAsig").click(function(){desAsignarRadio(); idRadioDesAsignar = this.value; });    		
-    	},250);
+	          marker.setAnimation(google.maps.Animation.BOUNCE);
+	          radioSeleccionado = objArray[obj.idMarker];
+	          verInformacionRadio(radioSeleccionado, PANT_OPCION.ASIGNARRADIOS);	  
+	          map.setCenter(new google.maps.LatLng(radioSeleccionado.coordenada.lat , radioSeleccionado.coordenada.lng));
+	          map.setZoom(15);
+	          $(".contentPopUpInfo").show();
+	        }
     	
 	});
 
+	 boundsGeneral = boundsAsig;
 		obj.marker   = marker;
-		obj.circle   = crearCirculo(obj.coordenada, colorCicle, obj.longRadio);
+		obj.circle   = crearCirculo(obj.coordenada, colorCicle, obj.infoMarker.fcRadio);
 		markerId++;
 }
 
@@ -659,8 +755,8 @@ function cancelarSelecRadio(){
 		if(infowindow != undefined){
 			if(radioSeleccionado.estatusId != 2){
 				radioSeleccionado.circle.setMap(null);
-				radioSeleccionado.circle = crearCirculo(radioSeleccionado.coordenada,colors.GREEN,radioSeleccionado.longRadio);
-				radioSeleccionado.marker.setIcon(iconMarke.GREEN);
+				radioSeleccionado.circle = crearCirculo(radioSeleccionado.coordenada,colors.NUEVO,radioSeleccionado.longRadio);
+				radioSeleccionado.marker.setIcon(iconMarke.NUEVO);
 			}
 			infowindow.close();
 			radioSeleccionado = undefined;
@@ -674,6 +770,7 @@ function desAsignarRadio(){
 
 	/* ---------- Consume WS Empleados --------*/
 	function asignarRadio(tipoAction){
+		
 		
 		if(tipoAction == 1){
 			idRadioDesAsignar = -1;
@@ -692,7 +789,7 @@ function desAsignarRadio(){
 		}else{
 			
 			
-				if(idJefeExpansion == 0){
+				if(idJefeExpansion == 0 ||idJefeExpansion == null || idJefeExpansion == undefined ){
 					cargaMensajeModal("Localizador","Seleccione a quien se le asignara el radio.", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
 					cierraLoading();
 					return false;
@@ -726,29 +823,26 @@ function desAsignarRadio(){
 				});
 
 		responseAsignacionRadio = function(data){
+			cleanRadiosDispoAsignados();
 			cargaMensajeModal("Localizador",data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
-
-			if(data.codigo == 200){
-				 deleteObjMarkerMap(radioSeleccionado.idMarker);
-				 radioSeleccionado.idMarker = -1 ;
-				 getRadiosLocalizados();
-			}
+			getRadiosLocalizados();
 		}
 		$("#select_employee").val(0);
-		idRadioDesAsignar = -1;
+		$(".btn_infoClose").trigger("click");
 	}
 	
 
 	/* ---------- Consume WS JEFES Disponibles por zona --------*/
-	function getObtenerEmpleados(){
+	function getObtenerEmpleados(elementId){
 		cargaLoading();
+		 
 
 		invocarJSONServiceAction("obtenerEmpleadosZona",{},
 				'llenarComboEmpleados',
 				function() {
 					//Funcion de error
 					cargaMensajeModal("Localizador","Error en el servicio obtener jefes de expansión.", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
-					$('#select_employee')
+					elementId
 				    .empty()
 				    .append('<option selected="selected" value="-1">Selecione un jefe </option>')
 				;
@@ -767,9 +861,9 @@ function desAsignarRadio(){
 			}
 
 			objArrayEmployee = data;
-
+			ARRAYOBJJEFES = objArrayEmployee.usuarios;
 			objArrayEmployee.usuarios.forEach(function(item, i){
-				 $('#select_employee').append($('<option>', {
+				elementId.append($('<option>', {
 				        value: item.usuarioId,
 				        text : item.usuario
 				    }));
@@ -801,7 +895,7 @@ function desAsignarRadio(){
 			}
 				
 			radiosArray = [];
-			bounds = new google.maps.LatLngBounds();
+			boundsAsig = new google.maps.LatLngBounds();
 			data.radios.forEach(function(element,index){
 
 				//RadiosClass(idZona,coordenada, idMarker,marker, circle,idEstatus,idUsuario)
@@ -814,17 +908,21 @@ function desAsignarRadio(){
 													element.usuarioId,
 													element.NombreUsr );
 				
-				objArray[element.radioId].setLongRadio(element.longRadio);
+				//objArray[element.radioId].setLongRadio(element.longRadio);
 				
 				if(element.datosRadio != undefined && element.datosRadio!= null){
 					var infoRadios = element.datosRadio;
-					objArray[element.radioId].setInfoMarker(new InfoRadiosLocalizados(infoRadios.fcEstrategia, infoRadios.fcPoblacionTotal, infoRadios.fcPea, infoRadios.fcViviendas, infoRadios.fcNse, infoRadios.fcMercados, infoRadios.fcEscuelas, infoRadios.fcHospitales, infoRadios.fcTemplos, infoRadios.fcCallePrin, infoRadios.fcCalle1, infoRadios.fcCalle2, infoRadios.fcSitio ));					
+					objArray[element.radioId].setInfoMarker(new InfoRadiosLocalizados(infoRadios.fcEstrategia, infoRadios.fcPoblacionTotal, infoRadios.fcPea, infoRadios.fcViviendas, infoRadios.fcNse,
+																					  infoRadios.fcMercados, infoRadios.fcEscuelas, infoRadios.fcHospitales, infoRadios.fcTemplos, infoRadios.fcCallePrin,
+																					  infoRadios.fcCalle1, infoRadios.fcCalle2, infoRadios.fcSitio, infoRadios.fcRadio,
+																					  infoRadios.fcCedis, infoRadios.fcDistancia, infoRadios.fcTipot, infoRadios.fcTiempo
+																						));					
 				}
 
 				addMarkerAsigna(objArray[element.radioId], map);			
 			});
 
-			map.fitBounds(bounds);
+			map.fitBounds(boundsAsig);
 			setTimeout(function(){cierraLoading();},500);
 		}
 	}
@@ -861,5 +959,777 @@ function radiosUsuario(select){
 }
 
 
+/* === MOSTRAR SOLO CIRCULOS ===*/
+function cleanRadiosDispoAsignados(){
+
+	 if(Object.keys(objArray).length <= 0){
+		 return false;
+	 }
+
+	 Object.keys(objArray).forEach(function (key){
+
+			 if( objArray[key].circle != undefined && objArray[key].circle != null && objArray[key].circle.getMap() != null){
+				 objArray[key].circle.setMap(null);
+			 } 
+			 
+			 if( objArray[key].marker != undefined && objArray[key].marker != null && objArray[key].marker.getMap() != null){
+				 objArray[key].marker.setMap(null);
+			 } 
+
+ 
+	});
+}
 
 
+
+
+
+
+
+
+
+/* ========================= LOCALIZACION TIMEPO REAL ========================= */
+
+function consultarRutaRecorridaJefe(){
+
+	quitarPinUbicacionActual();
+	directionsDisplay.setDirections({routes: []});
+	
+	ESTATUS_CONSULTA = false;
+	cargaLoading();
+	var usuarioId = $('#select_employeeLocalizar').val();
+	var fecha     = $("#datepicker1").val().split('/');
+	var formatDate = fecha[2]+"-"+fecha[1]+"-"+fecha[0];
+	
+	if(usuarioId == 0 ){
+		cierraLoading();
+		cargaMensajeModal("Localizador","Selecione un jefe.", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+		return false;
+	}	
+	
+	
+	invocarJSONServiceAction("consultaRutaRecorrida",{idJefeExpansion: usuarioId ,fechaRecorrido:formatDate},
+			'pintarRudaMaps',
+			function() {
+				//Funcion de error
+				cargaMensajeModal("Localizador","Error en el servicio localización tiempo real.", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+			},
+			function() {
+				//Función al finalizar
+				cierraLoading();
+			});
+
+	pintarRudaMaps = function(data){
+		console.log(data);
+		if(data.codigo == 400 || data.codigo == 205){
+			cargaMensajeModal("Localizador",data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+			return false;
+		}
+		
+		var inicioRuta = data.ubicacion.length-1;
+		LIST_UBICACIONES = new Array();
+
+	    
+	    
+
+		data.ubicacion.forEach(function(item,i){
+			  if(i <= 24){	
+					if(item.id == 1){
+						UBICACIONACTUAL = new google.maps.LatLng(item.datosRadio[0].fcLatitud , item.datosRadio[0].fcLongitud);		 
+					}else
+						if(i <= 24 ){
+							
+							INICIO_UBICACION =  new google.maps.LatLng(item.datosRadio[0].fcLatitud , item.datosRadio[0].fcLongitud);
+						} else {
+							LIST_UBICACIONES.push({location: new google.maps.LatLng(item.datosRadio[0].fcLatitud , item.datosRadio[0].fcLongitud),
+													stopover: true
+												});
+						}
+				  }
+		});
+		ESTATUS_CONSULTA = true;
+		verRutaUbicacion();
+		
+	}
+}
+
+function verRutaUbicacion(){
+	if(ESTATUS_CONSULTA){
+		 
+		cargaLoading();
+		quitarPinUbicacionActual();
+		directionsDisplay.setDirections({routes: []});
+	
+		if($("#checkTodaRuta").is(":checked")){
+			
+			displayRoute(UBICACIONACTUAL, INICIO_UBICACION, directionsService, directionsDisplay, LIST_UBICACIONES);	
+			
+		}else{
+			if(ESTATUS_CONSULTA){
+				directionsDisplay = new google.maps.DirectionsRenderer({
+					draggable: false,
+					map: map,
+					panel: document.getElementById('right-panel')
+				});	
+							
+				var icon = {
+						url: 
+							iconMarke.HERE, // url
+						scaledSize: new google.maps.Size(35, 35)// scaled size
+					};
+				
+				MARKER_HERE = new google.maps.Marker({
+					position: UBICACIONACTUAL,
+					animation: google.maps.Animation.DROP,
+					map: map,
+					icon : icon
+				});
+				
+				map.setCenter(UBICACIONACTUAL);
+				map.setZoom(17);
+				
+				
+			}
+		}
+	 
+		 setTimeout(function(){cierraLoading();},1200);
+	}
+}
+
+function quitarPinUbicacionActual(){
+	if(MARKER_HERE != null && MARKER_HERE != undefined){
+		MARKER_HERE.setMap(null);
+	}
+
+	
+}
+
+
+function displayRoute(origin, destination, service, display, listRuta) {
+	
+	service.route({
+		origin: origin,
+		destination: destination,
+		waypoints: listRuta,
+		travelMode: 'WALKING',
+		avoidTolls: true
+	}, function(response, status) {
+		if (status === 'OK') {
+			display.setDirections(response);
+		} else {
+			alert('Could not display directions due to: ' + status);
+		}
+	});
+}
+
+function inicializaCalendarios() {
+	$(".ui-datepicker-trigger").hide();
+	
+	var dateHoy = new Date();
+	var FECHA_HOY = $.datepicker.formatDate('dd/mm/yy',dateHoy);
+	
+	$( "#datepicker1").datepicker({
+		maxDate:0,
+		autoSize : true,
+		showOn: 'both',
+		showAnim: 'slideDown',
+        buttonImageOnly: true,
+        buttonImage: 'img/calendar_icon.png',
+        onClose: function( selectedDate ) {
+			var date = $(this).datepicker('getDate');			
+			var endDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+        }
+	});
+	
+	$("#datepicker1").datepicker.dateFormat = 'dd/MM/yy';
+	$("#datepicker1").val(FECHA_HOY);
+}
+
+
+function validaFechaConsultada(tipoChange){
+	var dateHoy = new Date();
+	var FECHA_HOY = $.datepicker.formatDate('dd/mm/yy',dateHoy);
+	var fechaSelected = $("#datepicker1").val();
+	var toDate = false;
+	
+	if(fechaSelected != FECHA_HOY && tipoChange != 2){
+		$("#checkTodaRuta").prop("checked",true);
+		toDate = true;
+	} 
+	
+	if(fechaSelected == FECHA_HOY && tipoChange == 2){
+		$("#checkTodaRuta").prop("checked",false);
+		toDate = false;
+	}else if(fechaSelected != FECHA_HOY && tipoChange == 2){
+		$("#checkTodaRuta").prop("checked",true);
+		toDate = true;
+	}
+	
+	return toDate;
+}
+
+
+
+
+  
+  /* ============================  CONSULTA MD'S POR EMPLEADO ===============================================*/
+  
+/*-- CONSULTA MD'S --*/
+function getObtenerMDs(){
+	cargaLoading();
+	clearMapsMds(MdsArray);
+	$(".contentPopUpInfoMD").hide();
+	
+	var idGerente = $("#select_employeeMDGere").val();
+	var idJefe    = $("#select_employeeMDJefes").val();
+	
+	if(idGerente == 0){
+		cierraLoading();
+		cargaMensajeModal("Localizador","Selecione un gerente.", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+		return false;
+	}
+
+	invocarJSONServiceAction("obtenerMdsAutorizadas",{idGerenteExpansion:idGerente ,idJefeExpansion:idJefe},
+			'responseMdsAutorizadas',
+			function() {
+				//Funcion de error
+				cargaMensajeModal("Localizador","Error en el servicio obtener  Md's autorizadas.", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+			},
+			function() {
+				//Función al finalizar
+				cierraLoading();
+			});
+
+	responseMdsAutorizadas = function(data){
+		console.log(data);
+		if(data.codigo == 400){
+			cargaMensajeModal("Localizador",data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+			return false;
+		}
+
+		bounds = new google.maps.LatLngBounds();
+		data.Arreglo.forEach(function(element, i){
+			element.arrayMD.forEach(function(item,y){
+				var objMd = new MdsPorRadio(item.categoria, item.direccion, item.jefeId, item.latitud, item.longitud, item.mdId, item.nombreJefe, item.nombreSitio, item.propietario);
+				MdsArray[item.mdId] = objMd;
+				addMarkerMDs(MdsArray[item.mdId], map,bounds,MdsArray);
+			});
+		});
+		map.fitBounds(bounds);
+	}
+}
+
+
+function clearMapsMds(array_){
+	Object.keys(array_).forEach(function(key){
+		array_[key].marker.setMap(null);
+	});
+	array_ = [];	
+}
+
+function pintarMdsMaps(md_){
+	return  new google.maps.Marker({
+		position: md_,
+		animation: google.maps.Animation.DROP,
+		map: map,
+		icon: iconMarke.MD,
+		map_icon_label: '<span class="map-icon map-icon-point-of-interest"></span>'
+	});
+}
+
+
+/* -- Consume WS JEFES Disponibles por zona --*/
+function getObtenerEmpleadosGerentes(){
+	cargaLoading();
+
+	invocarJSONServiceAction("obtenerEmpleadosGerentes",{},
+			'llenarComboEmpleados',
+			function() {
+				//Funcion de error
+				cargaMensajeModal("Localizador","Error en el servicio obtener jefes de expansión.", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+				$('#select_employeeMDGere')
+			    .empty()
+			    .append('<option selected="selected" value="-2">Selecione un gerente </option>')
+			;
+
+			},
+			function() {
+				//Función al finalizar
+				cierraLoading();
+			});
+
+	llenarComboEmpleados = function(data){
+		
+		console.log(data);
+		if(data.codigo == 400){
+			cargaMensajeModal("Localizador",data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+			return false;
+		}
+
+		objArrayEmployee = data;
+		ARRAYOBJGERENTES = objArrayEmployee.usuarios;
+		objArrayEmployee.usuarios.forEach(function(item, i){
+			 $('#select_employeeMDGere').append($('<option>', {
+			        value: item.gerenteId,
+			        text : item.gerente
+			    }));
+		});
+	}
+}
+	
+	
+/* -- RECARGAR SELECT JEFES --*/
+function cargarJefesXGerente(element){
+	$('#select_employeeMDJefes').html("");
+	$('#select_employeeMDJefes').append($('<option>', {
+			value: "-1",
+			text :"Todos los jefes"
+		}));
+	
+	if(ARRAYOBJGERENTES != undefined && Object.keys(ARRAYOBJGERENTES).length > 0){
+		ARRAYOBJGERENTES.forEach(function(item, i){
+			if(element.value === item.gerenteId){
+				item.jefes.forEach(function(itemj, y){
+					$('#select_employeeMDJefes').append($('<option>', {
+						value: itemj.jefeId,
+						text : itemj.jefe
+					}));
+				});
+			}
+			 
+		});
+		
+	}
+}
+	
+/* == VER DETALLE MD ===*/
+function obtieneDetalleMd(nombreMd, mdId) {
+	$("#nombreMd").val(nombreMd);
+	$("#mdId").val(mdId);
+	$("#tipoMd").val('5');
+	$("#detalleMemoriaAsignadaAction").submit();
+}
+	
+	
+	
+
+
+	
+
+/* ============================  CONSULTA RADIOS POR ESTATUS =====================================*/
+	var arrayRadios_4 = [];
+	var arrayMds_4    = [];
+	var ESTATUS_RADIO = {UNO : "Nuevo",DOS: "Asignado", TRES: "En proceso", CUATRO: "Concluido", CINCO:"Cancelado"  };
+	
+	
+	
+	function getObtenerRadiosXMDs(){
+		cargaLoading();
+		clearMapsMds(arrayMds_4);
+		clearMapsRadiosMDsBuscar(arrayRadios_4);
+		boundsMds = new google.maps.LatLngBounds();
+		boundsRadiosEstatus = new google.maps.LatLngBounds();
+		
+		invocarJSONServiceAction("obtenerRadiosXEstatusMds",{},
+				'responseRadiosMds',
+				function() {
+					//Funcion de error
+					cargaMensajeModal("Localizador","Error en el servicio obtener Radios con MDs.", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+					$('#select_employeeMDGere')
+				    .empty()
+				    .append('<option selected="selected" value="-2">Selecione un gerente </option>')
+				;
+
+				},
+				function() {
+					//Función al finalizar
+					cierraLoading();
+				});
+
+		responseRadiosMds = function(data){
+			
+			console.log(data);
+			if(data.codigo == 400){
+				cargaMensajeModal("Localizador",data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+				return false;
+			}
+
+			/* ==== CREAR MDS === */  
+			data.md.forEach(function(item,i){
+				var objMd = new MdsPorRadio(item.categoria, item.direccion, item.jefeId, item.latitud, item.longitud, item.mdId, item.nombreJefe, item.nombreSitio, item.propietario);
+				arrayMds_4[item.mdId] = objMd;
+				addMarkerMDs(arrayMds_4[item.mdId], map, boundsMds, arrayMds_4);
+			});
+			
+			/* ==== CREAR RADIOS ===*/
+			data.radios.forEach(function(element,i){
+				
+				arrayRadios_4[element.radioId] = new RadiosClass(element.zona.trim(),
+						new  CoordenadaClass(parseFloat(element.latitud),parseFloat(element.longitud)),
+						element.radioId,
+						null,
+						null,
+						element.estatusId,
+						element.usuarioId,
+						element.NombreUsr );
+				
+				if(element.datosRadio != undefined && element.datosRadio!= null){
+					var infoRadios = element.datosRadio;
+					arrayRadios_4[element.radioId].setInfoMarker(new InfoRadiosLocalizados(infoRadios.fcEstrategia, infoRadios.fcPoblacionTotal, infoRadios.fcPea, infoRadios.fcViviendas, infoRadios.fcNse,
+																					  infoRadios.fcMercados, infoRadios.fcEscuelas, infoRadios.fcHospitales, infoRadios.fcTemplos, infoRadios.fcCallePrin,
+																					  infoRadios.fcCalle1, infoRadios.fcCalle2, infoRadios.fcSitio, infoRadios.fcRadio,
+																					  infoRadios.fcCedis, infoRadios.fcDistancia, infoRadios.fcTipot, infoRadios.fcTiempo));					
+				}
+			});
+			
+			verMdsAutorizadasMaps();
+			pintarMarkersMaps(0,true);				
+			
+		}
+	}
+	
+	/* == show Mds*/
+	function verMdsAutorizadasMaps(){
+		
+		if($("#check_MdsRadios").is(":checked")){
+			Object.keys(arrayMds_4).forEach(function(key){
+				arrayMds_4[key].marker.setMap(map);
+			});			
+		}else{
+			hiddenMdsAutorizadasMaps();			
+		}
+		map.fitBounds(boundsMds);
+		
+	}
+	
+	/* === hidden Mds ==*/
+	function hiddenMdsAutorizadasMaps(){
+		Object.keys(arrayMds_4).forEach(function(key){
+			if(arrayMds_4[key].marker != undefined && arrayMds_4[key].marker != null ){
+				arrayMds_4[key].marker.setMap(null);				
+			}
+		})
+	}
+	
+	
+	/* === limpiar array Radios ===*/
+	function clearMapsRadiosMDsBuscar(array_){
+		
+		Object.keys(array_).forEach(function(key){
+			if(array_[key].marker != undefined && array_[key].marker != null ){
+				array_[key].marker.setMap(null);	
+			}
+			
+			if(array_[key].circle != undefined && array_[key].circle != null ){
+				array_[key].circle.setMap(null);					
+			}
+			
+		});
+		array_ = [];	
+	}
+	
+
+	/* === show  Radios ===*/
+	function pintarMarkersMaps(idEstatus, show){
+		
+		
+		if(idEstatus == 0){
+			clearMapsRadiosMDs( idEstatus);
+			
+			Object.keys(arrayRadios_4).forEach(function(key){
+				addMarkerEstatus(arrayRadios_4[key], map);
+			});
+			
+		}else{
+			Object.keys(arrayRadios_4).forEach(function(key){
+				if( arrayRadios_4[key].estatusId == idEstatus && show){
+					arrayRadios_4[key].marker.setMap(map);			
+					arrayRadios_4[key].circle.setMap(map);	
+				}
+			});
+		}
+		
+		if(show)
+		map.fitBounds(boundsRadiosEstatus);
+		
+	}
+
+
+	/* === hidden array Radios ===*/
+	function clearMapsRadiosMDs(idEstatus){
+		
+		Object.keys(arrayRadios_4).forEach(function(key){
+			if(arrayRadios_4[key].marker != undefined && arrayRadios_4[key].marker != null && arrayRadios_4[key].estatusId == idEstatus){
+				arrayRadios_4[key].marker.setMap(null);			
+				arrayRadios_4[key].circle.setMap(null);	
+			}
+		});
+		
+		if(radioSeleccionado != undefined 
+				&& radioSeleccionado != null 
+				&& idEstatus == radioSeleccionado.estatusId){
+				
+			$(".contentPopUpInfo").hide();					
+		}
+	}
+	
+
+	/* ===== RADIOS CON ESTATUS =====*/
+function addMarkerEstatus(obj, map) {
+	
+		var color;
+		var iconoEstatus;
+		var pintar = false;
+		
+		if( obj.estatusId == 1){
+			color = colors.NUEVO;
+			iconoEstatus = iconMarke.NUEVO;
+			pintar = true;
+		}else
+		  if( obj.estatusId == 2){
+			  color = colors.ASIGNADO;
+			  iconoEstatus = iconMarke.ASIGNADO;
+			  pintar = true;
+			}else
+				  if(obj.estatusId == 3){
+					  color = colors.EN_PROCESO;
+					  iconoEstatus = iconMarke.EN_PROCESO;
+					  pintar = true;
+					}else
+						  if(obj.estatusId == 4){
+							  color = colors.CONCLUIDO;
+							  iconoEstatus = iconMarke.CONCLUIDO;
+							  pintar = true;
+							}else
+								  if(obj.estatusId == 5){
+									  color = colors.CANCELADO;
+									  iconoEstatus = iconMarke.CANCELADO;
+									  pintar = true;
+									}
+		
+		colorCicle = color;
+		
+	var icono = {
+			url: iconoEstatus,
+			scaledSize: new google.maps.Size(35, 35)
+		};
+      
+	  var marker = new google.maps.Marker({
+		    position: obj.coordenada,
+		    draggable: false,
+		    animation: google.maps.Animation.DROP,
+		    map: map,
+		    id : obj.idMarker,
+		    icon: icono,
+			map_icon_label: '<span class="map-icon map-icon-point-of-interest"></span>'
+		  }); 
+	  
+
+	
+	 marker.addListener("click",  function(){
+		 if (marker.getAnimation() !== null) {
+	          marker.setAnimation(null);
+	          $(".contentPopUpInfo").hide();
+	          map.fitBounds(boundsRadiosEstatus);
+	          
+	        } else {
+	          if(radioSeleccionado != undefined && radioSeleccionado != null)
+	        	  radioSeleccionado.marker.setAnimation(null);
+	          
+	          
+	          marker.setAnimation(google.maps.Animation.BOUNCE);
+	          radioSeleccionado = arrayRadios_4[obj.idMarker];
+	          verInformacionRadio(radioSeleccionado,  PANT_OPCION.RADIOSXMD);	  
+	          map.setCenter(new google.maps.LatLng(radioSeleccionado.coordenada.lat , radioSeleccionado.coordenada.lng));
+	          map.setZoom(15);
+	          $(".contentPopUpInfoMD").hide();
+	          $(".contentPopUpInfo").show();
+	        }
+		 
+	 });
+
+	 
+	 boundsRadiosEstatus.extend(marker.position);
+		obj.marker   = marker;
+		obj.circle   = crearCirculo(obj.coordenada, colorCicle, obj.infoMarker.fcRadio);
+		markerId++;
+		
+		boundsGeneral = boundsRadiosEstatus;
+}
+
+
+
+
+
+function closePopUpInfo(){	
+	
+	if(radioSeleccionado != undefined && radioSeleccionado != null && radioSeleccionado.marker.getAnimation() !== null){
+   	  	radioSeleccionado.marker.setAnimation(null);
+   	  	radioSeleccionado = null;
+   	  	$(".contentPopUpInfo").hide();
+   	  	$(".contentPopUpInfoMD").hide();
+   	  	map.fitBounds(boundsGeneral);
+     }
+	
+}
+	
+	
+function verInformacionRadio(obj, vista_opcion){
+	
+	if(obj.infoMarker == undefined){
+		cargaMensajeModal("Localizador","La información del radio no se esta disponible.", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+		return false;
+	}
+	
+	if(obj.infoMarker == undefined){
+		return "Sin información del radio.";
+	}
+	
+	$("#infoTituloPopUp").html(validaValorObj(obj.infoMarker.fcSitio)+ ', '+obj.idZona);
+	$("#infoCoordenadas").html(obj.coordenada.lat+' , '+obj.coordenada.lng);
+	$("#infoEstrategias").html(validaValorObj(obj.infoMarker.fcEstrategia));
+	$("#infoEstatus").html(estatusRadios(obj.estatusId));
+	
+	
+	$("#infoTotalPoblacion").html(validaValorObj(obj.infoMarker.fcPoblacionTotal));
+	$("#infoPEA").html(validaValorObj(obj.infoMarker.fcPea));
+	$("#infoViviendas").html(validaValorObj(obj.infoMarker.fcViviendas));
+	$("#infoNSE").html(validaValorObj(obj.infoMarker.fcNse));
+	
+	$("#infoMercados").html(validaValorObj(obj.infoMarker.fcMercados));
+	$("#infoEscuelas").html(validaValorObj(obj.infoMarker.fcEscuelas));
+	$("#infoHospitales").html(validaValorObj(obj.infoMarker.fcHospitales));
+	$("#infoTemplos").html(validaValorObj(obj.infoMarker.fcTemplos));
+	
+	$("#infoCalle_p").html(validaValorObj(obj.infoMarker.fcCallePrin));
+	$("#infoCalle_1").html(validaValorObj(obj.infoMarker.fcCalle1));
+	$("#infoCalle_2").html(validaValorObj(obj.infoMarker.fcCalle2));
+	$("#infoColonia").html(validaValorObj(obj.infoMarker.fcCedis));
+	
+	$("#infoDistancia").html(validaValorObj(obj.infoMarker.fcDistancia));
+	$("#infoTipo").html(validaValorObj(obj.infoMarker.fcTipot));
+	$("#infoTiempo").html(validaValorObj(obj.infoMarker.fcTiempo));
+
+	var usuarioAsignado = "";
+	$("#divContentInfoRadio").children("div#divInfoAsinacion").html("");
+	
+	if(obj.estatusId == 2 && (obj.usuarioId != undefined && obj.usuarioId != "")){
+		if(vista_opcion == 1){
+			usuarioAsignado = '<div id="divInfoAsinacion"> <h6 class="subtitleInfo left_float">Asignado : </h6>  <h6 id="infoJefeAsignado" class="subtitleInfo infoValue" >'+obj.NombreUsr+'</h6>'+
+			'<button type="button" id="btonDescAsig" value="'+obj.idMarker+'" class="btonCenterPosition btn back_btonOrange btn_aceptar">Quitar asignación </button><br><br></div>';			
+		}else{
+			usuarioAsignado = '<div id="divInfoAsinacion"> <h6 class="subtitleInfo left_float">Asignado : </h6>  <h6 id="infoJefeAsignado" class="subtitleInfo infoValue" >'+obj.NombreUsr+'</h6><br></div>';
+		}
+		
+		$("#divContentInfoRadio").append(usuarioAsignado);
+	}else{
+		$("#divContentInfoRadio").children("div#divInfoAsinacion").html("");
+	}
+	
+	setTimeout(function(){
+		$("#btonDescAsig").unbind();
+		$("#btonDescAsig").click(function(){desAsignarRadio(); idRadioDesAsignar = this.value; });    		
+	},250);
+}
+	
+function estatusRadios(estatus){
+	var estatusRadio;
+	
+	if(estatus == 1){
+		estatusRadio = ESTATUS_RADIO.UNO;
+	}else if(estatus == 2){
+		estatusRadio = ESTATUS_RADIO.DOS;
+	}else if(estatus == 3){
+		estatusRadio = ESTATUS_RADIO.TRES;
+	}else if(estatus == 4){
+		estatusRadio = ESTATUS_RADIO.CUATRO;
+	}else if(estatus == 5){
+		estatusRadio = ESTATUS_RADIO.CINCO;
+	}
+	
+	return estatusRadio;
+}
+
+/* ---------- Adds a marker MDS--------*/
+function addMarkerMDs(obj, map,bounds_, array_ ) {
+	var icon = {
+			url: iconMarke.MD, // url
+			scaledSize: new google.maps.Size(35, 35)// scaled size
+		};
+	
+  var marker = new google.maps.Marker({
+	    position: new google.maps.LatLng(obj.latitud, obj.longitud),
+	    draggable: false,
+	    animation: google.maps.Animation.DROP,
+	    map: map,
+	    id : obj.mdId,
+	    icon : icon
+	  }); 
+  
+  bounds_.extend(marker.position);
+  marker.addListener("click", function() {
+	  
+	 if (marker.getAnimation() !== null) {
+          marker.setAnimation(null);
+          $(".contentPopUpInfoMD").hide();
+          map.fitBounds(bounds_);
+          
+        } else {
+          if(radioSeleccionado != undefined && radioSeleccionado != null)
+        	  radioSeleccionado.marker.setAnimation(null);
+          
+          
+          marker.setAnimation(google.maps.Animation.BOUNCE);
+          radioSeleccionado = array_[obj.mdId];
+          verInfoMd(radioSeleccionado);	  
+          
+          map.setCenter(new google.maps.LatLng(radioSeleccionado.latitud , radioSeleccionado.longitud));
+          map.setZoom(15);
+          $(".contentPopUpInfo").hide();
+          $(".contentPopUpInfoMD").show();
+       }
+});
+
+  	boundsGeneral = bounds_;
+	obj.marker   = marker;
+	markerId++;
+}
+
+function verInfoMd(obj){
+	if(obj == undefined){
+		cargaMensajeModal("Localizador","La información de la MD no esta disponible.", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+		return false;
+	}
+	
+	$("#infoMD").html(validaValorObj(obj.nombreSitio));
+	$("#infoMDCoordenadas").html(obj.latitud+' , '+obj.longitud);
+	$("#infoDireccion").html(validaValorObj(obj.direccion));	
+	$("#infoPropietario").html(validaValorObj(obj.propietario));
+	$("#infoNombreJefe").html(validaValorObj(obj.nombreJefe));
+	$("#verDetalleMD").val(validaValorObj(obj.nombreSitio));
+	
+	setTimeout(function(){
+		$("#verDetalleMD").unbind();
+		$("#verDetalleMD").click(function(){obtieneDetalleMd(this.attributes.MdNombre_.value, this.attributes.MdId_.value); });    		
+		$("#verDetalleMD").attr("MdNombre_", obj.nombreSitio);
+		$("#verDetalleMD").attr("MdId_", obj.mdId);
+		
+	},250);
+	
+}
+
+
+
+/* ===================== class Mds por radios ============*/
+	function MdsPorRadio(categoria,direccion, jefeId, latitud, longitud, mdId, nombreJefe, nombreSitio, propietario, marker ){
+		this.categoria = categoria;
+		this.jefeId = jefeId;
+		this.direccion = direccion;
+		this.latitud = latitud
+		this.longitud = longitud;
+		this.mdId = mdId;
+		this.nombreJefe = nombreJefe;
+		this.nombreSitio = nombreSitio
+		this.propietario = propietario;
+		this.marker = marker;
+	}	

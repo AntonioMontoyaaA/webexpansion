@@ -30,6 +30,9 @@ public class TableroVo implements Serializable {
 	private String jefeExpansion;
 	private String gerenteExpansion;
 	private String regional;
+	private String doctos;
+	private String comite;
+	private String ceco;
 	/**
 	 * @return the mdId
 	 */
@@ -294,7 +297,42 @@ public class TableroVo implements Serializable {
 	public void setRegional(String regional) {
 		this.regional = regional;
 	}
-	
+	/**
+	 * @return the doctos
+	 */
+	public String getDoctos() {
+		return doctos;
+	}
+	/**
+	 * @param doctos the doctos to set
+	 */
+	public void setDoctos(String doctos) {
+		this.doctos = doctos;
+	}
+	/**
+	 * @return the comite
+	 */
+	public String getComite() {
+		return comite;
+	}
+	/**
+	 * @param comite the comite to set
+	 */
+	public void setComite(String comite) {
+		this.comite = comite;
+	}
+	/**
+	 * @return the ceco
+	 */
+	public String getCeco() {
+		return ceco;
+	}
+	/**
+	 * @param ceco the ceco to set
+	 */
+	public void setCeco(String ceco) {
+		this.ceco = ceco;
+	}
 	
 	
 

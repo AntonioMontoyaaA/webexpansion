@@ -147,6 +147,38 @@
 			</div>
 			</div>
 			</div>
+<!-- Auditoría -->		
+			<div class="col-lg-6 divs_p">
+			<div class="col-lg-12 menupr_estilos fblanco">
+			<div class="row cabecera">
+				<div class="col-lg-12">
+					<span class="azul negrita">Auditor&iacute;a</span>
+				</div>
+			</div>
+			<div class="col-md-12 div_alt" id="auditoria"></div>
+			<div class="row cabecera">
+				<div class="col-lg-12">
+					<input id="chatAuditoria" class="input_text" type="text" placeholder="Escribir mensaje a auditor&iacute;a" onkeyup="enviaMensajeAuditoria(event)" /><img id="chatAuditoriaSend" onclick="enviaMensajeAuditoriaSend()" src="img/send_chat.png" class="send sendDisable" />
+				</div>
+			</div>
+			</div>
+			</div>
+<!-- Finanzas -->		
+			<div class="col-lg-6 divs_p">
+			<div class="col-lg-12 menupr_estilos fblanco">
+			<div class="row cabecera">
+				<div class="col-lg-12">
+					<span class="azul negrita">Finanzas</span>
+				</div>
+			</div>
+			<div class="col-md-12 div_alt" id="finanzas"></div>
+			<div class="row cabecera">
+				<div class="col-sm-12">
+					<input id="chatFinanzas" class="input_text" type="text" placeholder="Escribir mensaje a finanzas" onkeyup="enviaMensajeFinanzas(event)" /><img id="chatFinanzasSend" onclick="enviaMensajeFinanzasSend()" src="img/send_chat.png" class="send sendDisable" />
+				</div>
+			</div>
+			</div>
+			</div>
 		</div>
 	</div>
 	

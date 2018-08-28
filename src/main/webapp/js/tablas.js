@@ -94,7 +94,7 @@ function initTablaMemoriasAutorizadas(nombreDiv, datosDesgloseVenta, nombreTabla
 			 "aoColumnDefs": [ {
 					"sClass": "center",
 					"aTargets": [ 0,2 ]
-			} ]
+			},{ "sType": 'extract-date', "aTargets": [4,6] } ]
 			 
 	});	
 	
@@ -143,7 +143,7 @@ function initTablaMemoriasAutorizadasDirGeneral(nombreDiv, datosDesgloseVenta, n
 			 "aoColumnDefs": [ {
 					"sClass": "center",
 					"aTargets": [ 0,2 ]
-			} ]
+			},{ "sType": 'extract-date', "aTargets": [4] } ]
 			 
 	});	
 	
@@ -198,7 +198,7 @@ function initTablaMemoriasRechazadas(nombreDiv, datosDesgloseVenta, nombreTabla)
 			 "aoColumnDefs": [ {
 					"sClass": "center",
 					"aTargets": [ 0,2 ]
-			} ]
+			}, { "sType": 'extract-date', "aTargets": [4,6] } ]
 			 
 	});	
 	
@@ -250,7 +250,7 @@ function initTablaMemoriasRechazadasDirGeneral(nombreDiv, datosDesgloseVenta, no
 			 "aoColumnDefs": [ {
 					"sClass": "center",
 					"aTargets": [ 0,2 ]
-			} ]
+			}, { "sType": 'extract-date', "aTargets": [4] } ]
 			 
 	});	
 	
@@ -281,7 +281,10 @@ function initTablaMemoriasTablero(nombreDiv, datosDesgloseMemorias, nombreTabla)
 					'<th width="5%" class="gris negrita t12 center txt_construccion">Presupuesto construcci&oacute;n</th>' +
 					'<th width="5%" class="gris negrita t12 center txt_auditoria">Presupuesto auditor&iacute;a</th>' +
 					'<th width="5%" class="gris negrita t12 txt_operaciones">VoBo final operaciones</th>' +
+					'<th width="5%" class="gris negrita t12 txt_operaciones">Comité</th>' +
+					'<th width="5%" class="gris negrita t12 txt_operaciones">Carga<br/>Doctos</th>' +
 					'<th width="5%" class="gris negrita t12 txt_expansion">Contrato firmado</th>' +
+					'<th width="5%" class="gris negrita t12 txt_operaciones">CECO</th>' +
 					'<th width="5%" class="gris negrita t12 txt_gestoria">Gestor&iacute;a</th>' +
 					'<th width="7%" class="gris negrita t12 txt_construccion">Inicio obra</th>' +
 					'<th width="7%" class="gris negrita t12 txt_construccion">Fin obra</th>' +
@@ -312,6 +315,9 @@ function initTablaMemoriasTablero(nombreDiv, datosDesgloseMemorias, nombreTabla)
 				           {"sClass": "padding_right_5 padding_left_5", "bSearchable":true},
 				           {"sClass":"derecha","bSearchable":true},
 				           {"sClass":"derecha","bSearchable":true},
+				           {"sClass": "padding_right_5 padding_left_5", "bSearchable":true},
+				           {"sClass": "padding_right_5 padding_left_5", "bSearchable":true},
+				           {"sClass": "padding_right_5 padding_left_5", "bSearchable":true},
 				           {"sClass": "padding_right_5 padding_left_5", "bSearchable":true},
 				           {"sClass": "padding_right_5 padding_left_5", "bSearchable":true},
 				           {"sClass": "padding_right_5 padding_left_5", "bSearchable":true},
@@ -462,26 +468,29 @@ var idiomaEspanolDirRechazadas = {
 var idiomaEspanolTablero = {
 	    "sEmptyTable":     "<div style='padding:10px; color:red; font-size:13px;'>No existen memorias descriptivas</div>",
 	    "sInfo":           '<div class="row fazul blanco" style="padding-bottom:3px;">'+
-	    						'<div class="col-xl-6 col-lg-6 center">'+
+	    						'<div class="col-10 col-lg-10 center">'+
 	    	    					'<div class="row">'+
-	    	    							'<div class="col-xl-3 col-3 center"  style="min-width:160px;margin-top: 3px;">'+
+	    	    							'<div class="col-lg-2 col-2 center"  style="min-width:160px;margin-top: 3px;">'+
 	    	    								'<div class="circle_atrasadas"></div><span class="t12" style="margin-left: 0px;">Fecha final atrasada</span>' + 
 	    	    							'</div>'+
-	    	    							'<div class="col-xl-3 col-3 center"  style="min-width:160px;margin-top: 3px;">'+
-	    	    								'<img src="img/leyenda1.png"/><span class="t12" style="margin-left: 5px;padding-top: 3px;">En tiempo</span>' + 
+	    	    							'<div class="col-lg-2 col-2 center"  style="min-width:160px;margin-top: 3px;">'+
+	    	    								'<img src="img/leyenda1.svg" width="16px" height="16px"/><span class="t12" style="margin-left: 5px;padding-top: 3px;">En tiempo</span>' + 
 	    	    							'</div>'+
-	    	    							'<div class="col-xl-3 col-3 center"  style="min-width:160px;margin-top: 3px;">'+
-	    	    								'<img src="img/leyenda2.png"/><span class="t12" style="margin-left: 5px;padding-top: 3px;">Atrasada</span>' + 
+	    	    							'<div class="col-lg-2 col-2 center"  style="min-width:160px;margin-top: 3px;">'+
+	    	    								'<img src="img/leyenda2.svg" width="16px" height="16px"/><span class="t12" style="margin-left: 5px;padding-top: 3px;">Atrasada</span>' + 
 	    	    							'</div>'+
-	    	    							'<div class="col-xl-3 col-3 center" style="min-width:160px;margin-top: 3px;">'+
-	    	    								'<img src="img/leyenda3.png" /><span class="t12" style="margin-left: 5px;padding-top: 3px;">Fecha estimada</span>' +
+	    	    							'<div class="col-lg-2 col-2 center" style="min-width:160px;margin-top: 3px;">'+
+	    	    								'<img src="img/leyenda3.svg" width="16px" height="16px"/><span class="t12" style="margin-left: 5px;padding-top: 3px;">Fecha estimada</span>' +
 	    	    							'</div>'+
+	    	    							'<div class="col-lg-2 col-2 center" style="min-width:160px;margin-top: 3px;">'+
+    	    								    '<img src="img/leyenda4.svg" width="16px" height="16px"/><span class="t12" style="margin-left: 5px;padding-top: 3px;">Rechazada</span>' +
+    	    							    '</div>'+
 	    	    					'</div>' + 
 	    	    				'</div>'+
-	    	    			'<div class="col-xl-6 col-lg-6 right"><span>Totales: <b>_TOTAL_</b></span></div>'+
+	    	    			'<div class="col-2 col-lg-2 right"><span>Totales: <b>_TOTAL_</b></span></div>'+
 	    				'</div>',
 	    "sInfoEmpty":      "Totales: 0",
-	    "sInfoFiltered":   "(_TOTAL_ de _MAX_ memorias en total)",
+	    "sInfoFiltered":   "",
 	    "sInfoPostFix":    "",
 	    "sInfoThousands":  ",",
 	    "sLengthMenu":     "",

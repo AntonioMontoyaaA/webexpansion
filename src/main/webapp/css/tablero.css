@@ -156,7 +156,7 @@ span.circulo {
 	color: #D35612;
 } */
 .box{
-    width: 450px;
+    width: 100%;
     border: 1px solid #a29415;
     position: absolute;
     z-index: 99;
@@ -168,7 +168,7 @@ span.circulo {
 .slide-toggle {
 	width: 450px;
     height: 25px;
-    font-size: 12px;
+    font-size: 0.75em;
     border: 1px solid #CCC;
     background: #F4F4F4;
     cursor: pointer;
@@ -184,7 +184,7 @@ span.circulo {
     border-right: 1px solid #FFF;
     border-bottom: 1px solid #FFF;
     padding-left: 5px;
-    font-size: 12px;
+    font-size: 0.62em;
     padding: 6px;
     color: #efefef;
     height: 33px;
@@ -207,6 +207,9 @@ span.circulo {
 }
 .text_sin_atencion {
 	color: #CCCCCC;
+}
+.text_rechazada {
+	color: #9A0033;
 }
 /* .squaredThree */
 .squaredThree {

@@ -66,6 +66,9 @@ public class ExcelTableroAction extends ExpansionAction {
 	        	memoria.setJefeExpansion(array.getJSONObject(i).getString("JEFEEXP"));
 	        	memoria.setGerenteExpansion(array.getJSONObject(i).getString("GERENTEEXP"));
 	        	memoria.setRegional(array.getJSONObject(i).getString("REGIONAL"));
+	        	memoria.setComite(array.getJSONObject(i).getJSONObject("COMITE").getString("fechaValidacion"));
+	        	memoria.setDoctos(array.getJSONObject(i).getJSONObject("CARGADATOS").getString("fechaValidacion"));
+	        	memoria.setCeco(array.getJSONObject(i).getJSONObject("CCO").getString("fechaValidacion"));
 	        	listaMemorias.add(memoria);
 	        }
 	        

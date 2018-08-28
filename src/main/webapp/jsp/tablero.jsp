@@ -23,6 +23,8 @@
     <div class="container-fluid">
         <div class="row padding_p" style="padding-top: 0px;">
             <div class="col-lg-12 titulo azul t12 negrita">TABLERO ${usr.perfil.areasxpuesto[0].areaNom} > Tablero</div>
+        </div>
+        
             <%-- <div class="col-lg-2 titulo"
                 style="background: #FFFFFF; color: #1f3d7a; text-align: center; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">
                 <span class="punto"></span> <span style="padding-left: 5px;">A
@@ -32,15 +34,20 @@
             </div> 
             <div class="col-lg-2"></div>
             <div class="col-lg-5"></div>--%>
-            
-            
-            <div class="col-lg-2 col-2 titulogrande azul t18">TABLERO ${usr.perfil.areasxpuesto[0].areaNom}</div>
-            <div class="col-lg-4 col-4">
-            	<div class="slide-toggle">
+		<div class="row padding_p" style="padding-top: 0px;">
+            <div class="col-lg-4 col-sm-6" style="padding-right: 0px;padding-left: 8px;">
+            	<form class="form-inline">
+                	<div class="buscador" style="width: 100%; margin-top: 3px;">
+                        <input type="text"  placeholder="Buscar" id="buscador" class="form-control buscadorInput t12" onkeyup="ejecutaBusquedaTablero()"/>
+               		</div> 
+                </form>
+            </div>
+            <div class="col-lg-4 col-sm-6" style="padding-right: 0px;padding-left: 0px;">
+            	<div class="slide-toggle" style="margin-top: 2px;width: 100%;height: 22px;">
             		<div class="row">
-            			<div class="header_boton" style="border-right: 1px solid #ccc;width: 64%;"><img id="imgTableroPend" src="${pageContext.request.contextPath}/img/arrowDown.png" />&nbsp;&nbsp;&nbsp;Área</div>
-            			<div class="header_boton" style="border-right: 1px solid #ccc;width: 17%;padding-left: 10px;">Pendientes</div>
-            			<div class="header_boton" style="width: 17%;padding-left: 10px;">Atrasadas</div>
+            			<div class="header_boton" style="border-right: 1px solid #ccc;width: 64%;font-size: 11px;"><img id="imgTableroPend" src="${pageContext.request.contextPath}/img/arrowDown.png" />&nbsp;&nbsp;&nbsp;Área</div>
+            			<div class="header_boton" style="border-right: 1px solid #ccc;width: 17%;font-size: 11px;padding-left: 5px;">Pendientes</div>
+            			<div class="header_boton" style="width: 17%;font-size: 11px;padding-left: 5px;">Atrasadas</div>
             		</div>
             		
             	</div>
@@ -50,21 +57,16 @@
             		</div>
             	</div>
             </div>
-            <div class="col-lg-1 col-1">
-            	<div class="row" style="margin-top: 5px;">
-            		<div class="pretty p-default p-round">
+            <div class="col-lg-4">
+            		
+    				
+    				<form class="form-inline float-right">  
+    				<div class="pretty p-default p-round" style="margin-top: 6px;">
         				<input id="checkTipoTablero" type="checkbox" />
         				<div class="state p-primary-o">
             			<label style="font-size: 12px;">Ver canceladas</label>
         				</div>
     				</div>
-            	</div>
-            </div>
-            <div class="col-lg-5 col-5">
-                <form class="form-inline float-right">
-                <div class="buscador">
-                        <input type="text"  placeholder="Buscar" id="buscador" class="form-control buscadorInput t12" onkeyup="ejecutaBusquedaTablero()"/>
-                </div>    
                 <button class="btn desp rechargue" type="button" onclick="creatabla();">
                     <img src="${pageContext.request.contextPath}/img/refresh_sf.png" />
                 </button>
@@ -79,9 +81,11 @@
   					<button class="btn desp rechargue" id="refuse" type="button"></button>
   					<button class="btn desp rechargue" id="change" type="button"></button>
                 </form>
-            </div>
-            
-            <div class="col-lg-12 col-12">
+            	
+            </div> 
+           </div>
+           <div class="row padding_p" style="padding-top: 0px;">
+            <div class="col-lg-12 col-12" style="margin-top: -12px;">
                 <div class="row padding_p">
                     <div class="col-lg-12 menupr_estilos fblanco tabla_container">
                         <!--Tabla-->

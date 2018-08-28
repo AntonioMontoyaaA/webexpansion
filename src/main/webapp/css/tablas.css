@@ -22,8 +22,9 @@ tbody tr:hover{
 .tabla_container{
 	 padding-right:0px; 
 	 padding-left:0px; 
-	 min-height:76%; 
+	 min-height:73%; 
 	 overflow-x:scroll;
+	 overflow-y: hidden; 
 }
 table{
 	width:100%;

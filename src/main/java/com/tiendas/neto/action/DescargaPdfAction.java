@@ -351,13 +351,13 @@ public class DescargaPdfAction extends ExpansionAction{
 		}
 		//----------------------------
 		
-		JasperReport report = null;
 		
+//		JasperReport report = null;
 			// JasperCompileManager.compileReportToFile(url+"pag5.jrxml", url+"pag5.jasper");
-			 JasperCompileManager.compileReportToFile(url+"pag4.jrxml", url+"pag4.jasper");
-			 JasperCompileManager.compileReportToFile(url+"pag3.jrxml", url+"pag3.jasper");
-			 JasperCompileManager.compileReportToFile(url+"pag2.jrxml", url+"pag2.jasper");
-			 JasperCompileManager.compileReportToFile(url+"pag1.jrxml", url+"pag1.jasper");
+//			 JasperCompileManager.compileReportToFile(url+"pag4.jrxml", url+"pag4.jasper");
+//			 JasperCompileManager.compileReportToFile(url+"pag3.jrxml", url+"pag3.jasper");
+//			 JasperCompileManager.compileReportToFile(url+"pag2.jrxml", url+"pag2.jasper");
+//			 JasperCompileManager.compileReportToFile(url+"pag1.jrxml", url+"pag1.jasper");
 			
 			JasperPrint print = JasperFillManager.fillReport(url+"pag1.jasper", parameters);
 			
@@ -371,7 +371,7 @@ public class DescargaPdfAction extends ExpansionAction{
 			outStream.flush();
 				
 			
-		} catch (IOException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

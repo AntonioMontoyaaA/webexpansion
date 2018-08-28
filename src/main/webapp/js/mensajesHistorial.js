@@ -5,11 +5,13 @@ var TIPO_MENSAJE_EXPANSION = 1;
 var TIPO_MENSAJE_GESTORIA = 2;
 var TIPO_MENSAJE_CONSTRUCCION = 3;
 var TIPO_MENSAJE_OPERACIONES = 5;
+var TIPO_MENSAJE_AUDITORIA = 4;
 
 var AREA_EXPANSION = 1;
 var AREA_GESTORIA = 2;
 var AREA_CONSTRUCCION = 3;
-var AREA_OPERACIONES = 4;
+var AREA_OPERACIONES = 5;
+var AREA_AUDITORIA = 4;
 
 $(function(){
 		$('#idasignadas').addClass('resaltado'); //para el efecto de header
@@ -49,6 +51,8 @@ function limpiarChats() {
 	$('#gestoria').text('');
 	$('#construccion').text('');
 	$('#operaciones').text('');
+	$('#auditoria').text('');
+	$('#finanzas').text('');
 	 resetChat();
 }
 
@@ -78,6 +82,9 @@ function escribirMensajes(mensajes){
 							break;
 						case AREA_OPERACIONES :
 							icono='<img src="img/web_operacionesc.png">';
+							break;
+						case AREA_AUDITORIA :
+							icono='<img src="img/web_auditoriac.svg" width="29px" height="22px" />';
 							break;
 					};
 				}
@@ -135,6 +142,9 @@ function escribirMensajes(mensajes){
 						case AREA_OPERACIONES :
 							icono='<img src="img/web_operacionesc.png">';
 							break;
+						case AREA_AUDITORIA :
+							icono='<img src="img/web_auditoriac.svg" width="29px" height="22px" />';
+							break;
 					};
 				}
 				
@@ -190,6 +200,9 @@ function escribirMensajes(mensajes){
 							break;
 						case AREA_OPERACIONES :
 							icono='<img src="img/web_operacionesc.png">';
+							break;
+						case AREA_AUDITORIA :
+							icono='<img src="img/web_auditoriac.svg" width="29px" height="22px" />';
 							break;
 					};
 				}
@@ -247,6 +260,9 @@ function escribirMensajes(mensajes){
 						case AREA_OPERACIONES :
 							icono='<img src="img/web_operacionesc.png">';
 							break;
+						case AREA_AUDITORIA :
+							icono='<img src="img/web_auditoriac.svg" width="29px" height="22px" />';
+							break;
 					};
 				}
 				
@@ -302,6 +318,9 @@ function escribirMensajes(mensajes){
 							break;
 						case AREA_OPERACIONES :
 							icono='<img src="img/web_operacionesc.png">';
+							break;
+						case AREA_AUDITORIA :
+							icono='<img src="img/web_auditoriac.svg" width="29px" height="22px" />';
 							break;
 					};
 				}
@@ -359,6 +378,9 @@ function escribirMensajes(mensajes){
 						case AREA_OPERACIONES :
 							icono='<img src="img/web_operacionesc.png">';
 							break;
+						case AREA_AUDITORIA :
+							icono='<img src="img/web_auditoriac.svg" width="29px" height="22px" />';
+							break;
 					};
 				}
 				
@@ -394,6 +416,65 @@ function escribirMensajes(mensajes){
 				$('#operaciones').append(html);
 				//$("#operaciones").animate({ scrollTop: $('#operaciones').prop("scrollHeight")}, 50);
 				$('#operaciones').scrollTop($('#operaciones')[0].scrollHeight);
+			});
+		}
+		if(mensajes.AUDITORIA != undefined && mensajes.AUDITORIA.length > 0){ //modulo
+			icono='<img src="img/web_auditoriac.png">';
+			
+			$.each(mensajes.AUDITORIA, function(i, data) {
+				
+				if(data.areaId != undefined) {
+					switch(data.areaId) {
+						case AREA_EXPANSION :
+							icono='<img src="img/web_expansionc.png">';
+							break;
+						case AREA_GESTORIA :
+							icono='<img src="img/web_gestoriac.png">';
+							break;
+						case AREA_CONSTRUCCION :
+							icono='<img src="img/web_construccionc.png">';
+							break;
+						case AREA_OPERACIONES :
+							icono='<img src="img/web_operacionesc.png">';
+							break;
+						case AREA_AUDITORIA :
+							icono='<img src="img/web_auditoriac.svg" width="29px" height="22px" />';
+							break;
+					};
+				}
+				
+				html="";
+				html=html+'<div class="row msj_bloque">';
+				
+				if(data.tipoComentario == 3) {
+					html=html+'<div class="msj_icono">'+icono+'</div>';
+					html=html+'<div class="msj_texto azul mensaje_evento" style="width:91%">'+data.autor + ' ' + data.comentario+'<br><span style="font-size: 9px;">' + data.fecha + '</span></div>';
+				} else if(data.usuarioId != $("#usuarioLogin").val())  {
+					var pantalla = "En pantalla ";
+					if(data.nombreFactor != undefined && data.nombreFactor != null && data.nombreFactor != "null") {
+						pantalla += data.nombreFactor + ": ";
+					} else {
+						pantalla = "";
+					}
+					html=html+'<div class="msj_icono">'+icono+'</div>';
+					html=html+'<div class="msj_texto azul mensaje_recibido"><font class="area">'+data.autor+'</font><br>' + pantalla + data.comentario+'<br><span style="font-size: 9px;">' + data.fecha + '</span></div>';
+				} else {
+					var pantalla = "En pantalla ";
+					if(data.nombreFactor != undefined && data.nombreFactor != null && data.nombreFactor != "null") {
+						pantalla += data.nombreFactor + ": ";
+					} else {
+						pantalla = "";
+					}
+					if(data.nombreFactor != undefined && data.nombreFactor != null && data.nombreFactor == "null") {
+						pantalla += data.nombreFactor + ": ";
+					}
+					html=html+'<div class="msj_icono" style="width: 50%">&nbsp;</div>';
+					html=html+'<div class="msj_texto azul mensaje_enviado" style="width: 50%"><font class="area">'+ data.autor+'</font><br>'+  pantalla + data.comentario+'<br><span style="font-size: 9px;">' + data.fecha + '</span></div>';
+				}
+				html=html+'</div>';
+				$('#auditoria').append(html);
+				//$("#operaciones").animate({ scrollTop: $('#operaciones').prop("scrollHeight")}, 50);
+				$('#auditoria').scrollTop($('#auditoria')[0].scrollHeight);
 			});
 		}
 	}
@@ -599,6 +680,30 @@ function enviaMensajeOperaciones(e) {
     	$("#chatOperacionesSend").removeClass("sendDisable");
     } else {
     	$("#chatOperacionesSend").addClass("sendDisable");
+    }
+}
+
+function enviaMensajeAuditoriaSend() {
+	if($("#chatAuditoria").val() != "") {
+		enviaMensaje($("#chatAuditoria").val(), TIPO_MENSAJE_AUDITORIA);
+		$("#chatAuditoria").val("");
+		$("#chatAuditoriaSend").removeClass("sendDisable");
+	} else {
+		$("#chatAuditoriaSend").addClass("sendDisable");
+	}
+}
+
+function enviaMensajeAuditoria(e) {
+	var keycode = (e.keyCode ? e.keyCode : e.which);
+	
+    if (keycode == '13' && $("#chatAuditoria").val() != "") {
+        enviaMensaje($("#chatAuditoria").val(), TIPO_MENSAJE_AUDITORIA);
+        $("#chatAuditoria").val("");
+        $("#chatAuditoriaSend").addClass("sendDisable");
+    } else if($("#chatAuditoria").val() != "") {
+    	$("#chatAuditoriaSend").removeClass("sendDisable");
+    } else {
+    	$("#chatAuditoriaSend").addClass("sendDisable");
     }
 }
 

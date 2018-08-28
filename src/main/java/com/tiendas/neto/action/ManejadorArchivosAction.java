@@ -1,6 +1,8 @@
 package com.tiendas.neto.action;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
@@ -8,9 +10,11 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.SessionAware;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.interceptor.ParameterNameAware;
 import com.tiendas.neto.dao.Expansionlog;
@@ -39,14 +43,32 @@ public class ManejadorArchivosAction
 		HttpSession usuarioSesion = ServletActionContext.getRequest().getSession();
 		usuario = (UsuarioLoginVO) usuarioSesion.getAttribute("usr");
 		
-		String mdId = ServletActionContext.getRequest().getParameter("mdId");
-		String nombreArchivo = ServletActionContext.getRequest().getParameter("nombreArchivo");
-		String archivo = ServletActionContext.getRequest().getParameter("archivo");
-		String formato = ServletActionContext.getRequest().getParameter("formato");
-		String tipoArchivo = ServletActionContext.getRequest().getParameter("tipoArchivo");
-		String fecha = ServletActionContext.getRequest().getParameter("fecha");
-		String monto = ServletActionContext.getRequest().getParameter("monto");
 		String tipoServicio = ServletActionContext.getRequest().getParameter("tipoServicio");
+		
+		String mdId = null, 
+			nombreArchivo = null, 
+			archivo = null, 
+			formato = null, 
+			tipoArchivo = null, 
+			fecha = null, 
+			monto = null, 
+			acc = null, 
+			tiendaId = null;
+		
+		if(tipoServicio.equals("10")) {//CECO
+			tiendaId = ServletActionContext.getRequest().getParameter("tiendaId");
+		}else {
+			nombreArchivo = ServletActionContext.getRequest().getParameter("nombreArchivo");
+			archivo = ServletActionContext.getRequest().getParameter("archivo");
+			formato = ServletActionContext.getRequest().getParameter("formato");
+			tipoArchivo = ServletActionContext.getRequest().getParameter("tipoArchivo");
+			monto = ServletActionContext.getRequest().getParameter("monto");
+			acc = ServletActionContext.getRequest().getParameter("acc");
+		}
+		
+		mdId = ServletActionContext.getRequest().getParameter("mdId");
+		fecha = ServletActionContext.getRequest().getParameter("fecha");
+		
 		
 		try{
 			
@@ -58,47 +80,75 @@ public class ManejadorArchivosAction
 				
 			}else{
 				String numeroEmpleado = String.valueOf(usuario.getPerfil().getNumeroEmpleado());
-				if(monto.isEmpty())
-					monto = "''";
 				
 				final OkHttpClient client = new OkHttpClient();
 				
-				Builder builder = new Builder()
-					.add("mdId", mdId)
-					.add("nombreArc", nombreArchivo)
-					.add("archivo", archivo)
-					.add("formato", formato)
-					.add("tipoArchivo", tipoArchivo)
-					.add("fecha", fecha)
-					.add("usuarioId", numeroEmpleado);
+				Builder builder;
+				RequestBody body;
+				Request request;
+				Response response;
 				
-				RequestBody body = builder.build();
-				Request request = new Request.Builder()
-					.url(sp.getPropiedad("cloudinarySet"))
-					.post(body)
-					.build();
-				
-				Response response = client.newCall(request).execute();
-				respuesta = response.body().string();
-				
-				String url = obtieneURL(respuesta);
-				
-				if(url == null) {
-					elog.info("subeLayout", "ManejadorArchivosAction", "No se subio la imagen", respuesta);
-					sendJSONObjectToResponse(respuesta);
+				if(!tipoServicio.equals("10")) {
+					if(monto.isEmpty())
+						monto = "''";
+					
+					builder = new Builder()
+							.add("mdId", mdId)
+							.add("nombreArc", nombreArchivo)
+							.add("archivo", archivo)
+							.add("formato", formato)
+							.add("tipoArchivo", tipoArchivo)
+							.add("fecha", fecha)
+							.add("usuarioId", numeroEmpleado);
+						
+						body = builder.build();
+						request = new Request.Builder()
+							.url(sp.getPropiedad("cloudinarySet"))
+							.post(body)
+							.build();
+						
+						response = client.newCall(request).execute();
+						respuesta = response.body().string();
+						
+						String url = obtieneURL(respuesta);
+						
+						if(url == null) {
+							elog.info("subeLayout", "ManejadorArchivosAction", "No se subio la imagen", respuesta);
+							sendJSONObjectToResponse(respuesta);
+						}else {
+							
+							String[] urlsplit = url.split("/");
+							String nombreFinal = urlsplit[urlsplit.length - 1];
+							
+							builder = new Builder()
+										.add("usuarioId", numeroEmpleado)
+										.add("mdId", mdId)
+										.add("urlArchivo", url)
+										.add("nombreArchivo", nombreFinal)
+										.add("monto", monto)
+										.add("tipoServicio", tipoServicio)
+										.add("aireAcondicionado", acc)
+										.add("fecha", fecha);
+							
+							body = builder.build();
+							request = new Request.Builder()
+								.url(sp.getPropiedad("guardadocsmontos"))
+								.post(body)
+								.build();
+							
+							response = client.newCall(request).execute();
+							respuesta = response.body().string();
+							respuesta = setURLToResponse(respuesta, url);
+							
+							
+						}
 				}else {
-					
-					String[] urlsplit = url.split("/");
-					String nombreFinal = urlsplit[urlsplit.length - 1];
-					
 					builder = new Builder()
 							.add("usuarioId", numeroEmpleado)
 							.add("mdId", mdId)
-							.add("urlArchivo", url)
-							.add("nombreArchivo", nombreFinal)
-							.add("monto", monto)
 							.add("tipoServicio", tipoServicio)
-							.add("fecha", fecha);
+							.add("fecha", fecha)
+							.add("tiendaId", tiendaId);
 					
 					body = builder.build();
 					request = new Request.Builder()
@@ -108,13 +158,15 @@ public class ManejadorArchivosAction
 					
 					response = client.newCall(request).execute();
 					respuesta = response.body().string();
-					respuesta = setURLToResponse(respuesta, url);
-					
-					HttpServletResponse re = ServletActionContext.getResponse();
-					re.setContentType("application/json");
-					re.setCharacterEncoding("UTF-8");
-					re.getWriter().write(respuesta);
 				}
+				
+				HttpServletResponse re = ServletActionContext.getResponse();
+				re.setContentType("application/json");
+				re.setCharacterEncoding("UTF-8");
+				re.getWriter().write(respuesta);
+				
+				
+				
 			}
 		}catch (Exception e) {
 			String clase  ="clase: "+ new String (Thread.currentThread().getStackTrace()[1].getClassName());	
@@ -246,6 +298,268 @@ public class ManejadorArchivosAction
 				re.setContentType("application/json");
 				re.setCharacterEncoding("UTF-8");
 				re.getWriter().write(respuesta);
+				
+			}
+		}catch (Exception e) {
+			String clase  ="clase: "+ new String (Thread.currentThread().getStackTrace()[1].getClassName());	
+			String metodo ="metodo: "+ new String (Thread.currentThread().getStackTrace()[1].getMethodName());
+			elog.error(clase,metodo,e + "", "ID empleado: " + usuario.getPerfil().getNumeroEmpleado());
+			
+			RespuestaVo respuestaVo = new RespuestaVo();
+			respuestaVo.setCodigo(404);
+			respuestaVo.setMensaje("Error al conectarse al servidor");
+			sendJSONObjectToResponse(respuestaVo);
+		}
+	}
+	
+	public void subeArchivosGestoria() throws Exception{
+		String respuesta="";
+		UsuarioLoginVO usuario = null;
+		HttpSession usuarioSesion = ServletActionContext.getRequest().getSession();
+		usuario = (UsuarioLoginVO) usuarioSesion.getAttribute("usr");
+		
+		String mdId = ServletActionContext.getRequest().getParameter("mdId");
+		String fecha = ServletActionContext.getRequest().getParameter("fecha");
+		String tipoArchivo = ServletActionContext.getRequest().getParameter("tipoArchivo");
+		String tipoServicio = ServletActionContext.getRequest().getParameter("tipoServicio");
+
+		String archivos = ServletActionContext.getRequest().getParameter("archivos");
+		String formatos = ServletActionContext.getRequest().getParameter("formatos");
+		
+		try{
+			
+			if(usuario == null){
+				RespuestaVo respuestaVo = new RespuestaVo();
+				respuestaVo.setCodigo(501);
+				respuestaVo.setMensaje("Error en la sesión");
+				sendJSONObjectToResponse(respuestaVo);
+				
+			}else{
+				String numeroEmpleado = String.valueOf(usuario.getPerfil().getNumeroEmpleado());
+				
+				final OkHttpClient client = new OkHttpClient();
+				Builder builder;
+				RequestBody body;
+				Request request;
+				Response response;
+				
+				
+				List<String> archivosList = getElementsOfJson(archivos);
+				List<String> formatosList = getElementsOfJson(formatos);
+				
+				String nombreFile;
+				
+				List<Archivo> archivosResp;
+				
+				if(!archivosList.isEmpty() && !formatos.isEmpty()) {
+					
+					archivosResp = new ArrayList<Archivo>();
+					
+					for (int i = 0; i < archivosList.size(); i++) {
+						
+						System.out.println("FI " + i + archivosList.get(i));
+						System.out.println("FO " + i + formatosList.get(i));
+						
+						nombreFile = i + "GST" + mdId;
+						builder = new Builder()
+								.add("mdId", mdId)
+								.add("nombreArc", nombreFile)
+								.add("archivo", archivosList.get(i))
+								.add("formato", formatosList.get(i))
+								.add("tipoArchivo", tipoArchivo)
+								.add("fecha", fecha)
+								.add("usuarioId", numeroEmpleado);
+						
+						body = builder.build();
+						request = new Request.Builder()
+							.url(sp.getPropiedad("conteoPeatonal"))
+							.post(body)
+							.build();
+						
+						response = client.newCall(request).execute();
+						respuesta = response.body().string();
+						
+						
+						archivosResp.add(new Archivo(nombreFile, obtieneURL(respuesta)));
+					}
+					
+					if(!archivosResp.isEmpty()) {
+						builder = new Builder()
+								.add("usuarioId", numeroEmpleado)
+								.add("mdId", mdId)
+								.add("tipoServicio", tipoServicio)
+								.add("fecha", fecha)
+								.add("urlArchivo", archivosResp.get(0).getNombre())
+								.add("nombreArchivo", archivosResp.get(0).getUrl());
+						
+						body = builder.build();
+						request = new Request.Builder()
+							.url(sp.getPropiedad("guardadocsmontos"))
+							.post(body)
+							.build();
+						
+						response = client.newCall(request).execute();
+						respuesta = response.body().string();
+						
+						respuesta = setArchivos(respuesta, archivosResp);
+					}
+				}
+				
+				HttpServletResponse re = ServletActionContext.getResponse();
+				re.setContentType("application/json");
+				re.setCharacterEncoding("UTF-8");
+				re.getWriter().write(respuesta);
+				
+			}
+		}catch (Exception e) {
+			String clase  ="clase: "+ new String (Thread.currentThread().getStackTrace()[1].getClassName());	
+			String metodo ="metodo: "+ new String (Thread.currentThread().getStackTrace()[1].getMethodName());
+			elog.error(clase,metodo,e + "", "ID empleado: " + usuario.getPerfil().getNumeroEmpleado());
+			
+			RespuestaVo respuestaVo = new RespuestaVo();
+			respuestaVo.setCodigo(404);
+			respuestaVo.setMensaje("Error al conectarse al servidor");
+			sendJSONObjectToResponse(respuestaVo);
+		}
+	}
+	
+	private String setArchivos(String respuesta, List<Archivo> archivos) {
+		try {
+			JSONObject json = new JSONObject(respuesta);
+			JSONArray array = new JSONArray();
+			JsonObject obj;
+			
+			for (Archivo a : archivos) {
+				obj = new JsonObject();
+				obj.addProperty("nombre", a.getNombre());
+				obj.addProperty("url", a.getUrl());
+				
+				System.out.println(obj.toString());
+				
+				array.put(obj);
+			}
+			
+			json.put("archivos", array);
+			
+			return json.toString();
+		}catch (Exception e) {
+			String clase  ="clase: "+ new String (Thread.currentThread().getStackTrace()[1].getClassName());	
+			String metodo ="metodo: "+ new String (Thread.currentThread().getStackTrace()[1].getMethodName());
+			elog.error(clase,metodo,e + "", "");
+		}
+		return null;
+	}
+	
+	public class Archivo {
+		private String nombre;
+		private String url;
+		
+		public Archivo(String nombre, String url) {
+			this.nombre = nombre;
+			this.url = url;
+		}
+		
+		public void setNombre(String nombre) {
+			this.nombre = nombre;
+		}
+		
+		public void setUrl(String url) {
+			this.url = url;
+		}
+		
+		public String getNombre() {
+			return nombre;
+		}
+		
+		public String getUrl() {
+			return url;
+		}
+	}
+	
+	private List<String> getElementsOfJson(String element) {
+		List<String> elementos = null;
+		try {
+			elementos = new ArrayList<String>();
+			JSONArray array = new JSONArray(element);
+			
+			for (int i = 0; i < array.length(); i++) {
+				elementos.add(array.getString(i));
+			}
+			
+			return elementos;
+		}catch (Exception e) {
+			String clase  ="clase: "+ new String (Thread.currentThread().getStackTrace()[1].getClassName());	
+			String metodo ="metodo: "+ new String (Thread.currentThread().getStackTrace()[1].getMethodName());
+			elog.error(clase,metodo,e + "", "");
+			
+			return null;
+		}
+	}
+	
+	public void subeObra() {
+		String respuesta="";
+		UsuarioLoginVO usuario = null;
+		HttpSession usuarioSesion = ServletActionContext.getRequest().getSession();
+		usuario = (UsuarioLoginVO) usuarioSesion.getAttribute("usr");
+		
+		String tipoServicio = ServletActionContext.getRequest().getParameter("tipoServicio");
+		
+		String mdId = null,
+			fecha = null, 
+			inicio = null, 
+			duracion = null;
+		
+		mdId = ServletActionContext.getRequest().getParameter("mdId");
+		fecha = ServletActionContext.getRequest().getParameter("fecha");
+		inicio = ServletActionContext.getRequest().getParameter("inicio");
+		duracion = ServletActionContext.getRequest().getParameter("duracion");
+		
+		try{
+			
+			if(usuario == null){
+				RespuestaVo respuestaVo = new RespuestaVo();
+				respuestaVo.setCodigo(501);
+				respuestaVo.setMensaje("Error en la sesión");
+				sendJSONObjectToResponse(respuestaVo);
+				
+			}else{
+				String numeroEmpleado = String.valueOf(usuario.getPerfil().getNumeroEmpleado());
+				
+				final OkHttpClient client = new OkHttpClient();
+				
+				Builder builder;
+				RequestBody body;
+				Request request;
+				Response response;
+				
+				
+					builder = new Builder()
+							.add("usuarioId", numeroEmpleado)
+							.add("mdId", mdId)
+							.add("tipoServicio", tipoServicio)
+							.add("fecha", fecha)
+							.add("inicioObra", inicio)
+							.add("duracionObra", duracion)
+							.add("urlArchivo", "''")
+							.add("nombreArchivo", "''")
+							.add("unidadMedicion", "7");
+					
+					body = builder.build();
+					request = new Request.Builder()
+						.url(sp.getPropiedad("guardadocsmontos"))
+						.post(body)
+						.build();
+					
+					response = client.newCall(request).execute();
+					respuesta = response.body().string();
+				
+				
+				HttpServletResponse re = ServletActionContext.getResponse();
+				re.setContentType("application/json");
+				re.setCharacterEncoding("UTF-8");
+				re.getWriter().write(respuesta);
+				
+				
 				
 			}
 		}catch (Exception e) {

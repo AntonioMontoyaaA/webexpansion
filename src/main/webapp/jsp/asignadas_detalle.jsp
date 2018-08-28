@@ -22,6 +22,8 @@
     	<input type="hidden" class="permisos_detalleMd" rel="${permiso.getFIMODULOID()}" value="${permiso.toJSON()}">
     </c:forEach>
     <input type="hidden" id="areaUsuario" value="${usr.perfil.areasxpuesto[0].areaId}">
+    <input type="hidden" id="puestoUsuario" value="${usr.perfil.puestoId}">
+    <input type="hidden" id="usuarioId" value="${usr.perfil.numeroEmpleado}">
     <input type="hidden" id="nombreAreaUsuario" value="${usr.perfil.areasxpuesto[0].areaNom}">
     <input type="hidden" id="nombreCompletoUsuario" value="${usr.perfil.nombre} ${usr.perfil.apellidoP} ${usr.perfil.apellidoM}">
 <%@ include file="/jsp/generic/header.jsp" %>
@@ -590,7 +592,7 @@
 						</div> --%>
 						
 						<div class="row center" style="padding-top: 130px;">
-							<span class="subtituloIconos blanco">¿La MD cuenta con todos los puntos necesarios?</span>
+							<span id="msjFinalizacion" class="subtituloIconos blanco">¿La MD cuenta con todos los puntos necesarios?</span>
 						</div>
 						<div class="row">
 							<div class="col-6 right">
@@ -613,15 +615,40 @@
 								<span> <img id="autoriza9" title="Autoriza punto"
 									class="sin_autorizar b_autorizar" onclick="finalizaMD(1);"
 									style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
-								</span> <span> <img id="rechaza9" title="Rechaza punto"
+								</span> 
+								<span> <img id="rechaza9" title="Rechaza punto"
 									class="sin_autorizar b_rechazar" onclick="finalizaMD(0);"
 									style="cursor: pointer;" src="img/rechaza_mark.png">
 								</span>
+							</div>
+							<div id="tiendaIdCECO" class="float_right" style="display: none;">
+								<input placeholder="CECO" id="tiendaID" onkeypress="return isNumberKey(event,this)">
+								<div id="subeTiendaId" class="btn btnBlanco">Aceptar</div>
 							</div>
 						</div>
 
 						<div style="width: 100%; position: relative; float: left; text-align: left; padding-top: 20px;">
 							<div id="containerFilesVoboFinal"></div>
+							
+							<div id="containerFechasObra" style="display: none; text-align: center;">
+								<div class="datoObra">
+									<div class="blanco t14">Inicio de obra:</div>
+									<input id="inicioObra" readonly type="text" class="fechaInicialCalendario" placeholder="dd/MM/yyyy">
+								</div>
+								
+								<div class="datoObra">
+									<div class="blanco t14">Duración de la obra:</div>
+									<select class="selectSemana" id="duracionObra">
+										<option disabled selected value="0" >SEMANAS</option>
+										<option value="4" >4</option>
+										<option value="6" >6</option>
+										<option value="8" >8</option>
+										<option value="10" >10</option>
+									</select>
+								</div>
+								
+								<div id="subeObra" class="btn btnBlanco">Aceptar</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -639,9 +666,14 @@
 								<div style="display: none;" id="msjUploader"></div>
 								<div id="contenedorUploader">
 									<form action="/uploadLayout" class="dropzone" id="uploader"></form>
+									<div id="divACC">
+										<input type="checkbox" id="checkACC">
+    									<label class="blanco" for="checkACC">ACC</label>
+									</div>
 									<span class="simbolo">$</span>
 									<input id="montoPresupuesto" onkeypress="return isNumberKey(event,this)" style="display: none;">
 									<div id="subeArchivo" class="btn btnBlanco" style="display:none;">Aceptar</div>
+									
 								</div>
 							</div>
 							

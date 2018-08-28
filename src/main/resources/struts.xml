@@ -134,6 +134,18 @@
          	<result name = "success">jsp/asignadas_detalle.jsp</result>
       	</action>
       	
+      	<action name ="subeArchivosGestoria" 
+         		class = "com.tiendas.neto.action.ManejadorArchivosAction" 
+         		method = "subeArchivosGestoria">
+         	<result name = "success">jsp/asignadas_detalle.jsp</result>
+      	</action>
+      	
+      	<action name ="subeObra" 
+         		class = "com.tiendas.neto.action.ManejadorArchivosAction" 
+         		method = "subeObra">
+         	<result name = "success">jsp/asignadas_detalle.jsp</result>
+      	</action>
+      	
       	<action name ="guardaConteoAuditor" 
          		class = "com.tiendas.neto.action.ManejadorArchivosAction" 
          		method = "guardaConteoAuditor">

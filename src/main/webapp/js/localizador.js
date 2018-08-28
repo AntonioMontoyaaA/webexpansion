@@ -164,12 +164,22 @@ function showOptionAction(){
     	if(ARRAYOBJGERENTES == undefined || Object.keys(ARRAYOBJGERENTES).length < 0){
     		getObtenerEmpleadosGerentes();    		
     	}else{
+    		
+    		$('#select_employeeMDJefes').html("");
+    		$('#select_employeeMDJefes').append($('<option>', {
+    			value: "0",
+    			text :"Seleccionar jefe"
+    		}));
+    		
     		$("#select_employeeMDGere").val(0);
+    		$("#select_employeeMDJefes").val(0);
+    		
     	}
     }
     
     /*=== INTI LOCALIZACION EN TIEMPO REAL ===*/
     if(element_call.id == "localizaTime"){
+    	getObtenerEmpleados($('#select_employeeLocalizar'));
 	    if(ARRAYOBJJEFES == undefined || Object.keys(ARRAYOBJJEFES).length < 0){
 	    	getObtenerEmpleados($('#select_employeeLocalizar'));
 	    }else{
@@ -1228,7 +1238,7 @@ function getObtenerMDs(){
 			});
 		});
 		
-		if(MdsArray.length >= 0){			
+		if(Object.keys(MdsArray).length <= 0){				
 			cargaMensajeModal("Localizador","No se encontraron MD´s.", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
 		}else{
 			map.fitBounds(bounds);			

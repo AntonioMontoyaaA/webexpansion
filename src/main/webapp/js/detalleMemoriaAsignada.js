@@ -327,9 +327,9 @@ function inicializaFactores(){
 	ATENCION_POR_ESTATUS = {};
 	ATENCION_POR_ESTATUS[3] = [areaExpansion];
 	ATENCION_POR_ESTATUS[8] = [areaExpansion, areaOperaciones];
-	ATENCION_POR_ESTATUS[5] = [areaGestoria];
+	ATENCION_POR_ESTATUS[5] = [areaGestoria, areaAuditoria];
+	ATENCION_POR_ESTATUS[7] = [areaGestoria, areaAuditoria];
 	ATENCION_POR_ESTATUS[6] = [areaConstruccion];
-	ATENCION_POR_ESTATUS[7] = [areaAuditoria, areaConstruccion];
 	ATENCION_POR_ESTATUS[13] = [areaOperaciones];
 }
 
@@ -2069,7 +2069,7 @@ function inicializaDropzone(){
 			$('#subeObra').unbind('click');
 			$('#subeObra').click(function(){
 				inicio = $("#inicioObra").val();
-				duracion = $('#duracionObra option:selected').val();
+				duracion = parseInt($('#duracionObra option:selected').val());
 				
 				if(duracion == 0)
 					cargaMensajeModal('DETALLE MD', 'Selecciona la duración de obra', TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR);
@@ -2077,13 +2077,11 @@ function inicializaDropzone(){
 	        		cargaLoading();
 
 	        		mdId = $("#mdId").val();
-		        	fecha = new Date().format("dd/mm/yyyy H:MM:ss");
 		        	tipoServicio = 6;
 		        	
 		        	invocarJSONServiceAction("subeObra", 
 		        			{'mdId': mdId,
 		        			'tipoServicio' : tipoServicio,
-		        			'fecha': fecha,
 		        			'inicio': inicio,
 		        			'duracion' : duracion}, 
 		        			'respSubeObra', 

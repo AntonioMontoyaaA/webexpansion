@@ -505,12 +505,10 @@ public class ManejadorArchivosAction
 		String tipoServicio = ServletActionContext.getRequest().getParameter("tipoServicio");
 		
 		String mdId = null,
-			fecha = null, 
 			inicio = null, 
 			duracion = null;
 		
 		mdId = ServletActionContext.getRequest().getParameter("mdId");
-		fecha = ServletActionContext.getRequest().getParameter("fecha");
 		inicio = ServletActionContext.getRequest().getParameter("inicio");
 		duracion = ServletActionContext.getRequest().getParameter("duracion");
 		
@@ -537,12 +535,9 @@ public class ManejadorArchivosAction
 							.add("usuarioId", numeroEmpleado)
 							.add("mdId", mdId)
 							.add("tipoServicio", tipoServicio)
-							.add("fecha", fecha)
-							.add("inicioObra", inicio)
+							.add("fecha", inicio + " 00:00:00")
 							.add("duracionObra", duracion)
-							.add("urlArchivo", "''")
-							.add("nombreArchivo", "''")
-							.add("unidadMedicion", "7");
+							.add("unidadMedicion", "3");
 					
 					body = builder.build();
 					request = new Request.Builder()

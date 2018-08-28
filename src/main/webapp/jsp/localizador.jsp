@@ -238,7 +238,7 @@
 			<div class="content divTituloFixed" id="contentAlta">
 				<span id="infoMD" class="t14 titulo_info left_float"></span><h6 id="bton_infoClose" class="subtitleInfo infoValue btn_infoClose" >x</h6>
 			</div>		
-		<br>
+		<br><br>
 		<br>
 		<!-- CEDIS -->
 			<div class="" id="contentAsignar">

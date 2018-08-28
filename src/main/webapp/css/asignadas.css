@@ -470,3 +470,26 @@ Left
     color: #FFF;
     overflow: auto;
 }
+
+#divACC{
+	float: left;
+    width: 100px;
+    padding-top: 6px;
+    margin-top: 7px;
+}
+
+#tiendaID{
+	position: relative;
+    top: 7px;
+}
+
+.selectSemana{
+	border: 1px solid #000c48;
+    padding-left: 4%;
+    border-radius: 4px;
+    width: 170px;
+}
+
+.datoObra{
+	    height: 80px;
+}

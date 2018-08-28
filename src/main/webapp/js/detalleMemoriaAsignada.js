@@ -33,9 +33,11 @@ var areaGestoria = 2;
 var areaConstruccion = 3;
 var areaAuditoria = 4;
 var areaOperaciones = 5;
+var areaFinanzas = 6;
 
 var AREA_USUARIO;
-
+var PUESTO;
+var DIR_OPE = 19;
 var ESTATUS_MD;
 
 var ESTATUS_LAYOUT = [6,7];
@@ -43,9 +45,14 @@ var ESTATUS_VALIDACION_LAYOUT = 9;
 var ESTATUS_PRESUPUESTO_CONSTRUCCION = 10;
 var ESTATUS_PRESUPUESTO_AUDITORIA = 11;
 var ESTATUS_VOBO_FINAL = 12;
+var ESTATUS_COMITE = [22,23];
 var ESTATUS_CORRECCION_LAYOUT = 18;
 var ESTATUS_CORRECCION_PRESUPUESTO_CONSTRUCCION = 19;
 var ESTATUS_CORRECCION_PRESUPUESTO_AUDITORIA = 20;
+var ESTATUS_CONTRATO = 13;
+var ESTATUS_CECO = 24;
+var ESTATUS_GESTORIA = 14;
+var ESTATUS_OBRA = 15;
 
 var HORAI;
 var HORAF;
@@ -57,10 +64,17 @@ var ATENCION_POR_ESTATUS;
 var predialImg;
 var fechaPredial;
 
+var FILES_B64 = new Array();
+var FILES_Type = new Array();
+
+var USUARIO;
+
 $(function(){
 	TIPOMD = $("#tipoMd").val();
 	AREA_USUARIO = parseInt($('#areaUsuario').val());
-	 
+	PUESTO = parseInt($('#puestoUsuario').val());
+	USUARIO = parseInt($('#usuarioId').val());
+	
 	if(TIPOMD == 0){
 		$('#idasignadas').addClass('resaltado');
 		$('#titulo_tipo').text('EN PROCESO');
@@ -316,6 +330,7 @@ function inicializaFactores(){
 	ATENCION_POR_ESTATUS[5] = [areaGestoria];
 	ATENCION_POR_ESTATUS[6] = [areaConstruccion];
 	ATENCION_POR_ESTATUS[7] = [areaAuditoria, areaConstruccion];
+	ATENCION_POR_ESTATUS[13] = [areaOperaciones];
 }
 
 function muestraChatXMd() {
@@ -378,16 +393,28 @@ function permiteLayout(){
 	return $.inArray(ESTATUS_MD, ESTATUS_LAYOUT) != -1;
 }
 
+function permiteComite(){
+	if(PUESTO != DIR_OPE)
+		return false;
+	else
+		return $.inArray(ESTATUS_MD, ESTATUS_COMITE) != -1;
+}
+
 function dibujaGraficaAutorizaciones(){
 	$('#containerProgreso').html('');
 	$('#autoriza8').hide();
 	$('#rechaza8').hide();
 	$('#voboMD').hide();
 	
-	if(permiteAutorizacion() && !AREAS_A[AREA_USUARIO] ){
+	if(permiteAutorizacion() && !AREAS_A[AREA_USUARIO]){
 		$('#autoriza8').show();
 		$('#voboMD').show();
-		$('#rechaza8').show();
+		if(AREA_USUARIO != areaAuditoria && AREA_USUARIO != areaConstruccion)
+			$('#rechaza8').show();
+		else{
+			$('#msjFinalizacion').html('¿Finalizar MD?');
+			$('#autoriza8').text('Finalizar')
+		}
 	}
 	
 }
@@ -794,124 +821,49 @@ function buscaDetalleMD(mdId) {
 						
 						ARCHIVOS_MD.push(new Archivo(
 	        					item.nombreArchivo,
-	        					item.urllayout,
-	        					item.validacion,
-	        					$('#nombreCompletoUsuario').val(),
-	        					$('#nombreAreaUsuario').val(),
-	        					null, null));
+	        					item.url,
+	        					item.estatus,
+	        					item.autor,
+	        					null, 
+	        					null)
+						);
 					});
+				}
+				
+				if(eval(data)["seguimiento"]["PRESUPUESTO OBRA"] != undefined
+						&& eval(data)["seguimiento"]["PRESUPUESTO OBRA"] != null){
+					
+					$.each(eval(data)["seguimiento"]["PRESUPUESTO OBRA"], function(i,item){
+						
+						ARCHIVOS_MD.push(new Archivo(
+	        					item.nombreArchivo,
+	        					item.url,
+	        					item.estatus,
+	        					item.autor,
+	        					'$' + formatear(item.monto, true), 
+	        					((item.aireAcondicionado != undefined) ? item.aireAcondicionado : null))
+						);
+					});
+				}
+				
+				if(eval(data)["seguimiento"]["PRESUPUESTO AUDITORIA"] != undefined
+						&& eval(data)["seguimiento"]["PRESUPUESTO AUDITORIA"] != null){
+					
+					$.each(eval(data)["seguimiento"]["PRESUPUESTO AUDITORIA"], function(i,item){
+						
+						ARCHIVOS_MD.push(new Archivo(
+	        					item.nombreArchivo,
+	        					item.url,
+	        					item.estatus,
+	        					item.autor,
+	        					'$' + formatear(item.monto, true), 
+	        					((item.aireAcondicionado != undefined) ? item.aireAcondicionado : null))
+						);
+					});
+					ARCHIVOS_MD[ARCHIVOS_MD.length -1].estatus = 0;
 				}
 			}
 			
-			if((ESTATUS_MD == ESTATUS_PRESUPUESTO_CONSTRUCCION || ESTATUS_MD == ESTATUS_CORRECCION_PRESUPUESTO_CONSTRUCCION)
-					&& AREA_USUARIO == areaConstruccion){
-				ARCHIVOS_MD =  new Array();
-				if(data.seguimiento != undefined) {
-					if(eval(data)["seguimiento"]["PRESUPUESTO OBRA"] != undefined
-							&& eval(data)["seguimiento"]["PRESUPUESTO OBRA"] != null){
-						
-						$.each(eval(data)["seguimiento"]["PRESUPUESTO OBRA"], function(i,item){
-							
-							ARCHIVOS_MD.push(new Archivo(
-		        					item.nombreArchivo,
-		        					item.urldoctoc,
-		        					item.validacion,
-		        					$('#nombreCompletoUsuario').val(),
-		        					$('#nombreAreaUsuario').val(),
-		        					null,null,
-		        					item.monto));
-						});
-					}
-				}
-			}else if((ESTATUS_MD == ESTATUS_PRESUPUESTO_AUDITORIA || ESTATUS_MD == ESTATUS_CORRECCION_PRESUPUESTO_AUDITORIA)
-					&& AREA_USUARIO == areaAuditoria){
-				ARCHIVOS_MD =  new Array();
-				if(data.seguimiento != undefined) {
-					if(eval(data)["seguimiento"]["PRESUPUESTO OBRA"] != undefined
-							&& eval(data)["seguimiento"]["PRESUPUESTO OBRA"] != null){
-						
-						$.each(eval(data)["seguimiento"]["PRESUPUESTO OBRA"], function(i,item){
-							ARCHIVOS_MD.push(new Archivo(
-		        					item.nombreArchivo,
-		        					item.urldoctoc,
-		        					item.validacion,
-		        					$('#nombreCompletoUsuario').val(),
-		        					$('#nombreAreaUsuario').val(),
-		        					null,null,
-		        					item.monto));
-						});
-					}
-					
-					if(eval(data)["seguimiento"]["PRESUPUESTO AUDITORIA"] != undefined
-							&& eval(data)["seguimiento"]["PRESUPUESTO AUDITORIA"] != null){
-						
-						$.each(eval(data)["seguimiento"]["PRESUPUESTO AUDITORIA"], function(i,item){
-							nombres = item.urllayout.split('/');
-							name = nombres[nombres.length -1];
-							
-							ARCHIVOS_MD.push(new Archivo(
-		        					name,
-		        					item.urllayout,
-		        					2,
-		        					$('#nombreCompletoUsuario').val(),
-		        					$('#nombreAreaUsuario').val(),
-		        					null, null));
-						});
-						ARCHIVOS_MD[ARCHIVOS_MD.length -1].estatus = 0;
-					}
-				}
-			}else if(ESTATUS_MD == ESTATUS_VOBO_FINAL
-					&& TIPOMD == 3){
-				ARCHIVOS_MD =  new Array();
-				if(data.seguimiento != undefined) {
-					if(data.seguimiento.PRECONSTRUCCION != undefined
-							&& data.seguimiento.PRECONSTRUCCION != null){
-						
-						$.each(data.seguimiento.PRECONSTRUCCION, function(i,item){
-							
-							
-							ARCHIVOS_MD.push(new Archivo(
-		        					item.nombreArchivo,
-		        					item.urllayout,
-		        					item.validacion,
-		        					$('#nombreCompletoUsuario').val(),
-		        					$('#nombreAreaUsuario').val(),
-		        					null, null));
-						});
-					}
-					
-					if(eval(data)["seguimiento"]["PRESUPUESTO OBRA"] != undefined
-							&& eval(data)["seguimiento"]["PRESUPUESTO OBRA"] != null){
-						
-						$.each(eval(data)["seguimiento"]["PRESUPUESTO OBRA"], function(i,item){
-							ARCHIVOS_MD.push(new Archivo(
-		        					item.nombreArchivo,
-		        					item.urldoctoc,
-		        					item.validacion,
-		        					$('#nombreCompletoUsuario').val(),
-		        					$('#nombreAreaUsuario').val(),
-		        					null,null,
-		        					item.monto));
-						});
-					}
-					
-					if(eval(data)["seguimiento"]["PRESUPUESTO AUDITORIA"] != undefined
-							&& eval(data)["seguimiento"]["PRESUPUESTO AUDITORIA"] != null){
-						
-						$.each(eval(data)["seguimiento"]["PRESUPUESTO AUDITORIA"], function(i,item){
-							ARCHIVOS_MD.push(new Archivo(
-		        					item.nombreArchivo,
-		        					item.urldoctoc,
-		        					item.validacion,
-		        					$('#nombreCompletoUsuario').val(),
-		        					$('#nombreAreaUsuario').val(),
-		        					null,null,
-		        					item.monto));
-						});
-						ARCHIVOS_MD[ARCHIVOS_MD.length -1].estatus = 0;
-					}
-				}
-			}
 			
 			inicializaDropzone();
 		}
@@ -1170,7 +1122,18 @@ function finalizaMD(estatus){
 				consultaMotivosRechazo(0, 1);
 			}
 		}
-	}else if(ESTATUS_MD == ESTATUS_VOBO_FINAL && AREA_USUARIO == areaOperaciones){
+	}else if((ESTATUS_MD == ESTATUS_VOBO_FINAL || permiteComite()) && AREA_USUARIO == areaOperaciones){
+		ESTATUS_FINALIZA_MD = estatus;
+		if(estatus == 1){
+			cargaMensajeModal('DETALLE MD', 
+					'¿Est\u00e1s seguro de autorizar la MD?',
+					TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, actionfinalizaMD);
+		}else if(estatus == 0){
+			cargaMensajeModal('DETALLE MD', 
+					'¿Est\u00e1s seguro de rechazar la MD?',
+					TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, consultaMotivosRechazo);
+		}
+	}else if(ESTATUS_MD == ESTATUS_GESTORIA && AREA_USUARIO == areaGestoria){
 		ESTATUS_FINALIZA_MD = estatus;
 		if(estatus == 1){
 			cargaMensajeModal('DETALLE MD', 
@@ -1397,6 +1360,7 @@ function inicializaDropzone(){
 		$('#manejadorArchivos').show();
 		$('#montoPresupuesto').hide();
 		$('.simbolo').hide();
+		$('#divACC').hide();
 		dropzoneOptions = {
 	            dictDefaultMessage: 'Arrastra aqui el layout o da clic para buscarlo en tu equipo',
 	            dictFallbackMessage: 'Tu explorador no es compatible, actualizalo',
@@ -1454,7 +1418,8 @@ function inicializaDropzone(){
 	        			'tipoArchivo': tipoArchivo,
 	        			'tipoServicio' : tipoServicio,
 	        			'fecha': fecha,
-	        			'monto': ''}, 
+	        			'monto': '',
+	        			'acc' : ''}, 
 	        			'respSubeArchivo', 
 	        			function() {
 	        				cierraLoading();
@@ -1476,10 +1441,10 @@ function inicializaDropzone(){
 	        			ARCHIVOS_MD.push(new Archivo(
 	        					nombreArchivo,
 	        					data.url,
-	        					2,
+	        					1,
 	        					$('#nombreCompletoUsuario').val(),
-	        					$('#nombreAreaUsuario').val(),
-	        					null, null));
+	        					null,
+	        					null));
 	        			dibujaArchivos();
 	        			if(ESTATUS_MD == ESTATUS_CORRECCION_LAYOUT){
 	        				ESTATUS_FINALIZA_MD = 1;
@@ -1488,13 +1453,14 @@ function inicializaDropzone(){
 	        		}
 	        	}
 	        });
-	}//Vaslidacion Layout
+	}//Validacion Layout
 	else if(AREA_USUARIO == areaOperaciones 
 			&& ESTATUS_MD == ESTATUS_VALIDACION_LAYOUT){
 		$('#manejadorArchivos').show();
 		$('#subeArchivo').hide();
 		$('#montoPresupuesto').hide();
 		$('#contenedorUploader').hide();
+		$('#divACC').hide();
 		if (ARCHIVOS_MD.length > 0)
 			$('#msjUploader').html('Deberás autorizar el layout.');
 		else
@@ -1559,7 +1525,7 @@ function inicializaDropzone(){
 	        	tipoArchivo = 4;
 	        	tipoServicio = 2;
 	        	monto = $('#montoPresupuesto').val();
-	        	
+	        	acc = (($('#checkACC').prop('checked')) ? 1 : 0);
 	        	mensaje = '';
 	        	
 	        	if(monto == '')
@@ -1584,7 +1550,8 @@ function inicializaDropzone(){
 		        			'tipoArchivo': tipoArchivo,
 		        			'tipoServicio' : tipoServicio,
 		        			'fecha': fecha,
-		        			'monto': monto}, 
+		        			'monto': monto,
+		        			'acc' : acc}, 
 		        			'respSubeArchivo', 
 		        			function() {
 		        				cierraLoading();
@@ -1606,10 +1573,10 @@ function inicializaDropzone(){
 		        			ARCHIVOS_MD.push(new Archivo(
 		        					nombreArchivo,
 		        					data.url,
-		        					0,
+		        					1,
 		        					$('#nombreCompletoUsuario').val(),
-		        					$('#nombreAreaUsuario').val(),
-		        					null, null));
+		        					monto,
+		        					null));
 		        			dibujaArchivos();
 		        			ESTATUS_FINALIZA_MD = 1;
 		        			actionfinalizaMD();
@@ -1673,6 +1640,7 @@ function inicializaDropzone(){
 	        	tipoArchivo = 4;
 	        	tipoServicio = 3;
 	        	monto = $('#montoPresupuesto').val();
+	        	acc = (($('#checkACC').prop('checked')) ? 1 : 0);
 	        	
 	        	mensaje = '';
 	        	
@@ -1698,7 +1666,8 @@ function inicializaDropzone(){
 		        			'tipoArchivo': tipoArchivo,
 		        			'tipoServicio' : tipoServicio,
 		        			'fecha': fecha,
-		        			'monto': monto}, 
+		        			'monto': monto,
+		        			'acc' : acc}, 
 		        			'respSubeArchivo', 
 		        			function() {
 		        				cierraLoading();
@@ -1722,8 +1691,8 @@ function inicializaDropzone(){
 		        					data.url,
 		        					0,
 		        					$('#nombreCompletoUsuario').val(),
-		        					$('#nombreAreaUsuario').val(),
-		        					null, null));
+		        					monto,
+		        					null));
 		        			dibujaArchivos();
 		        			ESTATUS_FINALIZA_MD = 1;
 		        			actionfinalizaMD();
@@ -1732,7 +1701,7 @@ function inicializaDropzone(){
 	        	}else
 	        		cargaMensajeModal('DETALLE MD', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR);
 	        });
-	}else if(ESTATUS_MD == ESTATUS_VOBO_FINAL){
+	}else if(ESTATUS_MD == ESTATUS_VOBO_FINAL || permiteComite()){ //VoBo Final y comite
 		$('#autoriza9').hide();
 		$('#rechaza9').hide();
 		if(AREA_USUARIO == areaOperaciones){
@@ -1747,7 +1716,10 @@ function inicializaDropzone(){
 			strArchivos = '<div class="fileMD ' + clase + '">'
 								+ '<div class="datosFile" rel="' + i + '">'
 									+ '<div class="nombreFile">' + item.nombre + '</div>'
-									+ '<div class="autorFile">' + item.autor + '/' + item.areaAutor + '</div>'
+									+ '<div class="autorFile">' 
+										+ ((item.autor != undefined) ? item.autor : '--') + '/' 
+										+ ((item.monto != undefined) ? item.monto : '--') 
+										+ ((item.ACC != null && item.ACC != 0) ? '/ACC'  : '') + '</div>'
 								+ '</div>'
 								+ '<div class="actionsFile">'
 										+ '<span> <img title="Descargar archivo" onclick="descargaArchivo(' + i + ');" style="cursor: pointer;" src="img/iconos_DOWNLOAD.png">&nbsp;'
@@ -1757,7 +1729,407 @@ function inicializaDropzone(){
 		
 		$('#containerFilesVoboFinal').html(strArchivos);
 		$('#voboFinal').show();
+		
+		
+	}else if(ESTATUS_MD == ESTATUS_CECO){ //CECO
+		$('#autoriza9').hide();
+		$('#rechaza9').hide();
+		if(AREA_USUARIO == areaFinanzas){
+			$('#tiendaIdCECO').show();
+		}
+		$('#voboMD').hide();
+		strArchivos = '';
+		$.each(ARCHIVOS_MD, function(i, item){
+			clase = 'filePendiente';
+			
+			strArchivos = '<div class="fileMD ' + clase + '">'
+								+ '<div class="datosFile" rel="' + i + '">'
+									+ '<div class="nombreFile">' + item.nombre + '</div>'
+									+ '<div class="autorFile">' 
+										+ ((item.autor != undefined) ? item.autor : '--') + '/' 
+										+ ((item.monto != undefined) ? item.monto : '--') 
+										+ ((item.ACC != null && item.ACC != 0) ? '/ACC'  : '') + '</div>'
+								+ '</div>'
+								+ '<div class="actionsFile">'
+										+ '<span> <img title="Descargar archivo" onclick="descargaArchivo(' + i + ');" style="cursor: pointer;" src="img/iconos_DOWNLOAD.png">&nbsp;'
+								+ '</div>'
+							+ '</div>' +strArchivos;
+		});
+		
+		$('#containerFilesVoboFinal').html(strArchivos);
+		$('#voboFinal').show();
+		
+		 $('#subeTiendaId').unbind('click');
+	        $('#subeTiendaId').click(function(){
+	        	tiendaId = $('#tiendaID').val();
+	        	mensaje = '';
+	        	
+	        	if(tiendaId == '')
+	        		mensaje = 'Escribe el CECO para la sucursal';
+	        	
+	        	if(mensaje == ''){
+	        		cargaLoading();
+	        		tipoServicio = 10;
+	        		mdId = $("#mdId").val();
+	        		fecha = new Date().format("dd/mm/yyyy H:MM:ss");
+	        		
+		        	invocarJSONServiceAction("subeArchivo", 
+		        			{'mdId': mdId,
+		        			'tipoServicio' : tipoServicio,
+		        			'fecha': fecha,
+		        			'tiendaId': tiendaId}, 
+		        			'respCECO', 
+		        			function() {
+		        				cierraLoading();
+		        			},
+		        			function() {
+		        				cierraLoading();
+		        			});
+
+		        	respCECO = function(data){
+		        		if(data.codigo != 200){
+		        			cargaMensajeModal('DETALLE MD', 'Ocurrio un error, por favor reintenta', TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR);
+		        		}else{
+		        			ESTATUS_FINALIZA_MD = 1;
+		        			actionfinalizaMD();
+		        		}
+		        	}
+	        	}else
+	        		cargaMensajeModal('DETALLE MD', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR);
+	        });
+	        
+	}else if(AREA_USUARIO == areaGestoria && ESTATUS_MD == ESTATUS_CONTRATO){//Contrato
+		$('#manejadorArchivos').show();
+		$('#montoPresupuesto').show();
+		$('#montoPresupuesto').attr('placeholder', 'Captura el monto total de presupuesto');
+		$('#subeArchivo').show();
+		
+		$('#montoPresupuesto').hide();
+		$('.simbolo').hide();
+		$('#divACC').hide();
+		
+		dropzoneOptions = {
+	            dictDefaultMessage: 'Arrastra aqui el contrato o da clic para buscarlo en tu equipo',
+	            dictFallbackMessage: 'Tu explorador no es compatible, actualizalo',
+	            dictFileTooBig: 'El archivo es muy grande {{filesize}}, el limite es {{maxFilesize}} MB',
+	            dictInvalidFileType: 'Archivo no permitido',
+	            dictRemoveFile: 'Eliminar archivo', 
+	            dictRemoveFileConfirmation: 'Archivo eliminado',
+	            dictMaxFilesExceeded: 'Solo puedes agregar {{maxFiles}} archivo',
+	            paramName: "file",
+	            autoProcessQueue: false,
+	            maxFilesize: 3, // MB
+	            maxFiles: 1,
+	            addRemoveLinks: true,
+	            acceptedFiles: 'image/*,application/pdf,.psd',
+	            accept: function(file, done){
+	                reader = new FileReader();
+	                reader.onload = handleReaderLoad;
+	                reader.readAsDataURL(file);
+	                
+	                LAYOUT_B64 = '';
+	                LAYOUT_Type = '';
+	                
+	                function handleReaderLoad(evt) {
+	                	LAYOUT_B64 = evt.target.result;
+	                	LAYOUT_Type = file.type;
+	                	$('#subeArchivo').show();
+	                }
+	                done();
+	            }
+	        };
+		
+	        uploader = document.querySelector('#uploader');
+	        dropzoneLayouts = new Dropzone(uploader, dropzoneOptions);
+	        ARCHIVO_SUBIDO = false;
+	        
+	        dibujaArchivos();
+	        $('#subeArchivo').unbind('click');
+	        $('#subeArchivo').click(function(){
+	        	
+	        	mdId = $("#mdId").val();
+	        	nombreArchivo = 'CTO' + mdId; 
+	        	fecha = new Date().format("dd/mm/yyyy H:MM:ss");
+	        	archivo = LAYOUT_B64;
+	        	formato = LAYOUT_Type.split('/')[1];
+	        	tipoArchivo = 5;
+	        	tipoServicio = 4;
+	        	monto = '';
+	        	acc = '';
+	        	
+	        	mensaje = '';
+	        	
+	        	if(LAYOUT_B64 == ''){
+	        		mensaje = 'Carga el archivo del contrato';
+	        	}
+	        	
+	        	if(mensaje == ''){
+	        		cargaLoading();
+
+		        	invocarJSONServiceAction("subeArchivo", 
+		        			{'mdId': mdId,
+		        			'nombreArchivo': nombreArchivo,
+		        			'archivo': archivo,
+		        			'formato': formato,
+		        			'tipoArchivo': tipoArchivo,
+		        			'tipoServicio' : tipoServicio,
+		        			'fecha': fecha,
+		        			'monto': monto,
+		        			'acc' : acc}, 
+		        			'respSubeArchivo', 
+		        			function() {
+		        				cierraLoading();
+		        			},
+		        			function() {
+		        				cierraLoading();
+		        			});
+
+		        	respSubeArchivo = function(data){
+		        		if(data.codigo != 200){
+		        			cargaMensajeModal('DETALLE MD', 'No se logro cargar el archivo, por favor reintenta', TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR);
+		        		}else{
+		        			ARCHIVO_SUBIDO = true;
+		        			dropzoneLayouts.destroy();
+		        			$('#subeArchivo').hide();
+		        			$('#contenedorUploader').hide();
+		        			$('#msjUploader').html('¡Felicidades! El archivo fue cargado con exito. Deberás esperar a que el presupuesto sea validado por el area correspondiente.');
+		        			$('#msjUploader').show();
+		        			ARCHIVOS_MD.push(new Archivo(
+		        					nombreArchivo,
+		        					data.url,
+		        					0,
+		        					$('#nombreCompletoUsuario').val(),
+		        					monto,
+		        					null));
+		        			dibujaArchivos();
+		        			ESTATUS_FINALIZA_MD = 1;
+		        			actionfinalizaMD();
+		        		}
+		        	}
+	        	}else
+	        		cargaMensajeModal('DETALLE MD', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR);
+	        });
+	}else if(ESTATUS_MD == ESTATUS_GESTORIA && AREA_USUARIO == areaGestoria){
+		/*$('#manejadorArchivos').show();
+		$('#subeArchivo').hide();
+		
+		$('#montoPresupuesto').hide();
+		$('.simbolo').hide();
+		$('#divACC').hide();
+		
+		FILES_B64 = new Array();
+		FILES_Type = new Array();
+		
+		dropzoneOptions = {
+	            dictDefaultMessage: 'Arrastra aqui los documentos',
+	            dictFallbackMessage: 'Tu explorador no es compatible, actualizalo',
+	            dictFileTooBig: 'El archivo es muy grande {{filesize}}, el limite es {{maxFilesize}} MB',
+	            dictInvalidFileType: 'Archivo no permitido',
+	            dictRemoveFile: 'Eliminar archivo', 
+	            dictRemoveFileConfirmation: 'Archivo eliminado',
+	            dictMaxFilesExceeded: 'Solo puedes agregar {{maxFiles}} archivo',
+	            paramName: "file",
+	            autoProcessQueue: false,
+	            maxFilesize: 3, // MB
+	            maxFiles: 5,
+	            addRemoveLinks: true,
+	            acceptedFiles: 'image/*,application/pdf,.psd',
+	            accept: function(file, done){
+	                reader = new FileReader();
+	                reader.onload = handleReaderLoad;
+	                reader.readAsDataURL(file);
+
+	                function handleReaderLoad(evt) {
+	                	FILES_B64.push(evt.target.result);
+	                	FILES_Type.push(file.type);
+	                	$('#subeArchivo').show();
+	                }
+	                done();
+	            }
+	        };
+		
+	        uploader = document.querySelector('#uploader');
+	        dropzoneLayouts = new Dropzone(uploader, dropzoneOptions);
+	        ARCHIVO_SUBIDO = false;
+	        
+	        dibujaArchivos();
+	        $('#subeArchivo').unbind('click');
+	        $('#subeArchivo').click(function(){
+	        	
+	        	mdId = $("#mdId").val();
+	        	fecha = new Date().format("dd/mm/yyyy H:MM:ss");
+	        	tipoArchivo = 6;
+	        	tipoServicio = 5;
+
+	        	mensaje = '';
+	        	
+	        	if(FILES_B64.length == 0){
+	        		mensaje = 'Carga los archivos';
+	        	}
+	        	
+	        	if(mensaje == ''){
+	        		cargaLoading();
+
+		        	invocarJSONServiceAction("subeArchivosGestoria", 
+		        			{'mdId': mdId,
+		        			'archivos': JSON.stringify(FILES_B64),
+		        			'formatos': JSON.stringify(FILES_Type),
+		        			'tipoArchivo': tipoArchivo,
+		        			'tipoServicio' : tipoServicio,
+		        			'fecha': fecha}, 
+		        			'respSubeArchivo', 
+		        			function() {
+		        				cierraLoading();
+		        			},
+		        			function() {
+		        				cierraLoading();
+		        			});
+
+		        	respSubeArchivo = function(data){
+		        		if(data.codigo != 200){
+		        			cargaMensajeModal('DETALLE MD', 'No se logro cargar el archivo, por favor reintenta', TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR);
+		        		}else{
+		        			ARCHIVO_SUBIDO = true;
+		        			dropzoneLayouts.destroy();
+		        			$('#subeArchivo').hide();
+		        			$('#contenedorUploader').hide();
+		        			$('#msjUploader').html('¡Felicidades! Los archivo fue cargado con exito. Deberás esperar a que el presupuesto sea validado por el area correspondiente.');
+		        			$('#msjUploader').show();
+		        			
+		        			dibujaArchivos();
+		        			ESTATUS_FINALIZA_MD = 1;
+		        			actionfinalizaMD();
+		        		}
+		        	}
+	        	}else
+	        		cargaMensajeModal('DETALLE MD', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR);
+	        });*/
+		
+		$('#autoriza9').hide();
+		$('#rechaza9').hide();
+		if(AREA_USUARIO == areaGestoria){
+			$('#autoriza9').show();
+			$('#rechaza9').show();
+		}
+		$('#voboMD').hide();
+		strArchivos = '';
+		$.each(ARCHIVOS_MD, function(i, item){
+			clase = 'filePendiente';
+			
+			strArchivos = '<div class="fileMD ' + clase + '">'
+								+ '<div class="datosFile" rel="' + i + '">'
+									+ '<div class="nombreFile">' + item.nombre + '</div>'
+									+ '<div class="autorFile">' 
+										+ ((item.autor != undefined) ? item.autor : '--') + '/' 
+										+ ((item.monto != undefined) ? item.monto : '--') 
+										+ ((item.ACC != null && item.ACC != 0) ? '/ACC'  : '') + '</div>'
+								+ '</div>'
+								+ '<div class="actionsFile">'
+										+ '<span> <img title="Descargar archivo" onclick="descargaArchivo(' + i + ');" style="cursor: pointer;" src="img/iconos_DOWNLOAD.png">&nbsp;'
+								+ '</div>'
+							+ '</div>' +strArchivos;
+		});
+		
+		$('#containerFilesVoboFinal').html(strArchivos);
+		$('#voboFinal').show();
+	}else if(ESTATUS_MD == ESTATUS_OBRA){
+		$('#autoriza9').hide();
+		$('#rechaza9').hide();
+		if(AREA_USUARIO != areaConstruccion){
+			
+			$('#voboMD').hide();
+			strArchivos = '';
+			$.each(ARCHIVOS_MD, function(i, item){
+				clase = 'filePendiente';
+				
+				strArchivos = '<div class="fileMD ' + clase + '">'
+									+ '<div class="datosFile" rel="' + i + '">'
+										+ '<div class="nombreFile">' + item.nombre + '</div>'
+										+ '<div class="autorFile">' 
+											+ ((item.autor != undefined) ? item.autor : '--') + '/' 
+											+ ((item.monto != undefined) ? item.monto : '--') 
+											+ ((item.ACC != null && item.ACC != 0) ? '/ACC'  : '') + '</div>'
+									+ '</div>'
+									+ '<div class="actionsFile">'
+											+ '<span> <img title="Descargar archivo" onclick="descargaArchivo(' + i + ');" style="cursor: pointer;" src="img/iconos_DOWNLOAD.png">&nbsp;'
+									+ '</div>'
+								+ '</div>' +strArchivos;
+			});
+			
+			$('#containerFilesVoboFinal').html(strArchivos);
+			$('#voboFinal').show();
+		}else{
+			$('#containerFilesVoboFinal').hide();
+			
+			$('#voboFinal').show();
+			$('#containerFechasObra').show();
+			
+			inicializaCalendarioObra();
+			
+			$('#subeObra').unbind('click');
+			$('#subeObra').click(function(){
+				inicio = $("#inicioObra").val();
+				duracion = $('#duracionObra option:selected').val();
+				
+				if(duracion == 0)
+					cargaMensajeModal('DETALLE MD', 'Selecciona la duración de obra', TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR);
+				else{
+	        		cargaLoading();
+
+	        		mdId = $("#mdId").val();
+		        	fecha = new Date().format("dd/mm/yyyy H:MM:ss");
+		        	tipoServicio = 6;
+		        	
+		        	invocarJSONServiceAction("subeObra", 
+		        			{'mdId': mdId,
+		        			'tipoServicio' : tipoServicio,
+		        			'fecha': fecha,
+		        			'inicio': inicio,
+		        			'duracion' : duracion}, 
+		        			'respSubeObra', 
+		        			function() {
+		        				cierraLoading();
+		        			},
+		        			function() {
+		        				cierraLoading();
+		        			});
+
+		        	respSubeObra = function(data){
+		        		if(data.codigo != 200){
+		        			cargaMensajeModal('DETALLE MD', 'No se logro guardar la información, por favor reintenta', TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR);
+		        		}else{
+		        			dibujaArchivos();
+		        			ESTATUS_FINALIZA_MD = 1;
+		        			actionfinalizaMD();
+		        		}
+		        	}
+				}
+			})
+		}
 	}
+}
+
+function inicializaCalendarioObra() {
+	$(".ui-datepicker-trigger").hide();
+	
+	var dateHoy = new Date();
+	var FECHA_HOY = $.datepicker.formatDate('dd/mm/yy',dateHoy);
+	
+	$("#inicioObra").datepicker({
+		minDate:((USUARIO == 703022)? '-3y': 0),
+		autoSize : true,
+		showOn: 'both',
+		showAnim: 'slideDown',
+        buttonImageOnly: true,
+        onClose: function( selectedDate ) {
+			var date = $(this).datepicker('getDate');			
+			var endDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+        }
+	});
+	
+	$("#inicioObra").datepicker.dateFormat = 'dd/MM/yy';
+	$("#inicioObra").val(FECHA_HOY);
+	$("#inicioObra").show();
 }
 
 function dibujaArchivos(){
@@ -1770,7 +2142,9 @@ function dibujaArchivos(){
 			$.each(ARCHIVOS_MD, function(i, item){
 				if(item.estatus == 2){
 					clase = 'filePendiente';
-					if(ESTATUS_MD != ESTATUS_CORRECCION_LAYOUT && ESTATUS_MD != ESTATUS_CORRECCION_PRESUPUESTO_CONSTRUCCION){
+					if(ESTATUS_MD != ESTATUS_CORRECCION_LAYOUT 
+							&& ESTATUS_MD != ESTATUS_CORRECCION_PRESUPUESTO_CONSTRUCCION
+							&& ESTATUS_MD != ESTATUS_PRESUPUESTO_CONSTRUCCION){
 						ARCHIVO_SUBIDO = true;
 						$('#subeArchivo').hide();
 	        			$('#contenedorUploader').hide();
@@ -1787,7 +2161,7 @@ function dibujaArchivos(){
 				strArchivos = '<div class="fileMD ' + clase + '">'
 									+ '<div class="datosFile" rel="' + i + '">'
 										+ '<div class="nombreFile">' + item.nombre + '</div>'
-										+ '<div class="autorFile">' + item.autor + '/' + item.areaAutor + '</div>'
+										+ '<div class="autorFile">' + ((item.autor != undefined) ? item.autor : '--') + '</div>'
 									+ '</div>'
 									+ '<div class="actionsFile">'
 											+ '<span> <img title="Descargar archivo" onclick="descargaArchivo(' + i + ');" style="cursor: pointer;" src="img/iconos_DOWNLOAD.png">&nbsp;'
@@ -1812,14 +2186,14 @@ function dibujaArchivos(){
 				strArchivos = '<div class="fileMD ' + clase + '">'
 									+ '<div class="datosFile" rel="' + i + '">'
 										+ '<div class="nombreFile">' + item.nombre + '</div>'
-										+ '<div class="autorFile">' + item.autor + '/' + item.areaAutor + '</div>'
+										+ '<div class="autorFile">' + ((item.autor != undefined) ? item.autor : '--') + '/' + ((item.monto != undefined) ? item.monto : '--') + '</div>'
 									+ '</div>'
 									+ '<div class="actionsFile">'
 											+ strAcciones
 									+ '</div>'
 								+ '</div>' +strArchivos;
 			});
-		}else if(AREA_USUARIO == areaAuditoria){
+		}else if(AREA_USUARIO == areaAuditoria || AREA_USUARIO == areaGestoria){
 			$.each(ARCHIVOS_MD, function(i, item){
 				strAcciones = '<span> <img title="Descargar archivo" onclick="descargaArchivo(' + i + ');" style="cursor: pointer;" src="img/iconos_DOWNLOAD.png">&nbsp;';
 				clase = 'filePendiente';
@@ -1827,7 +2201,7 @@ function dibujaArchivos(){
 				strArchivos = '<div class="fileMD ' + clase + '">'
 									+ '<div class="datosFile" rel="' + i + '">'
 										+ '<div class="nombreFile">' + item.nombre + '</div>'
-										+ '<div class="autorFile">' + item.autor + '/' + item.areaAutor + '</div>'
+										+ '<div class="autorFile">' + ((item.autor != undefined) ? item.autor : '--') + '/' + ((item.monto != undefined) ? item.monto : '--') + '</div>'
 									+ '</div>'
 									+ '<div class="actionsFile">'
 											+ strAcciones
@@ -1839,15 +2213,6 @@ function dibujaArchivos(){
 		
 		$('.filesMD').html(strArchivos);
 		
-		$('.datosFile').unbind('click');
-		$('.datosFile').click(function(){
-			id = parseInt($(this).attr('rel'));
-			
-			if(ARCHIVOS_MD[id]  == undefined || ARCHIVOS_MD[id].comentario == null)
-				$('.commentsByFile').html('<div class="msjFiles">El archivo no cuenta con comentarios</div>');
-			else
-				$('.commentsByFile').html('<div class="msjFiles">"' + ARCHIVOS_MD[id].comentario + '" - ' + ARCHIVOS_MD[id].autorCometario + '</div>');
-		});
 	}
 } 
 
@@ -1953,18 +2318,14 @@ Archivo = function(
 		url,
 		estatus,
 		autor,
-		areaAutor,
-		comentario,
-		autorCometario,
-		monto){
+		monto, 
+		acc){
 	this.nombre = nombre;
 	this.url = url;
 	this.estatus = estatus;
 	this.autor = autor;
-	this.areaAutor = areaAutor;
-	this.comentario = comentario;
-	this.autorCometario = autorCometario;
 	this.monto = monto;
+	this.acc = acc;
 };
 
 Permiso = function(

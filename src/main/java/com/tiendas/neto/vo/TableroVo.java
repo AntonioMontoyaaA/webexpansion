@@ -33,6 +33,9 @@ public class TableroVo implements Serializable {
 	private String doctos;
 	private String comite;
 	private String ceco;
+	private String fechaPptoConstruccion;
+	private String fechaPptoAuditoria;
+	private String fechaConteoAuditor;
 	/**
 	 * @return the mdId
 	 */
@@ -333,7 +336,42 @@ public class TableroVo implements Serializable {
 	public void setCeco(String ceco) {
 		this.ceco = ceco;
 	}
-	
+	/**
+	 * @return the fechaPptoConstruccion
+	 */
+	public String getFechaPptoConstruccion() {
+		return fechaPptoConstruccion;
+	}
+	/**
+	 * @param fechaPptoConstruccion the fechaPptoConstruccion to set
+	 */
+	public void setFechaPptoConstruccion(String fechaPptoConstruccion) {
+		this.fechaPptoConstruccion = fechaPptoConstruccion;
+	}
+	/**
+	 * @return the fechaPptoAuditoria
+	 */
+	public String getFechaPptoAuditoria() {
+		return fechaPptoAuditoria;
+	}
+	/**
+	 * @param fechaPptoAuditoria the fechaPptoAuditoria to set
+	 */
+	public void setFechaPptoAuditoria(String fechaPptoAuditoria) {
+		this.fechaPptoAuditoria = fechaPptoAuditoria;
+	}
+	/**
+	 * @return the fechaConteoAuditor
+	 */
+	public String getFechaConteoAuditor() {
+		return fechaConteoAuditor;
+	}
+	/**
+	 * @param fechaConteoAuditor the fechaConteoAuditor to set
+	 */
+	public void setFechaConteoAuditor(String fechaConteoAuditor) {
+		this.fechaConteoAuditor = fechaConteoAuditor;
+	}
 	
 
 }

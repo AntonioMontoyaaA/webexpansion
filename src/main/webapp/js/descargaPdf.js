@@ -6,6 +6,7 @@ function descargaExcel(data){
 	$('#pdfpuntos').val(data.generales.totalPuntos);
 	$('#pdflat').val(data.generales.latitud);
 	$('#pdflon').val(data.generales.longitud);
+	$('#pdfurlmapa').val('http://maps.google.com/maps?q=loc:'+data.generales.latitud+','+data.generales.longitud);
 	
 	var calle= data.datosSitio.calle+", ";
 	var colonia= "Col. "+data.datosSitio.colonia+", ";

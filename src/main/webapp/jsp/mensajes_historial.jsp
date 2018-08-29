@@ -32,6 +32,9 @@
 		<div class="col-lg-12 menupr_estilos fazul">
 			<div class="row cabecera">
 				<div class="col-lg-12">
+					<span class="blanco negrita" id="titulo_chat"></span>
+				</div>
+				<div class="col-lg-12">
 					<span class="blanco negrita">Historial Chat</span>
 				</div>
 			</div>
@@ -193,6 +196,7 @@
 
 <form style="display:none;" action='mensajes_historial'  id="chatPorMd" method="post">
 	<s:textfield id="mdIdChat" name="mdIdChat" label="" cssStyle="display: none"></s:textfield>
+	<s:textfield id="nombreMdChat" name="nombreMdChat" label="" cssStyle="display: none"></s:textfield>
 	<input type="hidden" id="usuarioLogin" value="${usr.perfil.numeroEmpleado}" />
 </form>
 	

@@ -138,7 +138,8 @@ function creatabla(){
 			
 			$("#tablaMemoriasAsignadas tr td.liga_chat").click(function() {
 				var mdId = $(this).parent().find("td:eq(7)").html();
-				muestraChatXMd(mdId);
+				var nombreMd = $(this).parent().find("td:eq(0) span").html();
+				muestraChatXMd(mdId, nombreMd);
 			});
 		}
 	};	
@@ -235,8 +236,9 @@ function format(mdId){
     '</table>';
 }
 
-function muestraChatXMd(mdId) {
+function muestraChatXMd(mdId, nombreMd) {
 	$("#mdIdChat").val(mdId);
+	$("#nombreMdChat").val(nombreMd);
 	$("#chatPorMd").submit();
 }
 

@@ -286,6 +286,10 @@
                method = "execute">
            <result name = "success">jsp/aprobadas.jsp</result>
         </action>
+         <action name = "edita_md_superficie"
+               class = "com.tiendas.neto.action.EditaMdSuperficieAction"
+               method = "execute">
+        </action>
         <action name = "edita_md_datos_propietario"
                class = "com.tiendas.neto.action.EditaMdDatosPropietarioAction"
                method = "execute">

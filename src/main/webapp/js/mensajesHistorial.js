@@ -15,6 +15,7 @@ var AREA_AUDITORIA = 4;
 
 $(function(){
 		$('#idasignadas').addClass('resaltado'); //para el efecto de header
+		$("#titulo_chat").html($("#nombreMdChat").val());
 		consultaMensaje();
 		escribirMensajes();
 });

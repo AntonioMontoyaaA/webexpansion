@@ -21,7 +21,16 @@ public class DetalleMemoriaChatAction extends ActionSupport implements SessionAw
 	private static final long serialVersionUID = 1L;
 	
 	private String mdIdChat;
+	private String nombreMdChat;
 	
+	public String getNombreMdChat() {
+		return nombreMdChat;
+	}
+
+	public void setNombreMdChat(String nombreMdChat) {
+		this.nombreMdChat = nombreMdChat;
+	}
+
 	public String getMdIdChat() {
 		return mdIdChat;
 	}
@@ -34,6 +43,9 @@ public class DetalleMemoriaChatAction extends ActionSupport implements SessionAw
 	public String execute() throws Exception{
 		String mdIdChat = ServletActionContext.getRequest().getParameter("mdIdChat");
 		this.mdIdChat = mdIdChat;
+		String nombreMdChat = ServletActionContext.getRequest().getParameter("nombreMdChat");
+		this.nombreMdChat = nombreMdChat;
+		
 		return "success";
 	} 
 	

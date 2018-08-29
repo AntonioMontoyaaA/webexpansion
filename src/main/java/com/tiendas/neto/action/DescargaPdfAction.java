@@ -43,6 +43,7 @@ public class DescargaPdfAction extends ExpansionAction{
 	private String pdfemailPropietario;
 	private String pdflat;
 	private String pdflon;
+	private String pdfurlmapa;
 	private String pdfmarkers_comp;
 	private String pdfmarkers_gen;
 	
@@ -64,7 +65,14 @@ public class DescargaPdfAction extends ExpansionAction{
 	private String pdfdisponibilidad;
 	private String pdftiempo_amortizacion;
 	private String pdfgracia;
+	private String pdfconteos;
 
+	public String getPdfurlmapa() {
+		return pdfurlmapa;
+	}
+	public void setPdfurlmapa(String pdfurlmapa) {
+		this.pdfurlmapa = pdfurlmapa;
+	}
 	public String getPdfmarkers_comp() {
 		return pdfmarkers_comp;
 	}
@@ -77,9 +85,6 @@ public class DescargaPdfAction extends ExpansionAction{
 	public void setPdfmarkers_gen(String pdfmarkers_gen) {
 		this.pdfmarkers_gen = pdfmarkers_gen;
 	}
-
-	private String pdfconteos;
-
 	public String getPdflat() {
 		return pdflat;
 	}
@@ -268,6 +273,7 @@ public class DescargaPdfAction extends ExpansionAction{
 		parameters.put("imagen_usuario", urlimagenes+"imagen_usuario.png");
 		parameters.put("lat", Float.parseFloat(pdflat));
 		parameters.put("lon",Float.parseFloat(pdflon));
+		parameters.put("urlmapa",pdfurlmapa);
 		
 		parameters.put("frenteMd", pdffrenteMd);
 		parameters.put("profundidadMd", pdfprofundidadMd);
@@ -352,12 +358,11 @@ public class DescargaPdfAction extends ExpansionAction{
 		//----------------------------
 		
 		
-//		JasperReport report = null;
 			// JasperCompileManager.compileReportToFile(url+"pag5.jrxml", url+"pag5.jasper");
 //			 JasperCompileManager.compileReportToFile(url+"pag4.jrxml", url+"pag4.jasper");
 //			 JasperCompileManager.compileReportToFile(url+"pag3.jrxml", url+"pag3.jasper");
 //			 JasperCompileManager.compileReportToFile(url+"pag2.jrxml", url+"pag2.jasper");
-//			 JasperCompileManager.compileReportToFile(url+"pag1.jrxml", url+"pag1.jasper");
+			 JasperCompileManager.compileReportToFile(url+"pag1.jrxml", url+"pag1.jasper");
 			
 			JasperPrint print = JasperFillManager.fillReport(url+"pag1.jasper", parameters);
 			

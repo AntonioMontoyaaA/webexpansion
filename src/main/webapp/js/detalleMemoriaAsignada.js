@@ -139,7 +139,7 @@ function inicializaModulosEdicion(modulos, datosSitio, datosPropietario, general
 					'<span class="negrita azul t14 sangria_cuerpo">Estado</span><br/>' +
 					'<input id="estadoMdText" type="text" class="text_edita"><br/>' +
 					'<span class="negrita azul t14 sangria_cuerpo">Código postal</span><br/>' +
-					'<input id="codigoPostalMdText" type="text" class="text_edita"><br/>';
+					'<input id="codigoPostalMdText" type="number" class="text_edita"><br/>';
 				$("#modulo1Datos").html(datos);
 				
 				if(datosSitio != undefined) {
@@ -336,6 +336,7 @@ function inicializaFactores(){
 function muestraChatXMd() {
 	mdId = $("#mdIdAutorizacion").val();
 	$("#mdIdChat").val(mdId);
+	$("#nombreMdChat").val($("#nombreMd").val());
 	$("#chatPorMd").submit();
 }
 
@@ -2532,9 +2533,12 @@ function editaPantalla(pantalla, o) {
 		case 2:
 			cargaMensajeModal('EDITA MD', "¿Estás seguro de modificar los datos del propietario?", TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_EXITO, editaPropietarioAction);
 			break;
+		case 3:
+			cargaMensajeModal('EDITA MD', "¿Estás seguro de modificar los datos de superficie?", TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_EXITO, editaSuperficieAction);
+			break;
 		case 6:
 			cargaMensajeModal('EDITA MD', "¿Estás seguro de modificar las generalidades del sitio?", TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_EXITO, editaGeneralidadesAction);
-			break;
+			break;F
 	}
 }
 
@@ -2579,6 +2583,43 @@ function editaPropietarioAction() {
 			'amaternoPropietario': $("#amaternoPropietarioText").val(),
 			'telefono': $("#telefonoPropietarioText").val(),
 			'email': $("#emailPropietarioText").val()
+			}, 
+			'editaPropietarioResponse', 
+			function() {
+				//Funcion de error
+				
+				cierraLoading();
+			},
+			function() {
+				//Función al finalizar
+				
+				cierraLoading();
+			});
+
+	editaPropietarioResponse = function( data ) {
+		if(data.codigo != 200) {
+			cargaMensajeModal('EDITA MD', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
+		} else {
+			cargaMensajeModal('EDITA MD', "Datos modificados con éxito", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_EXITO, null);
+		}
+	}
+}
+
+function editaSuperficieAction() {
+	var esquina;
+	
+	if($("#esquina").checked==true){
+		esquina="1";
+	}else{
+		esquina="0";
+	}
+	
+	var mdId = $("#mdId").val();
+	invocarJSONServiceAction("edita_md_superficie", 
+			{'mdId': mdId,
+			'esquina':esquina,
+			'':'',
+			'':''
 			}, 
 			'editaPropietarioResponse', 
 			function() {

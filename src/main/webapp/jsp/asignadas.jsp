@@ -74,6 +74,7 @@
 
 <form action='mensajes_historial'  id="chatPorMd" method="post">
 	<input type="hidden" name="mdIdChat" id="mdIdChat" value=""/>
+	<input type="hidden" name="nombreMdChat" id="nombreMdChat" value=""/>
 </form>
 
 <form style="display: hidden" action="./excelAsignadasAction" method="POST" id="form">

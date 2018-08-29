@@ -955,7 +955,10 @@ function datosFlujoPeatonal(flujoPeatonal){
 	if(AREA_USUARIO != areaAuditoria || AREAS_A[areaAuditoria])
 		$('#posConteos').show();
 	else{
-		$('#preConteos').show();
+		if((ESTATUS_MD == 5 || ESTATUS_MD == 7) 
+				&& AREA_USUARIO == areaAuditoria 
+				&&  !AREAS_A[areaAuditoria])//TODO
+			$('#preConteos').show();
 		CONTEO_GUARDADO = false;
 		$('#subeConteo').unbind('click');
 		$('#subeConteo').click(function(){
@@ -1061,7 +1064,7 @@ function cargaComboMotivos(modulo){
 	strCombo = '<select id="motivoRechazo" class="motivoRechazo">' + 
 				'<option value="0" disabled>SELECCIONA EL MOTIVO DE RECHAZO</option>';
 	$.each(MOTIVOS_RECHAZO[modulo], function(){
-		strCombo += '<option value="' + this.id + '">' + this.nombre + '</option>' 
+		strCombo += '<option ' + ((this.isDefinitivo) ? 'style="color: red"' : '') + ' value="' + this.id + '">' + this.nombre + '</option>' 
 	});
 	
 	strCombo += '</select>';
@@ -2295,7 +2298,7 @@ function obtieneMotivosGenerales(combo){
 				'<option value="0" disabled>SELECCIONA EL MOTIVO DE RECHAZO</option>';
 				
 				$.each(data.motivos, function(){
-					strCombo += '<option value="' + this.motivoId + '">' + this.descripcion + '</option>' 
+					strCombo += '<option ' + ((this.isDefinitivo) ? 'style="color: red"' : '') + ' value="' + this.motivoId + '">' + this.descripcion + '</option>' 
 				});
 	
 				strCombo += '</select>';

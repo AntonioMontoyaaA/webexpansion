@@ -198,9 +198,9 @@ function showOptionAction(){
 	    	getObtenerRadiosXMDs();
 	    	$("#check_nuevos").prop("checked",true);
 	    	$("#check_asignados").prop("checked",true);
-	    	$("#check_proceso").prop("checked",true);
-	    	$("#check_concluido").prop("checked",true);
-	    	$("#check_cancelado").prop("checked",true);
+	    	$("#check_proceso").prop("checked",false);
+	    	$("#check_concluido").prop("checked",false);
+	    	$("#check_cancelado").prop("checked",false);
 	    	$("#check_MdsRadios").prop("checked",false);
 	
 	    }
@@ -1170,39 +1170,7 @@ function verRutaUbicacion(){
 }
 
 
-/* ---------- Adds a marker MDS--------*/
-function addMarkerRuta(obj, map,bounds_, array_ ) {
-	// Instantiate an info window to hold step text.
-    var stepDisplay = new google.maps.InfoWindow;
 
-	var icon = {
-			url: iconMarke.MD, // url
-			scaledSize: new google.maps.Size(35, 35)// scaled size
-		};
-	
-  var marker = new google.maps.Marker({
-	    position: new google.maps.LatLng(obj.latitud, obj.longitud),
-	    draggable: false,
-	    animation: google.maps.Animation.DROP,
-	    map: map,
-	    icon : icon
-	  }); 
-  
-
-  marker.addListener("click", function() {
-	  stepDisplay.setContent(text);
-      stepDisplay.open(map, marker);
-
-});
-
-
-}
-
-function RutaMapa(latitud, longitud, fecha){
-	this.longitud = longitud;
-	this.latitud = latitud;
-	this.fecha = fecha;
-}
 
 
 function quitarPinUbicacionActual(){
@@ -1228,8 +1196,65 @@ function displayRoute(origin, destination, service, display, listRuta) {
 		} else {
 			alert('Could not display directions due to: ' + status);
 		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	});
 }
+
+
+function createMarker(map, latlng, label, html, color) {
+	// alert("createMarker("+latlng+","+label+","+html+","+color+")");
+	    var contentString = '<b>'+label+'</b><br>'+html;
+	    var marker = new google.maps.Marker({
+	        position: latlng,
+	        map: map,
+	        shadow: iconShadow,
+	        icon: getMarkerImage(color),
+	        shape: iconShape,
+	        title: label,
+	        zIndex: Math.round(latlng.lat()*-100000)<<5
+	        });
+	        marker.myname = label;
+
+	    google.maps.event.addListener(marker, 'click', function() {
+	        infowindow.setContent(contentString); 
+	        infowindow.open(map,marker);
+	        });
+	    return marker;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function inicializaCalendarios() {
 	$(".ui-datepicker-trigger").hide();
@@ -1311,7 +1336,7 @@ function getObtenerMDs(){
 
 	responseMdsAutorizadas = function(data){
 		//console.log(data);
-		if(data.codigo == 400){
+		if(data.codigo == 400 || data.codigo == 205){
 			cargaMensajeModal("Localizador",data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
 			return false;
 		}
@@ -1611,31 +1636,48 @@ function addMarkerEstatus(obj, map) {
 		if( obj.estatusId == 1){
 			color = colors.NUEVO;
 			iconoEstatus = iconMarke.NUEVO;
-			pintar = true;
+			pintar = false;
 		}else
 		  if( obj.estatusId == 2){
 			  color = colors.ASIGNADO;
 			  iconoEstatus = iconMarke.ASIGNADO;
-			  pintar = true;
+			  pintar = false;
 			}else
-				  if(obj.estatusId == 3){
+				  if(obj.estatusId == 3 ){
 					  color = colors.EN_PROCESO;
 					  iconoEstatus = iconMarke.EN_PROCESO;
-					  pintar = true;
+					  
+					  if($("#check_proceso").is(":checked") == false)
+						  pintar = true;
+					  
+					  
 					}else
-						  if(obj.estatusId == 4){
+						  if(obj.estatusId == 4 ){
 							  color = colors.CONCLUIDO;
 							  iconoEstatus = iconMarke.CONCLUIDO;
-							  pintar = true;
+							  
+							  if($("#check_concluido").is(":checked")== false)
+								  pintar = true;
+							 
 							}else
-								  if(obj.estatusId == 5){
+								  if(obj.estatusId == 5 ){
 									  color = colors.CANCELADO;
 									  iconoEstatus = iconMarke.CANCELADO;
-									  pintar = true;
+									  
+									  if($("#check_cancelado").is(":checked")== false)
+										  pintar = true;
+									  
 									}
 		
 		colorCicle = color;
 		
+		
+		
+		
+			
+		
+				
+				
 	var icono = {
 			url: iconoEstatus,
 			scaledSize: new google.maps.Size(35, 35)
@@ -1651,7 +1693,8 @@ function addMarkerEstatus(obj, map) {
 			map_icon_label: '<span class="map-icon map-icon-point-of-interest"></span>'
 		  }); 
 	  
-
+	  if(pintar)
+	  marker.setMap(null);
 	
 	 marker.addListener("click",  function(){
 		 if (marker.getAnimation() !== null) {

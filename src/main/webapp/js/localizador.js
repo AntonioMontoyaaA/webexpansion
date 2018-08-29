@@ -181,6 +181,7 @@ function showOptionAction(){
     if(element_call.id == "localizaTime"){
     	getObtenerEmpleados($('#select_employeeLocalizar'));
 	    if(ARRAYOBJJEFES == undefined || Object.keys(ARRAYOBJJEFES).length < 0){
+	    	
 	    	getObtenerEmpleados($('#select_employeeLocalizar'));
 	    }else{
     		var dateHoy = new Date();
@@ -438,6 +439,8 @@ function pintarCirculosXslx(arrayDatosRadios){
 	clearMarkers();
 	bounds = new google.maps.LatLngBounds();
 	
+
+	
 	arrayDatosRadios.forEach(function(element,index){
 		if(index != 0 && index != 1){
 			objArray[markerId] = new RadiosClass(element[2],
@@ -452,6 +455,10 @@ function pintarCirculosXslx(arrayDatosRadios){
 		}
 	});
 	
+	
+	if(Object.keys(objArray).length <= 0){
+		 return false;
+	 }
 	map.fitBounds(bounds);
 }
 
@@ -897,7 +904,7 @@ function desAsignarRadio(){
 	/* ---------- Consume WS JEFES Disponibles por zona --------*/
 	function getObtenerEmpleados(elementId){
 		cargaLoading();
-		 
+		
 
 		invocarJSONServiceAction("obtenerEmpleadosZona",{},
 				'llenarComboEmpleados',
@@ -916,12 +923,13 @@ function desAsignarRadio(){
 				});
 
 		llenarComboEmpleados = function(data){
-			
+			console.log(data);
 			if(data.codigo == 400){
 				cargaMensajeModal("Localizador",data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
 				return false;
 			}
 
+			 $(elementId).html("");
 			objArrayEmployee = data;
 			ARRAYOBJJEFES = objArrayEmployee.usuarios;
 			objArrayEmployee.usuarios.forEach(function(item, i){
@@ -1051,7 +1059,7 @@ function cleanRadiosDispoAsignados(){
 
 
 /* ========================= LOCALIZACION TIMEPO REAL ========================= */
-
+var ARRAYRUTA = [];
 function consultarRutaRecorridaJefe(){
 
 	quitarPinUbicacionActual();
@@ -1109,6 +1117,8 @@ function consultarRutaRecorridaJefe(){
 												});
 						}
 				  }
+			  
+			  
 		});
 		ESTATUS_CONSULTA = true;
 		verRutaUbicacion();
@@ -1158,6 +1168,42 @@ function verRutaUbicacion(){
 		 setTimeout(function(){cierraLoading();},1200);
 	}
 }
+
+
+/* ---------- Adds a marker MDS--------*/
+function addMarkerRuta(obj, map,bounds_, array_ ) {
+	// Instantiate an info window to hold step text.
+    var stepDisplay = new google.maps.InfoWindow;
+
+	var icon = {
+			url: iconMarke.MD, // url
+			scaledSize: new google.maps.Size(35, 35)// scaled size
+		};
+	
+  var marker = new google.maps.Marker({
+	    position: new google.maps.LatLng(obj.latitud, obj.longitud),
+	    draggable: false,
+	    animation: google.maps.Animation.DROP,
+	    map: map,
+	    icon : icon
+	  }); 
+  
+
+  marker.addListener("click", function() {
+	  stepDisplay.setContent(text);
+      stepDisplay.open(map, marker);
+
+});
+
+
+}
+
+function RutaMapa(latitud, longitud, fecha){
+	this.longitud = longitud;
+	this.latitud = latitud;
+	this.fecha = fecha;
+}
+
 
 function quitarPinUbicacionActual(){
 	if(MARKER_HERE != null && MARKER_HERE != undefined){
@@ -1342,12 +1388,7 @@ function getObtenerEmpleadosGerentes(){
 
 		objArrayEmployee = data;
 		ARRAYOBJGERENTES = objArrayEmployee.usuarios;
-		
-		 $('#select_employeeMDGere').append($('<option>', {
-		        value: -1,
-		        text : "Todos los gerentes"
-		    }));
-		
+
 		objArrayEmployee.usuarios.forEach(function(item, i){
 			 $('#select_employeeMDGere').append($('<option>', {
 			        value: item.gerenteId,

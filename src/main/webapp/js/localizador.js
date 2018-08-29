@@ -1094,15 +1094,16 @@ function consultarRutaRecorridaJefe(){
 	    
 	    
 
+
 		data.ubicacion.forEach(function(item,i){
-			  if(i <= 24){	
+			  if(i <= 23){	
 					if(item.id == 1){
 						UBICACIONACTUAL = new google.maps.LatLng(item.datosRadio[0].fcLatitud , item.datosRadio[0].fcLongitud);		 
 					}else
-						if(i <= 24 ){
+						if(i <= 23 ){
 							
 							INICIO_UBICACION =  new google.maps.LatLng(item.datosRadio[0].fcLatitud , item.datosRadio[0].fcLongitud);
-						} else {
+						} if(i < 23 ) {
 							LIST_UBICACIONES.push({location: new google.maps.LatLng(item.datosRadio[0].fcLatitud , item.datosRadio[0].fcLongitud),
 													stopover: true
 												});
@@ -1341,6 +1342,12 @@ function getObtenerEmpleadosGerentes(){
 
 		objArrayEmployee = data;
 		ARRAYOBJGERENTES = objArrayEmployee.usuarios;
+		
+		 $('#select_employeeMDGere').append($('<option>', {
+		        value: -1,
+		        text : "Todos los gerentes"
+		    }));
+		
 		objArrayEmployee.usuarios.forEach(function(item, i){
 			 $('#select_employeeMDGere').append($('<option>', {
 			        value: item.gerenteId,
@@ -1360,6 +1367,7 @@ function cargarJefesXGerente(element){
 		}));
 	
 	if(ARRAYOBJGERENTES != undefined && Object.keys(ARRAYOBJGERENTES).length > 0){
+		
 		ARRAYOBJGERENTES.forEach(function(item, i){
 			if(element.value === item.gerenteId){
 				item.jefes.forEach(function(itemj, y){
@@ -1368,10 +1376,15 @@ function cargarJefesXGerente(element){
 						text : itemj.jefe
 					}));
 				});
+			}else if(element.value == -1){
+				item.jefes.forEach(function(itemj, y){
+					$('#select_employeeMDJefes').append($('<option>', {
+						value: itemj.jefeId,
+						text : itemj.jefe
+					}));
+				});
 			}
-			 
 		});
-		
 	}
 }
 	

@@ -79,7 +79,7 @@ $(function(){
 	
 	
 	$('#btonGuardarRadios').click(function(){ guardaRadiosLocalizados();});
-	$('#btonCancelarRadios').click(function(){ clearMarkers();});
+	$('#btonCancelarRadios').click(function(){$("#xlf").val(""); $(".contentPopUpInfo").hide(); $(".contentPopUpInfoMD").hide(); clearMarkers();});
 	$("#btnAsignarRadio").click(function(){ asignarRadio(1);});
 	$("#download_plantillaRadios").click(function(){ download_ejemplo(); });
 	$("#btnRemovelAsign").click(function(){ closePopUpInfo();  var selet = {value:0};	radiosUsuario(selet); });
@@ -625,6 +625,12 @@ var process_wb = (function() {
 		global_wb = wb;
 		var output = "";
 
+		if(wb.Sheets.Radios == undefined){
+			cierraLoading();
+			$("#xlf").val("");
+			cargaMensajeModal("Localizador","Plantilla incorrecta, descargue la plantilla más reciente.", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+			return false;
+		}
 		pintarCirculosXslx(JSON.parse(to_json(wb)).Radios);
 
 		//if(typeof console !== 'undefined') 
@@ -637,6 +643,9 @@ var setfmt = window.setfmt = function setfmt() { if(global_wb) process_wb(global
 
 var do_file = (function() {
 
+
+	      	
+	
 	var rABS = typeof FileReader !== "undefined" && (FileReader.prototype||{}).readAsBinaryString;
  	var use_worker = typeof Worker !== 'undefined';
 
@@ -654,8 +663,39 @@ var do_file = (function() {
 
 	return function do_file(files) {
 		cargaLoading();
-
+		clearMarkers();
+		$(".contentPopUpInfo").hide();
+		$(".contentPopUpInfoMD").hide();
 		var f = files[0];
+		
+		 extensiones_permitidas = new Array(".xlsx"); 
+		   mierror = ""; 
+		   if (f == undefined || !f.name) { 
+			   cierraLoading();
+			   clearMarkers();
+			   $("#xlf").val("");
+		      	cargaMensajeModal("Localizador","No has seleccionado ningún archivo.", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+		      	return false;
+		   }else{ 
+
+		      extension = (f.name.substring(f.name.lastIndexOf("."))).toLowerCase(); 
+		      permitida = false; 
+		      for (var i = 0; i < extensiones_permitidas.length; i++) { 
+		         if (extensiones_permitidas[i] == extension) { 
+		         permitida = true; 
+		         break; 
+		         } 
+		      } 
+		      if (!permitida) {  
+		    	  clearMarkers();
+		    	  cierraLoading();
+		    	  $("#xlf").val("");
+		    	  cargaMensajeModal("Localizador","Comprueba la extensión del archivo a subir. \n Descarga la plantilla para dar de alta radios.", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+		    	  return false;
+		      	}
+		   }
+		   
+		   
 		var reader = new FileReader();
 		reader.onload = function(e) {
 			if(typeof console !== 'undefined') 

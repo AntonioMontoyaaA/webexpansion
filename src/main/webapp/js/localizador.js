@@ -1312,6 +1312,7 @@ function validaFechaConsultada(tipoChange){
 function getObtenerMDs(){
 	cargaLoading();
 	clearMapsMds(MdsArray);
+	MdsArray = [];
 	$(".contentPopUpInfoMD").hide();
 	
 	var idGerente = $("#select_employeeMDGere").val();

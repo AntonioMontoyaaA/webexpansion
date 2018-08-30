@@ -126,7 +126,7 @@
 			<div class="col-12 titulo_seccion">	
 			<div class="row">
 			<div class="col-lg-6">
-			<span class="t12 azul" id="labelNombre"></span><input class="negrita azul t14" value="---" type="text" id="nombreMd" readonly />
+			<span class="t12 azul" id="labelNombre"></span><input class="negrita azul t14 text_edita" value="---" type="text" id="nombreMd" readonly />
 			</div>
 			<div class="col-lg-6 right">
 			<span>
@@ -258,15 +258,17 @@
 							</div>
 						</div>
 						<div class="row div_header_sub">
-							<div class="col-lg-6 col-6" style="margin-bottom:10px; margin-left:20px;">
-								<input type="checkbox" class="form-check-input" id="esquina"  onclick="return false;">
-    							<label class="blanco t12" for="esquina">Local en esquina</label>
-							</div>
+							<div class="col-lg-6 col-6"></div>
 							<div class="col-lg-5 col-5" onclick="muestraPredial()">
 								<span id="muestraPredial" style="color: #FFF; text-decoration: underline; cursor: pointer;font-size: 14px;display: none;">Ver predial</span>
 							</div>
 						</div>
 						<div class="row div_header_sub" id="modulo3Datos">
+						<div class="col-12" style="margin-bottom:10px; margin-left:20px;">
+								<input type="checkbox" class="form-check-input" id="esquina"  onclick="return false;">
+    							<label class="blanco t12" for="esquina">Local en esquina</label>
+						</div>
+						
 							<div class="col-lg-4">
 								<span class="blanco t12">FRENTE</span>&nbsp;&nbsp;&nbsp;<span
 									id="frenteMd" class="negrita blanco t14">---</span>
@@ -688,6 +690,7 @@
 									<div id="motivoRechazoLayout"></div>
 									<textarea rows="4" cols="50" id="commentFile"></textarea>
 									<div id="submitComment" class="btn btnBlanco">Aceptar</div>
+									
 								</div>
 							</div>
 						</div>
@@ -729,6 +732,7 @@
 
 <form action='mensajes_historial'  id="chatPorMd" method="post">
 	<input type="hidden" name="mdIdChat" id="mdIdChat" value=""/>
+	<input type="hidden" name="nombreMdChat" id="nombreMdChat" value=""/>
 </form>
 
 <!-- --------------------------------------- -->
@@ -744,6 +748,7 @@
 	<input type="hidden" name="pdfemailPropietario" id="pdfemailPropietario">
 	<input type="hidden" name="pdflat" id="pdflat">
 	<input type="hidden" name="pdflon" id="pdflon">
+	<input type="hidden" name="pdfurlmapa" id="pdfurlmapa">
 	<input type="hidden" name="pdfmarkers_comp" id="pdfmarkers_comp">
 	<input type="hidden" name="pdfmarkers_gen" id="pdfmarkers_gen">
 	

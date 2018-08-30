@@ -1,3 +1,6 @@
+.text_edita{
+	margin-left:10px;
+}
 #nombreMd:disabled, #nombreMd[readonly] {
 	background-color:transparent;
 	border:0;

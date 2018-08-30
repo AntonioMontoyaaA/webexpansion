@@ -238,10 +238,10 @@ function inicializaModulosEdicion(modulos, datosSitio, datosPropietario, general
 				var datos = "";
 				$("#modulo6Edita").show();
 				
-				datos += '<span class="negrita blanco t14 sangria_cuerpo">Renta</span><br/>' +
-				'<input id="montoRentaText" type="text" class="text_edita"/><br/>' +
+				datos += '<div style="width: 100%"><span class="negrita blanco t14 sangria_cuerpo">Renta</span></div><br>' +
+				'<input id="montoRentaText" type="text" class="text_edita"/><br>' +
 				'<div style="width: 100%"><span class="negrita blanco t14 sangria_cuerpo">Disponibilidad</span><br/>' +
-				'<select id="disponibilidadText" class="t12 sangria_cuerpo" style="margin-left: 20px;" onchange="cambiaDisponibilidad()">';
+				'<select id="disponibilidadText" class="t12 sangria_cuerpo" style="margin-left: 10px;" onchange="cambiaDisponibilidad()">';
 				if(generalidades.disponibilidad == 1) {
 					datos += '<option value="1" selected>DISPONIBLE INMEDIATO</option>';
 				} else {
@@ -259,11 +259,11 @@ function inicializaModulosEdicion(modulos, datosSitio, datosPropietario, general
 				}
 				datos += '</select><br/>' +
 				'<input id="disponibilidadFechaText" readonly style="display: none;margin-top: 5px;margin-bottom: 10px;" type="text" class="text_edita" placeholder="dd/MM/yyyy"></div>' +
-				'<span class="negrita blanco t14 sangria_cuerpo">Amortización (MXN)</span><br/>' +
+				'<div style="width: 100%"><span class="negrita blanco t14 sangria_cuerpo">Amortización (MXN)</span></div><br/>' +
 				'<input id="amortizacionText" type="text" class="text_edita"><br/>' +
-				'<span class="negrita blanco t14 sangria_cuerpo">Tiempo de amortización (meses)</span><br/>' +
+				'<div style="width: 100%"><span class="negrita blanco t14 sangria_cuerpo">Tiempo de amortización (meses)</span></div><br/>' +
 				'<input id="tiempoAmortizacionText" type="text" class="text_edita"><br/>' +
-				'<span class="negrita blanco t14 sangria_cuerpo">Periodo de gracia (meses)</span><br/>' +
+				'<div style="width: 100%"><span class="negrita blanco t14 sangria_cuerpo">Periodo de gracia (meses)</span></div><br/>' +
 				'<input id="periodoGraciaText" type="text" class="text_edita"><br/>';
 			$("#modulo6Datos").html(datos);
 			

@@ -484,6 +484,7 @@ Left
 #tiendaID{
 	position: relative;
     top: 7px;
+    margin-right: 10px;
 }
 
 .selectSemana{

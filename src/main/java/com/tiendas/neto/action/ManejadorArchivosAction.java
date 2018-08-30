@@ -55,8 +55,10 @@ public class ManejadorArchivosAction
 			acc = null, 
 			tiendaId = null;
 		
-		if(tipoServicio.equals("10")) {//CECO
+		if(tipoServicio.equals("10")){//CECO
 			tiendaId = ServletActionContext.getRequest().getParameter("tiendaId");
+		}else if(tipoServicio.equals("11")){//VENTA
+			monto = ServletActionContext.getRequest().getParameter("monto");
 		}else {
 			nombreArchivo = ServletActionContext.getRequest().getParameter("nombreArchivo");
 			archivo = ServletActionContext.getRequest().getParameter("archivo");
@@ -64,6 +66,7 @@ public class ManejadorArchivosAction
 			tipoArchivo = ServletActionContext.getRequest().getParameter("tipoArchivo");
 			monto = ServletActionContext.getRequest().getParameter("monto");
 			acc = ServletActionContext.getRequest().getParameter("acc");
+
 		}
 		
 		mdId = ServletActionContext.getRequest().getParameter("mdId");
@@ -88,7 +91,40 @@ public class ManejadorArchivosAction
 				Request request;
 				Response response;
 				
-				if(!tipoServicio.equals("10")) {
+				if(tipoServicio.equals("10")){
+					builder = new Builder()
+							.add("usuarioId", numeroEmpleado)
+							.add("mdId", mdId)
+							.add("tipoServicio", tipoServicio)
+							.add("fecha", fecha)
+							.add("tiendaId", tiendaId);
+					
+					body = builder.build();
+					request = new Request.Builder()
+						.url(sp.getPropiedad("guardadocsmontos"))
+						.post(body)
+						.build();
+					
+					response = client.newCall(request).execute();
+					respuesta = response.body().string();
+					
+				}else if(tipoServicio.equals("11")){
+					builder = new Builder()
+							.add("usuarioId", numeroEmpleado)
+							.add("mdId", mdId)
+							.add("tipoServicio", tipoServicio)
+							.add("fecha", fecha)
+							.add("monto", monto);
+					
+					body = builder.build();
+					request = new Request.Builder()
+						.url(sp.getPropiedad("guardadocsmontos"))
+						.post(body)
+						.build();
+					
+					response = client.newCall(request).execute();
+					respuesta = response.body().string();
+				}else {
 					if(monto.isEmpty())
 						monto = "''";
 					
@@ -142,22 +178,6 @@ public class ManejadorArchivosAction
 							
 							
 						}
-				}else {
-					builder = new Builder()
-							.add("usuarioId", numeroEmpleado)
-							.add("mdId", mdId)
-							.add("tipoServicio", tipoServicio)
-							.add("fecha", fecha)
-							.add("tiendaId", tiendaId);
-					
-					body = builder.build();
-					request = new Request.Builder()
-						.url(sp.getPropiedad("guardadocsmontos"))
-						.post(body)
-						.build();
-					
-					response = client.newCall(request).execute();
-					respuesta = response.body().string();
 				}
 				
 				HttpServletResponse re = ServletActionContext.getResponse();
@@ -357,8 +377,6 @@ public class ManejadorArchivosAction
 					
 					for (int i = 0; i < archivosList.size(); i++) {
 						
-						System.out.println("FI " + i + archivosList.get(i));
-						System.out.println("FO " + i + formatosList.get(i));
 						
 						nombreFile = i + "GST" + mdId;
 						builder = new Builder()
@@ -434,7 +452,6 @@ public class ManejadorArchivosAction
 				obj.addProperty("nombre", a.getNombre());
 				obj.addProperty("url", a.getUrl());
 				
-				System.out.println(obj.toString());
 				
 				array.put(obj);
 			}

@@ -813,11 +813,11 @@ function buscaDetalleMD(mdId) {
 			/* DATOS Seguimiento */
 			
 			if(data.seguimiento != undefined) {
-				if(data.seguimiento.PRECONSTRUCCION != undefined
-						&& data.seguimiento.PRECONSTRUCCION != null){
+				if(eval(data)["seguimiento"]["LEVANTAMIENTO CONSTRUCCION"] != undefined
+						&& eval(data)["seguimiento"]["LEVANTAMIENTO CONSTRUCCION"] != null){
 					
 					ARCHIVOS_MD =  new Array();
-					$.each(data.seguimiento.PRECONSTRUCCION, function(i,item){
+					$.each(eval(data)["seguimiento"]["LEVANTAMIENTO CONSTRUCCION"], function(i,item){
 						
 						
 						ARCHIVOS_MD.push(new Archivo(
@@ -831,10 +831,10 @@ function buscaDetalleMD(mdId) {
 					});
 				}
 				
-				if(eval(data)["seguimiento"]["PRESUPUESTO OBRA"] != undefined
-						&& eval(data)["seguimiento"]["PRESUPUESTO OBRA"] != null){
+				if(eval(data)["seguimiento"]["PRESUPUESTO CONSTRUCCION"] != undefined
+						&& eval(data)["seguimiento"]["PRESUPUESTO CONSTRUCCION"] != null){
 					
-					$.each(eval(data)["seguimiento"]["PRESUPUESTO OBRA"], function(i,item){
+					$.each(eval(data)["seguimiento"]["PRESUPUESTO CONSTRUCCION"], function(i,item){
 						
 						ARCHIVOS_MD.push(new Archivo(
 	        					item.nombreArchivo,
@@ -1126,7 +1126,25 @@ function finalizaMD(estatus){
 				consultaMotivosRechazo(0, 1);
 			}
 		}
-	}else if((ESTATUS_MD == ESTATUS_VOBO_FINAL || permiteComite()) && AREA_USUARIO == areaOperaciones){
+	}else if(ESTATUS_MD == ESTATUS_VOBO_FINAL && AREA_USUARIO == areaOperaciones){
+		ESTATUS_FINALIZA_MD = estatus;
+		if(estatus == 1){
+			monto = $('#tiendaID').val();
+			if(monto == ''){
+				cargaMensajeModal('DETALLE MD', 
+						'Debes capturar el monto de la venta presupuestada',
+						TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA);
+			}else{
+				cargaMensajeModal('DETALLE MD', 
+						'¿Est\u00e1s seguro de autorizar la MD?',
+						TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, actionvoboFinal);
+			}
+		}else if(estatus == 0){
+			cargaMensajeModal('DETALLE MD', 
+					'¿Est\u00e1s seguro de rechazar la MD?',
+					TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, consultaMotivosRechazo);
+		}
+	}else if(permiteComite() && AREA_USUARIO == areaOperaciones){
 		ESTATUS_FINALIZA_MD = estatus;
 		if(estatus == 1){
 			cargaMensajeModal('DETALLE MD', 
@@ -1183,6 +1201,37 @@ function actionfinalizaMD(motivo, comment){
 				cargaMensajeModal('DETALLE MD', 'Autorizaci\u00f3n exitosa', TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_EXITO, redireccionaAsignadas);
 			else if(ESTATUS_FINALIZA_MD == 0)
 				cargaMensajeModal('DETALLE MD', 'Rechazo exitoso', TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_EXITO, redireccionaAsignadas);
+		}
+	}
+}
+
+function actionvoboFinal(){
+	cargaLoading();
+	
+	monto = $('#tiendaID').val();
+	tipoServicio = 11;
+	mdId = $("#mdId").val();
+	fecha = new Date().format("dd/mm/yyyy H:MM:ss");
+	
+	invocarJSONServiceAction("subeArchivo", 
+			{'mdId': mdId,
+			'tipoServicio' : tipoServicio,
+			'fecha': fecha,
+			'monto': monto}, 
+			'respVOBO', 
+			function() {
+				cierraLoading();
+			},
+			function() {
+				cierraLoading();
+			});
+
+	respVOBO = function(data){
+		if(data.codigo != 200){
+			cargaMensajeModal('DETALLE MD', 'Ocurrio un error, por favor reintenta', TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR);
+		}else{
+			ESTATUS_FINALIZA_MD = 1;
+			actionfinalizaMD();
 		}
 	}
 }
@@ -1375,6 +1424,7 @@ function inicializaDropzone(){
 	            dictMaxFilesExceeded: 'Solo puedes agregar {{maxFiles}} archivo',
 	            paramName: "file",
 	            autoProcessQueue: false,
+	            uploadMultiple: false,
 	            maxFilesize: 3, // MB
 	            maxFiles: 1,
 	            addRemoveLinks: true,
@@ -1492,10 +1542,11 @@ function inicializaDropzone(){
 	            dictMaxFilesExceeded: 'Solo puedes agregar {{maxFiles}} archivo',
 	            paramName: "file",
 	            autoProcessQueue: false,
+	            uploadMultiple: false,
 	            maxFilesize: 3, // MB
 	            maxFiles: 1,
 	            addRemoveLinks: true,
-	            acceptedFiles: 'image/*,application/pdf,.psd',
+	            acceptedFiles: 'image/*,application/pdf,.psd,text/csv,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
 	            accept: function(file, done){
 	                reader = new FileReader();
 	                reader.onload = handleReaderLoad;
@@ -1507,6 +1558,10 @@ function inicializaDropzone(){
 	                function handleReaderLoad(evt) {
 	                	LAYOUT_B64 = evt.target.result;
 	                	LAYOUT_Type = file.type;
+	                	
+	                	if(LAYOUT_Type.includes('sheet'))
+	                		LAYOUT_Type = 'xlsx';
+	                	
 	                	$('#subeArchivo').show();
 	                }
 	                done();
@@ -1525,7 +1580,10 @@ function inicializaDropzone(){
 	        	nombreArchivo = 'PPTO-CO' + mdId; 
 	        	fecha = new Date().format("dd/mm/yyyy H:MM:ss");
 	        	archivo = LAYOUT_B64;
-	        	formato = LAYOUT_Type.split('/')[1];
+	        	if(!LAYOUT_Type.includes('xlsx'))
+	        		formato = LAYOUT_Type.split('/')[1];
+	        	else
+	        		formato = LAYOUT_Type;
 	        	tipoArchivo = 4;
 	        	tipoServicio = 2;
 	        	monto = $('#montoPresupuesto').val();
@@ -1607,10 +1665,11 @@ function inicializaDropzone(){
 	            dictMaxFilesExceeded: 'Solo puedes agregar {{maxFiles}} archivo',
 	            paramName: "file",
 	            autoProcessQueue: false,
+	            uploadMultiple: false,
 	            maxFilesize: 3, // MB
 	            maxFiles: 1,
 	            addRemoveLinks: true,
-	            acceptedFiles: 'image/*,application/pdf,.psd',
+	            acceptedFiles: 'image/*,application/pdf,.psd,text/csv,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
 	            accept: function(file, done){
 	                reader = new FileReader();
 	                reader.onload = handleReaderLoad;
@@ -1622,6 +1681,10 @@ function inicializaDropzone(){
 	                function handleReaderLoad(evt) {
 	                	LAYOUT_B64 = evt.target.result;
 	                	LAYOUT_Type = file.type;
+	                	
+	                	if(LAYOUT_Type.includes('sheet'))
+	                		LAYOUT_Type = 'xlsx';
+	                	
 	                	$('#subeArchivo').show();
 	                }
 	                done();
@@ -1640,7 +1703,10 @@ function inicializaDropzone(){
 	        	nombreArchivo = 'PPTOAU' + mdId; 
 	        	fecha = new Date().format("dd/mm/yyyy H:MM:ss");
 	        	archivo = LAYOUT_B64;
-	        	formato = LAYOUT_Type.split('/')[1];
+	        	if(!LAYOUT_Type.includes('xlsx'))
+	        		formato = LAYOUT_Type.split('/')[1];
+	        	else
+	        		formato = LAYOUT_Type;
 	        	tipoArchivo = 4;
 	        	tipoServicio = 3;
 	        	monto = $('#montoPresupuesto').val();
@@ -1705,7 +1771,7 @@ function inicializaDropzone(){
 	        	}else
 	        		cargaMensajeModal('DETALLE MD', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR);
 	        });
-	}else if(ESTATUS_MD == ESTATUS_VOBO_FINAL || permiteComite()){ //VoBo Final y comite
+	}else if(permiteComite()){ //COMITE
 		$('#autoriza9').hide();
 		$('#rechaza9').hide();
 		if(AREA_USUARIO == areaOperaciones){
@@ -1802,6 +1868,37 @@ function inicializaDropzone(){
 	        		cargaMensajeModal('DETALLE MD', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR);
 	        });
 	        
+	}else if(ESTATUS_MD == ESTATUS_VOBO_FINAL){ // VoBo FINAL OPERACIONES
+		$('#autoriza9').hide();
+		$('#rechaza9').hide();
+		if(AREA_USUARIO == areaOperaciones){
+			$('#autoriza9').show();
+			$('#rechaza9').show();
+			$('#tiendaID').attr('placeholder', 'Venta presupuestada')
+			$('#subeTiendaId').hide();
+			$('#tiendaIdCECO').show();
+		}
+		$('#voboMD').hide();
+		strArchivos = '';
+		$.each(ARCHIVOS_MD, function(i, item){
+			clase = 'filePendiente';
+			
+			strArchivos = '<div class="fileMD ' + clase + '">'
+								+ '<div class="datosFile" rel="' + i + '">'
+									+ '<div class="nombreFile">' + item.nombre + '</div>'
+									+ '<div class="autorFile">' 
+										+ ((item.autor != undefined) ? item.autor : '--') + '/' 
+										+ ((item.monto != undefined) ? item.monto : '--') 
+										+ ((item.ACC != null && item.ACC != 0) ? '/ACC'  : '') + '</div>'
+								+ '</div>'
+								+ '<div class="actionsFile">'
+										+ '<span> <img title="Descargar archivo" onclick="descargaArchivo(' + i + ');" style="cursor: pointer;" src="img/iconos_DOWNLOAD.png">&nbsp;'
+								+ '</div>'
+							+ '</div>' +strArchivos;
+		});
+		
+		$('#containerFilesVoboFinal').html(strArchivos);
+		$('#voboFinal').show();
 	}else if(AREA_USUARIO == areaGestoria && ESTATUS_MD == ESTATUS_CONTRATO){//Contrato
 		$('#manejadorArchivos').show();
 		$('#montoPresupuesto').show();
@@ -1822,6 +1919,7 @@ function inicializaDropzone(){
 	            dictMaxFilesExceeded: 'Solo puedes agregar {{maxFiles}} archivo',
 	            paramName: "file",
 	            autoProcessQueue: false,
+	            uploadMultiple: false,
 	            maxFilesize: 3, // MB
 	            maxFiles: 1,
 	            addRemoveLinks: true,
@@ -2108,6 +2206,30 @@ function inicializaDropzone(){
 				}
 			})
 		}
+	}else{
+		$('#autoriza9').hide();
+		$('#rechaza9').hide();
+		$('#voboMD').hide();
+		strArchivos = '';
+		$.each(ARCHIVOS_MD, function(i, item){
+			clase = 'filePendiente';
+			
+			strArchivos = '<div class="fileMD ' + clase + '">'
+								+ '<div class="datosFile" rel="' + i + '">'
+									+ '<div class="nombreFile">' + item.nombre + '</div>'
+									+ '<div class="autorFile">' 
+										+ ((item.autor != undefined) ? item.autor : '--') + '/' 
+										+ ((item.monto != undefined) ? item.monto : '--') 
+										+ ((item.ACC != null && item.ACC != 0) ? '/ACC'  : '') + '</div>'
+								+ '</div>'
+								+ '<div class="actionsFile">'
+										+ '<span> <img title="Descargar archivo" onclick="descargaArchivo(' + i + ');" style="cursor: pointer;" src="img/iconos_DOWNLOAD.png">&nbsp;'
+								+ '</div>'
+							+ '</div>' +strArchivos;
+		});
+		
+		$('#containerFilesVoboFinal').html(strArchivos);
+		$('#voboFinal').show();
 	}
 }
 
@@ -2538,7 +2660,7 @@ function editaPantalla(pantalla, o) {
 			break;
 		case 6:
 			cargaMensajeModal('EDITA MD', "¿Estás seguro de modificar las generalidades del sitio?", TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_EXITO, editaGeneralidadesAction);
-			break;F
+			break;
 	}
 }
 

@@ -21,7 +21,7 @@ var COMTE			= 22;
 var GDOCTOS			= 23;
 var CENTRCOST		= 24;
 var TRM_GES			= 14;
-var INICOBRA		= 15;
+var INICOBA		= 15;
 var INGTDA			= 16;
 
 
@@ -90,8 +90,8 @@ function dibujaEstatus(resumen) {
         	busqueda = "CENTRCOST";
         } else if(resumen[i].estatusid == TRM_GES) {
         	busqueda = "TRM_GES";
-        } else if(resumen[i].estatusid == INICOBRA) {
-        	busqueda = "INICOBRA";
+        } else if(resumen[i].estatusid == INICOBA) {
+        	busqueda = "INICOBA";
         } else if(resumen[i].estatusid == INGTDA) {
         	busqueda = "INGTDA";
         }
@@ -642,14 +642,14 @@ function creatabla(){
 							claseEstatus = "text_en_tiempo";
 						} else if(resultadoTablero[i].INICIO_OBRA.estatus == "ATRASADA") {
 							claseEstatus = "text_atrasada";
-							cadenaAtraso += "&ATR_INICOBRA";
+							cadenaAtraso += "&ATR_INICOBA";
 							esMdAtrasada = true;
 						} else if(resultadoTablero[i].INICIO_OBRA.estatus == "RECHAZADA") {
 							claseEstatus = "text_rechazada";
 						}
 						
 						if(resultadoTablero[i].INICIO_OBRA.estatus == "ATRASADA") {
-							cadenaAtraso += "&ATR_INICOBRA";
+							cadenaAtraso += "&ATR_INICOBA";
 							esMdAtrasada = true;
 						}
 						datosMemorias[i][21] = "<span class='" + claseEstatus + "'>" + resultadoTablero[i].INICIO_OBRA.fechaValidacion + "</span>";

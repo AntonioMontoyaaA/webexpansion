@@ -268,9 +268,10 @@ function initTablaMemoriasTablero(nombreDiv, datosDesgloseMemorias, nombreTabla)
 				'<tr style="cursor: pointer;border-top: 0px; border-bottom: 0px;">' +
 					'<th class="center" center" style="padding:0;background: #FFF;">&nbsp;</th>' +
 					'<th width="5%" class="gris negrita t12 center" style="padding:0;background: #FFF;">No.</th>'  +
+					'<th width="9%" class="gris negrita t12 center txt_expansion" style="padding:0;background: #FFF;">Gerente Expansi&oacute;n</th>'  +
 					'<th width="9%" class="gris negrita t12 center txt_expansion" style="padding:0;background: #FFF;">Fecha recepci&oacute;n MD</th>'  +
 					'<th width="9%" class="gris negrita t12 txt_expansion">Fuente MD</th>' +
-					'<th width="10%" class="gris negrita t12 txt_expansion">Nombre de la tda</th>' +
+					'<th width="15%" class="gris negrita t12 txt_expansion">Nombre de la tda</th>' +
 					'<th width="5%" class="gris negrita t12">Categor&iacute;a</th>' +
 					'<th width="5%" class="gris negrita t12">Puntuaci&oacute;n</th>' +
 					'<th width="5%" class="gris negrita t12 ">VoBo inicial operaciones</th>' +
@@ -289,6 +290,7 @@ function initTablaMemoriasTablero(nombreDiv, datosDesgloseMemorias, nombreTabla)
 					'<th width="7%" class="gris negrita t12 txt_construccion">Inicio obra</th>' +
 					'<th width="7%" class="gris negrita t12 txt_construccion">Fin obra</th>' +
 					'<th width="6%" class="gris negrita t12">Inauguraci&oacute;n</th>' +
+					'<th width="6%" class="gris negrita t12">Inauguraci&oacute;n objetivo</th>' +
 					'<th class="oculto">id</th>' +
 					'<th class="oculto">id</th>' +
 					'<th class="oculto">id</th>' +
@@ -303,7 +305,8 @@ function initTablaMemoriasTablero(nombreDiv, datosDesgloseMemorias, nombreTabla)
 				"aoColumns": [
 						   {"bSearchable":false},
 						   {"sClass":"izquierda padding padding_right","bSearchable":true},
-				           {"bSearchable":true},
+						   {"sClass":"izquierda padding","bSearchable":true},
+				           {"sClass":"izquierda padding","bSearchable":true},
 				           {"sClass":"izquierda padding","bSearchable":true},
 				           {"sClass":"imagen izquierda padding","bSearchable":true},
 				           {"sClass": "padding_right_5 padding_left_5", "bSearchable":true},
@@ -315,6 +318,7 @@ function initTablaMemoriasTablero(nombreDiv, datosDesgloseMemorias, nombreTabla)
 				           {"sClass": "padding_right_5 padding_left_5", "bSearchable":true},
 				           {"sClass":"derecha","bSearchable":true},
 				           {"sClass":"derecha","bSearchable":true},
+				           {"sClass": "padding_right_5 padding_left_5", "bSearchable":true},
 				           {"sClass": "padding_right_5 padding_left_5", "bSearchable":true},
 				           {"sClass": "padding_right_5 padding_left_5", "bSearchable":true},
 				           {"sClass": "padding_right_5 padding_left_5", "bSearchable":true},
@@ -336,14 +340,14 @@ function initTablaMemoriasTablero(nombreDiv, datosDesgloseMemorias, nombreTabla)
 			 "bScrollCollapse": false,
 			 "sScrollY": "70vh",
 			 "fixedColumns":   {
-		            "leftColumns": 3
+		            "leftColumns": 4
 		        },
 		     "scrollX":        true,
 		     "scrollCollapse": true,
 			 "aoColumnDefs": [ {
 									"sClass": "center",
 									"aTargets": [ 0,1 ]
-			 					},{ "sType": 'extract-date', "aTargets": [2,7,9,10,11,14,15,16,17,18,19,20,21,22] }
+			 					},{ "sType": 'extract-date', "aTargets": [2,3,8,10,11,12,15,16,17,18,19,20,21,22,23,24] }
 			 			]
 	});	
 	

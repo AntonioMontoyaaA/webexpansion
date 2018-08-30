@@ -45,9 +45,9 @@
             <div class="col-lg-4 col-sm-6" style="padding-right: 0px;padding-left: 0px;">
             	<div class="slide-toggle" style="margin-top: 2px;width: 100%;height: 22px;">
             		<div class="row">
-            			<div class="header_boton" style="border-right: 1px solid #ccc;width: 64%;font-size: 11px;"><img id="imgTableroPend" src="${pageContext.request.contextPath}/img/arrowDown.png" />&nbsp;&nbsp;&nbsp;Área</div>
-            			<div class="header_boton" style="border-right: 1px solid #ccc;width: 17%;font-size: 11px;padding-left: 5px;">Pendientes</div>
-            			<div class="header_boton" style="width: 17%;font-size: 11px;padding-left: 5px;">Atrasadas</div>
+            			<div class="header_boton" style="border-right: 1px solid #ccc;width: 64%;font-size: 11px;"><img id="imgTableroPend" src="${pageContext.request.contextPath}/img/arrowDown.png" />&nbsp;&nbsp;&nbsp;<span id="areaTextTablero">Área</span></div>
+            			<div class="header_boton" style="border-right: 1px solid #ccc;width: 17%;font-size: 11px;padding-left: 5px;"><span id="areaPendientesTablero">Pendientes</span></div>
+            			<div class="header_boton" style="width: 17%;font-size: 11px;padding-left: 5px;"><span id="areaAtrasadasTablero">Atrasadas</span></div>
             		</div>
             		
             	</div>

@@ -63,9 +63,10 @@ public class ExcelTableroAction extends ExpansionAction {
 	        	memoria.setGestoria(array.getJSONObject(i).getJSONObject("TRAMITES").getString("fechaValidacion"));
 	        	memoria.setVoboFinalOperaciones(array.getJSONObject(i).getJSONObject("VOBOFNL_OPERACIONES").getString("fechaValidacion"));
 	        	memoria.setContratoFirmado(array.getJSONObject(i).getJSONObject("FIRMA_CONTRATO").getString("fechaValidacion"));
-	        	memoria.setInicioObra(array.getJSONObject(i).getString("INICIO_OBRA"));
+	        	memoria.setInicioObra(array.getJSONObject(i).getJSONObject("INICIO_OBRA").getString("fechaValidacion"));
 	        	memoria.setFinObra(array.getJSONObject(i).getString("ESTIMADO_FINOBRA"));
 	        	memoria.setInauguracion(array.getJSONObject(i).getString("ESTIMADO_APERTURA"));
+	        	memoria.setInauguracionObjetivo(array.getJSONObject(i).getString("INAUGURACIONINICIAL"));
 	        	memoria.setJefeExpansion(array.getJSONObject(i).getString("JEFEEXP"));
 	        	memoria.setGerenteExpansion(array.getJSONObject(i).getString("GERENTEEXP"));
 	        	memoria.setRegional(array.getJSONObject(i).getString("REGIONAL"));

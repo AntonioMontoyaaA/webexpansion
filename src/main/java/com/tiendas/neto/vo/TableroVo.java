@@ -15,11 +15,14 @@ public class TableroVo implements Serializable {
 	private String categoria;
 	private int puntuacion;
 	private String voboInicialOperaciones;
+	private String fechaConteoAuditor;
 	private int conteoAuditor;
 	private String pregestoriaAutorizada;
 	private String levantamientoRealizado;
 	private String voboLayoutOperaciones;
+	private String fechaPptoConstruccion;
 	private double montoConstruccion;
+	private String fechaPptoAuditoria;
 	private double montoAuditoria;
 	private String gestoria;
 	private String voboFinalOperaciones;
@@ -27,15 +30,13 @@ public class TableroVo implements Serializable {
 	private String inicioObra;
 	private String finObra;
 	private String inauguracion;
+	private String inauguracionObjetivo;
 	private String jefeExpansion;
 	private String gerenteExpansion;
 	private String regional;
 	private String doctos;
 	private String comite;
 	private String ceco;
-	private String fechaPptoConstruccion;
-	private String fechaPptoAuditoria;
-	private String fechaConteoAuditor;
 	/**
 	 * @return the mdId
 	 */
@@ -121,6 +122,18 @@ public class TableroVo implements Serializable {
 		this.voboInicialOperaciones = voboInicialOperaciones;
 	}
 	/**
+	 * @return the fechaConteoAuditor
+	 */
+	public String getFechaConteoAuditor() {
+		return fechaConteoAuditor;
+	}
+	/**
+	 * @param fechaConteoAuditor the fechaConteoAuditor to set
+	 */
+	public void setFechaConteoAuditor(String fechaConteoAuditor) {
+		this.fechaConteoAuditor = fechaConteoAuditor;
+	}
+	/**
 	 * @return the conteoAuditor
 	 */
 	public int getConteoAuditor() {
@@ -169,6 +182,18 @@ public class TableroVo implements Serializable {
 		this.voboLayoutOperaciones = voboLayoutOperaciones;
 	}
 	/**
+	 * @return the fechaPptoConstruccion
+	 */
+	public String getFechaPptoConstruccion() {
+		return fechaPptoConstruccion;
+	}
+	/**
+	 * @param fechaPptoConstruccion the fechaPptoConstruccion to set
+	 */
+	public void setFechaPptoConstruccion(String fechaPptoConstruccion) {
+		this.fechaPptoConstruccion = fechaPptoConstruccion;
+	}
+	/**
 	 * @return the montoConstruccion
 	 */
 	public double getMontoConstruccion() {
@@ -179,6 +204,18 @@ public class TableroVo implements Serializable {
 	 */
 	public void setMontoConstruccion(double montoConstruccion) {
 		this.montoConstruccion = montoConstruccion;
+	}
+	/**
+	 * @return the fechaPptoAuditoria
+	 */
+	public String getFechaPptoAuditoria() {
+		return fechaPptoAuditoria;
+	}
+	/**
+	 * @param fechaPptoAuditoria the fechaPptoAuditoria to set
+	 */
+	public void setFechaPptoAuditoria(String fechaPptoAuditoria) {
+		this.fechaPptoAuditoria = fechaPptoAuditoria;
 	}
 	/**
 	 * @return the montoAuditoria
@@ -265,6 +302,18 @@ public class TableroVo implements Serializable {
 		this.inauguracion = inauguracion;
 	}
 	/**
+	 * @return the inauguracionObjetivo
+	 */
+	public String getInauguracionObjetivo() {
+		return inauguracionObjetivo;
+	}
+	/**
+	 * @param inauguracionObjetivo the inauguracionObjetivo to set
+	 */
+	public void setInauguracionObjetivo(String inauguracionObjetivo) {
+		this.inauguracionObjetivo = inauguracionObjetivo;
+	}
+	/**
 	 * @return the jefeExpansion
 	 */
 	public String getJefeExpansion() {
@@ -336,42 +385,5 @@ public class TableroVo implements Serializable {
 	public void setCeco(String ceco) {
 		this.ceco = ceco;
 	}
-	/**
-	 * @return the fechaPptoConstruccion
-	 */
-	public String getFechaPptoConstruccion() {
-		return fechaPptoConstruccion;
-	}
-	/**
-	 * @param fechaPptoConstruccion the fechaPptoConstruccion to set
-	 */
-	public void setFechaPptoConstruccion(String fechaPptoConstruccion) {
-		this.fechaPptoConstruccion = fechaPptoConstruccion;
-	}
-	/**
-	 * @return the fechaPptoAuditoria
-	 */
-	public String getFechaPptoAuditoria() {
-		return fechaPptoAuditoria;
-	}
-	/**
-	 * @param fechaPptoAuditoria the fechaPptoAuditoria to set
-	 */
-	public void setFechaPptoAuditoria(String fechaPptoAuditoria) {
-		this.fechaPptoAuditoria = fechaPptoAuditoria;
-	}
-	/**
-	 * @return the fechaConteoAuditor
-	 */
-	public String getFechaConteoAuditor() {
-		return fechaConteoAuditor;
-	}
-	/**
-	 * @param fechaConteoAuditor the fechaConteoAuditor to set
-	 */
-	public void setFechaConteoAuditor(String fechaConteoAuditor) {
-		this.fechaConteoAuditor = fechaConteoAuditor;
-	}
-	
 
 }

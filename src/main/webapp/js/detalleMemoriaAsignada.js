@@ -2209,26 +2209,33 @@ function inicializaDropzone(){
 	}else{
 		$('#autoriza9').hide();
 		$('#rechaza9').hide();
-		$('#voboMD').hide();
-		strArchivos = '';
-		$.each(ARCHIVOS_MD, function(i, item){
-			clase = 'filePendiente';
+
+		$('#containerFilesVoboFinal').parent().parent().hide();
+		if(AREAS_A[AREA_USUARIO]){
+			$('#voboMD').hide();
+		}else{
+
+			$('#containerFilesVoboFinal').parent().parent().hide();
+			strArchivos = '';
+			$.each(ARCHIVOS_MD, function(i, item){
+				clase = 'filePendiente';
+				
+				strArchivos = '<div class="fileMD ' + clase + '">'
+									+ '<div class="datosFile" rel="' + i + '">'
+										+ '<div class="nombreFile">' + item.nombre + '</div>'
+										+ '<div class="autorFile">' 
+											+ ((item.autor != undefined) ? item.autor : '--') + '/' 
+											+ ((item.monto != undefined) ? item.monto : '--') 
+											+ ((item.ACC != null && item.ACC != 0) ? '/ACC'  : '') + '</div>'
+									+ '</div>'
+									+ '<div class="actionsFile">'
+											+ '<span> <img title="Descargar archivo" onclick="descargaArchivo(' + i + ');" style="cursor: pointer;" src="img/iconos_DOWNLOAD.png">&nbsp;'
+									+ '</div>'
+								+ '</div>' +strArchivos;
+			});
 			
-			strArchivos = '<div class="fileMD ' + clase + '">'
-								+ '<div class="datosFile" rel="' + i + '">'
-									+ '<div class="nombreFile">' + item.nombre + '</div>'
-									+ '<div class="autorFile">' 
-										+ ((item.autor != undefined) ? item.autor : '--') + '/' 
-										+ ((item.monto != undefined) ? item.monto : '--') 
-										+ ((item.ACC != null && item.ACC != 0) ? '/ACC'  : '') + '</div>'
-								+ '</div>'
-								+ '<div class="actionsFile">'
-										+ '<span> <img title="Descargar archivo" onclick="descargaArchivo(' + i + ');" style="cursor: pointer;" src="img/iconos_DOWNLOAD.png">&nbsp;'
-								+ '</div>'
-							+ '</div>' +strArchivos;
-		});
-		
-		$('#containerFilesVoboFinal').html(strArchivos);
+			$('#containerFilesVoboFinal').html(strArchivos);
+		}
 		$('#voboFinal').show();
 	}
 }

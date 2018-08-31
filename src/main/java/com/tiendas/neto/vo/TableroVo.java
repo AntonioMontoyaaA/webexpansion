@@ -9,6 +9,7 @@ public class TableroVo implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private long mdId;
+	private String fechaGerenteExpansion;
 	private String fechaRecepcionMd;
 	private String fuenteMd;
 	private String nombreTda;
@@ -26,6 +27,7 @@ public class TableroVo implements Serializable {
 	private double montoAuditoria;
 	private String gestoria;
 	private String voboFinalOperaciones;
+	private double ventaEstimada;
 	private String contratoFirmado;
 	private String inicioObra;
 	private String finObra;
@@ -48,6 +50,18 @@ public class TableroVo implements Serializable {
 	 */
 	public void setMdId(long mdId) {
 		this.mdId = mdId;
+	}
+	/**
+	 * @return the fechaGerenteExpansion
+	 */
+	public String getFechaGerenteExpansion() {
+		return fechaGerenteExpansion;
+	}
+	/**
+	 * @param fechaGerenteExpansion the fechaGerenteExpansion to set
+	 */
+	public void setFechaGerenteExpansion(String fechaGerenteExpansion) {
+		this.fechaGerenteExpansion = fechaGerenteExpansion;
 	}
 	/**
 	 * @return the fechaRecepcionMd
@@ -254,6 +268,18 @@ public class TableroVo implements Serializable {
 		this.voboFinalOperaciones = voboFinalOperaciones;
 	}
 	/**
+	 * @return the ventaEstimada
+	 */
+	public double getVentaEstimada() {
+		return ventaEstimada;
+	}
+	/**
+	 * @param ventaEstimada the ventaEstimada to set
+	 */
+	public void setVentaEstimada(double ventaEstimada) {
+		this.ventaEstimada = ventaEstimada;
+	}
+	/**
 	 * @return the contratoFirmado
 	 */
 	public String getContratoFirmado() {
@@ -385,5 +411,7 @@ public class TableroVo implements Serializable {
 	public void setCeco(String ceco) {
 		this.ceco = ceco;
 	}
+	
+	
 
 }

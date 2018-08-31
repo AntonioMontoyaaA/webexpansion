@@ -22,17 +22,17 @@ public class CreaExcelTablero {
         HSSFWorkbook wb = new HSSFWorkbook();
         HSSFSheet sheet = wb.createSheet("Tablero memorias");
 
-        sheet.setColumnWidth(0, 4000);
+        sheet.setColumnWidth(0, 6000);
         sheet.setColumnWidth(1, 6000);
         sheet.setColumnWidth(2, 6000);
-        sheet.setColumnWidth(3, 8000);
+        sheet.setColumnWidth(3, 12000);
         sheet.setColumnWidth(4, 12000);
         sheet.setColumnWidth(5, 12000);
         sheet.setColumnWidth(6, 12000);
         sheet.setColumnWidth(7, 6000);
         sheet.setColumnWidth(8, 6000);
         sheet.setColumnWidth(9, 6000);
-        sheet.setColumnWidth(10, 5000);
+        sheet.setColumnWidth(10, 6000);
         sheet.setColumnWidth(11, 6000);
         sheet.setColumnWidth(12, 6000);
         sheet.setColumnWidth(13, 6000);
@@ -42,7 +42,7 @@ public class CreaExcelTablero {
         sheet.setColumnWidth(17, 8000);
         sheet.setColumnWidth(18, 6000);
         sheet.setColumnWidth(19, 6000);
-        sheet.setColumnWidth(20, 6000);
+        sheet.setColumnWidth(20, 8000);
         sheet.setColumnWidth(21, 6000);
         sheet.setColumnWidth(22, 6000);
         sheet.setColumnWidth(23, 6000);
@@ -51,6 +51,8 @@ public class CreaExcelTablero {
         sheet.setColumnWidth(26, 6000);
         sheet.setColumnWidth(27, 6000);
         sheet.setColumnWidth(28, 6000);
+        sheet.setColumnWidth(28, 6000);
+        sheet.setColumnWidth(29, 6000);
         
         HSSFFont tituloHeader0 = wb.createFont();
         tituloHeader0.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
@@ -107,10 +109,10 @@ public class CreaExcelTablero {
         cell.setCellValue(new HSSFRichTextString("MD ID"));
         cell = row.createCell(1);
         cell.setCellStyle(headerCellStyle);
-        cell.setCellValue(new HSSFRichTextString("FECHA RECEPCION MD"));
+        cell.setCellValue(new HSSFRichTextString("GERENTE EXPANSION"));
         cell = row.createCell(2);
         cell.setCellStyle(headerCellStyle);
-        cell.setCellValue(new HSSFRichTextString("FUENTE MD"));
+        cell.setCellValue(new HSSFRichTextString("FECHA RECEPCION MD"));
         cell = row.createCell(3);
         cell.setCellStyle(headerCellStyle);
         cell.setCellValue(new HSSFRichTextString("NOMBRE DE LA TDA"));
@@ -164,29 +166,32 @@ public class CreaExcelTablero {
         cell.setCellValue(new HSSFRichTextString("VOBO FINAL DE OPERACIONES DEL SITIO"));
         cell = row.createCell(20);
         cell.setCellStyle(headerCellStyle);
-        cell.setCellValue(new HSSFRichTextString("COMITE"));
+        cell.setCellValue(new HSSFRichTextString("VENTA ESTIMADA"));
         cell = row.createCell(21);
         cell.setCellStyle(headerCellStyle);
-        cell.setCellValue(new HSSFRichTextString("CARGA DOCUMENTOS"));
+        cell.setCellValue(new HSSFRichTextString("COMITE"));
         cell = row.createCell(22);
         cell.setCellStyle(headerCellStyle);
-        cell.setCellValue(new HSSFRichTextString("CONTRATO FIRMADO ARRENDADOR"));
+        cell.setCellValue(new HSSFRichTextString("CARGA DOCUMENTOS"));
         cell = row.createCell(23);
         cell.setCellStyle(headerCellStyle);
-        cell.setCellValue(new HSSFRichTextString("CECO"));
+        cell.setCellValue(new HSSFRichTextString("CONTRATO FIRMADO ARRENDADOR"));
         cell = row.createCell(24);
         cell.setCellStyle(headerCellStyle);
-        cell.setCellValue(new HSSFRichTextString("GESTORIA"));
+        cell.setCellValue(new HSSFRichTextString("CECO"));
         cell = row.createCell(25);
         cell.setCellStyle(headerCellStyle);
-        cell.setCellValue(new HSSFRichTextString("INICIO OBRA"));
+        cell.setCellValue(new HSSFRichTextString("GESTORIA"));
         cell = row.createCell(26);
         cell.setCellStyle(headerCellStyle);
-        cell.setCellValue(new HSSFRichTextString("FIN OBRA"));
+        cell.setCellValue(new HSSFRichTextString("INICIO OBRA"));
         cell = row.createCell(27);
         cell.setCellStyle(headerCellStyle);
-        cell.setCellValue(new HSSFRichTextString("INAUGURACION"));
+        cell.setCellValue(new HSSFRichTextString("FIN OBRA"));
         cell = row.createCell(28);
+        cell.setCellStyle(headerCellStyle);
+        cell.setCellValue(new HSSFRichTextString("INAUGURACION"));
+        cell = row.createCell(29);
         cell.setCellStyle(headerCellStyle);
         cell.setCellValue(new HSSFRichTextString("INAUGURACION OBJETIVO"));
         
@@ -208,8 +213,13 @@ public class CreaExcelTablero {
                 cellDatos.setCellValue(new HSSFRichTextString(listaMemorias.get(i).getFechaRecepcionMd()));
             }
             cellDatos = rowDatos.createCell(2);
-            cellDatos.setCellStyle(datosCellStyleNormal);
-            cellDatos.setCellValue(new HSSFRichTextString(listaMemorias.get(i).getFuenteMd()));
+            if(!listaMemorias.get(i).getFechaGerenteExpansion().trim().equals("") && listaMemorias.get(i).getFechaGerenteExpansion() != null) {
+            	cellDatos.setCellStyle(datosCellStyleFecha);
+                cellDatos.setCellValue(formatter.parse(listaMemorias.get(i).getFechaGerenteExpansion()));
+            } else {
+            	cellDatos.setCellStyle(datosCellStyleNormal);
+                cellDatos.setCellValue(new HSSFRichTextString(listaMemorias.get(i).getFechaGerenteExpansion()));
+            }
             cellDatos = rowDatos.createCell(3);
             cellDatos.setCellStyle(datosCellStyleNormal);
             cellDatos.setCellValue(new HSSFRichTextString(listaMemorias.get(i).getNombreTda()));
@@ -302,6 +312,9 @@ public class CreaExcelTablero {
                 cellDatos.setCellValue(new HSSFRichTextString(""));
             }
             cellDatos = rowDatos.createCell(20);
+            cellDatos.setCellStyle(datosCellStyleMoneda);
+            cellDatos.setCellValue(listaMemorias.get(i).getVentaEstimada());
+            cellDatos = rowDatos.createCell(21);
             if(!listaMemorias.get(i).getComite().trim().equals("") && listaMemorias.get(i).getComite() != null) {
             	cellDatos.setCellStyle(datosCellStyleFecha);
                 cellDatos.setCellValue(formatter.parse(listaMemorias.get(i).getComite()));
@@ -309,7 +322,7 @@ public class CreaExcelTablero {
             	cellDatos.setCellStyle(datosCellStyleNormal);
                 cellDatos.setCellValue(new HSSFRichTextString(""));
             }
-            cellDatos = rowDatos.createCell(21);
+            cellDatos = rowDatos.createCell(22);
             if(!listaMemorias.get(i).getDoctos().trim().equals("") && listaMemorias.get(i).getDoctos() != null) {
             	cellDatos.setCellStyle(datosCellStyleFecha);
                 cellDatos.setCellValue(formatter.parse(listaMemorias.get(i).getDoctos()));
@@ -317,7 +330,7 @@ public class CreaExcelTablero {
             	cellDatos.setCellStyle(datosCellStyleNormal);
                 cellDatos.setCellValue(new HSSFRichTextString(""));
             }
-            cellDatos = rowDatos.createCell(22);
+            cellDatos = rowDatos.createCell(23);
             if(!listaMemorias.get(i).getContratoFirmado().trim().equals("") && listaMemorias.get(i).getContratoFirmado() != null) {
             	cellDatos.setCellStyle(datosCellStyleFecha);
                 cellDatos.setCellValue(formatter.parse(listaMemorias.get(i).getContratoFirmado()));
@@ -325,7 +338,7 @@ public class CreaExcelTablero {
             	cellDatos.setCellStyle(datosCellStyleNormal);
                 cellDatos.setCellValue(new HSSFRichTextString(""));
             }
-            cellDatos = rowDatos.createCell(23);
+            cellDatos = rowDatos.createCell(24);
             if(!listaMemorias.get(i).getCeco().trim().equals("") && listaMemorias.get(i).getCeco() != null) {
             	cellDatos.setCellStyle(datosCellStyleFecha);
                 cellDatos.setCellValue(formatter.parse(listaMemorias.get(i).getCeco()));
@@ -333,7 +346,7 @@ public class CreaExcelTablero {
             	cellDatos.setCellStyle(datosCellStyleNormal);
                 cellDatos.setCellValue(new HSSFRichTextString(""));
             }
-            cellDatos = rowDatos.createCell(24);
+            cellDatos = rowDatos.createCell(25);
             if(!listaMemorias.get(i).getGestoria().trim().equals("") && listaMemorias.get(i).getGestoria() != null) {
             	cellDatos.setCellStyle(datosCellStyleFecha);
                 cellDatos.setCellValue(formatter.parse(listaMemorias.get(i).getGestoria()));
@@ -341,7 +354,7 @@ public class CreaExcelTablero {
             	cellDatos.setCellStyle(datosCellStyleNormal);
                 cellDatos.setCellValue(new HSSFRichTextString(""));
             }
-            cellDatos = rowDatos.createCell(25);
+            cellDatos = rowDatos.createCell(26);
             if(!listaMemorias.get(i).getInicioObra().trim().equals("") && listaMemorias.get(i).getInicioObra() != null) {
             	cellDatos.setCellStyle(datosCellStyleFecha);
                 cellDatos.setCellValue(formatter.parse(listaMemorias.get(i).getInicioObra()));
@@ -349,7 +362,7 @@ public class CreaExcelTablero {
             	cellDatos.setCellStyle(datosCellStyleNormal);
                 cellDatos.setCellValue(new HSSFRichTextString(""));
             }
-            cellDatos = rowDatos.createCell(26);
+            cellDatos = rowDatos.createCell(27);
             if(!listaMemorias.get(i).getFinObra().trim().equals("") && listaMemorias.get(i).getFinObra() != null) {
             	cellDatos.setCellStyle(datosCellStyleFecha);
                 cellDatos.setCellValue(formatter.parse(listaMemorias.get(i).getFinObra()));
@@ -357,7 +370,7 @@ public class CreaExcelTablero {
             	cellDatos.setCellStyle(datosCellStyleNormal);
                 cellDatos.setCellValue(new HSSFRichTextString(""));
             }
-            cellDatos = rowDatos.createCell(27);
+            cellDatos = rowDatos.createCell(28);
             if(!listaMemorias.get(i).getInauguracion().trim().equals("") && listaMemorias.get(i).getInauguracion() != null) {
             	cellDatos.setCellStyle(datosCellStyleFecha);
                 cellDatos.setCellValue(formatter.parse(listaMemorias.get(i).getInauguracion()));
@@ -365,7 +378,7 @@ public class CreaExcelTablero {
             	cellDatos.setCellStyle(datosCellStyleNormal);
                 cellDatos.setCellValue(new HSSFRichTextString(""));
             }
-            cellDatos = rowDatos.createCell(28);
+            cellDatos = rowDatos.createCell(29);
             if(!listaMemorias.get(i).getInauguracionObjetivo().trim().equals("") && listaMemorias.get(i).getInauguracionObjetivo() != null) {
             	cellDatos.setCellStyle(datosCellStyleFecha);
                 cellDatos.setCellValue(formatter.parse(listaMemorias.get(i).getInauguracionObjetivo()));

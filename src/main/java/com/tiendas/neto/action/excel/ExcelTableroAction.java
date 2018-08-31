@@ -45,6 +45,7 @@ public class ExcelTableroAction extends ExpansionAction {
 	        for(int i = 0 ; i < array.length() ; i++) {
 	        	TableroVo memoria = new TableroVo();
 	        	memoria.setMdId(array.getJSONObject(i).getLong("MDID"));
+	        	memoria.setFechaGerenteExpansion(array.getJSONObject(i).getJSONObject("GERENTE_EXP").getString("fechaValidacion"));
 	        	memoria.setFechaRecepcionMd(array.getJSONObject(i).getJSONObject("FECHARECEPCION").getString("fechaValidacion"));
 	        	memoria.setFuenteMd(array.getJSONObject(i).getString("FUENTEMD"));
 	        	memoria.setNombreTda(array.getJSONObject(i).getString("NOMBRETDA"));
@@ -62,6 +63,7 @@ public class ExcelTableroAction extends ExpansionAction {
 	        	memoria.setMontoAuditoria(array.getJSONObject(i).getDouble("PRESUPUESTO_AUDITORIA"));
 	        	memoria.setGestoria(array.getJSONObject(i).getJSONObject("TRAMITES").getString("fechaValidacion"));
 	        	memoria.setVoboFinalOperaciones(array.getJSONObject(i).getJSONObject("VOBOFNL_OPERACIONES").getString("fechaValidacion"));
+	        	memoria.setVentaEstimada(array.getJSONObject(i).getDouble("MONTOVNT"));
 	        	memoria.setContratoFirmado(array.getJSONObject(i).getJSONObject("FIRMA_CONTRATO").getString("fechaValidacion"));
 	        	memoria.setInicioObra(array.getJSONObject(i).getJSONObject("INICIO_OBRA").getString("fechaValidacion"));
 	        	memoria.setFinObra(array.getJSONObject(i).getString("ESTIMADO_FINOBRA"));

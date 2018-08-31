@@ -268,27 +268,27 @@ function initTablaMemoriasTablero(nombreDiv, datosDesgloseMemorias, nombreTabla)
 				'<tr style="cursor: pointer;border-top: 0px; border-bottom: 0px;">' +
 					'<th class="center" center" style="padding:0;background: #FFF;">&nbsp;</th>' +
 					'<th width="5%" class="gris negrita t12 center" style="padding:0;background: #FFF;">No.</th>'  +
-					'<th width="9%" class="gris negrita t12 center txt_expansion" style="padding:0;background: #FFF;">Gerente Expansi&oacute;n</th>'  +
-					'<th width="9%" class="gris negrita t12 center txt_expansion" style="padding:0;background: #FFF;">Fecha recepci&oacute;n MD</th>'  +
-					'<th width="9%" class="gris negrita t12 txt_expansion">Fuente MD</th>' +
-					'<th width="15%" class="gris negrita t12 txt_expansion">Nombre de la tda</th>' +
-					'<th width="5%" class="gris negrita t12">Categor&iacute;a</th>' +
-					'<th width="5%" class="gris negrita t12">Puntuaci&oacute;n</th>' +
+					'<th width="9%" class="gris negrita t12 center" style="padding:0;background: #FFF;">Gerente Expansi&oacute;n</th>'  +
+					'<th width="9%" class="gris negrita t12 center" style="padding:0;background: #FFF;">Fecha recepci&oacute;n MD</th>'  +
+					'<th width="20%" class="gris negrita t12 center" style="padding:0;background: #FFF;">Nombre de la tda</th>' +
+					'<th width="4%" class="gris negrita t12">Categor&iacute;a</th>' +
+					'<th width="4%" class="gris negrita t12">Puntuaci&oacute;n</th>' +
 					'<th width="5%" class="gris negrita t12 ">VoBo inicial operaciones</th>' +
-					'<th width="5%" class="gris negrita t12 txt_auditoria">Conteo auditor</th>' +
-					'<th width="5%" class="gris negrita t12 txt_suditoria">Pregestor&iacute;a autorizada</th>' +
-					'<th width="5%" class="gris negrita t12 txt_construccion">Levantamiento realizado</th>' +
-					'<th width="5%" class="gris negrita t12 txt_operaciones">VoBo layout operaciones</th>' +
-					'<th width="5%" class="gris negrita t12 center txt_construccion">Presupuesto construcci&oacute;n</th>' +
-					'<th width="5%" class="gris negrita t12 center txt_auditoria">Presupuesto auditor&iacute;a</th>' +
-					'<th width="5%" class="gris negrita t12 txt_operaciones">VoBo final operaciones</th>' +
-					'<th width="5%" class="gris negrita t12 txt_operaciones">Comité</th>' +
-					'<th width="5%" class="gris negrita t12 txt_operaciones">Carga<br/>Doctos</th>' +
-					'<th width="5%" class="gris negrita t12 txt_expansion">Contrato firmado</th>' +
-					'<th width="5%" class="gris negrita t12 txt_operaciones">CECO</th>' +
-					'<th width="5%" class="gris negrita t12 txt_gestoria">Gestor&iacute;a</th>' +
-					'<th width="7%" class="gris negrita t12 txt_construccion">Inicio obra</th>' +
-					'<th width="7%" class="gris negrita t12 txt_construccion">Fin obra</th>' +
+					'<th width="5%" class="gris negrita t12">Conteo auditor</th>' +
+					'<th width="5%" class="gris negrita t12">Pregestor&iacute;a autorizada</th>' +
+					'<th width="5%" class="gris negrita t12">Levantamiento realizado</th>' +
+					'<th width="5%" class="gris negrita t12">VoBo layout operaciones</th>' +
+					'<th width="5%" class="gris negrita t12 center">Presupuesto construcci&oacute;n</th>' +
+					'<th width="5%" class="gris negrita t12 center">Presupuesto auditor&iacute;a</th>' +
+					'<th width="5%" class="gris negrita t12">VoBo final operaciones</th>' +
+					'<th width="5%" class="gris negrita t12 center">Venta estimada</th>' +
+					'<th width="5%" class="gris negrita t12">Comité</th>' +
+					'<th width="5%" class="gris negrita t12">Carga<br/>Doctos</th>' +
+					'<th width="5%" class="gris negrita t12">Contrato firmado</th>' +
+					'<th width="5%" class="gris negrita t12">CECO</th>' +
+					'<th width="5%" class="gris negrita t12">Gestor&iacute;a</th>' +
+					'<th width="7%" class="gris negrita t12">Inicio obra</th>' +
+					'<th width="7%" class="gris negrita t12">Fin obra</th>' +
 					'<th width="6%" class="gris negrita t12">Inauguraci&oacute;n</th>' +
 					'<th width="6%" class="gris negrita t12">Inauguraci&oacute;n objetivo</th>' +
 					'<th class="oculto">id</th>' +
@@ -308,29 +308,29 @@ function initTablaMemoriasTablero(nombreDiv, datosDesgloseMemorias, nombreTabla)
 						   {"sClass":"izquierda padding","bSearchable":true},
 				           {"sClass":"izquierda padding","bSearchable":true},
 				           {"sClass":"izquierda padding","bSearchable":true},
-				           {"sClass":"imagen izquierda padding","bSearchable":true},
-				           {"sClass": "padding_right_5 padding_left_5", "bSearchable":true},
-				           {"sClass": "padding_right_5 padding_left_5", "bSearchable":true},
+				           {"sClass":"imagen padding_right_5 padding_left_5", "bSearchable":true},
+				           {"sClass":"padding_right_5 padding_left_5", "bSearchable":true},
 				           {"sClass":"izquierda padding","bSearchable":true},
-				           {"sClass": "padding_right_5 padding_left_5", "bSearchable":true},
-				           {"sClass": "padding_right_5 padding_left_5", "bSearchable":true},
-				           {"sClass": "padding_right_5 padding_left_5", "bSearchable":true},
-				           {"sClass": "padding_right_5 padding_left_5", "bSearchable":true},
+				           {"sClass":"padding_right_5 padding_left_5", "bSearchable":true},
+				           {"sClass":"padding_right_5 padding_left_5", "bSearchable":true},
+				           {"sClass":"padding_right_5 padding_left_5", "bSearchable":true},
+				           {"sClass":"padding_right_5 padding_left_5", "bSearchable":true},
 				           {"sClass":"derecha","bSearchable":true},
 				           {"sClass":"derecha","bSearchable":true},
-				           {"sClass": "padding_right_5 padding_left_5", "bSearchable":true},
-				           {"sClass": "padding_right_5 padding_left_5", "bSearchable":true},
-				           {"sClass": "padding_right_5 padding_left_5", "bSearchable":true},
-				           {"sClass": "padding_right_5 padding_left_5", "bSearchable":true},
-				           {"sClass": "padding_right_5 padding_left_5", "bSearchable":true},
-				           {"sClass": "padding_right_5 padding_left_5", "bSearchable":true},
-				           {"sClass": "padding_right_5 padding_left_5", "bSearchable":true},
-				           {"sClass": "padding_right_5 padding_left_5", "bSearchable":true},
-				           {"sClass": "padding_right_5 padding_left_5", "bSearchable":true},
-				           {"sClass": "padding_right_5 padding_left_5", "bSearchable":true},
-				           { "sClass": "oculto", "bSearchable": false },
-				           { "sClass": "oculto", "bSearchable": true },
-				           { "sClass": "oculto", "bSearchable": true }],
+				           {"sClass":"padding_right_5 padding_left_5", "bSearchable":true},
+				           {"sClass":"derecha","bSearchable":true},
+				           {"sClass":"padding_right_5 padding_left_5", "bSearchable":true},
+				           {"sClass":"padding_right_5 padding_left_5", "bSearchable":true},
+				           {"sClass":"padding_right_5 padding_left_5", "bSearchable":true},
+				           {"sClass":"padding_right_5 padding_left_5", "bSearchable":true},
+				           {"sClass":"padding_right_5 padding_left_5", "bSearchable":true},
+				           {"sClass":"padding_right_5 padding_left_5", "bSearchable":true},
+				           {"sClass":"padding_right_5 padding_left_5", "bSearchable":true},
+				           {"sClass":"padding_right_5 padding_left_5", "bSearchable":true},
+				           {"sClass":"padding_right_5 padding_left_5", "bSearchable":true},
+				           {"sClass":"oculto", "bSearchable": false },
+				           {"sClass":"oculto", "bSearchable": true },
+				           {"sClass":"oculto", "bSearchable": true }],
 			"bJQueryUI": false,
 			"order": [],
 			"sPaginationType": "full_numbers",
@@ -340,14 +340,14 @@ function initTablaMemoriasTablero(nombreDiv, datosDesgloseMemorias, nombreTabla)
 			 "bScrollCollapse": false,
 			 "sScrollY": "70vh",
 			 "fixedColumns":   {
-		            "leftColumns": 4
+		            "leftColumns": 5
 		        },
 		     "scrollX":        true,
 		     "scrollCollapse": true,
 			 "aoColumnDefs": [ {
 									"sClass": "center",
 									"aTargets": [ 0,1 ]
-			 					},{ "sType": 'extract-date', "aTargets": [2,3,8,10,11,12,15,16,17,18,19,20,21,22,23,24] }
+			 					},{ "sType": 'extract-date', "aTargets": [2,3,7,9,10,11,14,16,17,18,19,20,21,22,23,24] }
 			 			]
 	});	
 	

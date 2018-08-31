@@ -12,9 +12,29 @@ var AREA_GESTORIA = 2;
 var AREA_CONSTRUCCION = 3;
 var AREA_OPERACIONES = 5;
 var AREA_AUDITORIA = 4;
+var TIPOMD;
 
 $(function(){
-		$('#idasignadas').addClass('resaltado'); //para el efecto de header
+	TIPOMD = $("#tipoMdChat").val();
+	
+	if(TIPOMD == 0){
+		$('#idasignadas').addClass('resaltado');
+		$('#titulo_tipo').text('EN PROCESO');
+	}else if(TIPOMD == 1){
+		$('#idautorizadas').addClass('resaltado');
+		$('#titulo_tipo').text('AUTORIZADAS');
+	}else if(TIPOMD == 2){
+		$('#idrechazadas').addClass('resaltado');
+		$('#titulo_tipo').text('RECHAZADAS');
+	}else if(TIPOMD == 3){
+		$('#idaprobadas').addClass('resaltado');
+		$('#titulo_tipo').text('APROBADAS');
+	}else if(TIPOMD == 4 || TIPOMD == 5){
+		$('#idtablero').addClass('resaltado');
+		$('#titulo_tipo').text('TABLERO');
+	}
+	
+	
 		$("#titulo_chat").html($("#nombreMdChat").val());
 		consultaMensaje();
 		escribirMensajes();

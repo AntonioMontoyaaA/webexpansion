@@ -734,6 +734,7 @@
 <form action='mensajes_historial'  id="chatPorMd" method="post">
 	<input type="hidden" name="mdIdChat" id="mdIdChat" value=""/>
 	<input type="hidden" name="nombreMdChat" id="nombreMdChat" value=""/>
+	<input type="hidden" name="tipoMdChat" id="tipoMdChat" value=""/>
 </form>
 
 <!-- --------------------------------------- -->

@@ -337,6 +337,7 @@ function muestraChatXMd() {
 	mdId = $("#mdIdAutorizacion").val();
 	$("#mdIdChat").val(mdId);
 	$("#nombreMdChat").val($("#nombreMd").val());
+	$("#tipoMdChat").val($("#tipoMd").val());
 	$("#chatPorMd").submit();
 }
 
@@ -2672,15 +2673,23 @@ function editaPantalla(pantalla, o) {
 }
 
 function editaDatosSitioAction() {
+	var municipio="";
+	if($("#municipioMdText").val()!=null){
+		municipio=$("#municipioMdText").val();
+	}
+	
 	var mdId = $("#mdId").val();
 	invocarJSONServiceAction("edita_md_datos_sitio", 
 			{'mdId': mdId,
 			'calle': $("#calleMdText").val(),
 			'colonia': $("#coloniaMdText").val(),
-			'municipio': $("#municipioMdText").val(),
 			'ciudad': $("#ciudadMdText").val(),
 			'estado': $("#estadoMdText").val(),
-			'codigoPostal': $("#codigoPostalMdText").val()
+			'codigoPostal': $("#codigoPostalMdText").val(),
+			'nombreSitio': $("#nombreMd").val(),
+			'latitud': "",
+			'longitud':"",
+			'municipio': municipio
 			}, 
 			'editaMdResponse', 
 			function() {
@@ -2702,7 +2711,6 @@ function editaDatosSitioAction() {
 		}
 	}
 }
-
 function editaPropietarioAction() {
 	var mdId = $("#mdId").val();
 	invocarJSONServiceAction("edita_md_datos_propietario", 

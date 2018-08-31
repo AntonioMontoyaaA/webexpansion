@@ -22,7 +22,16 @@ public class DetalleMemoriaChatAction extends ActionSupport implements SessionAw
 	
 	private String mdIdChat;
 	private String nombreMdChat;
+	private String tipoMdChat;
 	
+	public String getTipoMdChat() {
+		return tipoMdChat;
+	}
+
+	public void setTipoMdChat(String tipoMdChat) {
+		this.tipoMdChat = tipoMdChat;
+	}
+
 	public String getNombreMdChat() {
 		return nombreMdChat;
 	}

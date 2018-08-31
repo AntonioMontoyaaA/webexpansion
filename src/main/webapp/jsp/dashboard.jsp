@@ -313,6 +313,7 @@
 
 <form action='mensajes_historial'  id="chatPorMd" method="post">
 	<input type="hidden" name="mdIdChat" id="mdIdChat" value=""/>
+	<input type="hidden" name="nombreMdChat" id="nombreMdChat" value=""/>
 </form>
 
 	<script	src="${pageContext.request.contextPath}/js/jquery/jquery.min.js"></script>

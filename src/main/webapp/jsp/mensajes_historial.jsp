@@ -197,6 +197,7 @@
 <form style="display:none;" action='mensajes_historial'  id="chatPorMd" method="post">
 	<s:textfield id="mdIdChat" name="mdIdChat" label="" cssStyle="display: none"></s:textfield>
 	<s:textfield id="nombreMdChat" name="nombreMdChat" label="" cssStyle="display: none"></s:textfield>
+	<s:textfield id="tipoMdChat" name="tipoMdChat" label="" cssStyle="display: none"></s:textfield>
 	<input type="hidden" id="usuarioLogin" value="${usr.perfil.numeroEmpleado}" />
 </form>
 	

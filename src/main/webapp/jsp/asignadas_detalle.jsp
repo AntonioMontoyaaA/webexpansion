@@ -827,6 +827,7 @@
 	<script	src="${pageContext.request.contextPath}/js/dropzone/dropzone.js"></script>
 	<script	src="${pageContext.request.contextPath}/js/dropzone/dateFormat.js"></script>
 	<script	src="${pageContext.request.contextPath}/js/detalleMemoriaAsignada.js"></script>
+	<script	src="${pageContext.request.contextPath}/js/autorizaciones.js"></script>
 	<script	src="${pageContext.request.contextPath}/js/utiles/modalImages.js"></script>
 	<script	src="${pageContext.request.contextPath}/js/descargaPdf.js"></script>
 	</body>

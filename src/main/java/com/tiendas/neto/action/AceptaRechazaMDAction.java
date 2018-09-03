@@ -131,4 +131,53 @@ public class AceptaRechazaMDAction extends ActionSupport implements SessionAware
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
 	}
+	
+	public static void main(String[] args) {
+		String [] arrMD = {"180803193951","180802191032","180802181727",
+				"180805135005","180804191708","180723190643","180803122025",
+				"180803173654","180803015222","180803151717","180803182725",
+				"180723180153","180802194636","180803011343","180803013401",
+				"180805141533","180805125342","180803135120","180803225701",
+				"180803094624","180803163852","180803221700","180802205108",
+				"180803150059","180805074035","180803152602","180803202121",
+				"180805140916","180803131318","180803160333"};
+		
+		String respuesta = "";
+		
+		try {
+			final OkHttpClient client = new OkHttpClient();
+			Builder builder;
+			RequestBody body;
+			Request request;
+			Response response;
+			
+			for(String md : arrMD) {
+				builder = new Builder()
+						.add("usuarioId", "703021")
+						.add("mdId", md)
+						.add("factorId", "7")
+						.add("estatusValidacion", "1")
+						.add("motivoRechazo", "0")
+						.add("comentarios", "Ok")
+						.add("finalizaValidacion", "1")
+						.add("puestoId", "6")
+						.add("areaId", "2");
+				
+				body = builder.build();
+				request = new Request.Builder()
+					.url("http://206.189.223.154/vokseapi/evaluamd")
+					.post(body)
+					.build();
+				
+				response = client.newCall(request).execute();
+				respuesta = response.body().string();
+				
+				System.out.println(md + "    " + respuesta);
+			}
+			
+			
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+	}
 }

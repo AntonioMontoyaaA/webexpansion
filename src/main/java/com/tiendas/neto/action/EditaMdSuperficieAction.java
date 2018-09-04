@@ -42,52 +42,23 @@ public class EditaMdSuperficieAction extends ExpansionAction implements SessionA
 		try {
 			if(usuario != null) {
 				String mdId = ServletActionContext.getRequest().getParameter("mdId");
-				String calle = ServletActionContext.getRequest().getParameter("calle");
-				String colonia = ServletActionContext.getRequest().getParameter("colonia");
-				String ciudad = ServletActionContext.getRequest().getParameter("ciudad");
-				String municipio = ServletActionContext.getRequest().getParameter("municipio");
-				String estado = ServletActionContext.getRequest().getParameter("estado");
-				String codigoPostal = ServletActionContext.getRequest().getParameter("codigoPostal");
-				StringBuffer direccion = new StringBuffer();
-				direccion.append(calle);
-				direccion.append(",");
-				direccion.append(colonia);
-				direccion.append(",");
-				if(!ciudad.equals("")) {
-					direccion.append(ciudad);
-				} else {
-					direccion.append("-");
-				}
-				direccion.append(",");
-				if(!codigoPostal.trim().equals("")) {
-					direccion.append(" ");
-					direccion.append(codigoPostal);
-				} else {
-					direccion.append(" ");
-					direccion.append("0");
-				}
-				direccion.append(" ");
-				if(!municipio.equals("")) {
-					direccion.append(municipio);
-				} else {
-					direccion.append("-");
-				}
-				direccion.append(",");
-				direccion.append(estado);
-				direccion.append(",");
-				direccion.append(PAIS_MX);
+				
+				String esquina=ServletActionContext.getRequest().getParameter("esquina");
+				String frente=ServletActionContext.getRequest().getParameter("frenteMd");
+				String fondo=ServletActionContext.getRequest().getParameter("profundidadMd");
 				
 				final OkHttpClient client = new OkHttpClient();
 				FormBody.Builder formBuilder = new FormBody.Builder()
-				 .add("direccion", direccion.toString())
+				 .add("esEsquina", esquina)
+				 .add("frente", frente)
+				 .add("fondo", fondo)
 				 .add("mdId", mdId)
-				 .add("usuarioId", String.valueOf(usuario.getPerfil().getNumeroEmpleado()))
-				 .add("tipoAplicacion", TIPO_APLICACION_WEB);
+				 .add("usuarioId", String.valueOf(usuario.getPerfil().getNumeroEmpleado()));
 				
 				
 				 RequestBody formBody = formBuilder.build();
 				 Request request = new Request.Builder()
-						 .url(sp.getPropiedad("editaDatosSitio"))
+						 .url(sp.getPropiedad("modificasuperficie"))
 		                 .post(formBody)
 		                 .build();
 				

@@ -199,7 +199,7 @@ var notificaciones="";
 function consultaNotificaciones(){
 	 
 	 invocarJSONServiceAction("notificacionesAction", 
-				{}, 
+				{'tipoNotificacion':2}, 
 				'cargaNotificaciones', 
 				function() {
 					//cierraLoading();
@@ -257,7 +257,6 @@ function consultaNotificaciones(){
 			}
 			}
 }
-
 function marca_notificacion(valor){
 	
 	var id=$(valor).attr('mdId');

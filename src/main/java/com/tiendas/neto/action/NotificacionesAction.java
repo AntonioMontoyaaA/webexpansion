@@ -82,6 +82,7 @@ public class NotificacionesAction extends ExpansionAction{
 		try{
 		final OkHttpClient client = new OkHttpClient();
 		FormBody.Builder formBuilder = new FormBody.Builder()
+		 .add("tipoNotificacion", getTipoNotificacion())
          .add("usuarioId", numeroEmpleado);
 				
 		RequestBody formBody = formBuilder.build();

@@ -42,17 +42,22 @@ public class EditaMdDatosSitioAction extends ExpansionAction implements SessionA
 		try {
 			if(usuario != null) {
 				String mdId = ServletActionContext.getRequest().getParameter("mdId");
-				String calle = ServletActionContext.getRequest().getParameter("calle");
+				String latitud = ServletActionContext.getRequest().getParameter("latitud");
+				String longitud = ServletActionContext.getRequest().getParameter("longitud");
+				String nombreSitio = ServletActionContext.getRequest().getParameter("nombreSitio");
+				String direccion = ServletActionContext.getRequest().getParameter("direccion");
+				
+				
+				/*String calle = ServletActionContext.getRequest().getParameter("calle");
 				String colonia = ServletActionContext.getRequest().getParameter("colonia");
 				String ciudad = ServletActionContext.getRequest().getParameter("ciudad");
 				String municipio = ServletActionContext.getRequest().getParameter("municipio");
 				String estado = ServletActionContext.getRequest().getParameter("estado");
-				String codigoPostal = ServletActionContext.getRequest().getParameter("codigoPostal");
-				String nombreSitio = ServletActionContext.getRequest().getParameter("nombreSitio");
-				String latitud = ServletActionContext.getRequest().getParameter("latitud");
-				String longitud = ServletActionContext.getRequest().getParameter("longitud");
+				String codigoPostal = ServletActionContext.getRequest().getParameter("codigoPostal");*/
 				
-				StringBuffer direccion = new StringBuffer();
+				
+				
+				/*StringBuffer direccion = new StringBuffer();
 				direccion.append(calle);
 				direccion.append(",");
 				direccion.append(colonia);
@@ -77,17 +82,16 @@ public class EditaMdDatosSitioAction extends ExpansionAction implements SessionA
 				direccion.append(estado);
 				direccion.append(",");
 				direccion.append(PAIS_MX);
-				
+				*/
 				
 				final OkHttpClient client = new OkHttpClient();
 				FormBody.Builder formBuilder = new FormBody.Builder()
 				 .add("mdId", mdId)
-				 .add("usuarioId", String.valueOf(usuario.getPerfil().getNumeroEmpleado()))
-				 .add("direccion", direccion.toString())
-				 .add("nombreSitio", nombreSitio)
 				 .add("latitud", latitud)
 				 .add("longitud", longitud)
-				 .add("municipio", municipio);
+				 .add("nombreSitio", nombreSitio)
+				 .add("usuarioId", String.valueOf(usuario.getPerfil().getNumeroEmpleado()))
+				 .add("direccion", direccion);
 				
 				
 				 RequestBody formBody = formBuilder.build();

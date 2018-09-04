@@ -45,7 +45,7 @@ $(function(){
 
 });
 
-function inicializaModulosEdicion(modulos, datosSitio, datosPropietario, generalidades,superficie) {
+function inicializaModulosEdicion(modulos, datosSitio, datosPropietario, generalidades,superficie, data) {
 	$("#modulo1Creacion").hide();
 	$("#modulo2Creacion").hide();
 	$("#modulo3Creacion").hide();
@@ -59,11 +59,21 @@ function inicializaModulosEdicion(modulos, datosSitio, datosPropietario, general
 		case 1:
 			if(modulos[i].editable == 1) {
 				var datos = "";
+				var responsable="";
+				
+				responsable='<span class="azul t12" style="font-size: .7em;">Creado por'+
+				' <select style="width:70%;"><option selected>'+data.generales.creador+'</option>'+
+				'</select></span>';
+				
+				$('#responsable').html(responsable);	
 				$('#labelNombre').text("Nombre ");	
 				$('#nombreMd').removeAttr("readonly");	
 				$("#modulo1Edita").show();
 				
-				datos += '<span class="negrita azul t14 sangria_cuerpo">Calle</span><br/>' +
+				datos += '<span class="negrita azul t14 sangria_cuerpo">Direccion</span><br/>' +
+				'<input id="direccionText" type="text" class="text_edita" style="width:98%;"/><br/>';
+					
+					/*'<span class="negrita azul t14 sangria_cuerpo">Calle</span><br/>' +
 					'<input id="calleMdText" type="text" class="text_edita"/><br/>' +
 					'<span class="negrita azul t14 sangria_cuerpo">Colonia</span><br/>' +
 					'<input id="coloniaMdText" type="text" class="text_edita"><br/>' +
@@ -74,16 +84,17 @@ function inicializaModulosEdicion(modulos, datosSitio, datosPropietario, general
 					'<span class="negrita azul t14 sangria_cuerpo">Estado</span><br/>' +
 					'<input id="estadoMdText" type="text" class="text_edita"><br/>' +
 					'<span class="negrita azul t14 sangria_cuerpo">Código postal</span><br/>' +
-					'<input id="codigoPostalMdText" type="number" class="text_edita"><br/>';
+					'<input id="codigoPostalMdText" type="number" class="text_edita"><br/>';*/
 				$("#modulo1Datos").html(datos);
 				
 				if(datosSitio != undefined) {
-					$("#calleMdText").val(datosSitio.calle);
+					$("#direccionText").val(datosSitio.direccion);
+				/*	$("#calleMdText").val(datosSitio.calle);
 					$("#coloniaMdText").val(datosSitio.colonia);
 					$("#municipioMdText").val(datosSitio.municipio);
 					$("#ciudadMdText").val(datosSitio.ciudad);
 					$("#estadoMdText").val(datosSitio.estado);
-					$("#codigoPostalMdText").val(datosSitio.codigoPostal);
+					$("#codigoPostalMdText").val(datosSitio.codigoPostal);*/
 				}
 				
 			}
@@ -115,7 +126,7 @@ function inicializaModulosEdicion(modulos, datosSitio, datosPropietario, general
 			}
 			break;
 		case 3:
-			if(modulos[i].editable == 1) {
+			if(modulos[i].editable == 0) {
 				var datos = "";
 				$("#modulo3Edita").show();
 				
@@ -130,11 +141,11 @@ function inicializaModulosEdicion(modulos, datosSitio, datosPropietario, general
 				datos+='</div>';
 				datos+='<div class="col-lg-4">';
 				datos+='<span class="blanco t12">PROFUNDIDAD&nbsp;&nbsp;&nbsp;';
-				datos+='<input id="profundidadMd" type="text" class="text_edita"/> mts</span><br/>';
+				datos+='<input id="profundidadMd" type="text" class="text_edita"/> mts</span><br/>'
 				datos+='</div>';
 				datos+='<div class="col-lg-4">';
 				datos+='<span class="blanco t12">SUPERFICIE TOTAL&nbsp;&nbsp;&nbsp;';
-				datos+='<input id="tamanioTotalMd" type="text" class="text_edita"/> mts<sup>2</sup></span><br/>';
+				datos+='<span id="tamanioTotalMd">'+formatear(superficie.total, true)+' mts</span></span><br/>';
 				datos+='</div>';
 				$("#modulo3Datos").html(datos);
 				
@@ -145,7 +156,6 @@ function inicializaModulosEdicion(modulos, datosSitio, datosPropietario, general
 				$("#puntosSuperficie").text(superficie.puntos);
 				$("#frenteMd").val(formatear(superficie.frente, true));
 				$("#profundidadMd").val(formatear(superficie.profundidad, true));
-				$("#tamanioTotalMd").val(formatear(superficie.total, true));
 				$("#vistaFrontalMd").attr("src", superficie.vistaFrontal);
 				$("#fechaVistaFrontal").text(superficie.fechaFrontal);
 				$("#horaVistaFrontal").text(superficie.horaFrontal);
@@ -441,7 +451,7 @@ function buscaDetalleMD(mdId) {
 			ESTATUS_FINALIZA_MD = -1;
 			
 			if(TIPOMD == DETALLE_MD_EDITAR && data.modulos != undefined) {
-				inicializaModulosEdicion(data.modulos, data.datosSitio, data.datosPropietario, data.generalidades, data.superficie);
+				inicializaModulosEdicion(data.modulos, data.datosSitio, data.datosPropietario, data.generalidades, data.superficie, data);
 			}
 			/* Datos de áreas que ya han autorizado */
 			if(data.areasAutorizadas != undefined && data.areasAutorizadas.length > 0) {
@@ -484,14 +494,17 @@ function buscaDetalleMD(mdId) {
 				$("#fechaCreacion").text(data.generales.fechaCreacion);
 				$("#puntuacionMd").text(data.generales.totalPuntos+simbolo);
 			}
-			/* Datos del sitio */
+			/* Datos del sitio  linea 663*/
 			if(data.datosSitio != undefined) {
-				$("#calleMd").text(data.datosSitio.calle);
+				$("#direccion").text(data.datosSitio.direccion);
+				/*$("#calleMd").text(data.datosSitio.calle);
 				$("#coloniaMd").text(data.datosSitio.colonia);
 				$("#municipioMd").text(data.datosSitio.municipio);
 				$("#ciudadMd").text(data.datosSitio.ciudad);
 				$("#estadoMd").text(data.datosSitio.estado);
-				$("#codiPostalMd").text(data.datosSitio.codigoPostal);
+				$("#codiPostalMd").text(data.datosSitio.codigoPostal);*/
+				
+				
 				/* Datos del propietario */
 				$("#propietarioId").text(data.datosPropietario.propietarioId);
 				$("#nombrePropietario").text(data.datosPropietario.nombre);
@@ -1048,7 +1061,7 @@ function cambiaDisponibilidad() {
 function editaPantalla(pantalla, o) {
 	switch(pantalla) {
 		case 1:
-			cargaMensajeModal('EDITA MD', "¿Estás seguro de modificar la dirección del sitio?", TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_EXITO, editaDatosSitioAction);
+			cargaMensajeModal('EDITA MD', "¿Estás seguro de modificar los datos del Sitio?", TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_EXITO, editaDatosSitioAction);
 			break;
 		case 2:
 			cargaMensajeModal('EDITA MD', "¿Estás seguro de modificar los datos del propietario?", TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_EXITO, editaPropietarioAction);
@@ -1063,15 +1076,25 @@ function editaPantalla(pantalla, o) {
 }
 
 function editaDatosSitioAction() {
+	/*var municipio="";
+	if($("#municipioMdText").val()!=null){
+		municipio=$("#municipioMdText").val();
+	}*/
 	var mdId = $("#mdId").val();
 	invocarJSONServiceAction("edita_md_datos_sitio", 
-			{'mdId': mdId,
+			{
+			'nombreSitio': $("#nombreMd").val(),
+			'mdId': mdId,
+			'latitud': "",
+			'longitud':"",
+			'direccion': $("#direccionText").val()
+			/*
 			'calle': $("#calleMdText").val(),
 			'colonia': $("#coloniaMdText").val(),
-			'municipio': $("#municipioMdText").val(),
 			'ciudad': $("#ciudadMdText").val(),
 			'estado': $("#estadoMdText").val(),
-			'codigoPostal': $("#codigoPostalMdText").val()
+			'codigoPostal': $("#codigoPostalMdText").val(),
+			'municipio': municipio*/
 			}, 
 			'editaMdResponse', 
 			function() {
@@ -1138,8 +1161,8 @@ function editaSuperficieAction() {
 	invocarJSONServiceAction("edita_md_superficie", 
 			{'mdId': mdId,
 			'esquina':esquina,
-			'':'',
-			'':''
+			'frenteMd':$("#frenteMd").val(),
+			'profundidadMd':$("#profundidadMd").val()
 			}, 
 			'editaPropietarioResponse', 
 			function() {

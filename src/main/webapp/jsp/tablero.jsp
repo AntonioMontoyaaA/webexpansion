@@ -73,7 +73,7 @@
                 <div class="desp" id="descargaExcelTablero" style="cursor: pointer;">
                     <img src="${pageContext.request.contextPath}/img/iconos_DOWNLOAD.png">
                 </div>
-                    <input type="text" class="fechaInicialCalendario" readonly id="datepicker1" />
+                    <input type="text" class="fechaInicialCalendario" readonly id="datepicker1" style="display: none;" />
                     
                 	<button class="btn desp rechargue" id="time" type="button"></button>
   					<button class="btn desp rechargue" id="edit" type="button"></button>

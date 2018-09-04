@@ -382,6 +382,7 @@ public class DescargaPdfAction extends ExpansionAction{
 			String clase  ="clase: "+ new String (Thread.currentThread().getStackTrace()[1].getClassName());	
 			String metodo ="metodo: "+ new String (Thread.currentThread().getStackTrace()[1].getMethodName());
 			elog.error(clase,metodo,e+"","", "");  
+			
 		}
 		return null;
 			

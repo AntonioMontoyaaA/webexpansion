@@ -16,20 +16,31 @@ public class TableroVo implements Serializable {
 	private String categoria;
 	private int puntuacion;
 	private String voboInicialOperaciones;
+	private String voboInicialOperacionesEstatus;
 	private String fechaConteoAuditor;
+	private String fechaConteoAuditorEstatus;
 	private int conteoAuditor;
 	private String pregestoriaAutorizada;
+	private String pregestoriaAutorizadaEstatus;
 	private String levantamientoRealizado;
+	private String levantamientoRealizadoEstatus;
 	private String voboLayoutOperaciones;
+	private String voboLayoutOperacionesEstatus;
 	private String fechaPptoConstruccion;
+	private String fechaPptoConstruccionEstatus;
 	private double montoConstruccion;
 	private String fechaPptoAuditoria;
+	private String fechaPptoAuditoriaEstatus;
 	private double montoAuditoria;
 	private String gestoria;
+	private String gestoriaEstatus;
 	private String voboFinalOperaciones;
+	private String voboFinalOperacionesEstatus;
 	private double ventaEstimada;
 	private String contratoFirmado;
+	private String contratoFirmadoEstatus;
 	private String inicioObra;
+	private String inicioObraEstatus;
 	private String finObra;
 	private String inauguracion;
 	private String inauguracionObjetivo;
@@ -37,8 +48,11 @@ public class TableroVo implements Serializable {
 	private String gerenteExpansion;
 	private String regional;
 	private String doctos;
+	private String doctosEstatus;
 	private String comite;
+	private String comiteEstatus;
 	private String ceco;
+	private String cecoEstatus;
 	/**
 	 * @return the mdId
 	 */
@@ -136,6 +150,18 @@ public class TableroVo implements Serializable {
 		this.voboInicialOperaciones = voboInicialOperaciones;
 	}
 	/**
+	 * @return the voboInicialOperacionesEstatus
+	 */
+	public String getVoboInicialOperacionesEstatus() {
+		return voboInicialOperacionesEstatus;
+	}
+	/**
+	 * @param voboInicialOperacionesEstatus the voboInicialOperacionesEstatus to set
+	 */
+	public void setVoboInicialOperacionesEstatus(String voboInicialOperacionesEstatus) {
+		this.voboInicialOperacionesEstatus = voboInicialOperacionesEstatus;
+	}
+	/**
 	 * @return the fechaConteoAuditor
 	 */
 	public String getFechaConteoAuditor() {
@@ -146,6 +172,18 @@ public class TableroVo implements Serializable {
 	 */
 	public void setFechaConteoAuditor(String fechaConteoAuditor) {
 		this.fechaConteoAuditor = fechaConteoAuditor;
+	}
+	/**
+	 * @return the fechaConteoAuditorEstatus
+	 */
+	public String getFechaConteoAuditorEstatus() {
+		return fechaConteoAuditorEstatus;
+	}
+	/**
+	 * @param fechaConteoAuditorEstatus the fechaConteoAuditorEstatus to set
+	 */
+	public void setFechaConteoAuditorEstatus(String fechaConteoAuditorEstatus) {
+		this.fechaConteoAuditorEstatus = fechaConteoAuditorEstatus;
 	}
 	/**
 	 * @return the conteoAuditor
@@ -172,6 +210,18 @@ public class TableroVo implements Serializable {
 		this.pregestoriaAutorizada = pregestoriaAutorizada;
 	}
 	/**
+	 * @return the pregestoriaAutorizadaEstatus
+	 */
+	public String getPregestoriaAutorizadaEstatus() {
+		return pregestoriaAutorizadaEstatus;
+	}
+	/**
+	 * @param pregestoriaAutorizadaEstatus the pregestoriaAutorizadaEstatus to set
+	 */
+	public void setPregestoriaAutorizadaEstatus(String pregestoriaAutorizadaEstatus) {
+		this.pregestoriaAutorizadaEstatus = pregestoriaAutorizadaEstatus;
+	}
+	/**
 	 * @return the levantamientoRealizado
 	 */
 	public String getLevantamientoRealizado() {
@@ -182,6 +232,18 @@ public class TableroVo implements Serializable {
 	 */
 	public void setLevantamientoRealizado(String levantamientoRealizado) {
 		this.levantamientoRealizado = levantamientoRealizado;
+	}
+	/**
+	 * @return the levantamientoRealizadoEstatus
+	 */
+	public String getLevantamientoRealizadoEstatus() {
+		return levantamientoRealizadoEstatus;
+	}
+	/**
+	 * @param levantamientoRealizadoEstatus the levantamientoRealizadoEstatus to set
+	 */
+	public void setLevantamientoRealizadoEstatus(String levantamientoRealizadoEstatus) {
+		this.levantamientoRealizadoEstatus = levantamientoRealizadoEstatus;
 	}
 	/**
 	 * @return the voboLayoutOperaciones
@@ -196,6 +258,18 @@ public class TableroVo implements Serializable {
 		this.voboLayoutOperaciones = voboLayoutOperaciones;
 	}
 	/**
+	 * @return the voboLayoutOperacionesEstatus
+	 */
+	public String getVoboLayoutOperacionesEstatus() {
+		return voboLayoutOperacionesEstatus;
+	}
+	/**
+	 * @param voboLayoutOperacionesEstatus the voboLayoutOperacionesEstatus to set
+	 */
+	public void setVoboLayoutOperacionesEstatus(String voboLayoutOperacionesEstatus) {
+		this.voboLayoutOperacionesEstatus = voboLayoutOperacionesEstatus;
+	}
+	/**
 	 * @return the fechaPptoConstruccion
 	 */
 	public String getFechaPptoConstruccion() {
@@ -206,6 +280,18 @@ public class TableroVo implements Serializable {
 	 */
 	public void setFechaPptoConstruccion(String fechaPptoConstruccion) {
 		this.fechaPptoConstruccion = fechaPptoConstruccion;
+	}
+	/**
+	 * @return the fechaPptoConstruccionEstatus
+	 */
+	public String getFechaPptoConstruccionEstatus() {
+		return fechaPptoConstruccionEstatus;
+	}
+	/**
+	 * @param fechaPptoConstruccionEstatus the fechaPptoConstruccionEstatus to set
+	 */
+	public void setFechaPptoConstruccionEstatus(String fechaPptoConstruccionEstatus) {
+		this.fechaPptoConstruccionEstatus = fechaPptoConstruccionEstatus;
 	}
 	/**
 	 * @return the montoConstruccion
@@ -232,6 +318,18 @@ public class TableroVo implements Serializable {
 		this.fechaPptoAuditoria = fechaPptoAuditoria;
 	}
 	/**
+	 * @return the fechaPptoAuditoriaEstatus
+	 */
+	public String getFechaPptoAuditoriaEstatus() {
+		return fechaPptoAuditoriaEstatus;
+	}
+	/**
+	 * @param fechaPptoAuditoriaEstatus the fechaPptoAuditoriaEstatus to set
+	 */
+	public void setFechaPptoAuditoriaEstatus(String fechaPptoAuditoriaEstatus) {
+		this.fechaPptoAuditoriaEstatus = fechaPptoAuditoriaEstatus;
+	}
+	/**
 	 * @return the montoAuditoria
 	 */
 	public double getMontoAuditoria() {
@@ -256,6 +354,18 @@ public class TableroVo implements Serializable {
 		this.gestoria = gestoria;
 	}
 	/**
+	 * @return the gestoriaEstatus
+	 */
+	public String getGestoriaEstatus() {
+		return gestoriaEstatus;
+	}
+	/**
+	 * @param gestoriaEstatus the gestoriaEstatus to set
+	 */
+	public void setGestoriaEstatus(String gestoriaEstatus) {
+		this.gestoriaEstatus = gestoriaEstatus;
+	}
+	/**
 	 * @return the voboFinalOperaciones
 	 */
 	public String getVoboFinalOperaciones() {
@@ -266,6 +376,18 @@ public class TableroVo implements Serializable {
 	 */
 	public void setVoboFinalOperaciones(String voboFinalOperaciones) {
 		this.voboFinalOperaciones = voboFinalOperaciones;
+	}
+	/**
+	 * @return the voboFinalOperacionesEstatus
+	 */
+	public String getVoboFinalOperacionesEstatus() {
+		return voboFinalOperacionesEstatus;
+	}
+	/**
+	 * @param voboFinalOperacionesEstatus the voboFinalOperacionesEstatus to set
+	 */
+	public void setVoboFinalOperacionesEstatus(String voboFinalOperacionesEstatus) {
+		this.voboFinalOperacionesEstatus = voboFinalOperacionesEstatus;
 	}
 	/**
 	 * @return the ventaEstimada
@@ -292,6 +414,18 @@ public class TableroVo implements Serializable {
 		this.contratoFirmado = contratoFirmado;
 	}
 	/**
+	 * @return the contratoFirmadoEstatus
+	 */
+	public String getContratoFirmadoEstatus() {
+		return contratoFirmadoEstatus;
+	}
+	/**
+	 * @param contratoFirmadoEstatus the contratoFirmadoEstatus to set
+	 */
+	public void setContratoFirmadoEstatus(String contratoFirmadoEstatus) {
+		this.contratoFirmadoEstatus = contratoFirmadoEstatus;
+	}
+	/**
 	 * @return the inicioObra
 	 */
 	public String getInicioObra() {
@@ -302,6 +436,18 @@ public class TableroVo implements Serializable {
 	 */
 	public void setInicioObra(String inicioObra) {
 		this.inicioObra = inicioObra;
+	}
+	/**
+	 * @return the inicioObraEstatus
+	 */
+	public String getInicioObraEstatus() {
+		return inicioObraEstatus;
+	}
+	/**
+	 * @param inicioObraEstatus the inicioObraEstatus to set
+	 */
+	public void setInicioObraEstatus(String inicioObraEstatus) {
+		this.inicioObraEstatus = inicioObraEstatus;
 	}
 	/**
 	 * @return the finObra
@@ -388,6 +534,18 @@ public class TableroVo implements Serializable {
 		this.doctos = doctos;
 	}
 	/**
+	 * @return the doctosEstatus
+	 */
+	public String getDoctosEstatus() {
+		return doctosEstatus;
+	}
+	/**
+	 * @param doctosEstatus the doctosEstatus to set
+	 */
+	public void setDoctosEstatus(String doctosEstatus) {
+		this.doctosEstatus = doctosEstatus;
+	}
+	/**
 	 * @return the comite
 	 */
 	public String getComite() {
@@ -398,6 +556,18 @@ public class TableroVo implements Serializable {
 	 */
 	public void setComite(String comite) {
 		this.comite = comite;
+	}
+	/**
+	 * @return the comiteEstatus
+	 */
+	public String getComiteEstatus() {
+		return comiteEstatus;
+	}
+	/**
+	 * @param comiteEstatus the comiteEstatus to set
+	 */
+	public void setComiteEstatus(String comiteEstatus) {
+		this.comiteEstatus = comiteEstatus;
 	}
 	/**
 	 * @return the ceco
@@ -411,7 +581,17 @@ public class TableroVo implements Serializable {
 	public void setCeco(String ceco) {
 		this.ceco = ceco;
 	}
-	
-	
+	/**
+	 * @return the cecoEstatus
+	 */
+	public String getCecoEstatus() {
+		return cecoEstatus;
+	}
+	/**
+	 * @param cecoEstatus the cecoEstatus to set
+	 */
+	public void setCecoEstatus(String cecoEstatus) {
+		this.cecoEstatus = cecoEstatus;
+	}
 
 }

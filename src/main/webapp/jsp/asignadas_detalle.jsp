@@ -183,9 +183,9 @@
 				</div>
 			</div>
 			<div id="modulo1Datos" style="width: 100%;position: relative; float: left;text-align: left">
-					<span class="negrita azul t14 sangria_cuerpo">Dirección</span><br/>
-					<span id="direccion" class="azul t12 sangria_doble_cuerpo">---</span><br/>
-					<%-- <span class="negrita azul t14 sangria_cuerpo">Calle</span><br/>
+					<!--<span class="negrita azul t14 sangria_cuerpo">Dirección</span><br/>
+					<span id="direccion" class="azul t12 sangria_doble_cuerpo">---</span><br/> -->
+					<span class="negrita azul t14 sangria_cuerpo">Calle</span><br/>
 					<span id="calleMd" class="azul t12 sangria_doble_cuerpo">---</span><br/>
 					<span class="negrita azul t14 sangria_cuerpo">Colonia</span><br/>
 					<span id="coloniaMd" class="azul t12 sangria_doble_cuerpo">---</span><br/>
@@ -194,7 +194,7 @@
 					<span class="negrita azul t14 sangria_cuerpo">Estado</span><br/>
 					<span id="estadoMd" class="azul t12 sangria_doble_cuerpo">---</span><br/>
 					<span class="negrita azul t14 sangria_cuerpo">Código postal</span><br/>
-					<span id="codiPostalMd" class="azul t12 sangria_doble_cuerpo">---</span><br/> --%>
+					<span id="codiPostalMd" class="azul t12 sangria_doble_cuerpo">---</span><br/>
 			</div>
 			</div>
 		</div>

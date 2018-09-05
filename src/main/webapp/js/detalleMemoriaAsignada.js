@@ -496,13 +496,13 @@ function buscaDetalleMD(mdId) {
 			}
 			/* Datos del sitio  linea 663*/
 			if(data.datosSitio != undefined) {
-				$("#direccion").text(data.datosSitio.direccion);
-				/*$("#calleMd").text(data.datosSitio.calle);
+				//$("#direccion").text(data.datosSitio.direccion);
+				$("#calleMd").text(data.datosSitio.calle);
 				$("#coloniaMd").text(data.datosSitio.colonia);
 				$("#municipioMd").text(data.datosSitio.municipio);
 				$("#ciudadMd").text(data.datosSitio.ciudad);
 				$("#estadoMd").text(data.datosSitio.estado);
-				$("#codiPostalMd").text(data.datosSitio.codigoPostal);*/
+				$("#codiPostalMd").text(data.datosSitio.codigoPostal);
 				
 				
 				/* Datos del propietario */
@@ -536,7 +536,7 @@ function buscaDetalleMD(mdId) {
 				$("#horaVistaLateral2").text(data.superficie.horaLateral2);
 				
 				//predial
-				if(data.superficie.predial != undefined && data.superficie.predial != "") {
+				if(data.superficie.predial != undefined && data.superficie.predial.trim() != "") {
 					$("#muestraPredial").show();
 					predialImg = data.superficie.predial;
 					fechaPredial = data.superficie.fechaPredial + " " + data.superficie.horaPredial;

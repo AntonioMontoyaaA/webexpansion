@@ -8,12 +8,14 @@ var DETALLE_MD_ASIGNADAS = 1;
 var DETALLE_MD_AUTORIZADAS = 2;
 var DETALLE_MD_RECHAZADAS = 3;
 var DETALLE_MD_EDITAR = 4;
+var mdId="";
 
 var predialImg;
 var fechaPredial;
 
 $(function(){
 	TIPOMD = $("#tipoMd").val();
+	mdId=$("#mdId").val();
 	
 	
 	if(TIPOMD == 0){
@@ -62,10 +64,12 @@ function inicializaModulosEdicion(modulos, datosSitio, datosPropietario, general
 				var responsable="";
 				
 				responsable='<span class="azul t12" style="font-size: .7em;">Creado por'+
-				' <select style="width:70%;"><option selected>'+data.generales.creador+'</option>'+
-				'</select></span>';
+				' <select style="width:70%;" id="listaCreadores"></select></span>';
 				
 				$('#responsable').html(responsable);	
+				
+				obtieneListaCreadores(data.generales.creador);
+				
 				$('#labelNombre').text("Nombre ");	
 				$('#nombreMd').removeAttr("readonly");	
 				$("#modulo1Edita").show();
@@ -228,6 +232,41 @@ function inicializaModulosEdicion(modulos, datosSitio, datosPropietario, general
 			}
 			break;
 		};
+	}
+}
+function obtieneListaCreadores(creador){
+	invocarJSONServiceAction("listaCreadoresAction", 
+			{'mdId': mdId}, 
+			'obtieneListaResponse', 
+			function() {
+				//Funcion de error
+				
+				cierraLoading();
+			},
+			function() {
+				//Función al finalizar
+				
+				cierraLoading();
+			});
+
+	obtieneListaResponse = function( data ) {
+	 
+		if(data.codigo != 200) {
+			cargaMensajeModal('EDITA MD', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
+		} else {
+			var arreglo=data.jefes;
+			var cadena="";
+			
+			for(var i=0; i<arreglo.length; i++){
+				if(arreglo[i].nombre==creador){
+					cadena= cadena+'<option selected value="'+arreglo[i].jefeId+'">'+arreglo[i].nombre+'</option>';
+				}
+				else{
+					cadena= cadena+'<option value="'+arreglo[i].jefeId+'">'+arreglo[i].nombre+'</option>';
+				}
+			}
+			$('#listaCreadores').append(cadena);
+		}
 	}
 }
 
@@ -1076,6 +1115,7 @@ function editaPantalla(pantalla, o) {
 }
 
 function editaDatosSitioAction() {
+	guardaNuevoCreador();
 	/*var municipio="";
 	if($("#municipioMdText").val()!=null){
 		municipio=$("#municipioMdText").val();
@@ -1083,6 +1123,7 @@ function editaDatosSitioAction() {
 	var mdId = $("#mdId").val();
 	invocarJSONServiceAction("edita_md_datos_sitio", 
 			{
+			'creador': $("#listaCreadores").val(),
 			'nombreSitio': $("#nombreMd").val(),
 			'mdId': mdId,
 			'latitud': "",
@@ -1109,6 +1150,37 @@ function editaDatosSitioAction() {
 			});
 
 	editaMdResponse = function( data ) {
+		if(data.codigo != 200) {
+			cargaMensajeModal('EDITA MD', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
+		} else {
+			cargaMensajeModal('EDITA MD', "Datos modificados con éxito", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_EXITO, null);
+		}
+	}	
+}
+function guardaNuevoCreador() {
+	/*var municipio="";
+	if($("#municipioMdText").val()!=null){
+		municipio=$("#municipioMdText").val();
+	}*/
+	var mdId = $("#mdId").val();
+	invocarJSONServiceAction("guardaCreador", 
+			{
+			'creador': $("#listaCreadores").val(),
+			'mdId': mdId
+			}, 
+			'guardaCreadorResponse', 
+			function() {
+				//Funcion de error
+				
+				cierraLoading();
+			},
+			function() {
+				//Función al finalizar
+				
+				cierraLoading();
+			});
+
+	guardaCreadorResponse = function( data ) {
 		if(data.codigo != 200) {
 			cargaMensajeModal('EDITA MD', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
 		} else {

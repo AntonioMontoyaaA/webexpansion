@@ -106,7 +106,7 @@
 									<span class="simbolo">$</span>
 									<input id="montoPresupuesto" onkeypress="return isNumberKey(event,this)" style="display: none;">
 									<div id="subeArchivo" class="btn btnBlanco" style="display:none;">Aceptar</div>
-									
+									<div id="rechazaMD" onclick="finalizaMD(0);" class="btn btnBlanco" style="display:none;">Rechazar</div>
 								</div>
 							</div>
 							

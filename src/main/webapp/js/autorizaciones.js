@@ -313,6 +313,17 @@ function finalizaMD(estatus){
 					'¿Est\u00e1s seguro de rechazar la MD?',
 					TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, consultaMotivosRechazo);
 		}
+	}else if(ESTATUS_MD == ESTATUS_CONTRATO && AREA_USUARIO == areaGestoria){
+		ESTATUS_FINALIZA_MD = estatus;
+		if(estatus == 1){
+			cargaMensajeModal('DETALLE MD', 
+					'¿Est\u00e1s seguro de autorizar la MD?',
+					TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, actionfinalizaMD);
+		}else if(estatus == 0){
+			cargaMensajeModal('DETALLE MD', 
+					'¿Est\u00e1s seguro de rechazar la MD?',
+					TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, consultaMotivosRechazo);
+		}
 	}
 }
 
@@ -1052,6 +1063,7 @@ function inicializaDropzone(){
 		$('#montoPresupuesto').show();
 		$('#montoPresupuesto').attr('placeholder', 'Captura el monto total de presupuesto');
 		$('#subeArchivo').show();
+		$('#rechazaMD').show();
 		
 		$('#montoPresupuesto').hide();
 		$('.simbolo').hide();

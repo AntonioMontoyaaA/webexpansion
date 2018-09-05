@@ -114,7 +114,7 @@ function inicializaGrantt(datos){
 		
 		cadena={
 				 id: data[i].nivelEstatusArea,
-				name: data[i].nivelEstatusArea+" -  &nbsp; "+data[i].duracion+" días",
+				name: data[i].nivelEstatusArea+" -  &nbsp; "+data[i].completados+"/"+data[i].duracion+" días",
 				start: reformat(data[i].fechaInicial.substring(0,10)),	
 				end: fechafinal_formato,
 				progress: '0',

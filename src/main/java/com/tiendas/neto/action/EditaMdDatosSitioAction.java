@@ -41,6 +41,8 @@ public class EditaMdDatosSitioAction extends ExpansionAction implements SessionA
 		
 		try {
 			if(usuario != null) {
+				
+				String creador = ServletActionContext.getRequest().getParameter("creador");
 				String mdId = ServletActionContext.getRequest().getParameter("mdId");
 				String latitud = ServletActionContext.getRequest().getParameter("latitud");
 				String longitud = ServletActionContext.getRequest().getParameter("longitud");

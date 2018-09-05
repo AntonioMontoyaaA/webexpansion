@@ -286,6 +286,14 @@
                method = "execute">
            <result name = "success">jsp/aprobadas.jsp</result>
         </action>
+         <action name = "guardaCreador"
+               class = "com.tiendas.neto.action.ObtieneCreadoresAction"
+               method = "guardaCreador">
+        </action>
+        <action name="listaCreadoresAction"
+        		class = "com.tiendas.neto.action.ObtieneCreadoresAction"
+               	method = "execute">
+        </action>
          <action name = "edita_md_superficie"
                class = "com.tiendas.neto.action.EditaMdSuperficieAction"
                method = "execute">
@@ -300,6 +308,8 @@
                method = "execute">
            <result name = "success">jsp/aprobadas.jsp</result>
         </action>
+    
+        
       	 <!-- ************************************ ACCIONES SEGUIMIENTO ******* -->
       	<!-- ****************************** DESCARGA DE PDF**************************************** -->
 	<action name = "descargaPdfAction" 

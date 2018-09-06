@@ -154,8 +154,7 @@ public class Login  extends HttpServlet {
             throw new NoSuchAlgorithmException(e);
         }
     }
-		
-		
 	 }
     
+
 

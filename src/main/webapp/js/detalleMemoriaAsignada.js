@@ -778,6 +778,34 @@ function buscaDetalleMD(mdId) {
 					});
 					ARCHIVOS_MD[ARCHIVOS_MD.length -1].estatus = 0;
 				}
+				
+				if(eval(data)["seguimiento"]["CARGA DOCUMENTOS EXPANSION"] != undefined
+						&& eval(data)["seguimiento"]["CARGA DOCUMENTOS EXPANSION"] != null){
+					
+					$.each(eval(data)["seguimiento"]["CARGA DOCUMENTOS EXPANSION"], function(i,item){
+						
+						if(item.estatus == 2) {
+							if(item.documentos != undefined && item.documentos.length > 0) {
+								for(var i = 0; i < item.documentos.length; i++) {
+									
+									if(item.documentos[i].archivos != undefined && item.documentos[i].archivos.length > 0) {
+										for(var j = 0; j < item.documentos[i].archivos.length; j++) {
+											ARCHIVOS_MD.push(new Archivo(
+													item.documentos[i].nombreArchivo + " " + (j+1) + " de " + item.documentos[i].archivos.length,
+													item.documentos[i].archivos[j].url,
+						        					item.estatus,
+						        					item.autor,
+						        					null, 
+						        					((item.aireAcondicionado != undefined) ? item.aireAcondicionado : null))
+											);
+										}
+									}
+								}
+							}
+						}
+					});
+					ARCHIVOS_MD[ARCHIVOS_MD.length -1].estatus = 0;
+				}
 			}
 			
 			

@@ -1,3 +1,12 @@
+/* ------------ MODAL ----------------- */
+.modal-header{
+	height:50px;
+}
+.modal-title {
+    line-height: 1.0;
+}
+
+/* ----------------------------- */
 .mensajeerror{
 	display:none;
 }

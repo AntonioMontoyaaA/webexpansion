@@ -48,6 +48,11 @@
 	</package>
 	
 	<package name="default" namespace="/" extends="struts-default">
+	<!-- ************************* RECUPERA CONTRASEÑA ***************************** -->
+	<action name = "recuperaPassAction" 
+         		class = "com.tiendas.neto.action.RecuperaPassAction" 
+         		method = "execute">
+    </action>
 	
 	<!-- ************************* NOTIFICACIONES ***************************** -->
 	<action name = "notificacionesAction" 

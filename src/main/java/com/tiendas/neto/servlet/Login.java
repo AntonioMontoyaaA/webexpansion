@@ -1,6 +1,9 @@
 package com.tiendas.neto.servlet;
 
 import java.io.IOException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,7 +15,6 @@ import javax.servlet.http.HttpSession;
 import com.google.gson.Gson;
 import com.tiendas.neto.dao.Expansionlog;
 import com.tiendas.neto.singleton.SingletonProperties;
-import com.tiendas.neto.vo.PerfilesxusuarioVO;
 import com.tiendas.neto.vo.UsuarioLoginVO;
 
 import okhttp3.FormBody;
@@ -91,15 +93,16 @@ public class Login  extends HttpServlet {
 	}
 	
 //------------------------------ CONEXION AL SERVICIO ------------------------------
-	public UsuarioLoginVO comprueba_login(String user, String pass) {    
+	public UsuarioLoginVO comprueba_login(String user, String pass) {    		
 		String respuesta="";
-
 		UsuarioLoginVO userLogin=null;
 	try{
+		String pass_encriptado= encripta(pass);
+		
 		final OkHttpClient client = new OkHttpClient();
 		FormBody.Builder formBuilder = new FormBody.Builder()
 		 .add("usuarioId", user)
-         .add("contrasena", pass)
+         .add("contrasena", pass_encriptado)
          .add("numTelefono", "")
          .add("tipoLog", "2");
 		 RequestBody formBody = formBuilder.build();
@@ -124,5 +127,35 @@ public class Login  extends HttpServlet {
 	return userLogin;
 	
    } 
+	
+	public String encripta(String cadena) throws NoSuchAlgorithmException {
+        String cad_encriptada = null;
+        try {
+            // Create MessageDigest instance for MD5
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            //Add password bytes to digest
+            md.update(cadena.getBytes());
+            //Get the hash's bytes
+            byte[] bytes = md.digest();
+            //This bytes[] has bytes in decimal format;
+            //Convert it to hexadecimal format
+            StringBuilder sb = new StringBuilder();
+            for(int i=0; i< bytes.length ;i++)
+            {
+                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+            }
+            //Get complete hashed password in hex format
+            System.out.println(sb.toString());
+            return sb.toString();
+        }
+        catch (NoSuchAlgorithmException e)
+        {
+            e.printStackTrace();
+            throw new NoSuchAlgorithmException(e);
+        }
+    }
+		
+		
+	 }
     
-}
+

@@ -83,7 +83,7 @@
 														<div class="mensajeerror">Contraseña incorrecta!</div>	
 														<input id="pass" type="password" value="" placeholder="Escribe tu contraseña" class="form-control input_login" name="pass">
 													<div class="col col-12">
-														<a class="btn btnOlvidoContrasena" href="#">Olvidaste&nbsp;tu&nbsp;contraseña?</a>
+														<a class="btn btnOlvidoContrasena" onclick="olvidaPass()">Olvidaste&nbsp;tu&nbsp;contraseña?</a>
 													</div>
 												</div>
 											</div>
@@ -129,11 +129,40 @@
 	<div class="text-center"><button class="btn entrar" onclick='entrar_boton()'>Entrar</button></div>
 	</div>
 
+	<div class="modal" tabindex="-1" role="dialog" id="modalPass">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Recuperación de contraseña</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="row" id="cajas">
+						<div class="col-lg-6">No. de empleado</div>
+						<div class="col-lg-6"><input type="text" id="idusuario"></div>
+						
+						<div class="col-12" style="text-align:center; margin-top:20px">
+							<button type="button" style="padding:0px 10px;"" onclick="recuperaPass()">Enviar contraseña a correo electrónico</button>
+						</div>	
+					</div>
+					<div class="row" id="informacion" style="display:none;">
+						<div class="col-lg-12" style="text-align:center;"><span id="mensaje"></span></div>
+					</div>				
+				</div>
+			</div>
+		</div>
+	</div>
+
+
 	<input type="hidden" value='${respuesta}' id="respuesta"/>
 	<script	src="${pageContext.request.contextPath}/js/jquery/jquery.min.js"></script>	
 		<script src="${pageContext.request.contextPath}/js/jquery/popper.js"></script>
 	<script	src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 	<script src="${pageContext.request.contextPath}/js/login.js"></script>
+	
 	
 	</body>
 </html>

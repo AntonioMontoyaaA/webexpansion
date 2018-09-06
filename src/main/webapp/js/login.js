@@ -11,6 +11,43 @@ $(function(){
 	}	
 });
 
+function olvidaPass(){
+	$('#idusuario').val(''); 
+	$('#informacion').hide();
+	$('#modalPass').modal('show');
+}
+function recuperaPass(){
+	if($('#idusuario').val()!=""){
+	
+		 $.ajax({
+		        type     : "POST",
+		        url      : 'recuperaPassAction',
+		        data     : {
+		        	'usuario': $('#idusuario').val() 
+		        },
+		        async	 : false,
+		        beforeSend : function(){
+		        	$("#loadingPagina").modal('show');
+		        },
+		        success  : function(data) {
+		        	$("#loadingPagina").modal('hide');
+		        	
+		        	if(data.codigo != 200) {
+		        		$('#idusuario').val(''); 
+		    			$('#mensaje').text("Ocurrio un error: "+data.mensaje );
+		    			$('#informacion').show();
+		    		} else {
+		    			$('#cajas').hide();
+		    			$('#mensaje').text(data.mensaje);
+		    			$('#informacion').show();
+		    		}
+		        }
+		      
+		 });
+	}
+}
+
+
 $(document).ready(function(){   
     var inputs = $("form :text"),
     length = inputs.length,

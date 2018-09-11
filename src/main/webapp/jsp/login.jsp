@@ -145,7 +145,7 @@
 						<div class="col-lg-6"><input type="text" id="idusuario"></div>
 						
 						<div class="col-12" style="text-align:center; margin-top:20px">
-							<button type="button" style="padding:0px 10px;"" onclick="recuperaPass()">Enviar contraseña a correo electrónico</button>
+							<button type="button" style="padding:0px 10px;"" onclick="recuperaPass()">Buscar</button>
 						</div>	
 					</div>
 					<div class="row" id="informacion" style="display:none;">

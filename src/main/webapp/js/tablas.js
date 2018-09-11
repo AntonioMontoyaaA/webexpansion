@@ -271,6 +271,7 @@ function initTablaMemoriasTablero(nombreDiv, datosDesgloseMemorias, nombreTabla)
 					'<th width="9%" class="gris negrita t12 center" style="padding:0;background: #FFF;">Gerente Expansi&oacute;n</th>'  +
 					'<th width="9%" class="gris negrita t12 center" style="padding:0;background: #FFF;">Fecha recepci&oacute;n MD</th>'  +
 					'<th width="20%" class="gris negrita t12 center" style="padding:0;background: #FFF;">Nombre de la tda</th>' +
+					'<th width="4%" class="gris negrita t12">Regi&oacute;n</th>' +
 					'<th width="4%" class="gris negrita t12">Categor&iacute;a</th>' +
 					'<th width="4%" class="gris negrita t12">Puntuaci&oacute;n</th>' +
 					'<th width="5%" class="gris negrita t12 ">VoBo inicial operaciones</th>' +
@@ -294,6 +295,7 @@ function initTablaMemoriasTablero(nombreDiv, datosDesgloseMemorias, nombreTabla)
 					'<th class="oculto">id</th>' +
 					'<th class="oculto">id</th>' +
 					'<th class="oculto">id</th>' +
+					'<th class="oculto">id</th>' +
 				'</tr>'+
 			'</thead>' +
 			'<tbody>'  +			
@@ -308,6 +310,7 @@ function initTablaMemoriasTablero(nombreDiv, datosDesgloseMemorias, nombreTabla)
 						   {"sClass":"izquierda padding","bSearchable":true},
 				           {"sClass":"izquierda padding","bSearchable":true},
 				           {"sClass":"izquierda padding","bSearchable":true},
+				           {"sClass":"imagen padding_right_5 padding_left_5", "bSearchable":true},
 				           {"sClass":"imagen padding_right_5 padding_left_5", "bSearchable":true},
 				           {"sClass":"padding_right_5 padding_left_5", "bSearchable":true},
 				           {"sClass":"izquierda padding","bSearchable":true},
@@ -329,6 +332,7 @@ function initTablaMemoriasTablero(nombreDiv, datosDesgloseMemorias, nombreTabla)
 				           {"sClass":"padding_right_5 padding_left_5", "bSearchable":true},
 				           {"sClass":"padding_right_5 padding_left_5", "bSearchable":true},
 				           {"sClass":"oculto", "bSearchable": false },
+				           {"sClass":"oculto", "bSearchable": true },
 				           {"sClass":"oculto", "bSearchable": true },
 				           {"sClass":"oculto", "bSearchable": true }],
 			"bJQueryUI": false,

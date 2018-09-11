@@ -18,6 +18,8 @@ import okhttp3.Response;
 
 public class RecuperaPassAction extends ExpansionAction{
 	private static final long serialVersionUID = 1L;
+	private static final String BUSCA_NUM_CELULAR = "1";
+	
 	SingletonProperties sp=SingletonProperties.getInstancia();
 	Expansionlog elog=new Expansionlog();
 	
@@ -36,17 +38,19 @@ public class RecuperaPassAction extends ExpansionAction{
 		
 		String respuesta="";
 		HttpServletResponse response2 = ServletActionContext.getResponse();
+		String usuario = ServletActionContext.getRequest().getParameter("usuario");
 		response2.setContentType("application/json");
 		response2.setCharacterEncoding("UTF-8");
 		
 		try{
 		final OkHttpClient client = new OkHttpClient();
 		FormBody.Builder formBuilder = new FormBody.Builder()
-         .add("usuarioId", getUsuarioId());
+         .add("usuarioId", usuario)
+         .add("tipollamado", BUSCA_NUM_CELULAR);
 				
 		RequestBody formBody = formBuilder.build();
 		 Request request = new Request.Builder()
-				 .url(sp.getPropiedad("recuperaPass"))
+				 .url(sp.getPropiedad("reestablecercontrasenia"))
                  .post(formBody)
                  .build();
 		

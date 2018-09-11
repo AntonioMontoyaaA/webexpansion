@@ -124,7 +124,7 @@ function dibujaEstatus(resumen) {
 	} else {
 		datos += '<div onclick="filtraEstatus(\'\',' + total + ',' + totalAtrasadas + ', this)" class="tabla_pendientes" style="border-top: 2px solid #FFF;width: 65%;"><span>Total</span></div>' +
 		'<div onclick="filtraEstatus(\'\',' + total + ',' + totalAtrasadas + ', this)" class="tabla_pendientes" style="border-top: 2px solid #FFF;width: 18%;padding-left: 10px;"><span id="totalPendientes">' + total + '</span></div>' +
-		'<div class="tabla_pendientes" style="border-top: 2px solid #FFF;width: 17%;padding-left: 10px;"><span id="totalPendientes">' + totalAtrasadas + '</span></div>';
+		'<div onclick="filtraEstatus(\'$#&1&#$\',' + total + ',' + totalAtrasadas + ', this, \'TOTAL\')" class="tabla_pendientes" style="border-top: 2px solid #FFF;width: 17%;padding-left: 10px;"><span id="totalPendientes">' + totalAtrasadas + '</span></div>';
 	}
 	$("#box-inner").html(datos);
 }
@@ -270,15 +270,20 @@ function creatabla(){
 				} else {
 					datosMemorias[i][4] = "<span style='"  + "'>---</span>";
 				}
-				if(resultadoTablero[i].CATEGORIA != undefined) {
-					datosMemorias[i][5] = "<span style='"  + "'>" + resultadoTablero[i].CATEGORIA + "</span>";
+				if(resultadoTablero[i].REGION != undefined) {
+					datosMemorias[i][5] = resultadoTablero[i].REGION;
 				} else {
 					datosMemorias[i][5] = "<span style='"  + "'>---</span>";
 				}
-				if(resultadoTablero[i].PUNTOSTOTALES != undefined) {
-					datosMemorias[i][6] = "<span style='"  + "'>" + resultadoTablero[i].PUNTOSTOTALES + "</span>";
+				if(resultadoTablero[i].CATEGORIA != undefined) {
+					datosMemorias[i][6] = "<span style='"  + "'>" + resultadoTablero[i].CATEGORIA + "</span>";
 				} else {
 					datosMemorias[i][6] = "<span style='"  + "'>---</span>";
+				}
+				if(resultadoTablero[i].PUNTOSTOTALES != undefined) {
+					datosMemorias[i][7] = "<span style='"  + "'>" + resultadoTablero[i].PUNTOSTOTALES + "</span>";
+				} else {
+					datosMemorias[i][7] = "<span style='"  + "'>---</span>";
 				}
 				if(resultadoTablero[i].PRE_OPERACIONES != undefined) {
 					if(resultadoTablero[i].PRE_OPERACIONES.fechaValidacion != undefined) {
@@ -298,12 +303,12 @@ function creatabla(){
 							cadenaAtraso += "&ATR_VOBOINICOPER";
 							esMdAtrasada = true;
 						}
-						datosMemorias[i][7] = "<span class='" + claseEstatus + "'>" + resultadoTablero[i].PRE_OPERACIONES.fechaValidacion + "</span>";
+						datosMemorias[i][8] = "<span class='" + claseEstatus + "'>" + resultadoTablero[i].PRE_OPERACIONES.fechaValidacion + "</span>";
 					} else {
-						datosMemorias[i][7] = "<span class='text_sin_atencion'>---</span>";
+						datosMemorias[i][8] = "<span class='text_sin_atencion'>---</span>";
 					}
 				} else {
-					datosMemorias[i][7] = "<span class='text_sin_atencion'>---</span>";
+					datosMemorias[i][8] = "<span class='text_sin_atencion'>---</span>";
 				} 
 				if(resultadoTablero[i].PRE_AUDITORIA != undefined) {
 					if(resultadoTablero[i].PRE_AUDITORIA.fechaValidacion != undefined) {
@@ -324,15 +329,15 @@ function creatabla(){
 							esMdAtrasada = true;
 						}
 						if(resultadoTablero[i].CONTEOAUDITOR != undefined) {
-							datosMemorias[i][8] = "<span class='" + claseEstatus + "'>" + formato(resultadoTablero[i].CONTEOAUDITOR, true) + "</span>";
+							datosMemorias[i][9] = "<span class='" + claseEstatus + "'>" + formato(resultadoTablero[i].CONTEOAUDITOR, true) + "</span>";
 						} else {
-							datosMemorias[i][8] = "<span class='" + claseEstatus + "'>---</span>";
+							datosMemorias[i][9] = "<span class='" + claseEstatus + "'>---</span>";
 						}
 					} else {
-						datosMemorias[i][8] = "<span class='text_sin_atencion'>---</span>";
+						datosMemorias[i][9] = "<span class='text_sin_atencion'>---</span>";
 					}
 				} else {
-					datosMemorias[i][8] = "<span class='text_sin_atencion'>---</span>";
+					datosMemorias[i][9] = "<span class='text_sin_atencion'>---</span>";
 				}
 				if(resultadoTablero[i].PRE_GESTORIA != undefined) {
 					if(resultadoTablero[i].PRE_GESTORIA.fechaValidacion != undefined) {
@@ -352,12 +357,12 @@ function creatabla(){
 							cadenaAtraso += "&ATR_PREGES_GES";
 							esMdAtrasada = true;
 						}
-						datosMemorias[i][9] = "<span class='" + claseEstatus + "'>" + resultadoTablero[i].PRE_GESTORIA.fechaValidacion + "</span>";
+						datosMemorias[i][10] = "<span class='" + claseEstatus + "'>" + resultadoTablero[i].PRE_GESTORIA.fechaValidacion + "</span>";
 					} else {
-						datosMemorias[i][9] = "<span class='text_sin_atencion'>---</span>";
+						datosMemorias[i][10] = "<span class='text_sin_atencion'>---</span>";
 					}
 				} else {
-					datosMemorias[i][9] = "<span class='text_sin_atencion'>---</span>";
+					datosMemorias[i][10] = "<span class='text_sin_atencion'>---</span>";
 				}
 				if(resultadoTablero[i].PRE_CONSTRUCCION != undefined) {
 					if(resultadoTablero[i].PRE_CONSTRUCCION.fechaValidacion != undefined) {
@@ -377,12 +382,12 @@ function creatabla(){
 							cadenaAtraso += "&ATR_PRECONS_CONS";
 							esMdAtrasada = true;
 						}
-						datosMemorias[i][10] = "<span class='" + claseEstatus + "'>" + resultadoTablero[i].PRE_CONSTRUCCION.fechaValidacion + "</span>";
+						datosMemorias[i][11] = "<span class='" + claseEstatus + "'>" + resultadoTablero[i].PRE_CONSTRUCCION.fechaValidacion + "</span>";
 					} else {
-						datosMemorias[i][10] = "<span class='text_sin_atencion'>---</span>";
+						datosMemorias[i][11] = "<span class='text_sin_atencion'>---</span>";
 					}
 				} else {
-					datosMemorias[i][10] = "<span class='text_sin_atencion'>---</span>";
+					datosMemorias[i][11] = "<span class='text_sin_atencion'>---</span>";
 				}
 				if(resultadoTablero[i].VOBO_LAYOUT != undefined) {
 					if(resultadoTablero[i].VOBO_LAYOUT.fechaValidacion != undefined) {
@@ -402,12 +407,12 @@ function creatabla(){
 							cadenaAtraso += "&ATR_VOBOLAY";
 							esMdAtrasada = true;
 						}
-						datosMemorias[i][11] = "<span class='" + claseEstatus + "'>" + resultadoTablero[i].VOBO_LAYOUT.fechaValidacion + "</span>";
+						datosMemorias[i][12] = "<span class='" + claseEstatus + "'>" + resultadoTablero[i].VOBO_LAYOUT.fechaValidacion + "</span>";
 					} else {
-						datosMemorias[i][11] = "<span class='text_sin_atencion'>---</span>";
+						datosMemorias[i][12] = "<span class='text_sin_atencion'>---</span>";
 					}
 				} else {
-					datosMemorias[i][11] = "<span class='text_sin_atencion'>---</span>";
+					datosMemorias[i][12] = "<span class='text_sin_atencion'>---</span>";
 				}
 				if(resultadoTablero[i].JSONPTOOBRA != undefined) {
 					if(resultadoTablero[i].JSONPTOOBRA.fechaValidacion != undefined) {
@@ -428,15 +433,15 @@ function creatabla(){
 							esMdAtrasada = true;
 						}
 						if(resultadoTablero[i].PRESUPUESTO_OBRA != undefined) {
-							datosMemorias[i][12] = "<span class='" + claseEstatus + "'>$ " + formato(resultadoTablero[i].PRESUPUESTO_OBRA, true) + "</span>";
+							datosMemorias[i][13] = "<span class='" + claseEstatus + "'>$ " + formato(resultadoTablero[i].PRESUPUESTO_OBRA, true) + "</span>";
 						} else {
-							datosMemorias[i][12] = "<span class='" + claseEstatus + "'>---</span>";
+							datosMemorias[i][13] = "<span class='" + claseEstatus + "'>---</span>";
 						}
 					} else {
-						datosMemorias[i][12] = "<span class='text_sin_atencion'>---</span>";
+						datosMemorias[i][13] = "<span class='text_sin_atencion'>---</span>";
 					}
 				} else {
-					datosMemorias[i][12] = "<span class='text_sin_atencion'>---</span>";
+					datosMemorias[i][13] = "<span class='text_sin_atencion'>---</span>";
 				}
 				if(resultadoTablero[i].JSONPTOAUDITORIA != undefined) {
 					if(resultadoTablero[i].JSONPTOAUDITORIA.fechaValidacion != undefined) {
@@ -457,15 +462,15 @@ function creatabla(){
 							esMdAtrasada = true;
 						}
 						if(resultadoTablero[i].PRESUPUESTO_AUDITORIA != undefined) {
-							datosMemorias[i][13] = "<span class='" + claseEstatus + "'>$ " + formato(resultadoTablero[i].PRESUPUESTO_AUDITORIA, true) + "</span>";
+							datosMemorias[i][14] = "<span class='" + claseEstatus + "'>$ " + formato(resultadoTablero[i].PRESUPUESTO_AUDITORIA, true) + "</span>";
 						} else {
-							datosMemorias[i][13] = "<span class='" + claseEstatus + "'>---</span>";
+							datosMemorias[i][14] = "<span class='" + claseEstatus + "'>---</span>";
 						}
 					} else {
-						datosMemorias[i][13] = "<span class='text_sin_atencion'>---</span>";
+						datosMemorias[i][14] = "<span class='text_sin_atencion'>---</span>";
 					}
 				} else {
-					datosMemorias[i][13] = "<span class='text_sin_atencion'>---</span>";
+					datosMemorias[i][14] = "<span class='text_sin_atencion'>---</span>";
 				}
 				
 				if(resultadoTablero[i].VOBOFNL_OPERACIONES != undefined) {
@@ -486,12 +491,12 @@ function creatabla(){
 							cadenaAtraso += "&ATR_VOBOFINOPER";
 							esMdAtrasada = true;
 						}
-						datosMemorias[i][14] = "<span class='" + claseEstatus + "'>" + resultadoTablero[i].VOBOFNL_OPERACIONES.fechaValidacion + "</span>";
+						datosMemorias[i][15] = "<span class='" + claseEstatus + "'>" + resultadoTablero[i].VOBOFNL_OPERACIONES.fechaValidacion + "</span>";
 					} else {
-						datosMemorias[i][14] = "<span class='text_sin_atencion'></span>";
+						datosMemorias[i][15] = "<span class='text_sin_atencion'></span>";
 					}
 				} else {
-					datosMemorias[i][14] = "<span class='text_sin_atencion'>---</span>";
+					datosMemorias[i][15] = "<span class='text_sin_atencion'>---</span>";
 				}
 				if(resultadoTablero[i].MONTOVNT != undefined) {
 					if(resultadoTablero[i].VOBOFNL_OPERACIONES.fechaValidacion != undefined) {
@@ -506,12 +511,12 @@ function creatabla(){
 						} else if(resultadoTablero[i].VOBOFNL_OPERACIONES.estatus == "RECHAZADA") {
 							claseEstatus = "text_rechazada";
 						}
-						datosMemorias[i][15] = "<span class='" + claseEstatus + "'>$ " + formato(resultadoTablero[i].MONTOVNT, true) + "</span>";
+						datosMemorias[i][16] = "<span class='" + claseEstatus + "'>$ " + formato(resultadoTablero[i].MONTOVNT, true) + "</span>";
 					} else {
-						datosMemorias[i][15] = "<span class='text_sin_atencion'></span>";
+						datosMemorias[i][16] = "<span class='text_sin_atencion'></span>";
 					}
 				} else {
-					datosMemorias[i][15] = "<span class='text_sin_atencion'>---</span>";
+					datosMemorias[i][16] = "<span class='text_sin_atencion'>---</span>";
 				}
 				if(resultadoTablero[i].COMITE != undefined) {
 					if(resultadoTablero[i].COMITE.fechaValidacion != undefined) {
@@ -531,12 +536,12 @@ function creatabla(){
 							cadenaAtraso += "&ATR_COMTE";
 							esMdAtrasada = true;
 						}
-						datosMemorias[i][16] = "<span class='" + claseEstatus + "'>" + resultadoTablero[i].COMITE.fechaValidacion + "</span>";
+						datosMemorias[i][17] = "<span class='" + claseEstatus + "'>" + resultadoTablero[i].COMITE.fechaValidacion + "</span>";
 					} else {
-						datosMemorias[i][16] = "<span class='text_sin_atencion'></span>";
+						datosMemorias[i][17] = "<span class='text_sin_atencion'></span>";
 					}
 				} else {
-					datosMemorias[i][16] = "<span class='text_sin_atencion'>---</span>";
+					datosMemorias[i][17] = "<span class='text_sin_atencion'>---</span>";
 				}
 				if(resultadoTablero[i].CARGADATOS != undefined) {
 					if(resultadoTablero[i].CARGADATOS.fechaValidacion != undefined) {
@@ -556,12 +561,12 @@ function creatabla(){
 							cadenaAtraso += "&ATR_GDOCTOS";
 							esMdAtrasada = true;
 						}
-						datosMemorias[i][17] = "<span class='" + claseEstatus + "'>" + resultadoTablero[i].CARGADATOS.fechaValidacion + "</span>";
+						datosMemorias[i][18] = "<span class='" + claseEstatus + "'>" + resultadoTablero[i].CARGADATOS.fechaValidacion + "</span>";
 					} else {
-						datosMemorias[i][17] = "<span class='text_sin_atencion'></span>";
+						datosMemorias[i][18] = "<span class='text_sin_atencion'></span>";
 					}
 				} else {
-					datosMemorias[i][17] = "<span class='text_sin_atencion'>---</span>";
+					datosMemorias[i][18] = "<span class='text_sin_atencion'>---</span>";
 				}
 				
 				
@@ -583,12 +588,12 @@ function creatabla(){
 							cadenaAtraso += "&ATR_FIRMACONTR";
 							esMdAtrasada = true;
 						}
-						datosMemorias[i][18] = "<span class='" + claseEstatus + "'>" + resultadoTablero[i].FIRMA_CONTRATO.fechaValidacion + "</span>";
+						datosMemorias[i][19] = "<span class='" + claseEstatus + "'>" + resultadoTablero[i].FIRMA_CONTRATO.fechaValidacion + "</span>";
 					} else {
-						datosMemorias[i][18] = "<span class='text_sin_atencion'>---</span>";
+						datosMemorias[i][19] = "<span class='text_sin_atencion'>---</span>";
 					}
 				} else {
-					datosMemorias[i][18] = "<span class='text_sin_atencion'>---</span>";
+					datosMemorias[i][19] = "<span class='text_sin_atencion'>---</span>";
 				}
 				
 				if(resultadoTablero[i].CCO != undefined) {
@@ -609,12 +614,12 @@ function creatabla(){
 							cadenaAtraso += "&ATR_CENTRCOST";
 							esMdAtrasada = true;
 						}
-						datosMemorias[i][19] = "<span class='" + claseEstatus + "'>" + resultadoTablero[i].CCO.fechaValidacion + "</span>";
+						datosMemorias[i][20] = "<span class='" + claseEstatus + "'>" + resultadoTablero[i].CCO.fechaValidacion + "</span>";
 					} else {
-						datosMemorias[i][19] = "<span class='text_sin_atencion'></span>";
+						datosMemorias[i][20] = "<span class='text_sin_atencion'></span>";
 					}
 				} else {
-					datosMemorias[i][19] = "<span class='text_sin_atencion'>---</span>";
+					datosMemorias[i][20] = "<span class='text_sin_atencion'>---</span>";
 				}
 				
 				
@@ -636,12 +641,12 @@ function creatabla(){
 							cadenaAtraso += "&ATR_TRM_GES";
 							esMdAtrasada = true;
 						}
-						datosMemorias[i][20] = "<span class='" + claseEstatus + "'>" + resultadoTablero[i].TRAMITES.fechaValidacion + "</span>";
+						datosMemorias[i][21] = "<span class='" + claseEstatus + "'>" + resultadoTablero[i].TRAMITES.fechaValidacion + "</span>";
 					} else {
-						datosMemorias[i][20] = "<span class='text_sin_atencion'>---</span>";
+						datosMemorias[i][21] = "<span class='text_sin_atencion'>---</span>";
 					}
 				} else {
-					datosMemorias[i][20] = "<span class='text_sin_atencion'>---</span>";
+					datosMemorias[i][21] = "<span class='text_sin_atencion'>---</span>";
 				}
 				if(resultadoTablero[i].INICIO_OBRA != undefined) {
 					if(resultadoTablero[i].INICIO_OBRA.fechaValidacion != undefined) {
@@ -661,31 +666,32 @@ function creatabla(){
 							cadenaAtraso += "&ATR_INICOBA";
 							esMdAtrasada = true;
 						}
-						datosMemorias[i][21] = "<span class='" + claseEstatus + "'>" + resultadoTablero[i].INICIO_OBRA.fechaValidacion + "</span>";
+						datosMemorias[i][22] = "<span class='" + claseEstatus + "'>" + resultadoTablero[i].INICIO_OBRA.fechaValidacion + "</span>";
 					} else {
-						datosMemorias[i][21] = "<span class='text_sin_atencion'>---</span>";
+						datosMemorias[i][22] = "<span class='text_sin_atencion'>---</span>";
 					}
-				} else {
-					datosMemorias[i][21] = "<span class='text_sin_atencion'>---</span>";
-				}
-				if(resultadoTablero[i].ESTIMADO_FINOBRA != undefined) {
-					datosMemorias[i][22] = "<span class=''>" + resultadoTablero[i].ESTIMADO_FINOBRA + "</span>";
 				} else {
 					datosMemorias[i][22] = "<span class='text_sin_atencion'>---</span>";
 				}
-				if(resultadoTablero[i].ESTIMADO_APERTURA != undefined) {
-					datosMemorias[i][23] = "<span class=''>" + resultadoTablero[i].ESTIMADO_APERTURA + "</span>";
+				if(resultadoTablero[i].ESTIMADO_FINOBRA != undefined) {
+					datosMemorias[i][23] = "<span class=''>" + resultadoTablero[i].ESTIMADO_FINOBRA + "</span>";
 				} else {
 					datosMemorias[i][23] = "<span class='text_sin_atencion'>---</span>";
 				}
-				if(resultadoTablero[i].INAUGURACIONINICIAL != undefined) {
-					datosMemorias[i][24] = "<span class=''>" + resultadoTablero[i].INAUGURACIONINICIAL + "</span>";
+				if(resultadoTablero[i].ESTIMADO_APERTURA != undefined) {
+					datosMemorias[i][24] = "<span class=''>" + resultadoTablero[i].ESTIMADO_APERTURA + "</span>";
 				} else {
 					datosMemorias[i][24] = "<span class='text_sin_atencion'>---</span>";
 				}
-				datosMemorias[i][25] = resultadoTablero[i].MDID;
-				datosMemorias[i][26] = "#&" + resultadoTablero[i].ESTATUSMD + "&#";
-				datosMemorias[i][27] = cadenaAtraso;
+				if(resultadoTablero[i].INAUGURACIONINICIAL != undefined) {
+					datosMemorias[i][25] = "<span class=''>" + resultadoTablero[i].INAUGURACIONINICIAL + "</span>";
+				} else {
+					datosMemorias[i][25] = "<span class='text_sin_atencion'>---</span>";
+				}
+				datosMemorias[i][26] = resultadoTablero[i].MDID;
+				datosMemorias[i][27] = "#&" + resultadoTablero[i].ESTATUSMD + "&#";
+				datosMemorias[i][28] = cadenaAtraso;
+				datosMemorias[i][29] = "$#&" + resultadoTablero[i].ESTATUSFINAL + "&#$";
 				if(esMdAtrasada) {
 					datosMemorias[i][0] = "<div class='circle_atrasadas_semaforo' style='margin-left: 8px;'></div><span style='font-size:1px; color: #FFF;'>0</span>";
 				} else {
@@ -696,7 +702,7 @@ function creatabla(){
 			initTablaMemoriasTablero('DivTablaTablero', datosMemorias, 'tablaMemoriasTablero');
 			
 			$("#tablaMemoriasTablero tr td").click(function() {
-				var mdId = $(this).parent().find("td:eq(25)").html();
+				var mdId = $(this).parent().find("td:eq(26)").html();
 				var nombreMd=$(this).parent().find("td:eq(4)").html();
 				
 				if(clase!=""){	// -- si hay alguna opcion seleccionada (botones)
@@ -727,7 +733,7 @@ function creatabla(){
 						var mensaje = "";
 						var motivoRechazo = "";
 						switch(col) {
-							case 7:
+							case 8:
 							if(resultadoTablero[i].PRE_OPERACIONES.validacion == "SI") {
 								usuario = resultadoTablero[i].PRE_OPERACIONES.usuario != null ? resultadoTablero[i].PRE_OPERACIONES.usuario : '-';
 								
@@ -747,7 +753,7 @@ function creatabla(){
 								cargaMensajeModal('PRE-OPERACIONES', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
 							}
 							break;
-							case 8:
+							case 9:
 							if(resultadoTablero[i].PRE_AUDITORIA.validacion == "SI") {
 								usuario = resultadoTablero[i].PRE_AUDITORIA.usuario != null ? resultadoTablero[i].PRE_AUDITORIA.usuario : '-';
 								
@@ -767,7 +773,7 @@ function creatabla(){
 								cargaMensajeModal('CONTEOS', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
 							}
 							break;
-							case 9:
+							case 10:
 								if(resultadoTablero[i].PRE_GESTORIA.validacion == "SI") {
 									usuario = resultadoTablero[i].PRE_GESTORIA.usuario != null ? resultadoTablero[i].PRE_GESTORIA.usuario : '-'; 
 									
@@ -787,7 +793,7 @@ function creatabla(){
 									cargaMensajeModal('PRE-GESTORIA', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
 								}
 								break;
-							case 10:
+							case 11:
 								if(resultadoTablero[i].PRE_CONSTRUCCION.validacion == "SI") {
 									usuario = resultadoTablero[i].PRE_CONSTRUCCION.usuario != null ? resultadoTablero[i].PRE_CONSTRUCCION.usuario : '-';
 									
@@ -807,7 +813,7 @@ function creatabla(){
 									cargaMensajeModal('PRE-CONSTRUCCION', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
 								}
 								break;
-							case 11:
+							case 12:
 								if(resultadoTablero[i].VOBO_LAYOUT.validacion == "SI") {
 									usuario = resultadoTablero[i].VOBO_LAYOUT.usuario != null ? resultadoTablero[i].VOBO_LAYOUT.usuario : '-';
 									
@@ -827,7 +833,7 @@ function creatabla(){
 									cargaMensajeModal('VOBO LAYOUT', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
 								}
 								break;
-							case 12:
+							case 13:
 								if(resultadoTablero[i].JSONPTOOBRA.validacion == "SI") {
 									usuario = resultadoTablero[i].JSONPTOOBRA.usuario != null ? resultadoTablero[i].JSONPTOOBRA.usuario : '-';
 									
@@ -847,7 +853,7 @@ function creatabla(){
 									cargaMensajeModal('PPTO CONSTRUCCIÓN', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
 								}
 								break;
-							case 13:
+							case 14:
 								if(resultadoTablero[i].JSONPTOAUDITORIA.validacion == "SI") {
 									usuario = resultadoTablero[i].JSONPTOAUDITORIA.usuario != null ? resultadoTablero[i].JSONPTOAUDITORIA.usuario : '-';
 									
@@ -867,7 +873,7 @@ function creatabla(){
 									cargaMensajeModal('PPTO AUDITORIA', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
 								}
 								break;
-							case 14:
+							case 15:
 								if(resultadoTablero[i].VOBOFNL_OPERACIONES.validacion == "SI") {
 									usuario = resultadoTablero[i].VOBOFNL_OPERACIONES.usuario != null ? resultadoTablero[i].VOBOFNL_OPERACIONES.usuario : '-';
 									
@@ -887,7 +893,7 @@ function creatabla(){
 									cargaMensajeModal('VOBO FINAL OPERACIONES', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
 								}
 								break;
-							 case 15:
+							 case 16:
 								if(resultadoTablero[i].VOBOFNL_OPERACIONES.validacion == "SI") {
 									usuario = resultadoTablero[i].VOBOFNL_OPERACIONES.usuario != null ? resultadoTablero[i].VOBOFNL_OPERACIONES.usuario : '-';
 									
@@ -907,7 +913,7 @@ function creatabla(){
 									cargaMensajeModal('VOBO FINAL OPERACIONES', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
 								}
 								break;
-							case 16:
+							case 17:
 								if(resultadoTablero[i].COMITE.validacion == "SI") {
 									usuario = resultadoTablero[i].COMITE.usuario != null ? resultadoTablero[i].COMITE.usuario : '-';
 									
@@ -927,7 +933,7 @@ function creatabla(){
 									cargaMensajeModal('COMITE', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
 								}
 								break;
-							case 17:
+							case 18:
 								if(resultadoTablero[i].CARGADATOS.validacion == "SI") {
 									usuario = resultadoTablero[i].CARGADATOS.usuario != null ? resultadoTablero[i].CARGADATOS.usuario : '-';
 									
@@ -947,7 +953,7 @@ function creatabla(){
 									cargaMensajeModal('CARGA DOCUMENTOS', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
 								}
 								break;
-							case 18:
+							case 19:
 								if(resultadoTablero[i].FIRMA_CONTRATO.validacion == "SI") {
 									usuario = resultadoTablero[i].FIRMA_CONTRATO.usuario != null ? resultadoTablero[i].FIRMA_CONTRATO.usuario : '-';
 									
@@ -967,7 +973,7 @@ function creatabla(){
 									cargaMensajeModal('CONTRATO FIRMADO', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
 								}
 								break;
-							case 19:
+							case 20:
 								if(resultadoTablero[i].CCO.validacion == "SI") {
 									usuario = resultadoTablero[i].CCO.usuario != null ? resultadoTablero[i].CCO.usuario : '-';
 									
@@ -987,7 +993,7 @@ function creatabla(){
 									cargaMensajeModal('CECO', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
 								}
 								break;
-							case 20:
+							case 21:
 								if(resultadoTablero[i].TRAMITES.validacion == "SI") {
 									usuario = resultadoTablero[i].TRAMITES.usuario != null ? resultadoTablero[i].TRAMITES.usuario : '-';
 									
@@ -1007,7 +1013,7 @@ function creatabla(){
 									cargaMensajeModal('GESTORÍA', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
 								}
 								break;
-							case 21:
+							case 22:
 								if(resultadoTablero[i].INICIO_OBRA.validacion == "SI") {
 									usuario = resultadoTablero[i].INICIO_OBRA.usuario != null ? resultadoTablero[i].INICIO_OBRA.usuario : '-';
 									

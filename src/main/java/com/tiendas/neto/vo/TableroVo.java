@@ -13,6 +13,7 @@ public class TableroVo implements Serializable {
 	private String fechaRecepcionMd;
 	private String fuenteMd;
 	private String nombreTda;
+	private String region;
 	private String categoria;
 	private int puntuacion;
 	private String voboInicialOperaciones;
@@ -112,6 +113,18 @@ public class TableroVo implements Serializable {
 	 */
 	public void setNombreTda(String nombreTda) {
 		this.nombreTda = nombreTda;
+	}
+	/**
+	 * @return the region
+	 */
+	public String getRegion() {
+		return region;
+	}
+	/**
+	 * @param region the region to set
+	 */
+	public void setRegion(String region) {
+		this.region = region;
 	}
 	/**
 	 * @return the categoria

@@ -461,3 +461,6 @@ a.linksLogin{
 .inicio_user2{
 	display:none;
 }
+.dato_faltante {
+	border-color: #FF0000;
+}

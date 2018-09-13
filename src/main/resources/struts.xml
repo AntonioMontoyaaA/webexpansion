@@ -53,6 +53,11 @@
          		class = "com.tiendas.neto.action.RecuperaPassAction" 
          		method = "execute">
     </action>
+    
+    <action name = "reestablecePassAction" 
+         		class = "com.tiendas.neto.action.ReestablecePassAction" 
+         		method = "execute">
+    </action>
 	
 	<!-- ************************* NOTIFICACIONES ***************************** -->
 	<action name = "notificacionesAction" 

@@ -32,4 +32,8 @@ public class SingletonProperties {
 	public String getPropiedad(String clave) {
 		return p.getProperty("prefijo") + p.getProperty(clave);
 	}
+	
+	public String getUrl(String clave) {
+		return p.getProperty(clave);
+	}
 }

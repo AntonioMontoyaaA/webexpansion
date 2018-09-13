@@ -1,3 +1,5 @@
+var reestablecePass = false;
+
 $(function(){
 	if($('#respuesta').val()=='error'){
 		
@@ -12,38 +14,88 @@ $(function(){
 });
 
 function olvidaPass(){
-	$('#idusuario').val(''); 
+	reestablecePass = false;
+	$("#tokenLabel").hide();
+	$("#tokenText").hide();
+	$("#tokenText").val('');
+	$('#idusuario').val('');
+	$('#mensaje').text('');
+	$('#idusuario').removeClass("dato_faltante");
+	$('#idusuario').focus();
 	$('#informacion').hide();
+	$('#cajas').show();
 	$('#modalPass').modal('show');
 }
-function recuperaPass(){
-	if($('#idusuario').val()!=""){
+function recuperaPass() {
+	$('#mensaje').text('');
 	
-		 $.ajax({
-		        type     : "POST",
-		        url      : 'recuperaPassAction',
-		        data     : {
-		        	'usuario': $('#idusuario').val() 
-		        },
-		        async	 : false,
-		        beforeSend : function(){
-		        	$("#loadingPagina").modal('show');
-		        },
-		        success  : function(data) {
-		        	$("#loadingPagina").modal('hide');
+	if(!reestablecePass) {
+		if($('#idusuario').val()!="") {
+			$('#idusuario').removeClass("dato_faltante");
+				$.ajax({
+					type     : "POST",
+					url      : 'recuperaPassAction',
+					data     : {
+						'usuario': $('#idusuario').val()
+					},
+					async	 : false,
+					beforeSend : function(){
+						$("#loadingPagina").modal('show');
+					},
+					success  : function(data) {
+						$("#loadingPagina").modal('hide');
 		        	
-		        	if(data.codigo != 200) {
-		        		$('#idusuario').val(''); 
-		    			$('#mensaje').text("Ocurrio un error: "+data.mensaje );
-		    			$('#informacion').show();
-		    		} else {
-		    			$('#cajas').hide();
-		    			$('#mensaje').text(data.mensaje);
-		    			$('#informacion').show();
-		    		}
-		        }
-		      
-		 });
+						if(data.codigo != 200) {
+							$('#idusuario').val(''); 
+							$('#mensaje').text("Ocurrio un error: "+data.mensaje );
+							$('#informacion').show();
+						} else {
+							//$('#cajas').hide();
+							//$('#mensaje').text(data.mensaje);
+							//$('#informacion').show();
+							$('#idusuario').attr('readonly', true);
+							$("#tokenLabel").show();
+							$("#tokenText").show();
+							$("#tokenBoton").text("Reestablecer");
+							reestablecePass = true;
+						}
+					}
+				});
+		} else {
+			$('#idusuario').addClass("dato_faltante");
+		}
+	} else if(reestablecePass) {
+		if($('#idclave').val()!="") {
+			$('#idclave').removeClass("dato_faltante");
+				$.ajax({
+					type     : "POST",
+					url      : 'reestablecePassAction',
+					data     : {
+						'usuario': $('#idusuario').val(),
+						'token': $('#idclave').val()
+					},
+					async	 : false,
+					beforeSend : function(){
+						$("#loadingPagina").modal('show');
+					},
+					success  : function(data) {
+						$("#loadingPagina").modal('hide');
+		        	
+						if(data.codigo != 200) {
+							$('#idclave').val(''); 
+							$('#mensaje').text("Ocurrio un error: "+data.mensaje );
+							$('#informacion').show();
+						} else {
+							$('#cajas').hide();
+							$('#mensaje').text(data.mensaje);
+							$('#informacion').show();
+							$('#idusuario').attr('readonly', false);
+						}
+					}
+				});
+		} else {
+			$('#idclave').addClass("dato_faltante");
+		}
 	}
 }
 

@@ -142,10 +142,13 @@
 				<div class="modal-body">
 					<div class="row" id="cajas">
 						<div class="col-lg-6">No. de empleado</div>
-						<div class="col-lg-6"><input type="text" id="idusuario"></div>
+						<div class="col-lg-6"><input type="text" id="idusuario" style="padding-left: 5px;"></div>
+						
+						<div id="tokenLabel" class="col-lg-6" style="padding-top: 15px; display: none;">Introduce la clave enviada a tu celular</div>
+						<div id="tokenText" class="col-lg-6" style="padding-top: 15px; display: none"><input type="text" id="idclave" style="padding-left: 5px;"></div>
 						
 						<div class="col-12" style="text-align:center; margin-top:20px">
-							<button type="button" style="padding:0px 10px;"" onclick="recuperaPass()">Buscar</button>
+							<button id="tokenBoton" type="button" style="padding:0px 10px;"" onclick="recuperaPass()">Buscar</button>
 						</div>	
 					</div>
 					<div class="row" id="informacion" style="display:none;">

@@ -351,7 +351,7 @@ function initTablaMemoriasTablero(nombreDiv, datosDesgloseMemorias, nombreTabla)
 			 "aoColumnDefs": [ {
 									"sClass": "center",
 									"aTargets": [ 0,1 ]
-			 					},{ "sType": 'extract-date', "aTargets": [2,3,7,9,10,11,14,16,17,18,19,20,21,22,23,24] }
+			 					},{ "sType": 'extract-date', "aTargets": [2,3,7,8,10,11,12,15,17,18,19,20,21,22,23,24,25] }
 			 			]
 	});	
 	

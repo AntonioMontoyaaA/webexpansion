@@ -173,7 +173,7 @@ function mueveReloj(){
 }
 
 function popover(){ //popover del header
-	 $('#salir').popover({
+	 $('#perfil').popover({
 		 container: 'body',
 		 html:true
 	 });

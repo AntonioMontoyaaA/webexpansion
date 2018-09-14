@@ -285,7 +285,7 @@ a.links{
 background-image: url('https://mdbootstrap.com/img/svg/hamburger7.svg?color=0069ac');
 }
 .navbar_fondo{
-	background: linear-gradient(#254581, #0E121C);
+	background: #071B36;
 	padding:0rem 0rem;
 }
 .navbar_borde{
@@ -370,6 +370,9 @@ body{
 .letra{
 	font-family: "Helvetica Neue" !important;
 	font-weight: normal;
+}
+.t26{
+	font-size:26px;
 }
 .t18{
 	font-size:18px;
@@ -460,6 +463,10 @@ span.gris{
 
 /* -------------------------------------------- POPOVER DEL HEADER ------------------------*/
 /* ========== BEGIN POPOVER 1 ========== */
+.opcionPerfil:hover{
+	background:#F4F4F4;
+}
+
 .titulo_avisos{
 	border-bottom:2px solid #D1D1D1;
 	padding-left:10px;

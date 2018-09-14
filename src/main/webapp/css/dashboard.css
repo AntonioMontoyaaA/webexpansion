@@ -1,3 +1,8 @@
+/*distribucion*/
+.graficas1{
+	height:20%;
+}
+
  /*alineacion de titulos*/
 .fecha{
 	margin-left:33%;
@@ -54,48 +59,116 @@ span.estilo_dato{
 }
 
 /* ------------------------------------------- GRAFICAS --------------*/
-/* ------------------------------------------- GRAFICA PROGRESO GENERAL DE AREAS --------------*/
-
-#container .highcharts-point{
+.highcharts-axis-line, .highcharts-point, .highcharts-tick{
+	stroke-width: 0;
+}
+.highcharts-point{
 	width:13px;
 }
-
-#container{
-	padding-top:25px;
-	min-width: 200px;
-	height: 35%;
-	margin: 0 auto;
-}
-#container_sm1{
-	display:none;
-	padding-top:25px;
-	height: 250;
-	margin: 0 auto;
-}
-#container_sm2{
-	display:none;
-	padding-top:25px;
-	height: 350;
-	margin: 0 auto;
-}
-
-#container_psemanal{
-	padding-top:25px;
-	min-width: 200px;
-	height: 35%;
-	margin: 0 auto;
+#container_apmensual .highcharts-point{
+	width:15px;
 }
 #container_apmensual{
-	min-width: 200px;
-	height: 22%;
+	height: 30%;
 	margin: 0 auto;
 }
-#container_proceso,#container_atrasadas,#container_autorizadas,#container_rechazadas{
-	min-width: 100px;
-	height: 21%;
-	max-width: auto;
-	margin: 0 auto
+#container_apmensual .highcharts-yaxis-labels {
+	display:none;
+}
+
+#container_activas, #container_atrasadas, #container_canceladas{
+	height: 25%;
+	margin: 0 auto;
+}
+#container_activas .highcharts-axis-labels, #container_activas .highcharts-yaxis-labels {
+	display:none;
+}
+#container_atrasadas .highcharts-axis-labels, #container_activas .highcharts-yaxis-labels {
+	display:none;
+}
+#container_canceladas .highcharts-axis-labels, #container_activas .highcharts-yaxis-labels {
+	display:none;
 } 
+.icono_medida{
+	height:35px;
+}
+/* estilos del diagrama de proceso*/
+.simple{
+	width:6.6%;
+	position: relative;
+	float:left;
+	background:transparent;
+	
+}
+.doble{
+	position: relative;
+	bottom:104;
+	margin: 0 auto;
+}
+.hexa{
+	text-align:center;
+	background-repeat: no-repeat;
+	background-position: center;
+	height:68px;
+	width:50px;
+	margin: 70 auto;
+}
+.linea{
+	border-top:1px solid white;
+	height:1px;
+	position:relative;
+	top:134;	
+}
+.lineadoble{
+	/* background:transparent; */
+	border:1px solid white;
+	height:140;
+	position:relative;
+	top:66;
+	margin: 0 auto;
+	border-radius: 3px;
+}
+#proceso{
+padding-top:3%;
+min-width:1254;
+}
+.titulo_hex{
+	height:30;
+	font-size:11px;
+	bottom:15px;
+	position:relative;
+	text-align:center;
+	top:87;
+	
+}.titulo_hex_doble{
+	height:30;
+	font-size:11px;
+	position:relative;
+	text-align:center;
+}
+.cont_hex{
+	top:17px;
+	font-size:22px;
+	position:relative;
+}
+.cont_hex_doble{
+	top:17px;
+	font-size:22px;
+	position:relative;
+}
+.pie_hex{
+	text-align:center;
+	font-size:11px;
+	position:relative;
+	bottom:75;
+}
+.pie_hex_doble{
+	height:45;
+	text-align:center;
+	font-size:11px;
+	bottom:0;
+	position:relative;
+}
 /* ESTILOS DE LA SECCION DE RESUMEN, CIRCULOS*/
 .numero_grande{
 	font-size:2.5em;

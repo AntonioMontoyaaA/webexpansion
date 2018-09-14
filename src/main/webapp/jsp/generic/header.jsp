@@ -41,17 +41,20 @@
 		 ><img src="img/web_AVISOS.png"  style="margin-bottom:12px;"><div id="alerta_circulo"></div></a></span>
 		&nbsp;
 		
-		<span class="my-2 my-sm-0"><a id="salir" tabindex="0" role="tooltip" data-toggle="popover" data-trigger="focus" data-placement="bottom"
+		<span class="my-2 my-sm-0"><a id="perfil" tabindex="0" role="tooltip" data-toggle="popover" data-trigger="focus" data-placement="bottom"
 		 data-template='<div class="popover1">
 		 	<div class="arrow"></div>
 		 	<h3 class="popover-header"></h3>
 		 	<div class="popover-body"></div>
 		 </div>' 
                      
-		data-content="<form id='logout' action='Logout'>
-		 <div id='salir' class='cursor t14 negrita azul' style='padding:5px 10px;' onclick='salir()'>Cerrar Sesión </div>
-		</form>" >
-		<img src="img/user.png" style="padding-right:15px; margin-bottom:15px;"></a></span>
+		data-content="<div>
+		 <div class='t12 negrita azul titulo_avisos'>Opciones</div>
+		 <!-- <div id='editaPerfil' class='cursor t12 negrita azul opcionPerfil' style='padding:5px 10px;' onclick='cambiaPass()'>Cambiar contraseña </div> -->
+		 <form id='logout' action='Logout'>
+		 <div id='salir' class='cursor t12 negrita azul opcionPerfil' style='padding:5px 10px; margin-bottom:3px;' onclick='salir()'>Cerrar Sesión </div></form>
+		 </div>" >
+		 <img src="img/user.png" style="padding-right:15px; margin-bottom:15px;"></a></span>
 		</form>
 		</div>	
 </nav>

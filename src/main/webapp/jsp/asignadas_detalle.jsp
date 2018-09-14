@@ -15,6 +15,8 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/dropzone/dropzone.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/asignadas.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/utiles/modalImages.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/slick/slick.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/slick/slick-theme.css" />
 <title>Detalle MD</title>
 </head>
 <body>
@@ -126,7 +128,7 @@
 			<div class="col-12 titulo_seccion">	
 			<div class="row">
 			<div class="col-lg-6">
-			<span class="t12 azul" id="labelNombre"></span><input class="negrita azul t14 text_edita" value="---" type="text" id="nombreMd" readonly />
+			<span class="titulo_detalle_md_20" id="labelNombre"></span><input class="titulo_detalle_md_20 text_edita" style="text-transform: uppercase;" value="---" type="text" id="nombreMd" readonly />
 			</div>
 			<div class="col-lg-6 right">
 			<span>
@@ -137,31 +139,50 @@
 			</span>
 			</div>
 			
-			<div class="col-lg-6" id="responsable">
-			<span class="azul t12" style="font-size: .7em;">Creado por <span id="creadorMd">---</span></span>
+			<div class="col-lg-7" id="responsable">
+			<span class="contenido_cajas_20">Creado por <span id="creadorMd">---</span></span>
 			</div>			
 			
-			<div class="col-lg-6 right">
-				<span class="azul t12">Creada el <span id="fechaCreacion">---</span></span>
+			<div class="col-lg-5 right">
+				<span class="contenido_cajas_20">Creada el <span id="fechaCreacion">---</span></span>
 			</div>
-			<div class="col-4 center"><span class="t12 negrita center">CATEGORÍA</span><br>
+			<div class="col-4 center"><span class="titulo_detalle_md_20 center">CATEGORÍA</span><br>
 				<span id="categoriaMd" class="circulo negrita">---</span></div>
-			<div class="col-4 center"><span class="t12 negrita center">PUNTUACIÓN</span><br>
+			<div class="col-4 center"><span class="titulo_detalle_md_20 center">PUNTUACIÓN</span><br>
 				<span id="estrellasMd" class="azul t12"></span><br>
-				<span class="azul t12"><span id="puntuacionMd">---</span></span><br/>
+				<span class="contenido_cajas_20"><span id="puntuacionMd">---</span></span><br/>
 			</div>
-			<div class="col-4 center"><span class="t12 negrita center" id="tipoMdTitulo" style="display:none;">TIPO </span><span class="azul t12"><span id="tipoMdtexto"></span></span><br>
+			<div class="col-4 center">
+				<span class="titulo_detalle_md_20 center" id="tipoMdTitulo" style="display:none;">TIPO </span><br>
 				<span id="tipoMdImagen" class="azul t12"></span><br>
-				<span class="azul t12 cursor" style="text-decoration:underline;" onclick="consultaScore()"><span>Ver detalle</span></span>
+				<span class="contenido_cajas_20"><span id="tipoMdtexto"></span></span>
+				<!-- <span class="azul t12 cursor" style="text-decoration:underline;" onclick="consultaScore()"><span>Ver detalle</span></span>-->
 			</div>	
 			</div>
-				<div class="row center">
-					<span class="negrita azul t14">UBICACIÓN</span>
-				</div>
+			<div class="row" style="padding-top: 5px;">
+				<div class="col-lg-12"><span class="negrita azul t14">UBICACIÓN</span></div>
 			</div>
-				<div class="col-12" id="map"></div>
-					<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCuFdkYUDivTv_TrR4RZMWP1NYCA0MK2YM">
-					</script>
+			</div>
+			<div class="col-12" id="map"></div>
+				<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCuFdkYUDivTv_TrR4RZMWP1NYCA0MK2YM">
+				</script>
+			</div>
+		</div>
+		</div>
+		
+		<div class="col-lg-4 altura1">
+		<div class="row divs_p">
+			<div class="slick_main col-lg-12 menupr_estilos fblanco altura1">
+				<div class="col-12 titulo_seccion">
+					<span class="titulo_detalle_md_20">SCORE CARD</span><br/>
+					<span class="titulo_detalle_md_20 sangria_cuerpo">Macro ubicaci&oacute;n</span><br/>
+					<div id="macroUbicacionChart"></div>
+				</div>
+				<div class="col-12 titulo_seccion">
+					<span class="titulo_detalle_md_20">SCORE CARD</span><br/>
+					<span class="titulo_detalle_md_20 sangria_cuerpo">Micro ubicaci&oacute;n</span><br/>
+					<div id="microUbicacionChart"></div>
+				</div>
 			</div>
 		</div>
 		</div>
@@ -170,41 +191,7 @@
 		<div class="row divs_p">
 			<div class="col-lg-12 menupr_estilos fblanco altura1">
 			<div class="col-12 titulo_seccion">
-				<span class="negrita azul t14">1) Datos del sitio</span>
-				<div id="modulo1Edita" class="float_right" style="display: none;">
-                    <span><img id="historial1" title="Historial" onclick="historialPantalla(1, this);" style="cursor: pointer;" src="img/historial_mark.png">&nbsp;</span>
-                    <span><img id="edita1" title="Guarda cambios" onclick="editaPantalla(1, this);" style="cursor: pointer;" src="img/edita_mark.png"></span>
-                </div>
-				<div id="modulo1Creacion" class="float_right">
-					<span><img id="autoriza1" title="Autoriza punto" class="sin_autorizar b_autorizar" onclick="autorizaPantalla(1, this);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
-					</span>
-						<span><img id="rechaza1" title="Rechaza punto" class="sin_autorizar b_rechazar" onclick="rechazaPantalla(1, this);" style="cursor: pointer;" src="img/rechaza_mark.png">
-						</span>
-				</div>
-			</div>
-			<div id="modulo1Datos" style="width: 100%;position: relative; float: left;text-align: left">
-					<!--<span class="negrita azul t14 sangria_cuerpo">Dirección</span><br/>
-					<span id="direccion" class="azul t12 sangria_doble_cuerpo">---</span><br/> -->
-					<span class="negrita azul t14 sangria_cuerpo">Calle</span><br/>
-					<span id="calleMd" class="azul t12 sangria_doble_cuerpo">---</span><br/>
-					<span class="negrita azul t14 sangria_cuerpo">Colonia</span><br/>
-					<span id="coloniaMd" class="azul t12 sangria_doble_cuerpo">---</span><br/>
-					<span class="negrita azul t14 sangria_cuerpo">Ciudad</span><br/>
-					<span id="ciudadMd" class="azul t12 sangria_doble_cuerpo">---</span><br/>
-					<span class="negrita azul t14 sangria_cuerpo">Estado</span><br/>
-					<span id="estadoMd" class="azul t12 sangria_doble_cuerpo">---</span><br/>
-					<span class="negrita azul t14 sangria_cuerpo">Código postal</span><br/>
-					<span id="codiPostalMd" class="azul t12 sangria_doble_cuerpo">---</span><br/>
-			</div>
-			</div>
-		</div>
-		</div>
-		
-		<div class="col-lg-4 altura1">
-		<div class="row divs_p">
-			<div class="col-lg-12 menupr_estilos fblanco altura1">
-			<div class="col-12 titulo_seccion">
-				<span class="negrita azul t14">2) Datos del propietario</span>
+				<span class="titulo_detalle_md_20">DATOS DEL SITIO Y PROPIETARIO</span>
 				<div id="modulo2Edita" class="float_right" style="display: none;">
                     <span><img id="historial2" title="Historial" onclick="historialPantalla(2, this);" style="cursor: pointer;" src="img/historial_mark.png">&nbsp;</span>
                     <span><img id="edita2" title="Guarda cambios" onclick="editaPantalla(2, this);" style="cursor: pointer;" src="img/edita_mark.png"></span>
@@ -218,16 +205,26 @@
 					</span>
 				</div>
 			</div>
-			<div id="modulo2Datos" style="width: 100%;position: relative; float: left;text-align: left">
-				<span class="negrita azul t14 sangria_cuerpo">Número propietario</span><br/>
-				<span id="propietarioId" class="azul t12 sangria_doble_cuerpo">---</span><br/>
-				<span class="negrita azul t14 sangria_cuerpo">Nombre</span><br/>
-				<span id="nombrePropietario" class="azul t12 sangria_doble_cuerpo">---</span><br/>
-				<span class="negrita azul t14 sangria_cuerpo">Teléfono</span><br/>
-				<span id="telefonoPropietario" class="azul t12 sangria_doble_cuerpo">---</span><br/>
-				<span class="negrita azul t14 sangria_cuerpo">Email</span><br/>
-				<span id="emailPropietario" class="azul t12 sangria_doble_cuerpo">---</span><br/>
-				<span id="rentaANeto" class="negrita azul t14 sangria_doble_cuerpo">---</span><br/>
+			<div class="row" id="modulo2Datos" style="width: 100%;position: relative; float: left;text-align: left">
+				<div class="col-lg-12 padding_top_botom_5">
+					<span class="titulo_detalle_md_20 sangria_cuerpo">Direcci&oacute;n</span><br/>
+					<span id="direccion" class="contenido_cajas_20 sangria_doble_cuerpo">---</span><br/>
+				</div>
+				<div class="col-lg-12 padding_top_botom_5">
+					<span class="titulo_detalle_md_20 sangria_cuerpo">Nombre propietario</span><br/>
+					<span id="nombrePropietario" class="contenido_cajas_20 sangria_doble_cuerpo">---</span><br/>
+				</div>
+				<div class="col-lg-12 padding_top_botom_5">
+					<span class="titulo_detalle_md_20 sangria_cuerpo">Teléfono</span><br/>
+					<span id="telefonoPropietario" class="contenido_cajas_20 sangria_doble_cuerpo">---</span><br/>
+				</div>
+				<div class="col-lg-12 padding_top_botom_5">
+					<span class="titulo_detalle_md_20 sangria_cuerpo">Email</span><br/>
+					<span id="emailPropietario" class="contenido_cajas_20 sangria_doble_cuerpo">---</span><br/>
+				</div>
+				<div class="col-lg-12 padding_top_botom_5">
+					<span id="rentaANeto" class="titulo_detalle_md_20 sangria_doble_cuerpo">---</span><br/>
+				</div>
 			</div>
 			</div>
 		</div>
@@ -235,63 +232,61 @@
 
 			<div class="col-lg-12">
 				<div class="row divs_p">
-					<div class="col-lg-12 menupr_estilos fazul">
-						<div class="col-12 titulo_seccion">
-							<span class="negrita blanco t14">3) Superficie</span>
-							<div id="modulo3Edita" class="float_right" style="display: none;">
-                                <span><img id="historial3" title="Historial" onclick="historialPantalla(3, this);" style="cursor: pointer;" src="img/historial_mark.png">&nbsp;</span>
-                                <span><img id="edita3" title="Guarda cambios" onclick="editaPantalla(3, this);" style="cursor: pointer;" src="img/edita_mark.png"></span>
-                            </div>
-							<div id="modulo3Creacion" class="float_right">
-								<%-- <span class="negrita blanco t14">Puntos: </span> <span
-									id="puntosSuperficie" class="negrita blanco t14">---</span>  --%>
-									<span>
-									<img id="autoriza3" title="Autoriza punto"
-									class="sin_autorizar b_autorizar"
-									onclick="autorizaPantalla(3, this);" style="cursor: pointer;"
-									src="img/autoriza_mark.png">&nbsp;
-								</span> <span> <img id="rechaza3" title="Rechaza punto"
-									class="sin_autorizar b_rechazar"
+					<div class="col-lg-12 menupr_estilos fblanco">
+						<div class="row titulo_seccion">
+							<div class="col-lg-8">
+								<span class="titulo_detalle_md_20">SUPERFICIE</span>
+							</div>
+							<div class="col-lg-2">
+								<input type="checkbox" class="form-check-input" id="esquina"  onclick="return false;">
+    							<label class="contenido_cajas_20" for="esquina">Local en esquina</label>
+							</div>
+							<div class="col-lg-2">
+								<div id="modulo3Edita" class="float_right" style="display: none;">
+                                	<span><img id="historial3" title="Historial" onclick="historialPantalla(3, this);" style="cursor: pointer;" src="img/historial_mark.png">&nbsp;</span>
+                                	<span><img id="edita3" title="Guarda cambios" onclick="editaPantalla(3, this);" style="cursor: pointer;" src="img/edita_mark.png"></span>
+                            	</div>
+								<div id="modulo3Creacion" class="float_right">
+									<%-- <span class="negrita blanco t14">Puntos: </span> <spanid="puntosSuperficie" class="negrita blanco t14">---</span>  --%>
+										<span>
+											<img id="autoriza3" title="Autoriza punto" class="sin_autorizar b_autorizar" onclick="autorizaPantalla(3, this);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
+										</span> 
+										<span> <img id="rechaza3" title="Rechaza punto" class="sin_autorizar b_rechazar"
 									onclick="rechazaPantalla(3, this);" style="cursor: pointer;"
 									src="img/rechaza_mark.png">
-								</span> <a id="superficieTip" tabindex="0" class="question_mark b_tip"
-									role="" data-toggle="popover" data-trigger="focus"
-									data-placement="bottom" data-content=""> <img
-									style="cursor: pointer;" src="img/question.png">
-								</a>
-
+									</span> <a id="superficieTip" tabindex="0" class="question_mark b_tip"
+										role="" data-toggle="popover" data-trigger="focus"
+										data-placement="bottom" data-content=""> <img
+										style="cursor: pointer;" src="img/question.png">
+									</a>
+								</div>
 							</div>
 						</div>
-						<div class="row div_header_sub">
+						<div class="row div_header_sub" style="display: none;">
 							<div class="col-lg-6 col-6"></div>
 							<div class="col-lg-5 col-5" onclick="muestraPredial()">
 								<span id="muestraPredial" style="color: #FFF; text-decoration: underline; cursor: pointer;font-size: 14px;display: none;">Ver predial</span>
 							</div>
 						</div>
 						<div class="row div_header_sub" id="modulo3Datos">
-						<div class="col-12" style="margin-bottom:10px; margin-left:20px;">
-								<input type="checkbox" class="form-check-input" id="esquina"  onclick="return false;">
-    							<label class="blanco t12" for="esquina">Local en esquina</label>
-						</div>
-						
 							<div class="col-lg-4">
-								<span class="blanco t12">FRENTE</span>&nbsp;&nbsp;&nbsp;<span
-									id="frenteMd" class="negrita blanco t14">---</span>
+								<span class="titulo_detalle_md_20">FRENTE</span>&nbsp;&nbsp;&nbsp;
+								<span id="frenteMd" class="contenido_cajas_20">---</span>
 							</div>
 							<div class="col-lg-4">
-								<span class="blanco t12">PROFUNDIDAD</span>&nbsp;&nbsp;&nbsp;<span
-									id="profundidadMd" class="negrita blanco t14 sangria_cuerpo">---</span>
+								<span class="titulo_detalle_md_20">PROFUNDIDAD</span>&nbsp;&nbsp;&nbsp;
+								<span id="profundidadMd" class="contenido_cajas_20 sangria_cuerpo">---</span>
 							</div>
 							<div class="col-lg-4">
-								<span class="blanco t12">SUPERFICIE TOTAL</span>&nbsp;&nbsp;&nbsp;<span
-									id="tamanioTotalMd" class="negrita blanco t14 sangria_cuerpo">---</span>
+								<span class="titulo_detalle_md_20">SUPERFICIE TOTAL</span>&nbsp;&nbsp;&nbsp;
+								<span id="tamanioTotalMd" class="contenido_cajas_20 sangria_cuerpo">---</span>
 							</div>
 						</div>
 						<div class="row div_header_sub">
 							
 							<div class="col-lg-4">
 								<div class="col-lg-12" style="padding:0;">
-									<span class="blanco t12">LATERAL 1</span>
+									<span class="contenido_cajas_20">LATERAL 1</span>
 								</div>
 								<div class="col-lg-12" style="padding:0;">
 									<img class="imagenModal" id="vistaLateral1Md" alt="LATERAL 1"
@@ -310,7 +305,7 @@
 							
 							<div class="col-lg-4">
 								<div class="col-lg-12" style="padding:0;">
-									<span class="blanco t12">VISTA FRONTAL</span>
+									<span class="contenido_cajas_20">VISTA FRONTAL</span>
 								</div>
 								<div class="col-lg-12" style="padding:0;">
 									<img class="imagenModal" id="vistaFrontalMd"
@@ -329,7 +324,7 @@
 							
 							<div class="col-lg-4">
 								<div class="col-lg-12" style="padding:0;">
-									<span class="blanco t12 ">LATERAL 2</span>
+									<span class="contenido_cajas_20">LATERAL 2</span>
 								</div>
 								<div class="col-lg-12" style="padding:0;">
 									<img class="imagenModal" id="vistaLateral2Md" alt="LATERAL 2"
@@ -350,33 +345,33 @@
 				</div>
 			</div>
 
-			<div class="col-lg-8 col-12">
-		<div class="row divs_p">
-			<div class="col-lg-12 menupr_estilos fblanco div_mapa">
-			
-			<div class="col-12 titulo_seccion">
-				<span class="negrita azul t14">4) Zonificación</span>
-				<div id="modulo4Edita" class="float_right" style="display: none;">
-                    <span><img id="historial4" title="Historial" onclick="historialPantalla(4, this);" style="cursor: pointer;" src="img/historial_mark.png">&nbsp;</span>
-                    <span><img id="edita4" title="Guarda cambios" onclick="editaPantalla(4, this);" style="cursor: pointer;" src="img/edita_mark.png"></span>
-                </div>
-				<div id="modulo4Creacion" class="float_right">
-<%-- 					<span class="negrita azul t14">Puntos: </span> <span id="puntosZonificacion" class="negrita azul t14">---</span>
- --%>					<span>
-						<img id="autoriza4" title="Autoriza punto" class="sin_autorizar b_autorizar" onclick="autorizaPantalla(4, this);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
-					</span>
-					<span>
-						<img id="rechaza4" title="Rechaza punto" class="sin_autorizar b_rechazar" onclick="rechazaPantalla(4, this);" style="cursor: pointer;" src="img/rechaza_mark.png">
-					</span>
-					<a id="zonificacionTip" tabindex="0" class="question_mark b_tip" role="" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="">
-						<img style="cursor: pointer;" src="img/question.png"></a>		
-				</div>
-			</div>
-			
-				
+			<div class="col-lg-12 col-12">
+				<div class="row divs_p">
+					<div class="col-lg-12 menupr_estilos fblanco div_mapa">
+						<div class="col-12 titulo_seccion">
+							<span class="negrita azul t14">ZONIFICACI&Oacute;N</span>
+							<div id="modulo4Edita" class="float_right" style="display: none;">
+                    			<span><img id="historial4" title="Historial" onclick="historialPantalla(4, this);" style="cursor: pointer;" src="img/historial_mark.png">&nbsp;</span>
+                    			<span><img id="edita4" title="Guarda cambios" onclick="editaPantalla(4, this);" style="cursor: pointer;" src="img/edita_mark.png"></span>
+                			</div>
+							<div id="modulo4Creacion" class="float_right">
+							<span>
+								<img id="autoriza4" title="Autoriza punto" class="sin_autorizar b_autorizar" onclick="autorizaPantalla(4, this);" style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
+							</span>
+							<span>
+								<img id="rechaza4" title="Rechaza punto" class="sin_autorizar b_rechazar" onclick="rechazaPantalla(4, this);" style="cursor: pointer;" src="img/rechaza_mark.png">
+							</span>
+								<a id="zonificacionTip" tabindex="0" class="question_mark b_tip" role="" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="">
+								<img style="cursor: pointer;" src="img/question.png"></a>		
+							</div>
+						</div>
 				<div class="row div_header_sub">
-					<div class="col-lg-9 col-md-7 altura2"><div id="mapaZonificacion" style="width: 100%; height: 79%; position: relative; float: left;"></div></div>
-					<div class="col-lg-3 col-md-5 altura2" style="max-height:404px; overflow:auto;">
+					<div class="col-lg-12 col-md-12 altura2">
+						<div id="mapaZonificacion" style="width: 100%; height: 85%; position: relative; float: left;"></div>
+					</div>
+					<div class="col-lg-12 col-12" style="position: absolute; ">
+						<div class="row" style="float: right; overflow-y: scroll;margin-right: 0px;">
+							<div class="back_generadores altura2" style="max-height:404px; overflow:auto;background: #FFF;">
 					
 						<div class="row">
 							<div class="col-lg-12 titulo_mapa"><span class="azul t12">COMPETENCIAS</span></div>
@@ -447,12 +442,15 @@
 						
 						
 					</div>
+						</div>
+					</div>
+					
 				</div>
 			</div>
 		</div>
 		</div>
 		
-		<div class="col-lg-4 col-12">
+		<div class="col-lg-4 col-12" style="display: none;">
 		<div class="row divs_p">
 			<div class="col-lg-12 menupr_estilos fblanco altura2">
 			
@@ -694,11 +692,13 @@
 	<script	src="${pageContext.request.contextPath}/js/jquery/popper.js"></script>
 	<script	src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 	<script	src="${pageContext.request.contextPath}/highcharts/highcharts.js"></script>
+	<script	src="${pageContext.request.contextPath}/highcharts/highcharts-more.js"></script>
 	<script	src="${pageContext.request.contextPath}/highcharts/js/modules/data.js"></script>
 	<script	src="${pageContext.request.contextPath}/highcharts/js/modules/exporting.js"></script>
 	<script	src="${pageContext.request.contextPath}/highcharts/js/modules/export-data.js"></script>
 	<script src="${pageContext.request.contextPath}/js/progress/progressbar.js"></script>
 	<script src="${pageContext.request.contextPath}/js/progress/progressbar.min.js"></script>
+	<script src="${pageContext.request.contextPath}/css/slick/slick.min.js"></script>
 	<script	src="${pageContext.request.contextPath}/js/utiles/utiles.js"></script>
 	<script	src="${pageContext.request.contextPath}/js/dropzone/dropzone.js"></script>
 	<script	src="${pageContext.request.contextPath}/js/dropzone/dateFormat.js"></script>

@@ -44,6 +44,15 @@ $(function(){
 	$('.popover-dismiss').popover({
 		  trigger: 'focus'
 		});
+	
+	
+	$('.slick_main').slick({
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1
+    });
 
 });
 
@@ -504,8 +513,8 @@ function buscaDetalleMD(mdId) {
 				$("#nombreMdTxt").text(data.generales.nombreMd);
 				$("#creadorMd").text(data.generales.creador);
 				$("#categoriaMd").text(data.generales.categoria);
-				estrella = "<img class='estrellaPuntuacionDetalle' src='img/estrella.png'>";
-				estrellag = "<img class='estrellaPuntuacionDetalle' style='width:30px;' src='img/estrella.png'>";
+				estrella = "<img class='estrellaPuntuacionDetalle' src='img/estrella.svg'>";
+				estrellag = "<img class='estrellaPuntuacionDetalle' style='width:30px;' src='img/estrella.svg'>";
 				if(data.generales.categoria == 'A') {
 					$("#estrellasMd").html(estrella + estrellag + estrella);
 				} else if(data.generales.categoria == 'B') {
@@ -535,13 +544,13 @@ function buscaDetalleMD(mdId) {
 			}
 			/* Datos del sitio  linea 663*/
 			if(data.datosSitio != undefined) {
-				//$("#direccion").text(data.datosSitio.direccion);
-				$("#calleMd").text(data.datosSitio.calle);
+				$("#direccion").text(data.datosSitio.direccion);
+				/*$("#calleMd").text(data.datosSitio.calle);
 				$("#coloniaMd").text(data.datosSitio.colonia);
 				$("#municipioMd").text(data.datosSitio.municipio);
 				$("#ciudadMd").text(data.datosSitio.ciudad);
 				$("#estadoMd").text(data.datosSitio.estado);
-				$("#codiPostalMd").text(data.datosSitio.codigoPostal);
+				$("#codiPostalMd").text(data.datosSitio.codigoPostal);*/
 				
 				
 				/* Datos del propietario */
@@ -558,6 +567,11 @@ function buscaDetalleMD(mdId) {
 				validaEstatusAtencion(data.datosSitio.estatus, 1);
 				validaEstatusAtencion(data.datosPropietario.estatus, 2);
 			}
+			
+			cargaMacroUbicacion();
+			cargaMicroUbicacion();
+			
+			
 			/* Datos de la superficie */
 			if(data.superficie != undefined) {
 				$("#puntosSuperficie").text(data.superficie.puntos);
@@ -913,6 +927,131 @@ function datosFlujoPeatonal(flujoPeatonal){
 
 function muestraPopAutorizacion(){
 	$("#modal_autorizacion").modal("show");
+}
+
+function cargaMacroUbicacion() {
+	Highcharts.chart('macroUbicacionChart', {
+
+		  chart: {
+		    polar: true,
+		    type: 'area',
+		    spacingTop: -60,
+		    spacingBottom: 20,
+		  },
+
+		  title: {
+		    text: null
+		  },
+
+		  pane: {
+		    size: '50%'
+		  },
+
+		  xAxis: {
+		    categories: ['Competencia localidad', 'Tiendas neto', '', '', '', ''],
+		    tickmarkPlacement: 'on',
+		    lineWidth: 0
+		  },
+
+		  yAxis: {
+		    gridLineInterpolation: 'polygon',
+		    lineWidth: 0,
+		    min: 0
+		  },
+
+		  tooltip: {
+		    shared: true,
+		    pointFormat: '<span style="color:{series.color}">{series.name}: <b>{point.y:,.0f} %</b><br/>'
+		  },
+
+		  legend: {
+		    align: 'top',
+		    verticalAlign: 'top',
+		    y: 55,
+		    x: 150,
+		    layout: 'horizontal',
+		    itemStyle: {
+		    	fontSize: '10px',
+		    	color: '#717171'
+		    }
+		  },
+
+		  series: [{
+		    name: 'Objetivo',
+		    data: [10, 5, 0, 0, 0, 0],
+		    pointPlacement: 'on',
+		    color: '#40BCD8'
+		  }, {
+		    name: 'Real',
+		    data: [0, 5, 0, 0, 0, 0],
+		    pointPlacement: 'on',
+		    color: '#536379'
+		  }]
+
+		});
+}
+
+function cargaMicroUbicacion() {
+	Highcharts.chart('microUbicacionChart', {
+
+		  chart: {
+		    polar: true,
+		    type: 'area',
+		    spacingTop: -60,
+		    spacingBottom: 20,
+		  },
+
+		  title: {
+		    text: null
+		  },
+
+		  pane: {
+		    size: '50%'
+		  },
+
+		  xAxis: {
+		    categories: ['Mercado público', 'Tianguis', 'Negocios comida', 'Transporte público',
+		      'Flujo peatonal', 'Frente', 'Superficie', 'Renta', 'Esquina', 'Amortización', 'Negocios'],
+		    tickmarkPlacement: 'on',
+		    lineWidth: 0
+		  },
+
+		  yAxis: {
+		    gridLineInterpolation: 'polygon',
+		    lineWidth: 0,
+		    min: 0
+		  },
+
+		  tooltip: {
+		    shared: true,
+		    pointFormat: '<span style="color:{series.color}">{series.name}: <b>{point.y:,.0f} %</b><br/>'
+		  },
+
+		  legend: {
+		    align: 'top',
+		    verticalAlign: 'top',
+		    y: 55,
+		    x: 150,
+		    layout: 'horizontal',
+		    itemStyle: {
+		    	fontSize: '10px',
+		    	color: '#717171'
+		    }
+		  },
+
+		  series: [{
+		    name: 'Objetivo',
+		    data: [7.5, 7.5, 10, 7.5, 10, 5, 10, 10, 2.5, 5, 10],
+		    pointPlacement: 'on',
+		    color: '#40BCD8'
+		  }, {
+		    name: 'Real',
+		    data: [7.5, 0, 10, 0, 10, 5, 0, 10, 2.5, 0, 10],
+		    pointPlacement: 'on',
+		    color: '#536379'
+		  }]
+
+		});
 }
 
 function cargaFlujoPeatonal(colores,rows) {

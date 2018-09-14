@@ -112,7 +112,7 @@ span.circulo {
 .footerDetalleMd {
 	font-weight: normal;
 	font-size: 10px;
-	color: white;
+	color: #717171;
 }
 
 #containerProgreso {
@@ -138,10 +138,10 @@ span.circulo {
 
 #map{
 	height:50%;
-	top:140;
+	top:130;
 }
 @media (min-width: 1015px) {
-#map{height:55%; top:122px;}
+#map{height:55%; top:110px;}
 }
 @media (max-width: 767px) {
  .div_mapa{height:950px;}
@@ -497,3 +497,42 @@ Left
 .datoObra{
 	    height: 80px;
 }
+/* ----------------------------------- INICIO ESTILOS 2.0 ---------------------------------- */
+.titulo_detalle_md_20 {
+	font-size: 0.9em;
+	color: #071B36;
+	font-weight: bold;
+}
+.contenido_cajas_20 {
+	font-size: 0.7em;
+	color: #717171;
+}
+.padding_top_botom_5 {
+	padding-top: 5px;
+    padding-bottom: 5px;
+}
+.container-fluid {
+	background: #071B36;
+}
+.slick_main {
+	
+}
+.slick-prev {
+	display: none !important;
+}
+.slick-next {
+	display: none !important;
+}
+.highcharts-title {
+    fill: #071B36;
+    font-weight: bold;
+    font-size: 0.7em;
+}
+.back_generadores {
+	filter: alpha(opacity=85);
+	-khtml-opacity: 0.85;
+	-moz-opacity: 0.85;
+	opacity: 0.85;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=85)";
+}
+/* ----------------------------------- FIN ESTILOS 2.0 ---------------------------------- */

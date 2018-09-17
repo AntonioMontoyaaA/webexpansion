@@ -369,74 +369,81 @@
 					<div class="col-lg-12 col-md-12 altura2">
 						<div id="mapaZonificacion" style="width: 100%; height: 85%; position: relative; float: left;"></div>
 					</div>
-					<div class="col-lg-12 col-12" style="position: absolute; ">
+					<div id="divNegociosHeader" style="position: absolute;left: 68%;display: none;">
+						<div class="row" style="float: right; overflow-y: scroll;margin-right: 0px;">
+							<div style="max-height:50px; overflow:auto;background: #e6e6e6;">
+								<span class="titulo_detalle_md_20" style="padding-left: 30px;">VER DETALLE</span>&nbsp;&nbsp;&nbsp;<img onclick="muestraGeneradores()" src="${pageContext.request.contextPath}/img/arrowDown.png" style="padding-top: 0px; cursor: pointer;padding-right: 30px;"/>
+							</div>
+						</div>
+					</div>
+					<div id="divNegocios" style="position: absolute;left: 68%;display:block">
 						<div class="row" style="float: right; overflow-y: scroll;margin-right: 0px;">
 							<div class="back_generadores altura2" style="max-height:404px; overflow:auto;background: #FFF;">
 					
-						<div class="row">
-							<div class="col-lg-12 titulo_mapa"><span class="azul t12">COMPETENCIAS</span></div>
-							<div class="icono_mapa"><img class="icono_imagen" src="img/competencia/w_neto.png"></div>
-							<div class="icono_mapa"><img class="icono_imagen" src="img/competencia/iconos_3b.png"></div>
-							<div class="icono_mapa"><img class="icono_imagen" src="img/competencia/iconos_express.png"></div>
-							<div class="icono_mapa"><img class="icono_imagen" src="img/competencia/iconos_oxxo.png"></div>
+						<div class="row" style="margin-right: 10px;margin-left: 10px;">
+							<div class="col-lg-10 col-10 titulo_mapa"><span class="titulo_detalle_md_20">COMPETENCIAS</span></div>
+							<div class="col-lg-2 col-2"><img onclick="escondeGeneradores()" src="${pageContext.request.contextPath}/img/arrowUp.png" style="padding-top: 10px; cursor: pointer;"/></div>
+							<div class="icono_mapa"><span id="netoTotal" class="titulo_detalle_md_20" style="padding-right: 5px">0</span><img class="icono_imagen" src="img/competencia/w_neto.png"></div>
+							<div class="icono_mapa"><span id="tresBTotal" class="titulo_detalle_md_20" style="padding-right: 5px">0</span><img class="icono_imagen" src="img/competencia/iconos_3b.png"></div>
+							<div class="icono_mapa"><span id="expressTotal" class="titulo_detalle_md_20" style="padding-right: 5px">0</span><img class="icono_imagen" src="img/competencia/iconos_express.png"></div>
+							<div class="icono_mapa"><span id="oxxoTotal" class="titulo_detalle_md_20" style="padding-right: 5px">0</span><img class="icono_imagen" src="img/competencia/iconos_oxxo.png"></div>
 							<!-- <div class="icono_mapa"><img class="icono_imagen" src="img/competencia/iconos_seven.png"></div>
 							<div class="icono_mapa"><img class="icono_imagen" src="img/competencia/iconos_k.png"></div> -->
-							<div class="icono_mapa"><img class="icono_imagen" src="img/competencia/icono_otros_2.png"><br>
+							<div class="icono_mapa"><span id="otrosCTotal" class="titulo_detalle_md_20" style="padding-right: 5px">0</span><img class="icono_imagen" src="img/competencia/icono_otros_2.png"><br>
 							<span class="t10 azul">Tienda de abarrotes</span></div>
 						</div>
 						
-						<div class="row">
+						<div class="row" style="margin-right: 10px;margin-left: 10px;">
 							<div class="col-lg-12 titulo_mapa" style="border-top:1px solid #C9C9C9;">
-							<span class="azul t12">NEGOCIOS</span></div>		
-							<div class="icono_mapa"><img class="icono_imagen" src="img/generadores/tortilleria.png"><br>
+							<span class="titulo_detalle_md_20">NEGOCIOS</span></div>		
+							<div class="icono_mapa"><span id="tortilleriaTotal" class="titulo_detalle_md_20" style="padding-right: 5px">0</span><img class="icono_imagen" src="img/generadores/tortilleria.png"><br>
 							<span class="t10 azul">Tortillería</span></div>
-							<div class="icono_mapa"><img class="icono_imagen" src="img/generadores/recauderia.png"><br>
+							<div class="icono_mapa"><span id="recauderiaTotal" class="titulo_detalle_md_20" style="padding-right: 5px">0</span><img class="icono_imagen" src="img/generadores/recauderia.png"><br>
 							<span class="t10 azul">Frutas y<br> verduras</span></div>
-							<div class="icono_mapa"><img class="icono_imagen" src="img/generadores/carniceria.png"><br>
+							<div class="icono_mapa"><span id="carniceriaTotal" class="titulo_detalle_md_20" style="padding-right: 5px">0</span><img class="icono_imagen" src="img/generadores/carniceria.png"><br>
 							<span class="t10 azul">Carnicería</span></div>
 						</div>
 						
-						<div class="row">
+						<div class="row" style="margin-right: 10px;margin-left: 10px;">
 							<div class="col-lg-12 titulo_mapa" style="border-top:1px solid #C9C9C9;">
-							<span class="azul t12">NEGOCIOS DE COMIDA</span></div>
-							<div class="icono_mapa"><img class="icono_imagen" src="img/generadores/negociocomida.png"><br>
+							<span class="titulo_detalle_md_20">NEGOCIOS DE COMIDA</span></div>
+							<div class="icono_mapa"><span id="comidaTotal" class="titulo_detalle_md_20" style="padding-right: 5px">0</span><img class="icono_imagen" src="img/generadores/negociocomida.png"><br>
 							<span class="t10 azul">Negocio de<br>comida</span></div>					
 						</div>
 						
-						<div class="row">
+						<div class="row" style="margin-right: 10px;margin-left: 10px;">
 							<div class="col-lg-12 titulo_mapa" style="border-top:1px solid #C9C9C9;">
-							<span class="azul t12">TRANSPORTE PUBLICO</span></div>
-							<div class="icono_mapa"><img class="icono_imagen" src="img/generadores/parada.png"><br>
+							<span class="titulo_detalle_md_20">TRANSPORTE PUBLICO</span></div>
+							<div class="icono_mapa"><span id="paradaTotal" class="titulo_detalle_md_20" style="padding-right: 5px">0</span><img class="icono_imagen" src="img/generadores/parada.png"><br>
 							<span class="t10 azul">Parada de<br>autobús</span></div>
-							<div class="icono_mapa"><img class="icono_imagen" src="img/generadores/w_metro.png"><br>
+							<div class="icono_mapa"><span id="metroTotal" class="titulo_detalle_md_20" style="padding-right: 5px">0</span><img class="icono_imagen" src="img/generadores/w_metro.png"><br>
 							<span class="t10 azul">Parada de<br>metro</span></div>
 												
 						</div>
 						
-						<div class="row">
+						<div class="row" style="margin-right: 10px;margin-left: 10px;">
 							<div class="col-lg-12 titulo_mapa" style="border-top:1px solid #C9C9C9;">
-							<span class="azul t12">MERCADO PUBLICO</span></div>
-							<div class="icono_mapa"><img class="icono_imagen" src="img/generadores/mercado.png"><br>
+							<span class="titulo_detalle_md_20">MERCADO PUBLICO</span></div>
+							<div class="icono_mapa"><span id="mercadoTotal" class="titulo_detalle_md_20" style="padding-right: 5px">0</span><img class="icono_imagen" src="img/generadores/mercado.png"><br>
 							<span class="t10 azul">Mercado</span></div>				
 						</div>
 						
-						<div class="row">
+						<div class="row" style="margin-right: 10px;margin-left: 10px;">
 							<div class="col-lg-12 titulo_mapa" style="border-top:1px solid #C9C9C9;">
-							<span class="azul t12">TIANGUIS</span></div>
-							<div class="icono_mapa"><img class="icono_imagen" src="img/generadores/tianguis.png"><br>
+							<span class="titulo_detalle_md_20">TIANGUIS</span></div>
+							<div class="icono_mapa"><span id="tianguisTotal" class="titulo_detalle_md_20" style="padding-right: 5px">0</span><img class="icono_imagen" src="img/generadores/tianguis.png"><br>
 							<span class="t10 azul">Tianguis</span></div>	
 												
 						</div>
 						
-						<div class="row">
+						<div class="row" style="margin-right: 10px;margin-left: 10px;">
 							<div class="col-lg-12 titulo_mapa" style="border-top:1px solid #C9C9C9;">
-							<span class="azul t12">OTROS GENERADORES</span></div>
-							
-							<div class="icono_mapa"><img class="icono_imagen" src="img/generadores/iglesia.png"><br>
+							<span class="titulo_detalle_md_20">OTROS GENERADORES</span></div>
+							<div class="icono_mapa"><span id="iglesiaTotal" class="titulo_detalle_md_20" style="padding-right: 5px">0</span><img class="icono_imagen" src="img/generadores/iglesia.png"><br>
 							<span class="t10 azul">Iglesia</span></div>
-							<div class="icono_mapa"><img class="icono_imagen" src="img/generadores/escuela.png"><br>
+							<div class="icono_mapa"><span id="escuelaTotal" class="titulo_detalle_md_20" style="padding-right: 5px">0</span><img class="icono_imagen" src="img/generadores/escuela.png"><br>
 							<span class="t10 azul">Escuela</span></div>
-							<div class="icono_mapa"><img class="icono_imagen" src="img/generadores/icono_otros_generadores.png"><br>
+							<div class="icono_mapa"><span id="otrosGTotal" class="titulo_detalle_md_20" style="padding-right: 5px">0</span><img class="icono_imagen" src="img/generadores/icono_otros_generadores.png"><br>
 							<span class="t10 azul">Otros<br>generadores</span></div>						
 						</div>
 						
@@ -473,11 +480,11 @@
 				</div>
 			</div>
 			
-				<div id="factoresConstruccion" style="width: 100%; height: 150px;  overflow-y: auto; position: relative; float: left;text-align: left">
+				<div id="factoresConstruccion1" style="width: 100%; height: 150px;  overflow-y: auto; position: relative; float: left;text-align: left">
 				</div>
 				<div id="condicionesConstruccion" style="width: 100%;position: relative; float: left;text-align: left">
 					<span class="azul t12 sangria_cuerpo">CONDICIONES GENERALES</span><br/>
-					<span id="condicionesGeneralesEstatus" class="azul t12 sangria_doble_cuerpo">---</span><br/>
+					<span id="condicionesGeneralesEstatus2" class="azul t12 sangria_doble_cuerpo">---</span><br/>
 				</div>
 			</div>
 		</div>
@@ -486,13 +493,13 @@
 	
 		<div class="col-lg-4">
 		<div class="row divs_p">
-			<div class="col-lg-12 menupr_estilos fazul altura1">
+			<div class="col-lg-12 menupr_estilos fblanco altura1">
 			
 			<div class="row" style="padding-top:4px;">
-			<div class="col-6 ">
-				<span class="negrita blanco t14">6) Generalidades del sitio</span></div>
+			<div class="col-8 ">
+				<span class="titulo_detalle_md_20">CONSTRUCCI&Oacute;N Y GENERALIDADES</span></div>
 				
-			<div class="col-6  right">
+			<div class="col-4  right">
 				<div id="modulo6Edita" class="float_right" style="display: none;">
                     <span><img id="historial6" title="Historial" onclick="historialPantalla(6, this);" style="cursor: pointer;" src="img/historial_mark.png">&nbsp;</span>
                     <span><img id="edita6" title="Guarda cambios" onclick="editaPantalla(6, this);" style="cursor: pointer;" src="img/edita_mark.png"></span>
@@ -510,18 +517,39 @@
 				</div>
 			</div>
 			</div>
-			<div id="modulo6Datos" class="row div_header_sub">
-				<div class="col-12">
-					<span class="negrita blanco t14 sangria_cuerpo">Renta</span><br/>
-					<span id="montoRenta" class="blanco t12 sangria_cuerpo">---</span><br/>
-					<span class="negrita blanco t14 sangria_cuerpo">Disponibilidad</span><br/>
-					<span id="disponibilidad" class="blanco t12 sangria_cuerpo">---</span><br/>
-					<span class="negrita blanco t14 sangria_cuerpo">Amortización</span><br/>
-					<span id="amortizacion" class="blanco t12 sangria_cuerpo">---</span><br/>
-					<span class="negrita blanco t14 sangria_cuerpo">Tiempo de amortización</span><br/>
-					<span id="tiempoAmortizacion" class="blanco t12 sangria_cuerpo">---</span><br/>
-					<span class="negrita blanco t14 sangria_cuerpo">Periodo de gracia</span><br/>
-					<span id="periodoGracia" class="blanco t12 sangria_cuerpo">---</span><br/>
+			<div id="modulo6Datos" class="div_header_sub">
+				<div class="row">
+					<div id="factoresConstruccion" class="col-lg-12 col-12" style=""></div>
+				</div>
+				<div class="row padding_top_botom_10" style="padding-top: 30px;">
+					<div class="col-lg-6 col-6">
+						<span class="titulo_detalle_md_20 sangria_cuerpo">Condiciones</span><br/>
+						<span id="condicionesGeneralesEstatus" class="contenido_cajas_20 sangria_doble_cuerpo">---</span><br/>
+					</div>
+					<div class="col-lg-6 col-6">
+						<span class="titulo_detalle_md_20 sangria_cuerpo">Amortizaci&oacute;n</span><br/>
+						<span id="amortizacion" class="contenido_cajas_20 sangria_doble_cuerpo">---</span><br/>
+					</div>
+				</div>
+				<div class="row padding_top_botom_10">
+					<div class="col-lg-6 col-6">
+						<span class="titulo_detalle_md_20 sangria_cuerpo">Renta</span><br/>
+						<span id="montoRenta" class="contenido_cajas_20 sangria_doble_cuerpo">---</span><br/>
+					</div>
+					<div class="col-lg-6 col-6">
+						<span class="titulo_detalle_md_20 sangria_cuerpo">Tiempo de amortizaci&oacute;n</span><br/>
+						<span id="tiempoAmortizacion" class="contenido_cajas_20 sangria_doble_cuerpo">---</span><br/>
+					</div>
+				</div>
+				<div class="row padding_top_botom_10">
+					<div class="col-lg-6 col-6">
+						<span class="titulo_detalle_md_20 sangria_cuerpo">Disponibilidad</span><br/>
+						<span id="disponibilidad" class="contenido_cajas_20 sangria_doble_cuerpo">---</span><br/>
+					</div>
+					<div class="col-lg-6 col-6">
+						<span class="titulo_detalle_md_20 sangria_cuerpo">Periodo de gracia</span><br/>
+						<span id="periodoGracia" class="contenido_cajas_20 sangria_doble_cuerpo">---</span><br/>
+					</div>
 				</div>
 			</div>
 			</div>
@@ -530,10 +558,10 @@
 		
 		<div class="col-lg-4">
 		<div class="row divs_p">
-			<div class="col-lg-12 menupr_estilos fazul altura1">
+			<div class="col-lg-12 menupr_estilos fblanco altura1">
 			
 			<div class="col-12 titulo_seccion">
-				<span class="negrita blanco t14">7)  Flujo peatonal</span>
+				<span class="titulo_detalle_md_20">FLUJO PEATONAL</span>
 				<div id="modulo7Edita" class="float_right" style="display: none;">
                     <span><img id="historial7" title="Historial" onclick="historialPantalla(7, this);" style="cursor: pointer;" src="img/historial_mark.png">&nbsp;</span>
                     <span><img id="edita7" title="Guarda cambios" onclick="editaPantalla(7, this);" style="cursor: pointer;" src="img/edita_mark.png"></span>
@@ -553,11 +581,11 @@
 			</div>
 			
 				<div class="row div_header_sub">
-					<span class="blanco t12 sangria_doble_cuerpo">PROMEDIO: </span>
-					<span id="promedioConteos" class="negrita blanco t14 sangria_cuerpo">---</span><br/>
+					<span class="contenido_cajas_20 sangria_doble_cuerpo">PROMEDIO: </span>
+					<span id="promedioConteos" class="titulo_detalle_md_20 sangria_cuerpo">---</span><br/>
 					<div class="contenedorConteos" id="posConteos" style="display: block;">
-						<span class="blanco t12 sangria_doble_cuerpo">PROMEDIO AUDITORIA: </span>
-						<span id="promedioConteosAuditoria" class="negrita blanco t14 sangria_cuerpo">---</span><br/>
+						<span class="contenido_cajas_20 sangria_doble_cuerpo">PROMEDIO AUDITORIA: </span>
+						<span id="promedioConteosAuditoria" class="titulo_detalle_md_20 sangria_cuerpo">---</span><br/>
 					</div>
 					<div class="contenedorConteos" id="preConteos" style="display: none;">
 						<input id="totalConteoAuditor" placeholder="Captura el promedio peatonal" onkeypress="return isNumberKey(event,this)" id="conteosAuditor" style="top: -6px; position: relative;left: 30px; width: 230px;height: 20px; font-size: 0.8em">

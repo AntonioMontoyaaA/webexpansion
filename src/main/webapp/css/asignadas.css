@@ -71,6 +71,7 @@ overflow-y: initial !important;
 .icono_mapa{
 	padding:5px 15px;
 	position:relative;
+	text-align: center;
 }
 .icono_imagen{
 	height:33px;
@@ -507,9 +508,17 @@ Left
 	font-size: 0.7em;
 	color: #717171;
 }
+.contenido_subfactores_20 {
+	font-size: 0.5em;
+	color: #717171;
+}
 .padding_top_botom_5 {
 	padding-top: 5px;
     padding-bottom: 5px;
+}
+.padding_top_botom_10 {
+	padding-top: 10px;
+    padding-bottom: 10px;
 }
 .container-fluid {
 	background: #071B36;
@@ -534,5 +543,10 @@ Left
 	-moz-opacity: 0.85;
 	opacity: 0.85;
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=85)";
+}
+.subfactores_20 {
+	text-align: center;
+    position: relative;
+    float: left;
 }
 /* ----------------------------------- FIN ESTILOS 2.0 ---------------------------------- */

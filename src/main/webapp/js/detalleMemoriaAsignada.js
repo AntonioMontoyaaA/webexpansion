@@ -568,8 +568,40 @@ function buscaDetalleMD(mdId) {
 				validaEstatusAtencion(data.datosPropietario.estatus, 2);
 			}
 			
-			cargaMacroUbicacion();
-			cargaMicroUbicacion();
+			/* Datos del scorecard*/
+			if(data.score != undefined) {
+				var nombresMicro = new Array();
+				var valoresObjetivoMicro = new Array();
+				var valoresRealesMicro = new Array();
+				var nombresMacro = ['','','','','','','',''];
+				var valoresObjetivoMacro = [0,0,0,0,0,0,0,0];
+				var valoresRealesMacro = [0,0,0,0,0,0,0,0];
+				
+				if(data.score.factores != undefined && data.score.factores.length > 0) {
+					var posicion = 0;
+					for(var i = 0; i < data.score.factores.length; i++) {
+						if(data.score.factores[i].rangoubica.indexOf("MICRO") != -1) {
+							var nombre = "";
+							if(data.score.factores[i].nombrenivel.length > 10) {
+								nombre = data.score.factores[i].nombrenivel.substring(0,9) + "...";
+							} else {
+								nombre = data.score.factores[i].nombrenivel;
+							}
+							nombresMicro.push(nombre);
+							valoresObjetivoMicro.push(data.score.factores[i].totalxfactor);
+							valoresRealesMicro.push(data.score.factores[i].puntuacion);
+						} else if(data.score.factores[i].rangoubica.indexOf("MACRO") != -1) {
+							nombresMacro[posicion] = data.score.factores[i].nombrenivel;
+							valoresObjetivoMacro[posicion] = data.score.factores[i].totalxfactor;
+							valoresRealesMacro[posicion] = data.score.factores[i].puntuacion;
+							posicion++;
+						}
+					}
+				}
+				cargaMicroUbicacion(nombresMicro, valoresObjetivoMicro, valoresRealesMicro);
+			}
+			cargaMacroUbicacion(nombresMacro, valoresObjetivoMacro, valoresRealesMacro);
+			
 			
 			
 			/* Datos de la superficie */
@@ -623,6 +655,99 @@ function buscaDetalleMD(mdId) {
 				var listaCompetencias = data.zonificacion.competencias;
 				var listaGeneradores = data.zonificacion.generadores;
 				
+				var netoTotal = 0;
+				var tresBTotal = 0;
+				var oxxoTotal = 0;
+				var expressTotal = 0;
+				var otrosCTotal = 0;
+				var iglesiaTotal = 0;
+				var mercadoTotal = 0;
+				var escuelaTotal = 0;
+				var paradaTotal = 0;
+				var metroTotal = 0;
+				var otrosGTotal = 0;
+				var recauderiaTotal = 0;
+				var comidaTotal = 0;
+				var tianguisTotal = 0;
+				var tortilleriaTotal = 0;
+				var carniceriaTotal = 0;
+				
+				for(var i = 0; i < listaCompetencias.length; i++) {
+					switch(listaCompetencias[i].competenciaId) {
+					case 1:
+						tresBTotal++;
+						break;
+					case 2:
+						oxxoTotal++;
+						break;
+					case 3:
+						expressTotal++;
+						break;
+					case 4:
+						otrosCTotal++;
+						break;
+					case 10:
+						netoTotal++;
+						break;
+					};
+				}
+				
+				for(var i = 0; i < listaGeneradores.length; i++) {
+					switch(listaGeneradores[i].generadorId) {
+					case 5:
+						iglesiaTotal++;
+						break;
+					case 6:
+						mercadoTotal++;
+						break;
+					case 7:
+						escuelaTotal++;
+						break;
+					case 8:
+						paradaTotal++;
+						break;
+					case 9:
+						otroGTotal++;
+						break;
+					case 11:
+						recauderiaTotal++;
+						break;
+					case 12:
+						comidaTotal++;
+						break;
+					case 14:
+						tianguisTotal++;
+						break;
+					case 15:
+						tortilleriaTotal++;
+						break;
+					case 16:
+						carniceriaTotal++;
+						break;
+					case 17:
+						metroTotal++;
+						break;
+				}
+				}
+				
+				$("#netoTotal").text(formato(netoTotal, true));
+				$("#tresBTotal").text(formato(tresBTotal, true));
+				$("#oxxoTotal").text(formato(oxxoTotal, true));
+				$("#expressTotal").text(formato(expressTotal, true));
+				$("#otrosCTotal").text(formato(otrosCTotal, true));
+				$("#iglesiaTotal").text(formato(iglesiaTotal, true));
+				$("#mercadoTotal").text(formato(mercadoTotal, true));
+				$("#escuelaTotal").text(formato(escuelaTotal, true));
+				$("#paradaTotal").text(formato(paradaTotal, true));
+				$("#metroTotal").text(formato(metroTotal, true));
+				$("#otrosGTotal").text(formato(otrosGTotal, true));
+				$("#recauderiaTotal").text(formato(recauderiaTotal, true));
+				$("#comidaTotal").text(formato(comidaTotal, true));
+				$("#tianguisTotal").text(formato(tianguisTotal, true));
+				$("#tortilleriaTotal").text(formato(tortilleriaTotal, true));
+				$("#carniceriaTotal").text(formato(carniceriaTotal, true));
+				
+				
 				var contentPopZonificacion = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 14px;">Agrega tips para que tus buscadores encuentren sitios mejores</span></div></div>';
 				if(data.zonificacion.tips != undefined && data.zonificacion.tips.length > 0) {
 					contentPopZonificacion = '<div><div style="width: 100%; position: relative: float: left;text-align: center;"><span style="color: #FFF;font-size: 14px;">' + data.zonificacion.tips[0] + '</span></div></div>';
@@ -645,12 +770,30 @@ function buscaDetalleMD(mdId) {
 								&& data.construccion.factores.EXPANSION[i].nivelId < 6) {
 							condicionesGeneralesLocal = data.construccion.factores.EXPANSION[i].nombreFactor
 						} else {
-							htmlFactores += '<img style="padding-right: 10px;" src="img/icono_factor.png"/><span class="subtituloDetalleMd sangria_cuerpo">' + data.construccion.factores.EXPANSION[i].nombreFactor + '</span><br/>';
+							htmlFactores += '<img style="padding-left: 10px;" src="img/icono_factor.png"/><span class="contenido_cajas_20 sangria_cuerpo">' + 
+								data.construccion.factores.EXPANSION[i].nombreFactor + '</span><br/><div style="overflow-y: auto;">';
 							
 							if(data.construccion.factores.EXPANSION[i].subfactores!=undefined)
 								for(var j = 0; j < data.construccion.factores.EXPANSION[i].subfactores.length; j++) {
-									htmlFactores += '<img class="sangria_cuerpo" src="img/icono_subfactor.png"/><span class="subtituloDetalleMd sangria_cuerpo">' + data.construccion.factores.EXPANSION[i].subfactores[j].nombre + '</span><br/>';
+									var imgSubfactor = "";
+									
+									switch(data.construccion.factores.EXPANSION[i].subfactores[j].subFactorId) {
+									case 1:
+										imgSubfactor = '<img class="sangria_cuerpo" src="img/subfactores/local_bodega.svg" style="width: 40px;"/>';
+										break;
+									case 2:
+										imgSubfactor = '<img class="sangria_cuerpo" src="img/subfactores/acceso_cd.svg" style="width: 40px;"/>';
+										break;
+									case 3:
+										imgSubfactor = '<img class="sangria_cuerpo" src="img/subfactores/sin_goteras.svg" style="width: 40px;"/>';
+										break;
+									case 4:
+										imgSubfactor = '<img class="sangria_cuerpo" src="img/subfactores/sin_grietas.svg" style="width: 40px;"/>';
+										break;
+									};
+									htmlFactores += '<div class="subfactores_20">' + imgSubfactor + '<br/><span class="contenido_subfactores_20 sangria_cuerpo">' + data.construccion.factores.EXPANSION[i].subfactores[j].nombre + '</span></div>';
 								}
+							htmlFactores += "</div>";
 						}
 					}
 					$("#factoresConstruccion").html(htmlFactores);
@@ -925,11 +1068,21 @@ function datosFlujoPeatonal(flujoPeatonal){
 	
 }
 
+function muestraGeneradores() {
+	$("#divNegociosHeader").hide();
+	$("#divNegocios").slideToggle();
+}
+
+function escondeGeneradores() {
+	 $("#divNegocios").slideToggle();
+	 $("#divNegociosHeader").show();
+}
+
 function muestraPopAutorizacion(){
 	$("#modal_autorizacion").modal("show");
 }
 
-function cargaMacroUbicacion() {
+function cargaMacroUbicacion(nombres, objetivo, reales) {
 	Highcharts.chart('macroUbicacionChart', {
 
 		  chart: {
@@ -948,7 +1101,7 @@ function cargaMacroUbicacion() {
 		  },
 
 		  xAxis: {
-		    categories: ['Competencia localidad', 'Tiendas neto', '', '', '', ''],
+		    categories: nombres,
 		    tickmarkPlacement: 'on',
 		    lineWidth: 0
 		  },
@@ -978,12 +1131,12 @@ function cargaMacroUbicacion() {
 
 		  series: [{
 		    name: 'Objetivo',
-		    data: [10, 5, 0, 0, 0, 0],
+		    data: objetivo,
 		    pointPlacement: 'on',
 		    color: '#40BCD8'
 		  }, {
 		    name: 'Real',
-		    data: [0, 5, 0, 0, 0, 0],
+		    data: reales,
 		    pointPlacement: 'on',
 		    color: '#536379'
 		  }]
@@ -991,7 +1144,7 @@ function cargaMacroUbicacion() {
 		});
 }
 
-function cargaMicroUbicacion() {
+function cargaMicroUbicacion(nombres, objetivo, reales) {
 	Highcharts.chart('microUbicacionChart', {
 
 		  chart: {
@@ -1010,8 +1163,7 @@ function cargaMicroUbicacion() {
 		  },
 
 		  xAxis: {
-		    categories: ['Mercado público', 'Tianguis', 'Negocios comida', 'Transporte público',
-		      'Flujo peatonal', 'Frente', 'Superficie', 'Renta', 'Esquina', 'Amortización', 'Negocios'],
+		    categories: nombres,
 		    tickmarkPlacement: 'on',
 		    lineWidth: 0
 		  },
@@ -1041,12 +1193,12 @@ function cargaMicroUbicacion() {
 
 		  series: [{
 		    name: 'Objetivo',
-		    data: [7.5, 7.5, 10, 7.5, 10, 5, 10, 10, 2.5, 5, 10],
+		    data: objetivo,
 		    pointPlacement: 'on',
 		    color: '#40BCD8'
 		  }, {
 		    name: 'Real',
-		    data: [7.5, 0, 10, 0, 10, 5, 0, 10, 2.5, 0, 10],
+		    data: reales,
 		    pointPlacement: 'on',
 		    color: '#536379'
 		  }]
@@ -1058,7 +1210,7 @@ function cargaFlujoPeatonal(colores,rows) {
 	Highcharts.chart('contenedorFlujoPeatonal', {
 	    chart: {
 	        type: 'column',
-	        backgroundColor: '#071B36',
+	        backgroundColor: '#FFF',
 	    },
 	    legend:false,
 	    title: {

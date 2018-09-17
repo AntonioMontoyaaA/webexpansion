@@ -145,7 +145,8 @@ span.circulo {
 #map{height:55%; top:110px;}
 }
 @media (max-width: 767px) {
- .div_mapa{height:950px;}
+ .div_mapa{height:500px;}
+ .padding_movil_10{margin-top: 10px;}
 }
 
 @media (max-height: 500px) {

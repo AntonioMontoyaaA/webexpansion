@@ -187,7 +187,7 @@
 		</div>
 		</div>
 		
-		<div class="col-lg-4 altura1">
+		<div class="col-lg-4 altura1 padding_movil_10">
 		<div class="row divs_p">
 			<div class="col-lg-12 menupr_estilos fblanco altura1">
 			<div class="col-12 titulo_seccion">
@@ -230,18 +230,18 @@
 		</div>
 		</div>
 
-			<div class="col-lg-12">
+			<div class="col-lg-12 col-12 padding_movil_10">
 				<div class="row divs_p">
 					<div class="col-lg-12 menupr_estilos fblanco">
 						<div class="row titulo_seccion">
-							<div class="col-lg-8">
+							<div class="col-lg-8 col-6">
 								<span class="titulo_detalle_md_20">SUPERFICIE</span>
 							</div>
-							<div class="col-lg-2">
+							<div class="col-lg-2 col-2">
 								<input type="checkbox" class="form-check-input" id="esquina"  onclick="return false;">
     							<label class="contenido_cajas_20" for="esquina">Local en esquina</label>
 							</div>
-							<div class="col-lg-2">
+							<div class="col-lg-2 col-4">
 								<div id="modulo3Edita" class="float_right" style="display: none;">
                                 	<span><img id="historial3" title="Historial" onclick="historialPantalla(3, this);" style="cursor: pointer;" src="img/historial_mark.png">&nbsp;</span>
                                 	<span><img id="edita3" title="Guarda cambios" onclick="editaPantalla(3, this);" style="cursor: pointer;" src="img/edita_mark.png"></span>

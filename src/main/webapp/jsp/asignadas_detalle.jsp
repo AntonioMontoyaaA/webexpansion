@@ -38,23 +38,7 @@
 
 			<div class="col-12">
 				<div class="row divs_p">
-					<div class="div_flujo col-12" style="padding: 0;">
-						<div class="linea"></div>
-
-						<div class="contenedor_boton fazul">
-							<button class="btn atras" type="button" onclick="history.back()"
-								style="margin: 0"></button>
-						</div>
-						<div class="contenedor_hexa">
-							<div class="hexa">0</div>
-						</div>
-						<div class="contenedor_hexa">
-							<div class="hexa">0</div>
-						</div>
-						<div class="contenedor_hexa">
-							<div class="hexa">0</div>
-						</div>
-					</div>
+					<div class="div_flujo col-12" style="padding: 0;" id="flujo"></div>
 				</div>
 			</div>
 
@@ -668,6 +652,7 @@
 	<script	src="${pageContext.request.contextPath}/js/dropzone/dropzone.js"></script>
 	<script	src="${pageContext.request.contextPath}/js/dropzone/dateFormat.js"></script>
 	<script	src="${pageContext.request.contextPath}/js/detalleMemoriaAsignada.js"></script>
+	<script	src="${pageContext.request.contextPath}/js/hexagonos_detalle.js"></script>
 	<script	src="${pageContext.request.contextPath}/js/autorizaciones.js"></script>
 	<script	src="${pageContext.request.contextPath}/js/utiles/modalImages.js"></script>
 	<script	src="${pageContext.request.contextPath}/js/descargaPdf.js"></script>

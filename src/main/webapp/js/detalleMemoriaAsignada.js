@@ -53,6 +53,14 @@ $(function(){
         slidesToShow: 1,
         slidesToScroll: 1
     });
+	
+	/*$('.galeria_main').slick({
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1
+    });*/
 
 });
 
@@ -580,7 +588,7 @@ function buscaDetalleMD(mdId) {
 				if(data.score.factores != undefined && data.score.factores.length > 0) {
 					var posicion = 0;
 					for(var i = 0; i < data.score.factores.length; i++) {
-						if(data.score.factores[i].rangoubica.indexOf("MICRO") != -1) {
+						if(data.score.factores[i].rangoubica != undefined && data.score.factores[i].rangoubica.indexOf("MICRO") != -1) {
 							var nombre = "";
 							if(data.score.factores[i].nombrenivel.length > 10) {
 								nombre = data.score.factores[i].nombrenivel.substring(0,9) + "...";
@@ -590,7 +598,7 @@ function buscaDetalleMD(mdId) {
 							nombresMicro.push(nombre);
 							valoresObjetivoMicro.push(data.score.factores[i].totalxfactor);
 							valoresRealesMicro.push(data.score.factores[i].puntuacion);
-						} else if(data.score.factores[i].rangoubica.indexOf("MACRO") != -1) {
+						} else if(data.score.factores[i].rangoubica != undefined && data.score.factores[i].rangoubica.indexOf("MACRO") != -1) {
 							nombresMacro[posicion] = data.score.factores[i].nombrenivel;
 							valoresObjetivoMacro[posicion] = data.score.factores[i].totalxfactor;
 							valoresRealesMacro[posicion] = data.score.factores[i].puntuacion;
@@ -707,7 +715,7 @@ function buscaDetalleMD(mdId) {
 						paradaTotal++;
 						break;
 					case 9:
-						otroGTotal++;
+						otrosGTotal++;
 						break;
 					case 11:
 						recauderiaTotal++;

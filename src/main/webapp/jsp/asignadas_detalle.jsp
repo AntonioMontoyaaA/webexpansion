@@ -30,7 +30,7 @@
     <input type="hidden" id="nombreCompletoUsuario" value="${usr.perfil.nombre} ${usr.perfil.apellidoP} ${usr.perfil.apellidoM}">
 <%@ include file="/jsp/generic/header.jsp" %>
 
-<div class="container-fluid">
+<div class="container-fluid_detalle">
 	<div class="row padding_p">
 	<div class="col-lg-12 titulo azul t12 negrita">DASHBOARD ${usr.perfil.areasxpuesto[0].areaNom} > <span id="titulo_tipo"></span> > <span id="nombreMdTxt"></span>></div>
 			<div class="col-12"  style="padding-left:0;">
@@ -231,8 +231,8 @@
 		</div>
 
 			<div class="col-lg-12 col-12 padding_movil_10">
-				<div class="row divs_p">
-					<div class="col-lg-12 menupr_estilos fblanco">
+				<div class="row divs_p galeria_main">
+					<div class="div_galeria col-lg-12 menupr_estilos fblanco">
 						<div class="row titulo_seccion">
 							<div class="col-lg-8 col-6">
 								<span class="titulo_detalle_md_20">SUPERFICIE</span>
@@ -342,6 +342,7 @@
 							</div>
 						</div>
 					</div>
+					<!-- <div class="div_galeria_dos">Nuevas fotos</div> -->
 				</div>
 			</div>
 

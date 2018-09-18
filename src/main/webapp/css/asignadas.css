@@ -522,6 +522,9 @@ Left
     padding-bottom: 10px;
 }
 .container-fluid {
+	background: #e7e6e3;
+}
+.container-fluid_detalle {
 	background: #071B36;
 }
 .slick_main {

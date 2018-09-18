@@ -13,6 +13,9 @@ var mdId="";
 var predialImg;
 var fechaPredial;
 
+var SCORE_ANTERIOR = 1;
+var SCORE_NUEVO = 2
+
 $(function(){
 	TIPOMD = $("#tipoMd").val();
 	mdId=$("#mdId").val();
@@ -44,15 +47,6 @@ $(function(){
 	$('.popover-dismiss').popover({
 		  trigger: 'focus'
 		});
-	
-	
-	$('.slick_main').slick({
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1
-    });
 	
 	/*$('.galeria_main').slick({
         dots: true,
@@ -578,37 +572,65 @@ function buscaDetalleMD(mdId) {
 			
 			/* Datos del scorecard*/
 			if(data.score != undefined) {
-				var nombresMicro = new Array();
-				var valoresObjetivoMicro = new Array();
-				var valoresRealesMicro = new Array();
-				var nombresMacro = ['','','','','','','',''];
-				var valoresObjetivoMacro = [0,0,0,0,0,0,0,0];
-				var valoresRealesMacro = [0,0,0,0,0,0,0,0];
-				
-				if(data.score.factores != undefined && data.score.factores.length > 0) {
-					var posicion = 0;
-					for(var i = 0; i < data.score.factores.length; i++) {
-						if(data.score.factores[i].rangoubica != undefined && data.score.factores[i].rangoubica.indexOf("MICRO") != -1) {
-							var nombre = "";
-							if(data.score.factores[i].nombrenivel.length > 10) {
-								nombre = data.score.factores[i].nombrenivel.substring(0,9) + "...";
-							} else {
-								nombre = data.score.factores[i].nombrenivel;
+				if(data.score.tipoScore != undefined && data.score.tipoScore == SCORE_ANTERIOR) {
+					$("#scoreSpan1").hide();
+					$("#div_score2").hide();
+					var nombres = new Array();
+					var valoresObjetivo = new Array();
+					var valoresReales = new Array();
+					
+					if(data.score.factores != undefined && data.score.factores.length > 0) {
+						for(var i = 0; i < data.score.factores.length; i++) {
+							nombres.push(data.score.factores[i].nombrenivel);
+							valoresObjetivo.push(data.score.factores[i].totalxfactor);
+							valoresReales.push(data.score.factores[i].puntuacion);
+						}
+						cargaPuntuacion(nombres, valoresObjetivo, valoresReales);
+					}
+				} else if(data.score.tipoScore != undefined && data.score.tipoScore == SCORE_NUEVO) {
+					$("#scoreSpan1").text("Micro ubicación");
+					$("#scoreSpan2").text("Macro ubicación");
+					$('.slick_main').slick({
+				        dots: true,
+				        infinite: true,
+				        speed: 500,
+				        slidesToShow: 1,
+				        slidesToScroll: 1
+				    });
+					
+					var nombresMicro = new Array();
+					var valoresObjetivoMicro = new Array();
+					var valoresRealesMicro = new Array();
+					var nombresMacro = ['','','','','','','',''];
+					var valoresObjetivoMacro = [0,0,0,0,0,0,0,0];
+					var valoresRealesMacro = [0,0,0,0,0,0,0,0];
+					
+					if(data.score.factores != undefined && data.score.factores.length > 0) {
+						var posicion = 0;
+						for(var i = 0; i < data.score.factores.length; i++) {
+							if(data.score.factores[i].rangoubica != undefined && data.score.factores[i].rangoubica.indexOf("MICRO") != -1) {
+								var nombre = "";
+								if(data.score.factores[i].nombrenivel.length > 10) {
+									nombre = data.score.factores[i].nombrenivel.substring(0,9) + "...";
+								} else {
+									nombre = data.score.factores[i].nombrenivel;
+								}
+								nombresMicro.push(nombre);
+								valoresObjetivoMicro.push(data.score.factores[i].totalxfactor);
+								valoresRealesMicro.push(data.score.factores[i].puntuacion);
+							} else if(data.score.factores[i].rangoubica != undefined && data.score.factores[i].rangoubica.indexOf("MACRO") != -1) {
+								nombresMacro[posicion] = data.score.factores[i].nombrenivel;
+								valoresObjetivoMacro[posicion] = data.score.factores[i].totalxfactor;
+								valoresRealesMacro[posicion] = data.score.factores[i].puntuacion;
+								posicion++;
 							}
-							nombresMicro.push(nombre);
-							valoresObjetivoMicro.push(data.score.factores[i].totalxfactor);
-							valoresRealesMicro.push(data.score.factores[i].puntuacion);
-						} else if(data.score.factores[i].rangoubica != undefined && data.score.factores[i].rangoubica.indexOf("MACRO") != -1) {
-							nombresMacro[posicion] = data.score.factores[i].nombrenivel;
-							valoresObjetivoMacro[posicion] = data.score.factores[i].totalxfactor;
-							valoresRealesMacro[posicion] = data.score.factores[i].puntuacion;
-							posicion++;
 						}
 					}
+					cargaMicroUbicacion(nombresMicro, valoresObjetivoMicro, valoresRealesMicro);
+					cargaMacroUbicacion(nombresMacro, valoresObjetivoMacro, valoresRealesMacro);
 				}
-				cargaMicroUbicacion(nombresMicro, valoresObjetivoMicro, valoresRealesMicro);
 			}
-			cargaMacroUbicacion(nombresMacro, valoresObjetivoMacro, valoresRealesMacro);
+			
 			
 			
 			
@@ -1159,7 +1181,7 @@ function cargaMicroUbicacion(nombres, objetivo, reales) {
 		    polar: true,
 		    type: 'area',
 		    spacingTop: -60,
-		    spacingBottom: 20,
+		    spacingBottom: 20
 		  },
 
 		  title: {
@@ -1191,6 +1213,69 @@ function cargaMicroUbicacion(nombres, objetivo, reales) {
 		    align: 'top',
 		    verticalAlign: 'top',
 		    y: 55,
+		    x: 150,
+		    layout: 'horizontal',
+		    itemStyle: {
+		    	fontSize: '10px',
+		    	color: '#717171'
+		    }
+		  },
+
+		  series: [{
+		    name: 'Objetivo',
+		    data: objetivo,
+		    pointPlacement: 'on',
+		    color: '#40BCD8'
+		  }, {
+		    name: 'Real',
+		    data: reales,
+		    pointPlacement: 'on',
+		    color: '#536379'
+		  }]
+
+		});
+}
+
+function cargaPuntuacion(nombres, objetivo, reales) {
+	Highcharts.chart('macroUbicacionChart', {
+
+		  chart: {
+		    polar: true,
+		    type: 'area',
+		    spacingTop: 20,
+		    spacingBottom: 0,
+		    height: 300
+		  },
+
+		  title: {
+		    text: null
+		  },
+
+		  pane: {
+		    size: '80%'
+		  },
+
+		  xAxis: {
+		    categories: nombres,
+		    tickmarkPlacement: 'on',
+		    lineWidth: 0
+		  },
+
+		  yAxis: {
+		    gridLineInterpolation: 'polygon',
+		    lineWidth: 0,
+		    min: 0
+		  },
+
+		  tooltip: {
+		    shared: true,
+		    pointFormat: '<span style="color:{series.color}">{series.name}: <b>{point.y:,.0f} %</b><br/>'
+		  },
+
+		  legend: {
+		    align: 'top',
+		    verticalAlign: 'top',
+		    y: -20,
 		    x: 150,
 		    layout: 'horizontal',
 		    itemStyle: {

@@ -1,0 +1,34 @@
+/*  estilos para pintar el flujo en la parte superior */
+.contenedor_boton{
+	width:4%;
+	min-width:30px;
+	max-width:50px;
+	position:relative;
+	float:left;
+}
+.contenedor_hexa{
+	width:7%;
+	position:relative;
+	float:left;
+}
+.div_flujo{
+	
+}
+.linea{
+	border-top:1px solid white;
+	height:1px;
+	position:relative;
+	top:15;
+}
+.hexa{
+	color:white;
+	padding-top:2;
+	text-align:center;
+	background:#071B36;
+	background-image:url('../img/hexa_detalle.svg');
+	background-repeat: no-repeat;
+	background-position: center;
+	height:30px;
+	width:30px;
+	margin: 0 auto;
+}

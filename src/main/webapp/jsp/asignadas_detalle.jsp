@@ -14,6 +14,7 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/generic.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/dropzone/dropzone.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/asignadas.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/detalle.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/utiles/modalImages.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/slick/slick.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/slick/slick-theme.css" />
@@ -23,6 +24,7 @@
 	<c:forEach var="permiso" items="${usr.perfil.perfilesxusuario[0].permisos}">
     	<input type="hidden" class="permisos_detalleMd" rel="${permiso.getFIMODULOID()}" value="${permiso.toJSON()}">
     </c:forEach>
+    <input type="hidden" id="perfil_usuario" value="${usr.perfil.perfilesxusuario[0].perfilid}">
     <input type="hidden" id="areaUsuario" value="${usr.perfil.areasxpuesto[0].areaId}">
     <input type="hidden" id="puestoUsuario" value="${usr.perfil.puestoId}">
     <input type="hidden" id="usuarioId" value="${usr.perfil.numeroEmpleado}">
@@ -30,93 +32,27 @@
     <input type="hidden" id="nombreCompletoUsuario" value="${usr.perfil.nombre} ${usr.perfil.apellidoP} ${usr.perfil.apellidoM}">
 <%@ include file="/jsp/generic/header.jsp" %>
 
-<div class="container-fluid_detalle">
+<div class="container-fluid fazul">
 	<div class="row padding_p">
-	<div class="col-lg-12 titulo azul t12 negrita">DASHBOARD ${usr.perfil.areasxpuesto[0].areaNom} > <span id="titulo_tipo"></span> > <span id="nombreMdTxt"></span>></div>
-			<div class="col-12"  style="padding-left:0;">
-				<button class="btn atras" type="button" onclick="history.back()"></button>
-			</div>
-			<div class="col-lg-12" style="padding-left: 20px; padding-right: 20px;">
-				<div class="row div_header menupr_estilos fazul"
-					style="margin-bottom: 10px;">
+	 <div class="col-lg-12 titulo blanco t12 negrita"><span id="leyenda"></span> > <span id="titulo_tipo"></span> > <span id="nombreMdTxt"></span>></div>
 
-					<div class="col-lg-3" style="padding-top: 8px;">
-						<span class="negrita t14 blanco">Seguimiento de Autorización</span>
-					</div>
-					<div class="col-lg-9" style="padding-top: 8px">
-						<div class="row div_header menupr_estilos fazul">
-						
-							<div id="gerenteExpansionDiv" class="col-lg-3" style="min-width: 210px; max-width: 215px;">
-								<div id="circuloAutorizaGerenteExpansion"
-									class="circuloSeguimiento">&nbsp;&nbsp;&nbsp;</div>
-								<div style="position: relative; float: left;">
-									<span class="azul t12">&nbsp;&nbsp; <a
-										id="gerenteExpansionSegPop" tabindex="0" class="blanco t14" role=""
-										data-toggle="popover" data-trigger="focus"
-										data-placement="bottom" data-content="">Gerente de
-											expansión</a>
-									</span> <img id="gerenteExpansionImg"
-										src="img/b_ATRASADAS.png"
-										style="width: 17px; display: none;">
-								</div>
-							</div>
-							<div id="expansionDiv" class="col-lg-2 min_width">
-								<div id="circuloAutorizaExpansion" class="circuloSeguimiento">&nbsp;&nbsp;&nbsp;</div>
-								<div style="position: relative; float: left;">
-									<span class="azul t12">&nbsp;&nbsp; <a
-										id="expansionSegPop" tabindex="0" class="blanco t14" role=""
-										data-toggle="popover" data-trigger="focus"
-										data-placement="bottom" data-content="">Expansión</a>
-									</span> <img id="expansionImg" src="img/b_ATRASADAS.png"
-										style="width: 17px; display: none;">
-								</div>
-							</div>
-							
-							<div id="auditoriaDiv" class="col-lg-2 min_width">
-								<div id="circuloAutorizaAuditoria" class="circuloSeguimiento">&nbsp;&nbsp;&nbsp;</div>
-								<div style="position: relative; float: left;">
-									<span class="azul t12">&nbsp;&nbsp; <a
-										id="auditoriaSegPop" tabindex="0" class="blanco t14" role=""
-										data-toggle="popover" data-trigger="focus"
-										data-placement="bottom" data-content="">Auditoria</a>
-									</span> <img id="auditoriaImg" src="img/b_ATRASADAS.png"
-										style="width: 17px; display: none;">
-								</div>
-							</div>
-							
-							<div id="gestoriaDiv" class="col-lg-2 min_width">
-								<div id="circuloAutorizaGestoria" class="circuloSeguimiento">&nbsp;&nbsp;&nbsp;</div>
-								<div style="position: relative; float: left;">
-									<span class="azul t12">&nbsp;&nbsp; <a
-										id="gestoriaSegPop" tabindex="0" class="blanco t14" role=""
-										data-toggle="popover" data-trigger="focus"
-										data-placement="bottom" data-content="">Gestoría</a>
-									</span> <img id="gestoriaImg" src="img/b_ATRASADAS.png"
-										style="width: 17px; display: none;">
-								</div>
-							</div>
-							<div id="construccionDiv" class="col-lg-2 min_width">
-								<div id="circuloAutorizaConstruccion" class="circuloSeguimiento">&nbsp;&nbsp;&nbsp;</div>
-								<div style="position: relative; float: left;">
-									<span class="azul t12">&nbsp;&nbsp; <a
-										id="construccionSegPop" tabindex="0" class="blanco t14" role=""
-										data-toggle="popover" data-trigger="focus"
-										data-placement="bottom" data-content="">Construcción</a>
-									</span> <img id="construccionImg" src="img/b_ATRASADAS.png"
-										style="width: 17px; display: none;">
-								</div>
-							</div>
-							<div id="operacionesDiv" class="col-lg-3 min_width">
-								<div id="circuloAutorizaOperaciones" class="circuloSeguimiento">&nbsp;&nbsp;&nbsp;</div>
-								<div style="position: relative; float: left;">
-									<span class="azul t12">&nbsp;&nbsp; <a
-										id="operacionesSegPop" tabindex="0" class="blanco t14" role=""
-										data-toggle="popover" data-trigger="focus"
-										data-placement="bottom" data-content="">Operaciones</a>
-									</span> <img id="operacionesImg" src="img/b_ATRASADAS.png"
-										style="width: 17px; display: none;">
-								</div>
-							</div>
+			<div class="col-12">
+				<div class="row divs_p">
+					<div class="div_flujo col-12" style="padding: 0;">
+						<div class="linea"></div>
+
+						<div class="contenedor_boton fazul">
+							<button class="btn atras" type="button" onclick="history.back()"
+								style="margin: 0"></button>
+						</div>
+						<div class="contenedor_hexa">
+							<div class="hexa">0</div>
+						</div>
+						<div class="contenedor_hexa">
+							<div class="hexa">0</div>
+						</div>
+						<div class="contenedor_hexa">
+							<div class="hexa">0</div>
 						</div>
 					</div>
 				</div>

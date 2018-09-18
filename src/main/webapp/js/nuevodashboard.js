@@ -1,4 +1,7 @@
 var fecha;
+var perfil;
+var area;
+var areaId;
 
 $(function(){
 		$('#iddashboard').addClass('resaltado'); //resalta en el header
@@ -6,7 +9,12 @@ $(function(){
 		area= $('#area').val();
 		areaId=$('#areaId').val();
 		
-		$('#nombrePerfil').text('DASHBOARD '+area);
+		if(perfil==3){
+			$('#nombrePerfil').text('DASHBOARD '+'DIRECTOR GENERAL');
+		}
+		else{
+			$('#nombrePerfil').text('DASHBOARD '+area);
+		}
 		cargafechas();
 		EnviaFecha();
 		AperturaMensual();
@@ -414,12 +422,12 @@ function pintaActivas(arreglo,filtrados){
 		var cant=filtrados[cont].total;
 		var color="";
 		
-			if(filtrados[cont].areaValidacion==$('#areaId').val() && $('#perfil_usuario').val()!='3'){
+			if(filtrados[cont].areaValidacion==$('#areaId').val() && perfil!='3'){
 				color="verde cursor";
 			}
 			else{
 				color="blanco";
-				if($('#perfil_usuario').val()=='3')
+				if(perfil=='3')
 					color="blanco cursor";
 			}
 		
@@ -431,12 +439,12 @@ function pintaActivas(arreglo,filtrados){
 			var cant2= filtrados[cont+1].total;
 			var color2="";
 			
-			if(filtrados[cont+1].areaValidacion==$('#areaId').val()&& $('#perfil_usuario').val()!='3'){
+			if(filtrados[cont+1].areaValidacion==$('#areaId').val()&& perfil!='3'){
 				color2="verde cursor";
 			}
 			else{
 				color2="blanco";
-				if($('#perfil_usuario').val()=='3')
+				if(perfil=='3')
 					color2="blanco cursor";
 			}
 			html=html+doble(cadenas[1] ,cant ,cadenas[0],color ,cadenas2[1] ,cant2 ,cadenas2[0], color2);	
@@ -461,12 +469,12 @@ function pintaAtrasadas(arreglo,filtrados){
 		var cadenas=filtrados[cont].estatus.replace('VALIDACION','VOBO').split('-',2);
 		var cant=filtrados[cont].atrasadas;
 		var color="";
-			if(filtrados[cont].areaValidacion==$('#areaId').val()&& $('#perfil_usuario').val()!='3'){
+			if(filtrados[cont].areaValidacion==$('#areaId').val()&& perfil!='3'){
 				color="rojo cursor";
 			}
 			else{
 				color="blanco";
-				if($('#perfil_usuario').val()=='3')
+				if(perfil=='3')
 					color="blanco cursor";
 			}
 		if(arreglo[i]==1){
@@ -476,12 +484,12 @@ function pintaAtrasadas(arreglo,filtrados){
 			var cadenas2= filtrados[cont+1].estatus.replace('VALIDACION','VOBO').split('-',2);
 			var cant2= filtrados[cont+1].atrasadas;
 			var color2="";
-					if(filtrados[cont+1].areaValidacion==$('#areaId').val()&& $('#perfil_usuario').val()!='3'){
+					if(filtrados[cont+1].areaValidacion==$('#areaId').val()&& perfil!='3'){
 							color2="rojo cursor";
 					}
 					else{
 							color2="blanco";
-							if($('#perfil_usuario').val()=='3')
+							if(perfil=='3')
 								color2="blanco cursor";
 					}
 			html=html+doble(cadenas[1] ,cant ,cadenas[0],color,  cadenas2[1] ,cant2 ,cadenas2[0],color2);	
@@ -506,12 +514,12 @@ function pintaCanceladas(arreglo,filtrados){
 		var cadenas=filtrados[cont].estatus.replace('VALIDACION','VOBO').split('-',2);
 		var cant=filtrados[cont].total;
 		var color="";
-		if(filtrados[cont].areaValidacion==$('#areaId').val() && $('#perfil_usuario').val()!='3'){
+		if(filtrados[cont].areaValidacion==$('#areaId').val() && perfil!='3'){
 			color="cgris cursor";
 		}
 		else{
 			color="blanco";
-			if($('#perfil_usuario').val()=='3')
+			if(perfil=='3')
 				color="blanco cursor";
 		}	
 		if(arreglo[i]==1){
@@ -521,12 +529,12 @@ function pintaCanceladas(arreglo,filtrados){
 			var cadenas2= filtrados[cont+1].estatus.replace('VALIDACION','VOBO').split('-',2);
 			var cant2= filtrados[cont+1].total;
 			var color2="";
-				if(filtrados[cont+1].areaValidacion==$('#areaId').val() && $('#perfil_usuario').val()!='3'){
+				if(filtrados[cont+1].areaValidacion==$('#areaId').val() && perfil!='3'){
 					color2="cgris cursor";
 				}
 				else{
 					color2="blanco";
-					if($('#perfil_usuario').val()=='3')
+					if(perfil=='3')
 						color2="blanco cursor";
 				}
 			
@@ -581,7 +589,7 @@ function redirige(valor){
 	if ($(valor).is(".cgris")){
 		window.location.href='tablero';
 	}
-	if($('#perfil_usuario').val()=='3'){
+	if(perfil=='3'){
 		window.location.href='tablero';
 	}	
 	

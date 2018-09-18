@@ -15,11 +15,23 @@ var fechaPredial;
 
 var SCORE_ANTERIOR = 1;
 var SCORE_NUEVO = 2
+var perfil;
+var area;
 
 $(function(){
 	TIPOMD = $("#tipoMd").val();
 	mdId=$("#mdId").val();
-	
+	perfil=$("#perfil_usuario").val();  //21
+	area=$("#nombreAreaUsuario").val();
+
+// ------------------- SE ARMA LA LEYENDA ------------------
+	if(perfil==3){
+		$('#leyenda').text('DASHBOARD DIRECTOR GENERAL');
+	}
+	else{
+		$('#leyenda').text('DASHBOARD '+area);
+	}
+// ------------------- Se define que parte del header se resalta ------------------
 	
 	if(TIPOMD == 0){
 		$('#idasignadas').addClass('resaltado');

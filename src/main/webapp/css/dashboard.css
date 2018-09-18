@@ -2,11 +2,6 @@
 .graficas1{
 	height:20%;
 }
-.cursor_verde, .cursor_rojo, .cursor_cgris{
-	cursor:pointer;
-}
-
-
 .verde{
 	color: #3FB961;
 }

@@ -415,10 +415,12 @@ function pintaActivas(arreglo,filtrados){
 		var color="";
 		
 			if(filtrados[cont].areaValidacion==$('#areaId').val() && $('#perfil_usuario').val()!='3'){
-				color="verde cursor_verde";
+				color="verde cursor";
 			}
 			else{
 				color="blanco";
+				if($('#perfil_usuario').val()=='3')
+					color="blanco cursor";
 			}
 		
 		if(arreglo[i]==1){
@@ -430,10 +432,12 @@ function pintaActivas(arreglo,filtrados){
 			var color2="";
 			
 			if(filtrados[cont+1].areaValidacion==$('#areaId').val()&& $('#perfil_usuario').val()!='3'){
-				color2="verde cursor_verde";
+				color2="verde cursor";
 			}
 			else{
 				color2="blanco";
+				if($('#perfil_usuario').val()=='3')
+					color2="blanco cursor";
 			}
 			html=html+doble(cadenas[1] ,cant ,cadenas[0],color ,cadenas2[1] ,cant2 ,cadenas2[0], color2);	
 			
@@ -458,10 +462,12 @@ function pintaAtrasadas(arreglo,filtrados){
 		var cant=filtrados[cont].atrasadas;
 		var color="";
 			if(filtrados[cont].areaValidacion==$('#areaId').val()&& $('#perfil_usuario').val()!='3'){
-				color="rojo cursor_rojo";
+				color="rojo cursor";
 			}
 			else{
 				color="blanco";
+				if($('#perfil_usuario').val()=='3')
+					color="blanco cursor";
 			}
 		if(arreglo[i]==1){
 			html=html+simple(cadenas[1] ,cant ,cadenas[0],color);
@@ -471,10 +477,12 @@ function pintaAtrasadas(arreglo,filtrados){
 			var cant2= filtrados[cont+1].atrasadas;
 			var color2="";
 					if(filtrados[cont+1].areaValidacion==$('#areaId').val()&& $('#perfil_usuario').val()!='3'){
-							color2="rojo cursor_rojo";
+							color2="rojo cursor";
 					}
 					else{
 							color2="blanco";
+							if($('#perfil_usuario').val()=='3')
+								color2="blanco cursor";
 					}
 			html=html+doble(cadenas[1] ,cant ,cadenas[0],color,  cadenas2[1] ,cant2 ,cadenas2[0],color2);	
 			
@@ -492,7 +500,6 @@ function pintaAtrasadas(arreglo,filtrados){
 function pintaCanceladas(arreglo,filtrados){
 	$('#proceso').hide();
 	html=inicio();
-	console.log(filtrados);
 	var cont=0;
 	
 	for(var i=0;i<arreglo.length;i++){
@@ -500,10 +507,12 @@ function pintaCanceladas(arreglo,filtrados){
 		var cant=filtrados[cont].total;
 		var color="";
 		if(filtrados[cont].areaValidacion==$('#areaId').val() && $('#perfil_usuario').val()!='3'){
-			color="cgris cursor_cgris";
+			color="cgris cursor";
 		}
 		else{
 			color="blanco";
+			if($('#perfil_usuario').val()=='3')
+				color="blanco cursor";
 		}	
 		if(arreglo[i]==1){
 			html=html+simple(cadenas[1] ,cant ,cadenas[0], color);
@@ -513,10 +522,12 @@ function pintaCanceladas(arreglo,filtrados){
 			var cant2= filtrados[cont+1].total;
 			var color2="";
 				if(filtrados[cont+1].areaValidacion==$('#areaId').val() && $('#perfil_usuario').val()!='3'){
-					color2="cgris cursor_cgris";
+					color2="cgris cursor";
 				}
 				else{
 					color2="blanco";
+					if($('#perfil_usuario').val()=='3')
+						color2="blanco cursor";
 				}
 			
 			html=html+doble(cadenas[1] ,cant ,cadenas[0],color  ,cadenas2[1] ,cant2 ,cadenas2[0],color2);	
@@ -560,8 +571,20 @@ function inicio(){
 	return '<div class="linea"></div>';
 }
 
-function redirige(){
-	window.location.href='b.php';
+function redirige(valor){
+	if ($(valor).is(".verde")){
+		window.location.href='asignadas';
+	}
+	if ($(valor).is(".rojo")){
+		window.location.href='asignadas';
+	}
+	if ($(valor).is(".cgris")){
+		window.location.href='tablero';
+	}
+	if($('#perfil_usuario').val()=='3'){
+		window.location.href='tablero';
+	}	
+	
 }
 
 //--------------------- ENVIA FECHA A LAS TABLAS

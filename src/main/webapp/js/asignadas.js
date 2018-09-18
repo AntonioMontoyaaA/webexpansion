@@ -3,7 +3,6 @@ var datosExcel = "";
 $(function(){
 	$('#idasignadas').addClass('resaltado');
 	inicializaCalendarios();
-	creatabla(); //TODO remove
 	if($( "#datepicker1").val()!='')
 		creatabla();
 	

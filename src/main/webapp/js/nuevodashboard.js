@@ -6,16 +6,28 @@ $(function(){
 		area= $('#area').val();
 		areaId=$('#areaId').val();
 		
-		$('#nombrePerfil').text('DASHBOARD ANALISTA '+area);
+		$('#nombrePerfil').text('DASHBOARD '+area);
 		cargafechas();
+		EnviaFecha();
 		AperturaMensual();
 		cargaDashboard();
+		
 });
 
 function cargafechas(){
 	var f=new Date();
 	var mesint = new Array ("01","02","03","04","05","06","07","08","09","10","11","12");
-	fecha = f.getDate() + "/" + mesint[f.getMonth()] + "/" + f.getFullYear();	
+	fecha = f.getDate() + "/" + mesint[f.getMonth()] + "/" + f.getFullYear();
+	
+	if(f.getMonth()-2<0){
+		var resta=f.getMonth()-2;
+		var año=f.getFullYear()-1;
+		fecha_enviar = f.getDate() + "/" + mesint[12+resta] + "/" + año;
+	}
+	else{
+		fecha_enviar = f.getDate() + "/" + mesint[f.getMonth()-2] + "/" + f.getFullYear();
+	}
+	
 }
 
 function AperturaMensual(){
@@ -37,76 +49,6 @@ function AperturaMensual(){
 	}
 	if(data.codigo==200){
 		AperturaMensual_grafica(data);
-	}
-};	
-}
-
-function cargaDashboard(){
-	invocarJSONServiceAction("cargaProcesoAction", 
-			{}, 
-			'obtieneResponseProceso', 
-			function() {
-				//Funcion de error
-				cierraLoading();
-			},
-			function() {
-				//Función al finalizar}
-				cierraLoading();
-			});
-
-	obtieneResponseProceso = function( data ) {
-	if(data.codigo != 200){
-		cargaMensajeModal('DASHBOARD', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
-	}
-	if(data.codigo==200){
-		$('#total_activas').text(data.totales);
-		$('#total_atrasadas').text(data.atrasadas);
-		$('#total_canceladas').text(data.canceladas);
-		
-		armaGraficas(data);
-// ----------------------- ARMA DIAGRAMA DE FLUJO -------------------------
-		var descripcion_arreglo=[1,1,2,2,1,1,1,1,1,2,1,1,1,1,1];
-		var original=data.nivelEstatusActivos;
-		var original_canceladas=data.nivelEstatusCancelado;
-		var filtrados=[];
-		
-		for(var i=0;i<original.length;i++){
-			if(original[i].estatusValidacion==1){
-				filtrados.push(original[i]);
-			}
-		}
-		pintaActivas(descripcion_arreglo, filtrados);
-		
-		$( "#container_activas" ).on( "click", function() {
-			var filtrados=[];
-			for(var i=0;i<original.length;i++){
-				if(original[i].estatusValidacion==1){
-					filtrados.push(original[i]);
-				}
-			}
-			pintaActivas(descripcion_arreglo,filtrados);
-		});
-		
-		$( "#container_atrasadas" ).on( "click", function() {
-			var filtrados=[];
-			for(var i=0;i<original.length;i++){
-				if(original[i].estatusValidacion==1){
-					filtrados.push(original[i]);
-				}
-			}
-			pintaAtrasadas(descripcion_arreglo,filtrados);
-		});
-		
-		$( "#container_canceladas" ).on( "click", function() {
-			var filtrados=[];
-			for(var i=0;i<original_canceladas.length;i++){
-				if(original_canceladas[i].estatusValidacion==1){
-					filtrados.push(original_canceladas[i]);
-				}
-			}
-			pintaCanceladas(descripcion_arreglo,filtrados);
-		});
-// ----------------------  ARMA DIAGRAMA DE FLUJO FIN ---------------------------------
 	}
 };	
 }
@@ -238,6 +180,77 @@ if(datos.Diciembre!="undefined"){
 		    }]
 	});
 }
+
+function cargaDashboard(){
+	invocarJSONServiceAction("cargaProcesoAction", 
+			{}, 
+			'obtieneResponseProceso', 
+			function() {
+				//Funcion de error
+				cierraLoading();
+			},
+			function() {
+				//Función al finalizar}
+				cierraLoading();
+			});
+
+	obtieneResponseProceso = function( data ) {
+	if(data.codigo != 200){
+		cargaMensajeModal('DASHBOARD', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
+	}
+	if(data.codigo==200){
+		$('#total_activas').text(data.totales);
+		$('#total_atrasadas').text(data.atrasadas);
+		$('#total_canceladas').text(data.canceladas);
+		
+		armaGraficas(data);
+// ----------------------- ARMA DIAGRAMA DE FLUJO -------------------------
+		var descripcion_arreglo=[1,1,2,2,1,1,1,1,1,2,1,1,1,1,1];
+		var original=data.nivelEstatusActivos;
+		var original_canceladas=data.nivelEstatusCancelado;
+		var filtrados=[];
+		
+		for(var i=0;i<original.length;i++){
+			if(original[i].estatusValidacion==1){
+				filtrados.push(original[i]);
+			}
+		}
+		pintaActivas(descripcion_arreglo, filtrados);
+		
+		$( "#container_activas" ).on( "click", function() {
+			var filtrados=[];
+			for(var i=0;i<original.length;i++){
+				if(original[i].estatusValidacion==1){
+					filtrados.push(original[i]);
+				}
+			}
+			pintaActivas(descripcion_arreglo,filtrados);
+		});
+		
+		$( "#container_atrasadas" ).on( "click", function() {
+			var filtrados=[];
+			for(var i=0;i<original.length;i++){
+				if(original[i].estatusValidacion==1){
+					filtrados.push(original[i]);
+				}
+			}
+			pintaAtrasadas(descripcion_arreglo,filtrados);
+		});
+		
+		$( "#container_canceladas" ).on( "click", function() {
+			var filtrados=[];
+			for(var i=0;i<original_canceladas.length;i++){
+				if(original_canceladas[i].estatusValidacion==1){
+					filtrados.push(original_canceladas[i]);
+				}
+			}
+			pintaCanceladas(descripcion_arreglo,filtrados);
+		});
+// ----------------------  ARMA DIAGRAMA DE FLUJO FIN ---------------------------------
+	}
+};	
+}
+
 
 function armaGraficas(data){
 	var meses=["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
@@ -399,14 +412,30 @@ function pintaActivas(arreglo,filtrados){
 	for(var i=0;i<arreglo.length;i++){
 		var cadenas=filtrados[cont].estatus.replace('VALIDACION','VOBO').split('-',2);
 		var cant=filtrados[cont].total;
+		var color="";
+		
+			if(filtrados[cont].areaValidacion==$('#areaId').val() && $('#perfil_usuario').val()!='3'){
+				color="verde cursor_verde";
+			}
+			else{
+				color="blanco";
+			}
 		
 		if(arreglo[i]==1){
-			html=html+simple(cadenas[1] ,cant ,cadenas[0]);
+			html=html+simple(cadenas[1] ,cant ,cadenas[0], color);
 		}
 		if(arreglo[i]==2){
 			var cadenas2= filtrados[cont+1].estatus.replace('VALIDACION','VOBO').split('-',2);
 			var cant2= filtrados[cont+1].total;
-			html=html+doble(cadenas[1] ,cant ,cadenas[0],cadenas2[1] ,cant2 ,cadenas2[0]);	
+			var color2="";
+			
+			if(filtrados[cont+1].areaValidacion==$('#areaId').val()&& $('#perfil_usuario').val()!='3'){
+				color2="verde cursor_verde";
+			}
+			else{
+				color2="blanco";
+			}
+			html=html+doble(cadenas[1] ,cant ,cadenas[0],color ,cadenas2[1] ,cant2 ,cadenas2[0], color2);	
 			
 			cont++;
 		}
@@ -427,14 +456,27 @@ function pintaAtrasadas(arreglo,filtrados){
 	for(var i=0;i<arreglo.length;i++){
 		var cadenas=filtrados[cont].estatus.replace('VALIDACION','VOBO').split('-',2);
 		var cant=filtrados[cont].atrasadas;
-		
+		var color="";
+			if(filtrados[cont].areaValidacion==$('#areaId').val()&& $('#perfil_usuario').val()!='3'){
+				color="rojo cursor_rojo";
+			}
+			else{
+				color="blanco";
+			}
 		if(arreglo[i]==1){
-			html=html+simple(cadenas[1] ,cant ,cadenas[0]);
+			html=html+simple(cadenas[1] ,cant ,cadenas[0],color);
 		}
 		if(arreglo[i]==2){
 			var cadenas2= filtrados[cont+1].estatus.replace('VALIDACION','VOBO').split('-',2);
 			var cant2= filtrados[cont+1].atrasadas;
-			html=html+doble(cadenas[1] ,cant ,cadenas[0],cadenas2[1] ,cant2 ,cadenas2[0]);	
+			var color2="";
+					if(filtrados[cont+1].areaValidacion==$('#areaId').val()&& $('#perfil_usuario').val()!='3'){
+							color2="rojo cursor_rojo";
+					}
+					else{
+							color2="blanco";
+					}
+			html=html+doble(cadenas[1] ,cant ,cadenas[0],color,  cadenas2[1] ,cant2 ,cadenas2[0],color2);	
 			
 			cont++;
 		}
@@ -445,7 +487,6 @@ function pintaAtrasadas(arreglo,filtrados){
 	$('.hexa').css('background-image','url("img/hexarojo.svg")');
 	
 	$('#proceso').fadeIn();
-	console.log(filtrados);
 }
 
 function pintaCanceladas(arreglo,filtrados){
@@ -457,14 +498,28 @@ function pintaCanceladas(arreglo,filtrados){
 	for(var i=0;i<arreglo.length;i++){
 		var cadenas=filtrados[cont].estatus.replace('VALIDACION','VOBO').split('-',2);
 		var cant=filtrados[cont].total;
-		
+		var color="";
+		if(filtrados[cont].areaValidacion==$('#areaId').val() && $('#perfil_usuario').val()!='3'){
+			color="cgris cursor_cgris";
+		}
+		else{
+			color="blanco";
+		}	
 		if(arreglo[i]==1){
-			html=html+simple(cadenas[1] ,cant ,cadenas[0]);
+			html=html+simple(cadenas[1] ,cant ,cadenas[0], color);
 		}
 		if(arreglo[i]==2){
 			var cadenas2= filtrados[cont+1].estatus.replace('VALIDACION','VOBO').split('-',2);
 			var cant2= filtrados[cont+1].total;
-			html=html+doble(cadenas[1] ,cant ,cadenas[0],cadenas2[1] ,cant2 ,cadenas2[0]);	
+			var color2="";
+				if(filtrados[cont+1].areaValidacion==$('#areaId').val() && $('#perfil_usuario').val()!='3'){
+					color2="cgris cursor_cgris";
+				}
+				else{
+					color2="blanco";
+				}
+			
+			html=html+doble(cadenas[1] ,cant ,cadenas[0],color  ,cadenas2[1] ,cant2 ,cadenas2[0],color2);	
 			
 			cont++;
 		}
@@ -476,31 +531,43 @@ function pintaCanceladas(arreglo,filtrados){
 	$('#proceso').fadeIn();
 }
 
-function simple(titulo,cant,pie){
+function simple(titulo,cant,pie,color){
 	return '<div class="simple">'+
-	'<div class="negrita blanco titulo_hex">'+titulo+'</div>'+
-	'<div class="hexa">'+
+	'<div class="negrita '+color+' titulo_hex"  onclick="redirige(this)">'+titulo+'</div>'+
+	'<div class="hexa '+color+'" onclick="redirige(this)">'+
 	'<div class="negrita blanco cont_hex">'+cant+'</div></div>'+
-	'<div class="blanco pie_hex">'+pie+'</div>'+	
+	'<div class="'+color+' pie_hex"  onclick="redirige(this)">'+pie+'</div>'+	
 	'</div>';
 }
-function doble(x1,x2,x3,y1,y2,y3){
+function doble(x1,x2,x3,color1,  y1,y2,y3,color2){
 	return '<div class="simple" style="padding:0 5;">'+
 	'<div class="lineadoble fazul">'+
 	'<div class="doble">'+
-	'<div class="hexa">'+
+	'<div class="hexa '+color1+'" onclick="redirige(this)">'+
 	'<div class="negrita blanco cont_hex_doble">'+x2+'</div>'+
-	'</div><div class="hexa">'+
+	'</div><div class="hexa '+color2+'"  onclick="redirige(this)">'+
 		'<div class="negrita blanco cont_hex_doble">'+y2+'</div>'+
 	'</div></div>'+
 	'</div>'+
-	'<div class="negrita blanco titulo_hex_doble" style="bottom:120">'+x1+'</div>'+
-	'<div class="blanco pie_hex_doble"  style="bottom:73">'+x3+'</div>'+
+	'<div class="negrita '+color1+' titulo_hex_doble" style="bottom:120"  onclick="redirige(this)">'+x1+'</div>'+
+	'<div class="'+color1+' pie_hex_doble"  style="bottom:73"  onclick="redirige(this)">'+x3+'</div>'+
 	
-	'<div class="negrita blanco titulo_hex_doble" style="bottom:57">'+y1+'</div>'+
-	'<div class="blanco pie_hex_doble" style="bottom:10">'+y3+'</div>'+
+	'<div class="negrita '+color2+' titulo_hex_doble" style="bottom:57"  onclick="redirige(this)">'+y1+'</div>'+
+	'<div class="'+color2+' pie_hex_doble" style="bottom:10"  onclick="redirige(this)">'+y3+'</div>'+
 	'</div>';
 }
 function inicio(){
 	return '<div class="linea"></div>';
+}
+
+function redirige(){
+	window.location.href='b.php';
+}
+
+//--------------------- ENVIA FECHA A LAS TABLAS
+function EnviaFecha(){
+
+	invocarJSONServiceAction("EnviaFechaAction", 
+			{'fechaConsulta': fecha_enviar}, 
+			'');
 }

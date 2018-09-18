@@ -47,8 +47,7 @@ public class DashboardPlanAperturaMAction extends ExpansionAction {
 			sendJSONObjectToResponse(respuestaVo);
 			return null;
 		}
-		
-		
+	
 		String respuesta="";
 		 HttpServletResponse response2 = ServletActionContext.getResponse();
 			response2.setContentType("application/json");

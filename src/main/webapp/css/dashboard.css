@@ -2,6 +2,20 @@
 .graficas1{
 	height:20%;
 }
+.cursor_verde, .cursor_rojo, .cursor_cgris{
+	cursor:pointer;
+}
+
+
+.verde{
+	color: #3FB961;
+}
+.cgris{
+	color: #657488;
+}
+.rojo{
+	color: #C93535;
+}
 
  /*alineacion de titulos*/
 .fecha{

@@ -497,8 +497,29 @@ Left
 }
 
 .datoObra{
-	    height: 80px;
+	height: 80px;
 }
+
+.btnGris{
+	color: white;
+    background-color: #CCC;
+}
+
+.btnAzul{
+	background-color: #071B36;
+    color: white;
+}
+
+.btnGris, .btnAzul{
+    width: 80px;
+    height: 25px;
+    margin: 15px;
+    line-height: 25px;
+    font-size: 12px;
+	border-radius: 2px;
+	cursor: pointer;
+}
+
 /* ----------------------------------- INICIO ESTILOS 2.0 ---------------------------------- */
 .titulo_detalle_md_20 {
 	font-size: 0.9em;

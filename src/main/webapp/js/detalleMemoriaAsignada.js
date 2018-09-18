@@ -500,6 +500,7 @@ function buscaDetalleMD(mdId) {
 		if(data.codigo != 200) {
 			cargaMensajeModal('DETALLE MD', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, redireccionaAsignadas);
 		} else {
+			pintaFlujo(data);
 			
 			$("#botondescarga").click(function(){
 				descargaExcel(data);

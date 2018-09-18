@@ -1282,7 +1282,7 @@ function cargaPuntuacion(nombres, objetivo, reales) {
 
 		  tooltip: {
 		    shared: true,
-		    pointFormat: '<span style="color:{series.color}">{series.name}: <b>{point.y:,.0f} %</b><br/>'
+		    pointFormat: '<span style="color:{series.color}">{series.name}: <b>{point.y:,.0f} puntos</b><br/>'
 		  },
 
 		  legend: {

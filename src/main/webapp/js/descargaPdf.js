@@ -8,13 +8,14 @@ function descargaExcel(data){
 	$('#pdflon').val(data.generales.longitud);
 	$('#pdfurlmapa').val('http://maps.google.com/maps?q=loc:'+data.generales.latitud+','+data.generales.longitud);
 	
-	var calle= data.datosSitio.calle+", ";
+	/*var calle= data.datosSitio.calle+", ";
 	var colonia= "Col. "+data.datosSitio.colonia+", ";
 	var municipio= data.datosSitio.municipio+", ";
 	var ciudad = data.datosSitio.ciudad+", ";
 	var estado =data.datosSitio.estado +", ";
 	var codigoPostal="C.P. "+data.datosSitio.codigoPostal;
-	$('#pdfdireccion').val(calle+colonia+ciudad+estado+codigoPostal);
+	$('#pdfdireccion').val(calle+colonia+ciudad+estado+codigoPostal);*/
+	$('#pdfdireccion').val(data.datosSitio.direccion);
 	
 	$('#pdfnombrePropietario').val(data.datosPropietario.nombre);
 	$('#pdftelefonoPropietario').val(data.datosPropietario.telefono);

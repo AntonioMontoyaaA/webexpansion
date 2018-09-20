@@ -83,7 +83,7 @@
   					</div>
 				</div>
 			<div class="col-lg-12 p_cabecera">
-				<span class="blanco negrita estilo_dato" id="suma">0</span><span class="blanco estilo_info t14"> TIENDAS</span>
+				<span class="blanco negrita estilo_dato t18" id="suma">0</span><span class="blanco estilo_info t14"> TIENDAS</span>
 			</div>
 			</div>	
 			

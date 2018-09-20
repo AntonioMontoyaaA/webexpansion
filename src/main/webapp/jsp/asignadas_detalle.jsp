@@ -35,12 +35,21 @@
 <div class="container-fluid fazul">
 	<div class="row padding_p">
 	 <div class="col-lg-12 titulo blanco t12 negrita"><span id="leyenda"></span> > <span id="titulo_tipo"></span> > <span id="nombreMdTxt"></span>></div>
-
-			<div class="col-12">
-				<div class="row divs_p">
-					<div class="div_flujo col-12" style="padding: 0;" id="flujo"></div>
+  <!--  ******************************** HEXAGONOS- FLUJO *************************************** -->
+			<div class="col-12" style="margin:10 0; padding:0;">
+				<div class="col-12 divs_p right">
+				<div class="float_left"><button class="btn desp regresa" type="button" onclick="history.back()"></button></div>
+					
+					<div class="col-lg-10 col-10" id="flujo"></div>
+					
+					<div class="botones">
+						<button class="btn desp radio" type="button"></button>
+						<button class="btn desp mensajes" type="button"></button>
+						<button class="btn desp descarga" type="button"></button>
+					</div>
 				</div>
 			</div>
+  <!--  *********************************************************************** -->
 
 			<div class="col-lg-4 col-12">
 		<div class="row divs_p">
@@ -620,11 +629,9 @@
 	<div style="position:relative"><img class="modal-content rotate_left" id="imageModal"></div>
 
 		
-
-
-
-
-
+<!-- MODAL INFO FLUJO-HEXAGONOS -->
+		
+<!-- FIN MODAL INFO FLUJO-HEXAGONOS -->
 	</div>
 
 <jsp:include page="/jsp/generic/loading.jsp" />

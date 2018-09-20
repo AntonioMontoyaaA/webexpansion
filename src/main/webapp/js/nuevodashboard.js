@@ -66,6 +66,7 @@ var	datos=data.meses;
 var ene_plan=0, ene_real=0, feb_plan=0, feb_real=0, mar_plan=0, mar_real=0, abr_plan=0, abr_real=0, may_plan=0, may_real=0;
 var jun_plan=0, jun_real=0, jul_plan=0, jul_real=0, ago_plan=0, ago_real=0, sep_plan=0, sep_real=0, oct_plan=0, oct_real=0;
 var nov_plan=0, nov_real=0, dic_plan=0, dic_real=0;
+$('#suma').text(data.totalAperturas);
 
 if(datos.Enero!="undefined"){
 	ene_plan=datos.Enero.plan;

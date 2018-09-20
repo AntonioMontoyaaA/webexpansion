@@ -83,7 +83,7 @@
 	background-image:url('../img/regresarOFF.png');
 }
 .descarga{
-	background-image:url('../img/iconos_DOWNLOAD.png');
+	background-image:url('../img/DOWNLOAD.svg');
 }
 .mensajes{
 	background-image:url('../img/aprobadas/msg.svg');
@@ -91,6 +91,6 @@
 .radio{
 	background-image:url('../img/aprobadas/radios.svg');
 }
-.radio:hover{
-	background-image:url('../img/aprobadas/radios_over.svg');
+.desp:hover{
+	background-color: #536379;
 }

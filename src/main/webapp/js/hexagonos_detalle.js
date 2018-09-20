@@ -47,11 +47,19 @@ function pintaFlujo(data){
 			      var fechaAutorizacion=arreglo[dato_buscar][cadena[0]][0].fechaAutorizacion;
 			      var fechaLimite=arreglo[dato_buscar][cadena[0]][0].fechaLimite;
 			      var nombre=arreglo[dato_buscar][cadena[0]][0].nombre;
+			      var dias;
+			      
+			      if(diasVencidos < 0)
+			    	  dias = 'A ' + (diasVencidos * -1) + ' días de vencer';
+			      else if(diasVencidos == 0)
+			    	  dias = 'En tiempo';
+			      else if(diasVencidos > 0)
+			    	  dias = ' ' + diasVencidos + ' días después';
 			      
 			      $('.dato1').text(nombre);
 			      $('.dato2').text(fechaAutorizacion);
 			      $('.dato3').text(fechaLimite);
-			      $('.dato4').text(diasVencidos);
+			      $('.dato4').text(dias);
 			      
 			      $('#titulo_proceso').text(cadena);
 			      $('#modal_flujo').modal('show');

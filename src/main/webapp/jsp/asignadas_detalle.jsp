@@ -44,8 +44,8 @@
 					
 					<div class="botones">
 						<button id="btnRadios" class="btn desp radio" type="button"></button>
-						<button class="btn desp mensajes" type="button"></button>
-						<button class="btn desp descarga" type="button"></button>
+						<button id="mensajesMD" onclick="muestraChatXMd();" class="btn desp mensajes" type="button"></button>
+						<button id="botondescarga" class="btn desp descarga" type="button"></button>
 					</div>
 				</div>
 			</div>
@@ -56,16 +56,8 @@
 			<div class="col-lg-12 menupr_estilos fblanco altura1">
 			<div class="col-12 titulo_seccion">	
 			<div class="row">
-			<div class="col-lg-6">
+			<div class="col-lg-12">
 			<span class="titulo_detalle_md_20" id="labelNombre"></span><input class="titulo_detalle_md_20 text_edita" style="text-transform: uppercase;" value="---" type="text" id="nombreMd" readonly />
-			</div>
-			<div class="col-lg-6 right">
-			<span>
-				<img id="botondescarga" title="Descarga PDF" class="autorizado" style="cursor: pointer;" src="img/iconos_DOWNLOAD.png">&nbsp;
-			</span>
-			<span>
-				<img id="mensajesMD" title="Ver mensajes" class="autorizado" onclick="muestraChatXMd();" style="cursor: pointer;" src="img/iconos_COMENTARIOS.png">&nbsp;
-			</span>
 			</div>
 			
 			<div class="col-lg-7" id="responsable">

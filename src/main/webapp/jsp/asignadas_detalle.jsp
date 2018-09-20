@@ -576,7 +576,7 @@
 					<div class="row fblanco" style="padding:10 0;">
 							<div class="col-12 negrita t12 left azul" style="margin-top:5">Autorizó</div>
 								<div class="col-12 dato1 left gris"></div>
-							<div class="col-12 negrita t12 left azul" style="margin-top:5">Fecha de Autorización</div>
+							<div class="col-12 negrita t12 left azul" style="margin-top:5">Fecha de creación</div>
 								<div class="col-12 dato2 left gris"></div>
 							<div class="col-12 negrita t12 left azul" style="margin-top:5">Fecha Límite</div>
 								<div class="col-12 dato3 left gris"></div>

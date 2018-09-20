@@ -554,7 +554,41 @@
 				</div>
 			</div>
 		</div>
-
+		
+		<!-- MODAL INFO FLUJO-HEXAGONOS -->
+	<div id="modal_flujo" class="modal fade">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				
+					
+					<div class="row center fazul div_contenido">
+					<div class="col-12">
+						<button id="modal_cerrar" type="button" class="close t18" data-dismiss="modal"
+							aria-label="Close" style="height:0;">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>	
+					<div class="col-12">
+						<span><img class="relojito" src="img/reloj_atrasoB.svg"></span>
+						<span id="titulo_proceso" class="blanco t14 negrita"></span>
+					</div>
+					</div>
+					<div class="row fblanco" style="padding:10 0;">
+							<div class="col-12 negrita t12 left azul" style="margin-top:5">Autorizó</div>
+								<div class="col-12 dato1 left gris"></div>
+							<div class="col-12 negrita t12 left azul" style="margin-top:5">Fecha de Autorización</div>
+								<div class="col-12 dato2 left gris"></div>
+							<div class="col-12 negrita t12 left azul" style="margin-top:5">Fecha Límite</div>
+								<div class="col-12 dato3 left gris"></div>
+							<div class="col-12 negrita t12 left azul" style="margin-top:5">Días vencidos</div>
+								<div class="col-12 dato4 left gris"></div>
+					</div>
+					
+				
+			</div>
+		</div>
+	</div>
+	<!-- FIN MODAL INFO FLUJO-HEXAGONOS -->
 
 
 <form style="display: none;" action='memoria_detalle'  id="detalleMemoriaAsignadaAction" method="post">
@@ -627,11 +661,6 @@
 	
 	
 	<div style="position:relative"><img class="modal-content rotate_left" id="imageModal"></div>
-
-		
-<!-- MODAL INFO FLUJO-HEXAGONOS -->
-		
-<!-- FIN MODAL INFO FLUJO-HEXAGONOS -->
 	</div>
 
 <jsp:include page="/jsp/generic/loading.jsp" />

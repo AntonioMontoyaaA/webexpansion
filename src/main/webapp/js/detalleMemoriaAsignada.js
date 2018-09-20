@@ -18,6 +18,8 @@ var SCORE_NUEVO = 2
 var perfil;
 var area;
 
+var radioAsignado;
+
 $(function(){
 	TIPOMD = $("#tipoMd").val();
 	mdId=$("#mdId").val();
@@ -67,8 +69,90 @@ $(function(){
         slidesToShow: 1,
         slidesToScroll: 1
     });*/
+	
+	
+	$("#btnRadios").click(function() {
+		imprimeInfoRadio();
+	});
 
 });
+
+function imprimeInfoRadio() {
+	if(radioAsignado.radioId != undefined) {
+		var cadena = "";
+		var fechaAsignado = "";
+		var infoSE = "";
+		var generadores = "";
+		var ubicacion = "";
+		
+		if(radioAsignado.fechaAsignado == undefined || radioAsignado.fechaAsignado == undefined || radioAsignado.fechaAsignado == "null") {
+			fechaAsignado = "sin fecha asignada";
+		}
+		
+		if(radioAsignado.poblacion != undefined) {
+			if(radioAsignado.poblacion.poblacion != undefined) {
+				infoSE += "<div class='col-lg-6 col-6'><span class='contenido_cajas_20'>Población: </span></div><div class='col-lg-6 col-6'><span class='titulo_detalle_md_20' style='font-size: 0.7em;'>" + formato(radioAsignado.poblacion.poblacion, true) + "</span></div>";
+			}
+			if(radioAsignado.poblacion.viviendas != undefined) {
+				infoSE += "<div class='col-lg-6 col-6'><span class='contenido_cajas_20'>Viviendas: </span></div><div class='col-lg-6 col-6'><span class='titulo_detalle_md_20' style='font-size: 0.7em;'>" + formato(radioAsignado.poblacion.viviendas, true) + "</span></div>";
+			}
+			if(radioAsignado.poblacion.pea != undefined) {
+				infoSE += "<div class='col-lg-6 col-6'><span class='contenido_cajas_20'>PEA: </span></div><div class='col-lg-6 col-6'><span class='titulo_detalle_md_20' style='font-size: 0.7em;'>" + formato(radioAsignado.poblacion.pea, true) + "</span></div>";
+			}
+			if(radioAsignado.poblacion.nse != undefined) {
+				infoSE += "<div class='col-lg-6 col-6'><span class='contenido_cajas_20'>NSE: </span></div><div class='col-lg-6 col-6'><span class='titulo_detalle_md_20' style='font-size: 0.7em;'>" + radioAsignado.poblacion.nse + "</span></div>";
+			}
+		}
+		
+		if(radioAsignado.generadores != undefined) {
+			if(radioAsignado.generadores.hospitales != undefined) {
+				generadores += "<div class='col-lg-6 col-6'><span class='contenido_cajas_20'>Hospitales: </span></div><div class='col-lg-6 col-6'><span class='titulo_detalle_md_20' style='font-size: 0.7em;'>" + formato(radioAsignado.generadores.hospitales, true) + "</span></div>";
+			}
+			if(radioAsignado.generadores.escuelas != undefined) {
+				generadores += "<div class='col-lg-6 col-6'><span class='contenido_cajas_20'>Escuelas: </span></div><div class='col-lg-6 col-6'><span class='titulo_detalle_md_20' style='font-size: 0.7em;'>" + formato(radioAsignado.generadores.escuelas, true) + "</span></div>";
+			}
+			if(radioAsignado.generadores.mercados != undefined) {
+				generadores += "<div class='col-lg-6 col-6'><span class='contenido_cajas_20'>Mercados: </span></div><div class='col-lg-6 col-6'><span class='titulo_detalle_md_20' style='font-size: 0.7em;'>" + formato(radioAsignado.generadores.mercados, true) + "</span></div>";
+			}
+			if(radioAsignado.generadores.templos != undefined) {
+				generadores += "<div class='col-lg-6 col-6'><span class='contenido_cajas_20'>Templos: </span></div><div class='col-lg-6 col-6'><span class='titulo_detalle_md_20' style='font-size: 0.7em;'>" + formato(radioAsignado.generadores.templos, true) + "</span></div>";
+			}
+		}
+		
+		if(radioAsignado.ubicacion != undefined) {
+			if(radioAsignado.ubicacion.callePrincipal != undefined) {
+				ubicacion += "<div class='col-lg-6 col-6'><span class='contenido_cajas_20'>Calle principal: </span></div><div class='col-lg-6 col-6'><span class='titulo_detalle_md_20' style='font-size: 0.7em;'>" + radioAsignado.ubicacion.callePrincipal + "</span></div>";
+			}
+			if(radioAsignado.ubicacion.entreCalle1 != undefined) {
+				ubicacion += "<div class='col-lg-6 col-6'><span class='contenido_cajas_20'>Entre calle 1: </span></div><div class='col-lg-6 col-6'><span class='titulo_detalle_md_20' style='font-size: 0.7em;'>" + radioAsignado.ubicacion.entreCalle1 + "</span></div>";
+			}
+			if(radioAsignado.ubicacion.entreCalle2 != undefined) {
+				ubicacion += "<div class='col-lg-6 col-6'><span class='contenido_cajas_20'>Entre calle 2: </span></div><div class='col-lg-6 col-6'><span class='titulo_detalle_md_20' style='font-size: 0.7em;'>" + radioAsignado.ubicacion.entreCalle2 + "</span></div>";
+			}
+		}
+		
+		cadena += "<div class='row'><div class='col-lg-12 col-12'><span class='titulo_detalle_md_20'>" + radioAsignado.nombreRadio + "</span></div></div>" +
+					"<div class='row'><div class='col-lg-12 col-12'><span class='contenido_cajas_20'>Asignado el: " + fechaAsignado + "</span></div></div>" +
+					"<div class='row'><div class='col-lg-6 col-6'><span class='contenido_cajas_20'>Tipo: </span><span class='titulo_detalle_md_20' style='font-size: 0.7em;'>" + radioAsignado.tipoEstrategia + "</span></div>" + 
+						"<div class='col-lg-6 col-6'><span class='contenido_cajas_20'>Estatus: </span><span class='titulo_detalle_md_20' style='font-size: 0.7em;'>" + radioAsignado.estatusRadio + "</span></div>" +
+					"</div>" +
+					"<div class='row' style='border-bottom: 1px solid #071B36; margin-bottom: 10px;height: 10px;'>&nbsp;</div>" +
+					"<div class='row'><div class='col-lg-12 col-12'><span class='titulo_detalle_md_20' style='font-size: 0.8em;'>Información socio demográfica</span></div></div>" +
+					"<div class='row'>" + infoSE + "</div>" +
+					"<div class='row' style='border-bottom: 1px solid #071B36; margin-bottom: 10px;height: 10px;'>&nbsp;</div>" +
+					"<div class='row'><div class='col-lg-12 col-12'><span class='titulo_detalle_md_20' style='font-size: 0.8em;'>Generadores</span></div></div>" +
+					"<div class='row'>" + generadores + "</div>" +
+					"<div class='row' style='border-bottom: 1px solid #071B36; margin-bottom: 10px;height: 10px;'>&nbsp;</div>" +
+					"<div class='row'><div class='col-lg-12 col-12'><span class='titulo_detalle_md_20' style='font-size: 0.8em;'>Ubicación</span></div></div>" +
+					"<div class='row'>" + ubicacion + "</div>";
+		
+		
+		cargaMensajeModal('RADIOS ASIGNADOS', cadena, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_EXITO, null);
+		
+	} else {
+		cargaMensajeModal('RADIOS ASIGNADOS', "<span style=\"color: #FF0000;\">Esta MD no está asignada a algún radio</span>", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_EXITO, null);
+	}
+}
 
 function inicializaModulosEdicion(modulos, datosSitio, datosPropietario, generalidades,superficie, data) {
 	$("#modulo1Creacion").hide();
@@ -644,7 +728,10 @@ function buscaDetalleMD(mdId) {
 				}
 			}
 			
-			
+			/* Datos del radio asignado */
+			if(data.radioAsignado != undefined) {
+				radioAsignado = data.radioAsignado;
+			}
 			
 			
 			/* Datos de la superficie */

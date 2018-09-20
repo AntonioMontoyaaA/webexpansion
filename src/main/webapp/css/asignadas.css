@@ -142,7 +142,7 @@ span.circulo {
 	top:130;
 }
 @media (min-width: 1015px) {
-#map{height:55%; top:110px;}
+#map{height:52%; top:130px;}
 }
 @media (max-width: 767px) {
  .div_mapa{height:500px;}

@@ -76,3 +76,6 @@
 .radio{
 	background-image:url('../img/aprobadas/radios.svg');
 }
+.radio:hover{
+	background-image:url('../img/aprobadas/radios_over.svg');
+}

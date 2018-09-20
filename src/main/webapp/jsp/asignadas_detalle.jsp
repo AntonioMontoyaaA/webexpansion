@@ -43,7 +43,7 @@
 					<div class="col-lg-10 col-10" id="flujo"></div>
 					
 					<div class="botones">
-						<button class="btn desp radio" type="button"></button>
+						<button id="btnRadios" class="btn desp radio" type="button"></button>
 						<button class="btn desp mensajes" type="button"></button>
 						<button class="btn desp descarga" type="button"></button>
 					</div>

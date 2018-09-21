@@ -39,7 +39,7 @@ public class MotivosRechazoAction extends ActionSupport implements SessionAware,
 		
 		String modulo = ServletActionContext.getRequest().getParameter("modulo");
 		String tipoModulo = ServletActionContext.getRequest().getParameter("tipoModulo");
-		
+		String estatus = ServletActionContext.getRequest().getParameter("estatus");
 		try{
 			
 			if(usuario == null){
@@ -56,7 +56,8 @@ public class MotivosRechazoAction extends ActionSupport implements SessionAware,
 				Builder builder = new Builder()
 					.add("usuarioId", numeroEmpleado)
 					.add("modulo", modulo)
-					.add("tipomodulo", tipoModulo);
+					.add("tipomodulo", tipoModulo)
+					.add("nivelEvaluacion", estatus);
 				
 				RequestBody body = builder.build();
 				Request request = new Request.Builder()

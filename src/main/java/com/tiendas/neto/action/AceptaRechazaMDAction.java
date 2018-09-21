@@ -133,14 +133,24 @@ public class AceptaRechazaMDAction extends ActionSupport implements SessionAware
 	}
 	
 	public static void main(String[] args) {
-		String [] arrMD = {"180803193951","180802191032","180802181727",
-				"180805135005","180804191708","180723190643","180803122025",
-				"180803173654","180803015222","180803151717","180803182725",
-				"180723180153","180802194636","180803011343","180803013401",
-				"180805141533","180805125342","180803135120","180803225701",
-				"180803094624","180803163852","180803221700","180802205108",
-				"180803150059","180805074035","180803152602","180803202121",
-				"180805140916","180803131318","180803160333"};
+		String [] arrMD = {"180803113532",
+				"180723171632",
+				"180723174244",
+				"180803160546",
+				"180804175205",
+				"180816115830",
+				"180720063658",
+				"180804194714",
+				"180803075102",
+				"180723185816",
+				"180720060810",
+				"180723184152",
+				"180723204740",
+				"180723185206",
+				"180723183554",
+				"180723200243",
+				"180803110909",
+				"180805074707"};
 		
 		String respuesta = "";
 		
@@ -152,16 +162,30 @@ public class AceptaRechazaMDAction extends ActionSupport implements SessionAware
 			Response response;
 			
 			for(String md : arrMD) {
+				
+				//GESTORIA
+//				builder = new Builder()
+//						.add("usuarioId", "703021")
+//						.add("mdId", md)
+//						.add("factorId", "7")
+//						.add("estatusValidacion", "1")
+//						.add("motivoRechazo", "0")
+//						.add("comentarios", "Ok")
+//						.add("finalizaValidacion", "1")
+//						.add("puestoId", "6")
+//						.add("areaId", "2");
+				
+				//Carga doctos
 				builder = new Builder()
-						.add("usuarioId", "703021")
+						.add("usuarioId", "200200")
 						.add("mdId", md)
 						.add("factorId", "7")
 						.add("estatusValidacion", "1")
 						.add("motivoRechazo", "0")
 						.add("comentarios", "Ok")
 						.add("finalizaValidacion", "1")
-						.add("puestoId", "6")
-						.add("areaId", "2");
+						.add("puestoId", "3")
+						.add("areaId", "1");
 				
 				body = builder.build();
 				request = new Request.Builder()

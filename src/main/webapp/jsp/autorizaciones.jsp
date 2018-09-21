@@ -1,76 +1,39 @@
-<div class="col-lg-4" id="voboMD">
+			<div class="col-lg-4" id="divAutorizacion" style="display: none;">
 				<div class="row divs_p">
-					<div id="divCalificacionFinal" class="col-lg-12 menupr_estilos fazul altura1">
+					<div id="divCalificacionFinal" class="col-lg-12 menupr_estilos fblanco altura1">
 						<div class="col-12 titulo_seccion">
-							<span class="negrita blanco t14">8) Autorización final</span>
-							<%-- <div class="float_right">
-								<span> <img id="autoriza8" title="Autoriza punto"
-									class="sin_autorizar b_autorizar" onclick="finalizaMD(1);"
-									style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
-								</span> <span> <img id="rechaza8" title="Rechaza punto"
-									class="sin_autorizar b_rechazar" onclick="finalizaMD(0);"
-									style="cursor: pointer;" src="img/rechaza_mark.png">
-								</span>
-							</div> --%>
+							<span class="negrita azul t14">AUTORIZACIÓN</span>
 						</div>
-
-						<%-- <div
-							style="width: 100%; position: relative; float: left; text-align: left; padding-top: 20px;">
-							<div id="containerProgreso"></div>
-						</div>
-						<div
-							style="width: 100%; position: relative; float: left; text-align: center; padding-top: 20px;">
-							<span class="subtituloIconos blanco"></span>
-						</div> --%>
 						
-						<div class="row center" style="padding-top: 130px;">
-							<span id="msjFinalizacion" class="subtituloIconos blanco">¿La MD cuenta con todos los puntos necesarios?</span>
-						</div>
-						<div class="row">
-							<div class="col-6 right">
-								<button id="rechaza8" class="btn desp" type="button" onclick="finalizaMD(0);">No</button>
-							</div>
-							<div class="col-6 left">
-								<button id="autoriza8" class="btn desp" type="button" onclick="finalizaMD(1);">Si</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			
-			<div class="col-lg-4" id="voboFinal" style="display: none;">
-				<div class="row divs_p">
-					<div class="col-lg-12 menupr_estilos fazul altura1">
-						<div class="col-12 titulo_seccion">
-							<span class="negrita blanco t14">8) Autorización final</span>
-							<div class="float_right">
-								<span> <img id="autoriza9" title="Autoriza punto"
-									class="sin_autorizar b_autorizar" onclick="finalizaMD(1);"
-									style="cursor: pointer;" src="img/autoriza_mark.png">&nbsp;
-								</span> 
-								<span> <img id="rechaza9" title="Rechaza punto"
-									class="sin_autorizar b_rechazar" onclick="finalizaMD(0);"
-									style="cursor: pointer;" src="img/rechaza_mark.png">
-								</span>
-							</div>
-							<div id="tiendaIdCECO" class="float_right" style="display: none;">
-								<input placeholder="CECO" id="tiendaID" onkeypress="return isNumberKey(event,this)">
-								<div id="subeTiendaId" class="btn btnBlanco">Aceptar</div>
-							</div>
-						</div>
-
-						<div style="width: 100%; position: relative; float: left; text-align: left; padding-top: 20px;">
-							<div id="containerFilesVoboFinal"></div>
+						<div id="presupuesto" class="row subtituloIconos azul" style="display: none;">
 							
-							<div id="containerFechasObra" style="display: none; text-align: center;">
-								<div class="datoObra">
-									<div class="blanco t14">Inicio de obra:</div>
-									<input id="inicioObra" readonly type="text" class="fechaInicialCalendario" placeholder="dd/MM/yyyy">
-								</div>
-								
-								<div class="datoObra">
-									<div class="blanco t14">Duración de la obra:</div>
-									<select class="selectSemana" id="duracionObra">
+							<span class="negrita azul tituloAutorizacion">Aire acondicionado</span>
+							<input type="radio" name="acc" class="acc" value="1">Si
+    						<input style="margin-left: 50px;" type="radio" name="acc" class="acc" value="0">No
+							
+							<span class="negrita azul tituloAutorizacion">Monto presupuestado</span>
+							<label class="simbolo">$</label>
+							<input id="montoPresupuesto" placeholder="Captura el monto del presupuesto" onkeypress="return isNumberKey(event,this)">
+						</div>
+						
+						<div id="venta" class="row subtituloIconos azul" style="display: none;">
+							<span class="negrita azul tituloAutorizacion">Venta semanal presupuestada</span>
+							<label class="simbolo">$</label>
+							<input id="montoVenta" placeholder="Captura el monto de la venta presupuestada" onkeypress="return isNumberKey(event,this)">
+						</div>
+						
+						<div id="ceco" class="row subtituloIconos azul" style="display: none;">
+							<span class="negrita azul tituloAutorizacion">Centro de costos</span>
+							<label class="simbolo">$</label>
+							<input id="idCeco" placeholder="Captura el numero de centro de costos" onkeypress="return isNumberKey(event,this)">
+						</div>
+						
+						<div id="obra" class="row subtituloIconos azul" style="display: none;">
+							<span class="negrita azul tituloAutorizacion">Inicio de la obra</span>
+							<input style="border: 1px solid #071B36" id="inicioObra" readonly type="text" class="fechaInicialCalendario" placeholder="dd/MM/yyyy">
+							
+							<span class="negrita azul tituloAutorizacion">Duración de la obra</span>
+							<select class="selectSemana" id="duracionObra">
 										<option disabled selected value="0" >SEMANAS</option>
 										<option value="4" >4</option>
 										<option value="6" >6</option>
@@ -78,51 +41,39 @@
 										<option value="10" >10</option>
 										<option value="12" >12</option>
 									</select>
-								</div>
-								
-								<div id="subeObra" class="btn btnBlanco">Aceptar</div>
-							</div>
+						</div>
+						
+						<div class="row center" style="padding-top: 110px;">
+							<span id="msjFinalizacion" class="subtituloIconos azul">¿Deseas autorizar esta MD?</span>
+						</div>
+						<div class="row center" id="botonesAutorizacion">
+							<div id="rechazaMD" class="btnGris">No</div>
+							<div id="autorizaMD" class="btnAzul">Si</div>
 						</div>
 					</div>
 				</div>
 			</div>
+			
+			
 
 			<div class="col-lg-12" id="manejadorArchivos" style="display: none;">
 				<div class="row divs_p">
-					<div class="col-lg-12 menupr_estilos fazul altura1">
+					<div class="col-lg-12 menupr_estilos fblanco altura1">
 						<div class="col-12 titulo_seccion">
-							<span class="negrita blanco t14">** Documentos **</span>
+							<span class="negrita azul t14">DOCUMENTACIÓN</span>
 						</div>
 						<div class="row div_header_sub">
 							
-							<div class="col-lg-4"><!-- DropZone -->
-								<div style="display: none;" id="msjUploader"></div>
-								<div id="contenedorUploader">
-									<form action="/uploadLayout" class="dropzone" id="uploader"></form>
-									<div id="divACC">
-										<input type="checkbox" id="checkACC">
-    									<label class="blanco" for="checkACC">ACC</label>
-									</div>
-									<span class="simbolo">$</span>
-									<input id="montoPresupuesto" onkeypress="return isNumberKey(event,this)" style="display: none;">
-									<div id="subeArchivo" class="btn btnBlanco" style="display:none;">Aceptar</div>
-									<div id="rechazaMD" onclick="finalizaMD(0);" class="btn btnBlanco" style="display:none;">Rechazar</div>
-								</div>
+							<div class="col-lg-2" id="tipoArchivos" style="background-color: #fafafa; height: 300px; overflow: auto;">
+							
 							</div>
 							
+							<div class="col-lg-10" id="archivos" style="height: 300px; overflow: auto;">
 							
-							<div class="col-lg-4"><!-- Files -->
-								<div class="filesMD"></div>
 							</div>
-							<div class="col-lg-4"><!-- Comments -->
-								<div class="commentsByFile"></div>
-								<div class="commentFileContainer" style="display: none;">
-									<div class="tituloComment"></div>
-									<div id="motivoRechazoLayout"></div>
-									<textarea rows="4" cols="50" id="commentFile"></textarea>
-									<div id="submitComment" class="btn btnBlanco">Aceptar</div>
-									
-								</div>
+							
+							<div class="col-lg-3" id="subida" style="height: 300px; overflow: auto; display: none;">
+								<form action="/uploadLayout" class="dropzone" id="uploader"></form>
 							</div>
 						</div>
 					</div>

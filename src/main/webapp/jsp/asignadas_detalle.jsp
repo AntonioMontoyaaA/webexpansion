@@ -21,9 +21,9 @@
 <title>Detalle MD</title>
 </head>
 <body>
-	<c:forEach var="permiso" items="${usr.perfil.perfilesxusuario[0].permisos}">
+	<%--<c:forEach var="permiso" items="${usr.perfil.perfilesxusuario[0].permisos}">
     	<input type="hidden" class="permisos_detalleMd" rel="${permiso.getFIMODULOID()}" value="${permiso.toJSON()}">
-    </c:forEach>
+    </c:forEach>--%>
     <input type="hidden" id="perfil_usuario" value="${usr.perfil.perfilesxusuario[0].perfilid}">
     <input type="hidden" id="areaUsuario" value="${usr.perfil.areasxpuesto[0].areaId}">
     <input type="hidden" id="puestoUsuario" value="${usr.perfil.puestoId}">
@@ -511,7 +511,7 @@
 					</div>
 					<div class="contenedorConteos" id="preConteos" style="display: none;">
 						<input id="totalConteoAuditor" placeholder="Captura el promedio peatonal" onkeypress="return isNumberKey(event,this)" id="conteosAuditor" style="top: -6px; position: relative;left: 30px; width: 230px;height: 20px; font-size: 0.8em">
-						<div id="subeConteo" class="btn btnBlanco" style="position: relative;top: -13px;left: 40px;height: 20px; padding-top: 1px; font-size: 0.8em">Aceptar</div>
+						<div id="subeConteo" class="btn btnConteo" style="position: relative;top: -13px;left: 40px;height: 20px; padding-top: 1px; font-size: 0.8em">Aceptar</div>
 					</div>
 				</div>
 				<div class="row div_header_sub">

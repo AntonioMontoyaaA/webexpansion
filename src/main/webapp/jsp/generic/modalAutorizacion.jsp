@@ -14,7 +14,7 @@
       	</select>
       </div>
        <div id="detalleMensajeModal">
-       		<textarea class="textAreaModal" placeholder="Escribir un comentario"></textarea>
+       		<textarea class="textAreaModal" placeholder="Escribir un comentario" style="resize: none; height: 200px;"></textarea>
        </div>
       </div>
       <div class="modal-footer" style="background: #C9C9C9; justify-content: center">

@@ -662,9 +662,6 @@ function buscaDetalleMD(mdId) {
 				} else {
 					$("#rentaANeto").text("NO RENTA A NETO AÚN");
 				}
-				
-				validaEstatusAtencion(data.datosSitio.estatus, 1);
-				validaEstatusAtencion(data.datosPropietario.estatus, 2);
 			}
 			
 			/* Datos del scorecard*/
@@ -751,13 +748,13 @@ function buscaDetalleMD(mdId) {
 				$("#horaVistaLateral2").text(data.superficie.horaLateral2);
 				
 				//predial
-				if(data.superficie.predial != undefined && data.superficie.predial.trim() != "") {
-					$("#muestraPredial").show();
-					predialImg = data.superficie.predial;
-					fechaPredial = data.superficie.fechaPredial + " " + data.superficie.horaPredial;
-				} else {
+//				if(data.superficie.predial != undefined && data.superficie.predial.trim() != "") {
+//					$("#muestraPredial").show();
+//					predialImg = data.superficie.predial;
+//					fechaPredial = data.superficie.fechaPredial + " " + data.superficie.horaPredial;
+//				} else {
 					$("#muestraPredial").hide();
-				}
+//				}
 				
 				//nuevos valores
 				if(data.superficie.esquina==true){
@@ -776,8 +773,6 @@ function buscaDetalleMD(mdId) {
 					html: true, 
 					content : contentPopSuperficie
 				});
-				
-				validaEstatusAtencion(data.superficie.estatus, 3);
 			}
 			/* Datos de la zonificación */
 			if(data.zonificacion != undefined) {
@@ -886,8 +881,6 @@ function buscaDetalleMD(mdId) {
 					html: true, 
 					content : contentPopZonificacion
 				});
-				
-				validaEstatusAtencion(data.zonificacion.estatus, 4);
 
 			}
 			/* Datos de la construcción */
@@ -944,7 +937,6 @@ function buscaDetalleMD(mdId) {
 					content : contentPopConstruccion
 				});
 				
-				validaEstatusAtencion(data.construccion.estatus, 5);
 			}
 			/* Datos de las generalidades del sitio */
 			if(data.generalidades != undefined) {
@@ -964,7 +956,6 @@ function buscaDetalleMD(mdId) {
 					content : contentPopGeneralidades
 				});
 				
-				validaEstatusAtencion(data.generalidades.estatus, 6);
 			}
 			/* Datos de los conteos */
 			if(data.flujoPeatonal != undefined) {
@@ -975,128 +966,14 @@ function buscaDetalleMD(mdId) {
 				initMap(Number(data.generales.latitud), Number(data.generales.longitud), listaCompetencias, listaGeneradores);
 			}, 500);
 			
-			
-			
-			dibujaGraficaAutorizaciones();
-			
 			/* DATOS Seguimiento */
 			
 			if(data.seguimiento != undefined) {
-				if(eval(data)["seguimiento"]["LEVANTAMIENTO CONSTRUCCION"] != undefined
-						&& eval(data)["seguimiento"]["LEVANTAMIENTO CONSTRUCCION"] != null){
-					
-					ARCHIVOS_MD =  new Array();
-					$.each(eval(data)["seguimiento"]["LEVANTAMIENTO CONSTRUCCION"], function(i,item){
-						
-						
-						ARCHIVOS_MD.push(new Archivo(
-	        					item.nombreArchivo,
-	        					item.url,
-	        					item.estatus,
-	        					item.autor,
-	        					null, 
-	        					null)
-						);
-					});
-				}
-				
-				if(eval(data)["seguimiento"]["PRESUPUESTO CONSTRUCCION"] != undefined
-						&& eval(data)["seguimiento"]["PRESUPUESTO CONSTRUCCION"] != null){
-					
-					$.each(eval(data)["seguimiento"]["PRESUPUESTO CONSTRUCCION"], function(i,item){
-						
-						ARCHIVOS_MD.push(new Archivo(
-	        					item.nombreArchivo,
-	        					item.url,
-	        					item.estatus,
-	        					item.autor,
-	        					'$' + formatear(item.monto, true), 
-	        					((item.aireAcondicionado != undefined) ? item.aireAcondicionado : null))
-						);
-					});
-				}
-				
-				if(eval(data)["seguimiento"]["CORRECION PRESUPUESTO CONSTRUCCION"] != undefined
-						&& eval(data)["seguimiento"]["CORRECION PRESUPUESTO CONSTRUCCION"] != null){
-					
-					$.each(eval(data)["seguimiento"]["CORRECION PRESUPUESTO CONSTRUCCION"], function(i,item){
-						
-						ARCHIVOS_MD.push(new Archivo(
-	        					item.nombreArchivo,
-	        					item.url,
-	        					item.estatus,
-	        					item.autor,
-	        					'$' + formatear(item.monto, true), 
-	        					((item.aireAcondicionado != undefined) ? item.aireAcondicionado : null))
-						);
-					});
-				}
-				
-				if(eval(data)["seguimiento"]["PRESUPUESTO AUDITORIA"] != undefined
-						&& eval(data)["seguimiento"]["PRESUPUESTO AUDITORIA"] != null){
-					
-					$.each(eval(data)["seguimiento"]["PRESUPUESTO AUDITORIA"], function(i,item){
-						
-						ARCHIVOS_MD.push(new Archivo(
-	        					item.nombreArchivo,
-	        					item.url,
-	        					item.estatus,
-	        					item.autor,
-	        					'$' + formatear(item.monto, true), 
-	        					((item.aireAcondicionado != undefined) ? item.aireAcondicionado : null))
-						);
-					});
-					ARCHIVOS_MD[ARCHIVOS_MD.length -1].estatus = 0;
-				}
-				
-				if(eval(data)["seguimiento"]["CONTRATO FIRMADO GESTORIA"] != undefined
-						&& eval(data)["seguimiento"]["CONTRATO FIRMADO GESTORIA"] != null){
-					
-					$.each(eval(data)["seguimiento"]["CONTRATO FIRMADO GESTORIA"], function(i,item){
-						
-						ARCHIVOS_MD.push(new Archivo(
-	        					item.nombreArchivo,
-	        					item.url,
-	        					item.estatus,
-	        					item.autor,
-	        					null, 
-	        					((item.aireAcondicionado != undefined) ? item.aireAcondicionado : null))
-						);
-					});
-					ARCHIVOS_MD[ARCHIVOS_MD.length -1].estatus = 0;
-				}
-				
-				if(eval(data)["seguimiento"]["CARGA DOCUMENTOS EXPANSION"] != undefined
-						&& eval(data)["seguimiento"]["CARGA DOCUMENTOS EXPANSION"] != null){
-					
-					$.each(eval(data)["seguimiento"]["CARGA DOCUMENTOS EXPANSION"], function(i,item){
-						
-						if(item.estatus == 2) {
-							if(item.documentos != undefined && item.documentos.length > 0) {
-								for(var i = 0; i < item.documentos.length; i++) {
-									
-									if(item.documentos[i].archivos != undefined && item.documentos[i].archivos.length > 0) {
-										for(var j = 0; j < item.documentos[i].archivos.length; j++) {
-											ARCHIVOS_MD.push(new Archivo(
-													item.documentos[i].nombreArchivo + " " + (j+1) + " de " + item.documentos[i].archivos.length,
-													item.documentos[i].archivos[j].url,
-						        					item.estatus,
-						        					item.autor,
-						        					null, 
-						        					((item.aireAcondicionado != undefined) ? item.aireAcondicionado : null))
-											);
-										}
-									}
-								}
-							}
-						}
-					});
-					ARCHIVOS_MD[ARCHIVOS_MD.length -1].estatus = 0;
-				}
+				documentacion(data);
 			}
 			
+			validaAutorizacion();
 			
-			inicializaDropzone();
 		}
 	}
 }
@@ -1128,10 +1005,6 @@ function datosFlujoPeatonal(flujoPeatonal){
 			content : contentPopConteos
 		});
 		
-		validaEstatusAtencion(flujoPeatonal.EXPANSION.estatus, 7);
-		
-		
-	
 		for(var i = 0; i < flujoPeatonal.EXPANSION.conteos.length; i++) {
 			id = flujoPeatonal.EXPANSION.conteos[i].detalleId;
 			
@@ -1175,26 +1048,8 @@ function datosFlujoPeatonal(flujoPeatonal){
 		$("#promedioConteosAuditoria").text(promedioAud);
 	}
 	
-	if(AREA_USUARIO != areaAuditoria || AREAS_A[areaAuditoria])
+	if(AREA_USUARIO != areaAuditoria)
 		$('#posConteos').show();
-	else{
-		if((ESTATUS_MD == 5 || ESTATUS_MD == 7) 
-				&& AREA_USUARIO == areaAuditoria 
-				&&  !AREAS_A[areaAuditoria])//TODO
-			$('#preConteos').show();
-		CONTEO_GUARDADO = false;
-		$('#subeConteo').unbind('click');
-		$('#subeConteo').click(function(){
-			total = $("#totalConteoAuditor").val();
-			
-			if(total == '')
-				cargaMensajeModal('DETALLE MD', 
-						'Agrega el promedio peatonal',
-						TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA);
-			else
-				guardaConteoAuditor(total);
-		});
-	}
 	
 }
 

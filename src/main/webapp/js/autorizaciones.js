@@ -40,6 +40,7 @@ var areaFinanzas = 6;
 var AREA_USUARIO;
 var PUESTO;
 var DIR_OPE = 19;
+var DIR_GRAL = 13;
 var ESTATUS_MD;
 
 var HORAI;
@@ -454,10 +455,12 @@ function generaAutorizacionPresupuesto(area){
 }
 
 function generaAutorizacionSimple(area){
-	if(area.tipoRechazo == sinRechazo)
-		$('#rechazaMD').hide();
-		
-	$('#divAutorizacion').show();
+	if(PUESTO != DIR_GRAL){
+		if(area.tipoRechazo == sinRechazo)
+			$('#rechazaMD').hide();
+			
+		$('#divAutorizacion').show();
+	}
 }
 
 Estatus = function(id, nombre){

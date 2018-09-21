@@ -8,7 +8,7 @@ Dropzone.autoDiscover = false;
 var uploader;
 var dropzone;
 var dropzoneOptions = {
-        dictDefaultMessage: 'Arrastra aqui el layout o da clic para buscarlo en tu equipo',
+        dictDefaultMessage: 'Arrastra aqui el archivo o da clic para buscarlo en tu equipo',
         dictFallbackMessage: 'Tu explorador no es compatible, actualizalo',
         dictFileTooBig: 'El archivo es muy grande {{filesize}}, el limite es {{maxFilesize}} MB',
         dictInvalidFileType: 'Archivo no permitido',

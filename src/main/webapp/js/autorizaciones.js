@@ -13,7 +13,6 @@ var dropzoneOptions = {
         dictFileTooBig: 'El archivo es muy grande {{filesize}}, el limite es {{maxFilesize}} MB',
         dictInvalidFileType: 'Archivo no permitido',
         dictRemoveFile: 'Eliminar archivo', 
-        dictRemoveFileConfirmation: 'Archivo eliminado',
         dictMaxFilesExceeded: 'Solo puedes agregar {{maxFiles}} archivo',
         paramName: "file",
         autoProcessQueue: false,
@@ -549,35 +548,6 @@ function obtieneMotivosGenerales(){
 	}
 }
 
-function permiteAutorizacion(){
-	return $.inArray(AREA_USUARIO, ATENCION_POR_ESTATUS[ESTATUS_MD]) != -1;
-}
-
-function permiteLayout(){
-	return $.inArray(ESTATUS_MD, ESTATUS_LAYOUT) != -1;
-}
-
-function permiteComite(){
-	if(PUESTO != DIR_OPE)
-		return false;
-	else
-		return $.inArray(ESTATUS_MD, ESTATUS_COMITE) != -1;
-}
-
-
-function autorizaPantalla(modulo, elemento) {
-	if($(elemento).hasClass('sin_autorizar') && ESTATUS_MD < ESTATUS_PRESUPUESTO_CONSTRUCCION && !AREAS_A[AREA_USUARIO]){
-		$("#tituloModalAutorizacion").text("¿Estás seguro de autorizar " + FACTORES[modulo].nombre + "?");
-		$("#tipoAutorizacion").val(AUTORIZA_MODULO);
-		$("#finaliza").val(0);
-		$("#moduloId").val(modulo);
-		$("#mdIdAutorizacion").val($("#mdId").val());
-		$("#comboMotivos").hide();
-		$('#detalleMensajeModal textarea').val('');
-		$("#modal_autorizacion").modal("show");
-	}
-}
-
 function finalizaConCargaPrevia(){
 	cargaLoading();
 	
@@ -585,10 +555,13 @@ function finalizaConCargaPrevia(){
 	nombreArchivo = prefijo + mdId; 
 	fecha = new Date().format("dd/mm/yyyy H:MM:ss");
 	
-	if(!FILE_Type.includes('xlsx'))
-		formato = FILE_Type.split('/')[1];
+	if(FILE_Type.includes('sheet'))
+		formato = 'xlsx';
+	else if(FILE_Type.includes('excel'))
+		formato = 'xls';
 	else
-		formato = FILE_Type;
+		formato = FILE_Type.split('/')[1];
+		
 	if(tipoServicio == 10){//CECO
     	invocarJSONServiceAction("subeArchivo", 
 				{'mdId': mdId,
@@ -596,12 +569,8 @@ function finalizaConCargaPrevia(){
 				'fecha': fecha,
 				'tiendaId': monto}, 
 				'respSubeArchivo', 
-				function() {
-					cierraLoading();
-				},
-				function() {
-					cierraLoading();
-				});
+				function() {},
+				function() {});
 	}else if(tipoServicio == 6){//Iniccio de obra
 		invocarJSONServiceAction("subeObra", 
     			{'mdId': mdId,
@@ -609,12 +578,8 @@ function finalizaConCargaPrevia(){
     			'inicio': monto,
     			'duracion' : acc}, 
     			'respSubeArchivo', 
-    			function() {
-    				cierraLoading();
-    			},
-    			function() {
-    				cierraLoading();
-    			});
+    			function() {},
+    			function() {});
 	}else{
 		invocarJSONServiceAction("subeArchivo", 
 				{'mdId': mdId,
@@ -627,12 +592,8 @@ function finalizaConCargaPrevia(){
 				'monto': monto,
 				'acc' : acc}, 
 				'respSubeArchivo', 
-				function() {
-					cierraLoading();
-				},
-				function() {
-					cierraLoading();
-				});
+				function() {},
+				function() {});
 	}
 	
 	
@@ -681,37 +642,6 @@ function actionfinalizaMD(motivo, comment){
 				cargaMensajeModal('DETALLE MD', 'Autorizaci\u00f3n exitosa', TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_EXITO, redireccionaAsignadas);
 			else if(ESTATUS_FINALIZA_MD == 0)
 				cargaMensajeModal('DETALLE MD', 'Rechazo exitoso', TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_EXITO, redireccionaAsignadas);
-		}
-	}
-}
-
-function actionvoboFinal(){
-	cargaLoading();
-	
-	monto = $('#tiendaID').val();
-	tipoServicio = 11;
-	mdId = $("#mdId").val();
-	fecha = new Date().format("dd/mm/yyyy H:MM:ss");
-	
-	invocarJSONServiceAction("subeArchivo", 
-			{'mdId': mdId,
-			'tipoServicio' : tipoServicio,
-			'fecha': fecha,
-			'monto': monto}, 
-			'respVOBO', 
-			function() {
-				cierraLoading();
-			},
-			function() {
-				cierraLoading();
-			});
-
-	respVOBO = function(data){
-		if(data.codigo != 200){
-			cargaMensajeModal('DETALLE MD', 'Ocurrio un error, por favor reintenta', TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR);
-		}else{
-			ESTATUS_FINALIZA_MD = 1;
-			actionfinalizaMD();
 		}
 	}
 }
@@ -825,17 +755,18 @@ function documentacion(data){
 				'Predial ',
 				data.superficie.predial,
 				1,
-				$("#creadorMd").html(), null, null
+				$("#creadorMd").html(), 
+				data.superficie.fechaPredial + ' ' +  data.superficie.horaPredial, 
+				null,
 		));
 	}
 	
 	if(eval(data)["seguimiento"]["LEVANTAMIENTO CONSTRUCCION"] != undefined
 			&& eval(data)["seguimiento"]["LEVANTAMIENTO CONSTRUCCION"] != null){
 		
-		
+		ARCHIVOS_MD[layout] = new Array();
 		$.each(eval(data)["seguimiento"]["LEVANTAMIENTO CONSTRUCCION"], function(i,item){
-			
-			ARCHIVOS_MD[layout] = new Array();
+
 			ARCHIVOS_MD[layout].push(new Archivo(
 					item.nombreArchivo,
 					item.url,
@@ -850,9 +781,9 @@ function documentacion(data){
 	if(eval(data)["seguimiento"]["PRESUPUESTO CONSTRUCCION"] != undefined
 			&& eval(data)["seguimiento"]["PRESUPUESTO CONSTRUCCION"] != null){
 		
+		ARCHIVOS_MD[presupuesto] = new Array();
 		$.each(eval(data)["seguimiento"]["PRESUPUESTO CONSTRUCCION"], function(i,item){
 			
-			ARCHIVOS_MD[presupuesto] = new Array();
 			ARCHIVOS_MD[presupuesto].push(new Archivo(
 					item.nombreArchivo,
 					item.url,
@@ -899,16 +830,16 @@ function documentacion(data){
 	if(eval(data)["seguimiento"]["CONTRATO FIRMADO GESTORIA"] != undefined
 			&& eval(data)["seguimiento"]["CONTRATO FIRMADO GESTORIA"] != null){
 		
+		ARCHIVOS_MD[contrato] = new Array();
 		$.each(eval(data)["seguimiento"]["CONTRATO FIRMADO GESTORIA"], function(i,item){
-			
-			ARCHIVOS_MD[contrato] = new Array();
+
 			ARCHIVOS_MD[contrato].push(new Archivo(
 					item.nombreArchivo,
 					item.url,
 					item.estatus,
 					item.autor,
-					null, 
-					((item.aireAcondicionado != undefined) ? item.aireAcondicionado : null))
+					item.fechaSubida, 
+					null)
 			);
 		});
 	}
@@ -916,6 +847,7 @@ function documentacion(data){
 	if(eval(data)["seguimiento"]["CARGA DOCUMENTOS EXPANSION"] != undefined
 			&& eval(data)["seguimiento"]["CARGA DOCUMENTOS EXPANSION"] != null){
 		
+		ARCHIVOS_MD[doctosContrato] = new Array();
 		$.each(eval(data)["seguimiento"]["CARGA DOCUMENTOS EXPANSION"], function(i,item){
 			
 			if(item.estatus == 2) { 
@@ -924,13 +856,13 @@ function documentacion(data){
 						
 						if(item.documentos[i].archivos != undefined && item.documentos[i].archivos.length > 0) {
 							for(var j = 0; j < item.documentos[i].archivos.length; j++) {
-								ARCHIVOS_MD.push(new Archivo(
+								ARCHIVOS_MD[doctosContrato].push(new Archivo(
 										item.documentos[i].nombreArchivo + " " + (j+1) + " de " + item.documentos[i].archivos.length,
 										item.documentos[i].archivos[j].url,
 			        					item.estatus,
 			        					item.autor,
-			        					null, 
-			        					((item.aireAcondicionado != undefined) ? item.aireAcondicionado : null))
+			        					item.fechaSubida, 
+			        					null)
 								);
 							}
 						}
@@ -938,7 +870,6 @@ function documentacion(data){
 				}
 			}
 		});
-		ARCHIVOS_MD[ARCHIVOS_MD.length -1].estatus = 0;
 	}
 }
 
@@ -951,7 +882,7 @@ function dibujaArchivos(){
 	nombres[presupuesto] = 'PRESUPUESTO';
 	nombres[contrato] = 'CONTRATO';
 	nombres[predial] = 'PREDIAL';
-	nombres[doctosContrato] = 'TRAMITES';
+	nombres[doctosContrato] = 'DOCUMENTOS SITIO';
 	
 	if(Object.size(ARCHIVOS_MD) > 0){
 		strArchivos = {};
@@ -969,7 +900,7 @@ function dibujaArchivos(){
 									+ '<div class="datosFile" rel="' + i + '">'
 										+ '<div class="nombreFile">' + archivo.nombre + '</div>'
 										+ '<div class="autorFile">' + ((archivo.autor != undefined) ? archivo.autor : '--') + '</div>'
-										+ '<div class="fechaFile">' + ((archivo.fecha != undefined) ? archivo.fecha : '--') + '</div>'
+										+ '<div class="fechaFile">' + ((archivo.monto != undefined) ? archivo.monto : '--') + ((archivo.acc == 1) ? '/ACC' : '') + '</div>'
 										+ '<div class="estatusFile">' + ((archivo.estatus != undefined) ? archivo.estatus : '--') + '</div>'
 									+ '</div>'
 									+ '<div class="actionsFile">'
@@ -1027,10 +958,15 @@ Archivo = function(
 		acc){
 	this.nombre = nombre;
 	this.url = url;
-	this.estatus = estatus;
 	this.autor = autor;
 	this.monto = monto;
-	this.acc = acc;
+	
+	if(estatus == 0)
+		this.estatus = 'Rechazado';
+	else if(estatus == 1)
+		this.estatus = 'Autorizado';
+	else
+		this.estatus = 'Pendiente';
 };
 
 MotivoRechazo = function(id, nombre, isDefinitivo){

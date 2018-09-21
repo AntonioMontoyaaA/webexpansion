@@ -53,14 +53,12 @@
 					</div>
 				</div>
 			</div>
-			
-			
 
 			<div class="col-lg-12" id="manejadorArchivos" style="display: none;">
 				<div class="row divs_p">
 					<div class="col-lg-12 menupr_estilos fblanco altura1">
 						<div class="col-12 titulo_seccion">
-							<span class="negrita azul t14">DOCUMENTACIÓN</span>
+							<span class="negrita azul t14">SEGUIMIENTO</span>
 						</div>
 						<div class="row div_header_sub">
 							

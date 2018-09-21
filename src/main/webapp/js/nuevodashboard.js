@@ -157,37 +157,37 @@ if(datos.Diciembre!="undefined"){
 	    	         return ('<b>Objetivo:</b> '+ene_plan+'<br><b>Real: </b> '+ene_real);
 	    	       } 
 	    		   if(text=="Feb") {
-	    			   return ('<b>Objetivo:</b> : '+feb_plan+'<br><b>Real: </b> '+feb_real);
+	    			   return ('<b>Objetivo:</b> '+feb_plan+'<br><b>Real: </b> '+feb_real);
 		    	    }
 	    		   if(text=="Mar") {
-	    			   return ('<b>Objetivo:</b> : '+mar_plan+'<br><b>Real: </b> '+mar_real);
+	    			   return ('<b>Objetivo:</b> '+mar_plan+'<br><b>Real: </b> '+mar_real);
 		    	    }
 	    		   if(text=="Abr") {
-	    			   return ('<b>Objetivo:</b> : '+abr_plan+'<br><b>Real: </b> '+abr_real);
+	    			   return ('<b>Objetivo:</b> '+abr_plan+'<br><b>Real: </b> '+abr_real);
 		    	    }
 	    		   if(text=="May") {
-	    			   return ('<b>Objetivo:</b> : '+may_plan+'<br><b>Real: </b> '+may_real);
+	    			   return ('<b>Objetivo:</b> '+may_plan+'<br><b>Real: </b> '+may_real);
 		    	    }
 	    		   if(text=="Jun") {
-	    			   return ('<b>Objetivo:</b> : '+jun_plan+'<br><b>Real: </b> '+jun_real);
+	    			   return ('<b>Objetivo:</b> '+jun_plan+'<br><b>Real: </b> '+jun_real);
 		    	    }
 	    		   if(text=="Jul") {
-	    			   return ('<b>Objetivo:</b> : '+jul_plan+'<br><b>Real: </b> '+jul_real);
+	    			   return ('<b>Objetivo:</b> '+jul_plan+'<br><b>Real: </b> '+jul_real);
 		    	    }
 	    		   if(text=="Ago") {
-	    			   return ('<b>Objetivo:</b> : '+ago_plan+'<br><b>Real: </b> '+ago_real);
+	    			   return ('<b>Objetivo:</b> '+ago_plan+'<br><b>Real: </b> '+ago_real);
 		    	    }
 	    		   if(text=="Sep") {
-	    			   return ('<b>Objetivo:</b> : '+sep_plan+'<br><b>Real: </b> '+sep_real);
+	    			   return ('<b>Objetivo:</b> '+sep_plan+'<br><b>Real: </b> '+sep_real);
 		    	    }
 	    		   if(text=="Oct") {
-	    			   return ('<b>Objetivo:</b> : '+oct_plan+'<br><b>Real: </b> '+oct_real);
+	    			   return ('<b>Objetivo:</b> '+oct_plan+'<br><b>Real: </b> '+oct_real);
 		    	    }
 	    		   if(text=="Nov") {
-	    			   return ('<b>Objetivo:</b> : '+nov_plan+'<br><b>Real: </b> '+nov_real);
+	    			   return ('<b>Objetivo:</b> '+nov_plan+'<br><b>Real: </b> '+nov_real);
 		    	    }
 	    		   if(text=="Dic") {
-	    			   return ('<b>Objetivo:</b> : '+dic_plan+'<br><b>Real: </b>'+dic_real);
+	    			   return ('<b>Objetivo:</b> '+dic_plan+'<br><b>Real: </b>'+dic_real);
 		    	    }
 	    		   
 	    	      /* var text = '';

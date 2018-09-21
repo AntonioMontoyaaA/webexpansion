@@ -1,18 +1,118 @@
+/*estilo de los botones*/
+	/* -----------------------------------------------*/
+.desp{
+	width:30;
+	height:30;
+	font-size:12px;
+	font-family:"Helvetica Neue";
+	background-color:white;
+	background-repeat: no-repeat;
+	background-position: center;
+	color:#00437e;
+	border:0;
+	padding:0px 10px;
+	margin-left:5px;
+	margin-top:1px;
+	border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius:2px;
+	margin-top:3;
+	margin-bottom:3;
+}
+.desp:hover{
+	background-color: #536379;
+}
+.atras{
+	background-image: url(../img/botones/w_regresarOFF.svg);
+	background-size:120% !important;
+}
+.descarga{
+	background-image:url('../img/botones/DOWNLOAD.svg');
+	background-size:120% !important;
+}
+.mensajes{
+	background-image:url('../img/botones/msg.svg');
+}
+.radio{
+	background-image:url('../img/botones/radios.svg');
+}
+.refresh{
+	background-image:url('../img/botones/b_refresh.svg');
+	background-size:120% !important;
+}
+/* ------------------------------- BOTONES TABLERO */
+#time{
+	background-image:url('../img/botones/w_tiempo.svg');
+}
+#time.activado, #time.activado:hover{
+	background-image:url('../img/botones/w_tiempoSF.svg');
+	background-color:#071B36;
+}
+.time_tabla{
+	background-image:url('../img/botones/w_tiempo.svg');
+	background-position:right;
+	background-repeat: no-repeat;
+	background-size:25px !important;
+}
+#edit{
+	background-image:url('../img/botones/w_editar.svg');
+}
+.edit_tabla{
+	background-image:url('../img/botones/w_editar.svg');
+	background-position:right;
+	background-repeat: no-repeat;
+	background-size:25px !important;
+}
+#edit.activado, #edit.activado:hover{
+	background-image:url('../img/botones/w_editarAzul.svg');
+	background-color:#071B36;
+}
+#pause{
+	background-image:url('../img/botones/w_pausar.svg');
+}
+.pause_tabla{
+	background-image:url('../img/botones/w_pausar.svg');
+	background-position:right;
+	background-repeat: no-repeat;
+	background-size:25px !important;
+}
+
+#pause.activado, #pause.activado:hover{
+	background-image:url('../img/botones/w_pausarSF.svg');
+	background-color:#071B36;
+}
+#refuse{
+	background-image:url('../img/botones/w_cancelar.svg');
+}
+.refuse_tabla{
+	background-image:url('../img/botones/w_cancelar.svg');
+	background-position:right;
+	background-repeat: no-repeat;
+	background-size:25px !important;
+}
+#refuse.activado, #refuse.activado:hover{
+	background-image:url('../img/botones/w_cancelarsSF.svg');
+	background-color:#071B36;
+}
+#change{
+	background-image:url('../img/botones/w_regresarStatus.svg');
+}
+.change_tabla{
+	background-image:url('../img/botones/w_regresarStatus.svg');
+	background-position:right;
+	background-repeat: no-repeat;
+	background-size:25px !important;
+}
+
+#change.activado, #change.activado:hover{
+	background-image:url('../img/botones/w_regresarStatusSF.svg');
+	background-color:#071B36;
+}
+/* -----------------------------------------------*/
 
 /* ---------------------------------  INICIA ESTILOS GENERALES */
 .cursor{
 	cursor:pointer;
-}
-.atras{
-	width:30px !important;
-	height:25px !important;
-	background-color:white;
-	background-image: url(../img/regresarOFF.png);
-	background-position: center;
-    background-repeat: no-repeat;
-    margin-left:5px;
-    margin-bottom:5px;
-	
 }
 .loadingPagina {
 	position: absolute;
@@ -148,13 +248,13 @@
 }
 .fechaInicialCalendario {
 	width: 87px;
-	height: 21px;
+	height: 25;
 	border-radius: 2px;
     -moz-border-radius: 2px;
     -webkit-border-radius:2px;
     border: 0px solid #000000;
     background-color: white;
-    font-size: 12px;
+    font-size: 12;
     margin-left:8px;
     padding-left: 8px;
     background-image: url(../img/flechita.png);
@@ -362,7 +462,7 @@ font-family:"Helvetica Neue Bold";
 src: url("../fonts/HelveticaNeue-Medium.otf");
 }
 body{
-	background: #e7e6e3;
+	background: #071B36;
 	font-family: "Helvetica Neue" !important;
 }
 .negrita{

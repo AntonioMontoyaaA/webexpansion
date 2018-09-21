@@ -38,7 +38,7 @@
   <!--  ******************************** HEXAGONOS- FLUJO *************************************** -->
 			<div class="col-12" style="margin:10 0; padding:0;">
 				<div class="col-12 divs_p right">
-				<div class="float_left"><button class="btn desp regresa" type="button" onclick="history.back()"></button></div>
+				<div class="float_left"><button class="btn desp atras" type="button" onclick="history.back()"></button></div>
 					
 					<div class="col-lg-10 col-10" id="flujo"></div>
 					
@@ -566,13 +566,13 @@
 					</div>
 					</div>
 					<div class="row fblanco" style="padding:10 0;">
-							<div class="col-12 negrita t12 left azul" style="margin-top:5">Autorizó</div>
+							<div class="col-12 negrita t12 left azul info1" style="margin-top:5"></div>
 								<div class="col-12 dato1 left gris"></div>
-							<div class="col-12 negrita t12 left azul" style="margin-top:5">Fecha de creación</div>
+							<div class="col-12 negrita t12 left azul info2" style="margin-top:5"></div>
 								<div class="col-12 dato2 left gris"></div>
-							<div class="col-12 negrita t12 left azul" style="margin-top:5">Fecha Límite</div>
+							<div class="col-12 negrita t12 left azul info3" style="margin-top:5"></div>
 								<div class="col-12 dato3 left gris"></div>
-							<div class="col-12 negrita t12 left azul" style="margin-top:5">Días vencidos</div>
+							<div class="col-12 negrita t12 left azul info4" style="margin-top:5"></div>
 								<div class="col-12 dato4 left gris"></div>
 					</div>
 					

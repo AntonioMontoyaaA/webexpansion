@@ -23,21 +23,6 @@
             transition: all .6s ease-in-out;
 }
 
-.desp{
-	width:70px;
-	font-size:12px;
-	font-family:"Helvetica Neue";
-	background-color:white;
-	color:#00437e;
-	border:0;
-	height:20px !important;
-	padding:0px 10px;
-	margin-left:5px;
-	margin-top:1px;
-	border-radius: 2px;
-    -moz-border-radius: 2px;
-    -webkit-border-radius:2px;
-}
 #score_card .modal-body{
 	height:480px;
     overflow-y: auto;
@@ -595,9 +580,6 @@ Left
 .padding_top_botom_10 {
 	padding-top: 10px;
     padding-bottom: 10px;
-}
-.container-fluid {
-	background: #e7e6e3;
 }
 .slick_main {
 	

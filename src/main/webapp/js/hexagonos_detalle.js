@@ -56,9 +56,18 @@ function pintaFlujo(data){
 			      else if(diasVencidos > 0)
 			    	  dias = ' ' + diasVencidos + ' días después';
 			      
+			     
+			      $('.info1').text('Autorizó');
 			      $('.dato1').text(nombre);
+			      if(dato_buscar==0){
+			    	  $('.info2').text('Fecha de creación');
+			      }else{
+			    	  $('.info2').text('Fecha de autorización');
+			      }
 			      $('.dato2').text(fechaAutorizacion);
+			      $('.info3').text('Fecha límite');
 			      $('.dato3').text(fechaLimite);
+			      $('.info4').text('Días vencidos');
 			      $('.dato4').text(dias);
 			      
 			      $('#titulo_proceso').text(cadena);

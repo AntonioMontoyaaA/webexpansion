@@ -24,10 +24,10 @@
 
 <div class="container-fluid">
 	<div class="row padding_p" style="padding-top:0px;">
-		<div class="col-lg-12 titulo azul t12 negrita">DASHBOARD ${usr.perfil.areasxpuesto[0].areaNom} > TABLERO > TIEMPOS > <span id="nombre_md" ></span> </div>
+		<div class="col-lg-12 titulo blanco t12 negrita">DASHBOARD ${usr.perfil.areasxpuesto[0].areaNom} > TABLERO > TIEMPOS > <span id="nombre_md" ></span> </div>
 	
 	<div class="col-12"  style="padding-left:0;">
-				<button class="btn atras" type="button" onclick="history.back()" style="margin-bottom:0px;"></button>
+				<button class="btn desp atras" type="button" onclick="history.back()" style="margin-bottom:0px;"></button>
 		</div>
 	
 	<div class="col-lg-12">

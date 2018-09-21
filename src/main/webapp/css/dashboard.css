@@ -43,15 +43,6 @@ span.estilo_dato{
 	margin-bottom:0.1em !important;	
 }
 /* ----------------------------------------- DESPLEGABLE ---------------------- */
-.desp{
-	font-size:12px;
-	font-family:"Helvetica Neue";
-	background-color:white;
-	border-color:black;
-	height:25px !important;
-	padding:0;
-	margin-right:8px;
-}
 .filtro{
 	min-width:100px !important;
 	width:100px !important;
@@ -59,12 +50,6 @@ span.estilo_dato{
 }
 .filtros{
 	width:150px;
-}
-.rechargue{
-	width:27px;
-}
-.rechargue:hover{
-	background-color:#E3E3E3;
 }
 
 /* ------------------------------------------- GRAFICAS --------------*/

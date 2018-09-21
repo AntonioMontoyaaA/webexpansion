@@ -147,7 +147,7 @@ if(datos.Diciembre!="undefined"){
 	        }
 	    },
 	    tooltip: {
-	        pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
+	        pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b><br/>',
 	        shared: true
 	    },
 	    plotOptions: {
@@ -156,7 +156,7 @@ if(datos.Diciembre!="undefined"){
 	        }
 	    },
 	    series: [{
-		        name: 'Diferencia',
+		        name: 'Objetivo',
 		        color: 'white',
 		        data: [
 		        	ene_plan - ene_real,
@@ -214,7 +214,7 @@ function cargaDashboard(){
 		
 		armaGraficas(data);
 // ----------------------- ARMA DIAGRAMA DE FLUJO -------------------------
-		var descripcion_arreglo=[1,1,2,2,1,1,1,1,1,2,1,1,1,1,1];
+		var descripcion_arreglo=[];
 		var original=data.nivelEstatusActivos;
 		var original_canceladas=data.nivelEstatusCancelado;
 		var filtrados=[];
@@ -224,36 +224,115 @@ function cargaDashboard(){
 				filtrados.push(original[i]);
 			}
 		}
+		
+		for(var i=0;i<filtrados.length;i++){
+			if(i<filtrados.length-1){
+				if(filtrados[i].prioridad==filtrados[i+1].prioridad){
+					descripcion_arreglo.push(2);
+					i++;
+				}
+				else{
+					descripcion_arreglo.push(1);
+				}
+			}
+			else{
+					descripcion_arreglo.push(1);
+			}
+		}
+		
+		if(descripcion_arreglo.length<16){
+			var size=100/descripcion_arreglo.length;
+		}
+		else{
+			var size=6.6;
+		}
 		pintaActivas(descripcion_arreglo, filtrados);
 		
+		$('#proceso').css('width',size*descripcion_arreglo.length+'%');
+		$('.simple').css('width',size+'%');
+		
 		$( "#container_activas" ).on( "click", function() {
+			var descripcion_arreglo=[];
 			var filtrados=[];
 			for(var i=0;i<original.length;i++){
 				if(original[i].estatusValidacion==1){
 					filtrados.push(original[i]);
+				}
+			}
+			
+			for(var i=0;i<filtrados.length;i++){
+				if(i<filtrados.length-1){
+					if(filtrados[i].prioridad==filtrados[i+1].prioridad){
+						descripcion_arreglo.push(2);
+						i++;
+					}
+					else{
+						descripcion_arreglo.push(1);
+					}
+				}
+				else{
+						descripcion_arreglo.push(1);
 				}
 			}
 			pintaActivas(descripcion_arreglo,filtrados);
+			$('#proceso').css('width',size*descripcion_arreglo.length+'%');
+			$('.simple').css('width',size+'%');
+
 		});
 		
 		$( "#container_atrasadas" ).on( "click", function() {
+			var descripcion_arreglo=[];
 			var filtrados=[];
 			for(var i=0;i<original.length;i++){
 				if(original[i].estatusValidacion==1){
 					filtrados.push(original[i]);
 				}
 			}
+			for(var i=0;i<filtrados.length;i++){
+				if(i<filtrados.length-1){
+					if(filtrados[i].prioridad==filtrados[i+1].prioridad){
+						descripcion_arreglo.push(2);
+						i++;
+					}
+					else{
+						descripcion_arreglo.push(1);
+					}
+				}
+				else{
+						descripcion_arreglo.push(1);
+				}
+			}
 			pintaAtrasadas(descripcion_arreglo,filtrados);
+			$('#proceso').css('width',size*descripcion_arreglo.length+'%');
+			$('.simple').css('width',size+'%');
+
 		});
 		
 		$( "#container_canceladas" ).on( "click", function() {
+			var descripcion_arreglo=[];
 			var filtrados=[];
 			for(var i=0;i<original_canceladas.length;i++){
 				if(original_canceladas[i].estatusValidacion==1){
 					filtrados.push(original_canceladas[i]);
 				}
 			}
+			for(var i=0;i<filtrados.length;i++){
+				if(i<filtrados.length-1){
+					if(filtrados[i].prioridad==filtrados[i+1].prioridad){
+						descripcion_arreglo.push(2);
+						i++;
+					}
+					else{
+						descripcion_arreglo.push(1);
+					}
+				}
+				else{
+						descripcion_arreglo.push(1);
+				}
+			}
 			pintaCanceladas(descripcion_arreglo,filtrados);
+			$('#proceso').css('width',size*descripcion_arreglo.length+'%');
+			$('.simple').css('width',size+'%');
 		});
 // ----------------------  ARMA DIAGRAMA DE FLUJO FIN ---------------------------------
 	}
@@ -417,7 +496,6 @@ function pintaActivas(arreglo,filtrados){
 	html=inicio();
 
 	var cont=0;
-	
 	for(var i=0;i<arreglo.length;i++){
 		var cadenas=filtrados[cont].estatus.replace('VALIDACION','VOBO').split('-',2);
 		var cant=filtrados[cont].total;

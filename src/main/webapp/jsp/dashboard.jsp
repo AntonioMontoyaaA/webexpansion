@@ -76,9 +76,7 @@
 				<div class="col-lg-2 text-right">
 					<div class="combos">
 					<form class="form-inline p_cabecera">
-  						<button class="btn desp rechargue" type="button" onclick="AperturaMensual();">
-  								<img src="${pageContext.request.contextPath}/img/refresh_sf.png" />
-  						</button>
+  						<button class="btn desp refresh" type="button" onclick="AperturaMensual();"></button>
   					</form>
   					</div>
 				</div>
@@ -97,12 +95,6 @@
 		<div class="col-lg-12 ">
 		<div class="row divs_p">
 			<div class="col-lg-12 menupr_estilos fazul" style="overflow-x:auto; height:400;">
-						<div class="row cabecera">
-							<div class="col-lg-12">
-								<span class="blanco negrita t14"></span>
-							</div>
-						</div>
-			
 			<div id="proceso"></div>
 		</div>
 		</div>

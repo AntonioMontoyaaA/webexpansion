@@ -18,7 +18,7 @@
 <%@ include file="/jsp/generic/header.jsp" %>
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-lg-12 titulo">Dashboard Expansión > Localizador</div>
+		<div class="col-lg-12 titulo blanco">Dashboard Expansión > Localizador</div>
 	
 		<div class="contentLocalizador" id="contentDivLocalizador">
 			<!-- ALTA RADIO -->

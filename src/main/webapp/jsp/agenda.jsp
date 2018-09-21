@@ -22,8 +22,8 @@
 
 <div class="container-fluid">
 	<div class="row padding_p"  style="padding-top:0px;">
-		<div class="col-lg-12 titulo azul t12 negrita">Dashboard Expansión > Agenda </div>
-		<div class="col-lg-12 titulogrande azul t18">AGENDA
+		<div class="col-lg-12 titulo blanco t12 negrita">Dashboard Expansión > Agenda </div>
+		<div class="col-lg-12 titulogrande blanco t18">AGENDA
 		
 		<button type="submit" class="btn evento">&emsp;Mes&emsp;</button>
 		<button id="crear_evento" onclick="llenaAreas()" type="button" class="btn evento" 

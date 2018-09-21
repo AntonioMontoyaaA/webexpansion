@@ -22,9 +22,9 @@
 
 <div class="container-fluid menupr_fondo">
 <div class="row padding_p">
-	<div class="col-lg-12 titulo">Historial de mensajes </div>
+		<div class="col-lg-12 titulo blanco t12 negrita">DASHBOARD ${usr.perfil.areasxpuesto[0].areaNom} > Historial de mensajes</div>
 		<div class="col-12" style="padding-left:0;">
-				<button class="btn atras" type="button" onclick="history.back()"></button>
+				<button class="btn desp atras" type="button" onclick="history.back()"></button>
 		</div>
 <!-- CHAT -->	
 		<div class="col-lg-4">

@@ -23,7 +23,7 @@
 
 	<div class="container-fluid">
 		<div class="row padding_p" style="padding-top: 0px;">
-			<div class="col-lg-12 titulo azul t12 negrita">DASHBOARD ${usr.perfil.areasxpuesto[0].areaNom} > EN PROCESO</div>
+			<div class="col-lg-12 titulo blanco t12 negrita">DASHBOARD ${usr.perfil.areasxpuesto[0].areaNom} > EN PROCESO</div>
 			<%-- <div class="col-lg-2 titulo"
 				style="background: #FFFFFF; color: #1f3d7a; text-align: center; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">
 				<span class="punto"></span> <span style="padding-left: 5px;">A
@@ -33,25 +33,20 @@
 			</div> 
 			<div class="col-lg-2"></div>
 			<div class="col-lg-5"></div>--%>
-			
-			
-			<div class="col-lg-4 titulogrande azul t18">MD EN PROCESO ${usr.perfil.areasxpuesto[0].areaNom}</div>
-			<div class="col-lg-8">
-			
-				<form class="form-inline float-right">
-				<div class="buscador">
+						
+			<div class="col-lg-10">
+			<div class="buscador">
 						<input type="text"  placeholder="Buscar" id="buscador" class="form-control buscadorInput t12" onkeyup="ejecutaBusquedaAsignadas()"/>
-				</div>	
-				<button class="btn desp rechargue" type="button" onclick="creatabla();">
-					<img src="${pageContext.request.contextPath}/img/refresh_sf.png" />
-				</button>
-				<div class="desp" id="descargaExcelAsignadas" style="cursor: pointer;">
-					<img src="${pageContext.request.contextPath}/img/iconos_DOWNLOAD.png">
-				</div>
-					<input type="text" class="fechaInicialCalendario" readonly id="datepicker1" value="${fecha_busqueda}" />
-				</form>
-				
+			</div>	
 			</div>
+			<div class="col-lg-2">
+				<form class="form-inline float-right">
+				<button class="btn desp refresh" type="button" onclick="creatabla();"></button>
+				<div class="desp descarga" id="descargaExcelAsignadas" style="cursor: pointer;"></div>
+					<input type="text" class="fechaInicialCalendario" readonly id="datepicker1" value="${fecha_busqueda}" />
+				</form>	
+			</div>
+			
 			<div class="col-lg-12">
 				<div class="row padding_p">
 					<div class="col-lg-12 menupr_estilos fblanco tabla_container">

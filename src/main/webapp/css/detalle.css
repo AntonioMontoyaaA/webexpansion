@@ -1,3 +1,4 @@
+
 /*  estilos para pintar el flujo en la parte superior */
 #contenedor_int{
 	min-width:1200;
@@ -69,28 +70,3 @@
 	margin-bottom:3;
 }
 /* -----------------fin modal --------------------*/
-.desp{
-	width:30px;
-	height:25px !important;
-	background-repeat: no-repeat;
-	background-position: center;
-	margin-top:3;
-	margin-bottom:3;
-}
-.regresa{
-	margin-right:15;
-	margin-left:0;
-	background-image:url('../img/regresarOFF.png');
-}
-.descarga{
-	background-image:url('../img/DOWNLOAD.svg');
-}
-.mensajes{
-	background-image:url('../img/aprobadas/msg.svg');
-}
-.radio{
-	background-image:url('../img/aprobadas/radios.svg');
-}
-.desp:hover{
-	background-color: #536379;
-}

@@ -22,29 +22,23 @@
 
 <div class="container-fluid">
 	<div class="row padding_p" style="padding-top:0px;">
-		<div class="col-lg-12 titulo azul t12 negrita">DASHBOARD ${usr.perfil.areasxpuesto[0].areaNom} > APROBADAS </div>
-		
-		<div class="col-lg-3  titulogrande azul t18">MD APROBADAS ${usr.perfil.areasxpuesto[0].areaNom}</div>
-		
-		<div class="col-lg-9">
-			
-			<form class="form-inline float-right">
-				<div class="buscador">
+		<div class="col-lg-12 titulo blanco t12 negrita">DASHBOARD ${usr.perfil.areasxpuesto[0].areaNom} > APROBADAS </div>
+		<div class="col-lg-10">
+			<div class="buscador">
 					<input type="text" placeholder="Buscar" id="buscador"  class="form-control buscadorInput t12" onkeyup="ejecutaBusquedaAprobadas();"/>
-				</div>
-				<button class="btn desp rechargue" type="button" onclick="creatabla();">
-  								<img src="${pageContext.request.contextPath}/img/refresh_sf.png" />
-  				</button>
-				<div class="desp" id="descargaExcel" style="cursor: pointer;">
-					<img src="${pageContext.request.contextPath}/img/iconos_DOWNLOAD.png">
-				</div>
+			</div>
+		</div>
+		<div class="col-lg-2">
+			<form class="form-inline float-right">
+				<button class="btn desp refresh" type="button" onclick="creatabla();"></button>
+				<div class="desp descarga" id="descargaExcel" style="cursor: pointer;"></div>
 			<input type="text" class="fechaInicialCalendario" readonly id="datepicker1" onchange="creatabla();" value="${fecha_busqueda}"/>
 			
-				<button class="btn desp rechargue" id="time" type="button" onclick=""></button>
-  				<button class="btn desp rechargue" id="edit" type="button" onclick=""></button>
-  				<button class="btn desp rechargue" id="pause" type="button" onclick=""></button>
-  				<button class="btn desp rechargue" id="refuse" type="button" onclick=""></button>
-  				<button class="btn desp rechargue" id="change" type="button" onclick=""></button>
+				<button class="btn desp" id="time" type="button" onclick=""></button>
+  				<button class="btn desp" id="edit" type="button" onclick=""></button>
+  				<button class="btn desp" id="pause" type="button" onclick=""></button>
+  				<button class="btn desp" id="refuse" type="button" onclick=""></button>
+  				<button class="btn desp" id="change" type="button" onclick=""></button>
 		</form>
 	</div>
 	

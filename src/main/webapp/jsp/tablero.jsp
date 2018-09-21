@@ -22,7 +22,7 @@
 <%@ include file="/jsp/generic/header.jsp" %>
     <div class="container-fluid">
         <div class="row padding_p" style="padding-top: 0px;">
-            <div class="col-lg-12 titulo azul t12 negrita">TABLERO ${usr.perfil.areasxpuesto[0].areaNom} > Tablero</div>
+            <div class="col-lg-12 titulo blanco t12 negrita">TABLERO ${usr.perfil.areasxpuesto[0].areaNom} > Tablero</div>
         </div>
         
             <%-- <div class="col-lg-2 titulo"
@@ -43,7 +43,7 @@
                 </form>
             </div>
             <div class="col-lg-4 col-sm-6" style="padding-right: 0px;padding-left: 0px;">
-            	<div class="slide-toggle" style="margin-top: 2px;width: 100%;height: 22px;">
+            	<div class="slide-toggle" style="margin-top: 6px;width: 100%;height: 25;">
             		<div class="row">
             			<div class="header_boton" style="border-right: 1px solid #ccc;width: 64%;font-size: 11px;"><img id="imgTableroPend" src="${pageContext.request.contextPath}/img/arrowDown.png" />&nbsp;&nbsp;&nbsp;<span id="areaTextTablero">Área</span></div>
             			<div class="header_boton" style="border-right: 1px solid #ccc;width: 17%;font-size: 11px;padding-left: 5px;"><span id="areaPendientesTablero">Pendientes</span></div>
@@ -64,22 +64,18 @@
     				<div class="pretty p-default p-round" style="margin-top: 6px;">
         				<input id="checkTipoTablero" type="checkbox" />
         				<div class="state p-primary-o">
-            			<label style="font-size: 12px;">Ver canceladas</label>
+            			<label class="blanco" style="font-size: 12px;">Ver canceladas</label>
         				</div>
     				</div>
-                <button class="btn desp rechargue" type="button" onclick="creatabla();">
-                    <img src="${pageContext.request.contextPath}/img/refresh_sf.png" />
-                </button>
-                <div class="desp" id="descargaExcelTablero" style="cursor: pointer;">
-                    <img src="${pageContext.request.contextPath}/img/iconos_DOWNLOAD.png">
-                </div>
+                <button class="btn desp refresh" type="button" onclick="creatabla();"></button>
+                <div class="desp descarga" id="descargaExcelTablero" style="cursor: pointer;"></div>
                     <input type="text" class="fechaInicialCalendario" readonly id="datepicker1" style="display: none;" />
                     
-                	<button class="btn desp rechargue" id="time" type="button"></button>
-  					<button class="btn desp rechargue" id="edit" type="button"></button>
-  					<button class="btn desp rechargue" id="pause" type="button"></button>
-  					<button class="btn desp rechargue" id="refuse" type="button"></button>
-  					<button class="btn desp rechargue" id="change" type="button"></button>
+                	<button class="btn desp" id="time" type="button"></button>
+  					<button class="btn desp" id="edit" type="button"></button>
+  					<button class="btn desp" id="pause" type="button"></button>
+  					<button class="btn desp" id="refuse" type="button"></button>
+  					<button class="btn desp" id="change" type="button"></button>
                 </form>
             	
             </div> 

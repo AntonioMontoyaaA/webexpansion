@@ -13,6 +13,15 @@
 	
 	<package name="user" namespace="/" extends="struts-default">
 		
+		<interceptors>  
+		       <interceptor class="com.tiendas.neto.interceptor.InterceptorAutorizadorPermisos" name="permisosInterceptor"/>  
+		       <interceptor-stack name="permisosStack">  
+			        <interceptor-ref name="permisosInterceptor"/>
+			        <interceptor-ref name="defaultStack"/>   
+		       </interceptor-stack>
+		 </interceptors>
+		 <default-interceptor-ref name="permisosStack"></default-interceptor-ref>
+		
 		
 		<action name="dashboard">
 			<result>jsp/dashboard.jsp</result>
@@ -35,9 +44,11 @@
 		<action name="agenda">
 			<result>jsp/agenda.jsp</result>
 		</action>
+		
 		<action name="localizador">
 			<result>jsp/localizador.jsp</result>
 		</action>
+		
 		<action name="aprobadas">
 			<result>jsp/aprobadas.jsp</result>
 		</action>

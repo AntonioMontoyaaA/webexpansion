@@ -48,6 +48,7 @@ public class UsuarioLoginVO {
 		private int numeroEmpleado;
 		private int puestoId;
 		
+		private AppPermitidas[] appPermitidas;
 		private AreasxpuestoVO[] areasxpuesto;
 		private ZonasxusuarioVO[] zonasxusuario;
 		private PerfilesxusuarioVO[] perfilesxusuario;
@@ -172,6 +173,26 @@ public class UsuarioLoginVO {
 			this.puestoId = puestoId;
 		}
 
+		public AppPermitidas[] getAppPermitidas() {
+			return appPermitidas;
+		}
+
+		public void setAppPermitidas(AppPermitidas[] appPermitidas) {
+			this.appPermitidas = appPermitidas;
+		}
+
+		public class AppPermitidas {
+			private int aplicacion;
+
+			public int getAplicacion() {
+				return aplicacion;
+			}
+
+			public void setAplicacion(int aplicacion) {
+				this.aplicacion = aplicacion;
+			}
+			
+		} 
 	}
 }
 

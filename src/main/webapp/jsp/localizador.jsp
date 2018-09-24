@@ -18,42 +18,45 @@
 <%@ include file="/jsp/generic/header.jsp" %>
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-lg-12 titulo blanco">Dashboard Expansión > Localizador</div>
+		<div class="col-lg-12 titulo">Dashboard Expansión > Localizador</div>
 	
 		<div class="contentLocalizador" id="contentDivLocalizador">
 			<!-- ALTA RADIO -->
-			<div class="content" id="contentAlta">
-				<span id="altaRadio" class="negrita t14 titleDivContent">Dar de alta radio</span><br>
-				
-				<div class="contentDetalle hidden">
-					<span class="negrita t14 spanText">Descargar plantilla</span>
-					<img id="download_plantillaRadios" src="img/iconos_DOWNLOAD.png" style="width: 29px;">
-					<br>
-					
-						<span class="negrita t14 spanText">1) Carga el archivo excel con los radios</span><br>
-						<span class="negrita t14 spanText">2) Un click para ver la información del radio</span><br>
-						<span class="negrita t14 spanText">3) Doble click para eliminar un radio</span><br>
-						<span class="negrita t14 spanText">4) Guarda</span>
+			<c:if test="${permisos['PRIVILEGIO.SUBMENU.VOKSE.12,1']}">
+				<div class="content" id="contentAlta">
+					<span id="altaRadio" class="negrita t14 titleDivContent">Dar de alta radio</span><br>
+					<div class="contentDetalle hidden">
+						<span class="negrita t14 spanText">Descargar plantilla</span>
+						<img id="download_plantillaRadios" src="img/iconos_DOWNLOAD.png" style="width: 29px;">
 						<br>
-					     
-					    <div id="drop">Arrastra el archivo</div>
-		
-						<input type="file" name="xlfile" id="xlf" /><br>
-						<br> 
 						
-						 <button type="button" id="btonGuardarRadios" class="btn back_5 btn_aceptar"  data-target="#myModal">
-							Guardar
-					   </button>
-					   <button type="button" id="btonCancelarRadios" class="btn btn-demo color_5 btn_cancelar"  data-target="#myModal">
-							Limpiar
-						</button>
+							<span class="negrita t14 spanText">1) Carga el archivo excel con los radios</span><br>
+							<span class="negrita t14 spanText">2) Un click para ver la información del radio</span><br>
+							<span class="negrita t14 spanText">3) Doble click para eliminar un radio</span><br>
+							<span class="negrita t14 spanText">4) Guarda</span>
+							<br>
+						     
+						    <div id="drop">Arrastra el archivo</div>
+			
+							<input type="file" name="xlfile" id="xlf" /><br>
+							<br> 
+							
+							 <button type="button" id="btonGuardarRadios" class="btn back_5 btn_aceptar"  data-target="#myModal">
+								Guardar
+						   </button>
+						   <button type="button" id="btonCancelarRadios" class="btn btn-demo color_5 btn_cancelar"  data-target="#myModal">
+								Limpiar
+							</button>
+					</div>
 				</div>
-			</div>
+			</c:if>
 			
 			<!-- ASIGNAR RADIO -->
+			<c:if test="${permisos['PRIVILEGIO.SUBMENU.VOKSE.12,2']}">
 			<div class="bordeDiv" id=""> </div>
 			<div class="content" id="contentAsignar">
 			 	<span id="asignarRadio" class="negrita t14 titleDivContent">Asignar radio</span>
+			
 			 	<br>
 			 	
 			 	<div class="contentDetalle  hidden">
@@ -78,9 +81,10 @@
 	 				</button> 
 				</div>
 			</div>
-			
+			 </c:if>
 			
 			<!-- LOCALIZACION EN TIMEPO REAL -->
+			<c:if test="${permisos['PRIVILEGIO.SUBMENU.VOKSE.12,3']}">
 			<div class="bordeDiv" id=""> </div>
 			<div class="content" id="contentAsignar">
 			 	<span id="localizaTime" class="negrita t14 titleDivContent">Localización en tiempo real</span>
@@ -106,8 +110,10 @@
 
 				</div>
 			</div>
+			 </c:if>
 			
 			<!-- VER  MIS MD -->
+			<c:if test="${permisos['PRIVILEGIO.SUBMENU.VOKSE.12,4']}">
 			<div class="bordeDiv" id=""> </div>
 			<div class="content" id="contentAsignar">
 			 	<span id="verMds" class="negrita t14 titleDivContent">Ver mis MD´s</span>
@@ -132,9 +138,11 @@
 
 				</div>
 			</div>
+			 </c:if>
 			
 			
 			<!-- VER  RADIOS POR ESTATUS -->
+			<c:if test="${permisos['PRIVILEGIO.SUBMENU.VOKSE.12,5']}">
 			<div class="bordeDiv" id=""> </div>
 			<div class="content" id="contentAsignar">
 			 	<span id="verRadiosEstatus" class="negrita t14 titleDivContent">Consulta radios</span>
@@ -162,6 +170,7 @@
 					
 				</div>
 			</div>
+		  </c:if>
 		</div>
 	</div> 
 

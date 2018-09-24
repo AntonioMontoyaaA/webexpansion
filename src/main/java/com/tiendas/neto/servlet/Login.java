@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,7 +17,10 @@ import javax.servlet.http.HttpSession;
 import com.google.gson.Gson;
 import com.tiendas.neto.dao.Expansionlog;
 import com.tiendas.neto.singleton.SingletonProperties;
+import com.tiendas.neto.vo.PerfilesxusuarioVO;
+import com.tiendas.neto.vo.PermisosVO;
 import com.tiendas.neto.vo.UsuarioLoginVO;
+import com.tiendas.neto.vo.UsuarioLoginVO.Perfil.AppPermitidas;
 
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
@@ -25,7 +30,6 @@ import okhttp3.Response;
 
 @SuppressWarnings("serial")
 public class Login  extends HttpServlet {
-	private final int ANALISTA_RADIOS = 15;
 	Expansionlog elog=new Expansionlog();
 	SingletonProperties sp=SingletonProperties.getInstancia();
 	private String user;
@@ -47,6 +51,8 @@ public class Login  extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	UsuarioLoginVO usuario=new UsuarioLoginVO();
     	RequestDispatcher despachador = null;
+    	HttpSession sesion = null;
+    	boolean accesoWeb = false;
     	int codigo;
     	response.setContentType("text/html;charset=UTF-8");
 
@@ -56,23 +62,47 @@ public class Login  extends HttpServlet {
     	try{
     	usuario=comprueba_login(user,pass);
     	codigo=usuario.getCodigo();
-    	Integer perfil;
-    	perfil=usuario.getPerfil().getPerfilesxusuario()[0].getPerfilid();
-			
-    	if (codigo == 200 && perfil!=1 && perfil!=2) {
-				try {
-					HttpSession sesion = request.getSession();
-					sesion.setAttribute("usr", usuario);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				
-				if(usuario.getPerfil().getPuestoId() == ANALISTA_RADIOS) {
-					despachador = getServletContext().getRequestDispatcher("/jsp/localizador.jsp");
-				} else {
-					despachador = getServletContext().getRequestDispatcher("/jsp/dashboard.jsp");
-				}
-				despachador.include(request, response);
+
+    	for(AppPermitidas app : usuario.getPerfil().getAppPermitidas()) {
+    		if(app.getAplicacion() == 3) {
+    			accesoWeb = true;
+    		}
+    	}
+    	
+       	if (codigo == 200 && accesoWeb) {
+    				try {
+    					sesion = request.getSession();
+    					sesion.setAttribute("usr", usuario);
+    				} catch (Exception e) {
+    					e.printStackTrace();
+    				}
+    								
+    				Map<Object, Object> MENUVOKSE = new HashMap<Object, Object>();
+    				
+    				for(PerfilesxusuarioVO perfiles :  usuario.getPerfil().getPerfilesxusuario()) {
+    					for(PermisosVO permiso : perfiles.getPermisos()) {
+    						if(permiso.getFIESTATUS() == 1) {
+    							MENUVOKSE.put("PRIVILEGIO.MENU.VOKSE."+permiso.getFIMODULOID(), true);
+    							MENUVOKSE.put("PRIVILEGIO.SUBMENU.VOKSE."+permiso.getFIMODULOID()+","+permiso.getFISUBMODULO(), true);							
+    						}
+    					}
+    				}
+
+    				if(MENUVOKSE.get("PRIVILEGIO.MENU.VOKSE.7") != null && (boolean)MENUVOKSE.get("PRIVILEGIO.MENU.VOKSE.7") == true) {
+    					despachador = getServletContext().getRequestDispatcher("/jsp/dashboard.jsp");
+    				} else if(MENUVOKSE.get("PRIVILEGIO.MENU.VOKSE.12") != null && (boolean)MENUVOKSE.get("PRIVILEGIO.MENU.VOKSE.12") == true) {
+    					despachador = getServletContext().getRequestDispatcher("/jsp/localizador.jsp");
+    				}else {
+    					despachador = getServletContext().getRequestDispatcher("/jsp/tablero.jsp");
+    				}
+
+    				try {
+    					sesion.setAttribute("permisos", MENUVOKSE);
+    				} catch (Exception e) {
+    					e.printStackTrace();
+    				}
+    				
+    				despachador.include(request, response);
 			} else {
 				request.setAttribute("respuesta", "error");
 				despachador = getServletContext().getRequestDispatcher("/jsp/login.jsp");

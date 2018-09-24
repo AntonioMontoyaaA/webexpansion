@@ -1,4 +1,4 @@
-
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 
 <nav class="navbar justify-content-between navbar-expand-lg navbar_fondo navbar_borde">
 	<span class="navbar-brand"> <img
@@ -12,14 +12,40 @@
 				</button>
 				<div class="navbar-collapse collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav mr-auto ml-auto mt-2 mt-lg-0" >
-						<li id="dashboardMenu" class="nav-item"><a id="iddashboard" class="nav-link blanco t12" href="dashboard">Dashboard</a></li>
-						<li id="tableroMenu" class="nav-item"><a id="idtablero" class="nav-link blanco t12" href="tablero">Tablero</a></li>
-						<li id="enProcesoMenu" class="nav-item"><a id="idasignadas" class="nav-link blanco t12" href="asignadas">En Proceso</a></li>
-						<li id="autorizadasMenu" class="nav-item"><a id="idautorizadas" class="nav-link blanco t12" href="autorizadas">Autorizadas</a></li>
-						<li id="rechazadasMenu" class="nav-item"><a id="idrechazadas" class="nav-link blanco t12" href="rechazadas">Rechazadas</a></li>
-						<li id="agendaMenu" class="nav-item"><a id="idagenda" class="nav-link blanco t12" href="agenda">Agenda</a></li>	
-						<li id="localizadorMenu" class="nav-item"><a id="idlocalizador" class="nav-link blanco t12" href="localizador"> Localizador</a></li>	
-						<li id="aprobadasMenu" class="nav-item" style="display: none;"><a id="idaprobadas" class="nav-link blanco t12" href="aprobadas">Aprobadas</a></li>	
+						<c:if test="${permisos['PRIVILEGIO.MENU.VOKSE.7']}">
+							<li id="dashboardMenu" class="nav-item"><a id="iddashboard" class="nav-link blanco t12" href="dashboard">Dashboard</a></li>					
+						</c:if>
+						<c:if test="${permisos['PRIVILEGIO.MENU.VOKSE.14']}">
+							<li id="tableroMenu" class="nav-item"><a id="idtablero" class="nav-link blanco t12" href="tablero">Tablero</a></li>					
+						</c:if>
+						<c:if test="${permisos['PRIVILEGIO.MENU.VOKSE.8']}">
+							<li id="enProcesoMenu" class="nav-item"><a id="idasignadas" class="nav-link blanco t12" href="asignadas">En Proceso</a></li>					
+						</c:if>
+						<c:if test="${permisos['PRIVILEGIO.MENU.VOKSE.9']}">
+							<li id="autorizadasMenu" class="nav-item"><a id="idautorizadas" class="nav-link blanco t12" href="autorizadas">Autorizadas</a></li>					
+						</c:if>
+						<c:if test="${permisos['PRIVILEGIO.MENU.VOKSE.10']}">
+							<li id="rechazadasMenu" class="nav-item"><a id="idrechazadas" class="nav-link blanco t12" href="rechazadas">Rechazadas</a></li>					
+						</c:if>
+						<c:if test="${permisos['PRIVILEGIO.MENU.VOKSE.11']}">
+							<li id="agendaMenu" class="nav-item"><a id="idagenda" class="nav-link blanco t12" href="agenda">Agenda</a></li>						
+						</c:if>
+						<c:if test="${permisos['PRIVILEGIO.MENU.VOKSE.12']}">
+							<li id="localizadorMenu" class="nav-item"><a id="idlocalizador" class="nav-link blanco t12" href="localizador"> Localizador</a></li>						
+						</c:if> 
+						<c:if test="${permisos['PRIVILEGIO.MENU.VOKSE.16']}">
+							<li id="aprobadasMenu" class="nav-item" style="display: none;"><a id="idaprobadas" class="nav-link blanco t12" href="aprobadas">Aprobadas</a></li>													
+						</c:if> 
+						
+						
+<!-- 						<li id="dashboardMenu" class="nav-item"><a id="iddashboard" class="nav-link blanco t12" href="dashboard">Dashboard</a></li> -->
+<!-- 						<li id="tableroMenu" class="nav-item"><a id="idtablero" class="nav-link blanco t12" href="tablero">Tablero</a></li> -->
+<!-- 						<li id="enProcesoMenu" class="nav-item"><a id="idasignadas" class="nav-link blanco t12" href="asignadas">En Proceso</a></li> -->
+<!-- 						<li id="autorizadasMenu" class="nav-item"><a id="idautorizadas" class="nav-link blanco t12" href="autorizadas">Autorizadas</a></li> -->
+<!-- 						<li id="rechazadasMenu" class="nav-item"><a id="idrechazadas" class="nav-link blanco t12" href="rechazadas">Rechazadas</a></li> -->
+<!-- 						<li id="agendaMenu" class="nav-item"><a id="idagenda" class="nav-link blanco t12" href="agenda">Agenda</a></li>	 -->
+<!-- 						<li id="localizadorMenu" class="nav-item"><a id="idlocalizador" class="nav-link blanco t12" href="localizador"> Localizador</a></li>	 -->
+<!-- 						<li id="aprobadasMenu" class="nav-item" style="display: none;"><a id="idaprobadas" class="nav-link blanco t12" href="aprobadas">Aprobadas</a></li>	 -->
 					</ul>
 					
 					<input id="perfilLogin" type="hidden" value="${usr.perfil.puestoId}"/>
@@ -58,4 +84,4 @@
 		</form>
 		</div>	
 </nav>
-
+				

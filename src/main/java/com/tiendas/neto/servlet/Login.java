@@ -34,6 +34,7 @@ public class Login  extends HttpServlet {
 	SingletonProperties sp=SingletonProperties.getInstancia();
 	private String user;
 	private String pass;
+	String pass_encriptado="";
 	
 	/**
      * @see HttpServlet#HttpServlet()
@@ -102,7 +103,8 @@ public class Login  extends HttpServlet {
     					e.printStackTrace();
     				}
     				
-    				despachador.include(request, response);
+    				sesion.setAttribute("pass", pass_encriptado);
+    				despachador.include(request, response);	
 			} else {
 				request.setAttribute("respuesta", "error");
 				despachador = getServletContext().getRequestDispatcher("/jsp/login.jsp");
@@ -121,13 +123,13 @@ public class Login  extends HttpServlet {
 
 		}
 	}
-	
+
 //------------------------------ CONEXION AL SERVICIO ------------------------------
 	public UsuarioLoginVO comprueba_login(String user, String pass) {    		
 		String respuesta="";
 		UsuarioLoginVO userLogin=null;
 	try{
-		String pass_encriptado= encripta(pass);
+		pass_encriptado= encripta(pass);
 		
 		final OkHttpClient client = new OkHttpClient();
 		FormBody.Builder formBuilder = new FormBody.Builder()

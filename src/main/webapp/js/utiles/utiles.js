@@ -302,3 +302,7 @@ function marca_notificacion(valor){
 		consultaNotificaciones();
 	}
 }
+
+function editaPerfil(){
+	$('#modal_perfil').modal('show');
+}

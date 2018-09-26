@@ -76,7 +76,7 @@
                      
 		data-content="<div>
 		 <div class='t12 negrita azul titulo_avisos'>Opciones</div>
-		 <!-- <div id='editaPerfil' class='cursor t12 negrita azul opcionPerfil' style='padding:5px 10px;' onclick='cambiaPass()'>Cambiar contraseña </div> -->
+		 <!-- <div id='editaPerfil' class='cursor t12 negrita azul opcionPerfil' style='padding:5px 10px;' onclick='editaPerfil()'>Edita perfil </div> -->
 		 <form id='logout' action='Logout'>
 		 <div id='salir' class='cursor t12 negrita azul opcionPerfil' style='padding:5px 10px; margin-bottom:3px;' onclick='salir()'>Cerrar Sesión </div></form>
 		 </div>" >
@@ -85,3 +85,58 @@
 		</div>	
 </nav>
 				
+				
+<!-- Modal perfil -->
+<div class="modal fade" id="modal_perfil" >
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="background:transparent;">
+      <div  class="modal-body" id="cuerpo_modal">
+     
+<form action="editaPerfilAction" method="POST">
+ 		
+ 		<div class="col-12 center" style="height: 50;">
+        		<div class="circulo_imagen">
+        			<img class="circulo_imagen" src="${usr.perfil.imagenusuario}">
+        		</div>
+        		 <input type="file" name="imagen_usuario" accept="image/*">
+      	</div>
+    <div class="espacio">      
+    <div class="col-12"><span class="etiqueta negrita">Nombre</span></div>
+      <div class="col-12"><input type="text" class="a_total" id="nombre_usuario" name="nombre_usuario" placeholder='${usr.perfil.nombre}'></div>
+    <div class="col-12"><span class="etiqueta negrita">Apellido paterno</span></div>
+      <div class="col-12"><input type="text" class="a_total" id="apellidoP_usuario" name="apellidoP_usuario" placeholder='${usr.perfil.apellidoP}'></div>
+    <div class="col-12"><span class="etiqueta negrita">Apellido materno</span></div>
+      <div class="col-12"><input type="text" class="a_total" id="apellidoM_usuario" name="apellidoM_usuario" placeholder='${usr.perfil.apellidoM}'></div>
+    <div class="col-12 center"><span class="etiqueta" id="puesto_usuario" name="puesto_usuario">${usr.perfil.perfilesxusuario[0].nombreperfil}</span></div></div>
+    
+    <div class="espacio">
+      <div class="col-12"><span class="etiqueta negrita">CONTACTO</span></div></div>
+    <div class="espacio">
+      <div class="col-12"><span class="etiqueta negrita">Celular</span></div>
+      <div class="col-12"><input type="text" class="a_total" id="celular_usuario" name="celular_usuario" placeholder='${usr.perfil.telefono}'></div></div>
+    <div class="espacio">
+      <div class="col-12"><span class="etiqueta negrita">Email</span></div>
+      <div class="col-12"><input type="text" class="a_total" id="email_usuario" name="email_usuario" placeholder='${usr.perfil.correo}'></div></div>
+
+    <div class="espacio">
+      <div class="col-12"><span class="etiqueta negrita">CAMBIO CONTRASEÑA</span></div></div>
+    <div class="espacio" style="margin-bottom:15;">
+    
+      <div class="col-12"><span class="etiqueta negrita" >Contraseña</span></div>
+      <div class="col-12"><input type="text" class="a_total" id="contraseña_usuario" name="contraseña_usuario" placeholder='**********'></div></div>
+    <div class="espacio">
+      <div class="col-12"><span class="etiqueta negrita">Contraseña nueva</span></div>
+      <div class="col-12"><input type="text" class="a_total" id="contraseñanueva_usuario" name="contraseñanueva_usuario" placeholder='**********'></div></div>
+    <div class="espacio">
+      <div class="col-12"><span class="etiqueta negrita">Repetir contraseña nueva</span></div>
+      <div class="col-12"><input type="text" class="a_total" id="rcontraseñanueva_usuario" name="rcontraseñanueva_usuario" placeholder='**********'></div></div>
+</form>
+     
+        <div class="row">
+        	<div class="col-6 center"><button type="button" class="btn boton_usuario t14">Guardar</button></div>   
+     		<div class="col-6 center"><button type="button" class="btn boton_usuario t14" data-dismiss="modal">Close</button></div>
+    	</div>
+      </div>
+    </div>
+  </div>
+</div>

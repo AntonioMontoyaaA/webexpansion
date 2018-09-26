@@ -136,6 +136,11 @@ if(datos.Diciembre!="undefined"){
 	    },
 	    xAxis: {
 	        categories: ['Ene','Feb','Mar','Abr','Mayo','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
+	        labels: {
+	             style: {
+	                 color: 'white'
+	             }
+	        }
 	    },
 	    yAxis: {
 	        min: 0,

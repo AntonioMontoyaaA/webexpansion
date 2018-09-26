@@ -381,7 +381,6 @@ public class DescargaPdfAction extends ExpansionAction{
 			
 			JasperPrint print = JasperFillManager.fillReport(url+"pag1.jasper", parameters);
 			
-			
 			HttpServletRequest request=ServletActionContext.getRequest();
 			HttpServletResponse response=ServletActionContext.getResponse();
 			response.setContentType("application/pdf");

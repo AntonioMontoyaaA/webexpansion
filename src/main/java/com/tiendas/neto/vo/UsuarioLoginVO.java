@@ -47,11 +47,20 @@ public class UsuarioLoginVO {
 		private String telefono;
 		private int numeroEmpleado;
 		private int puestoId;
+		private String imagenusuario;
 		
 		private AppPermitidas[] appPermitidas;
 		private AreasxpuestoVO[] areasxpuesto;
 		private ZonasxusuarioVO[] zonasxusuario;
 		private PerfilesxusuarioVO[] perfilesxusuario;
+
+		public String getImagenusuario() {
+			return imagenusuario;
+		}
+
+		public void setImagenusuario(String imagenusuario) {
+			this.imagenusuario = imagenusuario;
+		}
 
 		public AreasxpuestoVO[] getAreasxpuesto() {
 			return areasxpuesto;

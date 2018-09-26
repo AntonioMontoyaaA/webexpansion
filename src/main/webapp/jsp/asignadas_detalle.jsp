@@ -609,6 +609,8 @@
 	<input type="hidden" name="pdflat" id="pdflat">
 	<input type="hidden" name="pdflon" id="pdflon">
 	<input type="hidden" name="pdfurlmapa" id="pdfurlmapa">
+	<input type="hidden" name="pdfurlmapa_pag1" id="pdfurlmapa_pag1">
+	<input type="hidden" name="pdfurlmapa_pag3" id="pdfurlmapa_pag3">
 	<input type="hidden" name="pdfmarkers_comp" id="pdfmarkers_comp">
 	<input type="hidden" name="pdfmarkers_gen" id="pdfmarkers_gen">
 	

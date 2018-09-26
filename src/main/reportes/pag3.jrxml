@@ -4,6 +4,7 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="324"/>
+	<property name="net.sf.jasperreports.components.map.key" value="AIzaSyCaefWW3pvU6WKZKiVFD6OwyGoWIgZLyS0"/>
 	<subDataset name="competencias" uuid="e88de8c1-2863-4bbe-8c42-6499b91b96d5">
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 		<queryString>
@@ -64,6 +65,7 @@
 	<parameter name="listageneradores" class="java.lang.Object[]"/>
 	<parameter name="lat" class="java.lang.Float"/>
 	<parameter name="lon" class="java.lang.Float"/>
+	<parameter name="urlmapa_pag3" class="java.lang.String"/>
 	<field name="listacompetencias" class="java.lang.Object[]"/>
 	<background>
 		<band splitType="Stretch"/>
@@ -86,32 +88,6 @@
 				</textElement>
 				<text><![CDATA[ZONIFICACION]]></text>
 			</staticText>
-			<componentElement>
-				<reportElement x="0" y="50" width="570" height="400" uuid="839e5458-40b5-4213-bba6-c8d673dddc08"/>
-				<c:map xmlns:c="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-					<c:latitudeExpression><![CDATA[$P{lat}]]></c:latitudeExpression>
-					<c:longitudeExpression><![CDATA[$P{lon}]]></c:longitudeExpression>
-					<c:zoomExpression><![CDATA[14]]></c:zoomExpression>
-					<c:markerData>
-						<dataset>
-							<datasetRun subDataset="competencias" uuid="24c4ece6-54d0-43e8-8e25-2a4df63d6b92">
-								<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource(Arrays.asList($P{listacompetencias}))]]></dataSourceExpression>
-							</datasetRun>
-						</dataset>
-						<c:item>
-							<c:itemProperty name="color">
-								<valueExpression><![CDATA[$F{competenciaId}.equals( null )? "#F9B118":"#EE2B62"]]></valueExpression>
-							</c:itemProperty>
-							<c:itemProperty name="latitude">
-								<valueExpression><![CDATA[$F{latitud}]]></valueExpression>
-							</c:itemProperty>
-							<c:itemProperty name="longitude">
-								<valueExpression><![CDATA[$F{longitud}]]></valueExpression>
-							</c:itemProperty>
-						</c:item>
-					</c:markerData>
-				</c:map>
-			</componentElement>
 			<staticText>
 				<reportElement x="0" y="480" width="124" height="20" forecolor="#999999" uuid="53cf7075-344f-4bfa-b0c4-dcf47b706be4"/>
 				<textElement textAlignment="Center">
@@ -132,6 +108,10 @@
 			<ellipse>
 				<reportElement x="460" y="479" width="21" height="21" forecolor="#EE2B62" backcolor="#EE2B62" uuid="d42c31f6-07ca-4292-bd64-7db6f065d090"/>
 			</ellipse>
+			<image>
+				<reportElement x="2" y="34" width="570" height="400" uuid="76d05905-b2cf-45a1-8cf0-1dc855bf03e7"/>
+				<imageExpression><![CDATA[$P{urlmapa_pag3}]]></imageExpression>
+			</image>
 		</band>
 	</columnHeader>
 	<summary>

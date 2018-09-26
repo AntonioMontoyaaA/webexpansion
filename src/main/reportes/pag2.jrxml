@@ -52,6 +52,7 @@
 	<parameter name="listageneradores" class="java.lang.Object[]"/>
 	<parameter name="lat" class="java.lang.Float"/>
 	<parameter name="lon" class="java.lang.Float"/>
+	<parameter name="urlmapa_pag3" class="java.lang.String"/>
 	<field name="field1" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
@@ -281,6 +282,9 @@
 				</subreportParameter>
 				<subreportParameter name="lon">
 					<subreportParameterExpression><![CDATA[$P{lon}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="urlmapa_pag3">
+					<subreportParameterExpression><![CDATA[$P{urlmapa_pag3}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{url_subreport} + "pag3.jasper"]]></subreportExpression>

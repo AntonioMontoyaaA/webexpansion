@@ -6,8 +6,9 @@ function descargaExcel(data){
 	$('#pdfpuntos').val(data.generales.totalPuntos);
 	$('#pdflat').val(data.generales.latitud);
 	$('#pdflon').val(data.generales.longitud);
-	$('#pdfurlmapa').val('http://maps.google.com/maps?q=loc:'+data.generales.latitud+','+data.generales.longitud);
-	
+	$('#pdfurlmapa').val('https://maps.google.com/maps?q=loc:'+data.generales.latitud+','+data.generales.longitud);
+	$('#pdfurlmapa_pag1').val('http://maps.google.com/maps/api/staticmap?center='+data.generales.latitud+','+data.generales.longitud+'&size=517x220&zoom=16&maptype=roadmap&format=svg&scale=1&markers='+data.generales.latitud+','+data.generales.longitud+'&sensor=false&language=es&key=AIzaSyCaefWW3pvU6WKZKiVFD6OwyGoWIgZLyS0');
+		
 	/*var calle= data.datosSitio.calle+", ";
 	var colonia= "Col. "+data.datosSitio.colonia+", ";
 	var municipio= data.datosSitio.municipio+", ";
@@ -31,9 +32,25 @@ function descargaExcel(data){
 //para pag3 PDF	
 	$('#pdfmarkers_comp').val(JSON.stringify(data.zonificacion.competencias));
 	$('#pdfmarkers_gen').val(JSON.stringify(data.zonificacion.generadores));
+
+	var listacompetencias=data.zonificacion.competencias;
+	var listageneradores=data.zonificacion.generadores;
+	var markers="";
+	
+	
+	for(var i=0;i<listacompetencias.length;i++){
+		markers=markers+'&markers=color:0xEE2B62%7C'+listacompetencias[i].latitud+','+listacompetencias[i].longitud;
+	}
+	for(var i=0;i<listageneradores.length;i++){
+		markers=markers+'&markers=color:0xF9B118%7C'+listageneradores[i].latitud+','+listageneradores[i].longitud;
+	}
+	
+	var listas_url='http://maps.google.com/maps/api/staticmap?center='+data.generales.latitud+','+data.generales.longitud+'&size=570x400&zoom=14&maptype=roadmap&format=svg&scale=1'+markers+'&sensor=false&language=es&key=AIzaSyCaefWW3pvU6WKZKiVFD6OwyGoWIgZLyS0';
+	$('#pdfurlmapa_pag3').val(listas_url);
+
 //para pag4 PDF
 	
-	var subfactores=[];
+	var subfactores=[];+"los marcadores"
 	var subfactoresdesc=[];
 	
 	for(var s=0;s<data.construccion.factores.EXPANSION.length;s++){

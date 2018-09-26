@@ -44,6 +44,8 @@ public class DescargaPdfAction extends ExpansionAction{
 	private String pdflat;
 	private String pdflon;
 	private String pdfurlmapa;
+	private String pdfurlmapa_pag1;
+	private String pdfurlmapa_pag3;
 	private String pdfmarkers_comp;
 	private String pdfmarkers_gen;
 	
@@ -67,6 +69,18 @@ public class DescargaPdfAction extends ExpansionAction{
 	private String pdfgracia;
 	private String pdfconteos;
 
+	public String getPdfurlmapa_pag3() {
+		return pdfurlmapa_pag3;
+	}
+	public void setPdfurlmapa_pag3(String pdfurlmapa_pag3) {
+		this.pdfurlmapa_pag3 = pdfurlmapa_pag3;
+	}
+	public String getPdfurlmapa_pag1() {
+		return pdfurlmapa_pag1;
+	}
+	public void setPdfurlmapa_pag1(String pdfurlmapa_pag1) {
+		this.pdfurlmapa_pag1 = pdfurlmapa_pag1;
+	}
 	public String getPdfurlmapa() {
 		return pdfurlmapa;
 	}
@@ -274,7 +288,8 @@ public class DescargaPdfAction extends ExpansionAction{
 		parameters.put("lat", Float.parseFloat(pdflat));
 		parameters.put("lon",Float.parseFloat(pdflon));
 		parameters.put("urlmapa",pdfurlmapa);
-		
+		parameters.put("urlmapa_pag1",pdfurlmapa_pag1);
+		parameters.put("urlmapa_pag3",pdfurlmapa_pag3);
 		parameters.put("frenteMd", pdffrenteMd);
 		parameters.put("profundidadMd", pdfprofundidadMd);
 		parameters.put("tamanioTotalMd", pdftamanioTotalMd);
@@ -358,11 +373,11 @@ public class DescargaPdfAction extends ExpansionAction{
 		//----------------------------
 		
 		
-			// JasperCompileManager.compileReportToFile(url+"pag5.jrxml", url+"pag5.jasper");
-//			 JasperCompileManager.compileReportToFile(url+"pag4.jrxml", url+"pag4.jasper");
-//			 JasperCompileManager.compileReportToFile(url+"pag3.jrxml", url+"pag3.jasper");
-//			 JasperCompileManager.compileReportToFile(url+"pag2.jrxml", url+"pag2.jasper");
-//			 JasperCompileManager.compileReportToFile(url+"pag1.jrxml", url+"pag1.jasper");
+			/* JasperCompileManager.compileReportToFile(url+"pag5.jrxml", url+"pag5.jasper");
+			 JasperCompileManager.compileReportToFile(url+"pag4.jrxml", url+"pag4.jasper");
+			 JasperCompileManager.compileReportToFile(url+"pag3.jrxml", url+"pag3.jasper");
+			 JasperCompileManager.compileReportToFile(url+"pag2.jrxml", url+"pag2.jasper");
+			 JasperCompileManager.compileReportToFile(url+"pag1.jrxml", url+"pag1.jasper");*/
 			
 			JasperPrint print = JasperFillManager.fillReport(url+"pag1.jasper", parameters);
 			

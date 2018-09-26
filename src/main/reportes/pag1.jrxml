@@ -4,8 +4,8 @@
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="318"/>
-	<property name="net.sf.jasperreports.components.map.key" value="AIzaSyCuFdkYUDivTv_TrR4RZMWP1NYCA0MK2YM"/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="net.sf.jasperreports.components.map.key" value="AIzaSyCaefWW3pvU6WKZKiVFD6OwyGoWIgZLyS0"/>
 	<parameter name="mdId" class="java.lang.String"/>
 	<parameter name="nombreMd" class="java.lang.String"/>
 	<parameter name="categoriaMd" class="java.lang.String"/>
@@ -58,6 +58,8 @@
 	<parameter name="listacompetencias" class="java.lang.Object[]"/>
 	<parameter name="listageneradores" class="java.lang.Object[]"/>
 	<parameter name="urlmapa" class="java.lang.String"/>
+	<parameter name="urlmapa_pag3" class="java.lang.String"/>
+	<parameter name="urlmapa_pag1" class="java.lang.String"/>
 	<background>
 		<band height="792" splitType="Stretch">
 			<rectangle>
@@ -180,24 +182,6 @@
 				<reportElement x="44" y="372" width="53" height="50" uuid="f982b878-2101-44c4-97be-5862fc11f6ee"/>
 				<imageExpression><![CDATA[$P{imagen_usuario}]]></imageExpression>
 			</image>
-			<componentElement>
-				<reportElement x="45" y="30" width="435" height="220" uuid="2061cb86-000c-4c66-b178-9ba3d202e105"/>
-				<c:map xmlns:c="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-					<c:latitudeExpression><![CDATA[$P{lat}]]></c:latitudeExpression>
-					<c:longitudeExpression><![CDATA[$P{lon}]]></c:longitudeExpression>
-					<c:zoomExpression><![CDATA[16]]></c:zoomExpression>
-					<c:markerData>
-						<c:item>
-							<c:itemProperty name="latitude">
-								<valueExpression><![CDATA[$P{lat}]]></valueExpression>
-							</c:itemProperty>
-							<c:itemProperty name="longitude">
-								<valueExpression><![CDATA[$P{lon}]]></valueExpression>
-							</c:itemProperty>
-						</c:item>
-					</c:markerData>
-				</c:map>
-			</componentElement>
 			<textField isBlankWhenNull="true" hyperlinkType="Reference">
 				<reportElement x="26" y="300" width="518" height="20" uuid="644c2b93-1cfd-4bfe-acca-0c8ec20d803f"/>
 				<textElement>
@@ -205,6 +189,10 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$P{urlmapa}]]></textFieldExpression>
 			</textField>
+			<image>
+				<reportElement x="27" y="30" width="517" height="220" uuid="1ebabd16-8faf-4f7a-90d9-e3229615815d"/>
+				<imageExpression><![CDATA[$P{urlmapa_pag1}]]></imageExpression>
+			</image>
 		</band>
 	</columnHeader>
 	<summary>
@@ -346,6 +334,9 @@
 				</subreportParameter>
 				<subreportParameter name="lon">
 					<subreportParameterExpression><![CDATA[$P{lon}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="urlmapa_pag3">
+					<subreportParameterExpression><![CDATA[$P{urlmapa_pag3}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{url_subreport} + "pag2.jasper"]]></subreportExpression>

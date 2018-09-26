@@ -42,6 +42,11 @@ public class AsignadasInfoAction extends ExpansionAction implements SessionAware
 		int puestoId = 0;
 		String areaId = "";
 		HttpSession usuarioSesion = ServletActionContext.getRequest().getSession();
+		String submodulos="";
+		
+		if(usuarioSesion.getAttribute("submodulos")!=null) {
+			submodulos=(String) usuarioSesion.getAttribute("submodulos");
+		}
 		usuario = (UsuarioLoginVO) usuarioSesion.getAttribute("usr");
 		
 		try {
@@ -65,9 +70,7 @@ public class AsignadasInfoAction extends ExpansionAction implements SessionAware
 			final OkHttpClient client = new OkHttpClient();
 			FormBody.Builder formBuilder = new FormBody.Builder()
 			 .add("usuarioId", numeroEmpleado)
-			 .add("puestoId", String.valueOf(puestoId))
-	         .add("fechaConsulta", fechaConsulta)
-	         .add("areaId", String.valueOf(areaId));
+			 .add("nivelesEstatus", submodulos);
 			
 			 RequestBody formBody = formBuilder.build();
 			 Request request = new Request.Builder()

@@ -80,7 +80,11 @@
          		method = "marcarLeido">
     </action>
     <!-- ********************************************************************** -->
-	
+		<action name = "EnviaSubmodulosAction" 
+         		class = "com.tiendas.neto.action.EnviaSubmodulosAction" 
+         		method = "execute">
+      	</action>
+      	
 		<action name = "EnviaFechaAction" 
          		class = "com.tiendas.neto.action.EnviaFechaAction" 
          		method = "execute">

@@ -547,17 +547,19 @@ function armaGraficas(data){
 		});
 }
 
+ //arreglo son submodulos para enviar a las tablas
 function pintaActivas(arreglo,filtrados){
 	$('#proceso').hide();
 	html=inicio();
 
 	var cont=0;
 	var existe_modulo=false;
+	var submodulos_global=[];
+	
 	for(var i=0;i<arreglo.length;i++){
 		var existe_submodulo=false;
 		
 		$.each($(".permisos_sub"),function(index, value){
-			console.log(value.value);
 			if(value.value=='PRIVILEGIO.MENU.VOKSE.16=true'){
 				existe_modulo=true;
 			}
@@ -573,11 +575,14 @@ function pintaActivas(arreglo,filtrados){
 		
 			if(existe_submodulo==true || existe_modulo==false && filtrados[cont].areaValidacion==$('#areaId').val() && perfil!='3'){
 				color="verde cursor";
+				submodulos_global.push(filtrados[cont].estatusid);
 			}
 			else{
 				color="blanco";
-				if(perfil=='3')
+				if(perfil=='3'){
 					color="blanco cursor";
+					submodulos_global.push(filtrados[cont].estatusid);
+				}		
 			}
 		
 		if(arreglo[i]==1){
@@ -588,13 +593,16 @@ function pintaActivas(arreglo,filtrados){
 			var cant2= filtrados[cont+1].total;
 			var color2="";
 			
-			if(filtrados[cont+1].areaValidacion==$('#areaId').val()&& perfil!='3'){
+			if(existe_submodulo==true || existe_modulo==false && filtrados[cont+1].areaValidacion==$('#areaId').val() && perfil!='3'){
 				color2="verde cursor";
+				submodulos_global.push(filtrados[cont].estatusid);
 			}
 			else{
 				color2="blanco";
-				if(perfil=='3')
+				if(perfil=='3'){
 					color2="blanco cursor";
+					submodulos_global.push(filtrados[cont].estatusid);
+				}
 			}
 			html=html+doble(cadenas[1] ,cant ,cadenas[0],color ,cadenas2[1] ,cant2 ,cadenas2[0], color2);	
 			
@@ -602,6 +610,7 @@ function pintaActivas(arreglo,filtrados){
 		}
 		cont++;
 	}
+	EnviaSubmodulosAction(submodulos_global);
 	
 	$('#proceso').html(html);
 	$('.hexa').css('background-image','url("img/hexaverde.svg")');
@@ -614,6 +623,8 @@ function pintaAtrasadas(arreglo,filtrados){
 
 	var cont=0;
 	var existe_modulo=false;
+	var submodulos_global=[];
+	
 	for(var i=0;i<arreglo.length;i++){
 		var existe_submodulo=false;
 		
@@ -632,11 +643,14 @@ function pintaAtrasadas(arreglo,filtrados){
 		var color="";
 			if(existe_submodulo==true || existe_modulo==false && filtrados[cont].areaValidacion==$('#areaId').val() && perfil!='3'){
 				color="rojo cursor";
+				submodulos_global.push(filtrados[cont].estatusid);
 			}
 			else{
 				color="blanco";
-				if(perfil=='3')
+				if(perfil=='3'){
 					color="blanco cursor";
+					submodulos_global.push(filtrados[cont].estatusid);
+				}
 			}
 		if(arreglo[i]==1){
 			html=html+simple(cadenas[1] ,cant ,cadenas[0],color);
@@ -645,13 +659,17 @@ function pintaAtrasadas(arreglo,filtrados){
 			var cadenas2= filtrados[cont+1].estatus.replace('VALIDACION','VOBO').split('-',2);
 			var cant2= filtrados[cont+1].atrasadas;
 			var color2="";
-					if(filtrados[cont+1].areaValidacion==$('#areaId').val()&& perfil!='3'){
+					if(existe_submodulo==true || existe_modulo==false && filtrados[cont+1].areaValidacion==$('#areaId').val() && perfil!='3'){
 							color2="rojo cursor";
+							submodulos_global.push(filtrados[cont].estatusid);
 					}
 					else{
 							color2="blanco";
-							if(perfil=='3')
+							if(perfil=='3'){
 								color2="blanco cursor";
+								submodulos_global.push(filtrados[cont].estatusid);
+							}
+								
 					}
 			html=html+doble(cadenas[1] ,cant ,cadenas[0],color,  cadenas2[1] ,cant2 ,cadenas2[0],color2);	
 			
@@ -659,7 +677,7 @@ function pintaAtrasadas(arreglo,filtrados){
 		}
 		cont++;
 	}
-	
+	EnviaSubmodulosAction(submodulos_global);
 	$('#proceso').html(html);
 	$('.hexa').css('background-image','url("img/hexarojo.svg")');
 	
@@ -671,6 +689,8 @@ function pintaCanceladas(arreglo,filtrados){
 	html=inicio();
 	var cont=0;
 	var existe_modulo=false;
+	var submodulos_global=[];
+	
 	for(var i=0;i<arreglo.length;i++){
 		var existe_submodulo=false;
 		
@@ -689,11 +709,14 @@ function pintaCanceladas(arreglo,filtrados){
 		var color="";
 		if(existe_submodulo==true || existe_modulo==false && filtrados[cont].areaValidacion==$('#areaId').val() && perfil!='3'){
 			color="cgris cursor";
+			submodulos_global.push(filtrados[cont].estatusid);
 		}
 		else{
 			color="blanco";
-			if(perfil=='3')
+			if(perfil=='3'){
 				color="blanco cursor";
+				submodulos_global.push(filtrados[cont].estatusid);
+			}
 		}	
 		if(arreglo[i]==1){
 			html=html+simple(cadenas[1] ,cant ,cadenas[0], color);
@@ -702,13 +725,16 @@ function pintaCanceladas(arreglo,filtrados){
 			var cadenas2= filtrados[cont+1].estatus.replace('VALIDACION','VOBO').split('-',2);
 			var cant2= filtrados[cont+1].total;
 			var color2="";
-				if(filtrados[cont+1].areaValidacion==$('#areaId').val() && perfil!='3'){
+				if(existe_submodulo==true || existe_modulo==false && filtrados[cont+1].areaValidacion==$('#areaId').val() && perfil!='3'){
 					color2="cgris cursor";
+					submodulos_global.push(filtrados[cont].estatusid);
 				}
 				else{
 					color2="blanco";
-					if(perfil=='3')
+					if(perfil=='3'){
 						color2="blanco cursor";
+						submodulos_global.push(filtrados[cont].estatusid);
+					}		
 				}
 			
 			html=html+doble(cadenas[1] ,cant ,cadenas[0],color  ,cadenas2[1] ,cant2 ,cadenas2[0],color2);	
@@ -717,7 +743,7 @@ function pintaCanceladas(arreglo,filtrados){
 		}
 		cont++;
 	}
-	
+	EnviaSubmodulosAction(submodulos_global);
 	$('#proceso').html(html);
 	$('.hexa').css('background-image','url("img/hexagris.svg")');
 	$('#proceso').fadeIn();
@@ -780,4 +806,15 @@ function EnviaFecha(){
 	invocarJSONServiceAction("EnviaFechaAction", 
 			{'fechaConsulta': fecha_enviar}, 
 			'');
+}
+
+function EnviaSubmodulosAction(submodulos_global){
+	
+	submodulos=submodulos_global.toString();	
+	$.ajax({
+        type     : "POST",
+        url      : 'EnviaSubmodulosAction',
+        data     : {'submodulos': submodulos},
+        async	 : false
+	});
 }

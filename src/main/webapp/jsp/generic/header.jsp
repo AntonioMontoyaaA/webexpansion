@@ -140,3 +140,9 @@
     </div>
   </div>
 </div>
+
+<!-- ++++++++++++++++++++ -->
+    	<c:forEach items="${permisos}" var="item">
+    		<input type="hidden" class="permisos_sub" value="${item}">
+        </c:forEach>
+<!-- ++++++++++++++++++++ -->

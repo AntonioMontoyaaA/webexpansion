@@ -43,7 +43,7 @@
 				<form class="form-inline float-right">
 				<button class="btn desp refresh" type="button" onclick="creatabla();"></button>
 				<div class="desp descarga" id="descargaExcelAsignadas" style="cursor: pointer;"></div>
-					<input type="text" class="fechaInicialCalendario" readonly id="datepicker1" value="${fecha_busqueda}" />
+				<%-- 	<input type="text" class="fechaInicialCalendario" readonly id="datepicker1" value="${fecha_busqueda}" /> --%>
 				</form>	
 			</div>
 			

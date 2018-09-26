@@ -108,11 +108,7 @@
 	
 <jsp:include page="/jsp/generic/loading.jsp" />
 <jsp:include page="/jsp/generic/mensajes.jsp" />
-<!-- ++++++++++++++++++++ -->
-    	<c:forEach items="${permisos}" var="item">
-    		<input type="hidden" class="permisos_sub" value="${item}">
-        </c:forEach>
-<!-- ++++++++++++++++++++ -->
+
 <form action='memoria_detalle'  id="detalleMemoriaAsignadaAction" method="post">
 	<input type="hidden" name="mdId" id="mdId" value=""/>
 	<input type="hidden" name="nombreMd" id="nombreMd" value=""/>

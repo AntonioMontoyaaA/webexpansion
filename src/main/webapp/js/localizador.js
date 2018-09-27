@@ -59,16 +59,6 @@ var directionsService;
 /* =================== MAIN FUNCTION *-JS-*  ==================*/
 $(function(){
 	
-	if($("#perfilLogin").val() == ANALISTA_RADIOS) {
-		$("#dashboardMenu").hide();
-		$("#tableroMenu").hide();
-		$("#enProcesoMenu").hide();
-		$("#autorizadasMenu").hide();
-		$("#rechazadasMenu").hide();
-		$("#agendaMenu").hide();
-		$("#aprobadasMenu").hide();
-	}
-	
 	inicializaCalendarios();
 	$('#idlocalizador').addClass('resaltado');
 	$('#asignarRadio').click(function(){ showContentRadios(this);});
@@ -156,7 +146,7 @@ function showOptionAction(){
     if(element_call.id == "asignarRadio"){
     	getRadiosLocalizados();
     	getObtenerEmpleados($('#select_employee'));
-    	$("#select_employee").val(0);
+    	$("#select_employee").val(-1);
     }
     
     /* === VER MIS MDS ===*/
@@ -858,7 +848,7 @@ function desAsignarRadio(){
 		}else{
 			
 			
-				if(idJefeExpansion == 0 ||idJefeExpansion == null || idJefeExpansion == undefined ){
+				if(idJefeExpansion == -1 ||idJefeExpansion == null || idJefeExpansion == undefined ){
 					cargaMensajeModal("Localizador","Seleccione a quien se le asignara el radio.", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
 					cierraLoading();
 					return false;
@@ -896,7 +886,7 @@ function desAsignarRadio(){
 			cargaMensajeModal("Localizador",data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
 			getRadiosLocalizados();
 		}
-		$("#select_employee").val(0);
+		$("#select_employee").val(-1);
 		$(".btn_infoClose").trigger("click");
 	}
 	
@@ -929,7 +919,9 @@ function desAsignarRadio(){
 				return false;
 			}
 
-			 $(elementId).html("");
+			$(elementId).html("");
+			elementId.empty().append('<option selected="selected" value="-1">Selecione un jefe </option>')
+		    
 			objArrayEmployee = data;
 			ARRAYOBJJEFES = objArrayEmployee.usuarios;
 			objArrayEmployee.usuarios.forEach(function(item, i){
@@ -1071,7 +1063,7 @@ function consultarRutaRecorridaJefe(){
 	var fecha     = $("#datepicker1").val().split('/');
 	var formatDate = fecha[2]+"-"+fecha[1]+"-"+fecha[0];
 	
-	if(usuarioId == 0 ){
+	if(usuarioId == -1 ){
 		cierraLoading();
 		cargaMensajeModal("Localizador","Selecione un jefe.", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
 		return false;

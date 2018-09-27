@@ -74,12 +74,12 @@ function creatabla(){
 			var datosMemoriasAsignadas = new Array();
 			var total = 0;
 			var spanColor = "";
-			var puntuacionEnTiempoA = "<img class='estrellaPuntuacion' src='img/estrellita.png'><img class='estrellaPuntuacion' src='img/estrellita.png'><img class='estrellaPuntuacion' src='img/estrellita.png'>";
-			var puntuacionEnTiempoB = "<img class='estrellaPuntuacion' src='img/estrellita.png'><img class='estrellaPuntuacion' src='img/estrellita.png'>";
-			var puntuacionEnTiempoC = "<img class='estrellaPuntuacion' src='img/estrellita.png'>";
-			var puntuacionVencidaA = "<img class='estrellaPuntuacion' src='img/estrellita.png'><img class='estrellaPuntuacion' src='img/estrellita.png'><img class='estrellaPuntuacion' src='img/estrellita.png'>";
-			var puntuacionVencidaB = "<img class='estrellaPuntuacion' src='img/estrellita.png'><img class='estrellaPuntuacion' src='img/estrellita.png'>";
-			var puntuacionVencidaC = "<img class='estrellaPuntuacion' src='img/estrellita.png'>";
+			var puntuacionEnTiempoA = "<img class='estrellaPuntuacion' src='img/estrella.svg'><img class='estrellaPuntuacion' src='img/estrella.svg'><img class='estrellaPuntuacion' src='img/estrella.svg'>";
+			var puntuacionEnTiempoB = "<img class='estrellaPuntuacion' src='img/estrella.svg'><img class='estrellaPuntuacion' src='img/estrella.svg'>";
+			var puntuacionEnTiempoC = "<img class='estrellaPuntuacion' src='img/estrella.svg'>";
+			var puntuacionVencidaA = "<img class='estrellaPuntuacion' src='img/estrella.svg'><img class='estrellaPuntuacion' src='img/estrella.svg'><img class='estrellaPuntuacion' src='img/estrella.svg'>";
+			var puntuacionVencidaB = "<img class='estrellaPuntuacion' src='img/estrella.svg'><img class='estrellaPuntuacion' src='img/estrella.svg'>";
+			var puntuacionVencidaC = "<img class='estrellaPuntuacion' src='img/estrella.svg'>";
 			var estrellas = "";
 			
 			for( var i = 0 ; i < resultados.length; i++){
@@ -102,7 +102,7 @@ function creatabla(){
 				datosMemoriasAsignadas[i] = new Array();	 	 		 			 
 				datosMemoriasAsignadas[i][0] = "<span style='" + spanColor + "'>" + resultados[i].nombreMd + "</span>"; 
 				datosMemoriasAsignadas[i][1] = "<span style='" + spanColor + "'>" + resultados[i].categoria + "</span>";
-				datosMemoriasAsignadas[i][2] = "<span style='"  + "'>" + resultados[i].puntuacion + " </span> " + estrellas;
+				datosMemoriasAsignadas[i][2] = "<div class='num_puntuacion float_left' style='"  + "'>" + resultados[i].puntuacion + " </div> " + estrellas;
 				datosMemoriasAsignadas[i][3] = "<span style='"  + "'>" + resultados[i].creador + "</span>";
 				datosMemoriasAsignadas[i][4] = "<span style='"  + "'>" + resultados[i].fechaCreacion + "</span>";
 				datosMemoriasAsignadas[i][5] = "<span style='"  + "'>" + resultados[i].fechaVencimiento + "</span>";

@@ -71,7 +71,7 @@
 			<div class="col-lg-12 menupr_estilos fazul">
 				<div class="row cabecera">
 				<div class="col-lg-10">
-					<span class="blanco negrita t14">Plan Apertura Mensual</span>
+					<span class="blanco negrita t14">PLAN APERTURA MENSUAL</span>
 				</div>
 				<div class="col-lg-2 text-right">
 					<div class="combos">

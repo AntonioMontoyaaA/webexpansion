@@ -79,12 +79,12 @@ function creatabla(){
 			$("#descargaExcel").show();
 			var datosMemoriasRechazadas = new Array();
 			var total = 0;
-			var puntuacionEnTiempoA = "<img class='estrellaPuntuacion' src='img/estrellita.png'><img class='estrellaPuntuacion' src='img/estrellita.png'><img class='estrellaPuntuacion' src='img/estrellita.png'>";
-			var puntuacionEnTiempoB = "<img class='estrellaPuntuacion' src='img/estrellita.png'><img class='estrellaPuntuacion' src='img/estrellita.png'>";
-			var puntuacionEnTiempoC = "<img class='estrellaPuntuacion' src='img/estrellita.png'>";
-			var puntuacionVencidaA = "<img class='estrellaPuntuacion' src='img/estrellita.png'><img class='estrellaPuntuacion' src='img/estrellita.png'><img class='estrellaPuntuacion' src='img/estrellita.png'>";
-			var puntuacionVencidaB = "<img class='estrellaPuntuacion' src='img/estrellita.png'><img class='estrellaPuntuacion' src='img/estrellita.png'>";
-			var puntuacionVencidaC = "<img class='estrellaPuntuacion' src='img/estrellita.png'>";
+			var puntuacionEnTiempoA = "<img class='estrellaPuntuacion' src='img/estrella.svg'><img class='estrellaPuntuacion' src='img/estrella.svg'><img class='estrellaPuntuacion' src='img/estrella.svg'>";
+			var puntuacionEnTiempoB = "<img class='estrellaPuntuacion' src='img/estrella.svg'><img class='estrellaPuntuacion' src='img/estrella.svg'>";
+			var puntuacionEnTiempoC = "<img class='estrellaPuntuacion' src='img/estrella.svg'>";
+			var puntuacionVencidaA = "<img class='estrellaPuntuacion' src='img/estrella.svg'><img class='estrellaPuntuacion' src='img/estrella.svg'><img class='estrellaPuntuacion' src='img/estrella.svg'>";
+			var puntuacionVencidaB = "<img class='estrellaPuntuacion' src='img/estrella.svg'><img class='estrellaPuntuacion' src='img/estrella.svg'>";
+			var puntuacionVencidaC = "<img class='estrellaPuntuacion' src='img/estrella.svg'>";
 			var estrellas = "";
 			var variable;
 			var areasrechazo=[];
@@ -119,7 +119,7 @@ function creatabla(){
 				datosMemoriasRechazadas[i] = new Array();	 	 		 			 
 				datosMemoriasRechazadas[i][0] = "<span>" + resultados[i].nombreMd + "</span>"; 
 				datosMemoriasRechazadas[i][1] = "<span>" + resultados[i].categoria + "</span>";
-				datosMemoriasRechazadas[i][2] = "<span>" + resultados[i].puntuacion + '</span><span> '+ estrellas+"</span>";
+				datosMemoriasRechazadas[i][2] = "<div class='num_puntuacion float_left'>" + resultados[i].puntuacion + '</div><span> '+ estrellas+"</span>";
 				datosMemoriasRechazadas[i][3] = "<span>" + resultados[i].creador + "</span>";
 				datosMemoriasRechazadas[i][4] = "<span>" + resultados[i].fechaCreacion + "</span>";
 				datosMemoriasRechazadas[i][5] = listaiconos;
@@ -160,12 +160,12 @@ function creatabla(){
 			$("#descargaExcel").show();
 			var datosMemoriasRechazadas = new Array();
 			var total = 0;
-			var puntuacionEnTiempoA = "<img class='estrellaPuntuacion' src='img/estrellita.png'><img class='estrellaPuntuacion' src='img/estrellita.png'><img class='estrellaPuntuacion' src='img/estrellita.png'>";
-			var puntuacionEnTiempoB = "<img class='estrellaPuntuacion' src='img/estrellita.png'><img class='estrellaPuntuacion' src='img/estrellita.png'>";
-			var puntuacionEnTiempoC = "<img class='estrellaPuntuacion' src='img/estrellita.png'>";
-			var puntuacionVencidaA = "<img class='estrellaPuntuacion' src='img/estrellita.png'><img class='estrellaPuntuacion' src='img/estrellita.png'><img class='estrellaPuntuacion' src='img/estrellita.png'>";
-			var puntuacionVencidaB = "<img class='estrellaPuntuacion' src='img/estrellita.png'><img class='estrellaPuntuacion' src='img/estrellita.png'>";
-			var puntuacionVencidaC = "<img class='estrellaPuntuacion' src='img/estrellita.png'>";
+			var puntuacionEnTiempoA = "<img class='estrellaPuntuacion' src='img/estrella.svg'><img class='estrellaPuntuacion' src='img/estrella.svg'><img class='estrellaPuntuacion' src='img/estrella.svg'>";
+			var puntuacionEnTiempoB = "<img class='estrellaPuntuacion' src='img/estrella.svg'><img class='estrellaPuntuacion' src='img/estrella.svg'>";
+			var puntuacionEnTiempoC = "<img class='estrellaPuntuacion' src='img/estrella.svg'>";
+			var puntuacionVencidaA = "<img class='estrellaPuntuacion' src='img/estrella.svg'><img class='estrellaPuntuacion' src='img/estrella.svg'><img class='estrellaPuntuacion' src='img/estrella.svg'>";
+			var puntuacionVencidaB = "<img class='estrellaPuntuacion' src='img/estrella.svg'><img class='estrellaPuntuacion' src='img/estrella.svg'>";
+			var puntuacionVencidaC = "<img class='estrellaPuntuacion' src='img/estrella.svg'>";
 			var estrellas = "";
 			var variable;
 			for( var i = 0 ; i < resultados.length; i++){
@@ -183,7 +183,7 @@ function creatabla(){
 				datosMemoriasRechazadas[i] = new Array();	 	 		 			 
 				datosMemoriasRechazadas[i][0] = "<span>" + resultados[i].nombreMd + "</span>"; 
 				datosMemoriasRechazadas[i][1] = "<span>" + resultados[i].categoria + "</span>";
-				datosMemoriasRechazadas[i][2] = "<span>" + resultados[i].puntuacion + '</span><span> '+ estrellas+"</span>";
+				datosMemoriasRechazadas[i][2] = "<div class='num_puntuacion float_left'>" + resultados[i].puntuacion + '</div><span> '+ estrellas+"</span>";
 				datosMemoriasRechazadas[i][3] = "<span>" + resultados[i].creador + "</span>";
 				datosMemoriasRechazadas[i][4] = "<span>" + resultados[i].fechaCreacion + "</span>";
 				datosMemoriasRechazadas[i][5] = "<span>" + resultados[i].nombreRechazo + "</span>";

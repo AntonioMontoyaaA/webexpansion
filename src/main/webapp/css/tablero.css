@@ -1,3 +1,10 @@
+.tabla_container {
+    padding-right: 0px;
+    padding-left: 0px;
+    min-height: 73%;
+    overflow-x: hidden !important;
+    overflow-y: hidden !important;
+}
 .altura1{
 	height:350px;
 }
@@ -134,6 +141,11 @@ span.circulo {
 }
 .padding_left_5 {
 	padding-left: 5px;
+}
+.tablero_celda{
+	margin-left:5;
+	margin-right:5;
+	text-align:center;
 }
 /* 
 .txt_expansion {

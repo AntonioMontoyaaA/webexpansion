@@ -279,8 +279,8 @@ function cargaDashboard(){
 			if(original[i].estatusValidacion==1){
 				filtrados.push(original[i]);
 			}
+			
 		}
-		
 		for(var i=0;i<filtrados.length;i++){
 			if(i<filtrados.length-1){
 				if(filtrados[i].prioridad==filtrados[i+1].prioridad){
@@ -315,7 +315,6 @@ function cargaDashboard(){
 					filtrados.push(original[i]);
 				}
 			}
-			
 			for(var i=0;i<filtrados.length;i++){
 				if(i<filtrados.length-1){
 					if(filtrados[i].prioridad==filtrados[i+1].prioridad){
@@ -330,6 +329,7 @@ function cargaDashboard(){
 						descripcion_arreglo.push(1);
 				}
 			}
+			console.log(descripcion_arreglo);
 			pintaActivas(descripcion_arreglo,filtrados);
 			$('#proceso').css('width',size*descripcion_arreglo.length+'%');
 			$('.simple').css('width',size+'%');
@@ -558,15 +558,21 @@ function pintaActivas(arreglo,filtrados){
 	
 	for(var i=0;i<arreglo.length;i++){
 		var existe_submodulo=false;
+		var existe_submodulo2=false;
 		
 		$.each($(".permisos_sub"),function(index, value){
 			if(value.value=='PRIVILEGIO.MENU.VOKSE.16=true'){
 				existe_modulo=true;
 			}
 			if(value.value=='PRIVILEGIO.SUBMENU.VOKSE.16,'+filtrados[cont].estatusid+'=true'){
-				existe_modulo=true;
 				existe_submodulo=true;
 			}
+			if(arreglo[i]==2){
+				if(value.value=='PRIVILEGIO.SUBMENU.VOKSE.16,'+filtrados[cont+1].estatusid+'=true'){
+					existe_submodulo2=true;
+				}
+			}
+			
 		});
 		
 		var cadenas=filtrados[cont].estatus.replace('VALIDACION','VOBO').split('-',2);
@@ -593,15 +599,15 @@ function pintaActivas(arreglo,filtrados){
 			var cant2= filtrados[cont+1].total;
 			var color2="";
 			
-			if(existe_submodulo==true || existe_modulo==false && filtrados[cont+1].areaValidacion==$('#areaId').val() && perfil!='3'){
+			if(existe_submodulo2==true || existe_modulo==false && filtrados[cont+1].areaValidacion==$('#areaId').val() && perfil!='3'){
 				color2="verde cursor";
-				submodulos_global.push(filtrados[cont].estatusid);
+				submodulos_global.push(filtrados[cont+1].estatusid);
 			}
 			else{
 				color2="blanco";
 				if(perfil=='3'){
 					color2="blanco cursor";
-					submodulos_global.push(filtrados[cont].estatusid);
+					submodulos_global.push(filtrados[cont+1].estatusid);
 				}
 			}
 			html=html+doble(cadenas[1] ,cant ,cadenas[0],color ,cadenas2[1] ,cant2 ,cadenas2[0], color2);	
@@ -627,15 +633,21 @@ function pintaAtrasadas(arreglo,filtrados){
 	
 	for(var i=0;i<arreglo.length;i++){
 		var existe_submodulo=false;
+		var existe_submodulo2=false;
 		
 		$.each($(".permisos_sub"),function(index, value){
 			if(value.value=='PRIVILEGIO.MENU.VOKSE.16=true'){
 				existe_modulo=true;
 			}
 			if(value.value=='PRIVILEGIO.SUBMENU.VOKSE.16,'+filtrados[cont].estatusid+'=true'){
-				existe_modulo=true;
 				existe_submodulo=true;
 			}
+			if(arreglo[i]==2){
+				if(value.value=='PRIVILEGIO.SUBMENU.VOKSE.16,'+filtrados[cont+1].estatusid+'=true'){
+					existe_submodulo2=true;
+				}
+			}
+			
 		});
 		
 		var cadenas=filtrados[cont].estatus.replace('VALIDACION','VOBO').split('-',2);
@@ -659,15 +671,15 @@ function pintaAtrasadas(arreglo,filtrados){
 			var cadenas2= filtrados[cont+1].estatus.replace('VALIDACION','VOBO').split('-',2);
 			var cant2= filtrados[cont+1].atrasadas;
 			var color2="";
-					if(existe_submodulo==true || existe_modulo==false && filtrados[cont+1].areaValidacion==$('#areaId').val() && perfil!='3'){
+					if(existe_submodulo2==true || existe_modulo==false && filtrados[cont+1].areaValidacion==$('#areaId').val() && perfil!='3'){
 							color2="rojo cursor";
-							submodulos_global.push(filtrados[cont].estatusid);
+							submodulos_global.push(filtrados[cont+1].estatusid);
 					}
 					else{
 							color2="blanco";
 							if(perfil=='3'){
 								color2="blanco cursor";
-								submodulos_global.push(filtrados[cont].estatusid);
+								submodulos_global.push(filtrados[cont+1].estatusid);
 							}
 								
 					}
@@ -693,15 +705,21 @@ function pintaCanceladas(arreglo,filtrados){
 	
 	for(var i=0;i<arreglo.length;i++){
 		var existe_submodulo=false;
+		var existe_submodulo2=false;
 		
 		$.each($(".permisos_sub"),function(index, value){
 			if(value.value=='PRIVILEGIO.MENU.VOKSE.16=true'){
 				existe_modulo=true;
 			}
 			if(value.value=='PRIVILEGIO.SUBMENU.VOKSE.16,'+filtrados[cont].estatusid+'=true'){
-				existe_modulo=true;
 				existe_submodulo=true;
 			}
+			if(arreglo[i]==2){
+				if(value.value=='PRIVILEGIO.SUBMENU.VOKSE.16,'+filtrados[cont+1].estatusid+'=true'){
+					existe_submodulo2=true;
+				}
+			}
+			
 		});
 		
 		var cadenas=filtrados[cont].estatus.replace('VALIDACION','VOBO').split('-',2);
@@ -725,15 +743,15 @@ function pintaCanceladas(arreglo,filtrados){
 			var cadenas2= filtrados[cont+1].estatus.replace('VALIDACION','VOBO').split('-',2);
 			var cant2= filtrados[cont+1].total;
 			var color2="";
-				if(existe_submodulo==true || existe_modulo==false && filtrados[cont+1].areaValidacion==$('#areaId').val() && perfil!='3'){
+				if(existe_submodulo2==true || existe_modulo==false && filtrados[cont+1].areaValidacion==$('#areaId').val() && perfil!='3'){
 					color2="cgris cursor";
-					submodulos_global.push(filtrados[cont].estatusid);
+					submodulos_global.push(filtrados[cont+1].estatusid);
 				}
 				else{
 					color2="blanco";
 					if(perfil=='3'){
 						color2="blanco cursor";
-						submodulos_global.push(filtrados[cont].estatusid);
+						submodulos_global.push(filtrados[cont+1].estatusid);
 					}		
 				}
 			
@@ -803,9 +821,7 @@ function redirige(valor){
 //--------------------- ENVIA FECHA A LAS TABLAS
 function EnviaFecha(){
 
-	invocarJSONServiceAction("EnviaFechaAction", 
-			{'fechaConsulta': fecha_enviar}, 
-			'');
+	invocarJSONServiceAction("EnviaFechaAction", {}, '');
 }
 
 function EnviaSubmodulosAction(submodulos_global){

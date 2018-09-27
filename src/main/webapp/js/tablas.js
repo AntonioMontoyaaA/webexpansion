@@ -266,32 +266,32 @@ function initTablaMemoriasTablero(nombreDiv, datosDesgloseMemorias, nombreTabla)
 		'<table cellpadding="0" cellspacing="0" border="0px"  class="row-border stripe hover" id="' + nombreTabla + '" >' +
 			'<thead>'  +
 				'<tr style="cursor: pointer;border-top: 0px; border-bottom: 0px;">' +
-					'<th class="center" center" style="padding:0;background: #FFF;">&nbsp;</th>' +
-					'<th width="5%" class="gris negrita t12 center" style="padding:0;background: #FFF;">No.</th>'  +
-					'<th width="9%" class="gris negrita t12 center" style="padding:0;background: #FFF;">Gerente Expansi&oacute;n</th>'  +
-					'<th width="9%" class="gris negrita t12 center" style="padding:0;background: #FFF;">Fecha recepci&oacute;n MD</th>'  +
-					'<th width="20%" class="gris negrita t12 center" style="padding:0;background: #FFF;">Nombre de la tda</th>' +
-					'<th width="4%" class="gris negrita t12">Regi&oacute;n</th>' +
-					'<th width="4%" class="gris negrita t12">Categor&iacute;a</th>' +
-					'<th width="4%" class="gris negrita t12">Puntuaci&oacute;n</th>' +
-					'<th width="5%" class="gris negrita t12 ">VoBo inicial operaciones</th>' +
-					'<th width="5%" class="gris negrita t12">Conteo auditor</th>' +
-					'<th width="5%" class="gris negrita t12">Pregestor&iacute;a autorizada</th>' +
-					'<th width="5%" class="gris negrita t12">Levantamiento realizado</th>' +
-					'<th width="5%" class="gris negrita t12">VoBo layout operaciones</th>' +
-					'<th width="5%" class="gris negrita t12 center">Presupuesto construcci&oacute;n</th>' +
-					'<th width="5%" class="gris negrita t12 center">Presupuesto auditor&iacute;a</th>' +
-					'<th width="5%" class="gris negrita t12">VoBo final operaciones</th>' +
-					'<th width="5%" class="gris negrita t12 center">Venta estimada</th>' +
-					'<th width="5%" class="gris negrita t12">Comité</th>' +
-					'<th width="5%" class="gris negrita t12">Carga<br/>Doctos</th>' +
-					'<th width="5%" class="gris negrita t12">Contrato firmado</th>' +
-					'<th width="5%" class="gris negrita t12">CECO</th>' +
-					'<th width="5%" class="gris negrita t12">Gestor&iacute;a</th>' +
-					'<th width="7%" class="gris negrita t12">Inicio obra</th>' +
-					'<th width="7%" class="gris negrita t12">Fin obra</th>' +
-					'<th width="6%" class="gris negrita t12">Inauguraci&oacute;n</th>' +
-					'<th width="6%" class="gris negrita t12">Inauguraci&oacute;n objetivo</th>' +
+					'<th class="center" center">&nbsp;</th>' +
+					'<th class="gris negrita t12 center">No.</th>'  +
+					'<th class="gris negrita t12 center">Gerente Expansi&oacute;n</th>'  +
+					'<th class="gris negrita t12 center">Fecha recepci&oacute;n MD</th>'  +
+					'<th class="gris negrita t12 center">Nombre de la tda</th>' +
+					'<th class="gris negrita t12">Regi&oacute;n</th>' +
+					'<th class="gris negrita t12">Categor&iacute;a</th>' +
+					'<th class="gris negrita t12">Puntuaci&oacute;n</th>' +
+					'<th class="gris negrita t12 ">VoBo inicial operaciones</th>' +
+					'<th class="gris negrita t12">Conteo auditor</th>' +
+					'<th class="gris negrita t12">Pregestor&iacute;a autorizada</th>' +
+					'<th class="gris negrita t12">Levantamiento realizado</th>' +
+					'<th class="gris negrita t12">VoBo layout operaciones</th>' +
+					'<th class="gris negrita t12 center">Presupuesto construcci&oacute;n</th>' +
+					'<th class="gris negrita t12 center">Presupuesto auditor&iacute;a</th>' +
+					'<th class="gris negrita t12">VoBo final operaciones</th>' +
+					'<th class="gris negrita t12 center">Venta estimada</th>' +
+					'<th class="gris negrita t12">Comité</th>' +
+					'<th class="gris negrita t12">Carga<br/>Doctos</th>' +
+					'<th class="gris negrita t12">Contrato firmado</th>' +
+					'<th class="gris negrita t12">CECO</th>' +
+					'<th class="gris negrita t12">Gestor&iacute;a</th>' +
+					'<th class="gris negrita t12">Inicio obra</th>' +
+					'<th class="gris negrita t12">Fin obra</th>' +
+					'<th class="gris negrita t12">Inauguraci&oacute;n</th>' +
+					'<th class="gris negrita t12">Inauguraci&oacute;n objetivo</th>' +
 					'<th class="oculto">id</th>' +
 					'<th class="oculto">id</th>' +
 					'<th class="oculto">id</th>' +
@@ -306,31 +306,31 @@ function initTablaMemoriasTablero(nombreDiv, datosDesgloseMemorias, nombreTabla)
 			{"aaData": datosDesgloseMemorias,
 				"aoColumns": [
 						   {"bSearchable":false},
-						   {"sClass":"izquierda padding padding_right","bSearchable":true},
-						   {"sClass":"izquierda padding","bSearchable":false},
-				           {"sClass":"izquierda padding","bSearchable":false},
-				           {"sClass":"izquierda padding","bSearchable":true},
-				           {"sClass":"padding_right_5 padding_left_5", "bSearchable":true},
-				           {"sClass":"imagen padding_right_5 padding_left_5", "bSearchable":false},
-				           {"sClass":"padding_right_5 padding_left_5", "bSearchable":false},
-				           {"sClass":"izquierda padding","bSearchable":false},
-				           {"sClass":"padding_right_5 padding_left_5", "bSearchable":false},
-				           {"sClass":"padding_right_5 padding_left_5", "bSearchable":false},
-				           {"sClass":"padding_right_5 padding_left_5", "bSearchable":false},
-				           {"sClass":"padding_right_5 padding_left_5", "bSearchable":false},
-				           {"sClass":"derecha","bSearchable":false},
-				           {"sClass":"derecha","bSearchable":false},
-				           {"sClass":"padding_right_5 padding_left_5", "bSearchable":false},
-				           {"sClass":"derecha","bSearchable":false},
-				           {"sClass":"padding_right_5 padding_left_5", "bSearchable":false},
-				           {"sClass":"padding_right_5 padding_left_5", "bSearchable":false},
-				           {"sClass":"padding_right_5 padding_left_5", "bSearchable":false},
-				           {"sClass":"padding_right_5 padding_left_5", "bSearchable":false},
-				           {"sClass":"padding_right_5 padding_left_5", "bSearchable":false},
-				           {"sClass":"padding_right_5 padding_left_5", "bSearchable":false},
-				           {"sClass":"padding_right_5 padding_left_5", "bSearchable":false},
-				           {"sClass":"padding_right_5 padding_left_5", "bSearchable":false},
-				           {"sClass":"padding_right_5 padding_left_5", "bSearchable":false},
+						   {"sClass":"tablero_celda","bSearchable":true},
+						   {"sClass":"tablero_celda","bSearchable":false},
+				           {"sClass":"tablero_celda","bSearchable":false},
+				           {"sClass":"tablero_celda","bSearchable":true},
+				           {"sClass":"tablero_celda", "bSearchable":true},
+				           {"sClass":"tablero_celda", "bSearchable":false},
+				           {"sClass":"tablero_celda", "bSearchable":false},
+				           {"sClass":"tablero_celda","bSearchable":false},
+				           {"sClass":"tablero_celda", "bSearchable":false},
+				           {"sClass":"", "bSearchable":false},
+				           {"sClass":"", "bSearchable":false},
+				           {"sClass":"", "bSearchable":false},
+				           {"sClass":"","bSearchable":false},
+				           {"sClass":"","bSearchable":false},
+				           {"sClass":"", "bSearchable":false},
+				           {"sClass":"","bSearchable":false},
+				           {"sClass":"", "bSearchable":false},
+				           {"sClass":"", "bSearchable":false},
+				           {"sClass":"", "bSearchable":false},
+				           {"sClass":"", "bSearchable":false},
+				           {"sClass":"", "bSearchable":false},
+				           {"sClass":"", "bSearchable":false},
+				           {"sClass":"", "bSearchable":false},
+				           {"sClass":"", "bSearchable":false},
+				           {"sClass":"", "bSearchable":false},
 				           {"sClass":"oculto", "bSearchable": false },
 				           {"sClass":"oculto", "bSearchable": true },
 				           {"sClass":"oculto", "bSearchable": true },

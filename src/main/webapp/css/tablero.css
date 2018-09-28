@@ -127,7 +127,7 @@ span.circulo {
     margin-left: 10px;
 }
 .cicle_tiempo_sem_selecc {
-	background: #733535;
+	background: #40BCD8;
 }
 
 .padding_right {
@@ -203,6 +203,9 @@ span.circulo {
     padding: 6px;
     color: #efefef;
     height: 33px;
+}
+.tabla_pendientes:hover {
+	background:#A6D7E2;
 }
 .text_seleccion {
 	color: #36a6c1;

@@ -45,18 +45,19 @@ table{
 /* estilos comunes de elementos de la tabla*/
 
 .buscador {	
-	padding-top:3;
+	margin-top:6;
 	padding-right:10;
+	padding-left:8 !important;
     border-radius: 2px;
     -moz-border-radius: 2px;
     -webkit-border-radius:2px;
-    border: 0px solid #000000;
+    border: 0px solid white;
     color:white;
     font-size: 12px;
     padding-left: 3px;
     margin-right:10px;
-    background-color:#071B36;
-    background-image: url(../img/iconos_search.png);
+    background-color:white;
+    background-image: url(../img/lupa_search.svg);
     background-size: 13px 13px;
     background-position: left;
     background-repeat: no-repeat;
@@ -65,22 +66,22 @@ table{
 
 .buscadorInput {
 	font-size: 12px;
-	width:100% !important;
+	width:99% !important;
     height: 25px;
     border-radius: 2px;
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
-    border: 0px solid #000000;
+    border: 0px solid white;
     padding-left: 7px;
     margin-left: 15px;
- 	background-color:white;
+ 	background-color:transparent;
 }
 @media (max-width: 500px) {
 	.buscadorInput{width:90% !important;}
 	.buscador{width:82% !important;}
 }
 .buscadorInput::placeHolder {
- 	color: #A9A9A9;
+ 	color: #071B36;
 }
 .buscadorInput:focus {
  	color: #071B36;

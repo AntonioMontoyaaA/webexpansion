@@ -168,11 +168,10 @@ background:#c8c8c8;
 #embeddingDatePicker .datepicker table tr td.active.highlighted.active,
  #embeddingDatePicker .datepicker table tr td.active.highlighted:active,
   #embeddingDatePicker .datepicker table tr td.active:active {
-    color:red;
-    background-image: url("../img/fondo_datapicker.png");
+    color:white;
+    background-image: url("../img/circle.svg");
     background-repeat: no-repeat;
     background-position: center;
-    border-color: #125087;
 }
 #embeddingDatePicker .today.day{
 	color:red;
@@ -196,8 +195,9 @@ background:#c8c8c8;
     width: 1%;
     height: 22px;
     border: none;
-    color:white;
+    color:#071B36;
     padding-bottom:0px;
+    background: white;
 }
  #embeddingDatePicker .datepicker table tr th {
 	font-size:11px;
@@ -210,8 +210,8 @@ background:#c8c8c8;
     padding:0;
  }
 #embeddingDatePicker .dow {
-	background-color:#071B36 !important;
-	color:white !important;
+	background-color:#e7e6e3 !important;
+	color:#071B36 !important;
 }
  
 #embeddingDatePicker .datepicker table tr td.new, #embeddingDatePicker .datepicker table tr td.old {

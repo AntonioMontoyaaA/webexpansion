@@ -37,7 +37,7 @@
 		<div class="row padding_p" style="padding-top: 0px;">
             <div class="col-lg-4 col-sm-6" style="padding-right: 0px;padding-left: 8px;">
             	<form class="form-inline">
-                	<div class="buscador" style="width: 100%; margin-top: 3px;">
+                	<div class="buscador" style="width: 100%;">
                         <input type="text"  placeholder="Buscar" id="buscador" class="form-control buscadorInput t12" onkeyup="ejecutaBusquedaTablero()"/>
                		</div> 
                 </form>

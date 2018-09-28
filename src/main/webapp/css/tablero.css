@@ -142,11 +142,14 @@ span.circulo {
 .padding_left_5 {
 	padding-left: 5px;
 }
-.tablero_celda{
-	margin-left:5;
-	margin-right:5;
+ .tablero_celda{
+	padding-left:10;
+	padding-right:10;
 	text-align:center;
-}
+	padding-top:3;
+	padding-bottom:3;
+} 
+
 /* 
 .txt_expansion {
 	color: #37AFCE;

@@ -263,35 +263,35 @@ function initTablaMemoriasTablero(nombreDiv, datosDesgloseMemorias, nombreTabla)
 	
 	$("#" + nombreDiv).html(
 	   
-		'<table cellpadding="0" cellspacing="0" border="0px"  class="row-border stripe hover" id="' + nombreTabla + '" >' +
+		'<table cellpadding="1" cellspacing="0" border="0px"  class="row-border stripe hover" id="' + nombreTabla + '" >' +
 			'<thead>'  +
 				'<tr style="cursor: pointer;border-top: 0px; border-bottom: 0px;">' +
 					'<th class="center" center">&nbsp;</th>' +
-					'<th class="gris negrita t12 center">No.</th>'  +
-					'<th class="gris negrita t12 center">Gerente Expansi&oacute;n</th>'  +
-					'<th class="gris negrita t12 center">Fecha recepci&oacute;n MD</th>'  +
-					'<th class="gris negrita t12 center">Nombre de la tda</th>' +
-					'<th class="gris negrita t12">Regi&oacute;n</th>' +
-					'<th class="gris negrita t12">Categor&iacute;a</th>' +
-					'<th class="gris negrita t12">Puntuaci&oacute;n</th>' +
-					'<th class="gris negrita t12 ">VoBo inicial operaciones</th>' +
-					'<th class="gris negrita t12">Conteo auditor</th>' +
-					'<th class="gris negrita t12">Pregestor&iacute;a autorizada</th>' +
-					'<th class="gris negrita t12">Levantamiento realizado</th>' +
-					'<th class="gris negrita t12">VoBo layout operaciones</th>' +
-					'<th class="gris negrita t12 center">Presupuesto construcci&oacute;n</th>' +
-					'<th class="gris negrita t12 center">Presupuesto auditor&iacute;a</th>' +
-					'<th class="gris negrita t12">VoBo final operaciones</th>' +
-					'<th class="gris negrita t12 center">Venta estimada</th>' +
-					'<th class="gris negrita t12">Comité</th>' +
-					'<th class="gris negrita t12">Carga<br/>Doctos</th>' +
-					'<th class="gris negrita t12">Contrato firmado</th>' +
-					'<th class="gris negrita t12">CECO</th>' +
-					'<th class="gris negrita t12">Gestor&iacute;a</th>' +
-					'<th class="gris negrita t12">Inicio obra</th>' +
-					'<th class="gris negrita t12">Fin obra</th>' +
-					'<th class="gris negrita t12">Inauguraci&oacute;n</th>' +
-					'<th class="gris negrita t12">Inauguraci&oacute;n objetivo</th>' +
+					'<th class="gris negrita t12 center fblanco">No.</th>'  +
+					'<th class="gris negrita t12 center fblanco">Gerente Expansi&oacute;n</th>'  +
+					'<th class="gris negrita t12 center fblanco">Fecha recepci&oacute;n MD</th>'  +
+					'<th class="gris negrita t12 center fblanco">Nombre de la tda</th>' +
+					'<th class="gris negrita t12 fblanco">Regi&oacute;n</th>' +
+					'<th class="gris negrita t12 fblanco">Categor&iacute;a</th>' +
+					'<th class="gris negrita t12 fblanco">Puntuaci&oacute;n</th>' +
+					'<th class="gris negrita t12 fblanco">VoBo inicial operaciones</th>' +
+					'<th class="gris negrita t12 fblanco">Conteo auditor</th>' +
+					'<th class="gris negrita t12 fblanco">Pregestor&iacute;a autorizada</th>' +
+					'<th class="gris negrita t12 fblanco">Levantamiento realizado</th>' +
+					'<th class="gris negrita t12 fblanco">VoBo layout operaciones</th>' +
+					'<th class="gris negrita t12 center fblanco">Presupuesto construcci&oacute;n</th>' +
+					'<th class="gris negrita t12 center fblanco">Presupuesto auditor&iacute;a</th>' +
+					'<th class="gris negrita t12 fblanco">VoBo final operaciones</th>' +
+					'<th class="gris negrita t12 center fblanco">Venta estimada</th>' +
+					'<th class="gris negrita t12 fblanco">Comité</th>' +
+					'<th class="gris negrita t12 fblanco">Carga<br/>Doctos</th>' +
+					'<th class="gris negrita t12 fblanco">Contrato firmado</th>' +
+					'<th class="gris negrita t12 fblanco">CECO</th>' +
+					'<th class="gris negrita t12 fblanco">Gestor&iacute;a</th>' +
+					'<th class="gris negrita t12 fblanco">Inicio obra</th>' +
+					'<th class="gris negrita t12 fblanco">Fin obra</th>' +
+					'<th class="gris negrita t12 fblanco">Inauguraci&oacute;n</th>' +
+					'<th class="gris negrita t12 fblanco">Inauguraci&oacute;n objetivo</th>' +
 					'<th class="oculto">id</th>' +
 					'<th class="oculto">id</th>' +
 					'<th class="oculto">id</th>' +
@@ -315,22 +315,22 @@ function initTablaMemoriasTablero(nombreDiv, datosDesgloseMemorias, nombreTabla)
 				           {"sClass":"tablero_celda", "bSearchable":false},
 				           {"sClass":"tablero_celda","bSearchable":false},
 				           {"sClass":"tablero_celda", "bSearchable":false},
-				           {"sClass":"", "bSearchable":false},
-				           {"sClass":"", "bSearchable":false},
-				           {"sClass":"", "bSearchable":false},
-				           {"sClass":"","bSearchable":false},
-				           {"sClass":"","bSearchable":false},
-				           {"sClass":"", "bSearchable":false},
-				           {"sClass":"","bSearchable":false},
-				           {"sClass":"", "bSearchable":false},
-				           {"sClass":"", "bSearchable":false},
-				           {"sClass":"", "bSearchable":false},
-				           {"sClass":"", "bSearchable":false},
-				           {"sClass":"", "bSearchable":false},
-				           {"sClass":"", "bSearchable":false},
-				           {"sClass":"", "bSearchable":false},
-				           {"sClass":"", "bSearchable":false},
-				           {"sClass":"", "bSearchable":false},
+				           {"sClass":"tablero_celda", "bSearchable":false},
+				           {"sClass":"tablero_celda", "bSearchable":false},
+				           {"sClass":"tablero_celda", "bSearchable":false},
+				           {"sClass":"tablero_celda","bSearchable":false},
+				           {"sClass":"tablero_celda","bSearchable":false},
+				           {"sClass":"tablero_celda", "bSearchable":false},
+				           {"sClass":"tablero_celda","bSearchable":false},
+				           {"sClass":"tablero_celda", "bSearchable":false},
+				           {"sClass":"tablero_celda", "bSearchable":false},
+				           {"sClass":"tablero_celda", "bSearchable":false},
+				           {"sClass":"tablero_celda", "bSearchable":false},
+				           {"sClass":"tablero_celda", "bSearchable":false},
+				           {"sClass":"tablero_celda", "bSearchable":false},
+				           {"sClass":"tablero_celda", "bSearchable":false},
+				           {"sClass":"tablero_celda", "bSearchable":false},
+				           {"sClass":"tablero_celda", "bSearchable":false},
 				           {"sClass":"oculto", "bSearchable": false },
 				           {"sClass":"oculto", "bSearchable": true },
 				           {"sClass":"oculto", "bSearchable": true },

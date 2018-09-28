@@ -266,7 +266,7 @@ function initTablaMemoriasTablero(nombreDiv, datosDesgloseMemorias, nombreTabla)
 		'<table cellpadding="1" cellspacing="0" border="0px"  class="row-border stripe hover" id="' + nombreTabla + '" >' +
 			'<thead>'  +
 				'<tr style="cursor: pointer;border-top: 0px; border-bottom: 0px;">' +
-					'<th class="center" center">&nbsp;</th>' +
+					'<th class="center fblanco" center">&nbsp;</th>' +
 					'<th class="gris negrita t12 center fblanco">No.</th>'  +
 					'<th class="gris negrita t12 center fblanco">Gerente Expansi&oacute;n</th>'  +
 					'<th class="gris negrita t12 center fblanco">Fecha recepci&oacute;n MD</th>'  +

@@ -593,7 +593,8 @@ function buscaDetalleMD(mdId) {
 			MOTIVOS_RECHAZO = {};
 			ARCHIVOS_MD = new Array();
 			
-			ESTATUS_MD = parseInt(data.nivelEstatusMdId);
+			parseaEstatus(data.estatusActuales);
+			
 			$("#mdIdAutorizacion").val(mdId);
 			ESTATUS_FINALIZA_MD = -1;
 			

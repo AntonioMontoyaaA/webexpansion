@@ -329,7 +329,6 @@ function cargaDashboard(){
 						descripcion_arreglo.push(1);
 				}
 			}
-			console.log(descripcion_arreglo);
 			pintaActivas(descripcion_arreglo,filtrados);
 			$('#proceso').css('width',size*descripcion_arreglo.length+'%');
 			$('.simple').css('width',size+'%');

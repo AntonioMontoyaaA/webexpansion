@@ -42,9 +42,14 @@ public class Autorizadas_RechazadasInfoAction extends ExpansionAction{
 		UsuarioLoginVO usuario = null;
 		String numeroEmpleado = null;
 		int puestoId = 0;
-		String areaId = "";
-		
+		String areaId = "";	
 		HttpSession usuarioSesion = ServletActionContext.getRequest().getSession();
+	
+		String submodulos="";
+		if(usuarioSesion.getAttribute("submodulos")!=null) {
+			submodulos=(String) usuarioSesion.getAttribute("submodulos");
+		}
+		
 		usuario = (UsuarioLoginVO) usuarioSesion.getAttribute("usr");
 		
 		try {
@@ -68,10 +73,8 @@ public class Autorizadas_RechazadasInfoAction extends ExpansionAction{
 			final OkHttpClient client = new OkHttpClient();
 			FormBody.Builder formBuilder = new FormBody.Builder()
 			 .add("usuarioId", numeroEmpleado)
-			 .add("puestoId", String.valueOf(puestoId))
-	         .add("fechaConsulta", getFechaConsulta())
-	         .add("tipoConsulta", getTipoConsulta())
-	         .add("areaId", String.valueOf(areaId));
+	         .add("nivelesEstatus", submodulos)
+	         .add("tipoConsulta", getTipoConsulta());
 			
 			 RequestBody formBody = formBuilder.build();
 			 Request request = new Request.Builder()

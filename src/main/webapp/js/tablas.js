@@ -311,7 +311,7 @@ function initTablaMemoriasTablero(nombreDiv, datosDesgloseMemorias, nombreTabla)
 				           {"sClass":"tablero_celda","bSearchable":false},
 				           {"sClass":"tablero_celda","bSearchable":true},
 				           {"sClass":"tablero_celda", "bSearchable":true},
-				           {"sClass":"tablero_celda", "bSearchable":false},
+				           {"sClass":"imagen tablero_celda", "bSearchable":false},
 				           {"sClass":"tablero_celda", "bSearchable":false},
 				           {"sClass":"tablero_celda","bSearchable":false},
 				           {"sClass":"tablero_celda", "bSearchable":false},

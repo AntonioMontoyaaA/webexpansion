@@ -1051,6 +1051,7 @@ function creatabla(){
 			});
 			$('#tablaMemoriasTablero tr').hover(function() { //accion al hover
 				$(this).find("td.imagen").addClass(clase);
+				
 			}, function() { //accion al salir de hover
 				$(this).find("td.imagen").removeClass(clase);
 

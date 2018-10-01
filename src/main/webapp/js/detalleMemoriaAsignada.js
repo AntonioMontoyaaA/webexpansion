@@ -23,7 +23,7 @@ var radioAsignado;
 $(function(){
 	TIPOMD = $("#tipoMd").val();
 	mdId=$("#mdId").val();
-	perfil=$("#perfil_usuario").val();  //21
+	perfil=$("#perfil_usuario").val();  
 	area=$("#nombreAreaUsuario").val();
 
 // ------------------- SE ARMA LA LEYENDA ------------------

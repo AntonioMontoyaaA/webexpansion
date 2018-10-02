@@ -30,7 +30,7 @@
 		<div class="row divs_p">
 		<div class="col-lg-4 menupr_estilos fazul">
 			<div class="row cabecera">	
-					<span class="blanco negrita t14">ACTIVAS</span>
+					<span class="blanco negrita t18">ACTIVAS</span>
 			</div>
 			<div id="container_activas" class="cursor"></div>
 			
@@ -41,7 +41,7 @@
 		</div>
 		<div class="col-lg-4 menupr_estilos fazul">
 			<div class="row cabecera">	
-					<span class="blanco negrita t14">ATRASADAS</span>
+					<span class="blanco negrita t18">ATRASADAS</span>
 			</div>
 			<div id="container_atrasadas"  class="cursor"></div>
 			
@@ -52,7 +52,7 @@
 		</div>
 		<div class="col-lg-4 menupr_estilos fazul">
 			<div class="row cabecera">	
-					<span class="blanco negrita t14">CANCELADAS</span>
+					<span class="blanco negrita t18">CANCELADAS</span>
 			</div>
 			<div id="container_canceladas" class="cursor"></div>
 			
@@ -71,7 +71,7 @@
 			<div class="col-lg-12 menupr_estilos fazul">
 				<div class="row cabecera">
 				<div class="col-lg-10">
-					<span class="blanco negrita t14">Plan Apertura Mensual</span>
+					<span class="blanco negrita t18">PLAN APERTURA MENSUAL</span>
 				</div>
 				<div class="col-lg-2 text-right">
 					<div class="combos">
@@ -81,7 +81,7 @@
   					</div>
 				</div>
 			<div class="col-lg-12 p_cabecera">
-				<span class="blanco negrita estilo_dato t18" id="suma">0</span><span class="blanco estilo_info t14"> TIENDAS</span>
+				<span class="blanco negrita estilo_dato t22" id="suma">0</span><span class="blanco estilo_info t14"> TIENDAS</span>
 			</div>
 			</div>	
 			
@@ -95,6 +95,11 @@
 		<div class="col-lg-12 ">
 		<div class="row divs_p">
 			<div class="col-lg-12 menupr_estilos fazul" style="overflow-x:auto; height:400;">
+			<div class="row cabecera">
+				<div class="col-lg-12">
+					<span class="blanco negrita t18">SEGUIMIENTO DE MD'S POR ÁREA</span>
+				</div>
+			</div>
 			<div id="proceso"></div>
 		</div>
 		</div>

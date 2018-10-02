@@ -53,8 +53,8 @@ span.estilo_dato{
 }
 
 /* ------------------------------------------- GRAFICAS --------------*/
-.highcharts-axis-line, .highcharts-point, .highcharts-tick{
-	stroke-width: 0;
+.highcharts-point, .highcharts-tick{
+	 stroke-width: 0; 
 }
 .highcharts-point{
 	width:13px;

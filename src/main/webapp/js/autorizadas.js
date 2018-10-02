@@ -66,12 +66,12 @@ function creatabla(){
 			
 			var datosMemoriasAutorizadas = new Array();
 			var total = 0;
-			var puntuacionEnTiempoA = "<img class='estrellaPuntuacion' src='img/estrellita.png'><img class='estrellaPuntuacion' src='img/estrellita.png'><img class='estrellaPuntuacion' src='img/estrellita.png'>";
-			var puntuacionEnTiempoB = "<img class='estrellaPuntuacion' src='img/estrellita.png'><img class='estrellaPuntuacion' src='img/estrellita.png'>";
-			var puntuacionEnTiempoC = "<img class='estrellaPuntuacion' src='img/estrellita.png'>";
-			var puntuacionVencidaA = "<img class='estrellaPuntuacion' src='img/estrellita.png'><img class='estrellaPuntuacion' src='img/estrellita.png'><img class='estrellaPuntuacion' src='img/estrellita.png'>";
-			var puntuacionVencidaB = "<img class='estrellaPuntuacion' src='img/estrellita.png'><img class='estrellaPuntuacion' src='img/estrellita.png'>";
-			var puntuacionVencidaC = "<img class='estrellaPuntuacion' src='img/estrellita.png'>";
+			var puntuacionEnTiempoA = "<img class='estrellaPuntuacion' src='img/estrella.svg'><img class='estrellaPuntuacion' src='img/estrella.svg'><img class='estrellaPuntuacion' src='img/estrella.svg'>";
+			var puntuacionEnTiempoB = "<img class='estrellaPuntuacion' src='img/estrella.svg'><img class='estrellaPuntuacion' src='img/estrella.svg'>";
+			var puntuacionEnTiempoC = "<img class='estrellaPuntuacion' src='img/estrella.svg'>";
+			var puntuacionVencidaA = "<img class='estrellaPuntuacion' src='img/estrella.svg'><img class='estrellaPuntuacion' src='img/estrella.svg'><img class='estrellaPuntuacion' src='img/estrella.svg'>";
+			var puntuacionVencidaB = "<img class='estrellaPuntuacion' src='img/estrella.svg'><img class='estrellaPuntuacion' src='img/estrella.svg'>";
+			var puntuacionVencidaC = "<img class='estrellaPuntuacion' src='img/estrella.svg'>";
 			var estrellas = "";
 			var variable;
 			for( var i = 0 ; i < resultados.length; i++){
@@ -92,7 +92,7 @@ function creatabla(){
 					datosMemoriasAutorizadas[i] = new Array();	 	 		 			 
 					datosMemoriasAutorizadas[i][0] = "<span>" + resultados[i].nombreMd + "</span>"; 
 					datosMemoriasAutorizadas[i][1] = "<span>" + resultados[i].categoria + "</span>";
-					datosMemoriasAutorizadas[i][2] = "<span>" + resultados[i].puntuacion + '</span><span>'+ estrellas+"</span>";
+					datosMemoriasAutorizadas[i][2] = "<div class='num_puntuacion float_left'>" + resultados[i].puntuacion + '</div><span>'+ estrellas+"</span>";
 					datosMemoriasAutorizadas[i][3] = "<span>" + resultados[i].creador + "</span>";
 					datosMemoriasAutorizadas[i][4] = "<span>" + resultados[i].fechaCreacion + "</span>";
 					datosMemoriasAutorizadas[i][5] = "<span>" + variable + "</span>";
@@ -102,7 +102,7 @@ function creatabla(){
 				datosMemoriasAutorizadas[i] = new Array();	 	 		 			 
 				datosMemoriasAutorizadas[i][0] = "<span>" + resultados[i].nombreMd + "</span>"; 
 				datosMemoriasAutorizadas[i][1] = "<span>" + resultados[i].categoria + "</span>";
-				datosMemoriasAutorizadas[i][2] = "<span>" + resultados[i].puntuacion + '</span><span>'+ estrellas+"</span>";
+				datosMemoriasAutorizadas[i][2] = "<div class='num_puntuacion float_left'>" + resultados[i].puntuacion + '</div><span>'+ estrellas+"</span>";
 				datosMemoriasAutorizadas[i][3] = "<span>" + resultados[i].creador + "</span>";
 				datosMemoriasAutorizadas[i][4] = "<span>" + resultados[i].fechaCreacion + "</span>";
 				datosMemoriasAutorizadas[i][5] = "<span>" + resultados[i].autorizador + "</span>";

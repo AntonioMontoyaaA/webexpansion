@@ -23,7 +23,7 @@ var radioAsignado;
 $(function(){
 	TIPOMD = $("#tipoMd").val();
 	mdId=$("#mdId").val();
-	perfil=$("#perfil_usuario").val();  //21
+	perfil=$("#perfil_usuario").val();  
 	area=$("#nombreAreaUsuario").val();
 
 // ------------------- SE ARMA LA LEYENDA ------------------
@@ -593,7 +593,8 @@ function buscaDetalleMD(mdId) {
 			MOTIVOS_RECHAZO = {};
 			ARCHIVOS_MD = new Array();
 			
-			ESTATUS_MD = parseInt(data.nivelEstatusMdId);
+			parseaEstatus(data.estatusActuales);
+			
 			$("#mdIdAutorizacion").val(mdId);
 			ESTATUS_FINALIZA_MD = -1;
 			
@@ -682,8 +683,8 @@ function buscaDetalleMD(mdId) {
 						cargaPuntuacion(nombres, valoresObjetivo, valoresReales);
 					}
 				} else if(data.score.tipoScore != undefined && data.score.tipoScore == SCORE_NUEVO) {
-					$("#scoreSpan1").text("Micro ubicación");
-					$("#scoreSpan2").text("Macro ubicación");
+					$("#scoreSpan1").text("Macro ubicación");
+					$("#scoreSpan2").text("Micro ubicación");
 					$('.slick_main').slick({
 				        dots: true,
 				        infinite: true,
@@ -704,12 +705,12 @@ function buscaDetalleMD(mdId) {
 						for(var i = 0; i < data.score.factores.length; i++) {
 							if(data.score.factores[i].rangoubica != undefined && data.score.factores[i].rangoubica.indexOf("MICRO") != -1) {
 								var nombre = "";
-								if(data.score.factores[i].nombrenivel.length > 10) {
-									nombre = data.score.factores[i].nombrenivel.substring(0,9) + "...";
+								if(data.score.factores[i].nombrenivel.length > 20) {
+									nombre = data.score.factores[i].nombrenivel.substring(0,20) + "...";
 								} else {
 									nombre = data.score.factores[i].nombrenivel;
 								}
-								nombresMicro.push(nombre);
+								nombresMicro.push(data.score.factores[i].nombrenivel);
 								valoresObjetivoMicro.push(data.score.factores[i].totalxfactor);
 								valoresRealesMicro.push(data.score.factores[i].puntuacion);
 							} else if(data.score.factores[i].rangoubica != undefined && data.score.factores[i].rangoubica.indexOf("MACRO") != -1) {
@@ -1099,7 +1100,7 @@ function cargaMacroUbicacion(nombres, objetivo, reales) {
 
 		  tooltip: {
 		    shared: true,
-		    pointFormat: '<span style="color:{series.color}">{series.name}: <b>{point.y:,.0f} %</b><br/>'
+		    pointFormat: '<span style="color:{series.color}">{series.name}: <b>{point.y:,.1f} %</b><br/>'
 		  },
 
 		  legend: {
@@ -1161,7 +1162,7 @@ function cargaMicroUbicacion(nombres, objetivo, reales) {
 
 		  tooltip: {
 		    shared: true,
-		    pointFormat: '<span style="color:{series.color}">{series.name}: <b>{point.y:,.0f} %</b><br/>'
+		    pointFormat: '<span style="color:{series.color}">{series.name}: <b>{point.y:,.1f} %</b><br/>'
 		  },
 
 		  legend: {
@@ -1309,7 +1310,7 @@ function inicializaCalendarioObra() {
 	var FECHA_HOY = $.datepicker.formatDate('dd/mm/yy',dateHoy);
 	
 	$("#inicioObra").datepicker({
-		minDate:((USUARIO == 703022)? '-3y': 0),
+		minDate: 0,
 		autoSize : true,
 		showOn: 'both',
 		showAnim: 'slideDown',

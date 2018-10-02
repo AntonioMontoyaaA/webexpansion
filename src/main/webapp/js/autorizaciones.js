@@ -15,6 +15,7 @@ var dropzoneOptions = {
         dictRemoveFile: 'Eliminar archivo', 
         dictMaxFilesExceeded: 'Solo puedes agregar {{maxFiles}} archivo',
         paramName: "file",
+        maxFilesize: 5, //MB
         autoProcessQueue: false,
         uploadMultiple: false,
         addRemoveLinks: true,
@@ -42,6 +43,7 @@ var PUESTO;
 var DIR_OPE = 19;
 var DIR_GRAL = 13;
 var ESTATUS_MD;
+var arrEstatus;
 
 var HORAI;
 var HORAF;
@@ -149,53 +151,49 @@ function inicializaFlujoAutorizaciones(){
 	flujoAutorizaciones[15].agregaArea(areaConstruccion, new Area(areaConstruccion, sinRechazo, inicioObra));
 }
 
+function parseaEstatus(estatus){
+	arrEstatus = {};
+	
+	$.each(estatus, function(){
+		arrEstatus[this.areaValidacion] =  new AreasPendientes(
+				this.areaValidacion, 
+				this.nivelEstatusId, 
+				this.usuarioAsignadoId);
+	});
+}
+
 function finalizacionMDAutorizada(){
 	if(flujoAutorizaciones[ESTATUS_MD] != undefined && flujoAutorizaciones[ESTATUS_MD].area[AREA_USUARIO] != undefined){
 		
 		area = flujoAutorizaciones[ESTATUS_MD].area[AREA_USUARIO];
 		
 		if(area.tipoArchivo == sinArchivos || area.tipoArchivo == comite){ //Autorizacion simple
-			cargaMensajeModal('DETALLE MD', 
-					'¿Est\u00e1s seguro de autorizar la MD?',
-					TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, actionfinalizaMD);
+			mensajeConfirmacion('¿Est\u00e1s seguro de finalizar?', 0);
 		}else if(area.tipoArchivo == segundoConteo){ //Segundo conteo
 			if(ACCION_REALIZADA)
-				cargaMensajeModal('DETALLE MD', 
-						'¿Est\u00e1s seguro de autorizar la MD?',
-						TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, actionfinalizaMD);
+				mensajeConfirmacion('¿Est\u00e1s seguro de finalizar?', 0);
 			else
-				cargaMensajeModal('DETALLE MD', 
-						'Agrega el promedio peatonal',
-						TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA);
+				mensajeAlerta('Agrega el promedio peatonal');
+				
 		}else if(area.tipoArchivo == layout){ // layout
 			
 			if(ACCION_REALIZADA)
-				cargaMensajeModal('DETALLE MD', 
-						'¿Est\u00e1s seguro de finalizar?',
-						TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, finalizaConCargaPrevia);
+				mensajeConfirmacion('¿Est\u00e1s seguro de finalizar?', 1);
 			else
-				cargaMensajeModal('DETALLE MD', 
-						'Agrega el archivo de layout',
-						TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA);
+				mensajeAlerta('Agrega el archivo de layout');
 		}else if (area.tipoArchivo == presupuesto) {//presupuestos
 			if(!ACCION_REALIZADA)
-				cargaMensajeModal('DETALLE MD', 
-						'Agrega el archivo de presupuesto',
-						TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA);
+				mensajeAlerta('Agrega el archivo de presupuesto');
 			else{
 				acc = $('input[type=radio]:checked').val();
 				monto = $('#montoPresupuesto').val();
 				
 				if(acc == undefined){
-					cargaMensajeModal('DETALLE MD', 
-							'¿El sitio contará con aire acondicionado?',
-							TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA);
+					mensajeAlerta('¿El sitio contará con aire acondicionado?');
 					return;
 				}
 				if(monto == ''){
-					cargaMensajeModal('DETALLE MD', 
-							'Captura el monto total presupuestado',
-							TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA);
+					mensajeAlerta('Captura el monto total presupuestado');
 					return;
 				}
 					
@@ -207,74 +205,78 @@ function finalizacionMDAutorizada(){
 					tipoServicio = 3;
 					prefijo = 'PPTO-AU';
 				}
-					
-		        cargaMensajeModal('DETALLE MD', 
-						'¿Est\u00e1s seguro de finalizar?',
-						TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, finalizaConCargaPrevia);
-				
-				
+				mensajeConfirmacion('¿Est\u00e1s seguro de finalizar?', 1);
 			}
 		}else if(area.tipoArchivo == venta){ //Venta
 			monto = $('#montoVenta').val();
 			
 			if(monto == ''){
-				cargaMensajeModal('DETALLE MD', 
-						'Captura el monto de venta semanal presupuestada',
-						TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA);
+				mensajeAlerta('Captura el monto de venta semanal presupuestada');
 				return;
 			}else{
 				tipoServicio = 11;
-					
-		        cargaMensajeModal('DETALLE MD', 
-						'¿Est\u00e1s seguro de finalizar?',
-						TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, finalizaConCargaPrevia);
+				mensajeConfirmacion('¿Est\u00e1s seguro de finalizar?', 1);
 			}
 				
 			
 		}else if(area.tipoArchivo == contrato){ //Contrato
 			if(ACCION_REALIZADA)
-				cargaMensajeModal('DETALLE MD', 
-						'¿Est\u00e1s seguro de finalizar?',
-						TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, finalizaConCargaPrevia);
+				mensajeConfirmacion('¿Est\u00e1s seguro de finalizar?', 1);
 			else
-				cargaMensajeModal('DETALLE MD', 
-						'Agrega el archivo del contrato',
-						TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA);
+				mensajeAlerta('Agrega el archivo del contrato');
+
 		}else if(area.tipoArchivo == ceco){ //CECO
 			monto = $('#idCeco').val();
 			
 			if(monto == ''){
-				cargaMensajeModal('DETALLE MD', 
-						'Captura el numero de centro de costos',
-						TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA);
+				mensajeAlerta('Captura el numero de centro de costos');
 				return;
 			}else{
-				tipoServicio = 10;
-					
-		        cargaMensajeModal('DETALLE MD', 
-						'¿Est\u00e1s seguro de finalizar?',
-						TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, finalizaConCargaPrevia);
+				tipoServicio = 10;	
+				mensajeConfirmacion('¿Est\u00e1s seguro de finalizar?', 1);
 			}
 		}else if(area.tipoArchivo == inicioObra){
 			monto = $("#inicioObra").val();
 			acc = parseInt($('#duracionObra option:selected').val());
 			
 			if(acc == 0){
-				cargaMensajeModal('DETALLE MD', 
-						'Selecciona la duración de la obra que iniciará el ' + monto,
-						TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA);
+				mensajeAlerta('Selecciona la duración de la obra que iniciará el ' + monto);
 				return;
 			}
 			
 			tipoServicio = 6;
-			cargaMensajeModal('DETALLE MD', 
-					'¿Est\u00e1s seguro de finalizar?',
-					TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, finalizaConCargaPrevia);
+			mensajeConfirmacion('¿Est\u00e1s seguro de finalizar?', 1);
 		}
 	}
 }
 
+function mensajeAlerta(mensaje){
+	cargaMensajeModal('DETALLE MD', 
+			mensaje,
+			TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA);
+}
+
+function mensajeConfirmacion(mensaje, metodo){
+	if(metodo == 0)
+		cargaMensajeModal('DETALLE MD', 
+				mensaje,
+				TIPO_MENSAJE_SI_NO, 
+				TIPO_ESTATUS_ALERTA, 
+				actionfinalizaMD);
+	else
+		cargaMensajeModal('DETALLE MD', 
+				mensaje,
+				TIPO_MENSAJE_SI_NO, 
+				TIPO_ESTATUS_ALERTA, 
+				finalizaConCargaPrevia);
+}
+
 function validaAutorizacion(){
+	if(arrEstatus[AREA_USUARIO] != undefined)
+		ESTATUS_MD = arrEstatus[AREA_USUARIO].idEstatus;
+	else
+		ESTATUS_MD = -1;
+	
 	if(flujoAutorizaciones[ESTATUS_MD] != undefined && flujoAutorizaciones[ESTATUS_MD].area[AREA_USUARIO] != undefined){//Corresponde autorizacion al area del usuario en el estatus actual
 		
 		area = flujoAutorizaciones[ESTATUS_MD].area[AREA_USUARIO];
@@ -301,7 +303,6 @@ function validaAutorizacion(){
 			
 			$('#subida').show();
 			
-			dropzoneOptions.maxFilesize = 3;
 			dropzoneOptions.maxFiles = 1;
 			dropzoneOptions.acceptedFiles = 'image/*,application/pdf,.psd';
 			dropzoneOptions.accept = function(file, done){
@@ -333,6 +334,8 @@ function validaAutorizacion(){
 			
 			if(AREA_USUARIO == areaConstruccion)
 				$('#msjFinalizacion').html('¿Finalizar MD?');
+			else
+				$('#msjFinalizacion').html('¿Deseas autorizar el presupuesto?');
 				
 			generaAutorizacionPresupuesto(area);
 			
@@ -341,7 +344,6 @@ function validaAutorizacion(){
 			
 			$('#subida').show();
 			
-			dropzoneOptions.maxFilesize = 3;
 			dropzoneOptions.maxFiles = 1;
 			dropzoneOptions.acceptedFiles = 'image/*,application/pdf,.psd,text/csv,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
 			dropzoneOptions.accept = function(file, done){
@@ -380,7 +382,6 @@ function validaAutorizacion(){
 			
 			$('#subida').show();
 			
-			dropzoneOptions.maxFilesize = 3;
 			dropzoneOptions.maxFiles = 1;
 			dropzoneOptions.acceptedFiles = 'image/*,application/pdf,.psd';
 			dropzoneOptions.accept = function(file, done){
@@ -419,49 +420,50 @@ function validaAutorizacion(){
 }
 
 function generaAutorizacionObra(area){
-	if(area.tipoRechazo == sinRechazo)
-		$('#rechazaMD').hide();
-		
 	$('#msjFinalizacion').html('¿Finalizar MD?');
 	$('#obra').show();
-	$('#divAutorizacion').show();
-	
 	inicializaCalendarioObra();
+	
+	generaAutorizacionSimple(area);
 }
 
 function generaAutorizacionCeco(area){
-	if(area.tipoRechazo == sinRechazo)
-		$('#rechazaMD').hide();
-		
 	$('#msjFinalizacion').html('¿Finalizar MD?');
+	$('.simbolo').hide();
 	$('#ceco').show();
-	$('#divAutorizacion').show();
+	
+	generaAutorizacionSimple(area);
 }
 
 function generaAutorizacionVenta(area){
-	if(area.tipoRechazo == sinRechazo)
-		$('#rechazaMD').hide();
-		
 	$('#venta').show();
-	$('#divAutorizacion').show();
+	
+	generaAutorizacionSimple(area);
 }
 
 function generaAutorizacionPresupuesto(area){
-	if(area.tipoRechazo == sinRechazo)
-		$('#rechazaMD').hide();
-		
 	$('#presupuesto').show();
-	$('#divAutorizacion').show();
+
+	generaAutorizacionSimple(area);
 }
 
 function generaAutorizacionSimple(area){
 	if(PUESTO != DIR_GRAL){
-		if(area.tipoRechazo == sinRechazo)
-			$('#rechazaMD').hide();
-			
-		$('#divAutorizacion').show();
+		userPermitido = arrEstatus[AREA_USUARIO].usuarioId;
+		if(userPermitido == -1 || USUARIO == userPermitido){
+			if(area.tipoRechazo == sinRechazo)
+				$('#rechazaMD').hide();
+				
+			$('#divAutorizacion').show();
+		}
 	}
 }
+
+AreasPendientes = function(idArea, idEstatus, usuarioId){
+	this.idArea = idArea;
+	this.idEstatus = idEstatus;
+	this.usuarioId = usuarioId;
+};
 
 Estatus = function(id, nombre){
 	this.id = id;
@@ -902,7 +904,7 @@ function dibujaArchivos(){
 				strArchivos[i] = '<div class="fileMD">'
 									+ '<div class="datosFile" rel="' + i + '">'
 										+ '<div class="nombreFile">' + archivo.nombre + '</div>'
-										+ '<div class="autorFile">' + ((archivo.autor != undefined) ? archivo.autor : '--') + '</div>'
+										+ '<div class="autorFile">' + ((archivo.autor != undefined) ? capitalizeName(archivo.autor) : '--') + '</div>'
 										+ '<div class="fechaFile">' + ((archivo.monto != undefined) ? archivo.monto : '--') + ((archivo.acc == 1) ? '/ACC' : '') + '</div>'
 										+ '<div class="estatusFile">' + ((archivo.estatus != undefined) ? archivo.estatus : '--') + '</div>'
 									+ '</div>'
@@ -945,6 +947,15 @@ function isNumberKey(evt, obj) {
     if (charCode > 31 && (charCode < 48 || charCode > 57))
         return false;
     return true;
+}
+
+function capitalizeName(name){
+	arrName = name.split(' ');
+	nombre = '';
+	for (var i = 0; i < arrName.length; i++) {
+		nombre += capitalizeFirstLetter(arrName[i]) + ' ';
+	}
+	return nombre;
 }
 
 function capitalizeFirstLetter(string) {

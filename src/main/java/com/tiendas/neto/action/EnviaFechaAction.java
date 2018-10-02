@@ -1,6 +1,9 @@
 package com.tiendas.neto.action;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
@@ -35,9 +38,12 @@ public class EnviaFechaAction extends ExpansionAction implements SessionAware, P
 	
 	@Override
 	public String execute() throws Exception {
-
-	String fecha = ServletActionContext.getRequest().getParameter("fechaConsulta");
-
+	 
+	 SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+	 Calendar calendar = Calendar.getInstance();
+	 calendar.add(Calendar.DAY_OF_YEAR, -60);
+	 String fecha = format.format(calendar.getTime());
+	
 	try {
 		HttpSession sesion = ServletActionContext.getRequest().getSession();
 		sesion.setAttribute("fecha_busqueda", fecha);

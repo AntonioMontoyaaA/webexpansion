@@ -58,75 +58,79 @@ $(function(){
 });
 
 function dibujaEstatus(resumen) {
-	var datos = "";
-	var total = 0;
-	var totalAtrasadas = 0;
-	
-	for(var i = 0; i < resumen.length; i++) {
-		var busqueda = "";
-		
-		if(resumen[i].estatusid == PREGES_GES) {
-            busqueda = "PREGES_GES";
-        } else if(resumen[i].estatusid == PRECONS_CONS) {
-            busqueda = "PRECONS_CONS";
-        } else if(resumen[i].estatusid == PREAUDIT_AUDIT) {
-            busqueda = "PREAUDIT_AUDIT";
-        } else if(resumen[i].estatusid == VOBOINICOPER) {
-            busqueda = "VOBOINICOPER";
-        } else if(resumen[i].estatusid == VOBOLAY) {
-            busqueda = "VOBOLAY";
-        } else if(resumen[i].estatusid == PPTO_CONS) {
-            busqueda = "PPTO_CONS";
-        } else if(resumen[i].estatusid == PPTO_AUDIT) {
-            busqueda = "PPTO_AUDIT";
-        } else if(resumen[i].estatusid == VOBOFINOPER) {
-            busqueda = "VOBOFINOPER";
-        } else if(resumen[i].estatusid == FIRMACONTR) {
-            busqueda = "FIRMACONTR";
-        } else if(resumen[i].estatusid == COMTE) {
-        	busqueda = "COMTE";
-        } else if(resumen[i].estatusid == GDOCTOS) {
-        	busqueda = "GDOCTOS";
-        } else if(resumen[i].estatusid == CENTRCOST) {
-        	busqueda = "CENTRCOST";
-        } else if(resumen[i].estatusid == TRM_GES) {
-        	busqueda = "TRM_GES";
-        } else if(resumen[i].estatusid == INICOBA) {
-        	busqueda = "INICOBA";
-        } else if(resumen[i].estatusid == INGTDA) {
-        	busqueda = "INGTDA";
-        } else if(resumen[i].estatusid == ENOBRA) {
-        	busqueda = "&_&";
+    var datos = "";
+    var total = 0;
+    var totalAtrasadas = 0;
+    
+    for(var i = 0; i < resumen.length; i++) {
+        if(resumen[i].estatusid != 0) {
+            var busqueda = "";
+            
+            if(resumen[i].estatusid == PREGES_GES) {
+                busqueda = "PREGES_GES";
+            } else if(resumen[i].estatusid == PRECONS_CONS) {
+                busqueda = "PRECONS_CONS";
+            } else if(resumen[i].estatusid == PREAUDIT_AUDIT) {
+                busqueda = "PREAUDIT_AUDIT";
+            } else if(resumen[i].estatusid == VOBOINICOPER) {
+                busqueda = "VOBOINICOPER";
+            } else if(resumen[i].estatusid == VOBOLAY) {
+                busqueda = "VOBOLAY";
+            } else if(resumen[i].estatusid == PPTO_CONS) {
+                busqueda = "PPTO_CONS";
+            } else if(resumen[i].estatusid == PPTO_AUDIT) {
+                busqueda = "PPTO_AUDIT";
+            } else if(resumen[i].estatusid == VOBOFINOPER) {
+                busqueda = "VOBOFINOPER";
+            } else if(resumen[i].estatusid == FIRMACONTR) {
+                busqueda = "FIRMACONTR";
+            } else if(resumen[i].estatusid == COMTE) {
+                busqueda = "COMTE";
+            } else if(resumen[i].estatusid == GDOCTOS) {
+                busqueda = "GDOCTOS";
+            } else if(resumen[i].estatusid == CENTRCOST) {
+                busqueda = "CENTRCOST";
+            } else if(resumen[i].estatusid == TRM_GES) {
+                busqueda = "TRM_GES";
+            } else if(resumen[i].estatusid == INICOBA) {
+                busqueda = "INICOBA";
+            } else if(resumen[i].estatusid == INGTDA) {
+                busqueda = "INGTDA";
+            } else if(resumen[i].estatusid == ENOBRA) {
+                busqueda = "&_&";
+            }
+            
+            var busquedaCadena = "";
+            if(resumen[i].atrasadas != "NA") {
+                busquedaCadena = 'onclick="filtraEstatus(\'#&' + resumen[i].estatusid + '&# &ATR_' + busqueda + '\',' + resumen[i].total + ',' + resumen[i].atrasadas + ', this, \'' + resumen[i].estatus + '\')"';
+            } else {
+                busquedaCadena = '';
+            }
+            
+            datos += '<div onclick="filtraEstatus(\'#&' + resumen[i].estatusid + '&#\',' + resumen[i].total + ',' + resumen[i].atrasadas + ', this, \'' + resumen[i].estatus + '\')" class="tabla_pendientes" style="width: 65%;"><span>' + resumen[i].estatus + '</span></div>' +
+                    '<div onclick="filtraEstatus(\'#&' + resumen[i].estatusid + '&#\',' + resumen[i].total + ',' + resumen[i].atrasadas + ', this, \'' + resumen[i].estatus + '\')" class="tabla_pendientes" style="width: 18%;padding-left: 10px;"><span>' + resumen[i].total + '</span></div>' +
+                    '<div ' + busquedaCadena + ' class="tabla_pendientes" style="width: 17%;padding-left: 10px;"><span>' + resumen[i].atrasadas + '</span></div>';
+            total += resumen[i].total;
+            if(resumen[i].atrasadas != "NA") {
+                totalAtrasadas += resumen[i].atrasadas;
+            } else {
+                totalAtrasadas = -1;
+            }
+        } else if(resumen[i].estatusid == 0) {
+            total = resumen[i].total;
+            totalAtrasadas = resumen[i].atrasadas;
         }
-		
-		var busquedaCadena = "";
-		if(resumen[i].atrasadas != "NA") {
-			busquedaCadena = 'onclick="filtraEstatus(\'#&' + resumen[i].estatusid + '&# &ATR_' + busqueda + '\',' + resumen[i].total + ',' + resumen[i].atrasadas + ', this, \'' + resumen[i].estatus + '\')"';
-		} else {
-			busquedaCadena = '';
-		}
-		
-		datos += '<div onclick="filtraEstatus(\'#&' + resumen[i].estatusid + '&#\',' + resumen[i].total + ',' + resumen[i].atrasadas + ', this, \'' + resumen[i].estatus + '\')" class="tabla_pendientes" style="width: 65%;"><span>' + resumen[i].estatus + '</span></div>' +
-				'<div onclick="filtraEstatus(\'#&' + resumen[i].estatusid + '&#\',' + resumen[i].total + ',' + resumen[i].atrasadas + ', this, \'' + resumen[i].estatus + '\')" class="tabla_pendientes" style="width: 18%;padding-left: 10px;"><span>' + resumen[i].total + '</span></div>' +
-				'<div ' + busquedaCadena + ' class="tabla_pendientes" style="width: 17%;padding-left: 10px;"><span>' + resumen[i].atrasadas + '</span></div>';
-		total += resumen[i].total;
-		if(resumen[i].atrasadas != "NA") {
-			totalAtrasadas += resumen[i].atrasadas;
-		} else {
-			totalAtrasadas = -1;
-		}
-	}
-	
-	if(totalAtrasadas == -1) {
-		datos += '<div  class="tabla_pendientes" style="border-top: 2px solid #FFF;width: 65%;"><span>Total</span></div>' +
-		'<div class="tabla_pendientes" style="border-top: 2px solid #FFF;width: 18%;padding-left: 10px;"><span id="totalPendientes">' + total + '</span></div>' +
-		'<div class="tabla_pendientes" style="border-top: 2px solid #FFF;width: 17%;padding-left: 10px;"><span id="totalPendientes">NA</span></div>';
-	} else {
-		datos += '<div onclick="filtraEstatus(\'\',' + total + ',' + totalAtrasadas + ', this)" class="tabla_pendientes" style="border-top: 2px solid #FFF;width: 65%;"><span>Total</span></div>' +
-		'<div onclick="filtraEstatus(\'\',' + total + ',' + totalAtrasadas + ', this)" class="tabla_pendientes" style="border-top: 2px solid #FFF;width: 18%;padding-left: 10px;"><span id="totalPendientes">' + total + '</span></div>' +
-		'<div onclick="filtraEstatus(\'$#&1&#$\',' + total + ',' + totalAtrasadas + ', this, \'TOTAL\')" class="tabla_pendientes" style="border-top: 2px solid #FFF;width: 17%;padding-left: 10px;"><span id="totalPendientes">' + totalAtrasadas + '</span></div>';
-	}
-	$("#box-inner").html(datos);
+    }
+    if(totalAtrasadas == -1) {
+        datos += '<div  class="tabla_pendientes" style="border-top: 2px solid #FFF;width: 65%;"><span>Total</span></div>' +
+        '<div class="tabla_pendientes" style="border-top: 2px solid #FFF;width: 18%;padding-left: 10px;"><span id="totalPendientes">' + total + '</span></div>' +
+        '<div class="tabla_pendientes" style="border-top: 2px solid #FFF;width: 17%;padding-left: 10px;"><span id="totalPendientes">NA</span></div>';
+    } else {
+        datos += '<div onclick="filtraEstatus(\'\',' + total + ',' + totalAtrasadas + ', this)" class="tabla_pendientes" style="border-top: 2px solid #FFF;width: 65%;"><span>Total</span></div>' +
+        '<div onclick="filtraEstatus(\'\',' + total + ',' + totalAtrasadas + ', this)" class="tabla_pendientes" style="border-top: 2px solid #FFF;width: 18%;padding-left: 10px;"><span id="totalPendientes">' + total + '</span></div>' +
+        '<div onclick="filtraEstatus(\'$#&1&#$\',' + total + ',' + totalAtrasadas + ', this, \'TOTAL\')" class="tabla_pendientes" style="border-top: 2px solid #FFF;width: 17%;padding-left: 10px;"><span id="totalPendientes">' + totalAtrasadas + '</span></div>';
+    }
+    $("#box-inner").html(datos);
 }
 
 function filtraEstatus(cadena, pendientes, atrasadas, o, cadenaAtrasadas) {
@@ -511,7 +515,7 @@ function creatabla(){
 						} else if(resultadoTablero[i].VOBOFNL_OPERACIONES.estatus == "RECHAZADA") {
 							claseEstatus = "text_rechazada";
 						}
-						datosMemorias[i][16] = "<span class='" + claseEstatus + "'>$ " + formato(resultadoTablero[i].MONTOVNT, true) + "</span>";
+						datosMemorias[i][16] = "<span class='" + claseEstatus + "'>$" + formato(resultadoTablero[i].MONTOVNT, true) + "</span>";
 					} else {
 						datosMemorias[i][16] = "<span class='text_sin_atencion'></span>";
 					}
@@ -689,7 +693,13 @@ function creatabla(){
 					datosMemorias[i][25] = "<span class='text_sin_atencion'>---</span>";
 				}
 				datosMemorias[i][26] = resultadoTablero[i].MDID;
-				datosMemorias[i][27] = "#&" + resultadoTablero[i].ESTATUSMD + "&#";
+				var estatusPorTablero = "";
+                if(resultadoTablero[i].ESTATUSMD != undefined && resultadoTablero[i].ESTATUSMD.length > 0) {
+                    for(var j = 0; j < eval(resultadoTablero[i].ESTATUSMD).length; j++) {
+                        estatusPorTablero += "#&" + eval(resultadoTablero[i].ESTATUSMD)[j].estatusId + "&#";
+                    }
+                }
+                datosMemorias[i][27] = estatusPorTablero;
 				datosMemorias[i][28] = cadenaAtraso;
 				datosMemorias[i][29] = "$#&" + resultadoTablero[i].ESTATUSFINAL + "&#$";
 				if(esMdAtrasada) {
@@ -1041,6 +1051,7 @@ function creatabla(){
 			});
 			$('#tablaMemoriasTablero tr').hover(function() { //accion al hover
 				$(this).find("td.imagen").addClass(clase);
+				
 			}, function() { //accion al salir de hover
 				$(this).find("td.imagen").removeClass(clase);
 

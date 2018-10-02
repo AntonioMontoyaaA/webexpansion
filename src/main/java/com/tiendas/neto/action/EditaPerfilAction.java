@@ -85,19 +85,19 @@ public class EditaPerfilAction extends ExpansionAction implements SessionAware ,
 							session.setAttribute("pass",passconf);
 						}else {
 							respuestaVo.setCodigo(445);
-							respuestaVo.setMensaje("Contraseñas no corresponden.");
+							respuestaVo.setMensaje("Contraseï¿½as no corresponden.");
 							sendJSONObjectToResponse(respuestaVo);
 							return null;
 						}
 					}else {
 						respuestaVo.setCodigo(445);
-						respuestaVo.setMensaje("Contraseña incorrecta.");
+						respuestaVo.setMensaje("Contraseï¿½a incorrecta.");
 						sendJSONObjectToResponse(respuestaVo);
 						return null;
 					}
 				}else if(!passAct.isEmpty() || !passnew.isEmpty() || !passconf.isEmpty()) {
 					respuestaVo.setCodigo(445);
-					respuestaVo.setMensaje("Completar los campos de contraseña para cambiarla.");
+					respuestaVo.setMensaje("Completar los campos de contraseï¿½a para cambiarla.");
 					sendJSONObjectToResponse(respuestaVo);
 					return null;
 				}else {

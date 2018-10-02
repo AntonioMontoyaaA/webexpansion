@@ -1,7 +1,6 @@
 package com.tiendas.neto.servlet;
 
 import java.io.IOException;
-import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
@@ -89,12 +88,13 @@ public class Login  extends HttpServlet {
     					}
     				}
 
+    				String jspredirect = "";
     				if(MENUVOKSE.get("PRIVILEGIO.MENU.VOKSE.7") != null && (boolean)MENUVOKSE.get("PRIVILEGIO.MENU.VOKSE.7") == true) {
-    					despachador = getServletContext().getRequestDispatcher("/jsp/dashboard.jsp");
+    					jspredirect = "/Expansion/dashboard";
     				} else if(MENUVOKSE.get("PRIVILEGIO.MENU.VOKSE.12") != null && (boolean)MENUVOKSE.get("PRIVILEGIO.MENU.VOKSE.12") == true) {
-    					despachador = getServletContext().getRequestDispatcher("/jsp/localizador.jsp");
+    					jspredirect = "/Expansion/localizador";
     				}else {
-    					despachador = getServletContext().getRequestDispatcher("/jsp/tablero.jsp");
+    					jspredirect = "/Expansion/tablero";
     				}
 
     				try {
@@ -104,7 +104,8 @@ public class Login  extends HttpServlet {
     				}
     				
     				sesion.setAttribute("pass", pass_encriptado);
-    				despachador.include(request, response);	
+    				response.sendRedirect(jspredirect);
+	
 			} else {
 				request.setAttribute("respuesta", "error");
 				despachador = getServletContext().getRequestDispatcher("/jsp/login.jsp");
@@ -161,7 +162,7 @@ public class Login  extends HttpServlet {
    } 
 	
 	public String encripta(String cadena) throws NoSuchAlgorithmException {
-        String cad_encriptada = null;
+
         try {
             // Create MessageDigest instance for MD5
             MessageDigest md = MessageDigest.getInstance("MD5");

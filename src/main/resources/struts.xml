@@ -18,6 +18,7 @@
 		       <interceptor-stack name="permisosStack">  
 			        <interceptor-ref name="permisosInterceptor"/>
 			        <interceptor-ref name="defaultStack"/>   
+			        
 		       </interceptor-stack>
 		 </interceptors>
 		 <default-interceptor-ref name="permisosStack"></default-interceptor-ref>
@@ -300,6 +301,11 @@
       	 <result name = "SUCCESS">jsp/login.jsp</result>
       	 </action>
       	 
+      	 <action name = "editaPerfilAction" 
+		   	class = "com.tiendas.neto.action.EditaPerfilAction" 
+	      	method = "guardarDatosPerfil">
+		 </action>          	
+		    
       	 <!-- ************************************ ACCIONES SEGUIMIENTO ******* -->
       	 <action name = "accion_md_action"
                class = "com.tiendas.neto.action.AccionMdAction"

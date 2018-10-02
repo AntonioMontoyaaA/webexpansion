@@ -1,22 +1,22 @@
 package com.tiendas.neto.interceptor;
 
+import java.io.PrintWriter;
 import java.util.HashMap;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.StrutsStatics;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.Interceptor;
+import com.tiendas.neto.action.ExpansionAction;
 import com.tiendas.neto.vo.UsuarioLoginVO;
 
 
-public class InterceptorAutorizadorPermisos implements Interceptor{
+public class InterceptorAutorizadorPermisos  extends ExpansionAction implements Interceptor{
 
 	/**
 	 * 
@@ -47,38 +47,70 @@ public class InterceptorAutorizadorPermisos implements Interceptor{
 	    HttpSession session = request.getSession();
 	    PermisosMenu menuOptions = new PermisosMenu();  
         actionName = ActionContext.getContext().getName();
-        String anotherActionUrl = "/";
 
-      
 	    try {
 	    	HashMap<?, ?> MENUVOKSE =  (HashMap<?, ?>) session.getAttribute("permisos");
 	    	UsuarioLoginVO user= (UsuarioLoginVO) session.getAttribute("usr");
 
+
 	        if (session == null || user== null) {
-	                 ServletContext sc = (ServletContext)ServletActionContext.getServletContext();
-	                 sc.getRequestDispatcher(anotherActionUrl).forward(request, response);   
+	        	if(session.getAttribute("usr") != null){
+     	            session.removeAttribute("usuario");
+     	            session.removeAttribute("usr");
+     	            session.removeAttribute("permisos");
+     	            session.invalidate();
+     	        }
+                PrintWriter out;
+                out = response.getWriter();
+
+                response.setContentType("text/html");  
+                out.println("<html>");
+                out.println("<head>");
+                out.println("<script type=\"text/javascript\">");
+                out.println("function evaluarSession() { ");
+                out.println("window.location.href = \"/Expansion/\";");
+                out.println("alert('LA SESIÓN HA CADUCADO.');");
+                out.println("window.top.uploadComplete('1');");
+                out.println("}");
+                out.println("</script>");
+                out.println("</head>");
+                out.println("<body onload=\"evaluarSession();\">");
+                out.println("</body>");
+                out.println("</html>");
+                
+       		return NONE;
 	        }
 
 	        if(actionName != null || actionName.trim() != "") {
 	        	menuOptions.permisosMenu.get(actionName);
 	        	
 	        	if(MENUVOKSE.get(menuOptions.permisosMenu.get(actionName)) == null) {
-	        		 if(session.getAttribute("usr") != null){
-	     	            session.removeAttribute("usuario");
-	     	            session.removeAttribute("usr");
-	     	            session.invalidate();
-	     	        }
-	        		ServletContext sc = (ServletContext)ServletActionContext.getServletContext();
-	                 sc.getRequestDispatcher(anotherActionUrl).forward(request, response); 
+	                 PrintWriter out;
+	                 out = response.getWriter();
+
+	                 response.setContentType("text/html");  
+	                 out.println("<html>");
+	                 out.println("<head>");
+	                 out.println("<script type=\"text/javascript\">");
+	                 out.println("function evaluarPermisos() { ");
+	                 out.println("history.back();");
+	                 out.println("alert('PERMISO DENEGADO.');");
+	                 out.println("window.top.uploadComplete('1');");
+	                 out.println("}");
+	                 out.println("</script>");
+	                 out.println("</head>");
+	                 out.println("<body onload=\"evaluarPermisos();\">");
+	                 out.println("</body>");
+	                 out.println("</html>");
+	        		
+	        		return NONE;
 	        	}
 	        }
 	                 
 	    } catch (Exception e) {
-	        //Logger.getLogger(InterceptorAutorizadorPermisos.class.getName()).log(Level.INFO, "message", e);
 	    	System.out.println(e.getMessage());
 	    }
 
-	    //Invoke action
 	    String result = actionInvocation.invoke();
 	    return result;
 	}

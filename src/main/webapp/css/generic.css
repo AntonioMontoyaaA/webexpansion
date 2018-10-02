@@ -826,3 +826,25 @@ font-weight:normal;
 font-weight:normal;
   padding: 0;
 }
+
+.circulo_imagen_inicio {
+    width: 15px;
+    height: 15px;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    margin: -6px 25px 15px 3px;
+    bottom: 60;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 130%;
+    cursor: pointer;
+}
+
+.inputerror{
+	border : 1px solid red;
+}
+
+.inputform{
+	border : 1px solid silver;
+}

@@ -37,11 +37,13 @@ var areaConstruccion = 3;
 var areaAuditoria = 4;
 var areaOperaciones = 5;
 var areaFinanzas = 6;
+var areaCalidadOperativa = 7;
 
 var AREA_USUARIO;
 var PUESTO;
 var DIR_OPE = 19;
 var DIR_GRAL = 13;
+var GERENTE = 3;
 var ESTATUS_MD;
 var arrEstatus;
 
@@ -70,6 +72,7 @@ var ceco = 7;
 var inicioObra = 8;
 var predial = 9;
 var doctosContrato = 10;
+var fechaSimple = 11;
 
 var ACCION_REALIZADA;
 var FILE_B64 = '';
@@ -115,6 +118,8 @@ function inicializaFlujoAutorizaciones(){
 	flujoAutorizaciones[24] = new Estatus(24, 'CECO finanzas');
 	flujoAutorizaciones[14] = new Estatus(14, 'Gestoria');
 	flujoAutorizaciones[15] = new Estatus(15, 'Inicio de obra');
+	flujoAutorizaciones[26] = new Estatus(26, 'Confirmacion fin de obra');
+	flujoAutorizaciones[16] = new Estatus(16, 'Confirmacion Inauguracion');
 	
 	flujoAutorizaciones[3].agregaArea(areaExpansion, new Area(areaExpansion, todosRechazos, sinArchivos));
 	
@@ -149,6 +154,10 @@ function inicializaFlujoAutorizaciones(){
 	flujoAutorizaciones[14].agregaArea(areaGestoria, new Area(areaGestoria, rechazoDefinitivo, sinArchivos));
 	
 	flujoAutorizaciones[15].agregaArea(areaConstruccion, new Area(areaConstruccion, sinRechazo, inicioObra));
+	
+	flujoAutorizaciones[26].agregaArea(areaConstruccion, new Area(areaConstruccion, sinRechazo, fechaSimple));
+	
+	flujoAutorizaciones[16].agregaArea(areaCalidadOperativa, new Area(areaCalidadOperativa, sinRechazo, fechaSimple));
 }
 
 function parseaEstatus(estatus){
@@ -235,7 +244,7 @@ function finalizacionMDAutorizada(){
 				tipoServicio = 10;	
 				mensajeConfirmacion('¿Est\u00e1s seguro de finalizar?', 1);
 			}
-		}else if(area.tipoArchivo == inicioObra){
+		}else if(area.tipoArchivo == inicioObra){// Inicio de obra
 			monto = $("#inicioObra").val();
 			acc = parseInt($('#duracionObra option:selected').val());
 			
@@ -246,6 +255,17 @@ function finalizacionMDAutorizada(){
 			
 			tipoServicio = 6;
 			mensajeConfirmacion('¿Est\u00e1s seguro de finalizar?', 1);
+			
+		}else if(area.tipoArchivo == fechaSimple){ //Fin de obra e inauguracion
+			monto = $("#simpleDate").val();
+			
+			if(area.id == areaConstruccion){
+				tipoServicio = 12;
+				mensajeConfirmacion('¿Est\u00e1s seguro de confirmar el fin de obra en ' + monto + '?', 1);
+			}else{
+				tipoServicio = 13;
+				mensajeConfirmacion('¿Est\u00e1s seguro de confirmar la inauguracion en ' + monto + '?', 1);
+			}
 		}
 	}
 }
@@ -411,18 +431,32 @@ function validaAutorizacion(){
 			$('#manejadorArchivos').show();
 		}else if(area.tipoArchivo == ceco){ //CECO
 			generaAutorizacionCeco(area);
-		}else if(area.tipoArchivo == inicioObra){
+		}else if(area.tipoArchivo == inicioObra){// inicio de obra
 			generaAutorizacionObra(area);
+		}else if(area.tipoArchivo == fechaSimple){// Fin de obra e inauguracion
+			generaAutorizacionFechaSimple(area);
 		}
 	}
 	
 	dibujaArchivos();
+
+}
+
+function generaAutorizacionFechaSimple(area){
+	$('#msjFinalizacion').html('¿Confirmar fecha?');
+	$('#fechaSimple').show();
+	inicializaCalendario('simpleDate', 1);
+	
+	if(area.id == areaCalidadOperativa)
+		$('.tituloAutorizacion').html('Confirma la fecha de inauguración')
+		
+	generaAutorizacionSimple(area);
 }
 
 function generaAutorizacionObra(area){
 	$('#msjFinalizacion').html('¿Finalizar MD?');
 	$('#obra').show();
-	inicializaCalendarioObra();
+	inicializaCalendario('inicioObra', 0);
 	
 	generaAutorizacionSimple(area);
 }
@@ -450,7 +484,7 @@ function generaAutorizacionPresupuesto(area){
 function generaAutorizacionSimple(area){
 	if(PUESTO != DIR_GRAL){
 		userPermitido = arrEstatus[AREA_USUARIO].usuarioId;
-		if(userPermitido == -1 || USUARIO == userPermitido){
+		if((userPermitido == -1 && PUESTO != GERENTE) || USUARIO == userPermitido){
 			if(area.tipoRechazo == sinRechazo)
 				$('#rechazaMD').hide();
 				
@@ -582,6 +616,14 @@ function finalizaConCargaPrevia(){
     			'tipoServicio' : tipoServicio,
     			'inicio': monto,
     			'duracion' : acc}, 
+    			'respSubeArchivo', 
+    			function() {},
+    			function() {});
+	}else if(tipoServicio == 12 || tipoServicio == 13){//Fecha Simple
+		invocarJSONServiceAction("subeFechaSimple", 
+    			{'mdId': mdId,
+    			'tipoServicio' : tipoServicio,
+    			'fecha': monto}, 
     			'respSubeArchivo', 
     			function() {},
     			function() {});
@@ -936,6 +978,29 @@ function dibujaArchivos(){
 		
 	}
 } 
+
+function inicializaCalendario(element, tipo) {
+	$(".ui-datepicker-trigger").hide();
+	
+	var dateHoy = new Date();
+	var FECHA_HOY = $.datepicker.formatDate('dd/mm/yy',dateHoy);
+	
+	$("#" + element).datepicker({
+		minDate: (tipo == 0) ? 0 : '-3y',
+		autoSize : true,
+		showOn: 'both',
+		showAnim: 'slideDown',
+        buttonImageOnly: true,
+        onClose: function( selectedDate ) {
+			var date = $(this).datepicker('getDate');			
+			var endDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+        }
+	});
+	
+	$("#" + element).datepicker.dateFormat = 'dd/MM/yy';
+	$("#" + element).val(FECHA_HOY);
+	$("#" + element).show();
+}
 
 function isNumberKey(evt, obj) {
     var charCode = (evt.which) ? evt.which : event.keyCode

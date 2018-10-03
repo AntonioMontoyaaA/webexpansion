@@ -610,7 +610,7 @@ Left
     float: left;
 }
 /* ----------------------------------- FIN ESTILOS 2.0 ---------------------------------- */
-#presupuesto, #venta, #ceco, #obra{
+#presupuesto, #venta, #ceco, #obra, #fechaSimple{
 	width: 95%;
     margin: auto	
 }

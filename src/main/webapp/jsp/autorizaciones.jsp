@@ -34,13 +34,18 @@
 							
 							<span class="negrita azul tituloAutorizacion">Duración de la obra</span>
 							<select class="selectSemana" id="duracionObra">
-										<option disabled selected value="0" >SEMANAS</option>
-										<option value="4" >4</option>
-										<option value="6" >6</option>
-										<option value="8" >8</option>
-										<option value="10" >10</option>
-										<option value="12" >12</option>
-									</select>
+								<option disabled selected value="0" >SEMANAS</option>
+								<option value="4" >4</option>
+								<option value="6" >6</option>
+								<option value="8" >8</option>
+								<option value="10" >10</option>
+								<option value="12" >12</option>
+							</select>
+						</div>
+						
+						<div id="fechaSimple" class="row subtituloIconos azul" style="display: none;">
+							<span class="negrita azul tituloAutorizacion">Confirma la fecha de finalización de obra</span>
+							<input style="border: 1px solid #071B36" id="simpleDate" readonly type="text" class="fechaInicialCalendario" placeholder="dd/MM/yyyy">
 						</div>
 						
 						<div class="row center" style="padding-top: 110px;">

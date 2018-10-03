@@ -58,8 +58,11 @@
 			<div class="row">
 			<div class="col-lg-12">
 			<span class="titulo_detalle_md_20" id="labelNombre"></span><input class="titulo_detalle_md_20 text_edita" style="text-transform: uppercase;" value="---" type="text" id="nombreMd" readonly />
+				<div id="modulo1Edita" class="float_right" style="display: none;">
+                    <span><img id="historial1" title="Historial" onclick="historialPantalla(1, this);" style="cursor: pointer;" src="img/historial_mark.png">&nbsp;</span>
+                    <span><img id="edita1" title="Guarda cambios" onclick="editaPantalla(1, this);" style="cursor: pointer;" src="img/edita_mark.png"></span>
+            	</div>
 			</div>
-			
 			<div class="col-lg-7" id="responsable">
 			<span class="contenido_cajas_20">Creado por <span id="creadorMd">---</span></span>
 			</div>			
@@ -159,8 +162,8 @@
 								<span class="titulo_detalle_md_20">SUPERFICIE</span>
 							</div>
 							<div class="col-lg-2 col-2">
-								<input type="checkbox" class="form-check-input" id="esquina"  onclick="return false;">
-    							<label class="contenido_cajas_20" for="esquina">Local en esquina</label>
+								<input type="checkbox" class="form-check-input esquina" id="esquina"  onclick="return false;">
+    							<label class="contenido_cajas_20 esquina" for="esquina">Local en esquina</label>
 							</div>
 							<div class="col-lg-2 col-4">
 								<div id="modulo3Edita" class="float_right" style="display: none;">
@@ -466,7 +469,7 @@
 				<div class="row padding_top_botom_10">
 					<div class="col-lg-6 col-6">
 						<span class="titulo_detalle_md_20 sangria_cuerpo">Disponibilidad</span><br/>
-						<span id="disponibilidad" class="contenido_cajas_20 sangria_doble_cuerpo">---</span><br/>
+						<div id="disponibilidad" class="contenido_cajas_20 sangria_doble_cuerpo">---</div><br/>
 					</div>
 					<div class="col-lg-6 col-6">
 						<span class="titulo_detalle_md_20 sangria_cuerpo">Periodo de gracia</span><br/>

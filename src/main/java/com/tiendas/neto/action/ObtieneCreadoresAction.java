@@ -94,7 +94,7 @@ public class ObtieneCreadoresAction extends ExpansionAction{
 				 .add("usuarioId", String.valueOf(usuario.getPerfil().getNumeroEmpleado()))
 				 .add("jefeId", getCreador());
 				
-				
+				System.out.println(getMdId()+":mdId "+String.valueOf(usuario.getPerfil().getNumeroEmpleado())+":noemp "+getCreador()+":creador ");
 				 RequestBody formBody = formBuilder.build();
 				 Request request = new Request.Builder()
 						 .url(sp.getPropiedad("actualizajefecreamd"))

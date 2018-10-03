@@ -124,7 +124,7 @@ span.estilo_dato{
 }
 #proceso{
 padding-top:3%;
-min-width:1254;
+overflow-y:hidden;
 }
 .titulo_hex{
 	height:30;

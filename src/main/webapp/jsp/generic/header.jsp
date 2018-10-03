@@ -155,4 +155,8 @@
     </div>
   </div>
 </div>
-	
+
+<c:forEach var="permiso" items="${permisos}">
+    	<input type="hidden" class="permisos_sub" value="${permiso}">
+</c:forEach>	
+

@@ -5,9 +5,11 @@ function pintaFlujo(data){
 	
 	if(arreglo.length<21){
 		var size=100/arreglo.length;
+		var size_total=size*arreglo.length;
 	}
 	else{
-		var size=4;
+		var size_total=4*arreglo.length;
+		var size=100/arreglo.length;	
 	}
 		html=html+'<div id="contenedor_int" style="width:'+(size*arreglo.length)+'%">';
 		html=html+'<div class="linea"></div>';	

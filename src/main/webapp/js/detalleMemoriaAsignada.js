@@ -1303,29 +1303,6 @@ function cargaFlujoPeatonal(colores,rows) {
 	});
 }
 
-function inicializaCalendarioObra() {
-	$(".ui-datepicker-trigger").hide();
-	
-	var dateHoy = new Date();
-	var FECHA_HOY = $.datepicker.formatDate('dd/mm/yy',dateHoy);
-	
-	$("#inicioObra").datepicker({
-		minDate: 0,
-		autoSize : true,
-		showOn: 'both',
-		showAnim: 'slideDown',
-        buttonImageOnly: true,
-        onClose: function( selectedDate ) {
-			var date = $(this).datepicker('getDate');			
-			var endDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-        }
-	});
-	
-	$("#inicioObra").datepicker.dateFormat = 'dd/MM/yy';
-	$("#inicioObra").val(FECHA_HOY);
-	$("#inicioObra").show();
-}
-
 function initMap(latitudSitio, longitudSitio, listaCompetencias, listaGeneradores) {
 	var myLatLng = {lat: latitudSitio, lng: longitudSitio};
 	

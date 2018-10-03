@@ -21,9 +21,9 @@
 <title>Detalle MD</title>
 </head>
 <body>
-	<%--<c:forEach var="permiso" items="${usr.perfil.perfilesxusuario[0].permisos}">
-    	<input type="hidden" class="permisos_detalleMd" rel="${permiso.getFIMODULOID()}" value="${permiso.toJSON()}">
-    </c:forEach>--%>
+	<c:forEach var="permiso" items="${permisos}">
+    	<input type="hidden" class="permisos_detalleMd"value="${permiso}">
+    </c:forEach>
     <input type="hidden" id="perfil_usuario" value="${usr.perfil.perfilesxusuario[0].perfilid}">
     <input type="hidden" id="areaUsuario" value="${usr.perfil.areasxpuesto[0].areaId}">
     <input type="hidden" id="puestoUsuario" value="${usr.perfil.puestoId}">

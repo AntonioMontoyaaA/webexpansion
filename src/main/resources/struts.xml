@@ -172,6 +172,12 @@
          	<result name = "success">jsp/asignadas_detalle.jsp</result>
       	</action>
       	
+      	<action name ="subeFechaSimple" 
+         		class = "com.tiendas.neto.action.ManejadorArchivosAction" 
+         		method = "subeFechaSimple">
+         	<result name = "success">jsp/asignadas_detalle.jsp</result>
+      	</action>
+      	
       	<action name ="guardaConteoAuditor" 
          		class = "com.tiendas.neto.action.ManejadorArchivosAction" 
          		method = "guardaConteoAuditor">

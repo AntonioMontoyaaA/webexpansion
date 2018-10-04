@@ -16,6 +16,7 @@ var earthRadii = {
 
 var boundsAsig;
 var bounds;
+var boundsRutaTodos;
 var boundsRadiosEstatus;
 var boundsMds;
 var boundsGeneral;
@@ -275,6 +276,7 @@ function initMap() {
   boundsRadiosEstatus = new google.maps.LatLngBounds();
   boundsMds = new google.maps.LatLngBounds();
   boundsAsig = new google.maps.LatLngBounds();
+  boundsRutaTodos = new google.maps.LatLngBounds();
   
   setTimeout(function(){cierraLoading();},1850);
   
@@ -1095,7 +1097,7 @@ function consultarRutaRecorridaJefe(){
 			return false;
 		}
 		
-		var inicioRuta = data.ubicacion.length-1;
+		var inicioRuta = data.ubicacion[0].datos.length-1;
 		LIST_UBICACIONES = new Array();
 
 		if(inicioRuta > 23){
@@ -1127,14 +1129,16 @@ function consultarRutaRecorridaJefe(){
 					
 					if(i ==  inicioRuta){
 						INICIO_UBICACION =  new google.maps.LatLng(item.datosRadio[0].fcLatitud , item.datosRadio[0].fcLongitud);
-						LIST_UBICACIONES.push({location: new google.maps.LatLng(item.datosRadio[0].fcLatitud , item.datosRadio[0].fcLongitud), stopover: true});		
+						if(data.ubicacion[0].datos.length  == 2){													
+							LIST_UBICACIONES.push({location: new google.maps.LatLng(item.datosRadio[0].fcLatitud , item.datosRadio[0].fcLongitud), stopover: true});		
+						}
 					}else{
-						if(data.ubicacion.length != 2){
+						if(data.ubicacion[0].datos.length  != 2){
 							LIST_UBICACIONES.push({location: new google.maps.LatLng(item.datosRadio[0].fcLatitud , item.datosRadio[0].fcLongitud), stopover: true});													
 						}
 					}
 					
-					if(data.ubicacion.length == 1){
+					if(data.ubicacion[0].datos.length == 1){
 						INICIO_UBICACION =  new google.maps.LatLng(item.datosRadio[0].fcLatitud , item.datosRadio[0].fcLongitud);
 						ArrayInfoRutas[1] = "<span class='fecha_ubicacion'>Registro : "+item.id +" <br>  Fecha registro : "+item.fecha+"</span>"; 
 					}
@@ -1194,13 +1198,14 @@ function verRutaUbicacion(){
 						var infowindow = new google.maps.InfoWindow({ 
 							size: new google.maps.Size(150,50)
 						});
-						
+						boundsRutaTodos.extend(ArrayMarkerAllJefes[i].position);
 						google.maps.event.addListener(ArrayMarkerAllJefes[i], 'click', function() {
 							infowindow.setContent(ArrayInfoRutas[i]); 
 							infowindow.open(map,ArrayMarkerAllJefes[i]);
 						});
 						
 					});	
+					map.fitBounds(boundsRutaTodos);
 				}else{
 					
 					MARKER_HERE = new google.maps.Marker({

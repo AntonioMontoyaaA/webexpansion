@@ -298,13 +298,16 @@ function cargaDashboard(){
 		
 		if(descripcion_arreglo.length<16){
 			var size=100/descripcion_arreglo.length;
+			var size_total=size*descripcion_arreglo.length;
 		}
 		else{
-			var size=6.6;
+			var size_total=6.6*descripcion_arreglo.length;
+			var size=100/descripcion_arreglo.length;
 		}
+		
 		pintaActivas(descripcion_arreglo, filtrados);
 		
-		$('#proceso').css('width',size*descripcion_arreglo.length+'%');
+		$('#proceso').css('min-width',size_total+'%');
 		$('.simple').css('width',size+'%');
 		
 		$( "#container_activas" ).on( "click", function() {
@@ -330,7 +333,7 @@ function cargaDashboard(){
 				}
 			}
 			pintaActivas(descripcion_arreglo,filtrados);
-			$('#proceso').css('width',size*descripcion_arreglo.length+'%');
+			$('#proceso').css('min-width',size_total+'%');
 			$('.simple').css('width',size+'%');
 
 		});
@@ -358,7 +361,7 @@ function cargaDashboard(){
 				}
 			}
 			pintaAtrasadas(descripcion_arreglo,filtrados);
-			$('#proceso').css('width',size*descripcion_arreglo.length+'%');
+			$('#proceso').css('min-width',size_total+'%');
 			$('.simple').css('width',size+'%');
 
 		});
@@ -386,9 +389,11 @@ function cargaDashboard(){
 				}
 			}
 			pintaCanceladas(descripcion_arreglo,filtrados);
-			$('#proceso').css('width',size*descripcion_arreglo.length+'%');
+			$('#proceso').css('min-width',size_total+'%');
 			$('.simple').css('width',size+'%');
 		});
+		
+		
 // ----------------------  ARMA DIAGRAMA DE FLUJO FIN ---------------------------------
 	}
 };	

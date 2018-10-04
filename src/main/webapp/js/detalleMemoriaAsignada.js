@@ -181,8 +181,8 @@ function inicializaModulosEdicion(modulos, datosSitio, datosPropietario, general
 				$('#nombreMd').removeAttr("readonly");	
 				$("#modulo1Edita").show();
 				
-				datos += '<span class="negrita azul t14 sangria_cuerpo">Direccion</span><br/>' +
-				'<input id="direccionText" type="text" class="text_edita" style="width:98%;"/><br/>';
+				/*datos += '<span class="negrita azul t14 sangria_cuerpo">Direccion</span><br/>' +
+				'<input id="direccionText" type="text" class="text_edita" style="width:98%;"/><br/>';*/
 					
 					/*'<span class="negrita azul t14 sangria_cuerpo">Calle</span><br/>' +
 					'<input id="calleMdText" type="text" class="text_edita"/><br/>' +
@@ -196,10 +196,9 @@ function inicializaModulosEdicion(modulos, datosSitio, datosPropietario, general
 					'<input id="estadoMdText" type="text" class="text_edita"><br/>' +
 					'<span class="negrita azul t14 sangria_cuerpo">Código postal</span><br/>' +
 					'<input id="codigoPostalMdText" type="number" class="text_edita"><br/>';*/
-				$("#modulo1Datos").html(datos);
+				// $("#modulo1Datos").html(datos);
 				
 				if(datosSitio != undefined) {
-					$("#direccionText").val(datosSitio.direccion);
 				/*	$("#calleMdText").val(datosSitio.calle);
 					$("#coloniaMdText").val(datosSitio.colonia);
 					$("#municipioMdText").val(datosSitio.municipio);
@@ -215,17 +214,20 @@ function inicializaModulosEdicion(modulos, datosSitio, datosPropietario, general
 				var datos = "";
 				$("#modulo2Edita").show();
 				
-				datos += '<span class="negrita azul t14 sangria_cuerpo">Nombre</span><br/>' +
-				'<input id="nombrePropietarioText" type="text" class="text_edita"/><br/>' +
-				'<span class="negrita azul t14 sangria_cuerpo">Apellido Paterno</span><br/>' +
-				'<input id="apaternoPropietarioText" type="text" class="text_edita"/><br/>' +
-				'<span class="negrita azul t14 sangria_cuerpo">Apellido Materno</span><br/>' +
-				'<input id="amaternoPropietarioText" type="text" class="text_edita"/><br/>' +
-				'<span class="negrita azul t14 sangria_cuerpo">Teléfono</span><br/>' +
-				'<input id="telefonoPropietarioText" type="text" class="text_edita"><br/>' +
-				'<span class="negrita azul t14 sangria_cuerpo">Email</span><br/>' +
-				'<input id="emailPropietarioText" type="text" class="text_edita"><br/>';
-			$("#modulo2Datos").html(datos);
+				datos += '<div class=" col-12 negrita azul t14 sangria_cuerpo">Dirección</div>' +
+				'<div class="col-12"><input id="direccionText" type="text" class="text_edita"/></div>';
+				datos += '<span class="col-12 negrita azul t14 sangria_cuerpo">Nombre</span>' +
+				'<div class="col-12"><input id="nombrePropietarioText" type="text" class="text_edita"/></div>';
+				datos += '<span class="col-12 negrita azul t14 sangria_cuerpo">Apellido Paterno</span>' +
+				'<div class="col-12"><input id="apaternoPropietarioText" type="text" class="text_edita"/></div>';
+				datos += '<span class="col-12 negrita azul t14 sangria_cuerpo">Apellido Materno</span>' +
+				'<div class="col-12"><input id="amaternoPropietarioText" type="text" class="text_edita"/></div>';	
+				datos += '<span class="col-12 negrita azul t14 sangria_cuerpo">Teléfono</span>' +
+				'<div class="col-12"><input id="telefonoPropietarioText" type="text" class="text_edita"/></div>';
+				datos += '<span class="col-12 negrita azul t14 sangria_cuerpo">Email</span>' +
+				'<div class="col-12"><input id="emailPropietarioText" type="text" class="text_edita"/></div>';
+				
+				$("#modulo2Datos").html(datos);
 			
 			if(datosPropietario != undefined) {
 				$("#nombrePropietarioText").val(datosPropietario.nombreP);
@@ -233,6 +235,10 @@ function inicializaModulosEdicion(modulos, datosSitio, datosPropietario, general
 				$("#amaternoPropietarioText").val(datosPropietario.aMaterno);
 				$("#telefonoPropietarioText").val(datosPropietario.telefono);
 				$("#emailPropietarioText").val(datosPropietario.email);
+				$("#direccionText").val(datosSitio.direccion);
+			}
+			if(datosSitio != undefined) {
+				$("#direccionText").val(datosSitio.direccion);
 			}
 			}
 			break;
@@ -240,28 +246,29 @@ function inicializaModulosEdicion(modulos, datosSitio, datosPropietario, general
 			if(modulos[i].editable == 0) {
 				var datos = "";
 				$("#modulo3Edita").show();
+				$(".esquina").hide();
 				
 				datos+='<div class="col-12" style="margin-bottom:10px; margin-left:20px;">';
-				datos+='<input type="checkbox" class="form-check-input" id="esquina">';
-				datos+='<label class="blanco t12" for="esquina">Local en esquina</label>';
+				datos+='<input type="checkbox" class="form-check-input" id="esquina_edit">';
+				datos+='<label class="azul t12" for="esquina">Local en esquina</label>';
 				datos+='</div>';
 			
 				datos+='<div class="col-lg-4">';
-				datos+='<span class="blanco t12">FRENTE&nbsp;&nbsp;&nbsp;';
-				datos+='<input id="frenteMd" type="text" class="text_edita"/>mts</span><br/>';
+				datos+='<span class="azul t12">FRENTE&nbsp;&nbsp;&nbsp;';
+				datos+='<input id="frenteMd" type="text" class="text_edita"/> mts</span><br/>';
 				datos+='</div>';
 				datos+='<div class="col-lg-4">';
-				datos+='<span class="blanco t12">PROFUNDIDAD&nbsp;&nbsp;&nbsp;';
+				datos+='<span class="azul t12">PROFUNDIDAD&nbsp;&nbsp;&nbsp;';
 				datos+='<input id="profundidadMd" type="text" class="text_edita"/> mts</span><br/>'
 				datos+='</div>';
 				datos+='<div class="col-lg-4">';
-				datos+='<span class="blanco t12">SUPERFICIE TOTAL&nbsp;&nbsp;&nbsp;';
+				datos+='<span class="azul t12">SUPERFICIE TOTAL&nbsp;&nbsp;&nbsp;';
 				datos+='<span id="tamanioTotalMd">'+formatear(superficie.total, true)+' mts</span></span><br/>';
 				datos+='</div>';
 				$("#modulo3Datos").html(datos);
 				
 				if(superficie.esquina==true){
-					$("#esquina").prop('checked', true);
+					$("#esquina_edit").prop('checked', true);
 				}
 				
 				$("#puntosSuperficie").text(superficie.puntos);
@@ -292,44 +299,49 @@ function inicializaModulosEdicion(modulos, datosSitio, datosPropietario, general
 		case 6:
 			if(modulos[i].editable == 1) {
 				var datos = "";
+				var visibilidad="none";
 				$("#modulo6Edita").show();
 				
-				datos += '<div style="width: 100%"><span class="negrita blanco t14 sangria_cuerpo">Renta</span></div><br>' +
-				'<input id="montoRentaText" type="text" class="text_edita"/><br>' +
-				'<div style="width: 100%"><span class="negrita blanco t14 sangria_cuerpo">Disponibilidad</span><br/>' +
-				'<select id="disponibilidadText" class="t12 sangria_cuerpo" style="margin-left: 10px;" onchange="cambiaDisponibilidad()">';
-				if(generalidades.disponibilidad == 1) {
+				datos += '<div class="col-12 negrita azul t14 sangria_cuerpo">Renta</div>' +
+				'<div class="col-12"><input id="montoRentaText" type="text" class="text_edita"/></div>' +
+				'<div class="col-12 negrita azul t14 sangria_cuerpo">Disponibilidad</div>' +
+				'<div class="col-12"><select id="disponibilidadText" class="t12" onchange="cambiaDisponibilidad()">';				
+				if(generalidades.disponibilidad == "DISPONIBLE INMEDIATO") {
 					datos += '<option value="1" selected>DISPONIBLE INMEDIATO</option>';
 				} else {
 					datos += '<option value="1">DISPONIBLE INMEDIATO</option>';
 				}
-				if(generalidades.disponibilidad == 2) {
+				if(generalidades.disponibilidad == "OCUPADO") {
 					datos += '<option value="2" selected>OCUPADO</option>';
 				} else {
 					datos += '<option value="2">OCUPADO</option>';
 				}
-				if(generalidades.disponibilidad == 3) {
+				if(generalidades.disponibilidad.indexOf("DISPONIBLE A PARTIR DE")!=-1) {
 					datos += '<option value="3" selected>DISPONIBLE A PARTIR DE</option>';
+					visibilidad="block";
 				} else {
 					datos += '<option value="3">DISPONIBLE A PARTIR DE</option>';
 				}
-				datos += '</select><br/>' +
-				'<input id="disponibilidadFechaText" readonly style="display: none;margin-top: 5px;margin-bottom: 10px;" type="text" class="text_edita" placeholder="dd/MM/yyyy"></div>' +
-				'<div style="width: 100%"><span class="negrita blanco t14 sangria_cuerpo">Amortización (MXN)</span></div><br/>' +
-				'<input id="amortizacionText" type="text" class="text_edita"><br/>' +
-				'<div style="width: 100%"><span class="negrita blanco t14 sangria_cuerpo">Tiempo de amortización (meses)</span></div><br/>' +
-				'<input id="tiempoAmortizacionText" type="text" class="text_edita"><br/>' +
-				'<div style="width: 100%"><span class="negrita blanco t14 sangria_cuerpo">Periodo de gracia (meses)</span></div><br/>' +
-				'<input id="periodoGraciaText" type="text" class="text_edita"><br/>';
+				datos += '</select></div>' +
+				'<div class="col-12"><input id="disponibilidadFechaText" readonly style="display: '+visibilidad+';margin-top: 5px;margin-bottom: 10px;" type="text" class="text_edita" placeholder="yy-mm-dd"></div>' +
+				'<div class="col-12 negrita azul t14 sangria_cuerpo">Amortización (MXN)</div>' +
+				'<div class="col-12"><input id="amortizacionText" type="text" class="text_edita"></div>' +
+				'<div class="col-12 negrita azul t14 sangria_cuerpo">Tiempo de amortización (meses)</div>' +
+				'<div class="col-12"><input id="tiempoAmortizacionText" type="text" class="text_edita"></div>' +
+				'<div class="col-12 negrita azul t14 sangria_cuerpo">Periodo de gracia (meses)</div>' +
+				'<div class="col-12"><input id="periodoGraciaText" type="text" class="text_edita"></div>';
 			$("#modulo6Datos").html(datos);
+			
 			
 			if(generalidades != undefined) {
 				$("#montoRentaText").val(generalidades.renta);
 				$("#amortizacionText").val(generalidades.porcentajeAmortizacion.replace("%",""));
 				$("#tiempoAmortizacionText").val(generalidades.periodoAmortizacion.replace("MESES",""));
 				$("#periodoGraciaText").val(generalidades.periodoGracia.replace("MESES",""));
-				$("#disponibilidadFechaText").val(generalidades.fechadisponible);
 				inicializaCalendarioDisponibilidad();
+				if(generalidades.fechaDisponibilidad!=""){
+					$("#disponibilidadFechaText").val(generalidades.fechaDisponibilidad);
+				}	
 			}
 			}
 			break;
@@ -381,9 +393,10 @@ function inicializaCalendarioDisponibilidad() {
 	$(".ui-datepicker-trigger").hide();
 	
 	var dateHoy = new Date();
-	var FECHA_HOY = $.datepicker.formatDate('dd/mm/yy',dateHoy);
+	var FECHA_HOY = $.datepicker.formatDate('yy-mm-dd',dateHoy);
 	
 	$( "#disponibilidadFechaText").datepicker({
+		dateFormat:'yy-mm-dd',
 		minDate:0,
 		autoSize : true,
 		showOn: 'both',
@@ -395,7 +408,7 @@ function inicializaCalendarioDisponibilidad() {
         }
 	});
 	
-	$("#disponibilidadFechaText").datepicker.dateFormat = 'dd/MM/yy';
+	$("#disponibilidadFechaText").datepicker.dateFormat = 'yy-mm-dd';
 	$("#disponibilidadFechaText").val(FECHA_HOY);
 }
 
@@ -942,7 +955,7 @@ function buscaDetalleMD(mdId) {
 			/* Datos de las generalidades del sitio */
 			if(data.generalidades != undefined) {
 				$("#montoRenta").text('$' + formatear(data.generalidades.renta, true) + " al mes");
-				$("#disponibilidad").text(data.generalidades.disponibilidad);
+				$("#disponibilidad").html(data.generalidades.disponibilidad +"<br>"+ data.generalidades.fechaDisponibilidad);
 				$("#amortizacion").text('$'+formatear(data.generalidades.porcentajeAmortizacion, true) + " MXN");
 				$("#tiempoAmortizacion").text(data.generalidades.periodoAmortizacion);
 				$("#periodoGracia").text(data.generalidades.periodoGracia);
@@ -1303,29 +1316,6 @@ function cargaFlujoPeatonal(colores,rows) {
 	});
 }
 
-function inicializaCalendarioObra() {
-	$(".ui-datepicker-trigger").hide();
-	
-	var dateHoy = new Date();
-	var FECHA_HOY = $.datepicker.formatDate('dd/mm/yy',dateHoy);
-	
-	$("#inicioObra").datepicker({
-		minDate: 0,
-		autoSize : true,
-		showOn: 'both',
-		showAnim: 'slideDown',
-        buttonImageOnly: true,
-        onClose: function( selectedDate ) {
-			var date = $(this).datepicker('getDate');			
-			var endDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-        }
-	});
-	
-	$("#inicioObra").datepicker.dateFormat = 'dd/MM/yy';
-	$("#inicioObra").val(FECHA_HOY);
-	$("#inicioObra").show();
-}
-
 function initMap(latitudSitio, longitudSitio, listaCompetencias, listaGeneradores) {
 	var myLatLng = {lat: latitudSitio, lng: longitudSitio};
 	
@@ -1583,7 +1573,7 @@ function editaPropietarioAction() {
 		if(data.codigo != 200) {
 			cargaMensajeModal('EDITA MD', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
 		} else {
-			cargaMensajeModal('EDITA MD', "Datos modificados con éxito", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_EXITO, null);
+			editaDatosSitioAction();	
 		}
 	}
 }
@@ -1591,7 +1581,7 @@ function editaPropietarioAction() {
 function editaSuperficieAction() {
 	var esquina;
 	
-	if($("#esquina").checked==true){
+	if($("#esquina_edit").prop('checked')==true){
 		esquina="1";
 	}else{
 		esquina="0";
@@ -1636,7 +1626,7 @@ function editaGeneralidadesAction() {
 				'renta': $("#montoRentaText").val(),
 				'disponibilidad': $("#disponibilidadText").val(),
 				'fechadisponible': $("#disponibilidadFechaText").val(),
-				'porcentajeamortiza': $("#amortizacionText").val(),
+				'montoamortiza': $("#amortizacionText").val(),
 				'periodoamortizacion': $("#tiempoAmortizacionText").val(),
 				'periodogracia': $("#periodoGraciaText").val()
 				}, 

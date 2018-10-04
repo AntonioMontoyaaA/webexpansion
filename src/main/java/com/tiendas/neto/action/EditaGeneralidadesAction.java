@@ -43,7 +43,7 @@ public class EditaGeneralidadesAction extends ExpansionAction implements Session
 				String renta = ServletActionContext.getRequest().getParameter("renta");
 				String disponibilidad = ServletActionContext.getRequest().getParameter("disponibilidad");
 				String fechadisponible = ServletActionContext.getRequest().getParameter("fechadisponible");
-				String porcentajeamortiza = ServletActionContext.getRequest().getParameter("porcentajeamortiza");
+				String montoamortiza = ServletActionContext.getRequest().getParameter("montoamortiza");
 				String periodoamortizacion = ServletActionContext.getRequest().getParameter("periodoamortizacion");
 				String periodogracia = ServletActionContext.getRequest().getParameter("periodogracia");
 				
@@ -54,7 +54,7 @@ public class EditaGeneralidadesAction extends ExpansionAction implements Session
 				 .add("renta", renta)
 				 .add("disponibilidad", disponibilidad)
 				 .add("fechadisponible", fechadisponible)
-				 .add("porcentajeamortiza", porcentajeamortiza)
+				 .add("montoamortiza", montoamortiza)
 				 .add("periodoamortizacion", periodoamortizacion)
 				 .add("periodogracia", periodogracia)
 				 .add("tipoAplicacion", TIPO_APLICACION_WEB);

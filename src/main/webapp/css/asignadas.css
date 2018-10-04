@@ -1,5 +1,6 @@
 .text_edita{
-	margin-left:10px;
+	width:70%;
+	height:25px;
 }
 #nombreMd:disabled, #nombreMd[readonly] {
 	background-color:transparent;
@@ -609,7 +610,7 @@ Left
     float: left;
 }
 /* ----------------------------------- FIN ESTILOS 2.0 ---------------------------------- */
-#presupuesto, #venta, #ceco, #obra{
+#presupuesto, #venta, #ceco, #obra, #fechaSimple{
 	width: 95%;
     margin: auto	
 }

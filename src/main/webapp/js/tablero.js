@@ -55,7 +55,7 @@ $(function(){
 	$(".slide-toggle").click(function(){
         $(".box").slideToggle();
     });
-	
+	permisos_perfil();
 });
 
 function filtraMDPorEstatus() {
@@ -221,12 +221,12 @@ function creatabla(){
 			$("#descargaExcelTablero").hide();
 			$("#time").hide();
 			$("#edit").hide();
-			if(tipoTabla == 0) {
-				$("#pause").hide();
-				$("#refuse").hide();
-			} else {
+			if(tipoTabla == 1) {
 				$("#pause").show();
 				$("#refuse").show();
+			} else {
+				$("#pause").hide();
+				$("#refuse").hide();
 			}
 			$("#change").hide();
 			initTablaMemoriasTablero('DivTablaTablero', 0, 'tablaMemoriasTablero');
@@ -236,13 +236,13 @@ function creatabla(){
 			$("#descargaExcelTablero").show();
 			$("#time").show();
 //			$("#change").show();
-			if(tipoTabla == 0) {
-				$("#pause").hide();
-				$("#refuse").hide();
-				//$("#edit").hide();
-			} else {
+			if(tipoTabla == 1) {
 				$("#pause").show();
 				$("#refuse").show();
+				//$("#edit").hide();
+			} else {
+				$("#pause").hide();
+				$("#refuse").hide();
 				//$("#edit").show();
 			}
 

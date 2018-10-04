@@ -1,5 +1,8 @@
 /*estilo de los botones*/
 	/* -----------------------------------------------*/
+.sin_permiso{ /*se usa para ocultar los botones del tablero segun su permiso de perfil*/
+	display:none !important;
+}
 .desp{
 	width:30;
 	height:30;

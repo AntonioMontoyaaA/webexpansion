@@ -581,19 +581,16 @@ function validaCelular(value){
 	value.value = value.value.replace(regexletras, '');
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+function permisos_perfil(){
+	var permiso=true;
+	$.each($(".permisos_sub"),function(index, value){  // permisos de perfil
+		if(value.value=="PRIVILEGIO.MENU.VOKSE.33=true"){
+			
+			$('#descargaExcelTablero').addClass('sin_permiso');
+			$('#edit').addClass('sin_permiso');
+			$('#pause').addClass('sin_permiso');
+			$('#refuse').addClass('sin_permiso');
+			$('#change').addClass('sin_permiso');
+		}
+	});
+}

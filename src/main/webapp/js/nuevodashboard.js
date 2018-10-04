@@ -580,10 +580,15 @@ function pintaActivas(arreglo,filtrados){
 		});
 		
 		var cadenas=filtrados[cont].estatus.replace('VALIDACION','VOBO').split('-',2);
-		var cant=filtrados[cont].total;
+		var cant="";
 		var color="";
 		var estatusId = filtrados[cont].estatusid;
 		
+		if(filtrados[cont].totalSum!=undefined){
+			cant=filtrados[cont].totalSum;
+		}else{
+			cant=filtrados[cont].total;
+		}
 			if(existe_submodulo==true || existe_modulo==false && filtrados[cont].areaValidacion==$('#areaId').val() && perfil!='3'){
 				color="verde cursor";
 				submodulos_global.push(filtrados[cont].estatusid);
@@ -601,10 +606,15 @@ function pintaActivas(arreglo,filtrados){
 		}
 		if(arreglo[i]==2){
 			var cadenas2= filtrados[cont+1].estatus.replace('VALIDACION','VOBO').split('-',2);
-			var cant2= filtrados[cont+1].total;
+			var cant2= "";
 			var color2="";
 			var estatusId2 = filtrados[cont+1].estatusid;
 			
+			if(filtrados[cont+1].totalSum!=undefined){
+				cant2=filtrados[cont+1].totalSum;
+			}else{
+				cant2=filtrados[cont+1].total;
+			}
 			if(existe_submodulo2==true || existe_modulo==false && filtrados[cont+1].areaValidacion==$('#areaId').val() && perfil!='3'){
 				color2="verde cursor";
 				submodulos_global.push(filtrados[cont+1].estatusid);
@@ -657,9 +667,16 @@ function pintaAtrasadas(arreglo,filtrados){
 		});
 		
 		var cadenas=filtrados[cont].estatus.replace('VALIDACION','VOBO').split('-',2);
-		var cant=filtrados[cont].atrasadas;
+		var cant="";
 		var color="";
 		var estatusId = filtrados[cont].estatusid;
+		
+		if(filtrados[cont].atrasadasSum!=undefined){
+			cant=filtrados[cont].atrasadasSum;
+		}else{
+			cant=filtrados[cont].atrasadas;
+		}
+		
 			if(existe_submodulo==true || existe_modulo==false && filtrados[cont].areaValidacion==$('#areaId').val() && perfil!='3'){
 				color="rojo cursor";
 				submodulos_global.push(filtrados[cont].estatusid);
@@ -676,9 +693,16 @@ function pintaAtrasadas(arreglo,filtrados){
 		}
 		if(arreglo[i]==2){
 			var cadenas2= filtrados[cont+1].estatus.replace('VALIDACION','VOBO').split('-',2);
-			var cant2= filtrados[cont+1].atrasadas;
+			var cant2="";
 			var color2="";
 			var estatusId2 = filtrados[cont+1].estatusid;
+			
+			if(filtrados[cont+1].atrasadasSum!=undefined){
+				cant2=filtrados[cont+1].atrasadasSum;
+			}else{
+				cant2=filtrados[cont+1].atrasadas;
+			}
+			
 					if(existe_submodulo2==true || existe_modulo==false && filtrados[cont+1].areaValidacion==$('#areaId').val() && perfil!='3'){
 							color2="rojo cursor";
 							submodulos_global.push(filtrados[cont+1].estatusid);

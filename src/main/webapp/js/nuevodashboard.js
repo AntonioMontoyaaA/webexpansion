@@ -3,6 +3,10 @@ var perfil;
 var area;
 var areaId;
 
+var MDS_ACTIVAS = 1
+var MDS_ATRASADAS = 2;
+var MDS_CANCELADAS = 0;
+
 $(function(){
 		$('#iddashboard').addClass('resaltado'); //resalta en el header
 		perfil=$('#perfil_usuario').val();
@@ -602,7 +606,7 @@ function pintaActivas(arreglo,filtrados){
 			}
 		
 		if(arreglo[i]==1){
-			html=html+simple(cadenas[1] ,cant ,cadenas[0], color, estatusId);
+			html=html+simple(cadenas[1] ,cant ,cadenas[0], color, estatusId, MDS_ACTIVAS);
 		}
 		if(arreglo[i]==2){
 			var cadenas2= filtrados[cont+1].estatus.replace('VALIDACION','VOBO').split('-',2);
@@ -626,7 +630,7 @@ function pintaActivas(arreglo,filtrados){
 					submodulos_global.push(filtrados[cont+1].estatusid);
 				}
 			}
-			html=html+doble(cadenas[1] ,cant ,cadenas[0],color ,cadenas2[1] ,cant2 ,cadenas2[0], color2, estatusId, estatusId2);	
+			html=html+doble(cadenas[1] ,cant ,cadenas[0],color ,cadenas2[1] ,cant2 ,cadenas2[0], color2, estatusId, estatusId2, MDS_ACTIVAS);	
 			
 			cont++;
 		}
@@ -689,7 +693,7 @@ function pintaAtrasadas(arreglo,filtrados){
 				}
 			}
 		if(arreglo[i]==1){
-			html=html+simple(cadenas[1] ,cant ,cadenas[0],color,estatusId);
+			html=html+simple(cadenas[1] ,cant ,cadenas[0],color,estatusId, MDS_ATRASADAS);
 		}
 		if(arreglo[i]==2){
 			var cadenas2= filtrados[cont+1].estatus.replace('VALIDACION','VOBO').split('-',2);
@@ -715,7 +719,7 @@ function pintaAtrasadas(arreglo,filtrados){
 							}
 								
 					}
-			html=html+doble(cadenas[1] ,cant ,cadenas[0],color,  cadenas2[1] ,cant2 ,cadenas2[0],color2,estatusId,estatusId2);	
+			html=html+doble(cadenas[1] ,cant ,cadenas[0],color,  cadenas2[1] ,cant2 ,cadenas2[0],color2,estatusId,estatusId2, MDS_ATRASADAS);	
 			
 			cont++;
 		}
@@ -770,7 +774,7 @@ function pintaCanceladas(arreglo,filtrados){
 			}
 		}	
 		if(arreglo[i]==1){
-			html=html+simple(cadenas[1] ,cant ,cadenas[0], color, estatusId);
+			html=html+simple(cadenas[1] ,cant ,cadenas[0], color, estatusId, MDS_CANCELADAS);
 		}
 		if(arreglo[i]==2){
 			var cadenas2= filtrados[cont+1].estatus.replace('VALIDACION','VOBO').split('-',2);
@@ -789,7 +793,7 @@ function pintaCanceladas(arreglo,filtrados){
 					}		
 				}
 			
-			html=html+doble(cadenas[1] ,cant ,cadenas[0],color  ,cadenas2[1] ,cant2 ,cadenas2[0],color2,estatusId,estatusId2);	
+			html=html+doble(cadenas[1] ,cant ,cadenas[0],color  ,cadenas2[1] ,cant2 ,cadenas2[0],color2,estatusId,estatusId2, MDS_CANCELADAS);	
 			
 			cont++;
 		}
@@ -801,43 +805,43 @@ function pintaCanceladas(arreglo,filtrados){
 	$('#proceso').fadeIn();
 }
 
-function simple(titulo,cant,pie,color,estatusId){
+function simple(titulo,cant,pie,color,estatusId, estatusMd){
 	return '<div class="simple">'+
-	'<div class="negrita '+color+' titulo_hex"  onclick="redirige(this,' + estatusId + ')">'+titulo+'</div>'+
-	'<div class="hexa '+color+'" onclick="redirige(this,' + estatusId + ')">'+
+	'<div class="negrita '+color+' titulo_hex"  onclick="redirige(this,' + estatusId + ',' + estatusMd + ')">'+titulo+'</div>'+
+	'<div class="hexa '+color+'" onclick="redirige(this,' + estatusId + ',' + estatusMd + ')">'+
 	'<div class="negrita blanco cont_hex">'+cant+'</div></div>'+
-	'<div class="'+color+' pie_hex"  onclick="redirige(this,'+ estatusId + ')">'+pie+'</div>'+	
+	'<div class="'+color+' pie_hex"  onclick="redirige(this,'+ estatusId + ', ' + estatusMd + ')">'+pie+'</div>'+	
 	'</div>';
 }
-function doble(x1,x2,x3,color1,  y1,y2,y3,color2,estatusId,estatusId2){
+function doble(x1,x2,x3,color1,  y1,y2,y3,color2,estatusId,estatusId2, estatusMd){
 	return '<div class="simple" style="padding:0 5;">'+
 	'<div class="lineadoble fazul">'+
 	'<div class="doble">'+
-	'<div class="hexa '+color1+'" onclick="redirige(this,' + estatusId + ')">'+
+	'<div class="hexa '+color1+'" onclick="redirige(this,' + estatusId + ',' + estatusMd + ')">'+
 	'<div class="negrita blanco cont_hex_doble">'+x2+'</div>'+
-	'</div><div class="hexa '+color2+'"  onclick="redirige(this, ' + estatusId2 + ')">'+
+	'</div><div class="hexa '+color2+'"  onclick="redirige(this, ' + estatusId2 + ',' + estatusMd + ')">'+
 		'<div class="negrita blanco cont_hex_doble">'+y2+'</div>'+
 	'</div></div>'+
 	'</div>'+
-	'<div class="negrita '+color1+' titulo_hex_doble" style="bottom:120"  onclick="redirige(this,' + estatusId + ')">'+x1+'</div>'+
-	'<div class="'+color1+' pie_hex_doble"  style="bottom:73"  onclick="redirige(this,' + estatusId + ')">'+x3+'</div>'+
+	'<div class="negrita '+color1+' titulo_hex_doble" style="bottom:120"  onclick="redirige(this,' + estatusId + ',' + estatusMd + ')">'+x1+'</div>'+
+	'<div class="'+color1+' pie_hex_doble"  style="bottom:73"  onclick="redirige(this,' + estatusId + ',' + estatusMd + ')">'+x3+'</div>'+
 	
-	'<div class="negrita '+color2+' titulo_hex_doble" style="bottom:57"  onclick="redirige(this,' + estatusId2 + ')">'+y1+'</div>'+
-	'<div class="'+color2+' pie_hex_doble" style="bottom:10"  onclick="redirige(this,' + estatusId2 + ')">'+y3+'</div>'+
+	'<div class="negrita '+color2+' titulo_hex_doble" style="bottom:57"  onclick="redirige(this,' + estatusId2 + ',' + estatusMd + ')">'+y1+'</div>'+
+	'<div class="'+color2+' pie_hex_doble" style="bottom:10"  onclick="redirige(this,' + estatusId2 + ',' + estatusMd + ')">'+y3+'</div>'+
 	'</div>';
 }
 function inicio(){
 	return '<div class="linea"></div>';
 }
 
-function redirige(valor, estatusId){
+function redirige(valor, estatusId, estatusMd){
 	$.each($(".permisos_sub"),function(index, value){
 		if(value.value=="PRIVILEGIO.MENU.VOKSE.14=true"){ //tablero
 			if(perfil=='3'){
-				window.location.href='tablero?estatusId=' + estatusId;
+				window.location.href='tablero?estatusId=' + estatusId + '&estatusMd=' + estatusMd;
 			}
 			if ($(valor).is(".cgris")){
-				window.location.href='tablero?estatusId=' + estatusId;
+				window.location.href='tablero?estatusId=' + estatusId + '&estatusMd=' + estatusMd;
 			}	
 		}
 		if(value.value=="PRIVILEGIO.MENU.VOKSE.8=true"){ //asignadas

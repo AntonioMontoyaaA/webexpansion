@@ -62,7 +62,7 @@
     				
     				<form class="form-inline float-right">
     				<div>
-    					<select id="selectEstatus" class="combo_tablero">	
+    					<select id="selectEstatus" name="selectEstatus" class="combo_tablero">	
   							<option value="1">Activas</option>
   							<option value="0">Canceladas</option>
   							<option value="2">Aperturadas</option>

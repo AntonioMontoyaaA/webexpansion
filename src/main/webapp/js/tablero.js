@@ -36,7 +36,7 @@ $(function(){
 	inicializaCalendarios();
 	
 	//if($( "#datepicker1").val()!='')
-	
+	filtraTableroPorMDEstatus();
 	creatabla();
 	
 	$( "#datepicker1").change(function() {
@@ -62,9 +62,22 @@ function filtraMDPorEstatus() {
 	var url_string = window.location.href
 	var url = new URL(url_string);
 	var estatusId = url.searchParams.get("estatusId");
+	var estatusMd = url.searchParams.get("estatusMd");
 	
-	if(estatusId != undefined) {
+	if(estatusId != undefined && estatusMd != undefined && estatusMd == 1) {
 		$("#divEstatus" + estatusId).click();
+	} else if(estatusId != undefined && estatusMd != undefined && estatusMd == 2) {
+		$("#divAtraso" + estatusId).click();
+	}
+}
+
+function filtraTableroPorMDEstatus() {
+	var url_string = window.location.href
+	var url = new URL(url_string);
+	var estatusMd = url.searchParams.get("estatusMd");
+	
+	if(estatusMd != undefined && estatusMd == 0) {
+		 $('[name=selectEstatus]').val( '0' );
 	}
 }
 
@@ -119,8 +132,8 @@ function dibujaEstatus(resumen) {
             }
             
             datos += '<div id="divEstatus' + resumen[i].estatusid + '" onclick="filtraEstatus(\'#&' + resumen[i].estatusid + '&#\',' + resumen[i].total + ',' + resumen[i].atrasadas + ', this, \'' + resumen[i].estatus + '\')" class="tabla_pendientes" style="width: 65%;"><span>' + resumen[i].estatus + '</span></div>' +
-                    '<div id="divAtraso' + resumen[i].estatusid + '" onclick="filtraEstatus(\'#&' + resumen[i].estatusid + '&#\',' + resumen[i].total + ',' + resumen[i].atrasadas + ', this, \'' + resumen[i].estatus + '\')" class="tabla_pendientes" style="width: 18%;padding-left: 10px;"><span>' + resumen[i].total + '</span></div>' +
-                    '<div ' + busquedaCadena + ' class="tabla_pendientes" style="width: 17%;padding-left: 10px;"><span>' + resumen[i].atrasadas + '</span></div>';
+                    '<div  onclick="filtraEstatus(\'#&' + resumen[i].estatusid + '&#\',' + resumen[i].total + ',' + resumen[i].atrasadas + ', this, \'' + resumen[i].estatus + '\')" class="tabla_pendientes" style="width: 18%;padding-left: 10px;"><span>' + resumen[i].total + '</span></div>' +
+                    '<div id="divAtraso' + resumen[i].estatusid + '" ' + busquedaCadena + ' class="tabla_pendientes" style="width: 17%;padding-left: 10px;"><span>' + resumen[i].atrasadas + '</span></div>';
             total += resumen[i].total;
             if(resumen[i].atrasadas != "NA") {
                 totalAtrasadas += resumen[i].atrasadas;

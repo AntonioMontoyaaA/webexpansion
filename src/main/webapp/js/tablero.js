@@ -22,7 +22,7 @@ var GDOCTOS			= 23;
 var CENTRCOST		= 24;
 var TRM_GES			= 14;
 var INICOBA		    = 15;
-var ENOBRA			= 155;
+var ENOBRA			= 26;
 var INGTDA			= 16;
 
 
@@ -47,7 +47,7 @@ $(function(){
 		$("#submitBotonTablero").click();
 	});
 	
-	$("#checkTipoTablero").click(function() {
+	$("select#selectEstatus").change(function(){
 		creatabla();
 	});
 	
@@ -183,13 +183,10 @@ function inicializaCalendarios() {
 
 function creatabla(){
 	
-	var tipoTabla = 0;
+	var tipoTabla = $("#selectEstatus").val();
 	$("#areaTextTablero").text("Área");
 	$("#areaPendientesTablero").text("Pendientes");
 	$("#areaAtrasadasTablero").text("Atrasadas");
-	if(!$("#checkTipoTablero").is(":checked")) {
-		tipoTabla = 1;
-	}
 	
 	invocarJSONServiceAction("tablero_info", 
 				{'fechaConsulta': $( "#datepicker1").val(), "estatus": tipoTabla}, 
@@ -213,7 +210,7 @@ function creatabla(){
 			$("#descargaExcelTablero").hide();
 			$("#time").hide();
 			$("#edit").hide();
-			if($("#checkTipoTablero").is(":checked")) {
+			if(tipoTabla == 0) {
 				$("#pause").hide();
 				$("#refuse").hide();
 			} else {
@@ -228,7 +225,7 @@ function creatabla(){
 			$("#descargaExcelTablero").show();
 			$("#time").show();
 //			$("#change").show();
-			if($("#checkTipoTablero").is(":checked")) {
+			if(tipoTabla == 0) {
 				$("#pause").hide();
 				$("#refuse").hide();
 				//$("#edit").hide();

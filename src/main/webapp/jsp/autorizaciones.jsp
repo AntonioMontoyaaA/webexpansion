@@ -25,7 +25,7 @@
 						<div id="ceco" class="row subtituloIconos azul" style="display: none;">
 							<span class="negrita azul tituloAutorizacion">Centro de costos</span>
 							<label class="simbolo">$</label>
-							<input id="idCeco" placeholder="Captura el numero de centro de costos" onkeypress="return isNumberKey(event,this)">
+							<input id="idCeco" maxlength="6" placeholder="Captura el numero de centro de costos" onkeypress="return isNumberKey(event,this)">
 						</div>
 						
 						<div id="obra" class="row subtituloIconos azul" style="display: none;">

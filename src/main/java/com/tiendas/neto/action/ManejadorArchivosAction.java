@@ -585,4 +585,71 @@ public class ManejadorArchivosAction
 			sendJSONObjectToResponse(respuestaVo);
 		}
 	}
+	
+	public void subeFechaSimple() {
+		String respuesta="";
+		UsuarioLoginVO usuario = null;
+		HttpSession usuarioSesion = ServletActionContext.getRequest().getSession();
+		usuario = (UsuarioLoginVO) usuarioSesion.getAttribute("usr");
+		
+		String tipoServicio = ServletActionContext.getRequest().getParameter("tipoServicio");
+		
+		String mdId = null,
+			fecha = null;
+		
+		mdId = ServletActionContext.getRequest().getParameter("mdId");
+		fecha = ServletActionContext.getRequest().getParameter("fecha");
+		
+		try{
+			
+			if(usuario == null){
+				RespuestaVo respuestaVo = new RespuestaVo();
+				respuestaVo.setCodigo(501);
+				respuestaVo.setMensaje("Error en la sesión");
+				sendJSONObjectToResponse(respuestaVo);
+				
+			}else{
+				String numeroEmpleado = String.valueOf(usuario.getPerfil().getNumeroEmpleado());
+				
+				final OkHttpClient client = new OkHttpClient();
+				
+				Builder builder;
+				RequestBody body;
+				Request request;
+				Response response;
+				
+				
+					builder = new Builder()
+							.add("usuarioId", numeroEmpleado)
+							.add("mdId", mdId)
+							.add("tipoServicio", tipoServicio)
+							.add("fecha", fecha + " 00:00:00");
+					
+					body = builder.build();
+					request = new Request.Builder()
+						.url(sp.getPropiedad("guardadocsmontos"))
+						.post(body)
+						.build();
+					
+					response = client.newCall(request).execute();
+					respuesta = response.body().string();
+				
+				
+				HttpServletResponse re = ServletActionContext.getResponse();
+				re.setContentType("application/json");
+				re.setCharacterEncoding("UTF-8");
+				re.getWriter().write(respuesta);
+				
+			}
+		}catch (Exception e) {
+			String clase  ="clase: "+ new String (Thread.currentThread().getStackTrace()[1].getClassName());	
+			String metodo ="metodo: "+ new String (Thread.currentThread().getStackTrace()[1].getMethodName());
+			elog.error(clase,metodo,e + "", "ID empleado: " + usuario.getPerfil().getNumeroEmpleado());
+			
+			RespuestaVo respuestaVo = new RespuestaVo();
+			respuestaVo.setCodigo(404);
+			respuestaVo.setMensaje("Error al conectarse al servidor");
+			sendJSONObjectToResponse(respuestaVo);
+		}
+	}
 }

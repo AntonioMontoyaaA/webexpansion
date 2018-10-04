@@ -645,8 +645,12 @@ function finalizaConCargaPrevia(){
 	
 	
 	respSubeArchivo = function(data){
-		if(data.codigo != 200){
-			cargaMensajeModal('DETALLE MD', 'No se logro cargar el archivo, por favor reintenta', TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR);
+		if(tipoServicio == 10 && data.codigo == 450){
+			cierraLoading();
+			cargaMensajeModal('DETALLE MD', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR);
+		}else if(data.codigo != 200){
+			cierraLoading();
+			cargaMensajeModal('DETALLE MD', 'Ocurrio un error, por favor reintenta', TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR);
 		}else{
 			if(dropzone != undefined)
 				dropzone.destroy();

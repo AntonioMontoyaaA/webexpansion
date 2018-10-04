@@ -60,13 +60,21 @@
             <div class="col-lg-4">
             		
     				
-    				<form class="form-inline float-right">  
-    				<div class="pretty p-default p-round" style="margin-top: 6px;">
+    				<form class="form-inline float-right">
+    				<div>
+    					<select id="selectEstatus" class="combo_tablero">	
+  							<option value="1">Activas</option>
+  							<option value="0">Canceladas</option>
+  							<option value="2">Aperturadas</option>
+  							<option value="3">Pausadas</option>
+						</select>
+    				</div>  
+    				<!-- <div class="pretty p-default p-round" style="margin-top: 6px;">
         				<input id="checkTipoTablero" type="checkbox" />
         				<div class="state p-primary-o">
             			<label class="blanco" style="font-size: 12px;">Ver canceladas</label>
         				</div>
-    				</div>
+    				</div> -->
                 <button class="btn desp refresh" type="button" onclick="creatabla();"></button>
                 <div class="desp descarga" id="descargaExcelTablero" style="cursor: pointer;"></div>
                     <input type="text" class="fechaInicialCalendario" readonly id="datepicker1" style="display: none;" />

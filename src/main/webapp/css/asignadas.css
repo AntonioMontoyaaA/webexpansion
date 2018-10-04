@@ -1,5 +1,6 @@
 .text_edita{
-	margin-left:10px;
+	width:70%;
+	height:25px;
 }
 #nombreMd:disabled, #nombreMd[readonly] {
 	background-color:transparent;

@@ -616,7 +616,7 @@ function pintaActivas(arreglo,filtrados){
 					submodulos_global.push(filtrados[cont+1].estatusid);
 				}
 			}
-			html=html+doble(cadenas[1] ,cant ,cadenas[0],color ,cadenas2[1] ,cant2 ,cadenas2[0], color2, estatusId2);	
+			html=html+doble(cadenas[1] ,cant ,cadenas[0],color ,cadenas2[1] ,cant2 ,cadenas2[0], color2, estatusId, estatusId2);	
 			
 			cont++;
 		}
@@ -659,7 +659,7 @@ function pintaAtrasadas(arreglo,filtrados){
 		var cadenas=filtrados[cont].estatus.replace('VALIDACION','VOBO').split('-',2);
 		var cant=filtrados[cont].atrasadas;
 		var color="";
-		var estatusId = filtrados[cont+1].estatusid;
+		var estatusId = filtrados[cont].estatusid;
 			if(existe_submodulo==true || existe_modulo==false && filtrados[cont].areaValidacion==$('#areaId').val() && perfil!='3'){
 				color="rojo cursor";
 				submodulos_global.push(filtrados[cont].estatusid);
@@ -691,7 +691,7 @@ function pintaAtrasadas(arreglo,filtrados){
 							}
 								
 					}
-			html=html+doble(cadenas[1] ,cant ,cadenas[0],color,  cadenas2[1] ,cant2 ,cadenas2[0],color2,estatusId2);	
+			html=html+doble(cadenas[1] ,cant ,cadenas[0],color,  cadenas2[1] ,cant2 ,cadenas2[0],color2,estatusId,estatusId2);	
 			
 			cont++;
 		}
@@ -733,7 +733,7 @@ function pintaCanceladas(arreglo,filtrados){
 		var cadenas=filtrados[cont].estatus.replace('VALIDACION','VOBO').split('-',2);
 		var cant=filtrados[cont].total;
 		var color="";
-		var estatusId = filtrados[cont+1].estatusid;
+		var estatusId = filtrados[cont].estatusid;
 		if(existe_submodulo==true || existe_modulo==false && filtrados[cont].areaValidacion==$('#areaId').val() && perfil!='3'){
 			color="cgris cursor";
 			submodulos_global.push(filtrados[cont].estatusid);
@@ -765,7 +765,7 @@ function pintaCanceladas(arreglo,filtrados){
 					}		
 				}
 			
-			html=html+doble(cadenas[1] ,cant ,cadenas[0],color  ,cadenas2[1] ,cant2 ,cadenas2[0],color2,estatusId2);	
+			html=html+doble(cadenas[1] ,cant ,cadenas[0],color  ,cadenas2[1] ,cant2 ,cadenas2[0],color2,estatusId,estatusId2);	
 			
 			cont++;
 		}
@@ -785,21 +785,21 @@ function simple(titulo,cant,pie,color,estatusId){
 	'<div class="'+color+' pie_hex"  onclick="redirige(this,'+ estatusId + ')">'+pie+'</div>'+	
 	'</div>';
 }
-function doble(x1,x2,x3,color1,  y1,y2,y3,color2,estatusId){
+function doble(x1,x2,x3,color1,  y1,y2,y3,color2,estatusId,estatusId2){
 	return '<div class="simple" style="padding:0 5;">'+
 	'<div class="lineadoble fazul">'+
 	'<div class="doble">'+
 	'<div class="hexa '+color1+'" onclick="redirige(this,' + estatusId + ')">'+
 	'<div class="negrita blanco cont_hex_doble">'+x2+'</div>'+
-	'</div><div class="hexa '+color2+'"  onclick="redirige(this, ' + estatusId + ')">'+
+	'</div><div class="hexa '+color2+'"  onclick="redirige(this, ' + estatusId2 + ')">'+
 		'<div class="negrita blanco cont_hex_doble">'+y2+'</div>'+
 	'</div></div>'+
 	'</div>'+
 	'<div class="negrita '+color1+' titulo_hex_doble" style="bottom:120"  onclick="redirige(this,' + estatusId + ')">'+x1+'</div>'+
 	'<div class="'+color1+' pie_hex_doble"  style="bottom:73"  onclick="redirige(this,' + estatusId + ')">'+x3+'</div>'+
 	
-	'<div class="negrita '+color2+' titulo_hex_doble" style="bottom:57"  onclick="redirige(this,' + estatusId + ')">'+y1+'</div>'+
-	'<div class="'+color2+' pie_hex_doble" style="bottom:10"  onclick="redirige(this,' + estatusId + ')">'+y3+'</div>'+
+	'<div class="negrita '+color2+' titulo_hex_doble" style="bottom:57"  onclick="redirige(this,' + estatusId2 + ')">'+y1+'</div>'+
+	'<div class="'+color2+' pie_hex_doble" style="bottom:10"  onclick="redirige(this,' + estatusId2 + ')">'+y3+'</div>'+
 	'</div>';
 }
 function inicio(){

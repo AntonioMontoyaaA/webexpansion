@@ -47,8 +47,11 @@ public class InterceptorAutorizadorPermisos  extends ExpansionAction implements 
 	    HttpSession session = request.getSession();
 	    PermisosMenu menuOptions = new PermisosMenu();  
         actionName = ActionContext.getContext().getName();
-
+        String contextPath = request.getContextPath();
 	    try {
+	    	
+	    	
+	    	
 	    	HashMap<?, ?> MENUVOKSE =  (HashMap<?, ?>) session.getAttribute("permisos");
 	    	UsuarioLoginVO user= (UsuarioLoginVO) session.getAttribute("usr");
 
@@ -64,17 +67,15 @@ public class InterceptorAutorizadorPermisos  extends ExpansionAction implements 
                 out = response.getWriter();
 
                 response.setContentType("text/html");  
-                out.println("<html>");
-                out.println("<head>");
-                out.println("<script type=\"text/javascript\">");
-                out.println("function evaluarSession() { ");
-                out.println("window.location.href = \"/Expansion/\";");
-                out.println("alert('LA SESIÓN HA CADUCADO.');");
+                out.println(headerhtml(contextPath));             
+                out.println("function evaluaSession() {  errorSesionCaduca(); ");
                 out.println("window.top.uploadComplete('1');");
                 out.println("}");
                 out.println("</script>");
                 out.println("</head>");
-                out.println("<body onload=\"evaluarSession();\">");
+                out.println(alertMensaje() );
+                
+                out.println("<body onload=\"evaluaSession();\">");
                 out.println("</body>");
                 out.println("</html>");
                 
@@ -87,18 +88,15 @@ public class InterceptorAutorizadorPermisos  extends ExpansionAction implements 
 	        	if(MENUVOKSE.get(menuOptions.permisosMenu.get(actionName)) == null) {
 	                 PrintWriter out;
 	                 out = response.getWriter();
-
-	                 response.setContentType("text/html");  
-	                 out.println("<html>");
-	                 out.println("<head>");
-	                 out.println("<script type=\"text/javascript\">");
-	                 out.println("function evaluarPermisos() { ");
-	                 out.println("history.back();");
-	                 out.println("alert('PERMISO DENEGADO.');");
+	                response.setContentType("text/html");
+	                
+	                out.println(headerhtml(contextPath));
+	                out.println("function evaluarPermisos() {  errorPermisoDenegado(); ");
 	                 out.println("window.top.uploadComplete('1');");
 	                 out.println("}");
 	                 out.println("</script>");
 	                 out.println("</head>");
+	                 out.println(alertMensaje() );
 	                 out.println("<body onload=\"evaluarPermisos();\">");
 	                 out.println("</body>");
 	                 out.println("</html>");
@@ -113,6 +111,50 @@ public class InterceptorAutorizadorPermisos  extends ExpansionAction implements 
 
 	    String result = actionInvocation.invoke();
 	    return result;
+	}
+	
+	public String headerhtml(String contextPath) {
+		String mensaje ="<html>"+
+		                "<head>"+
+		                "<link rel=\"stylesheet\" href=\""+contextPath+"/bootstrap/css/bootstrap.min.css\" /> "+
+		                "<link rel=\"stylesheet\" href=\""+contextPath+"/bootstrap/css/bootstrap.min.css\" /> "+
+		                "<link rel=\"stylesheet\" href=\""+contextPath+"/css/generic.css\" /> "+
+		                "<link rel=\"stylesheet\" href=\""+contextPath+"/css/jquery-ui.css\" />"+
+		                "<link rel=\"stylesheet\" href=\""+contextPath+"/css/mapa.css\" />"+
+		                "<link rel=\"stylesheet\" href=\""+contextPath+"/css/localizador.css\" />"+
+		                "<!-- Bootstrap core JavaScript -->"+
+		                "<script	src=\""+contextPath+"/js/jquery/jquery.min.js\"></script>"+	
+		                "<script	src=\""+contextPath+"/js/jquery/jquery-ui.js\"></script>"+
+		                "<script	src=\""+contextPath+"/js/jquery/popper.js\"></script>	"+
+		                "<script	src=\""+contextPath+"/bootstrap/js/bootstrap.min.js\" type=\"text/javascript\"></script>"+
+		                "<script	src=\""+contextPath+"/js/utiles/utiles.js\"></script>"+
+		               "<script type=\"text/javascript\">";
+		return mensaje;
+	}
+	
+	public String alertMensaje() {
+		String mensaje =  "<div class=\"modal\" id=\"mensajes_modal\" tabindex=\"-1\" role=\"dialog\" data-backdrop=\"static\" data-keyboard=\"false\">"+
+		 " <div class=\"modal-dialog\" role=\"document\">"+
+		
+		    "<div class=\"modal-content\">"+
+		    "  <div class=\"modal-header blanco\" id=\"mensajeHeader\" style=\"padding-top:7px; padding-bottom:7px;\">"+
+		     "   <div id=\"tituloMensaje\">---</div>"+
+		      "  <button type=\"button\" class=\"close blanco\" data-dismiss=\"modal\" aria-label=\"Close\">"+
+		       "   <span aria-hidden=\"true\">&times;</span>"+
+		       " </button>"+
+		      "</div>"+
+		      "<div class=\"modal-body\">"+
+		      " <div id=\"descripcionMensaje\">---</div>"+
+		      "</div>"+
+		      "<div class=\"modal-footer\" style=\"justify-content: center; border:0;\">"+
+		       " <button type=\"button\" class=\"btn fazul blanco\" id=\"botonMensajeSi\"  style=\"width: 70px; height: 30px; padding-top: 2px; margin-right: 20px; cursor: pointer;\">Si</button>"+
+		        "<button type=\"button\" class=\"btn fazul blanco\" id=\"botonMensajeNo\" style=\"width: 70px; height: 30px; padding-top: 2px; margin-right: 20px; cursor: pointer;\">No</button>"+
+		        "<button type=\"button\" class=\"btn fazul blanco\" id=\"botonMensajeAceptar\" style=\"width: 100px; height: 30px; padding-top: 2px; cursor: pointer;\">Aceptar</button>"+
+		      "</div>"+
+		    "</div>"+
+		  "</div>"+
+		"</div> ";
+		return mensaje;
 	}
 
 }

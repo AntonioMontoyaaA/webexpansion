@@ -124,8 +124,26 @@ function cierraMensajeModal() {
 }
 
 function errorSesionCaduca(){
-	cargaMensajeModal("ERROR", "La sesión ha caducado", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
+	cargaMensajeModal("ERROR", "La sesi&oacute;n ha caducado", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, redirecLogin);
 }
+
+function errorPermisoDenegado(){
+	cargaMensajeModal("ERROR", "Permiso denegado", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, redirecBack);
+	redirecBack();
+}
+
+function redirecBack(){
+	
+	setTimeout(function(){history.back();},1500);
+}
+
+function redirecLogin(){
+	window.location.href = getContextPath() ;
+}
+
+function getContextPath() {
+	   return window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
+	}
 
 function reloadLoginPage(){
 	window.location.replace(".");
@@ -154,7 +172,7 @@ function mueveReloj(){
     var mesesarr = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");	
 	mes = mesesarr[f.getMonth()];
 	dia = f.getDate();
-	año = f.getFullYear();
+	anio = f.getFullYear();
 	minutos=f.getMinutes();
 	horas=f.getHours();
 	
@@ -165,7 +183,7 @@ function mueveReloj(){
 		horas='0'+horas;
 	}
 	
-	fecha_header=dia+' de '+mes+' del '+año+' '+horas+':'+minutos+' hrs';
+	fecha_header=dia+' de '+mes+' del '+anio+' '+horas+':'+minutos+' hrs';
      $('#fecha_header').text(fecha_header);
 
      //La función se tendrá que llamar así misma para que sea dinámica, 

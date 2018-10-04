@@ -75,12 +75,12 @@
 		 <c:choose> 
 		  <c:when test="${empty  usr.perfil.imagenusuario}">
 		  	<div class="circulo_imagen_inicio" >
-	      		<img src="img/user.png" style="margin-bottom: 15px; background: WHITE; border-radius: 50%; width: 23px; height: 23px;">
+	      		<img src="img/user.png" style="margin-bottom: 15px; border-radius: 50%; width: 23px; height: 23px;">
 	      	</div>
 		  </c:when>
 		  <c:otherwise>
 		  	<div class="circulo_imagen_inicio" >
-		    	<img src="${usr.perfil.imagenusuario}" style="margin-bottom: 15px; background: WHITE; border-radius: 50%; width: 23px; height: 23px;">
+		    	<img src="${usr.perfil.imagenusuario}" style="margin-bottom: 15px; background: WHITE; border-radius: 50%; width: 30px; height: 30px;">
 		    </div>
 		  </c:otherwise>
 		</c:choose>
@@ -146,8 +146,8 @@
       <div class="col-12"><span class="etiqueta negrita">Repetir contraseña nueva</span></div>
       <div class="col-12"><input type="text" class="a_total" maxlength="50" id="rcontraseñanueva_usuario" name="rcontraseñanueva_usuario" placeholder='**********'></div></div>
         <div class="row">
-        	<div class="col-6 center"><button type="button" id="GuardarDatosPerfil" class="btn boton_usuario t14" data-dismiss="modal">Guardar</button></div>   
-     		<div class="col-6 center"><button type="button" id="CloseDatosPerfil" class="btn boton_usuario t14" data-dismiss="modal">Cerrar</button></div>
+        	<div class="col-6 center"><button type="button" id="GuardarDatosPerfil" class="btn boton_datosPerfil t14" data-dismiss="modal">Guardar</button></div>   
+     		<div class="col-6 center"><button type="button" id="CloseDatosPerfil" class="btn boton_datosPerfil t14" data-dismiss="modal">Cerrar</button></div>
     	</div>
 </form>
 

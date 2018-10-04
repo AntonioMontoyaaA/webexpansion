@@ -589,6 +589,21 @@ table thead tr{
     color: #ffffff;
 }
 
+.boton_datosPerfil:hover {
+    color: white;
+    background-color: #536379;
+}
+
+.boton_datosPerfil {
+    margin-top: 10px;
+    height: 30;
+    line-height: 0;
+}
+
+.checkBlock {
+    color: #e5e3e3;
+    cursor: no-drop;
+}
 
 /* === BACKGROUNG COLOR === */
 .back_1{background-color:#FF7C17;}

@@ -12,13 +12,13 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/mapa.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/localizador.css" />
 	
-<title>Asignadas</title>
+<title>Localizador</title>
 </head>
 <body>
 <%@ include file="/jsp/generic/header.jsp" %>
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-lg-12 titulo">Dashboard Expansión > Localizador</div>
+		<div class="col-lg-12 blanco  titulo">Dashboard Expansión > Localizador</div>
 	
 		<div class="contentLocalizador" id="contentDivLocalizador">
 			<!-- ALTA RADIO -->
@@ -100,7 +100,7 @@
 				     </div>
 					
 					<input id="checkTodaRuta" type="checkbox" style="margin-bottom: 10px;" class="spanText" name="ruta" value="1"> 
-					<span class="negrita t14 spanText"> Ver toda la ruta</span>
+					<span id="checkTextRuta" class="negrita t14  spanText"> Ver toda la ruta</span>
 					<br>					
 
 					<button type="button" style=" margin-left: 93px;" id="btnUbicacionTR" class="btn back_5 btn_aceptar"  data-target="#myModal">

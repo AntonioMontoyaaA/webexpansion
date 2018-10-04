@@ -99,8 +99,9 @@ $(function(){
 	$("#check_MdsRadios").change(function(){verMdsAutorizadasMaps(); });
 	$(".btn_infoClose").click(function(){closePopUpInfo();});
 	
+	/* == UBICACION TIEMPO REAL ==*/
 	$("#datepicker1").change(function(){validaFechaConsultada(2);});
-	
+	$('#select_employeeLocalizar').change(function(){ validaFechaConsultada(2); ESTATUS_CONSULTA = false;});
 	
 });
 
@@ -145,7 +146,7 @@ function showOptionAction(){
     
     if(element_call.id == "asignarRadio"){
     	getRadiosLocalizados();
-    	getObtenerEmpleados($('#select_employee'));
+    	getObtenerEmpleados($('#select_employee'),2);
     	$("#select_employee").val(-1);
     }
     
@@ -169,17 +170,14 @@ function showOptionAction(){
     
     /*=== INTI LOCALIZACION EN TIEMPO REAL ===*/
     if(element_call.id == "localizaTime"){
-    	getObtenerEmpleados($('#select_employeeLocalizar'));
-	    if(ARRAYOBJJEFES == undefined || Object.keys(ARRAYOBJJEFES).length < 0){
-	    	
-	    	getObtenerEmpleados($('#select_employeeLocalizar'));
+	    if($("#select_employeeLocalizar")[0].length <= 2){
+	    	getObtenerEmpleados($('#select_employeeLocalizar'),3);	    	
 	    }else{
     		var dateHoy = new Date();
     		var FECHA_HOY = $.datepicker.formatDate('dd/mm/yy',dateHoy);
-    		
-	    		$("#datepicker1").val(FECHA_HOY);
-	    		$("#checkTodaRuta").prop("checked", false);
-		    	$('#select_employeeLocalizar').val(0);	    	
+	    	 $("#datepicker1").val(FECHA_HOY);
+	    	 $("#checkTodaRuta").prop("checked", false);
+		     $('#select_employeeLocalizar').val(-2);	    	
 	    }
     }
     
@@ -195,17 +193,21 @@ function showOptionAction(){
 	
 	    }
 	    
+	    
+	    /* =============== CLEAN MAP MARKERS =========*/
 		clearMapsRadiosMDsBuscar(arrayRadios_4);
 		clearMapsRadiosMDsBuscar(arrayMds_4);
 		directionsDisplay.setDirections({routes: []});
 		quitarPinUbicacionActual();
-		
+		cleanMapRutas();
 		clearMapsMds(MdsArray);
+		cleanMapRutasAllJefes();
 		
 		ESTATUS_CONSULTA = false; 
 		positionMapInit();
 		$(".contentPopUpInfo").hide();
 		$(".contentPopUpInfoMD").hide();
+		$("#xlf").val("");
    }
 
 /* ---------- Consume WS GUARDA RADIOS --------*/
@@ -238,14 +240,10 @@ function guardaRadiosLocalizados(){
 			});
 
 	responseGuardarLocalizados = function(data){
-		//console.log(data);
-		
 		if(data.codigo == 403){
 			cargaMensajeModal("Localizador","Revisar el registro de la fila "+data.jsonError.indexXSLX+" <br>"+ data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
-			
 		}else{
 			cargaMensajeModal("Localizador",data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
-			
 		}
 
 		clearMarkers();
@@ -285,7 +283,8 @@ function initMap() {
   directionsDisplay = new google.maps.DirectionsRenderer({
     draggable: false,
     map: map,
-    panel: document.getElementById('right-panel')
+    panel: document.getElementById('right-panel'),
+    suppressMarkers: true
   });
 
 }
@@ -336,14 +335,15 @@ function addMarker(obj, map) {
 		 if (marker.getAnimation() !== null) {
 	          marker.setAnimation(null);
 	          $(".contentPopUpInfo").hide();
-	          map.fitBounds(bounds);
-	          
+	          map.setZoom(12);
+
 	        } else {
 	          if(radioSeleccionado != undefined && radioSeleccionado != null)
 	        	  radioSeleccionado.marker.setAnimation(null);
 	          
 	          
 	          marker.setAnimation(google.maps.Animation.BOUNCE);
+	          setTimeout(function(){marker.setAnimation(google.maps.Animation.BOUNCE);},1100);
 	          radioSeleccionado = objArray[obj.idMarker];
 	          verInformacionRadio(radioSeleccionado, PANT_OPCION.ALTARADIOS);	  
 	          map.setCenter(new google.maps.LatLng(radioSeleccionado.coordenada.lat , radioSeleccionado.coordenada.lng));
@@ -372,6 +372,7 @@ function toggleBounce() {
       marker.setAnimation(null);
     } else {
       marker.setAnimation(google.maps.Animation.BOUNCE);
+      setTimeout(function(){marker.setAnimation(google.maps.Animation.BOUNCE);},1100);
     }
   }
 
@@ -629,10 +630,6 @@ var process_wb = (function() {
 			return false;
 		}
 		pintarCirculosXslx(JSON.parse(to_json(wb)).Radios);
-
-		//if(typeof console !== 'undefined') 
-			//console.log("output", new Date());
-
 	};
 })();
 
@@ -696,7 +693,6 @@ var do_file = (function() {
 		var reader = new FileReader();
 		reader.onload = function(e) {
 			if(typeof console !== 'undefined') 
-				//console.log("onload", new Date(), rABS, use_worker);
 			var data = e.target.result;
 			if(!rABS) data = new Uint8Array(data);
 			if(use_worker) xw(data, process_wb);
@@ -787,13 +783,15 @@ var do_file = (function() {
 		 if (marker.getAnimation() !== null) {
 	          marker.setAnimation(null);
 	          $(".contentPopUpInfo").hide();
-	          map.fitBounds(boundsAsig);
+	         // map.fitBounds(boundsAsig);
+	          map.setZoom(12);
 	          
 	        } else {
 	          if(radioSeleccionado != undefined && radioSeleccionado != null)
 	        	  radioSeleccionado.marker.setAnimation(null);
 
 	          marker.setAnimation(google.maps.Animation.BOUNCE);
+	          setTimeout(function(){marker.setAnimation(google.maps.Animation.BOUNCE);},1100);
 	          radioSeleccionado = objArray[obj.idMarker];
 	          verInformacionRadio(radioSeleccionado, PANT_OPCION.ASIGNARRADIOS);	  
 	          map.setCenter(new google.maps.LatLng(radioSeleccionado.coordenada.lat , radioSeleccionado.coordenada.lng));
@@ -892,7 +890,7 @@ function desAsignarRadio(){
 	
 
 	/* ---------- Consume WS JEFES Disponibles por zona --------*/
-	function getObtenerEmpleados(elementId){
+	function getObtenerEmpleados(elementId, tipo){
 		cargaLoading();
 		
 
@@ -903,7 +901,7 @@ function desAsignarRadio(){
 					cargaMensajeModal("Localizador","Error en el servicio obtener jefes de expansión.", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
 					elementId
 				    .empty()
-				    .append('<option selected="selected" value="-1">Selecione un jefe </option>')
+				    .append('<option selected="selected" value="">Selecione un jefe </option>')
 				;
 
 				},
@@ -913,7 +911,6 @@ function desAsignarRadio(){
 				});
 
 		llenarComboEmpleados = function(data){
-			console.log(data);
 			if(data.codigo == 400){
 				cargaMensajeModal("Localizador",data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
 				return false;
@@ -922,6 +919,11 @@ function desAsignarRadio(){
 			$(elementId).html("");
 			elementId.empty().append('<option selected="selected" value="-1">Selecione un jefe </option>')
 		    
+			if(tipo == 3){
+				$(elementId).html("");
+				elementId.empty().append('<option selected="selected" value="-2">Selecione un jefe </option>')
+				elementId.append('<option value="-1">Todos los jefes </option>')
+			}
 			objArrayEmployee = data;
 			ARRAYOBJJEFES = objArrayEmployee.usuarios;
 			objArrayEmployee.usuarios.forEach(function(item, i){
@@ -1051,19 +1053,24 @@ function cleanRadiosDispoAsignados(){
 
 
 /* ========================= LOCALIZACION TIMEPO REAL ========================= */
-var ARRAYRUTA = [];
+var ArrayInfoRutas   = [];
+var ArrayMarkerRutas = [];
+var ArrayMarkerAllJefes = [];
+var infoUbicacion ="";
 function consultarRutaRecorridaJefe(){
 
 	quitarPinUbicacionActual();
+	cleanMapRutasAllJefes();
 	directionsDisplay.setDirections({routes: []});
 	
 	ESTATUS_CONSULTA = false;
 	cargaLoading();
+	ArrayInfoRutas   = [];
 	var usuarioId = $('#select_employeeLocalizar').val();
 	var fecha     = $("#datepicker1").val().split('/');
 	var formatDate = fecha[2]+"-"+fecha[1]+"-"+fecha[0];
 	
-	if(usuarioId == -1 ){
+	if(usuarioId == -2 ){
 		cierraLoading();
 		cargaMensajeModal("Localizador","Selecione un jefe.", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
 		return false;
@@ -1078,12 +1085,12 @@ function consultarRutaRecorridaJefe(){
 			},
 			function() {
 				//Función al finalizar
-				cierraLoading();
+				//cierraLoading();
 			});
 
 	pintarRudaMaps = function(data){
-		//console.log(data);
 		if(data.codigo == 400 || data.codigo == 205){
+			cierraLoading();
 			cargaMensajeModal("Localizador",data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
 			return false;
 		}
@@ -1091,46 +1098,77 @@ function consultarRutaRecorridaJefe(){
 		var inicioRuta = data.ubicacion.length-1;
 		LIST_UBICACIONES = new Array();
 
-	    
-	    
-
-
-		data.ubicacion.forEach(function(item,i){
-			  if(i <= 23){	
-					if(item.id == 1){
-						UBICACIONACTUAL = new google.maps.LatLng(item.datosRadio[0].fcLatitud , item.datosRadio[0].fcLongitud);		 
-					}else
-						if(i <= 23 ){
-							
-							INICIO_UBICACION =  new google.maps.LatLng(item.datosRadio[0].fcLatitud , item.datosRadio[0].fcLongitud);
-						} if(i < 23 ) {
-							LIST_UBICACIONES.push({location: new google.maps.LatLng(item.datosRadio[0].fcLatitud , item.datosRadio[0].fcLongitud),
-													stopover: true
-												});
-						}
-				  }
-			  
-			  
-		});
-		ESTATUS_CONSULTA = true;
-		verRutaUbicacion();
+		if(inicioRuta > 23){
+			inicioRuta  = 23;
+		}
+		ArrayInfoRutas = [];
+		var numAux = 0;
 		
+		if(usuarioId == -1 ){
+			data.ubicacion.forEach(function(item,i){				
+				if(usuarioId == -1 ){	
+						if(item.datos.length != 0){
+							LIST_UBICACIONES.push(new google.maps.LatLng(item.datos[0].datosRadio[0].fcLatitud , item.datos[0].datosRadio[0].fcLongitud));
+							ArrayInfoRutas[numAux]  = "<span class='fecha_ubicacion'>Nombre : "+item.nombre+"</span><br>"+
+							"<span class='fecha_ubicacion'>Fecha : "+item.datos[0].fecha+"</span>";		
+							numAux++;
+						}
+				}	
+			});
+		}else if(usuarioId != -1 && usuarioId != -2 ){
+			data.ubicacion[0].datos.forEach(function(item,i){	
+				if(i <= 23 && usuarioId != -1 ){			
+					
+					if(item.id == 1){
+						infoUbicacion = "<span class='fecha_ubicacion'>Nombre : "+data.ubicacion[0].nombre+"</span><br>"+
+										"<span class='fecha_ubicacion'>Fecha registro : "+item.fecha+"</span>";
+						UBICACIONACTUAL = new google.maps.LatLng(item.datosRadio[0].fcLatitud , item.datosRadio[0].fcLongitud);		 
+					}
+					
+					if(i ==  inicioRuta){
+						INICIO_UBICACION =  new google.maps.LatLng(item.datosRadio[0].fcLatitud , item.datosRadio[0].fcLongitud);
+						LIST_UBICACIONES.push({location: new google.maps.LatLng(item.datosRadio[0].fcLatitud , item.datosRadio[0].fcLongitud), stopover: true});		
+					}else{
+						if(data.ubicacion.length != 2){
+							LIST_UBICACIONES.push({location: new google.maps.LatLng(item.datosRadio[0].fcLatitud , item.datosRadio[0].fcLongitud), stopover: true});													
+						}
+					}
+					
+					if(data.ubicacion.length == 1){
+						INICIO_UBICACION =  new google.maps.LatLng(item.datosRadio[0].fcLatitud , item.datosRadio[0].fcLongitud);
+						ArrayInfoRutas[1] = "<span class='fecha_ubicacion'>Registro : "+item.id +" <br>  Fecha registro : "+item.fecha+"</span>"; 
+					}
+					ArrayInfoRutas[i] = "<span class='fecha_ubicacion'>Registro : "+item.id +" <br>  Fecha registro : "+item.fecha+"</span>"; 
+				} 
+			});			
+		}
+
+		ESTATUS_CONSULTA = true;
+		verRutaUbicacion();		
 	}
 }
 
 function verRutaUbicacion(){
 	if(ESTATUS_CONSULTA){
-		 
 		cargaLoading();
 		quitarPinUbicacionActual();
 		directionsDisplay.setDirections({routes: []});
+		directionsDisplay = new google.maps.DirectionsRenderer({
+			    draggable: false,
+			    map: map,
+			    panel: document.getElementById('right-panel'),
+			    suppressMarkers: true
+			  });
+		  
 	
-		if($("#checkTodaRuta").is(":checked")){
+		if($("#checkTodaRuta").is(":checked") && $('#select_employeeLocalizar').val() != -1){
 			
 			displayRoute(UBICACIONACTUAL, INICIO_UBICACION, directionsService, directionsDisplay, LIST_UBICACIONES);	
 			
 		}else{
 			if(ESTATUS_CONSULTA){
+				hiddenMapRutas();
+				
 				directionsDisplay = new google.maps.DirectionsRenderer({
 					draggable: false,
 					map: map,
@@ -1143,37 +1181,60 @@ function verRutaUbicacion(){
 						scaledSize: new google.maps.Size(35, 35)// scaled size
 					};
 				
-				MARKER_HERE = new google.maps.Marker({
-					position: UBICACIONACTUAL,
-					animation: google.maps.Animation.DROP,
-					map: map,
-					icon : icon
-				});
-				
-				map.setCenter(UBICACIONACTUAL);
-				map.setZoom(17);
-				
-				
+				if($('#select_employeeLocalizar').val() == -1 ){
+					
+					LIST_UBICACIONES.forEach(function(item,i){
+						ArrayMarkerAllJefes[i] = new google.maps.Marker({
+							position: item,
+							animation: google.maps.Animation.DROP,
+							map: map,
+							icon : icon
+						});
+					
+						var infowindow = new google.maps.InfoWindow({ 
+							size: new google.maps.Size(150,50)
+						});
+						
+						google.maps.event.addListener(ArrayMarkerAllJefes[i], 'click', function() {
+							infowindow.setContent(ArrayInfoRutas[i]); 
+							infowindow.open(map,ArrayMarkerAllJefes[i]);
+						});
+						
+					});	
+				}else{
+					
+					MARKER_HERE = new google.maps.Marker({
+						position: UBICACIONACTUAL,
+						animation: google.maps.Animation.DROP,
+						map: map,
+						icon : icon
+					});
+					map.setCenter(UBICACIONACTUAL);
+					map.setZoom(17);
+					var infowindow = new google.maps.InfoWindow({ 
+						size: new google.maps.Size(150,50)
+					});
+					
+					google.maps.event.addListener(MARKER_HERE, 'click', function() {
+						infowindow.setContent(infoUbicacion); 
+						infowindow.open(map,MARKER_HERE);
+					});
+				}
 			}
 		}
-	 
-		 setTimeout(function(){cierraLoading();},1200);
+		 setTimeout(function(){cierraLoading();},1500);
 	}
 }
 
 
-
-
-
+/* == QUITAR PIN UBICACION ==*/
 function quitarPinUbicacionActual(){
 	if(MARKER_HERE != null && MARKER_HERE != undefined){
 		MARKER_HERE.setMap(null);
 	}
-
-	
 }
 
-
+/* == PINTAR RUTA ==*/
 function displayRoute(origin, destination, service, display, listRuta) {
 	
 	service.route({
@@ -1189,65 +1250,90 @@ function displayRoute(origin, destination, service, display, listRuta) {
 			alert('Could not display directions due to: ' + status);
 		}
 		
-		
-		
-		
-		
-		
-		
-		
-		
+        var legs = response.routes[0].legs;
+        cleanMapRutas();        
+        var numMArker = 1;
+        var color = "red";
+
+        for (var i=0; i < legs.length;i++){
+        	color = (numMArker == 1 || numMArker == legs.length )? "blue" : "red";
+	          ArrayMarkerRutas[i] =  createMarker(directionsDisplay.getMap(), legs[i].start_location, ArrayInfoRutas[i], legs[i].start_address,color,numMArker);
+	          numMArker++;
+        }
 	});
 }
 
+/* == PUNTAR RUTA ==*/
+function createMarker(map, latlng, label, html, color, text) {
 
-function createMarker(map, latlng, label, html, color) {
-	// alert("createMarker("+latlng+","+label+","+html+","+color+")");
-	    var contentString = '<b>'+label+'</b><br>'+html;
-	    var marker = new google.maps.Marker({
-	        position: latlng,
-	        map: map,
-	        shadow: iconShadow,
-	        icon: getMarkerImage(color),
-	        shape: iconShape,
-	        title: label,
-	        zIndex: Math.round(latlng.lat()*-100000)<<5
-	        });
-	        marker.myname = label;
+	
+	  var infowindow = new google.maps.InfoWindow({ 
+			    size: new google.maps.Size(150,50)
+			  });
 
-	    google.maps.event.addListener(marker, 'click', function() {
-	        infowindow.setContent(contentString); 
-	        infowindow.open(map,marker);
-	        });
-	    return marker;
+  var contentString = '<b>'+label+'</b><br>'+html;
+  var marker = new google.maps.Marker({
+      position: latlng,
+      map: map,
+      icon: "img/markers_nums/marker_"+color+text+".png",
+      title: label,
+      zIndex: Math.round(latlng.lat()*-100000)<<5
+      });
+      marker.myname = label;
+
+  google.maps.event.addListener(marker, 'click', function() {
+      infowindow.setContent(contentString); 
+      infowindow.open(map,marker);
+      });
+  return marker;
+}
+
+/* == LIMPIAR MAP RUTAS ==*/
+function cleanMapRutas(){
+	if(ArrayMarkerRutas.length > 0){
+		
+		ArrayMarkerRutas.forEach(function(element, index){
+			
+			if(element.getMap() != undefined ){
+				element.setMap(null);
+			}
+			
+		});
+	}
+	ArrayMarkerRutas = [];
+}
+
+/* == LIMPIAR UBICACIONES ==*/
+function cleanMapRutasAllJefes(){
+	if(ArrayMarkerAllJefes.length > 0){
+		
+		ArrayMarkerAllJefes.forEach(function(element, index){
+			
+			if(element.getMap() != undefined ){
+				element.setMap(null);
+			}
+			
+		});
+	}
+	ArrayMarkerAllJefes = [];
+}
+
+/* == OCULTAR RUTA ==*/
+function hiddenMapRutas(){
+	if(ArrayMarkerRutas.length > 0){
+		
+		ArrayMarkerRutas.forEach(function(element, index){
+			
+			if(element.getMap() != undefined ){
+				element.setMap(null);
+			}
+			
+		});
 	}
 
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* == CALENDARIO FECHA RUTA ==*/
 function inicializaCalendarios() {
 	$(".ui-datepicker-trigger").hide();
 	
@@ -1284,11 +1370,33 @@ function validaFechaConsultada(tipoChange){
 	} 
 	
 	if(fechaSelected == FECHA_HOY && tipoChange == 2){
-		$("#checkTodaRuta").prop("checked",false);
-		toDate = false;
+		if($("#select_employeeLocalizar").val() == -1){
+			$("#checkTodaRuta").prop("checked",false);
+			$("#checkTodaRuta").attr("disabled","disabled");
+			$("#checkTextRuta").addClass("checkBlock");
+			toDate = true;
+		}else{
+			$("#checkTodaRuta").prop("checked",false);
+			$("#checkTodaRuta").removeAttr("disabled","disabled");
+			$("#checkTextRuta").removeClass("checkBlock");
+			toDate = false;			
+		}
+		
 	}else if(fechaSelected != FECHA_HOY && tipoChange == 2){
-		$("#checkTodaRuta").prop("checked",true);
-		toDate = true;
+
+		if($("#select_employeeLocalizar").val() == -1){
+			$("#checkTodaRuta").prop("checked",false);
+			$("#checkTodaRuta").attr("disabled","disabled");
+			$("#checkTextRuta").addClass("checkBlock");
+			toDate = true;
+		}else{
+			$("#checkTodaRuta").prop("checked",true);
+			$("#checkTodaRuta").attr("disabled","disabled");	
+			$("#checkTextRuta").addClass("checkBlock");
+			toDate = true;		
+		}
+		
+		
 	}
 	
 	return toDate;
@@ -1663,13 +1771,6 @@ function addMarkerEstatus(obj, map) {
 									}
 		
 		colorCicle = color;
-		
-		
-		
-		
-			
-		
-				
 				
 	var icono = {
 			url: iconoEstatus,
@@ -1693,20 +1794,24 @@ function addMarkerEstatus(obj, map) {
 		 if (marker.getAnimation() !== null) {
 	          marker.setAnimation(null);
 	          $(".contentPopUpInfo").hide();
-	          map.fitBounds(boundsRadiosEstatus);
+	          //map.fitBounds(boundsRadiosEstatus);
+	          map.setZoom(12);
 	          
 	        } else {
-	          if(radioSeleccionado != undefined && radioSeleccionado != null)
+	          if(radioSeleccionado != undefined && radioSeleccionado != null && radioSeleccionado.idMarker != obj.idMarker)
 	        	  radioSeleccionado.marker.setAnimation(null);
 	          
 	          
-	          marker.setAnimation(google.maps.Animation.BOUNCE);
 	          radioSeleccionado = arrayRadios_4[obj.idMarker];
 	          verInformacionRadio(radioSeleccionado,  PANT_OPCION.RADIOSXMD);	  
 	          map.setCenter(new google.maps.LatLng(radioSeleccionado.coordenada.lat , radioSeleccionado.coordenada.lng));
 	          map.setZoom(15);
 	          $(".contentPopUpInfoMD").hide();
 	          $(".contentPopUpInfo").show();
+	          
+	          marker.setAnimation(google.maps.Animation.BOUNCE);
+	          setTimeout(function(){marker.setAnimation(google.maps.Animation.BOUNCE);},1100);
+	          
 	        }
 		 
 	 });
@@ -1731,7 +1836,8 @@ function closePopUpInfo(){
    	  	radioSeleccionado = null;
    	  	$(".contentPopUpInfo").hide();
    	  	$(".contentPopUpInfoMD").hide();
-   	  	map.fitBounds(boundsGeneral);
+   	  	//map.fitBounds(boundsGeneral);
+   	  	map.setZoom(12);
      }
 	
 }
@@ -1772,6 +1878,10 @@ function verInformacionRadio(obj, vista_opcion){
 	$("#infoDistancia").html(validaValorObj(obj.infoMarker.fcDistancia));
 	$("#infoTipo").html(validaValorObj(obj.infoMarker.fcTipot));
 	$("#infoTiempo").html(validaValorObj(obj.infoMarker.fcTiempo));
+
+	if(vista_opcion == 0){
+		$("#infoEstatus").html("Nuevo");
+	}
 
 	var usuarioAsignado = "";
 	$("#divContentInfoRadio").children("div#divInfoAsinacion").html("");
@@ -1835,21 +1945,24 @@ function addMarkerMDs(obj, map,bounds_, array_ ) {
 	 if (marker.getAnimation() !== null) {
           marker.setAnimation(null);
           $(".contentPopUpInfoMD").hide();
-          map.fitBounds(bounds_);
+          //map.fitBounds(bounds_);
+          map.setZoom(12);
           
         } else {
-          if(radioSeleccionado != undefined && radioSeleccionado != null)
-        	  radioSeleccionado.marker.setAnimation(null);
-          
-          
-          marker.setAnimation(google.maps.Animation.BOUNCE);
-          radioSeleccionado = array_[obj.mdId];
-          verInfoMd(radioSeleccionado);	  
-          
-          map.setCenter(new google.maps.LatLng(radioSeleccionado.latitud , radioSeleccionado.longitud));
-          map.setZoom(15);
-          $(".contentPopUpInfo").hide();
-          $(".contentPopUpInfoMD").show();
+	          if(radioSeleccionado != undefined && radioSeleccionado != null && radioSeleccionado.idMarker != obj.idMarker)
+	        	  radioSeleccionado.marker.setAnimation(null); 
+	          
+	          
+	          radioSeleccionado = array_[obj.mdId];
+	          verInfoMd(radioSeleccionado);	  
+	          
+	          map.setCenter(new google.maps.LatLng(radioSeleccionado.latitud , radioSeleccionado.longitud));
+	          map.setZoom(15);
+	          $(".contentPopUpInfo").hide();
+	          $(".contentPopUpInfoMD").show();
+
+	          marker.setAnimation(google.maps.Animation.BOUNCE);
+	          setTimeout(function(){marker.setAnimation(google.maps.Animation.BOUNCE);},1100);
        }
 });
 

@@ -35,8 +35,9 @@ $(function(){
 	$('#idtablero').addClass('resaltado');
 	inicializaCalendarios();
 	
-	if($( "#datepicker1").val()!='')
-		creatabla();
+	//if($( "#datepicker1").val()!='')
+	
+	creatabla();
 	
 	$( "#datepicker1").change(function() {
 		creatabla();
@@ -56,6 +57,16 @@ $(function(){
     });
 	
 });
+
+function filtraMDPorEstatus() {
+	var url_string = window.location.href
+	var url = new URL(url_string);
+	var estatusId = url.searchParams.get("estatusId");
+	
+	if(estatusId != undefined) {
+		$("#divEstatus" + estatusId).click();
+	}
+}
 
 function dibujaEstatus(resumen) {
     var datos = "";
@@ -107,8 +118,8 @@ function dibujaEstatus(resumen) {
                 busquedaCadena = '';
             }
             
-            datos += '<div onclick="filtraEstatus(\'#&' + resumen[i].estatusid + '&#\',' + resumen[i].total + ',' + resumen[i].atrasadas + ', this, \'' + resumen[i].estatus + '\')" class="tabla_pendientes" style="width: 65%;"><span>' + resumen[i].estatus + '</span></div>' +
-                    '<div onclick="filtraEstatus(\'#&' + resumen[i].estatusid + '&#\',' + resumen[i].total + ',' + resumen[i].atrasadas + ', this, \'' + resumen[i].estatus + '\')" class="tabla_pendientes" style="width: 18%;padding-left: 10px;"><span>' + resumen[i].total + '</span></div>' +
+            datos += '<div id="divEstatus' + resumen[i].estatusid + '" onclick="filtraEstatus(\'#&' + resumen[i].estatusid + '&#\',' + resumen[i].total + ',' + resumen[i].atrasadas + ', this, \'' + resumen[i].estatus + '\')" class="tabla_pendientes" style="width: 65%;"><span>' + resumen[i].estatus + '</span></div>' +
+                    '<div id="divAtraso' + resumen[i].estatusid + '" onclick="filtraEstatus(\'#&' + resumen[i].estatusid + '&#\',' + resumen[i].total + ',' + resumen[i].atrasadas + ', this, \'' + resumen[i].estatus + '\')" class="tabla_pendientes" style="width: 18%;padding-left: 10px;"><span>' + resumen[i].total + '</span></div>' +
                     '<div ' + busquedaCadena + ' class="tabla_pendientes" style="width: 17%;padding-left: 10px;"><span>' + resumen[i].atrasadas + '</span></div>';
             total += resumen[i].total;
             if(resumen[i].atrasadas != "NA") {
@@ -707,6 +718,11 @@ function creatabla(){
 			 }
 			
 			initTablaMemoriasTablero('DivTablaTablero', datosMemorias, 'tablaMemoriasTablero');
+			
+			
+			//valida filtro de MDs
+			filtraMDPorEstatus();
+			
 			
 			$("#tablaMemoriasTablero tr td").click(function() {
 				var mdId = $(this).parent().find("td:eq(26)").html();

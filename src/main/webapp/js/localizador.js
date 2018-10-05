@@ -75,7 +75,7 @@ $(function(){
 	$("#download_plantillaRadios").click(function(){ download_ejemplo(); });
 	$("#btnRemovelAsign").click(function(){ closePopUpInfo();  var selet = {value:0};	radiosUsuario(selet); });
 	
-	$("#select_employee").change(function(){ radiosUsuario(this);});
+	$("#select_employee").change(function(){ radiosUsuario(this); });
 	$("#select_employeeMDGere").change(function(){ cargarJefesXGerente(this);});
 	
 	$("#btnUbicacionTR").click(function(){ consultarRutaRecorridaJefe();});
@@ -1002,7 +1002,7 @@ function radiosUsuario(select){
 	 }
 
 	 Object.keys(objArray).forEach(function (key){
-		 if(select.value  == 0){
+		 if(select.value  == -1){
 			 if( objArray[key].marker.getMap() == null && objArray[key].circle.getMap() == null){
 				 addMarkerAsigna( objArray[key] , map);
 			 } 
@@ -1094,6 +1094,7 @@ function consultarRutaRecorridaJefe(){
 		if(data.codigo == 400 || data.codigo == 205){
 			cierraLoading();
 			cargaMensajeModal("Localizador",data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+			positionMapInit();
 			return false;
 		}
 		
@@ -1186,6 +1187,8 @@ function verRutaUbicacion(){
 					};
 				
 				if($('#select_employeeLocalizar').val() == -1 ){
+					
+					if(LIST_UBICACIONES.length <= 0){positionMapInit(); cierraLoading(); return false;}
 					
 					LIST_UBICACIONES.forEach(function(item,i){
 						ArrayMarkerAllJefes[i] = new google.maps.Marker({
@@ -1458,6 +1461,7 @@ function getObtenerMDs(){
 		
 		if(Object.keys(MdsArray).length <= 0){				
 			cargaMensajeModal("Localizador","No se encontraron MD´s.", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+			positionMapInit();
 		}else{
 			map.fitBounds(bounds);			
 		}

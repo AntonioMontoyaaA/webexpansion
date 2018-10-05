@@ -901,7 +901,6 @@ function documentacion(data){
 		ARCHIVOS_MD[doctosContrato] = new Array();
 		$.each(eval(data)["seguimiento"]["CARGA DOCUMENTOS EXPANSION"], function(i,item){
 			
-			if(item.estatus == 2) { 
 				if(item.documentos != undefined && item.documentos.length > 0) {
 					for(var i = 0; i < item.documentos.length; i++) {
 						
@@ -919,7 +918,6 @@ function documentacion(data){
 						}
 					}
 				}
-			}
 		});
 	}
 }

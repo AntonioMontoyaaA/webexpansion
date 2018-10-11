@@ -470,8 +470,6 @@ function dibujaAreasCompletadas(AREAS){
 					content : contentPopGerente
 				});
 				
-				//AREAS_A[areaExpansion] = true;
-				
 				if(AREAS[i].EXPANSION[0].diasVencidos > 0) {
 					$("#gerenteExpansionImg").css("display", "inline");
 				}
@@ -486,8 +484,6 @@ function dibujaAreasCompletadas(AREAS){
 					html: true, 
 					content : contentPopExpansion
 				});
-				
-				AREAS_A[areaExpansion] = true;
 				
 				if(AREAS[i].EXPANSION[0].diasVencidos > 0) {
 					$("#expansionImg").css("display", "inline");
@@ -507,8 +503,6 @@ function dibujaAreasCompletadas(AREAS){
 				content : contentPopGestoria
 			});
 				
-			AREAS_A[areaGestoria] = true;
-			
 			if(AREAS[i].GESTORIA[0].diasVencidos > 0) {
 				$("#gestoriaImg").css("display", "inline");
 			}
@@ -526,8 +520,6 @@ function dibujaAreasCompletadas(AREAS){
 				html: true, 
 				content : contentPopConstruccion
 			});
-			
-			AREAS_A[areaConstruccion] = true;
 				
 			if(AREAS[i].CONSTRUCCION[0].diasVencidos > 0) {
 				$("#construccionImg").css("display", "inline");
@@ -546,8 +538,6 @@ function dibujaAreasCompletadas(AREAS){
 				html: true, 
 				content : contentPopOperaciones
 			});
-				
-			AREAS_A[areaOperaciones] = true;
 			
 			if(AREAS[i].OPERACIONES[0].diasVencidos > 0) {
 				$("#operacionesImg").css("display", "inline");
@@ -564,8 +554,6 @@ function dibujaAreasCompletadas(AREAS){
 				html: true, 
 				content : contentPopAuditoria
 			});
-				
-			AREAS_A[areaAuditoria] = true;
 			
 			if(AREAS[i].AUDITORIA[0].diasVencidos > 0) {
 				$("#auditoriaImg").css("display", "inline");

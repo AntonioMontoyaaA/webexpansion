@@ -13,19 +13,19 @@
 							
 							<span class="negrita azul tituloAutorizacion">Monto presupuestado</span>
 							<label class="simbolo">$</label>
-							<input id="montoPresupuesto" placeholder="Captura el monto del presupuesto" onkeypress="return isNumberKey(event,this)">
+							<input class="inputNoPegar"  maxlength="9" id="montoPresupuesto" placeholder="Captura el monto del presupuesto" onkeypress="return isNumberKey(event,this)">
 						</div>
 						
 						<div id="venta" class="row subtituloIconos azul" style="display: none;">
 							<span class="negrita azul tituloAutorizacion">Venta semanal presupuestada</span>
 							<label class="simbolo">$</label>
-							<input id="montoVenta" placeholder="Captura el monto de la venta presupuestada" onkeypress="return isNumberKey(event,this)">
+							<input class="inputNoPegar" maxlength="9" id="montoVenta" placeholder="Captura el monto de la venta presupuestada" onkeypress="return isNumberKey(event,this)">
 						</div>
 						
 						<div id="ceco" class="row subtituloIconos azul" style="display: none;">
 							<span class="negrita azul tituloAutorizacion">Centro de costos</span>
 							<label class="simbolo">$</label>
-							<input id="idCeco" maxlength="6" placeholder="Captura el numero de centro de costos" onkeypress="return isNumberKey(event,this)">
+							<input class="inputNoPegar" id="idCeco" maxlength="6" placeholder="Captura el numero de centro de costos" onkeypress="return isNumberKey(event,this)">
 						</div>
 						
 						<div id="obra" class="row subtituloIconos azul" style="display: none;">

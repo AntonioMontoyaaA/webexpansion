@@ -86,6 +86,8 @@ var tipoServicio = '';
 var monto = ''; 
 var acc = ''; 
 
+var permisos;
+
 $(function(){
 	
 	AREA_USUARIO = parseInt($('#areaUsuario').val());
@@ -96,30 +98,43 @@ $(function(){
 	MOTIVOS_RECHAZO = {};
 	
 	funcionesAutorizacion();
-	
+
 });
+
+//function obtienePermisos(){
+//	privilegios = $('.permisos_sub');
+//	permisos = new Array();
+//	
+//	$.each(privilegios, function(){
+//		if(this.value.indexOf("16") != -1){
+//			if(this.value.indexOf(",") != -1){
+//				permisos.push()
+//			}
+//		}
+//	});
+//}
 
 function inicializaFlujoAutorizaciones(){
 	flujoAutorizaciones = {};
-	flujoAutorizaciones[3] = new Estatus(3, 'Validacion Expansion');
-	flujoAutorizaciones[8] = new Estatus(8, 'Validacion Expansion y VoBo Inicial Operaciones');
-	flujoAutorizaciones[5] = new Estatus(5, 'Validacion Gestoria y Segundo conteo Auditoria');
-	flujoAutorizaciones[7] = new Estatus(7, 'Validacion Gestoria y Segundo conteo Auditoria');
-	flujoAutorizaciones[6] = new Estatus(6, 'Carga de layout');
-	flujoAutorizaciones[9] = new Estatus(9, 'Validacion de layout');
-	flujoAutorizaciones[10] = new Estatus(10, 'Presupuesto Construccion');
-	flujoAutorizaciones[11] = new Estatus(11, 'Presupuesto Auditoria');
-	flujoAutorizaciones[12] = new Estatus(12, 'Vobo final Operaciones');
-	flujoAutorizaciones[22] = new Estatus(22, 'Comite');
-	flujoAutorizaciones[23] = new Estatus(23, 'Comite');
-	flujoAutorizaciones[18] = new Estatus(18, 'Correccion de layout');
-	flujoAutorizaciones[19] = new Estatus(19, 'Correccion de presupuesto Construccion');
-	flujoAutorizaciones[13] = new Estatus(13, 'Contrato firmado');
-	flujoAutorizaciones[24] = new Estatus(24, 'CECO finanzas');
-	flujoAutorizaciones[14] = new Estatus(14, 'Gestoria');
-	flujoAutorizaciones[15] = new Estatus(15, 'Inicio de obra');
-	flujoAutorizaciones[26] = new Estatus(26, 'Confirmacion fin de obra');
-	flujoAutorizaciones[16] = new Estatus(16, 'Confirmacion Inauguracion');
+	flujoAutorizaciones[3] = new Estatus(3, [1], 'Validacion Expansion');
+	flujoAutorizaciones[8] = new Estatus(8, [1,2], 'Validacion Expansion y VoBo Inicial Regional');
+	flujoAutorizaciones[5] = new Estatus(5, [3,4], 'Validacion Gestoria y Segundo conteo Auditoria');
+	flujoAutorizaciones[7] = new Estatus(7, [3,4], 'Validacion Gestoria y Segundo conteo Auditoria');
+	flujoAutorizaciones[6] = new Estatus(6, [5], 'Carga de layout');
+	flujoAutorizaciones[9] = new Estatus(9, [6], 'Validacion de layout');
+	flujoAutorizaciones[10] = new Estatus(10, [7], 'Presupuesto Construccion');
+	flujoAutorizaciones[11] = new Estatus(11, [8], 'Presupuesto Auditoria');
+	flujoAutorizaciones[12] = new Estatus(12, [9], 'Vobo final Operaciones');
+	flujoAutorizaciones[22] = new Estatus(22, [10], 'Comite');
+	flujoAutorizaciones[23] = new Estatus(23, [10], 'Comite');
+	flujoAutorizaciones[18] = new Estatus(18, [6], 'Correccion de layout');
+	flujoAutorizaciones[19] = new Estatus(19, [7], 'Correccion de presupuesto Construccion');
+	flujoAutorizaciones[13] = new Estatus(13, [11], 'Contrato firmado');
+	flujoAutorizaciones[24] = new Estatus(24, [12], 'CECO finanzas');
+	flujoAutorizaciones[14] = new Estatus(14, [13], 'Gestoria');
+	flujoAutorizaciones[15] = new Estatus(15, [14], 'Inicio de obra');
+	flujoAutorizaciones[26] = new Estatus(26, [15], 'Confirmacion fin de obra');
+	flujoAutorizaciones[16] = new Estatus(16, [16], 'Confirmacion Inauguracion');
 	
 	flujoAutorizaciones[3].agregaArea(areaExpansion, new Area(areaExpansion, todosRechazos, sinArchivos));
 	
@@ -499,8 +514,9 @@ AreasPendientes = function(idArea, idEstatus, usuarioId){
 	this.usuarioId = usuarioId;
 };
 
-Estatus = function(id, nombre){
+Estatus = function(id, permisos, nombre){
 	this.id = id;
+	this.permisos = permisos;
 	this.nombre = nombre;
 	this.area = {};
 	
@@ -757,6 +773,12 @@ function funcionesAutorizacion(){
 		finalizacionMDAutorizada();
 	});
 	
+	inputNoPegar = document.getElementsByClassName('inputNoPegar');
+	for (var i = 0; i < inputNoPegar.length; i++) {
+		inputNoPegar[i].onpaste = function(e) {
+			e.preventDefault();
+		}
+	}
 }
 
 function guardaConteoAuditor(total){

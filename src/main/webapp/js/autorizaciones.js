@@ -98,42 +98,45 @@ $(function(){
 	MOTIVOS_RECHAZO = {};
 	
 	funcionesAutorizacion();
-
+	obtienePermisos();
 });
 
-//function obtienePermisos(){
-//	privilegios = $('.permisos_sub');
-//	permisos = new Array();
-//	
-//	$.each(privilegios, function(){
-//		if(this.value.indexOf("16") != -1){
-//			if(this.value.indexOf(",") != -1){
-//				permisos.push()
-//			}
-//		}
-//	});
-//}
+function obtienePermisos(){
+	privilegios = $('.permisos_sub');
+	permisos = new Array();
+	
+	$.each(privilegios, function(){
+		if(this.value.indexOf("16") != -1){
+			if(this.value.indexOf(",") != -1){
+				per = this.value.split(',')[1];
+				per = per.split('=')[0];
+				
+				permisos.push(parseInt(per));
+			}
+		}
+	});
+}
 
 function inicializaFlujoAutorizaciones(){
 	flujoAutorizaciones = {};
-	flujoAutorizaciones[3] = new Estatus(3, [1], 'Validacion Expansion');
-	flujoAutorizaciones[8] = new Estatus(8, [1,2], 'Validacion Expansion y VoBo Inicial Regional');
-	flujoAutorizaciones[5] = new Estatus(5, [3,4], 'Validacion Gestoria y Segundo conteo Auditoria');
-	flujoAutorizaciones[7] = new Estatus(7, [3,4], 'Validacion Gestoria y Segundo conteo Auditoria');
-	flujoAutorizaciones[6] = new Estatus(6, [5], 'Carga de layout');
-	flujoAutorizaciones[9] = new Estatus(9, [6], 'Validacion de layout');
-	flujoAutorizaciones[10] = new Estatus(10, [7], 'Presupuesto Construccion');
-	flujoAutorizaciones[11] = new Estatus(11, [8], 'Presupuesto Auditoria');
-	flujoAutorizaciones[12] = new Estatus(12, [9], 'Vobo final Operaciones');
-	flujoAutorizaciones[22] = new Estatus(22, [10], 'Comite');
-	flujoAutorizaciones[23] = new Estatus(23, [10], 'Comite');
-	flujoAutorizaciones[18] = new Estatus(18, [6], 'Correccion de layout');
-	flujoAutorizaciones[19] = new Estatus(19, [7], 'Correccion de presupuesto Construccion');
-	flujoAutorizaciones[13] = new Estatus(13, [11], 'Contrato firmado');
-	flujoAutorizaciones[24] = new Estatus(24, [12], 'CECO finanzas');
-	flujoAutorizaciones[14] = new Estatus(14, [13], 'Gestoria');
-	flujoAutorizaciones[15] = new Estatus(15, [14], 'Inicio de obra');
-	flujoAutorizaciones[26] = new Estatus(26, [15], 'Confirmacion fin de obra');
+	flujoAutorizaciones[3] = new Estatus(3, [3], 'Validacion Expansion');
+	flujoAutorizaciones[8] = new Estatus(8, [3,8], 'Validacion Expansion y VoBo Inicial Regional');
+	flujoAutorizaciones[5] = new Estatus(5, [5,7], 'Validacion Gestoria y Segundo conteo Auditoria');
+	flujoAutorizaciones[7] = new Estatus(7, [5,7], 'Validacion Gestoria y Segundo conteo Auditoria');
+	flujoAutorizaciones[6] = new Estatus(6, [6], 'Carga de layout');
+	flujoAutorizaciones[9] = new Estatus(9, [9], 'Validacion de layout');
+	flujoAutorizaciones[10] = new Estatus(10, [10], 'Presupuesto Construccion');
+	flujoAutorizaciones[11] = new Estatus(11, [11], 'Presupuesto Auditoria');
+	flujoAutorizaciones[12] = new Estatus(12, [12], 'Vobo final Operaciones');
+	flujoAutorizaciones[22] = new Estatus(22, [22], 'Comite');
+	flujoAutorizaciones[23] = new Estatus(23, [22], 'Comite');
+	flujoAutorizaciones[18] = new Estatus(18, [18], 'Correccion de layout');
+	flujoAutorizaciones[19] = new Estatus(19, [19], 'Correccion de presupuesto Construccion');
+	flujoAutorizaciones[13] = new Estatus(13, [13], 'Contrato firmado');
+	flujoAutorizaciones[24] = new Estatus(24, [24], 'CECO finanzas');
+	flujoAutorizaciones[14] = new Estatus(14, [14], 'Gestoria');
+	flujoAutorizaciones[15] = new Estatus(15, [15], 'Inicio de obra');
+	flujoAutorizaciones[26] = new Estatus(26, [26], 'Confirmacion fin de obra');
 	flujoAutorizaciones[16] = new Estatus(16, [16], 'Confirmacion Inauguracion');
 	
 	flujoAutorizaciones[3].agregaArea(areaExpansion, new Area(areaExpansion, todosRechazos, sinArchivos));
@@ -498,13 +501,28 @@ function generaAutorizacionPresupuesto(area){
 
 function generaAutorizacionSimple(area){
 	if(PUESTO != DIR_GRAL){
-		userPermitido = arrEstatus[AREA_USUARIO].usuarioId;
-		if((userPermitido == -1 && PUESTO != GERENTE) || USUARIO == userPermitido){
-			if(area.tipoRechazo == sinRechazo)
-				$('#rechazaMD').hide();
-				
-			$('#divAutorizacion').show();
+		if(tienePermiso(area)){
+			userPermitido = arrEstatus[AREA_USUARIO].usuarioId;
+			if((userPermitido == -1 && PUESTO != GERENTE) || USUARIO == userPermitido){
+				if(area.tipoRechazo == sinRechazo)
+					$('#rechazaMD').hide();
+					
+				$('#divAutorizacion').show();
+			}
 		}
+	}
+}
+
+function tienePermiso(area){
+	if(permisos.length == 0)//No tiene perfiles asignados, tiene acceso a toda su area
+		return true;
+	else{
+		permisosNecesarios = flujoAutorizaciones[ESTATUS_MD].permisos;
+		for (var i = 0; i < permisosNecesarios.length; i++) {
+			if(permisos.indexOf(permisosNecesarios[i]) != -1)//Tiene el perfil necesario asignado
+				return true;
+		}
+		return false;//No tiene el perfil necesaario asignado
 	}
 }
 

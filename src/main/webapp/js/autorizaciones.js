@@ -87,6 +87,7 @@ var monto = '';
 var acc = ''; 
 
 var permisos;
+var SOLO_CONSULTA = false;
 
 $(function(){
 	
@@ -106,14 +107,15 @@ function obtienePermisos(){
 	permisos = new Array();
 	
 	$.each(privilegios, function(){
-		if(this.value.indexOf("16") != -1){
+		if(this.value.indexOf("VOKSE.16") != -1){
 			if(this.value.indexOf(",") != -1){
 				per = this.value.split(',')[1];
 				per = per.split('=')[0];
 				
 				permisos.push(parseInt(per));
 			}
-		}
+		}else if(this.value.indexOf("VOKSE.17,1")) //Modulo de solo consulta
+			SOLO_CONSULTA = true;
 	});
 }
 
@@ -514,13 +516,16 @@ function generaAutorizacionSimple(area){
 }
 
 function tienePermiso(area){
-	if(permisos.length == 0)//No tiene perfiles asignados, tiene acceso a toda su area
+	if(SOLO_CONSULTA) //Tiene bloqueo de solo consulta
+		return false;
+	else if(permisos.length == 0)//No tiene perfiles asignados, tiene acceso a toda su area
 		return true;
 	else{
 		permisosNecesarios = flujoAutorizaciones[ESTATUS_MD].permisos;
 		for (var i = 0; i < permisosNecesarios.length; i++) {
 			if(permisos.indexOf(permisosNecesarios[i]) != -1)//Tiene el perfil necesario asignado
 				return true;
+			
 		}
 		return false;//No tiene el perfil necesaario asignado
 	}

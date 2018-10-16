@@ -299,20 +299,20 @@ function cargaDashboard(){
 					descripcion_arreglo.push(1);
 			}
 		}
-		
+// ---------------------------------------------------------		
 		if(descripcion_arreglo.length<16){
-			var size=100/descripcion_arreglo.length;
-			var size_total=size*descripcion_arreglo.length;
+			var size=100/descripcion_arreglo.length+'%';
+			var size_total=100*descripcion_arreglo.length+'px';
 		}
 		else{
-			var size_total=6.6*descripcion_arreglo.length;
-			var size=100/descripcion_arreglo.length;
+			var size_total=100*descripcion_arreglo.length+'px';
+			var size=100+'px';
 		}
-		
+// ------------------------------------------------------------		
 		pintaActivas(descripcion_arreglo, filtrados);
 		
-		$('#proceso').css('min-width',size_total+'%');
-		$('.simple').css('width',size+'%');
+		$('#proceso').css('min-width',size_total);
+		$('.simple').css('width',size);
 		
 		$( "#container_activas" ).on( "click", function() {
 			var descripcion_arreglo=[];
@@ -337,8 +337,8 @@ function cargaDashboard(){
 				}
 			}
 			pintaActivas(descripcion_arreglo,filtrados);
-			$('#proceso').css('min-width',size_total+'%');
-			$('.simple').css('width',size+'%');
+			$('#proceso').css('min-width',size_total);
+			$('.simple').css('width',size);
 
 		});
 		
@@ -365,8 +365,8 @@ function cargaDashboard(){
 				}
 			}
 			pintaAtrasadas(descripcion_arreglo,filtrados);
-			$('#proceso').css('min-width',size_total+'%');
-			$('.simple').css('width',size+'%');
+			$('#proceso').css('min-width',size_total);
+			$('.simple').css('width',size);
 
 		});
 		
@@ -393,8 +393,8 @@ function cargaDashboard(){
 				}
 			}
 			pintaCanceladas(descripcion_arreglo,filtrados);
-			$('#proceso').css('min-width',size_total+'%');
-			$('.simple').css('width',size+'%');
+			$('#proceso').css('min-width',size_total);
+			$('.simple').css('width',size);
 		});
 		
 		

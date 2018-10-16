@@ -117,11 +117,11 @@
      </div>
     <div class="espacio">      
     <div class="col-12"><span class="etiqueta negrita">Nombre</span></div>
-      <div class="col-12"><input type="text" class="a_total" maxlength="50" onkeyup="validaNombre(this);"  id="nombre_usuario" name="nombre_usuario" placeholder='${usr.perfil.nombre}'></div>
+      <div class="col-12"><input type="text" class="a_total" maxlength="50" onkeyup="validaNombre(this);"  id="nombre_usuario" name="nombre_usuario" placeholder='${usr.perfil.nombre}' readonly></div>
     <div class="col-12"><span class="etiqueta negrita">Apellido paterno</span></div>
-      <div class="col-12"><input type="text" class="a_total" maxlength="50" onkeyup="validaApellido(this);" id="apellidoP_usuario" name="apellidoP_usuario" placeholder='${usr.perfil.apellidoP}'></div>
+      <div class="col-12"><input type="text" class="a_total" maxlength="50" onkeyup="validaApellido(this);" id="apellidoP_usuario" name="apellidoP_usuario" placeholder='${usr.perfil.apellidoP}' readonly></div>
     <div class="col-12"><span class="etiqueta negrita">Apellido materno</span></div>
-      <div class="col-12"><input type="text" class="a_total" maxlength="50" onkeyup="validaApellido(this);" id="apellidoM_usuario" name="apellidoM_usuario" placeholder='${usr.perfil.apellidoM}'></div>
+      <div class="col-12"><input type="text" class="a_total" maxlength="50" onkeyup="validaApellido(this);" id="apellidoM_usuario" name="apellidoM_usuario" placeholder='${usr.perfil.apellidoM}' readonly></div>
     <div class="col-12 center"><span class="etiqueta" id="puesto_usuario" name="puesto_usuario">${usr.perfil.perfilesxusuario[0].nombreperfil}</span></div></div>
     
     <div class="espacio">

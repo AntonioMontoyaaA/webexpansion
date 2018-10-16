@@ -131,6 +131,11 @@
          	<result name = "success">jsp/mensajes_historial.jsp</result>
       	</action>
       	
+      	<action name = "validacionMensajesAction" 
+         		class = "com.tiendas.neto.action.GuardaMensajeAction" 
+         		method = "validacionMensajesAction">
+      	</action>
+      	
       	<action name = "memoria_detalle_x_id" 
          		class = "com.tiendas.neto.action.DetalleMemoriaXIdAction" 
          		method = "execute">
@@ -301,6 +306,8 @@
       	 
       	<action name = "MensajeHistorialAction" class="com.tiendas.neto.action.MensajeHistorialAction"
       	 method = "execute"/>
+      	<action name = "obtieneMensajes" class="com.tiendas.neto.action.MensajeHistorialAction"
+      	 method = "obtieneMensajes"/>
       	 
       	 <action name = "Logout" class="com.tiendas.neto.filtros.Logout"
       	 method = "execute">

@@ -28,14 +28,17 @@
 		</div>
 <!-- lista -->	
 		<div class="col-lg-2 col-md-3"  id="contenedor_lista"></div>	
-		<div class="col-lg-10 col-md-9" style="padding-left:0; padding-right:0;">
+		<div class="col-lg-10 col-md-9" id="cuadro_chat">
 <!-- Jefe de expansión -->
 			<div class="col-lg-12 menupr_estilos fondo_chat">
-			<div class="row cabecera">
-				<div class="col-lg-8"  style="height:30px;">
-					<span class="azul negrita" id="subtitulo_chat"></span>
+			<div class="row cabecera" style="width:100%;">
+				<div class="col-lg-9 col-md-8"  style="height:40px;">
+					<span class="azul negrita t14" id="subtitulo_chat"></span>
 				</div>
-				<div class="col-lg-4 right" style="padding-right:25px; padding-top:2px;"><input type="text" id="chat_buscador" onkeyup="buscador()" placeholder="Buscar.."></div>
+				<div class="col-lg-3 col-md-4 right" style="padding-right:25px; padding-top:2px;">
+				<div class="buscador" style="width: 100%;">
+               			<input type="text"  placeholder="Buscar" id="chat_buscador" class="form-control buscadorInput t12" onkeyup="buscador()"></div>
+               	</div> 
 			</div>
 			<div class="col-md-12 div_alt" id="chat_principal"></div>
 			<div class="col-12 cabecera">

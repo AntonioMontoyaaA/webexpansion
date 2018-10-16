@@ -164,7 +164,7 @@ function cargaMensajes(valor){
 		$("#chatSend").addClass("sendDisable");
 		$("#chat_principal").animate({ scrollTop: $('#chat_principal').prop("scrollHeight")}, 50);
 		$('#chat_principal').scrollTop($('#chat_principal')[0].scrollHeight);
-		$('#chat_buscador').show();
+		$('.buscador').show();
 		
 		if($('#'+PARAMETRO+" td div").hasClass( "globo" )){
 			validacionMensajes();

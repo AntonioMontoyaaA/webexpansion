@@ -1,6 +1,44 @@
-#chat_buscador{
+.buscador {	
 	display:none;
-	height:25px;
+	margin-top:3;
+	padding-right:10;
+	padding-left:8 !important;
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius:2px;
+    border: 0px solid white;
+    color:white;
+    font-size: 12px;
+    padding-left: 3px;
+    margin-right:10px;
+    background-color:white;
+    background-image: url(../img/lupaGris.svg);
+    background-size: 13px 13px;
+    background-position: left;
+    background-repeat: no-repeat;
+    background-origin: content-box;
+    border:1px solid #c9c9c9;
+    height:25px;
+}
+.buscadorInput {
+	font-size: 12px;
+	width:98% !important;
+    height: 23px;
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border: 0px solid white;
+    padding-left: 7px;
+    margin-left: 15px;
+ 	background-color:transparent;
+}
+.buscadorInput::placeHolder  {
+	color:#c9c9c9;
+}
+
+
+#cuadro_chat{
+	padding:0;
 }
 @media (max-width: 1140px) {
 	.descr{font-size:10px !important;}
@@ -14,6 +52,7 @@
 	#contenedor_lista{
 	max-height: 100px !important;
 	}
+	.cuadro_chat{padding:auto;}
 }
 
 /* estilos del chat_principal*/
@@ -44,7 +83,6 @@
 
 .fondo_chat{ 
 	background-image: url(../img/bgCHAT-03.svg);
-	background-size:1200px;
 	background-repeat: no-repeat; 
 	background-position:center;
 	background-color:white;
@@ -56,7 +94,7 @@
 #contenedor_lista{
 	padding-left:0;
 	padding-right:0;
-	max-height: calc(100% - 144px);
+	max-height: calc(100% - 145px);
 	overflow-y:auto;
 }
 
@@ -116,7 +154,7 @@
 	padding-bottom:20px;
 }
 .div_alt{
-	height:calc(100% - 240px);
+	height:calc(100% - 250px);
 	overflow-y: auto;
 	padding:0;
 }

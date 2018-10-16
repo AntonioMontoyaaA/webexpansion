@@ -300,13 +300,13 @@ function cargaDashboard(){
 			}
 		}
 // ---------------------------------------------------------		
-		if(descripcion_arreglo.length<16){
+		if(descripcion_arreglo.length<18){
 			var size=100/descripcion_arreglo.length+'%';
 			var size_total=100*descripcion_arreglo.length+'px';
 		}
 		else{
 			var size_total=100*descripcion_arreglo.length+'px';
-			var size=100+'px';
+			var size=100/descripcion_arreglo.length+'%';
 		}
 // ------------------------------------------------------------		
 		pintaActivas(descripcion_arreglo, filtrados);

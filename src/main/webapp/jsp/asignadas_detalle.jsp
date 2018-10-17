@@ -647,20 +647,22 @@
 
 <div id="modalImages" class="modalImagen">
  <span class="closeModal">&times;</span>
-	
-	<div class="row">
+	<div class="row" style="width:100%;">
 		<div class="col-6">
-			<div class="t12 blanco negrita" id="captionModal"></div>
+			<div class="t18 blanco negrita" id="captionModal"></div>
 		</div>
-		<div class="col-5 right">
-			<input type="button" class="btn t12" value="Rotar izquierda" onclick="rotar(0);">
-			<input type="button" class="btn t12" value="Rotar derecha" onclick="rotar(1);">
+		<div class="col-5 right" style="padding-right:30px;">
+			<input type="button" class="btn desp" id="derecha" onclick="rotar(0);">
+			<input type="button" class="btn desp" id="izquierda" onclick="rotar(1);">
+			<input type="button" class="btn desp" id="aumentar" onclick="rotar(3);">
+			<input type="button" class="btn desp" id="disminuir" onclick="rotar(4);">
 		</div>
 	</div>
-	
-	
-	<div style="position:relative"><img class="modal-content rotate_left" id="imageModal"></div>
+	<div id="contenedor-imagen">
+	<div style="width:100%; height: -webkit-fill-available;"><img class="modal-content rotate_left" id="imageModal" ></div>
 	</div>
+	
+</div>
 
 <jsp:include page="/jsp/generic/loading.jsp" />
 <jsp:include page="/jsp/generic/mensajes.jsp" />

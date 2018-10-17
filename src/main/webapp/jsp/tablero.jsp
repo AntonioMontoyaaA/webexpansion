@@ -76,14 +76,14 @@
         				</div>
     				</div> -->
                 <button class="btn desp refresh" type="button" onclick="creatabla();"></button>
-                <div class="desp descarga" id="descargaExcelTablero" style="cursor: pointer;"></div>
+                <div class="desp descarga sin_permiso" id="descargaExcelTablero" style="cursor: pointer;"></div>
                     <input type="text" class="fechaInicialCalendario" readonly id="datepicker1" style="display: none;" />
                     
-                	<button class="btn desp" id="time" type="button"></button>
-  					<button class="btn desp" id="edit" type="button"></button>
-  					<button class="btn desp" id="pause" type="button"></button>
-  					<button class="btn desp" id="refuse" type="button"></button>
-  					<button class="btn desp" id="change" type="button"></button>
+                	<button class="btn desp sin_permiso" id="time" type="button"></button>
+  					<button class="btn desp sin_permiso" id="edit" type="button"></button>
+  					<button class="btn desp sin_permiso" id="pause" type="button"></button>
+  					<button class="btn desp sin_permiso" id="refuse" type="button"></button>
+  					<button class="btn desp sin_permiso" id="change" type="button"></button>
                 </form>
             	
             </div> 

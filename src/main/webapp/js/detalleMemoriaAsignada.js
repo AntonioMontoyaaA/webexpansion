@@ -1640,20 +1640,32 @@ function editaGeneralidadesAction() {
 	}
 }
 
+var tamaño=60;
 var grados=0;
 function rotar(valor){
-	if(valor==1){
-		grados=grados+90;
-		$('#imageModal').css('-webkit-transform','rotate('+grados+'deg)');
-		
-	}
 	if(valor==0){
 		grados=grados-90;
 		$('#imageModal').css('-webkit-transform','rotate('+grados+'deg)');
 	}
-	if(valor==2){
+	if(valor==1){
+		grados=grados+90;
+		$('#imageModal').css('-webkit-transform','rotate('+grados+'deg)');
+	}
+	if(valor==2){ //imagen en posicion inicial
 		grados=0;
 		$('#imageModal').css('-webkit-transform','rotate('+grados+'deg)');
+	}
+	if(valor==3){
+		if(tamaño<140){
+			tamaño=tamaño+20;
+		}
+		$('#imageModal').css('width',tamaño+'%');
+	}
+	if(valor==4){
+		if(tamaño>60){
+			tamaño=tamaño-20;
+		}
+		$('#imageModal').css('width',tamaño+'%');
 	}
 }
 

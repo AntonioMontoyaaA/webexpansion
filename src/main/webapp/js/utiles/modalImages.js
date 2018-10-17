@@ -9,6 +9,7 @@ function modalImage(img, url, nombre){
 	captionText = document.getElementById('captionModal');
 	
 	modal.style.display = "block";
+	$('body').css('overflow','hidden');
 	if(url == undefined) {
 		modalImg.src = img.src;
 		captionText.innerHTML = img.alt;
@@ -23,6 +24,7 @@ function modalImage(img, url, nombre){
 function closeModal(){
 	span = document.getElementsByClassName("closeModal")[0];
 	span.onclick = function() { 
+		$('body').css('overflow','auto');
 		modal.style.display = "none";
 	}
 }

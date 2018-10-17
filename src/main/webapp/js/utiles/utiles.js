@@ -600,15 +600,45 @@ function validaCelular(value){
 }
 
 function permisos_perfil(){
+	$('#time').hide;
+	$('#edit').hide;
+	$('#pause').hide;
+	$('#refuse').hide;
+	$('#change').hide;
+	$('#descargaExcelTablero').hide;
+
 	var permiso=true;
-	$.each($(".permisos_sub"),function(index, value){  // permisos de perfil
-		if(value.value=="PRIVILEGIO.MENU.VOKSE.33=true"){
-			
-			$('#descargaExcelTablero').addClass('sin_permiso');
-			$('#edit').addClass('sin_permiso');
-			$('#pause').addClass('sin_permiso');
-			$('#refuse').addClass('sin_permiso');
-			$('#change').addClass('sin_permiso');
+	$.each($(".permisos_sub"),function(index, value){  // permisos de perfil	
+		
+		/*501 - DESCARGA EXCEL
+		502 - VER GANT
+		503 - EDITAR MD
+		504 - PAUSAR MD
+		505 - CANCELAR MD
+		506 - CAMBIAR ESTATUS MD*/
+		if(value.value=="PRIVILEGIO.MENU.VOKSE.501=true"){
+			console.log(value.value);
+			$('#descargaExcelTablero').removeClass('sin_permiso');
 		}
+		if(value.value=="PRIVILEGIO.MENU.VOKSE.502=true"){
+			console.log(value.value);
+			$('#time').removeClass('sin_permiso');
+		}
+		if(value.value=="PRIVILEGIO.MENU.VOKSE.503=true"){
+			console.log(value.value);
+			$('#edit').removeClass('sin_permiso');
+		}
+		if(value.value=="PRIVILEGIO.MENU.VOKSE.504=true"){
+			console.log(value.value);
+			$('#pause').removeClass('sin_permiso');
+		}
+		if(value.value=="PRIVILEGIO.MENU.VOKSE.505=true"){
+			console.log(value.value);
+			$('#refuse').removeClass('sin_permiso');
+		}
+		if(value.value=="PRIVILEGIO.MENU.VOKSE.506=true"){
+			console.log(value.value);
+			$('#change').removeClass('sin_permiso');
+		}		
 	});
 }

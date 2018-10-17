@@ -1,3 +1,27 @@
+
+#derecha{
+	background-image:url('../../img/botones/derecha.svg');
+}
+#izquierda{
+	background-image:url('../../img/botones/izq.svg');
+}
+#aumentar{
+	background-image:url('../../img/botones/maszoom.svg');
+}
+#disminuir{
+	background-image:url('../../img/botones/menoszoom.svg');
+}
+#captionModal{
+	margin-left:10px !important;
+}
+#imageModal{
+	width:60%;
+}
+#contenedor-imagen{
+	max-height:calc(100% - 50px);
+	overflow-y: auto;
+	padding-top:100px;
+}
 @charset "ISO-8859-1";
 
 /* Style the Image Used to Trigger the Modal */
@@ -14,7 +38,6 @@
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
-    padding-top:20px; /* Location of the box */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
@@ -28,8 +51,7 @@
 .modal-content {
     margin: auto;
     display: block;
-    width: 80%;
-    max-width: 620px;
+    margin-top:0 !important;
 }
 
 /* Caption of Modal Image (Image Text) - Same Width as the Image */
@@ -58,8 +80,8 @@
 /* The Close Button */
 .closeModal {
     position: absolute;
-    top: 0px;
-    right: 35px;
+    top: -15px;
+    right: 10px;
     color: #f1f1f1;
     font-size: 40px;
     font-weight: bold;

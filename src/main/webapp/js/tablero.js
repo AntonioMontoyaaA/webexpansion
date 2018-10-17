@@ -231,38 +231,30 @@ function creatabla(){
 		
 		if(data.codigo != 200) {
 			cargaMensajeModal('Memorias descriptivas', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
-			$("#descargaExcelTablero").hide();
-			$("#time").hide();
-			$("#edit").hide();
-			if(tipoTabla == 1) {
-				$("#pause").show();
-				$("#refuse").show();
-			} else {
-				$("#pause").hide();
-				$("#refuse").hide();
-			}
-			$("#change").hide();
+			$('#time').hide;
+			$('#edit').hide;
+			$('#pause').hide;
+			$('#refuse').hide;
+			$('#change').hide;
+			$('#descargaExcelTablero').hide;
 			initTablaMemoriasTablero('DivTablaTablero', 0, 'tablaMemoriasTablero');
 		} else {
 			resultadoTablero = data.detalleTablero;
 			datosExcel = data;
 			$("#descargaExcelTablero").show();
 			$("#time").show();
-//			$("#change").show();
+			
 			if(tipoTabla == 1) {
 				$("#pause").show();
 				$("#refuse").show();
-				//$("#edit").hide();
+				$("#edit").show();
+				$("#change").show();
 			} else {
 				$("#pause").hide();
 				$("#refuse").hide();
-				//$("#edit").show();
+				$("#edit").hide();
+				$("#change").hide();
 			}
-
-			//TODO remove
-			$("#edit").hide();
-			$("#change").hide();
-			
 			var datosMemorias = new Array();
 			
 			if(data.resumen != undefined && data.resumen != null && data.resumen != "null") {

@@ -33,9 +33,10 @@
 						<c:if test="${permisos['PRIVILEGIO.MENU.VOKSE.12']}">
 							<li id="localizadorMenu" class="nav-item"><a id="idlocalizador" class="nav-link blanco t12" href="localizador"> Localizador</a></li>						
 						</c:if> 
-					
-							<li id="aprobadasMenu" class="nav-item" style="display: none;"><a id="idaprobadas" class="nav-link blanco t12" href="aprobadas">Aprobadas</a></li>													
 						
+							<li id="configuracionMenu" class="nav-item"><a id="idconfiguracion" class="nav-link blanco t12" href="configuracion"> Configuración</a></li>						
+						
+							<!--  <li id="aprobadasMenu" class="nav-item" style="display: none;"><a id="idaprobadas" class="nav-link blanco t12" href="aprobadas">Aprobadas</a></li>	-->									
 					</ul>
 					
 					<input id="perfilLogin" type="hidden" value="${usr.perfil.puestoId}"/>
@@ -117,11 +118,11 @@
      </div>
     <div class="espacio">      
     <div class="col-12"><span class="etiqueta negrita">Nombre</span></div>
-      <div class="col-12"><input type="text" class="a_total" maxlength="50" onkeyup="validaNombre(this);"  id="nombre_usuario" name="nombre_usuario" placeholder='${usr.perfil.nombre}'></div>
+      <div class="col-12"><input type="text" class="a_total" maxlength="50" onkeyup="validaNombre(this);"  id="nombre_usuario" name="nombre_usuario" placeholder='${usr.perfil.nombre}' readonly></div>
     <div class="col-12"><span class="etiqueta negrita">Apellido paterno</span></div>
-      <div class="col-12"><input type="text" class="a_total" maxlength="50" onkeyup="validaApellido(this);" id="apellidoP_usuario" name="apellidoP_usuario" placeholder='${usr.perfil.apellidoP}'></div>
+      <div class="col-12"><input type="text" class="a_total" maxlength="50" onkeyup="validaApellido(this);" id="apellidoP_usuario" name="apellidoP_usuario" placeholder='${usr.perfil.apellidoP}' readonly></div>
     <div class="col-12"><span class="etiqueta negrita">Apellido materno</span></div>
-      <div class="col-12"><input type="text" class="a_total" maxlength="50" onkeyup="validaApellido(this);" id="apellidoM_usuario" name="apellidoM_usuario" placeholder='${usr.perfil.apellidoM}'></div>
+      <div class="col-12"><input type="text" class="a_total" maxlength="50" onkeyup="validaApellido(this);" id="apellidoM_usuario" name="apellidoM_usuario" placeholder='${usr.perfil.apellidoM}' readonly></div>
     <div class="col-12 center"><span class="etiqueta" id="puesto_usuario" name="puesto_usuario">${usr.perfil.perfilesxusuario[0].nombreperfil}</span></div></div>
     
     <div class="espacio">

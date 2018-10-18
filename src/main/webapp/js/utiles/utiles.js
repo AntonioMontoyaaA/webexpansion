@@ -221,12 +221,13 @@ function consultaNotificaciones(){
 				{'tipoNotificacion':2}, 
 				'cargaNotificaciones', 
 				function() {
-					//cierraLoading();
+					cierraLoading();
 				},
 				function() {
-					//cierraLoading();
+					cierraLoading();
 				});
 	 cargaNotificaciones = function(data) {
+	 cierraLoading();
 			if(data.codigo != 200){
 				
 			}else{

@@ -27,6 +27,9 @@
 		<action name="dashboard">
 			<result>jsp/dashboard.jsp</result>
 		</action>
+		<action name="configuracion">
+			<result>jsp/configuracion.jsp</result>
+		</action>
 		<action name="tablero">
 			<result>jsp/tablero.jsp</result>
 		</action>

@@ -296,10 +296,10 @@
 					<div class="col-lg-12 col-md-12 altura2">
 						<div id="mapaZonificacion" style="width: 100%; height: 85%; position: relative; float: left;"></div>
 					</div>
-					<div id="divNegociosHeader" style="position: absolute;left: 68%;display: none;">
+					<div id="divNegociosHeader" style="cursor:pointer; position: absolute;left: 68%;display: none;" onclick="muestraGeneradores()" >
 						<div class="row" style="float: right; overflow-y: scroll;margin-right: 0px;">
 							<div style="max-height:50px; overflow:auto;background: #e6e6e6;">
-								<span class="titulo_detalle_md_20" style="padding-left: 30px;">VER DETALLE</span>&nbsp;&nbsp;&nbsp;<img onclick="muestraGeneradores()" src="${pageContext.request.contextPath}/img/arrowDown.png" style="padding-top: 0px; cursor: pointer;padding-right: 30px;"/>
+								<span class="titulo_detalle_md_20" style="padding-left: 30px;">VER DETALLE</span>&nbsp;&nbsp;&nbsp;<img src="${pageContext.request.contextPath}/img/arrowDown.png" style="padding-top: 0px; cursor: pointer;padding-right: 30px;"/>
 							</div>
 						</div>
 					</div>
@@ -309,7 +309,7 @@
 					
 						<div class="row" style="margin-right: 10px;margin-left: 10px;">
 							<div class="col-lg-10 col-10 titulo_mapa"><span class="titulo_detalle_md_20">COMPETENCIAS</span></div>
-							<div class="col-lg-2 col-2"><img onclick="escondeGeneradores()" src="${pageContext.request.contextPath}/img/arrowUp.png" style="padding-top: 10px; cursor: pointer;"/></div>
+							<div class="col-lg-2 col-2 cursor" onclick="escondeGeneradores()"><img src="${pageContext.request.contextPath}/img/arrowUp.png" style="padding-top: 10px; cursor: pointer;"/></div>
 							<div class="icono_mapa"><span id="netoTotal" class="titulo_detalle_md_20" style="padding-right: 5px">0</span><img class="icono_imagen" src="img/competencia/w_neto.png"></div>
 							<div class="icono_mapa"><span id="tresBTotal" class="titulo_detalle_md_20" style="padding-right: 5px">0</span><img class="icono_imagen" src="img/competencia/iconos_3b.png"></div>
 							<div class="icono_mapa"><span id="expressTotal" class="titulo_detalle_md_20" style="padding-right: 5px">0</span><img class="icono_imagen" src="img/competencia/iconos_express.png"></div>

@@ -604,6 +604,16 @@ Left
 	opacity: 0.85;
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=85)";
 }
+@media (max-width: 576px) {
+	.back_generadores {
+		position:relative;
+		left: 15px !important;
+		max-height:435px !important;
+	}
+	#divNegocios{
+		left:0 !important;
+	}
+}
 .subfactores_20 {
 	text-align: center;
     position: relative;

@@ -1,0 +1,39 @@
+.contenedor_botones_superiores{
+	margin:0 auto;
+	width:35%;
+	height:30px;
+	margin-bottom:10px;
+}
+@media(max-width: 997px){
+	.contenedor_botones_superiores{width:100%;}
+}
+@media(max-width: 768px){
+	#asignar{width:50% !important;}
+	#filtros{width:50% !important;}
+	.buscador{width:100%;}
+}
+.boton_sup{
+	text-align:center;
+	color:gray;
+	border-bottom:4px solid gray;
+}
+.boton_sup.activo{
+	color:#40bcd8;
+	border-bottom:4px solid #40bcd8;
+}
+.boton_sup:hover{
+	color:#40bcd8;
+	border-bottom:4px solid #40bcd8;
+}
+#asignar{
+	width:200px !important;
+}
+#filtros{
+	width:200px !important;
+	background-image:url('../img/botones/filtro.svg');
+	background-repeat:no-repeat;
+	background-position:left;
+}
+.buscador{
+	width:calc(100% - 420px);
+}

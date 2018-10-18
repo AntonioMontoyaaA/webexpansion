@@ -12,7 +12,6 @@
 	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
 	
 	<package name="user" namespace="/" extends="struts-default">
-		
 		<interceptors>  
 		       <interceptor class="com.tiendas.neto.interceptor.InterceptorAutorizadorPermisos" name="permisosInterceptor"/>  
 		       <interceptor-stack name="permisosStack">  
@@ -28,7 +27,7 @@
 			<result>jsp/dashboard.jsp</result>
 		</action>
 		<action name="configuracion">
-			<result>jsp/configuracion.jsp</result>
+			<result>jsp/configuracion_usuario.jsp</result>
 		</action>
 		<action name="tablero">
 			<result>jsp/tablero.jsp</result>

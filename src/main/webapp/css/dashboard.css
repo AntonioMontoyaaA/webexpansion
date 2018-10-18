@@ -53,6 +53,17 @@ span.estilo_dato{
 }
 
 /* ------------------------------------------- GRAFICAS --------------*/
+g .highcharts-legend-item text tspan{
+	color:white !important;
+	fill:white !important;
+}
+g .highcharts-legend-item rect{
+	width:12px !important;
+	rx:1 !important;
+	ry:1 !important;
+}
+
+
 .highcharts-point, .highcharts-tick{
 	 stroke-width: 0; 
 }

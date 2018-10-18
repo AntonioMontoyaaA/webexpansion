@@ -865,10 +865,9 @@ function EnviaFecha(){
 function EnviaSubmodulosAction(submodulos_global){
 	
 	submodulos=submodulos_global.toString();	
-	$.ajax({
-        type     : "POST",
-        url      : 'EnviaSubmodulosAction',
-        data     : {'submodulos': submodulos},
-        async	 : false
-	});
+	invocarJSONServiceAction("EnviaSubmodulosAction", 
+			{'submodulos':submodulos}, 
+			null, 
+			null,
+			null);
 }

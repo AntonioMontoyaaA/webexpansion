@@ -114,7 +114,7 @@ function obtienePermisos(){
 				
 				permisos.push(parseInt(per));
 			}
-		}else if(this.value.indexOf("VOKSE.17,1")) //Modulo de solo consulta
+		}else if(this.value.indexOf("VOKSE.17,1") != -1) //Modulo de solo consulta
 			SOLO_CONSULTA = true;
 	});
 }

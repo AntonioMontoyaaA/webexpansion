@@ -1,7 +1,6 @@
 var AUTORIZA_MODULO			= 1;
 var RECHAZA_MODULO			= 0;
 
-var MOTIVOS_RECHAZO = {};
 var ESTATUS_FINALIZA_MD = -1;
 
 Dropzone.autoDiscover = false;
@@ -89,6 +88,9 @@ var acc = '';
 var permisos;
 var SOLO_CONSULTA = false;
 
+var MOTIVO_RECHAZO_SELECCIONADO;
+var COMENTARIO_RECHAZO;
+
 $(function(){
 	
 	AREA_USUARIO = parseInt($('#areaUsuario').val());
@@ -96,7 +98,6 @@ $(function(){
 	USUARIO = parseInt($('#usuarioId').val());
 
 	inicializaFlujoAutorizaciones();
-	MOTIVOS_RECHAZO = {};
 	
 	funcionesAutorizacion();
 	obtienePermisos();
@@ -599,12 +600,12 @@ function obtieneMotivosGenerales(){
 				$.each(data.motivos, function(){
 					if(tRechazo == rechazoParcial){// Solo rechazos parciales
 						if(!this.rechazoDefinitvo)
-							strCombo += '<option ' + ((this.rechazoDefinitvo) ? 'style="color: red"' : '') + ' value="' + this.motivoId + '">' + capitalizeFirstLetter(this.descripcion) + '</option>'; 
+							strCombo += '<option rel="0" value="' + this.motivoId + '">' + capitalizeFirstLetter(this.descripcion) + '</option>'; 
 					}else if(tRechazo == rechazoDefinitivo){//Solo rechazos definitivos
 						if(this.rechazoDefinitvo)
-							strCombo += '<option ' + ((this.rechazoDefinitvo) ? 'style="color: red"' : '') + ' value="' + this.motivoId + '">' + capitalizeFirstLetter(this.descripcion) + '</option>';
+							strCombo += '<option ' + ((this.rechazoDefinitvo) ? 'rel="1" style="color: red"' : 'rel="0"') + ' value="' + this.motivoId + '">' + capitalizeFirstLetter(this.descripcion) + '</option>';
 					}else
-						strCombo += '<option ' + ((this.rechazoDefinitvo) ? 'style="color: red"' : '') + ' value="' + this.motivoId + '">' + capitalizeFirstLetter(this.descripcion) + '</option>' ;
+						strCombo += '<option ' + ((this.rechazoDefinitvo) ? 'rel="1" style="color: red"' : 'rel="0"') + ' value="' + this.motivoId + '">' + capitalizeFirstLetter(this.descripcion) + '</option>' ;
 				});
 	
 				strCombo += '</select>';
@@ -759,11 +760,24 @@ function funcionesAutorizacion(){
 					mensaje += 'Por favor selecciona el motivo de rechazo';
 				else
 					mensaje = 'Porfavor escriba y seleccione el motivo de rechazo';
-			}else
+			}else{
 				motivoSeleccionado = $('#motivoRechazo option:selected').val();
-			
+				tipoMotivoSeleccionado = parseInt($('#motivoRechazo option:selected').attr('rel'));
+			}
 			if(mensaje == '')
-				actionfinalizaMD(motivoSeleccionado, comentario);
+				if(tipoMotivoSeleccionado == 0)//selecciona motivo de rechazo parcial
+					actionfinalizaMD(motivoSeleccionado, comentario);
+				else{//Selecciona motivo de rechazo definitivo
+					
+					MOTIVO_RECHAZO_SELECCIONADO = motivoSeleccionado;
+					COMENTARIO_RECHAZO = comentario;
+					
+					cargaMensajeModal('DETALLE MD',
+							'¿Estas seguro de rechazar la MD? Esto ocasionará que el sitio sea cancelado.',
+							TIPO_MENSAJE_SI_NO,
+							TIPO_ESTATUS_ALERTA,
+							actionfinalizaMDDefinitivo);
+				}
 			else{
 				$("#modal_autorizacion").modal("hide");
 				cargaMensajeModal('DETALLE MD', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, muestraPopAutorizacion);
@@ -804,6 +818,9 @@ function funcionesAutorizacion(){
 	}
 }
 
+function actionfinalizaMDDefinitivo(){
+	actionfinalizaMD(MOTIVO_RECHAZO_SELECCIONADO, COMENTARIO_RECHAZO);
+}
 function guardaConteoAuditor(total){
 	cargaLoading();
 	

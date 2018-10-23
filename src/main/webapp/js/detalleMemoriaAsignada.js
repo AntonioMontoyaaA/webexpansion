@@ -26,6 +26,10 @@ $(function(){
 	perfil=$("#perfil_usuario").val();  
 	area=$("#nombreAreaUsuario").val();
 
+	if( $(window).width() < 400)
+	{
+		escondeGeneradores();
+	}
 // ------------------- SE ARMA LA LEYENDA ------------------
 	if(perfil==3){
 		$('#leyenda').text('DASHBOARD DIRECTOR GENERAL');

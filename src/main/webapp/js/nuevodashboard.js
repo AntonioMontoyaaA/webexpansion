@@ -69,56 +69,70 @@ function AperturaMensual_grafica(data){
 var	datos=data.meses;
 var ene_plan=0, ene_real=0, feb_plan=0, feb_real=0, mar_plan=0, mar_real=0, abr_plan=0, abr_real=0, may_plan=0, may_real=0;
 var jun_plan=0, jun_real=0, jul_plan=0, jul_real=0, ago_plan=0, ago_real=0, sep_plan=0, sep_real=0, oct_plan=0, oct_real=0;
-var nov_plan=0, nov_real=0, dic_plan=0, dic_real=0;
+var nov_plan=0, nov_real=0, dic_plan=0, dic_real=0, ene_est=0, feb_est=0, mar_est=0, abr_est=0, may_est=0, jun_est=0, jul_est=0;
+var ago_est=0, sep_est=0, oct_est=0, nov_est=0, dic_est=0;
+
 $('#suma').text(data.totalAperturas);
 
 if(datos.Enero!="undefined"){
 	ene_plan=datos.Enero.plan;
 	ene_real=datos.Enero.real;
+	ene_est=datos.Enero.estimado;
 }
 if(datos.Febrero!="undefined"){
 	feb_plan=datos.Febrero.plan;
 	feb_real=datos.Febrero.real;
+	feb_est=datos.Febrero.estimado;
 }
 if(datos.Marzo!="undefined"){
 	mar_plan=datos.Marzo.plan;
 	mar_real=datos.Marzo.real;
+	mar_est=datos.Marzo.estimado;
 }
 if(datos.Abril!="undefined"){
 	abr_plan=datos.Abril.plan;
 	abr_real=datos.Abril.real;
+	abr_est=datos.Abril.estimado;
 }
 if(datos.Mayo!="undefined"){
 	may_plan=datos.Mayo.plan;
 	may_real=datos.Mayo.real;
+	may_est=datos.Mayo.estimado;
 }
 if(datos.Junio!="undefined"){
 	jun_plan=datos.Junio.plan;
 	jun_real=datos.Junio.real;
+	jun_est=datos.Junio.estimado;
 }
 if(datos.Julio!="undefined"){
 	jul_plan=datos.Julio.plan;
 	jul_real=datos.Julio.real;
+	jul_est=datos.Julio.estimado;
 }
 if(datos.Agosto!="undefined"){
 	ago_plan=datos.Agosto.plan;
 	ago_real=datos.Agosto.real;
+	ago_est=datos.Agosto.estimado;
 }
 if(datos.Septiembre!="undefined"){
 	sep_plan=datos.Septiembre.plan;
 	sep_real=datos.Septiembre.real;
+	sep_est=datos.Septiembre.estimado;
 }
 if(datos.Octubre!="undefined"){
 	oct_plan=datos.Octubre.plan;
 	oct_real=datos.Octubre.real;
+	oct_est=datos.Octubre.estimado;
 }
 if(datos.Noviembre!="undefined"){
 	nov_plan=datos.Noviembre.plan;
 	nov_real=datos.Noviembre.real;
+	nov_est=datos.Noviembre.estimado;
 }
 if(datos.Diciembre!="undefined"){
 	dic_plan=datos.Diciembre.plan;
 	dic_real=datos.Diciembre.real;
+	dic_est=datos.Diciembre.estimado;
 }
 	
 	Highcharts.chart('container_apmensual', {
@@ -136,7 +150,7 @@ if(datos.Diciembre!="undefined"){
 	        text: null,
 	    },
 	    legend: {
-	        enabled: false
+	        enabled: true
 	    },
 	    xAxis: {
 	        categories: ['Ene','Feb','Mar','Abr','Mayo','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
@@ -163,40 +177,40 @@ if(datos.Diciembre!="undefined"){
 	    		   text = this.x;
 	    		   
 	    		   if(text=="Ene") {
-	    	         return ('<b>Objetivo:</b> '+ene_plan+'<br><b>Real: </b> '+ene_real);
+	    	         return ('<b>Objetivo:</b> '+ene_plan+'<br><b>Estimado: </b> '+ene_est+'<br><b>Real: </b> '+ene_real);
 	    	       } 
 	    		   if(text=="Feb") {
-	    			   return ('<b>Objetivo:</b> '+feb_plan+'<br><b>Real: </b> '+feb_real);
+	    			   return ('<b>Objetivo:</b> '+feb_plan+'<br><b>Estimado: </b> '+feb_est+'<br><b>Real: </b> '+feb_real);
 		    	    }
 	    		   if(text=="Mar") {
-	    			   return ('<b>Objetivo:</b> '+mar_plan+'<br><b>Real: </b> '+mar_real);
+	    			   return ('<b>Objetivo:</b> '+mar_plan+'<br><b>Estimado: </b> '+mar_est+'<br><b>Real: </b> '+mar_real);
 		    	    }
 	    		   if(text=="Abr") {
-	    			   return ('<b>Objetivo:</b> '+abr_plan+'<br><b>Real: </b> '+abr_real);
+	    			   return ('<b>Objetivo:</b> '+abr_plan+'<br><b>Estimado: </b> '+abr_est+'<br><b>Real: </b> '+abr_real);
 		    	    }
 	    		   if(text=="May") {
-	    			   return ('<b>Objetivo:</b> '+may_plan+'<br><b>Real: </b> '+may_real);
+	    			   return ('<b>Objetivo:</b> '+may_plan+'<br><b>Estimado: </b> '+may_est+'<br><b>Real: </b> '+may_real);
 		    	    }
 	    		   if(text=="Jun") {
-	    			   return ('<b>Objetivo:</b> '+jun_plan+'<br><b>Real: </b> '+jun_real);
+	    			   return ('<b>Objetivo:</b> '+jun_plan+'<br><b>Estimado: </b> '+jun_est+'<br><b>Real: </b> '+jun_real);
 		    	    }
 	    		   if(text=="Jul") {
-	    			   return ('<b>Objetivo:</b> '+jul_plan+'<br><b>Real: </b> '+jul_real);
+	    			   return ('<b>Objetivo:</b> '+jul_plan+'<br><b>Estimado: </b> '+jul_est+'<br><b>Real: </b> '+jul_real);
 		    	    }
 	    		   if(text=="Ago") {
-	    			   return ('<b>Objetivo:</b> '+ago_plan+'<br><b>Real: </b> '+ago_real);
+	    			   return ('<b>Objetivo:</b> '+ago_plan+'<br><b>Estimado: </b> '+ago_est+'<br><b>Real: </b> '+ago_real);
 		    	    }
 	    		   if(text=="Sep") {
-	    			   return ('<b>Objetivo:</b> '+sep_plan+'<br><b>Real: </b> '+sep_real);
+	    			   return ('<b>Objetivo:</b> '+sep_plan+'<br><b>Estimado: </b> '+sep_est+'<br><b>Real: </b> '+sep_real);
 		    	    }
 	    		   if(text=="Oct") {
-	    			   return ('<b>Objetivo:</b> '+oct_plan+'<br><b>Real: </b> '+oct_real);
+	    			   return ('<b>Objetivo:</b> '+oct_plan+'<br><b>Estimado: </b> '+oct_est+'<br><b>Real: </b> '+oct_real);
 		    	    }
 	    		   if(text=="Nov") {
-	    			   return ('<b>Objetivo:</b> '+nov_plan+'<br><b>Real: </b> '+nov_real);
+	    			   return ('<b>Objetivo:</b> '+nov_plan+'<br><b>Estimado: </b> '+nov_est+'<br><b>Real: </b> '+nov_real);
 		    	    }
 	    		   if(text=="Dic") {
-	    			   return ('<b>Objetivo:</b> '+dic_plan+'<br><b>Real: </b>'+dic_real);
+	    			   return ('<b>Objetivo:</b> '+dic_plan+'<br><b>Estimado: </b> '+dic_est+'<br><b>Real: </b>'+dic_real);
 		    	    }
 	    		   
 	    	      /* var text = '';
@@ -216,21 +230,37 @@ if(datos.Diciembre!="undefined"){
 	        }
 	    },
 	    series: [{
-		        name: 'Objetivo',
-		        color: 'white',
+	        name: 'Objetivo',
+	        color: 'white',
+	        data: [
+	        	ene_plan - ene_est - ene_real,
+	        	feb_plan - feb_est -  feb_real,
+	        	mar_plan - mar_est -  mar_real,
+	        	abr_plan - abr_est -  abr_real,
+	        	may_plan - may_est -  may_real,
+	        	jun_plan - jun_est -  jun_real,
+	        	jul_plan - jul_est -  jul_real,
+	        	ago_plan - ago_est -  ago_real,
+	        	sep_plan - sep_est -  sep_real,
+	        	oct_plan - oct_est -  oct_real,
+	        	nov_plan - nov_est -  nov_real,
+	        	dic_plan - dic_est -  dic_real]
+	    	},{
+		        name: 'Estimado',
+		        color: '#3FB961',
 		        data: [
-		        	ene_plan - ene_real,
-		        	feb_plan - feb_real,
-		        	mar_plan - mar_real,
-		        	abr_plan - abr_real,
-		        	may_plan - may_real,
-		        	jun_plan - jun_real,
-		        	jul_plan - jul_real,
-		        	ago_plan - ago_real,
-		        	sep_plan - sep_real,
-		        	oct_plan - oct_real,
-		        	nov_plan - nov_real,
-		        	dic_plan - dic_real]
+		        	ene_est - ene_real,
+		        	feb_est - feb_real,
+		        	mar_est - mar_real,
+		        	abr_est - abr_real,
+		        	may_est - may_real,
+		        	jun_est - jun_real,
+		        	jul_est - jul_real,
+		        	ago_est - ago_real,
+		        	sep_est - sep_real,
+		        	oct_est - oct_real,
+		        	nov_est - nov_real,
+		        	dic_est - dic_real]
 		    },{
 		    	name: 'Aperturas',
 		    	color: '#40BCD8',

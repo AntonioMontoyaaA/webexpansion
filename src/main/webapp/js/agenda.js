@@ -460,12 +460,13 @@ function llenaEventos(){
 
 				// llena información para el menu desplegable (CREAR EVENTO)
 				var eventosxPuesto=data.eventosPuesto;
-				
+			if(eventosxPuesto!=undefined){
 				for(var e=0;e<eventosxPuesto.length;e++){
 					var nombre=eventosxPuesto[e].nombre;
 					var eventoId=eventosxPuesto[e].eventoId;
 					creaEvento=creaEvento+'<option value="'+eventoId+'">'+nombre+'</option>';
 				}
+			}
 				
 		html=html+'</div>';
 		$('#eventos').append(html);

@@ -25,6 +25,7 @@ public class CreaPerfilAction extends ExpansionAction {
 		HttpSession usuarioSesion = ServletActionContext.getRequest().getSession();
 		UsuarioLoginVO usuario = (UsuarioLoginVO) usuarioSesion.getAttribute("usr");
 		String numeroEmpleado = String.valueOf(usuario.getPerfil().getNumeroEmpleado());
+		String perfilId = ServletActionContext.getRequest().getParameter("perfilId");
 		String nombrePerfil = ServletActionContext.getRequest().getParameter("nombre");
 		String estatusPerfil = ServletActionContext.getRequest().getParameter("estatus");
 		String descripcionPerfil = ServletActionContext.getRequest().getParameter("descripcion");
@@ -39,7 +40,7 @@ public class CreaPerfilAction extends ExpansionAction {
 			final OkHttpClient client = new OkHttpClient();
 			FormBody.Builder formBuilder = new FormBody.Builder()
 					.add("usuarioId", numeroEmpleado)
-					.add("perfilId", "")
+					.add("perfilId", perfilId)
 					.add("nombre", nombrePerfil)
 					.add("estatus", estatusPerfil)
 					.add("descripcion", descripcionPerfil)

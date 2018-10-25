@@ -43,7 +43,7 @@
 				</div>
 				<div class="col-lg-3">
 					<form class="form-inline float-right">
-						<button class="btn desp" type="button" id="crear" onclick="creaPerfil()">Crear nuevo perfil</button>
+						<button class="btn desp" type="button" id="crear" onclick="creaEditaPerfil()">Crear nuevo perfil</button>
 						<button class="btn desp" type="button" id="asignar" onclick="" style="display: none;">Asignar opciones</button>
 						<button class="btn desp" type="button" id="agregar" onclick="" style="display: none;">Agregar módulos</button>
 						<button class="btn desp" id="edit" type="button"></button>

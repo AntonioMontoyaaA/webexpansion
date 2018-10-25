@@ -5,6 +5,15 @@ $(function(){
 		initTablaUsuarios('DivTabla', 0, 'tabla');
 });
 
+function activa(valor){
+    $('.boton_sup').removeClass('activo');
+    
+    if(valor.id=="boton_sup_perfiles"){
+        $(valor).addClass('activo');
+        $("#confPerfiles").submit();
+    }
+}
+
 function mostrarfiltros(){
 	
 	if( $(window).width() < 768){

@@ -18,6 +18,7 @@ public class PermisosMenu {
 		permisosMenu.put("localizador", "PRIVILEGIO.MENU.VOKSE.12");
 		permisosMenu.put("aprobadas"  , "PRIVILEGIO.MENU.VOKSE.16");
 		permisosMenu.put("configuracion", "PRIVILEGIO.MENU.VOKSE.12");
+		permisosMenu.put("configuracionPerfiles", "PRIVILEGIO.MENU.VOKSE.12");
 		
 		
 		permisosMenu.put("permisosMenu", "PRIVILEGIO.MENU.VOKSE.12");

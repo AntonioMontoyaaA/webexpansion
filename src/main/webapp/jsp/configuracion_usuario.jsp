@@ -73,6 +73,9 @@
 	<input type="submit" id="submitBotonAsignadas" style="display:none" />
 </form>
 
+<form style="display: hidden" action="./configuracionPerfiles" method="POST" id="confPerfiles">
+</form>
+
 	<!-- Bootstrap core JavaScript -->
 	<script	src="${pageContext.request.contextPath}/js/jquery/jquery.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/jquery/popper.js"></script>

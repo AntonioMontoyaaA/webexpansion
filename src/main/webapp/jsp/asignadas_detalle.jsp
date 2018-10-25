@@ -216,7 +216,7 @@
 								</div>
 								<div class="col-lg-12" style="padding:0;">
 									<img class="imagenModal" id="vistaLateral1Md" alt="LATERAL 1"
-										style="width: 100%; max-height: 300" src="img/no_imagen.png"
+										style="width: 100%; max-height: 300" src="img/cargando_imagen.gif"
 										onclick="modalImage(this)" />
 								</div>
 								<div class="row div_bottom">
@@ -236,7 +236,7 @@
 								<div class="col-lg-12" style="padding:0;">
 									<img class="imagenModal" id="vistaFrontalMd"
 										alt="VISTA FRONTAL" style="width: 100%; max-height: 300"
-										src="img/no_imagen.png" onclick="modalImage(this)" />
+										src="img/cargando_imagen.gif" onclick="modalImage(this)" />
 								</div>
 								<div class="row div_bottom">
 									<div class="col-lg-6" style="text-align: right;">
@@ -254,7 +254,7 @@
 								</div>
 								<div class="col-lg-12" style="padding:0;">
 									<img class="imagenModal" id="vistaLateral2Md" alt="LATERAL 2"
-										style="width: 100%; max-height: 300" src="img/no_imagen.png"
+										style="width: 100%; max-height: 300" src="img/cargando_imagen.gif"
 										onclick="modalImage(this)" />
 								</div>
 								<div class="row div_bottom">

@@ -411,6 +411,101 @@ function initTablaMemoriasAprobadas(nombreDiv, datos, nombreTabla){
 	$("#" + nombreTabla + "_filter").hide();
 }
 
+function initTablaPerfiles(nombreDiv, datos, nombreTabla){
+	
+	$("#" + nombreDiv).html(
+			   
+			'<table cellpadding="0" cellspacing="0" border="0px"  class="row-border stripe hover" id="' + nombreTabla + '" >' +
+			'<thead>'  +
+				'<tr class="fblanco" style="cursor: pointer;border-top: 0px; border-bottom: 0px;">' +
+					'<th class="gris negrita t14">ID Perfil</th>' +
+					'<th class="gris negrita t14">Nombre del perfil</th>' +
+					'<th class="gris negrita t14">Fecha de modificación</th>' +
+					'<th class="gris negrita t14">Estatus</th>' +
+				'</tr>'+
+			'</thead>' +
+			'<tbody>'  +			
+            '</tbody>' +
+        '</table>');
+	
+	tablaPerfiles = $("#" + nombreTabla).dataTable(
+			{"aaData": datos,
+				"aoColumns": [
+				           {"sClass": "imagen height_30", "bSearchable":true},
+				           {"sClass": "izquierda", "bSearchable":true},
+				           {"bSearchable":false},
+				           {"bSearchable":false},
+				           ],		
+			"bJQueryUI": false,
+			"sPaginationType": "full_numbers",
+			"oLanguage": idiomaEspanol,
+			"bLengthChange":false,
+			"order": [],
+			"iDisplayLength":1000,
+			 "bScrollCollapse": false,
+			 "sScrollY": "70vh",
+			 "aoColumnDefs": [ {
+					"sClass": "center",
+					"aTargets": [ 0,2 ]
+			} ]
+			 
+	});	
+	
+	
+	$("#" + nombreTabla + "_DTTT_container").hide();
+	$("#" + nombreTabla + "_paginate").hide();
+	$("#" + nombreTabla + "_filter").hide();
+}
+
+function initTablaPerfilesDetalle(nombreDiv, datos, nombreTabla) {
+	$("#" + nombreDiv).html(
+			   
+			'<table cellpadding="0" cellspacing="0" border="0px"  class="row-border stripe hover" id="' + nombreTabla + '" >' +
+			'<thead>'  +
+				'<tr class="fblanco" style="cursor: pointer;border-top: 0px; border-bottom: 0px;">' +
+					'<th class="gris negrita t14">Módulo</th>' +
+					'<th class="gris negrita t14">Submódulo</th>' +
+					'<th class="gris negrita t14">Tipo</th>' +
+					'<th class="gris negrita t14">Estatus</th>' +
+					'<th class="oculto">id</th>' +
+					'<th class="oculto">id</th>' +
+				'</tr>'+
+			'</thead>' +
+			'<tbody>'  +			
+            '</tbody>' +
+        '</table>');
+	
+	tablaPerfiles = $("#" + nombreTabla).dataTable(
+			{"aaData": datos,
+				"aoColumns": [
+				           {"sClass": "imagen height_30", "bSearchable":true},
+				           {"sClass": "izquierda", "bSearchable":true},
+				           {"bSearchable":false},
+				           {"bSearchable":false},
+				           { "sClass": "oculto", "bSearchable": false },
+				           { "sClass": "oculto", "bSearchable": false }
+				           ],		
+			"bJQueryUI": false,
+			"sPaginationType": "full_numbers",
+			"oLanguage": idiomaEspanol,
+			"bLengthChange":false,
+			"order": [],
+			"iDisplayLength":1000,
+			 "bScrollCollapse": false,
+			 "sScrollY": "70vh",
+			 "aoColumnDefs": [ {
+					"sClass": "center",
+					"aTargets": [ 0,2 ]
+			} ]
+			 
+	});	
+	
+	
+	$("#" + nombreTabla + "_DTTT_container").hide();
+	$("#" + nombreTabla + "_paginate").hide();
+	$("#" + nombreTabla + "_filter").hide();
+}
+
 var idiomaEspanol = {
 	    "sEmptyTable":     "<div style='padding:10px; color:red; font-size:13px;'>No existen memorias descriptivas</div>",
 	    "sInfo":           '<div class="col-12 fazul blanco right">Totales: <b>_TOTAL_</b></div>',

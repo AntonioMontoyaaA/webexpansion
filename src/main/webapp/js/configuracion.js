@@ -11,6 +11,7 @@ function activa(valor){
 	}
 	if(valor.id=="boton_sup_perfiles"){
 		$(valor).addClass('activo');
+		$("#confPerfiles").submit();
 	}
 	if(valor.id=="boton_sup_opciones"){
 		$(valor).addClass('activo');

@@ -32,6 +32,9 @@
 		<action name="configuracionPerfiles">
 			<result>jsp/configuracion_perfiles.jsp</result>
 		</action>
+		<action name="configuracion_usuario_perfil">
+			<result>jsp/configuracion_usuario_perfil.jsp</result>
+		</action>
 		<action name="tablero">
 			<result>jsp/tablero.jsp</result>
 		</action>
@@ -86,6 +89,7 @@
          		method = "marcarLeido">
     </action>
     <!-- ********************************************************************** -->
+    
 		<action name = "EnviaSubmodulosAction" 
          		class = "com.tiendas.neto.action.EnviaSubmodulosAction" 
          		method = "execute">
@@ -378,6 +382,14 @@
         		class = "com.tiendas.neto.action.CreaPerfilAction"
                	method = "execute">
      </action>
+      <action name = "cargaFiltrosAction" 
+         		class = "com.tiendas.neto.action.ConfiguracionUsuarioAction" 
+         		method = "execute">
+    </action>
+     <action name = "buscaUsuariosPerfiles" 
+         		class = "com.tiendas.neto.action.ConfiguracionUsuarioAction" 
+         		method = "buscaUsuariosPerfiles">
+    </action>
     <!--  ********************** TERMINA CONF PERFILES ******************** -->	
       	
 	</package>

@@ -506,6 +506,114 @@ function initTablaPerfilesDetalle(nombreDiv, datos, nombreTabla) {
 	$("#" + nombreTabla + "_filter").hide();
 }
 
+function initTablaUsuarios(nombreDiv, datosDesglose, nombreTabla){
+	
+	$("#" + nombreDiv).html(
+	   
+		'<table cellpadding="0" cellspacing="0" border="0px"  class="row-border stripe hover" id="' + nombreTabla + '" >' +
+			'<thead>'  +
+				'<tr style="cursor: pointer;border-top: 0px; border-bottom: 0px;">' +
+					'<th  class="gris negrita t14 center">ID</th>'  +
+					'<th  class="gris negrita t14">Nombre</th>' +
+					'<th  class="gris negrita t14 center">Area</th>' +
+					'<th class="gris negrita t14">Puesto</th>' +
+					'<th class="gris negrita t14">Estatus</th>' +
+					'<th class="gris negrita t14">Num</th>' +
+				'</tr>'+
+			'</thead>' +
+			'<tbody>'  +			
+            '</tbody>' +
+        '</table>');
+		
+	tabla = $("#" + nombreTabla).dataTable(
+			{"aaData": datosDesglose,
+				"aoColumns": [
+					   	   {"sClass":"izquierda padding","bSearchable":true},
+				           {"bSearchable":true},
+				           {"bSearchable":true},
+				           {"bSearchable":true},
+				           {"bSearchable":true},
+				           {"sClass": "oculto", "bSearchable": false }],		
+				          
+				           "bJQueryUI": false,
+							"order": [],
+							"sPaginationType": "full_numbers",
+							"oLanguage": idiomaEspanolGeneral,
+							"bLengthChange":false,
+							"iDisplayLength":1000,
+							 "bScrollCollapse": false,
+							 "sScrollY": "70vh",
+							 "aoColumnDefs": [ {
+									"sClass": "center",
+									"aTargets": [ 0,2 ]
+							}]		 
+});	
+	$("#" + nombreTabla + "_DTTT_container").hide();
+	$("#" + nombreTabla + "_paginate").hide();
+	$("#" + nombreTabla + "_filter").hide();
+}
+
+function initTablaUsuarios_Perfiles(nombreDiv, datosDesglose, nombreTabla){
+	
+	$("#" + nombreDiv).html(
+	   
+		'<table cellpadding="0" cellspacing="0" border="0px"  class="row-border stripe hover" id="' + nombreTabla + '" >' +
+			'<thead>'  +
+				'<tr style="cursor: pointer;border-top: 0px; border-bottom: 0px;">' +
+					'<th  class="gris negrita t14">Nombre del Perfil</th>'  +
+					'<th  class="gris negrita t14">Descripción</th>' +
+					'<th  class="gris negrita t14">Estatus</th>' +
+				'</tr>'+
+			'</thead>' +
+			'<tbody>'  +			
+            '</tbody>' +
+        '</table>');
+		
+	tabla = $("#" + nombreTabla).dataTable(
+			{"aaData": datosDesglose,
+				"aoColumns": [
+					   	   {"sClass":"izquierda padding","bSearchable":true},
+				           {"bSearchable":true},
+				           {"bSearchable":true}],		
+			"bJQueryUI": false,
+			"order": [],
+			"sPaginationType": "full_numbers",
+			"oLanguage": idiomaEspanolGeneral,
+			"bLengthChange":false,
+			"iDisplayLength":1000,
+			 "bScrollCollapse": false,
+			 "sScrollY": "calc(100% - 60px)"
+	});	
+	$("#" + nombreTabla + "_DTTT_container").hide();
+	$("#" + nombreTabla + "_paginate").hide();
+	$("#" + nombreTabla + "_filter").hide();
+}
+
+
+var idiomaEspanolGeneral = {
+	    "sEmptyTable":     "<div style='padding:10px; color:red; font-size:13px;'>No existen registros</div>",
+	    "sInfo":           'Totales: <b>_TOTAL_</b>',
+	    "sInfoEmpty":      "",
+	    "sInfoFiltered":   "(_TOTAL_ de _MAX_ registros en total)",
+	    "sInfoPostFix":    "",
+	    "sInfoThousands":  ",",
+	    "sLengthMenu":     "",
+	    "sLoadingRecords": "Cargando...",
+	    "sProcessing":     "Procesando...",
+	    "sSearch":         "",
+	    "sZeroRecords":    "No se encontraron resultados",
+	    "oPaginate": {
+	        "sFirst":    "Primero",
+	        "sLast":     "Último",
+	        "sNext":     "&raquo;",
+	        "sPrevious": "&laquo;"
+	    },
+	    "oAria": {
+	        "sSortAscending":  ": activar para Ordenar Ascendentemente",
+	        "sSortDescending": ": activar para Ordenar Descendentemente"
+	    }
+	};
+
 var idiomaEspanol = {
 	    "sEmptyTable":     "<div style='padding:10px; color:red; font-size:13px;'>No existen memorias descriptivas</div>",
 	    "sInfo":           '<div class="col-12 fazul blanco right">Totales: <b>_TOTAL_</b></div>',

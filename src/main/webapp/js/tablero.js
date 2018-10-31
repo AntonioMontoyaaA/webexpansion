@@ -1223,7 +1223,6 @@ function editarMD(nombreMd, mdId){
     $("#detalleMemoriaAsignadaAction").submit();
 }
 // -------------------------------------------------- FUNCIONES
-
 function pausarMD(nombreMd, mdId){
 	mdIdEstatus = mdId;
     cargaMensajeModal('TABLERO', 

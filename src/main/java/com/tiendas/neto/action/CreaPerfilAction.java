@@ -66,7 +66,6 @@ public class CreaPerfilAction extends ExpansionAction {
 		
 		return null;
 	}
-	
 	public String eliminaPerfilAction() throws Exception{
 		HttpSession usuarioSesion = ServletActionContext.getRequest().getSession();
 		UsuarioLoginVO usuario = (UsuarioLoginVO) usuarioSesion.getAttribute("usr");

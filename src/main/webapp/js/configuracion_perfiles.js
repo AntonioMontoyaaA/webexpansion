@@ -482,7 +482,6 @@ function creaNuevoPerfil() {
 		            TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, eliminaPerfilAction);
 	}
 	
-	
 	function eliminaPerfilAction() {
 	    invocarJSONServiceAction("eliminaPerfilAction", 
 	            {'perfilId': perfilElimina}, 

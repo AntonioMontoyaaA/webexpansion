@@ -396,7 +396,6 @@
         		class = "com.tiendas.neto.action.CreaPerfilAction"
                	method = "eliminaPerfilAction">
      </action>
-    
      <action name = "validaPuestoJefeAction" 
          		class = "com.tiendas.neto.action.ConfiguracionUsuarioAction" 
          		method = "validaPuestoJefeAction">

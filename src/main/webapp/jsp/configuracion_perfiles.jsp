@@ -88,7 +88,6 @@
 
 <form style="display: hidden" action="./configuracionOpciones" method="POST" id="confOpciones">
 </form>
-
 	<!-- Bootstrap core JavaScript -->
 	<script	src="${pageContext.request.contextPath}/js/jquery/jquery.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/jquery/popper.js"></script>

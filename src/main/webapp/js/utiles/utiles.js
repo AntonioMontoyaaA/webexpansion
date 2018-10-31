@@ -207,7 +207,6 @@ function popover(){ //popover del header
 	});
 }
 function salir(){
-	//console.log("entro");
 	$('#logout').submit();
 }
 
@@ -242,14 +241,14 @@ function showNotificaciones(){
 			$('#divisionAvisos').show();
 			$('.leidos').hide();
 			
-			$('#divisionAvisos').find('.opcionNotificacion').first().addClass('notificacionActivada');
+			$('#divisionAvisos').find('.opcionNotificacion').first().addClass('notificacionActivadaTurquesa');
 			dibujaNotificaciones(AR_AVISOS[0]);
 			
 			$('.divAvisos').unbind('click');
 			$('.divAvisos').click(function(){
-				if(!$(this).hasClass('notificacionActivada')){// Sino se esta mostrando
-					$('.divAvisos').removeClass('notificacionActivada');
-					$(this).addClass('notificacionActivada');
+				if(!$(this).hasClass('notificacionActivadaTurquesa')){// Sino se esta mostrando
+					$('.divAvisos').removeClass('notificacionActivadaTurquesa');
+					$(this).addClass('notificacionActivadaTurquesa');
 					
 					dibujaNotificaciones(AR_AVISOS[$(this).attr('rel')]);
 				}
@@ -269,8 +268,7 @@ function showNotificaciones(){
 		}
 		
 		$('#modal_notificaciones').modal('hide');
-		marcarMensajeLeido(2, mds);
-		consultaNotificaciones();
+		marcarMensajeLeido(2, mds, true);
 	});
 }
 
@@ -320,10 +318,11 @@ function dibujaNotificaciones(ar){
 				$(this).find('.subtituloNotificacion').removeClass('azulTurquesa');
 				
 				marcarMensajeLeido(tipoNot, id);
-				
-				$("#mdIdChat").val(id);
-				$("#chatPorMd").submit();
 			}
+
+			$("#mdIdChat").val(id);
+			$("#chatPorMd").submit();
+			
 		}else{ //Aviso
 			marcarMensajeLeido(tipoNot, id);
 			
@@ -335,7 +334,7 @@ function dibujaNotificaciones(ar){
 	});
 }
 
-function marcarMensajeLeido(tipo, mdId){
+function marcarMensajeLeido(tipo, mdId, consulta){
 	invocarJSONServiceAction("marcaNotificacionLeida", 
 			{'tipoComentario':tipo,
 			'mdId' : mdId}, 
@@ -344,6 +343,8 @@ function marcarMensajeLeido(tipo, mdId){
 			function(){cierraLoading();});
 	
 	notificacionLeida = function(data){
+		if(consulta == true)
+			consultaNotificaciones();
 		cierraLoading();
 		if(data.codigo == 200){}
 	}
@@ -374,7 +375,9 @@ function actualizaTotalNotificaciones(total){
 }
 
 function consultaNotificaciones(){
+	
 	 TOTAL_NOTIFICACIONES = 0;
+	 actualizaTotalNotificaciones(0);
 	 
 	 invocarJSONServiceAction("notificaciones", 
 				{'tipoComentario':2,
@@ -404,7 +407,7 @@ function consultaNotificaciones(){
 				
 				if(this.numMensajesNuevos > 0){
 					estatus = 1;
-					subtitulo = this.numMensajesNuevo + ' mensajes nuevos';
+					subtitulo = this.numMensajesNuevos + ' mensajes nuevos';
 				}
 				
 				e = new Notificacion(
@@ -454,48 +457,6 @@ function consultaNotificaciones(){
 		}
 	};
 }
-
-function marca_notificacion(valor){
-	
-	var id=$(valor).attr('mdId');
-	var tipoNotificacion=$(valor).attr('tipoNotificacion');
-	var fechaRegistro=$(valor).attr('fechaRegistro');
-	var nivelEstatusAreaId=$(valor).attr('nivelEstatusAreaId');
-	var nombreSitio=$(valor).attr('nombreSitio');
-
-	invocarJSONServiceAction("marcaNotificacionAction",
-			{'mdId':id,
-			 'tipoNotificacion':tipoNotificacion,
-			 'fecha':fechaRegistro,
-			 'nivelEstatusArea':nivelEstatusAreaId
-			 },
-			'marcaNotificacion', 
-				function() {
-					cierraLoading();
-				},
-				function() {
-					cierraLoading();
-				});
-
-		marcaNotificacion = function( data ) {
-			if(data.codigo != 200){
-				console.log("error "+data.mensaje+" mensaje");
-			}
-			else{
-				console.log("ok "+data.mensaje+" mensaje");
-		}
-		}
-
-	if(tipoNotificacion==1){
-		$("#mdIdChat").val(id);
-		$("#chatPorMd").submit();
-	}
-	else{
-		consultaNotificaciones();
-	}
-}
-
-
 
 /* == ACTUALIZAR DATOS PERFIL ==*/
 function editaPerfil(){
@@ -589,7 +550,6 @@ function doActualizaDatosPerfil(){
 
 	responseGuardaDatosPerfil = function(data){
 		
-		//console.log(data);
 		if(data.codigo == 200){
 			cargaMensajeModal("Perfil","Información actualizada correctamente.", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);			
 			cleanFormPerfil();
@@ -790,27 +750,21 @@ function permisos_perfil(){
 		505 - CANCELAR MD
 		506 - CAMBIAR ESTATUS MD*/
 		if(value.value=="PRIVILEGIO.MENU.VOKSE.501=true"){
-			//console.log(value.value);
 			$('#descargaExcelTablero').removeClass('sin_permiso');
 		}
 		if(value.value=="PRIVILEGIO.MENU.VOKSE.502=true"){
-			//console.log(value.value);
 			$('#time').removeClass('sin_permiso');
 		}
 		if(value.value=="PRIVILEGIO.MENU.VOKSE.503=true"){
-			//console.log(value.value);
 			$('#edit').removeClass('sin_permiso');
 		}
 		if(value.value=="PRIVILEGIO.MENU.VOKSE.504=true"){
-			//console.log(value.value);
 			$('#pause').removeClass('sin_permiso');
 		}
 		if(value.value=="PRIVILEGIO.MENU.VOKSE.505=true"){
-			//console.log(value.value);
 			$('#refuse').removeClass('sin_permiso');
 		}
 		if(value.value=="PRIVILEGIO.MENU.VOKSE.506=true"){
-			//console.log(value.value);
 			$('#change').removeClass('sin_permiso');
 		}		
 	});

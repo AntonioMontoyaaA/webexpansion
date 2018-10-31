@@ -918,6 +918,11 @@ font-weight:normal;
 	color: #071B36;
 }
 
+.notificacionActivadaTurquesa{
+	border-bottom-color: #34bbdc;
+	color: #34bbdc;
+}
+
 .notificacion{
 	font-size: 13px;
     width: 100%;

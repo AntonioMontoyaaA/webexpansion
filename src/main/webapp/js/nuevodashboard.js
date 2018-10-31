@@ -900,5 +900,5 @@ function EnviaSubmodulosAction(submodulos_global){
 			null, 
 			null,
 			null);
-	cierraLoading();
+	cierraLoading(); 
 }

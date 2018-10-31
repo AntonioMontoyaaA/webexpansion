@@ -1262,7 +1262,7 @@ function displayRoute(origin, destination, service, display, listRuta) {
         cleanMapRutas();        
         var numMArker = 1;
         var color = "red";
-
+ 
         for (var i=0; i < legs.length;i++){
         	color = (numMArker == 1 || numMArker == legs.length )? "blue" : "red";
 	          ArrayMarkerRutas[i] =  createMarker(directionsDisplay.getMap(), legs[i].start_location, ArrayInfoRutas[i], legs[i].start_address,color,numMArker);

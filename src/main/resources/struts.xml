@@ -381,7 +381,18 @@
          		class = "com.tiendas.neto.action.DescargaPdfAction" 
          		method = "exportPdf">
     </action>
-    <!-- ********************************************************************** -->  	
+    <!-- ********************************************************************** -->  
+    
+    <!--  ********************** CONF PERFILES ******************** -->
+     <action name="perfilesAction"
+        		class = "com.tiendas.neto.action.PerfilesAction"
+               	method = "execute">
+     </action>
+     <action name="creaPerfilAction"
+        		class = "com.tiendas.neto.action.CreaPerfilAction"
+               	method = "execute">
+     </action>
+    <!--  ********************** TERMINA CONF PERFILES ******************** -->		
       	
 	</package>
 	

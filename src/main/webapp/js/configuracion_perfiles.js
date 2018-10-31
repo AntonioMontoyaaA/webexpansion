@@ -148,7 +148,7 @@ function creaTablaPerfilDetalle(data) {
 	
 	if(data.modulos != undefined) {
 		for( var i = 0 ; i < data.modulos.length; i++) {
-			if(data.modulos[i].submodulos != undefined) {
+			if(data.modulos[i].submodulos != undefined && data.modulos[i].submodulos.length > 0) {
 				for(var j = 0; j < data.modulos[i].submodulos.length; j++) {
 					datosPerfilesDetalle[i] = new Array();
 					datosPerfilesDetalle[i][0] = data.modulos[i].modulo;

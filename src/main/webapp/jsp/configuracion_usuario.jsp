@@ -27,9 +27,9 @@
 			<div style="width:100%">
 			<div class="contenedor_botones_superiores">
         		<div class="row">
-        			<div class="col-4 boton_sup cursor activo" id="boton_sup_usuario" onclick="activa(this)">Usuario</div>
-        			<div class="col-4 boton_sup cursor" id="boton_sup_perfiles" onclick="activa(this)">Perfiles</div>
-        			<div class="col-4 boton_sup cursor" id="boton_sup_opciones" onclick="activa(this)">Opciones</div>
+        			<div class="col-6 boton_sup cursor activo" id="boton_sup_usuario" onclick="activa(this)">Usuario</div>
+        			<div class="col-6 boton_sup cursor" id="boton_sup_perfiles" onclick="activa(this)">Perfiles</div>
+<!--         			<div class="col-4 boton_sup cursor" id="boton_sup_opciones" onclick="activa(this)">Opciones</div> -->
         		</div>
         		
         	</div>
@@ -41,7 +41,7 @@
 						<input type="text"  placeholder="Buscar" id="buscador" class="form-control buscadorInput t12" onkeyup="ejecutaBuscador()"/>
 			</div>	
 					<button class="btn desp" type="button" id="agrega" onclick="mostrarNuevoUsuario()"></button>
-					<a  href="configuracion_usuario_perfil"><button class="btn desp" type="button" id="asignar">Asignar perfil a usuario</button></a>
+					<button class="btn desp" type="button" id="asignar" style="display:none;" onclick="mostrarAsignar()">Asignar perfil a usuario</button>
 					<button class="btn desp fondo_puntos" type="button" id="filtros" onclick="mostrarfiltros()">Filtros</button>
 			</div>
 			
@@ -95,15 +95,42 @@
 						<div class="col-12 azul t14 negrita">Area</div>
 						<div class="col-12 azul"><select class="campo t12" id="nuevo_area"></select></div>
 						<div class="col-12 azul t14 negrita">Puesto</div>
-						<div class="col-12 azul"><select class="campo t12" id="nuevo_puesto"></select></div>
+						<div class="col-12 azul"><select class="campo t12" id="nuevo_puesto" onchange="validaCamposOcultos()"></select></div>
+						
+						<div class="col-12 azul t14 negrita nuevo_jefe" style="display:none;">Jefe</div>
+						<div class="col-12 azul"><select class="campo t12 nuevo_jefe" id="nuevo_jefe" style="display:none;"></select></div>
+						
+						<div class="row" style="padding-left:15px;">
+						<div class="col-6 azul center">
+							<div class="form-check nuevo_fotoFueraRadio" style="display:none;  margin-top:15px; margin-bottom:15px;">
+								<input type="checkbox" class="form-check-input"	id="nuevo_fotoFueraRadio"> 
+								<label class="form-check-label t12 cursor" for="nuevo_fotoFueraRadio" style="margin-top:2px;">Foto fuera de radio</label>
+							</div>
+						</div>
+						<div class="col-6 azul center">
+							<div class="form-check nuevo_conteoFueraRadio" style="display:none;  margin-top:15px; margin-bottom:15px;">
+								<input type="checkbox" class="form-check-input"	id="nuevo_conteoFueraRadio"> 
+								<label class="form-check-label t12 cursor" for="nuevo_conteoFueraRadio" style="margin-top:2px;">Conteo fuera de radio</label>
+							</div>
+						</div>
+						</div>
+						<div class="col-12 azul t14 negrita nuevo_imei" style="display:none;">IMEI</div>
+						<div class="col-12 azul"><input type="text" class="campo nuevo_imei" id="nuevo_imei" style="display:none;"></div>
+						
+						
 						<div class="col-12 azul t14 negrita">Telefono</div>
 						<div class="col-12 azul"><input type="text" class="campo" id="nuevo_telefono"></div>
-						<div class="col-12 azul t14 negrita">IMEI</div>
-						<div class="col-12 azul"><input type="text" class="campo" id="nuevo_imei"></div>
 						<div class="col-12 azul t14 negrita">Email</div>
 						<div class="col-12 azul"><input type="text" class="campo" id="nuevo_email"></div>
 						
-						<div class="col-12 center"><button class="btn fazul t14 blanco" type="button" id="boton_crear">Crear Usuario</button></div>
+						<div class="col-6 azul center">
+							<div class="form-check nuevo_tipoUsuario" style="margin-top:15px; margin-bottom:15px;">
+								<input type="checkbox" class="form-check-input"	id="nuevo_tipoUsuario"> 
+								<label class="form-check-label t12 cursor" for="nuevo_tipoUsuario" style="margin-top:2px;">Interno</label>
+							</div>
+						</div>
+						
+						<div class="col-12 center"><button class="btn fazul t14 blanco" type="button" id="boton_crear" onclick="nuevoUsuario()">Crear Usuario</button></div>
 					</div>
 				</div>
 				</div>
@@ -111,19 +138,20 @@
 			</div>
 			
 			<div class="bloque2" style="display:none; width:100%;"> <!-- ***************************** BLOQUE 2 ************************************ -->
-			
-			<div class="contenedor_buscador">
+			<div class="contenedor_buscador right">
+			<button class="btn desp atras float_left" type="button" onclick="atras();" style="margin-right:10px;"></button>
 			<div class="buscador float_left">
-						<input type="text"  placeholder="Buscar" id="buscador" class="form-control buscadorInput t12" onkeyup="ejecutaBuscador()"/>
+						<input type="text"  placeholder="Buscar" id="buscadorDetalle" class="form-control buscadorInput t12" onkeyup="ejecutaBuscadorDetalle()"/>
 			</div>
+						<button class="btn desp guardar" type="button" onclick="guardaActualizacionPerfiles();"></button>
 			</div>
-			
+			<div class="col-lg-12">
 			<div class="row">
 			<div class="col-lg-3" id="detalle1">
 				<div class="row padding_p">
 					<div class="col-lg-12 menupr_estilos fblanco tabla_container">
 						<div class="col-12 azul t14 left titulo_contenedor">Detalles del usuario</div><br>
-						
+						<input type="hidden" id="UsuarioId" value="">
 						<div class="col-12 center">
 										<div class="circulo_imagen" style="background: white;" id="imagenusuario"></div>
 							</div><br>
@@ -145,17 +173,60 @@
 				</div>
 			</div>
 			</div>
-			
+			</div>
 			</div>
 		</div>
+		
+			<!-- ************************** SECCION DE ASIGNACION DE PERFILES ************************ -->	
+			<!-- ***************************** BLOQUE 3 ************************************ -->
+			<div class="padding_p bloque3" style=" width:100%; display:none;"> 
+			<div class="row"><button class="btn desp atras" type="button" onclick="atras();"></button></div>
+			<div class="row">
+			<div class="col-lg-6" style="padding:0;">	
+			<div class="row t14 negrita blanco" style="margin:7px 7px;">Perfiles disponibles</div>
+			<div class="contenedor_buscador padding_p" style="min-height: 40px;">
+			<div class="buscador float_left">
+						<input type="text"  placeholder="Buscar" id="buscadorPerfiles" class="form-control buscadorInput t12" onkeyup="ejecutaBuscadorPerfiles()"/>
+			</div>
+					
+			</div>
+			
+			<div class="contenedor float_left" id="usuarios_cont">
+				<div class="row padding_p">
+					<div class="col-lg-12 menupr_estilos fblanco tabla_container">
+						<div id="DivTablaAsignarPerfiles"></div>
+					</div>
+				</div>
+			</div>
+			</div>
+			
+			<div class="col-lg-6" style="padding:0;">	
+			<div class="row t14 negrita blanco" style="margin:7px 7px;">Usuarios disponibles</div>
+			<div class="contenedor_buscador padding_p" >
+			<div class="buscador float_left">
+						<input type="text"  placeholder="Buscar" id="buscadorUsuarios" class="form-control buscadorInput t12" onkeyup="ejecutaBuscadorUsuarios()"/>
+			</div>
+<!-- 					<button class="btn desp" type="button" id="filtrar_por" onclick="">Filtrar por puesto</button> -->
+					<button class="btn desp" type="button" id="asignar_2" onclick="actualizaAsignacion()">Asignar</button>
+			</div>
+			
+			<div class="contenedor float_left" id="usuarios_cont">
+				<div class="row padding_p">
+					<div class="col-lg-12 menupr_estilos fblanco tabla_container">
+						<div id="DivTablaAsignarUsuarios"></div>
+					</div>
+				</div>
+			</div>
+			</div></div>
+			</div>
 	</div>
 
 	<jsp:include page="/jsp/generic/loading.jsp" />
 <jsp:include page="/jsp/generic/mensajes.jsp" />
 
 
-<form style="display: hidden" action="./configuracionPerfiles" method="POST" id="confPerfiles">
-</form>
+<form style="display: hidden" action="./configuracionPerfiles" method="POST" id="confPerfiles"></form>
+<form style="display: hidden" action="configuracion" method="POST" id="confUsuario"></form>
 
 	<!-- Bootstrap core JavaScript -->
 	<script	src="${pageContext.request.contextPath}/js/jquery/jquery.min.js"></script>
@@ -165,6 +236,7 @@
 	<script src="${pageContext.request.contextPath}/DataTable/js/jquery.dataTables.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/jquery/jquery.ui.datepicker-es.js"></script>
 	<script	src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+	<script	src="${pageContext.request.contextPath}/js/tablas.js"></script>
 	<script	src="${pageContext.request.contextPath}/js/configuracion_usuario.js"></script>
 
 	

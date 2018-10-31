@@ -593,8 +593,8 @@ span.gris{
 .fblanco{
 	background-color:white;
 }
- .cabecera{
- 	padding-top:10px;
+.cabecera{
+ 	padding-top:5px;
  	padding-left:9px;
  }
 /* ---------------------------------------- ESTILOS DE MENU PRINCIPAL*/
@@ -878,7 +878,11 @@ font-weight:normal;
 
 .leidos{
 	text-align: center;
-	cursor: pointer;
+    cursor: pointer;
+    background-image: url(../img/documentacion/palomitaNot.svg);
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: 10%;
 }
 
 .grisNot{
@@ -894,7 +898,6 @@ font-weight:normal;
 	width: 30%;
 	border-bottom: 3px solid #a3a3a0;
 	text-align: center;
-	float: left;
 	cursor: pointer;
 	margin-top: 5px;
 }

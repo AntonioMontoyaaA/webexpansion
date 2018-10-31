@@ -36,6 +36,10 @@ function activa(valor){
 }
 
 function creatabla() {
+	clase="";
+	$( '#edit' ).removeClass("activado");
+	$( '#refuse' ).removeClass("activado");
+	
 	invocarJSONServiceAction("perfilesAction", 
 				{}, 
 				'obtienePerfilesResponse', 
@@ -114,6 +118,7 @@ function cargaPerfilDetalle(perfil) {
 			$("#asignar").show();
 			$("#agregar").show();
 			$("#edit").hide();
+			$("#refuse").hide();
 			creaTablaPerfilDetalle(perfiles[i]);
 			$("#perfilNombre").text(perfiles[i].perfil);
 			$("#perfilDescripcion").text(perfiles[i].descripcion);
@@ -131,6 +136,7 @@ function atrasPerfiles() {
 	$("#asignar").hide();
 	$("#agregar").hide();
 	$("#edit").show();
+	$("#refuse").show();
 	$( "#divPerfiles" ).fadeIn( "fast" );
 	$( "#divPerfilesDetalle" ).fadeOut( "fast" );
 	imprimePerfiles();
@@ -287,9 +293,17 @@ function editaPerfil(perfil) {
 				for(var j = 0; j < perfiles[i].modulos.length; j++) {
 					if(perfiles[i].modulos[j].submodulos != undefined) {
 						for(var k = 0; k < perfiles[i].modulos[j].submodulos.length; k++) {
+							var subId = '';
+							var subNombre = '';
+							if(perfiles[i].modulos[j].submodulos[k].submoduloId != null && perfiles[i].modulos[j].submodulos[k].submoduloId != 'null') {
+								subId = perfiles[i].modulos[j].submodulos[k].submoduloId;
+								subNombre = perfiles[i].modulos[j].submodulos[k].submodulo;
+							}
 							modulosSeleccionadosArray.push({'modulo': perfiles[i].modulos[j].moduloId, 'moduloNombre': perfiles[i].modulos[j].modulo, 
 								'submodulo': perfiles[i].modulos[j].submodulos[k].submoduloId, 'submoduloNombre': perfiles[i].modulos[j].submodulos[k].submodulo});
 						}
+					} else {
+						modulosSeleccionadosArray.push({'modulo': perfiles[i].modulos[j].moduloId, 'moduloNombre': perfiles[i].modulos[j].modulo});
 					}
 				}
 			}
@@ -374,9 +388,16 @@ function dibujaModulosCrea() {
 			"</div>";
 	
 	for(var i = 0; i < modulosSeleccionadosArray.length; i++) {
+		var subModuloNombre = '';
+		var subModuloId = '';
+		
+		if(modulosSeleccionadosArray[i].submoduloNombre != undefined) {
+			subModuloNombre = modulosSeleccionadosArray[i].submoduloNombre;
+		}
+		
 		html += "<div class='row' style='padding-top: 5px;padding-bottom: 5px;'>" +
 					"<div class='col-5' style='text-align: center'><span>" + modulosSeleccionadosArray[i].moduloNombre + "</span></div>" +
-					"<div class='col-5' style='text-align: center'><span>" + modulosSeleccionadosArray[i].submoduloNombre + "</span></div>" +
+					"<div class='col-5' style='text-align: center'><span>" + subModuloNombre + "</span></div>" +
 					"<div class='col-2' style='text-align: center' onclick='eliminaPerfilCrea(" + modulosSeleccionadosArray[i].modulo + 
 						"," + modulosSeleccionadosArray[i].submodulo + ")'><img style='cursor:pointer; width: 15px;padding-top: 5px;' src='img/eliminar.svg' /></div>" +
 				"</div>";
@@ -386,7 +407,12 @@ function dibujaModulosCrea() {
 
 function eliminaPerfilCrea(modulo, submodulo) {
 	for(var i = 0; i < modulosSeleccionadosArray.length; i++) {
-		if(modulo == modulosSeleccionadosArray[i].modulo && submodulo == modulosSeleccionadosArray[i].submodulo) {
+		if(submodulo != undefined) {
+			
+		}
+		if(modulo == modulosSeleccionadosArray[i].modulo && submodulo != undefined && submodulo == modulosSeleccionadosArray[i].submodulo) {
+			modulosSeleccionadosArray.splice(i,1);
+		} else if(modulo == modulosSeleccionadosArray[i].modulo) {
 			modulosSeleccionadosArray.splice(i,1);
 		}
 	}
@@ -411,7 +437,11 @@ function creaNuevoPerfil() {
 	}
 	
 	for(var i = 0; i < modulosSeleccionadosArray.length; i++) {
-		arregloModulos.push("{'FIMODULOID': " + modulosSeleccionadosArray[i].modulo + ", 'FISUBMODULOID': " + modulosSeleccionadosArray[i].submodulo + "}");
+		if(modulosSeleccionadosArray[i].submodulo != undefined) {
+			arregloModulos.push("{\"FIMODULOID\": " + modulosSeleccionadosArray[i].modulo + ", \"FISUBMODULOID\": " + modulosSeleccionadosArray[i].submodulo + "}");
+		} else {
+			arregloModulos.push("{\"FIMODULOID\": " + modulosSeleccionadosArray[i].modulo + "}");
+		}
 	}
 	
 	
@@ -438,7 +468,8 @@ function creaNuevoPerfil() {
 	if(data.codigo != 200) {
 		cargaMensajeModal('PERFILES', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
 	} else {
-		console.log(data);
+		cargaMensajeModal('PERFILES', "Cambios guardados con éxito", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_EXITO, null);
+		creatabla();
 	}
 	};
 }

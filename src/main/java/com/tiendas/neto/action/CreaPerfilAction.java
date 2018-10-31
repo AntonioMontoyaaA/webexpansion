@@ -66,5 +66,46 @@ public class CreaPerfilAction extends ExpansionAction {
 		
 		return null;
 	}
+	
+	public String eliminaPerfilAction() throws Exception{
+		HttpSession usuarioSesion = ServletActionContext.getRequest().getSession();
+		UsuarioLoginVO usuario = (UsuarioLoginVO) usuarioSesion.getAttribute("usr");
+		String numeroEmpleado = String.valueOf(usuario.getPerfil().getNumeroEmpleado());
+		String perfilId = ServletActionContext.getRequest().getParameter("perfilId");
+		
+			
+		String respuesta="";
+		HttpServletResponse response2 = ServletActionContext.getResponse();
+		response2.setContentType("application/json");
+		response2.setCharacterEncoding("UTF-8");
+		
+		try{
+			final OkHttpClient client = new OkHttpClient();
+			FormBody.Builder formBuilder = new FormBody.Builder()
+					.add("usuarioId", numeroEmpleado)
+					.add("perfilId", perfilId)
+					.add("estatus", "2");
+				
+			RequestBody formBody = formBuilder.build();
+			Request request = new Request.Builder()
+				 .url(sp.getPropiedad("gestionaperfiles"))
+                 .post(formBody)
+                 .build();
+		
+		 Response response = client.newCall(request).execute();
+		 respuesta = response.body().string();
+		 response2.getWriter().write(respuesta);
+		 }
+		 catch (Exception e){
+			String clase  ="clase: "+ new String (Thread.currentThread().getStackTrace()[1].getClassName());	
+			String metodo ="metodo: "+ new String (Thread.currentThread().getStackTrace()[1].getMethodName());
+			elog.error(clase,metodo,e+"","", ""); 
+			e.printStackTrace();
+			response2.getWriter().write("error");
+		 }
+		
+		return null;
+	}
+
 
 }

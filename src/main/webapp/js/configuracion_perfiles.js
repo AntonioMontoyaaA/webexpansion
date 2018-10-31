@@ -4,6 +4,7 @@ var esPantallaDetalle = false;
 var modulosSelect;
 var modulosSeleccionadosArray;
 var perfilEdita;
+var perfilElimina;
 
 $(function(){
 	$('#idconfiguracion').addClass('resaltado');
@@ -98,7 +99,8 @@ function imprimePerfiles() {
 				editaPerfil(perfilId);
 			}
 			if(clase=="refuse_tabla"){
-				rechazarMD(nombreMd, mdId);
+				perfilElimina=perfilId;
+				eliminarPerfil();
 			}
 		} else {
 			cargaPerfilDetalle(perfilId);
@@ -473,3 +475,33 @@ function creaNuevoPerfil() {
 	}
 	};
 }
+
+	function eliminarPerfil() {
+		 cargaMensajeModal('PERFILES', 
+		            '¿Está seguro de eliminar el perfil seleccionado?',
+		            TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, eliminaPerfilAction);
+	}
+	
+	
+	function eliminaPerfilAction() {
+	    invocarJSONServiceAction("eliminaPerfilAction", 
+	            {'perfilId': perfilElimina}, 
+	            'accionEliminarResponse', 
+	            function() {
+	                //Funcion de error               
+	                cierraLoading();
+	            },
+	            function() {
+	                //Función al finalizar                
+	                cierraLoading();
+	            });
+
+	    accionEliminarResponse = function( data ) {
+	        if(data.codigo != 200) {
+	            cargaMensajeModal('PERFILES', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
+	        } else {
+	            cargaMensajeModal('PERFILES', "Perfil eliminado con éxito", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_EXITO, null);
+	            creatabla();
+	        }
+	    }
+	}

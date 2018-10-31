@@ -372,6 +372,10 @@ a.links{
 	border-radius: 2px !important;
 }
 
+#modal_perfil #cuerpo_modal{
+	background-color: #FFF;
+}
+
 #modal_perfil .modal-dialog{
 	max-width:300px;
 	top:50;
@@ -379,8 +383,18 @@ a.links{
 	margin-bottom: 1.75rem;
 	margin-left: 20;
 }
+
+#modal_notificaciones .modal-dialog{
+	max-width:500px;
+	top:25;
+	margin-top: 1.75rem;
+	margin-bottom: 1.75rem;
+	margin-right: 0;
+}
+
 @media (max-width: 991px) {
 	#modal_perfil .modal-dialog{margin: 1.75rem auto !important;}
+	#modal_notificaciones .modal-dialog{margin: 1.75rem auto !important;}
 }
 .circulo_imagen{
 	background-color:white;
@@ -852,3 +866,99 @@ font-weight:normal;
 .inputform{
 	border : 1px solid silver;
 }
+
+
+
+/*-----------INICIO NOTIFICACIONES 2.0---------------*/
+.tituloNotificaciones{
+	float: left;
+	width: 45%;
+	line-height: 35px;
+}
+
+.leidos{
+	text-align: center;
+	cursor: pointer;
+}
+
+.grisNot{
+	color: #a3a3a0;
+}
+
+.segmentoNotificaciones{
+	width: 100%;
+	height: 40px;
+}
+
+.opcionNotificacion{
+	width: 30%;
+	border-bottom: 3px solid #a3a3a0;
+	text-align: center;
+	float: left;
+	cursor: pointer;
+	margin-top: 5px;
+}
+
+.t11{
+	font-size: 11px;
+}
+
+.contenedorNotificaciones{
+	height: 75%;
+    max-height: 75%;
+    width: 100%;
+    overflow: auto;
+}
+
+.notificacionActivada{
+	border-bottom-color: #071B36;
+	color: #071B36;
+}
+
+.notificacion{
+	font-size: 13px;
+    width: 100%;
+    height: 60px;
+    cursor: pointer;
+}
+
+.titulos{
+	margin-left: 2%;	
+	width: 68%;
+	float: left;
+}
+
+.tituloNotificacion{
+    font-weight: bold;
+    line-height: 25px;
+}
+
+.subtituloNotificacion{
+    line-height: 25px;
+}
+
+.azulTurquesa{
+	color: #34bbdc;
+}
+
+.fechaNotificacion{
+	width: 30%;
+    float: left;
+    font-size: 11px;
+    text-align: center;
+	color: #828282;
+	line-height: 50px;
+}
+
+.notificacionLeida{
+	color: #828282 !important;
+    background-color: #e6e6e6;
+}
+
+.sinNotificaciones{
+	color: #828282;
+    text-align: center;
+    padding-top: 100px;
+    font-size: 13px;
+}
+/*-------------FIN NOTIFICACIONES 2.0---------------*/

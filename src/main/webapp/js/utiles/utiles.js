@@ -199,9 +199,6 @@ function popover(){ //popover del header
 	 
 	 $('#notificaciones').popover({
 		 container: 'body',
-		 content:function(){
-			 return  notificaciones;
-		 },
 		 html:true
 	 });
 	 
@@ -210,73 +207,254 @@ function popover(){ //popover del header
 	});
 }
 function salir(){
-	console.log("entro");
+	//console.log("entro");
 	$('#logout').submit();
 }
 
 var notificaciones="";
-function consultaNotificaciones(){
-	 
-	 invocarJSONServiceAction("notificacionesAction", 
-				{'tipoNotificacion':2}, 
-				'cargaNotificaciones', 
-				function() {
-					cierraLoading();
-				},
-				function() {
-					cierraLoading();
-				});
-	 cargaNotificaciones = function(data) {
-	 cierraLoading();
-			if(data.codigo != 200){
-				
-			}else{
-				var noti=data.notificaciones;
-				
-				notificaciones="";
-				notificaciones+="<div>";
-				notificaciones+="<div class='t12 negrita azul titulo_avisos'>Avisos</div>";
-				notificaciones+="<div class='t12 negrita azul avisos'>";
-				var positivo=0;
-				
-				if(noti.length>0){
-				for(var i=0;i<noti.length;i++){
-					var estatus= noti[i].estatus;
+
+function showNotificaciones(){
+	
+	$('.opcionNotificacion').removeClass('notificacionActivada');
+	$('#notMsjs').addClass('notificacionActivada');
+	$('#divisionAvisos').hide();
+	
+	dibujaNotificaciones(AR_MENSAJES);
+	
+	$('#modal_notificaciones').modal('show');
+	
+	$('#notMsjs').unbind('click');
+	$('#notMsjs').click(function(){
+		if(!$('#notMsjs').hasClass('notificacionActivada')){// Sino se esta mostrando
+			$('#notAvis').removeClass('notificacionActivada');
+			$('#notMsjs').addClass('notificacionActivada');
+			$('#divisionAvisos').hide();
+			$('.leidos').show();
+			dibujaNotificaciones(AR_MENSAJES);
+		}
+	});
+	
+	$('#notAvis').unbind('click');
+	$('#notAvis').click(function(){
+		if(!$('#notAvis').hasClass('notificacionActivada')){// Sino se esta mostrando
+			$('.opcionNotificacion').removeClass('notificacionActivada');
+			$('#notAvis').addClass('notificacionActivada');
+			$('#divisionAvisos').show();
+			$('.leidos').hide();
+			
+			$('#divisionAvisos').find('.opcionNotificacion').first().addClass('notificacionActivada');
+			dibujaNotificaciones(AR_AVISOS[0]);
+			
+			$('.divAvisos').unbind('click');
+			$('.divAvisos').click(function(){
+				if(!$(this).hasClass('notificacionActivada')){// Sino se esta mostrando
+					$('.divAvisos').removeClass('notificacionActivada');
+					$(this).addClass('notificacionActivada');
 					
-					if(estatus==1){
-						notificaciones+="<div mdId='"+noti[i].mdId+"' tipoNotificacion='"+noti[i].tipoNotificacion+
-						"' fechaRegistro='"+noti[i].fechaRegistro+"' nivelEstatusAreaId='"+noti[i].nivelEstatusAreaId+
-						"' nombreSitio='"+noti[i].nombreSitio+
-						"' class='t12 leido cursor' style='font-weight:normal' onclick='marca_notificacion(this)'><span>"+
-						noti[i].mensaje+"</span><span class='t10'>&emsp;"+noti[i].fechaRegistro+"</span></div>";
-					}
-					else{
-						positivo++;
-						notificaciones+="<div mdId='"+noti[i].mdId+"' tipoNotificacion='"+noti[i].tipoNotificacion+
-						"' fechaRegistro='"+noti[i].fechaRegistro+"' nivelEstatusAreaId='"+noti[i].nivelEstatusAreaId+
-						"' nombreSitio='"+noti[i].nombreSitio+
-						"' class='t12 noleido cursor' style='font-weight:normal' onclick='marca_notificacion(this)'><span>"+
-						noti[i].mensaje+"</span><span class='t10'>&emsp;"+noti[i].fechaRegistro+"</span></div>";
-					}
-					
+					dibujaNotificaciones(AR_AVISOS[$(this).attr('rel')]);
 				}
-				}
-				else{
-					notificaciones+="<div class='t12 leido cursor' style='font-weight:normal;'><span>No existen avisos nuevos</span></div>";
-				}
-				notificaciones+="</div>";
-				notificaciones+="</div>";
-				
-				if(positivo>0){
-					$('#alerta_circulo').text(positivo);
-					$('#alerta_circulo').show();
-				}
-				else{
-					$('#alerta_circulo').hide();
-				}
-			}
-			}
+			});
+		}
+	});
+	
+	$('.leidos').unbind('click');
+	$('.leidos').click(function(){
+		mds = '';
+		
+		for (var i = 0; i < AR_MENSAJES.length; i++) {
+			if(i < AR_MENSAJES.length -1)
+				mds += AR_MENSAJES[i].mdId +',';
+			else
+				mds += AR_MENSAJES[i].mdId;
+		}
+		
+		$('#modal_notificaciones').modal('hide');
+		marcarMensajeLeido(2, mds);
+		consultaNotificaciones();
+	});
 }
+
+function dibujaNotificaciones(ar){
+	$('.contenedorNotificaciones').html('');
+	htmlNotificaciones = '';
+	
+	$.each(ar, function(){
+		
+		if(this.estatus == 0){
+			htmlNotificaciones += '<div class="notificacion notificacionLeida" id="' + this.mdId + '" rel="' + this.tipo + '">'
+										+ '<div class="titulos">'
+											+ '<div class="tituloNotificacion">' + this.titulo + '</div>'
+											+ '<div class="subtituloNotificacion">' + this.subtitulo + '</div>'
+										+ '</div>'
+										+ '<div class="fechaNotificacion">' + this.fecha + '</div>'
+								+ '</div>';
+		}else{
+			htmlNotificaciones += '<div class="notificacion" id="' + this.mdId + '" rel="' + this.tipo + '">'
+										+ '<div class="titulos">'
+											+ '<div class="tituloNotificacion azul">' + this.titulo + '</div>'
+											+ '<div class="subtituloNotificacion azulTurquesa">' + this.subtitulo + '</div>'
+										+ '</div>'
+										+ '<div class="fechaNotificacion">' + this.fecha + '</div>'
+								+ '</div>';
+		}
+		
+	});
+	
+	if(htmlNotificaciones != '')
+		$('.contenedorNotificaciones').html(htmlNotificaciones);
+	else
+		$('.contenedorNotificaciones').html('<div class="sinNotificaciones">Nada que mostrar :(</div>');
+	
+	$('.notificacion').unbind('click');
+	$('.notificacion').click(function(){
+		
+		tipoNot = $(this).attr('rel');
+		id = $(this).attr('id');
+		nombre = $(this).find('.tituloNotificacion').html();
+		
+		if(tipoNot == 2){ //Mensaje
+			if(!$(this).hasClass('notificacionLeida')){// Sino esta leida
+				$(this).addClass('notificacionLeida');
+				
+				$(this).find('.tituloNotificacion').removeClass('azul');
+				$(this).find('.subtituloNotificacion').removeClass('azulTurquesa');
+				
+				marcarMensajeLeido(tipoNot, id);
+				
+				$("#mdIdChat").val(id);
+				$("#chatPorMd").submit();
+			}
+		}else{ //Aviso
+			marcarMensajeLeido(tipoNot, id);
+			
+			$("#nombreMd").val(nombre);
+			$("#mdId").val(id);
+			$("#tipoMd").val('0');
+			$("#detalleMemoriaAsignadaAction").submit();
+		}
+	});
+}
+
+function marcarMensajeLeido(tipo, mdId){
+	invocarJSONServiceAction("marcaNotificacionLeida", 
+			{'tipoComentario':tipo,
+			'mdId' : mdId}, 
+			'notificacionLeida', 
+			function(){cierraLoading();},
+			function(){cierraLoading();});
+	
+	notificacionLeida = function(data){
+		cierraLoading();
+		if(data.codigo == 200){}
+	}
+}
+
+Notificacion = function(mdId, titulo, subtitulo, fecha, estatus, tipo){
+	this.mdId = mdId;
+	this.titulo = titulo;
+	this.subtitulo = subtitulo;
+	this.fecha = fecha;
+	this.estatus = estatus;
+	this.tipo = tipo;
+};
+
+var AR_MENSAJES;
+var AR_AVISOS;
+var TOTAL_NOTIFICACIONES;
+
+function actualizaTotalNotificaciones(total){
+	TOTAL_NOTIFICACIONES += parseInt(total);
+	
+	if(TOTAL_NOTIFICACIONES > 0){
+		$('#alerta_circulo').text(TOTAL_NOTIFICACIONES);
+		$('#alerta_circulo').show();
+	}else{
+		$('#alerta_circulo').hide();
+	}	
+}
+
+function consultaNotificaciones(){
+	 TOTAL_NOTIFICACIONES = 0;
+	 
+	 invocarJSONServiceAction("notificaciones", 
+				{'tipoComentario':2,
+				'propiedad' : 'notificacionesMensajes'}, 
+				'asignaMensajes', 
+				null,
+				null);
+	 
+	 invocarJSONServiceAction("notificaciones", 
+				{'tipoComentario':3,
+				'propiedad' : 'notificacionesAvisos'}, 
+				'asignaAvisos', 
+				null,
+				null);
+	 
+	 asignaMensajes = function(data) {
+	 
+		if(data.codigo == 200){
+			
+			actualizaTotalNotificaciones(data.totalNotificaciones);
+			
+			AR_MENSAJES = new Array();
+			$.each(data.notificaciones, function(){
+				
+				subtitulo = this.numMensajes + ' mensajes';
+				estatus = 0;
+				
+				if(this.numMensajesNuevos > 0){
+					estatus = 1;
+					subtitulo = this.numMensajesNuevo + ' mensajes nuevos';
+				}
+				
+				e = new Notificacion(
+						this.mdId,
+						'MD ' + this.nombreSitio,
+						subtitulo,
+						this.fecha,
+						estatus,
+						2
+				);
+				
+				AR_MENSAJES.push(e);
+			});
+		}
+	};
+	
+	asignaAvisos = function(data) {
+		 
+		if(data.codigo == 200){
+			
+			total = parseInt(data.totalNotificacionesCan);
+			total += parseInt(data.totalNotificacionesRe);
+			total += parseInt(data.totalNotificaciones);
+			
+			actualizaTotalNotificaciones(total);
+			
+			AR_AVISOS = {};
+			arrayAvisos = [data.notificaciones, data.notificacionesCan, data.notificacionesRe];
+			
+			$.each(arrayAvisos, function(i, item){
+				
+				AR_AVISOS[i] = new Array();
+				
+				$.each(item, function(){
+					e = new Notificacion(
+							this.mdId,
+							'MD ' + this.nombreSitio,
+							this.comentario,
+							this.fecha,
+							1,
+							3
+					);
+					
+					AR_AVISOS[i].push(e);
+				});
+			});
+		}
+	};
+}
+
 function marca_notificacion(valor){
 	
 	var id=$(valor).attr('mdId');
@@ -307,14 +485,8 @@ function marca_notificacion(valor){
 				console.log("ok "+data.mensaje+" mensaje");
 		}
 		}
-		
-		
-	/*if(tipoNotificacion==1){
-		$("#nombreMd").val(nombreSitio);
-		$("#mdId").val(id);
-		$("#detalleMemoriaAsignadaAction").submit();
-	}*/
-	if(tipoNotificacion==1||tipoNotificacion==2||tipoNotificacion==4){
+
+	if(tipoNotificacion==1){
 		$("#mdIdChat").val(id);
 		$("#chatPorMd").submit();
 	}
@@ -417,7 +589,7 @@ function doActualizaDatosPerfil(){
 
 	responseGuardaDatosPerfil = function(data){
 		
-		console.log(data);
+		//console.log(data);
 		if(data.codigo == 200){
 			cargaMensajeModal("Perfil","Información actualizada correctamente.", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);			
 			cleanFormPerfil();
@@ -618,27 +790,27 @@ function permisos_perfil(){
 		505 - CANCELAR MD
 		506 - CAMBIAR ESTATUS MD*/
 		if(value.value=="PRIVILEGIO.MENU.VOKSE.501=true"){
-			console.log(value.value);
+			//console.log(value.value);
 			$('#descargaExcelTablero').removeClass('sin_permiso');
 		}
 		if(value.value=="PRIVILEGIO.MENU.VOKSE.502=true"){
-			console.log(value.value);
+			//console.log(value.value);
 			$('#time').removeClass('sin_permiso');
 		}
 		if(value.value=="PRIVILEGIO.MENU.VOKSE.503=true"){
-			console.log(value.value);
+			//console.log(value.value);
 			$('#edit').removeClass('sin_permiso');
 		}
 		if(value.value=="PRIVILEGIO.MENU.VOKSE.504=true"){
-			console.log(value.value);
+			//console.log(value.value);
 			$('#pause').removeClass('sin_permiso');
 		}
 		if(value.value=="PRIVILEGIO.MENU.VOKSE.505=true"){
-			console.log(value.value);
+			//console.log(value.value);
 			$('#refuse').removeClass('sin_permiso');
 		}
 		if(value.value=="PRIVILEGIO.MENU.VOKSE.506=true"){
-			console.log(value.value);
+			//console.log(value.value);
 			$('#change').removeClass('sin_permiso');
 		}		
 	});

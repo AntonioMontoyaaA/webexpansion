@@ -15,6 +15,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import okhttp3.FormBody.Builder;
 
 public class NotificacionesAction extends ExpansionAction{
 	private static final long serialVersionUID = 1L;
@@ -156,5 +157,107 @@ public class NotificacionesAction extends ExpansionAction{
 		
 		return null;
 	}
+	
+	public void notificacionesMensajesAvisos() throws Exception{
+		String respuesta = "";
+		UsuarioLoginVO usuario = null;
+		HttpSession usuarioSesion = ServletActionContext.getRequest().getSession();
+		usuario = (UsuarioLoginVO) usuarioSesion.getAttribute("usr");
+		
+		String tipoComentario = ServletActionContext.getRequest().getParameter("tipoComentario");
+		String propiedad = ServletActionContext.getRequest().getParameter("propiedad");
+		try {
+			if(usuario == null){
+				RespuestaVo respuestaVo = new RespuestaVo();
+				respuestaVo.setCodigo(501);
+				respuestaVo.setMensaje("Error en la sesión");
+				sendJSONObjectToResponse(respuestaVo);
+				
+			}else{
+				String numeroEmpleado = String.valueOf(usuario.getPerfil().getNumeroEmpleado());
+				
+				final OkHttpClient client = new OkHttpClient();
+				
+				Builder builder = new Builder()
+					.add("usuarioId", numeroEmpleado)
+					.add("tipoComentario", tipoComentario);
+				
+				RequestBody body = builder.build();
+				Request request = new Request.Builder()
+					.url(sp.getPropiedad(propiedad))
+					.post(body)
+					.build();
+				
+				Response response = client.newCall(request).execute();
+				respuesta = response.body().string();
+				
+				HttpServletResponse re = ServletActionContext.getResponse();
+				re.setContentType("application/json");
+				re.setCharacterEncoding("UTF-8");
+				re.getWriter().write(respuesta);
+			}
+		}catch (Exception e) {
+			String clase  ="clase: "+ new String (Thread.currentThread().getStackTrace()[1].getClassName());	
+			String metodo ="metodo: "+ new String (Thread.currentThread().getStackTrace()[1].getMethodName());
+			elog.error(clase,metodo,e + "", "ID empleado: " + usuario.getPerfil().getNumeroEmpleado());
+			
+			RespuestaVo respuestaVo = new RespuestaVo();
+			respuestaVo.setCodigo(404);
+			respuestaVo.setMensaje("Error al conectarse al servidor");
+			sendJSONObjectToResponse(respuestaVo);
+		}
+	}
 
+	
+	public void marcaNotificacionLeida() throws Exception{
+		String respuesta = "";
+		UsuarioLoginVO usuario = null;
+		HttpSession usuarioSesion = ServletActionContext.getRequest().getSession();
+		usuario = (UsuarioLoginVO) usuarioSesion.getAttribute("usr");
+		
+		String tipoComentario = ServletActionContext.getRequest().getParameter("tipoComentario");
+		String mdId = ServletActionContext.getRequest().getParameter("mdId");
+		
+		try {
+			if(usuario == null){
+				RespuestaVo respuestaVo = new RespuestaVo();
+				respuestaVo.setCodigo(501);
+				respuestaVo.setMensaje("Error en la sesión");
+				sendJSONObjectToResponse(respuestaVo);
+				
+			}else{
+				String numeroEmpleado = String.valueOf(usuario.getPerfil().getNumeroEmpleado());
+				
+				final OkHttpClient client = new OkHttpClient();
+				
+				Builder builder = new Builder()
+					.add("usuarioId", numeroEmpleado)
+					.add("tipoComentario", tipoComentario)
+					.add("mdId", mdId);
+				
+				RequestBody body = builder.build();
+				Request request = new Request.Builder()
+					.url(sp.getPropiedad("validacionMensajesNotificacion"))
+					.post(body)
+					.build();
+				
+				Response response = client.newCall(request).execute();
+				respuesta = response.body().string();
+				
+				HttpServletResponse re = ServletActionContext.getResponse();
+				re.setContentType("application/json");
+				re.setCharacterEncoding("UTF-8");
+				re.getWriter().write(respuesta);
+			}
+		}catch (Exception e) {
+			String clase  ="clase: "+ new String (Thread.currentThread().getStackTrace()[1].getClassName());	
+			String metodo ="metodo: "+ new String (Thread.currentThread().getStackTrace()[1].getMethodName());
+			elog.error(clase,metodo,e + "", "ID empleado: " + usuario.getPerfil().getNumeroEmpleado());
+			
+			RespuestaVo respuestaVo = new RespuestaVo();
+			respuestaVo.setCodigo(404);
+			respuestaVo.setMensaje("Error al conectarse al servidor");
+			sendJSONObjectToResponse(respuestaVo);
+		}
+	}
 }

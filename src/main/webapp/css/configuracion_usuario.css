@@ -1,6 +1,12 @@
 .circulo_imagen{
 	bottom:0;
 }
+.guardar{
+	background-image:url('../img/botones/guardar.svg');
+	background-size:21px;
+	background-position:center;
+	background-repeat:no-repeat;
+}
 .desp{
 	margin-left:8px !important;
 }
@@ -19,7 +25,6 @@
 .contenedor_buscador{
 	padding:0px 7px;
 	width:100%;
-	float:left;
 	min-height:41px;
 }
 .caja{
@@ -108,6 +113,7 @@
 	#filtrar_por{width:calc(100% - 125px) !important; margin-left:0px !important}
 	#agrega{margin-left:0px !important}
 	#boton_consultar,#boton_crear  {margin-top: calc(100% - 248px); margin-bottom: 10px;}
+	.contenedor_buscador{min-height:60px;}
 }
 .boton_sup{
 	text-align:center;
@@ -141,8 +147,7 @@
 	display:none;
 	width:100%;
 }
-
-#filtros_cont, #usuarios_cont, #nuevo_usuario {height: calc(100% - 170px);}
+#filtros_cont, #usuarios_cont, #nuevo_usuario {height: calc(100% - 210px);}
 
 .dataTables_info {
     height: 30px !important;

@@ -51,7 +51,7 @@
 			<div class="buscador float_left">
 						<input type="text"  placeholder="Buscar" id="buscador" class="form-control buscadorInput t12" onkeyup="ejecutaBuscador()"/>
 			</div>
-					<button class="btn desp" type="button" id="filtrar_por" onclick="">Filtrar por puesto</button>
+<!-- 					<button class="btn desp" type="button" id="filtrar_por" onclick="">Filtrar por puesto</button> -->
 					<button class="btn desp" type="button" id="asignar_2" onclick="">Asignar</button>
 			</div>
 			

@@ -161,14 +161,14 @@
       					<div class="tituloNotificaciones azul negrita t18">Notificaciones</div>
       					<div class="tituloNotificaciones grisNot t12 leidos">Marcar todos como leídos</div>
       				</div>
-      				<div class="segmentoNotificaciones">
-      					<div id="notMsjs" class="opcionNotificacion grisNot t14">MENSAJES</div>
-      					<div id="notAvis" class="opcionNotificacion grisNot t14">AVISOS</div>
+      				<div class="segmentoNotificaciones" style="text-align: center;">
+      					<label id="notMsjs" class="opcionNotificacion grisNot t14">MENSAJES</label>
+      					<label id="notAvis" class="opcionNotificacion grisNot t14">AVISOS</label>
       				</div>
-      				<div class="segmentoNotificaciones" id="divisionAvisos" style="display: none;">
-      					<div rel="0" class="divAvisos opcionNotificacion grisNot t11">AUTORIZADAS</div>
-      					<div rel="1" class="divAvisos opcionNotificacion grisNot t11">CANCELADAS</div>
-      					<div rel="2" class="divAvisos opcionNotificacion grisNot t11">RECHAZADAS</div>
+      				<div class="segmentoNotificaciones" id="divisionAvisos" style="display: none; text-align: center;">
+      					<label rel="0" class="divAvisos opcionNotificacion grisNot t11">AUTORIZADAS</label>
+      					<label rel="1" class="divAvisos opcionNotificacion grisNot t11">CANCELADAS</label>
+      					<label rel="2" class="divAvisos opcionNotificacion grisNot t11">RECHAZADAS</label>
       				</div>
       				<div class="contenedorNotificaciones">
       				</div>

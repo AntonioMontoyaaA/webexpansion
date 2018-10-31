@@ -1199,7 +1199,7 @@ function verRutaUbicacion(){
 						});
 					
 						var infowindow = new google.maps.InfoWindow({ 
-							size: new google.maps.Size(150,50)
+							size: new google.maps.Size(100,50)
 						});
 						boundsRutaTodos.extend(ArrayMarkerAllJefes[i].position);
 						google.maps.event.addListener(ArrayMarkerAllJefes[i], 'click', function() {
@@ -1262,12 +1262,26 @@ function displayRoute(origin, destination, service, display, listRuta) {
         cleanMapRutas();        
         var numMArker = 1;
         var color = "red";
-
+ 
         for (var i=0; i < legs.length;i++){
         	color = (numMArker == 1 || numMArker == legs.length )? "blue" : "red";
 	          ArrayMarkerRutas[i] =  createMarker(directionsDisplay.getMap(), legs[i].start_location, ArrayInfoRutas[i], legs[i].start_address,color,numMArker);
+	          if(numMArker == 1 || numMArker == legs.length){
+	        	  ArrayMarkerRutas[i].setMap(null);
+	          }
 	          numMArker++;
         }
+        
+        var resaltarMArker = 1;
+        setTimeout(function(){
+        	for(var i = 0; i < legs.length ;i++){
+        		if(resaltarMArker == 1 || resaltarMArker == legs.length){
+        			ArrayMarkerRutas[i].setMap(directionsDisplay.getMap());
+        		}
+        		resaltarMArker++;
+        	}        	
+        },100);
+        
 	});
 }
 
@@ -1276,14 +1290,14 @@ function createMarker(map, latlng, label, html, color, text) {
 
 	
 	  var infowindow = new google.maps.InfoWindow({ 
-			    size: new google.maps.Size(150,50)
+			    size: new google.maps.Size(100,50)
 			  });
 
   var contentString = '<b>'+label+'</b><br>'+html;
   var marker = new google.maps.Marker({
       position: latlng,
       map: map,
-      icon: "img/markers_nums/marker_"+color+text+".png",
+      icon: "img/markers_nums/marker_"+color+text+".png" ,
       title: label,
       zIndex: Math.round(latlng.lat()*-100000)<<5
       });

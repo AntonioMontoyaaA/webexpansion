@@ -392,6 +392,26 @@
         		class = "com.tiendas.neto.action.CreaPerfilAction"
                	method = "execute">
      </action>
+     <action name = "validaPuestoJefeAction" 
+         		class = "com.tiendas.neto.action.ConfiguracionUsuarioAction" 
+         		method = "validaPuestoJefeAction">
+    </action>
+    <action name = "nuevoUsuarioAction" 
+         		class = "com.tiendas.neto.action.ConfiguracionUsuarioAction" 
+         		method = "nuevoUsuarioAction">
+    </action>
+    <action name = "listaPerfilesAction" 
+         		class = "com.tiendas.neto.action.ConfiguracionUsuarioAction" 
+         		method = "listaPerfilesAction">
+    </action>
+    <action name = "asignarUsuarioPerfilAction" 
+         		class = "com.tiendas.neto.action.ConfiguracionUsuarioAction" 
+         		method = "asignarUsuarioPerfilAction">
+    </action>
+    <action name = "editarPerfilesUsuarioAction" 
+         		class = "com.tiendas.neto.action.ConfiguracionUsuarioAction" 
+         		method = "editarPerfilesUsuarioAction">
+    </action>
     <!--  ********************** TERMINA CONF PERFILES ******************** -->		
       	
 	</package>

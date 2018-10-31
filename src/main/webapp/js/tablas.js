@@ -589,6 +589,92 @@ function initTablaUsuarios_Perfiles(nombreDiv, datosDesglose, nombreTabla){
 	$("#" + nombreTabla + "_filter").hide();
 }
 
+function initTablaAsignarUsuarios(nombreDiv, datosDesglose, nombreTabla){
+	
+	$("#" + nombreDiv).html(
+	   
+		'<table cellpadding="0" cellspacing="0" border="0px"  class="row-border stripe hover" id="' + nombreTabla + '" >' +
+			'<thead>'  +
+				'<tr style="cursor: pointer;border-top: 0px; border-bottom: 0px;">' +
+					'<th  class="gris negrita t14 center"></th>'  +
+					'<th  class="gris negrita t14 center">ID usuario</th>'  +
+					'<th  class="gris negrita t14">Nombre usuario</th>' +
+					'<th  class="gris negrita t14 center">Area</th>' +
+					'<th class="gris negrita t14">Puesto</th>' +
+				'</tr>'+
+			'</thead>' +
+			'<tbody>'  +			
+            '</tbody>' +
+        '</table>');
+		
+	tabla = $("#" + nombreTabla).dataTable(
+			{"aaData": datosDesglose,
+				"aoColumns": [
+					   	   {"sClass":"izquierda padding","bSearchable":true},
+				           {"bSearchable":true},
+				           {"bSearchable":true},
+				           {"bSearchable":true},
+				           {"bSearchable":true}],		
+				          
+				           "bJQueryUI": false,
+							"order": [],
+							"sPaginationType": "full_numbers",
+							"oLanguage": idiomaEspanolGeneral,
+							"bLengthChange":false,
+							"iDisplayLength":1000,
+							 "bScrollCollapse": false,
+							 "sScrollY": "70vh",
+							 "aoColumnDefs": [ {
+									"sClass": "center",
+									"aTargets": [ 0,2 ]
+							}]		 
+});	
+	$("#" + nombreTabla + "_DTTT_container").hide();
+	$("#" + nombreTabla + "_paginate").hide();
+	$("#" + nombreTabla + "_filter").hide();
+}
+
+
+function initTablaAsignarPerfiles(nombreDiv, datosDesglose, nombreTabla){
+	
+	$("#" + nombreDiv).html(
+	   
+		'<table cellpadding="0" cellspacing="0" border="0px"  class="row-border stripe hover" id="' + nombreTabla + '" >' +
+			'<thead>'  +
+				'<tr style="cursor: pointer;border-top: 0px; border-bottom: 0px;">' +
+					'<th  class="gris negrita t14 center"></th>'  +
+					'<th  class="gris negrita t14 center">ID</th>'  +
+					'<th  class="gris negrita t14">Nombre perfil</th>' +
+				'</tr>'+
+			'</thead>' +
+			'<tbody>'  +			
+            '</tbody>' +
+        '</table>');
+		
+	tabla = $("#" + nombreTabla).dataTable(
+			{"aaData": datosDesglose,
+				"aoColumns": [
+					   	   {"sClass":"izquierda padding","bSearchable":true},
+				           {"sClass":"izquierda padding","bSearchable":true},
+				           {"sClass":"izquierda padding","bSearchable":true}],		
+				          
+				           "bJQueryUI": false,
+							"order": [],
+							"sPaginationType": "full_numbers",
+							"oLanguage": idiomaEspanolGeneral,
+							"bLengthChange":false,
+							"iDisplayLength":1000,
+							 "bScrollCollapse": false,
+							 "sScrollY": "70vh",
+							 "aoColumnDefs": [ {
+									"sClass": "center",
+									"aTargets": [ 0,2 ]
+							}]		 
+});	
+	$("#" + nombreTabla + "_DTTT_container").hide();
+	$("#" + nombreTabla + "_paginate").hide();
+	$("#" + nombreTabla + "_filter").hide();
+}
 
 var idiomaEspanolGeneral = {
 	    "sEmptyTable":     "<div style='padding:10px; color:red; font-size:13px;'>No existen registros</div>",

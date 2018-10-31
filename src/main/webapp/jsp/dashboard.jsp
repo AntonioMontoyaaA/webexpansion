@@ -66,7 +66,7 @@
 <!-- FIN PROGRESO GENERAL DE AREAS -->
 		</div>	
 		<div class="col-lg-4 ">
-		<div class="row divs_p">
+		<div class="row divs_p" style="padding-bottom:0">
 <!-- PLAN APERTURA MENSUAL -->	
 			<div class="col-lg-12 menupr_estilos fazul">
 				<div class="row cabecera">
@@ -94,9 +94,9 @@
 		
 		<div class="col-lg-12 ">
 		<div class="row divs_p">
-			<div class="col-lg-12 menupr_estilos fazul" style="overflow-x:auto; height:400;">
-			<div class="row cabecera">
-				<div class="col-lg-12">
+			<div class="col-lg-12 menupr_estilos fazul" style="overflow-x:auto; overflow-y:hidden; height:310;">
+			<div class="row cabecera" style="padding-top:0">
+				<div class="col-lg-12" style="height:15px;">
 					<span class="blanco negrita t18">SEGUIMIENTO DE MD'S POR ÁREA</span>
 				</div>
 			</div>

@@ -32,6 +32,9 @@
 		<action name="configuracionPerfiles">
 			<result>jsp/configuracion_perfiles.jsp</result>
 		</action>
+		<action name="configuracion_usuario_perfil">
+			<result>jsp/configuracion_usuario_perfil.jsp</result>
+		</action>
 		<action name="tablero">
 			<result>jsp/tablero.jsp</result>
 		</action>
@@ -85,6 +88,17 @@
          		class = "com.tiendas.neto.action.NotificacionesAction" 
          		method = "marcarLeido">
     </action>
+    
+    <action name = "notificaciones" 
+         	class = "com.tiendas.neto.action.NotificacionesAction" 
+         	method = "notificacionesMensajesAvisos">
+    </action>
+    
+    <action name = "marcaNotificacionLeida" 
+         	class = "com.tiendas.neto.action.NotificacionesAction" 
+         	method = "marcaNotificacionLeida">
+    </action>
+    
     <!-- ********************************************************************** -->
 		<action name = "EnviaSubmodulosAction" 
          		class = "com.tiendas.neto.action.EnviaSubmodulosAction" 
@@ -367,18 +381,7 @@
          		class = "com.tiendas.neto.action.DescargaPdfAction" 
          		method = "exportPdf">
     </action>
-    <!-- ********************************************************************** -->  
-    
-    <!--  ********************** CONF PERFILES ******************** -->
-     <action name="perfilesAction"
-        		class = "com.tiendas.neto.action.PerfilesAction"
-               	method = "execute">
-     </action>
-     <action name="creaPerfilAction"
-        		class = "com.tiendas.neto.action.CreaPerfilAction"
-               	method = "execute">
-     </action>
-    <!--  ********************** TERMINA CONF PERFILES ******************** -->	
+    <!-- ********************************************************************** -->  	
       	
 	</package>
 	

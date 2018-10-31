@@ -47,14 +47,10 @@
 		</div>
 			
 			
-		<span class="mr-sm-2"><a id="notificaciones" tabindex="0" role="tooltip" data-toggle="popover" data-trigger="focus" data-placement="bottom"
-		data-template='<div class="popover1">
-		 	<div class="arrow"></div>
-		 	<h3 class="popover-header"></h3>
-		 	<div class="popover-body"></div>
-		 </div>' 
-		 
-		 ><img src="img/web_AVISOS.png"  style="margin-bottom:12px;"><div id="alerta_circulo"></div></a></span>
+		<span class="mr-sm-2" onclick="showNotificaciones()">
+			<img src="img/web_AVISOS.png"  style="margin-bottom:12px;">
+			<div id="alerta_circulo"></div>
+		</span>
 		&nbsp;
 		
 		<span class="my-2 my-sm-0"><a id="perfil" tabindex="0" role="tooltip" data-toggle="popover" data-trigger="focus" data-placement="bottom"
@@ -156,7 +152,32 @@
   </div>
 </div>
 
+<!-- NOTIFICACIONES -->
+	<div class="modal fade" id="modal_notificaciones" >
+		<div class="modal-dialog" role="document">
+   			<div class="modal-content" style="background:transparent;">
+      			<div  class="modal-body" id="cuerpo_modal" style="background-color: #FFF">
+      				<div class="segmentoNotificaciones">
+      					<div class="tituloNotificaciones azul negrita t18">Notificaciones</div>
+      					<div class="tituloNotificaciones grisNot t12 leidos">Marcar todos como leídos</div>
+      				</div>
+      				<div class="segmentoNotificaciones">
+      					<div id="notMsjs" class="opcionNotificacion grisNot t14">MENSAJES</div>
+      					<div id="notAvis" class="opcionNotificacion grisNot t14">AVISOS</div>
+      				</div>
+      				<div class="segmentoNotificaciones" id="divisionAvisos" style="display: none;">
+      					<div rel="0" class="divAvisos opcionNotificacion grisNot t11">AUTORIZADAS</div>
+      					<div rel="1" class="divAvisos opcionNotificacion grisNot t11">CANCELADAS</div>
+      					<div rel="2" class="divAvisos opcionNotificacion grisNot t11">RECHAZADAS</div>
+      				</div>
+      				<div class="contenedorNotificaciones">
+      				</div>
+     			</div>
+    		</div>
+  		</div>
+	</div>
+
 <c:forEach var="permiso" items="${permisos}">
-    	<input type="hidden" class="permisos_sub" value="${permiso}">
+	<input type="hidden" class="permisos_sub" value="${permiso}">
 </c:forEach>	
 

@@ -23,7 +23,7 @@ tbody tr:hover{
 	 padding-right:0px; 
 	 padding-left:0px; 
 	 min-height:73%; 
-	 overflow-x:scroll;
+	 overflow-x:auto;
 	 overflow-y: hidden; 
 }
 table{

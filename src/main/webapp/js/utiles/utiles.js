@@ -242,14 +242,14 @@ function showNotificaciones(){
 			$('#divisionAvisos').show();
 			$('.leidos').hide();
 			
-			$('#divisionAvisos').find('.opcionNotificacion').first().addClass('notificacionActivada');
+			$('#divisionAvisos').find('.opcionNotificacion').first().addClass('notificacionActivadaTurquesa');
 			dibujaNotificaciones(AR_AVISOS[0]);
 			
 			$('.divAvisos').unbind('click');
 			$('.divAvisos').click(function(){
-				if(!$(this).hasClass('notificacionActivada')){// Sino se esta mostrando
-					$('.divAvisos').removeClass('notificacionActivada');
-					$(this).addClass('notificacionActivada');
+				if(!$(this).hasClass('notificacionActivadaTurquesa')){// Sino se esta mostrando
+					$('.divAvisos').removeClass('notificacionActivadaTurquesa');
+					$(this).addClass('notificacionActivadaTurquesa');
 					
 					dibujaNotificaciones(AR_AVISOS[$(this).attr('rel')]);
 				}
@@ -375,6 +375,7 @@ function actualizaTotalNotificaciones(total){
 
 function consultaNotificaciones(){
 	 TOTAL_NOTIFICACIONES = 0;
+	 actualizaTotalNotificaciones(0);
 	 
 	 invocarJSONServiceAction("notificaciones", 
 				{'tipoComentario':2,
@@ -404,7 +405,7 @@ function consultaNotificaciones(){
 				
 				if(this.numMensajesNuevos > 0){
 					estatus = 1;
-					subtitulo = this.numMensajesNuevo + ' mensajes nuevos';
+					subtitulo = this.numMensajesNuevos + ' mensajes nuevos';
 				}
 				
 				e = new Notificacion(

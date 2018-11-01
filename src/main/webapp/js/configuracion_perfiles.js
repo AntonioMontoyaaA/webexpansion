@@ -30,10 +30,14 @@ function ejecutaBuscador() {
 function activa(valor){
 	$('.boton_sup').removeClass('activo');
 	
-	if(valor.id=="boton_sup_opciones"){
-		$(valor).addClass('activo');
-		$("#confOpciones").submit();
-	}
+	 if(valor.id=="boton_sup_perfiles"){
+	        $(valor).addClass('activo');
+	        $("#confPerfiles").submit();
+	    }
+	 if(valor.id=="boton_sup_usuario"){
+			$(valor).addClass('activo');
+			$("#confUsuario").submit();
+		}
 }
 
 function creatabla() {

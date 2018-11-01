@@ -26,9 +26,9 @@
 			<div class="col-lg-12 titulo blanco t12 negrita">DASHBOARD ${usr.perfil.areasxpuesto[0].areaNom} > CONFIGURACION</div>
 			<div class="contenedor_botones_superiores">
         		<div class="row">
-        			<div class="col-6 boton_sup" id="boton_sup_usuario" onclick="activa(this)">Usuario</div>
-        			<div class="col-6 boton_sup activo" id="boton_sup_perfiles" onclick="activa(this)">Perfiles</div>
-<!--         			<div class="col-4 boton_sup" id="boton_sup_opciones" onclick="activa(this)">Opciones</div> -->
+        			<div class="col-6 boton_sup cursor" id="boton_sup_usuario" onclick="activa(this)">Usuario</div>
+        			<div class="col-6 boton_sup cursor activo" id="boton_sup_perfiles" onclick="activa(this)">Perfiles</div>
+<!--         			<div class="col-4 boton_sup cursor" id="boton_sup_opciones" onclick="activa(this)">Opciones</div> -->
         		</div>
         	</div>
 						
@@ -86,8 +86,8 @@
 	<jsp:include page="/jsp/generic/loading.jsp" />
 <jsp:include page="/jsp/generic/mensajes.jsp" />
 
-<form style="display: hidden" action="./configuracionOpciones" method="POST" id="confOpciones">
-</form>
+<form style="display: hidden" action="./configuracionPerfiles" method="POST" id="confPerfiles"></form>
+<form style="display: hidden" action="configuracion" method="POST" id="confUsuario"></form>
 	<!-- Bootstrap core JavaScript -->
 	<script	src="${pageContext.request.contextPath}/js/jquery/jquery.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/jquery/popper.js"></script>

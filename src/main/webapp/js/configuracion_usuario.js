@@ -43,6 +43,7 @@ function mostrarfiltros(){
 	}else{
 		if($('#nuevo_usuario').css('display') == 'block'){
 			$('#nuevo_usuario').hide();
+			$('#usuarios_cont').show();
 		}
 		if($('#filtros_cont').css('display') == 'block'){
 			$('#filtros_cont').hide();
@@ -62,11 +63,12 @@ function mostrarNuevoUsuario(){
 		$('#usuarios_cont').css('width', '100%');
 		$('#nuevo_usuario').css('width', '100%');
 		
+		
 		if($('#usuarios_cont').css('display') == 'block'){
 			$('#nuevo_usuario').show();
 			$('#usuarios_cont').hide();
 		}
-		if($('#filtros_cont').css('display') == 'block'){
+		else if($('#filtros_cont').css('display') == 'block'){
 			$('#filtros_cont').hide();
 			$('#nuevo_usuario').show();
 		}
@@ -77,6 +79,7 @@ function mostrarNuevoUsuario(){
 	}else{
 		if($('#filtros_cont').css('display') == 'block'){
 			$('#filtros_cont').css('display','none');
+			$('#usuarios_cont').show();
 		}
 		if($('#nuevo_usuario').css('display') == 'block'){
 			$('#nuevo_usuario').hide();
@@ -92,6 +95,14 @@ function mostrarNuevoUsuario(){
 	$("#tabla").dataTable().fnFilter(''); //para actualizar la tabla y ajustar el tamaño
 }
 function mostrarAsignar(){
+	$('.seleccion_usuario img').css('display','none');
+	$('.seleccion_usuario div').css('background-color','white');
+	$('.seleccion_usuario').removeClass('activado');
+	
+	$('.seleccion_perfil img').css('display','none');
+	$('.seleccion_perfil div').css('background-color','white');
+	$('.seleccion_perfil').removeClass('activado');
+	
 	
 	if($('.bloque3').css('display') == 'none'){
 		$('.contenedor_botones_superiores').hide();
@@ -296,15 +307,18 @@ function mostrarDetalle(posicion){
 		datos[i] = new Array();	 	 		 			 
 		datos[i][0] = resultados[i].nombrePerfil; 
 		datos[i][1] = resultados[i].descPerfil; 
-		if(resultados[i].estatusPerfil==1){
-			datos[i][2] = '<label class="switch"><input class="switch_perfil" name="'+resultados[i].perfilId+'" type="checkbox" checked><span class="slider round"></span></label>'; 
-		}else{
-			datos[i][2] = '<label class="switch"><input class="switch_perfil" name="'+resultados[i].perfilId+'" type="checkbox"><span class="slider round"></span></label>'; 
-		}
+		datos[i][2] = '<label class="switch"><input class="switch_perfil" id="'+resultados[i].perfilId+'_id'+'" type="checkbox"><span class="slider round"></span></label>'; 
 		
 	 }
 	 initTablaUsuarios_Perfiles('DivTablaPerfiles', datos, 'tablaPerfiles');
-
+	
+	 for( var i = 0 ; i < resultados.length; i++){
+		 if(resultados[i].estatusPerfil==1){
+			 $('#'+resultados[i].perfilId+'_id').prop("checked",true);	
+			 
+		 }
+	 }
+	 
 	$('.bloque1').css('display', 'none');
 	$('.bloque2').css('display', 'block');
 	 $("#tablaPerfiles").dataTable().fnFilter('');//para actualizar la tabla y ajustar el tamaño
@@ -474,6 +488,7 @@ function nuevoUsuario(){
 }
 //funcion para cargar la lista de perfiles para ASIGNAR
 function cargaAsignarPerfiles(){
+	
 		invocarJSONServiceAction("listaPerfilesAction", '', 
 					'respuestaPerfilesAction', 
 					function() {
@@ -552,7 +567,8 @@ respuestaPerfilesAction = function( data ) {
 	} else {
 		cargaMensajeModal('CONFIGURACION', "Perfiles asignados correctamente", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_EXITO, null);
 		mostrarAsignar();
-		ejecutaBuscador();
+		$('#boton_consultar').click();
+		
 		}
 	}
 	}else{
@@ -572,17 +588,17 @@ function guardaActualizacionPerfiles(){
 	
 	$.each($(".switch_perfil"),function(i, value){  
 		var info = new Object();
-		console.log(value.name+" el valor "+ i)
-		var nombre = document.getElementsByName(value.name);
 		
-		if($(nombre).is( ":checked" )){
-			console.log("checked" + value.name);
-			info.perfilId = value.name;
+		if($('#'+value.id).is( ":checked" )){
+			console.log("checked");
+			cadena=value.id.split('_');
+			info.perfilId = cadena[0];
 		    info.estatus = "1";
 		   
 		}else{
-			console.log("no checked" + value.name);
-			info.perfilId = value.name;
+			cadena=value.id.split('_');
+			console.log("no checked");
+			info.perfilId = cadena[0];
 		    info.estatus = "0";
 		}
 		array.push(info);
@@ -607,7 +623,7 @@ function guardaActualizacionPerfiles(){
 		cargaMensajeModal('CONFIGURACION', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
 	} else {
 		cargaMensajeModal('CONFIGURACION', "Perfiles actualizados correctamente", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_EXITO, null);
-		 $('#boton_consultar').click();
+		$('#boton_consultar').click();
 	}
 }
 	

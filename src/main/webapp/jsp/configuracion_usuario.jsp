@@ -82,7 +82,7 @@
 				
 				<div class="contenedor float_right" id="nuevo_usuario">
 				<div class="row padding_p">
-					<div class="col-lg-12 menupr_estilos fblanco tabla_container">
+					<div class="col-lg-12 menupr_estilos fblanco tabla_container" style="overflow-x:hidden;">
 						<div class="col-12 azul t14 center titulo_contenedor">NUEVO USUARIO</div><br>
 						<div class="col-12 azul t14 negrita">No. Empleado</div>
 						<div class="col-12"><input type="text" class="campo" id="nuevo_noempleado"></div>

@@ -392,6 +392,14 @@
         		class = "com.tiendas.neto.action.CreaPerfilAction"
                	method = "execute">
      </action>
+        <action name = "cargaFiltrosAction" 
+         		class = "com.tiendas.neto.action.ConfiguracionUsuarioAction" 
+         		method = "execute">
+    </action>
+     <action name = "buscaUsuariosPerfiles" 
+         		class = "com.tiendas.neto.action.ConfiguracionUsuarioAction" 
+         		method = "buscaUsuariosPerfiles">
+    </action>
       <action name="eliminaPerfilAction"
         		class = "com.tiendas.neto.action.CreaPerfilAction"
                	method = "eliminaPerfilAction">

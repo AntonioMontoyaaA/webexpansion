@@ -82,7 +82,7 @@ function imprimePerfiles() {
 			datosPerfiles[i][0] = perfiles[i].perfilId;
 			datosPerfiles[i][1] = perfiles[i].perfil + ' <span class="descripcion_perfil">(' + perfiles[i].descripcion + ')</span>';
 			datosPerfiles[i][2] = perfiles[i].fechaModifica;
-			datosPerfiles[i][3] = perfiles[i].estatus == 1 ? 'Activo' : 'Inactivo';
+			datosPerfiles[i][3] = perfiles[i].estatus;
 		}
 	}
 	initTablaPerfiles('DivTablaPerfiles', datosPerfiles, 'tablaPerfiles');
@@ -128,7 +128,7 @@ function cargaPerfilDetalle(perfil) {
 			creaTablaPerfilDetalle(perfiles[i]);
 			$("#perfilNombre").text(perfiles[i].perfil);
 			$("#perfilDescripcion").text(perfiles[i].descripcion);
-			$("#estatusPerfil").text(perfiles[i].estatus == 1 ? 'Activo' : 'Inactivo');
+			$("#estatusPerfil").text(perfiles[i].estatus);
 			break;
 		}
 	}
@@ -316,7 +316,7 @@ function editaPerfil(perfil) {
 			
 			$("#nombrePerfilCrea").val(perfiles[i].perfil);
 			$("#descripcionPerfilCrea").val(perfiles[i].descripcion);
-			if(perfiles[i].estatus == "1") {
+			if(perfiles[i].estatus == "ACTIVO") {
 				$("#estatusCreaPerfil").prop('checked', true);
 			} else {
 				$("#estatusCreaPerfil").prop('checked', false);

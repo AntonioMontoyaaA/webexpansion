@@ -150,7 +150,7 @@ function cargaMensajes(valor){
 			}
 			else{
 					mensajes=mensajes+'<tr class="renglon_chat">';
-					mensajes=mensajes+'<td class="imagen_chat"><div class="msj_icono" style="background:url('+url+');"></div></td>';
+					mensajes=mensajes+'<td class="imagen_chat"><div class="msj_icono" style="background:url('+url+'); background-size:30px;"></div></td>';
 					mensajes=mensajes+'<td class="mensaje_chat">';
 						mensajes=mensajes+'<div class="t12 negrita gris">'+dato.area+':'+dato.autor+'</div>';
 						mensajes=mensajes+'<div class="t14 azul">'+dato.comentario+'</div>';

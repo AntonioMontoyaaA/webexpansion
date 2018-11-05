@@ -26,10 +26,16 @@
 			<div class="col-lg-12 titulo blanco t12 negrita">DASHBOARD ${usr.perfil.areasxpuesto[0].areaNom} > CONFIGURACION</div>
 			<div style="width:100%">
 			<div class="contenedor_botones_superiores">
-        		<div class="row">
+        		<div class="row center">
+        		<c:if test="${permisos['PRIVILEGIO.SUBMENU.VOKSE.18,1']}">
         			<div class="col-6 boton_sup cursor activo" id="boton_sup_usuario" onclick="activa(this)">Usuario</div>
+        		</c:if> 
+        		<c:if test="${permisos['PRIVILEGIO.SUBMENU.VOKSE.18,2']}">
         			<div class="col-6 boton_sup cursor" id="boton_sup_perfiles" onclick="activa(this)">Perfiles</div>
+        		</c:if> 
+        		<c:if test="${permisos['PRIVILEGIO.SUBMENU.VOKSE.18,3']}">
 <!--         			<div class="col-4 boton_sup cursor" id="boton_sup_opciones" onclick="activa(this)">Opciones</div> -->
+				</c:if> 
         		</div>
         		
         	</div>
@@ -40,6 +46,8 @@
 			<div class="buscador float_left">
 						<input type="text"  placeholder="Buscar" id="buscador" class="form-control buscadorInput t12" onkeyup="ejecutaBuscador()"/>
 			</div>	
+									
+			
 					<button class="btn desp" type="button" id="agrega" onclick="mostrarNuevoUsuario()"></button>
 					<button class="btn desp" type="button" id="asignar" style="display:none;" onclick="mostrarAsignar()">Asignar perfil a usuario</button>
 					<button class="btn desp fondo_puntos" type="button" id="filtros" onclick="mostrarfiltros()">Filtros</button>
@@ -223,6 +231,24 @@
 
 	<jsp:include page="/jsp/generic/loading.jsp" />
 <jsp:include page="/jsp/generic/mensajes.jsp" />
+
+
+<form action='memoria_detalle'  id="detalleMemoriaAsignadaAction" method="post">
+	<input type="hidden" name="mdId" id="mdId" value=""/>
+	<input type="hidden" name="nombreMd" id="nombreMd" value=""/>
+	<input type="hidden" name="tipoMd" id="tipoMd" value=""/>
+</form>
+
+<form action='mensajes_historial'  id="chatPorMd" method="post">
+	<input type="hidden" name="mdIdChat" id="mdIdChat" value=""/>
+	<input type="hidden" name="nombreMdChat" id="nombreMdChat" value=""/>
+</form>
+
+
+<form style="display: hidden" action="./excelAsignadasAction" method="POST" id="form">
+	<input type="hidden" id="datos" name="datos" value=""/>
+	<input type="submit" id="submitBotonAsignadas" style="display:none" />
+</form>
 
 
 <form style="display: hidden" action="./configuracionPerfiles" method="POST" id="confPerfiles"></form>

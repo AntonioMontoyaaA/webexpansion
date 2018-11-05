@@ -32,9 +32,6 @@
 		<action name="configuracionPerfiles">
 			<result>jsp/configuracion_perfiles.jsp</result>
 		</action>
-		<action name="configuracion_usuario_perfil">
-			<result>jsp/configuracion_usuario_perfil.jsp</result>
-		</action>
 		<action name="tablero">
 			<result>jsp/tablero.jsp</result>
 		</action>

@@ -321,6 +321,7 @@ function dibujaNotificaciones(ar){
 			}
 
 			$("#mdIdChat").val(id);
+			$("#nombreMdChat").val(nombre);
 			$("#chatPorMd").submit();
 			
 		}else{ //Aviso

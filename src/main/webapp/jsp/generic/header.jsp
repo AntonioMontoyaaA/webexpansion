@@ -33,8 +33,9 @@
 						<c:if test="${permisos['PRIVILEGIO.MENU.VOKSE.12']}">
 							<li id="localizadorMenu" class="nav-item"><a id="idlocalizador" class="nav-link blanco t12" href="localizador"> Localizador</a></li>						
 						</c:if> 
+						<c:if test="${permisos['PRIVILEGIO.MENU.VOKSE.18']}">
 							<li id="configuracionMenu" class="nav-item"><a id="idconfiguracion" class="nav-link blanco t12" href="configuracion"> Configuración</a></li>						
-						
+						</c:if> 
 							<!--  <li id="aprobadasMenu" class="nav-item" style="display: none;"><a id="idaprobadas" class="nav-link blanco t12" href="aprobadas">Aprobadas</a></li>	-->									
 					</ul>
 					

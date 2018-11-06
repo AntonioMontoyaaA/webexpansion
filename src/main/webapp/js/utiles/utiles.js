@@ -749,7 +749,8 @@ function permisos_perfil(){
 		503 - EDITAR MD
 		504 - PAUSAR MD
 		505 - CANCELAR MD
-		506 - CAMBIAR ESTATUS MD*/
+		506 - CAMBIAR ESTATUS MD
+		507 - Descargar PDF detalle MD*/
 		if(value.value=="PRIVILEGIO.MENU.VOKSE.501=true"){
 			$('#descargaExcelTablero').removeClass('sin_permiso');
 		}
@@ -767,6 +768,9 @@ function permisos_perfil(){
 		}
 		if(value.value=="PRIVILEGIO.MENU.VOKSE.506=true"){
 			$('#change').removeClass('sin_permiso');
-		}		
+		}
+		if(value.value == "PRIVILEGIO.MENU.VOKSE.507=true"){
+			$('#botondescarga').removeClass('sin_permiso');
+		}
 	});
 }

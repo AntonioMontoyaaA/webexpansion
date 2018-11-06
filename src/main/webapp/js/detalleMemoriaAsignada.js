@@ -79,6 +79,7 @@ $(function(){
 		imprimeInfoRadio();
 	});
 
+	permisos_perfil();
 });
 
 function imprimeInfoRadio() {

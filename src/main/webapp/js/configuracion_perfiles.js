@@ -300,7 +300,7 @@ function editaPerfil(perfil) {
 			
 			if(perfiles[i].modulos != undefined) {
 				for(var j = 0; j < perfiles[i].modulos.length; j++) {
-					if(perfiles[i].modulos[j].submodulos != undefined) {
+					if(perfiles[i].modulos[j].submodulos != undefined && perfiles[i].modulos[j].submodulos.length>0) {
 						for(var k = 0; k < perfiles[i].modulos[j].submodulos.length; k++) {
 							var subId = '';
 							var subNombre = '';

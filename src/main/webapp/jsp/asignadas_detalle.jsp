@@ -98,7 +98,6 @@
 		
 		<div class="col-lg-4 altura1">
 		<div class="row divs_p">
-			<div class="slick_main col-lg-12 menupr_estilos fblanco altura1">
 				<div id="div_score1" class="col-12 titulo_seccion">
 					<span class="titulo_detalle_md_20">SCORE CARD</span><br/>
 					<span id="scoreSpan1" class="titulo_detalle_md_20 sangria_cuerpo">---</span><br/>

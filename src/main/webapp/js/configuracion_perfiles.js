@@ -153,25 +153,28 @@ function creaTablaPerfilDetalle(data) {
 	var datosPerfilesDetalle = new Array();
 	
 	if(data.modulos != undefined) {
+		var contador=0;
 		for( var i = 0 ; i < data.modulos.length; i++) {
 			if(data.modulos[i].submodulos != undefined && data.modulos[i].submodulos.length > 0) {
 				for(var j = 0; j < data.modulos[i].submodulos.length; j++) {
-					datosPerfilesDetalle[i] = new Array();
-					datosPerfilesDetalle[i][0] = data.modulos[i].modulo;
-					datosPerfilesDetalle[i][1] = data.modulos[i].submodulos[j].submodulo;
-					datosPerfilesDetalle[i][2] = data.modulos[i].tipo;
-					datosPerfilesDetalle[i][3] = data.modulos[i].estatus == 1 ? 'Activo' : 'Inactivo';
-					datosPerfilesDetalle[i][4] = data.modulos[i].moduloId;
-					datosPerfilesDetalle[i][5] = data.modulos[i].submodulos[j].submoduloId;
+					datosPerfilesDetalle[contador] = new Array();
+					datosPerfilesDetalle[contador][0] = data.modulos[i].modulo;
+					datosPerfilesDetalle[contador][1] = data.modulos[i].submodulos[j].submodulo;
+					datosPerfilesDetalle[contador][2] = data.modulos[i].tipo;
+					datosPerfilesDetalle[contador][3] = data.modulos[i].estatus;
+					datosPerfilesDetalle[contador][4] = data.modulos[i].moduloId;
+					datosPerfilesDetalle[contador][5] = data.modulos[i].submodulos[j].submoduloId;
+					contador++;
 				}
 			} else {
-				datosPerfilesDetalle[i] = new Array();
-				datosPerfilesDetalle[i][0] = data.modulos[i].modulo;
-				datosPerfilesDetalle[i][1] = '-';
-				datosPerfilesDetalle[i][2] = data.modulos[i].tipo;
-				datosPerfilesDetalle[i][3] = data.modulos[i].estatus == 1 ? 'Activo' : 'Inactivo';
-				datosPerfilesDetalle[i][4] = data.modulos[i].moduloId;
-				datosPerfilesDetalle[i][5] = 0;
+				datosPerfilesDetalle[contador] = new Array();
+				datosPerfilesDetalle[contador][0] = data.modulos[i].modulo;
+				datosPerfilesDetalle[contador][1] = '-';
+				datosPerfilesDetalle[contador][2] = data.modulos[i].tipo;
+				datosPerfilesDetalle[contador][3] = data.modulos[i].estatus;
+				datosPerfilesDetalle[contador][4] = data.modulos[i].moduloId;
+				datosPerfilesDetalle[contador][5] = 0;
+				contador++;
 			}
 		}
 	}
@@ -230,7 +233,7 @@ function creaEditaPerfil(perfilId) {
 	
 	//Módulos al select
 	for(var i = 0; i < modulosSelect.length; i++) {
-		modulos += "<option value='" + modulosSelect[i].moduloId + "'>" + modulosSelect[i].modulo + "</option>";
+		modulos += "<option value='" + modulosSelect[i].moduloId + "'>" + modulosSelect[i].modulo +" ("+ modulosSelect[i].tipo +") "+ "</option>";
 	}
 	
 	cadena = "<div class='row padding_bottom_10'>" +
@@ -265,7 +268,7 @@ function creaEditaPerfil(perfilId) {
 			"<div class='row padding_bottom_10'>" +
 				"<div class='col-lg-12 col-12 custom_select'>" +
 					"<select id='selectSubmodulosCrea' name='selectSubmodulos' class='combo_modulos'>" +	
-						"<option value='0'>Seleccionar submódulo</option>" +
+						"<option value='-1'>Seleccionar submódulo</option>" +
 					"</select>" +
 				"</div>" +
 			"</div>" +
@@ -331,7 +334,7 @@ function editaPerfil(perfil) {
 function seleccionaSubmoduloCrea() {
 	var moduloId = $("#selectModuloCrea").val();
 	$("#selectSubmodulosCrea").empty();
-	$('#selectSubmodulosCrea').append($('<option>', {value:0, text:'Seleccionar submódulo'}));
+	$('#selectSubmodulosCrea').append($('<option>', {value:-1, text:'Seleccionar submódulo'}));
 	 
 	for(var i = 0; i < modulosSelect.length; i++) {
 		if(moduloId == modulosSelect[i].moduloId) {
@@ -356,9 +359,9 @@ function agregaModuloCrear() {
 		$("#moduloPerfilCrea").hide();
 	}
 	
-	if($("#selectSubmodulosCrea").val() == 0) {
-		$("#submoduloPerfilCrea").show();
-		agregaModulo = false;
+	if($("#selectSubmodulosCrea").val() == -1) {
+		//$("#submoduloPerfilCrea").show();
+		//agregaModulo = false;
 	} else {
 		$("#submoduloPerfilCrea").hide();
 	}
@@ -371,15 +374,21 @@ function agregaModuloCrear() {
 				return;
 			}
 		}
+		var texto_submodulo="";
+		if($("#selectSubmodulosCrea").val() == -1){
+			texto_submodulo="";
+		}else{
+			texto_submodulo=$("#selectSubmodulosCrea").find('option:selected').text();
+		}
 		modulosSeleccionadosArray.push({'modulo': $("#selectModuloCrea").val(), 'moduloNombre': $("#selectModuloCrea").find('option:selected').text(), 
-										'submodulo': $("#selectSubmodulosCrea").val(), 'submoduloNombre': $("#selectSubmodulosCrea").find('option:selected').text()});
+										'submodulo': $("#selectSubmodulosCrea").val(), 'submoduloNombre': texto_submodulo});
 		
 		dibujaModulosCrea();
 		activaCreaPerfil();
 		
 		$('#selectModuloCrea option[value=0]').prop('selected', true);
 		$("#selectSubmodulosCrea").empty();
-		$('#selectSubmodulosCrea').append($('<option>', {value:0, text:'Seleccionar submódulo'}));
+		$('#selectSubmodulosCrea').append($('<option>', {value:-1, text:'Seleccionar submódulo'}));
 	}	
 }
 

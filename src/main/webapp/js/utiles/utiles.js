@@ -508,7 +508,7 @@ function doActualizaDatosPerfil(){
 	var imgUser  = $("img.circulo_imagen")[0].src;
 	var imgUserInit = $("img.circulo_imagen")[0].getAttribute("relinit");
 	
-	if(imgUser === imgUserInit){
+	if(imgUser === imgUserInit || imgUserInit === ""){
 		imgUser = "";
 	}
 	

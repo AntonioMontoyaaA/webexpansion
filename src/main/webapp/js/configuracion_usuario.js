@@ -122,8 +122,10 @@ function mostrarAsignar(){
 function seleccionEvento(){
 		if($('#campo_estatus').css('display') == 'none'){
 			$('#campo_estatus').css('display','block');
+			$('.caja').css('background-color','#40BCD8');
 		}else{
 			$('#campo_estatus').css('display','none');
+			$('.caja').css('background-color','white');
 		}
 }
 
@@ -211,6 +213,8 @@ function cargafiltros(){
 			}
 			if($('#campo_estatus').css('display')=='block'){
 				estatus=1;
+			}else{
+				estatus=0;
 			}
 			if($('#campo_idUsuario').val()!=""){
 				usrBuscaId=$('#campo_idUsuario').val();
@@ -253,7 +257,11 @@ function buscaUsuarios(areaId, puestoId, estatus, usrBuscaId){
 				datos[i][1] = resultados[i].usuario; 
 				datos[i][2] = resultados[i].area; 
 				datos[i][3] = resultados[i].puesto;
-				datos[i][4] = resultados[i].estatus; 
+				if(resultados[i].estatus==1){
+				datos[i][4] = "Activo"; 
+				}else{
+				datos[i][4] = "Inactivo"; 
+				}			
 				datos[i][5] = i; 				
 			 }
 			initTablaUsuarios('DivTabla', datos, 'tabla');

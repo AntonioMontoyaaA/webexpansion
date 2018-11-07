@@ -73,8 +73,8 @@
 						<br>
 						<div class="col-12 azul t14 negrita">Estatus</div>
 						<div class="col-12 cursor" id="seleccion" onclick="seleccionEvento()" style="margin-top:5px;">
-							<div class="caja float_left" style="background:#40BCD8">
-								<img id="campo_estatus" src="img/check.png" style="display:none;">
+							<div class="caja float_left" style="background-color:#40BCD8;">
+								<img id="campo_estatus" src="img/check.png" style="display:block;">
 							</div>
 							<span class="t10 azul">ACTIVO</span>
 						</div>
@@ -161,7 +161,7 @@
 						<div class="col-12 azul t14 left titulo_contenedor">Detalles del usuario</div><br>
 						<input type="hidden" id="UsuarioId" value="">
 						<div class="col-12 center">
-										<div class="circulo_imagen" style="background: white;" id="imagenusuario"></div>
+										<div class="circulo_imagen" style="background: white; bottom:0px;" id="imagenusuario"></div>
 							</div><br>
 							<div class="col-12 t14 center gris" style="margin-bottom:10px;" id="nombreusuario"></div>
 							<div class="col-12 t14 center gris" style="margin-bottom:10px;" id="areausuario"></div><br>

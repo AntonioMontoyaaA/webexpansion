@@ -1,6 +1,4 @@
-.circulo_imagen{
-	bottom:0;
-}
+
 .guardar{
 	background-image:url('../img/botones/guardar.svg');
 	background-size:21px;
@@ -28,8 +26,8 @@
 	min-height:41px;
 }
 .caja{
-    padding-top: 2px;
-    padding-left: 2px;
+    padding-top: 1px;
+    padding-left: 1px;
     text-align: center;
    margin-right:5px;
     font-size: 9px;
@@ -40,6 +38,7 @@
     border-radius: 30%;
     color: white;
     line-height: 1;
+    border: 1px solid rgb(201, 201, 201);
 }
 .tabla_container{
 	min-height:calc(100%);

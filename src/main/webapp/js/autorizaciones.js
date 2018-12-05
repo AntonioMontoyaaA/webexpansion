@@ -141,6 +141,7 @@ function inicializaFlujoAutorizaciones(){
 	flujoAutorizaciones[15] = new Estatus(15, [15], 'Inicio de obra');
 	flujoAutorizaciones[26] = new Estatus(26, [26], 'Confirmacion fin de obra');
 	flujoAutorizaciones[16] = new Estatus(16, [16], 'Confirmacion Inauguracion');
+	flujoAutorizaciones[28] = new Estatus(28, [28], 'Validacion de levantamiento');
 	
 	flujoAutorizaciones[3].agregaArea(areaExpansion, new Area(areaExpansion, todosRechazos, sinArchivos));
 	
@@ -167,6 +168,8 @@ function inicializaFlujoAutorizaciones(){
 	
 	flujoAutorizaciones[22].agregaArea(areaOperaciones, new Area(areaOperaciones, todosRechazos, comite));
 	flujoAutorizaciones[23].agregaArea(areaOperaciones, new Area(areaOperaciones, todosRechazos, comite));
+	flujoAutorizaciones[28].agregaArea(areaOperaciones, new Area(areaOperaciones, todosRechazos, comite));
+	
 	
 	flujoAutorizaciones[13].agregaArea(areaGestoria, new Area(areaGestoria, todosRechazos, contrato));
 	
@@ -342,7 +345,21 @@ function validaAutorizacion(){
 			$('#archivos').addClass('col-lg-7');
 			$('#archivos').html('<div class="selecciona">...</div>');
 			
-			$('#subida').show();
+			/* == VISTA CARGA ARCHIVO ==*/
+			if(ESTATUS_MD == 6){
+				
+				$.each($(".perfiles_usuario"), function(index,obj){ 
+					if(obj.value == 15){ 
+						$('#subida').show();
+					}
+				});			
+				
+			}else{
+				$('#subida').show();
+			}
+			
+			
+			
 			
 			dropzoneOptions.maxFiles = 1;
 			dropzoneOptions.acceptedFiles = 'image/*,application/pdf,.psd';
@@ -383,7 +400,20 @@ function validaAutorizacion(){
 			$('#archivos').removeClass('col-lg-10');
 			$('#archivos').addClass('col-lg-7');
 			
-			$('#subida').show();
+			/* == VISTA CARGA ARCHIVO ==*/
+			if(ESTATUS_MD == 10){
+				
+				$.each($(".perfiles_usuario"), function(index,obj){ 
+					if(obj.value == 19){ 
+						$('#subida').show();
+					}
+				});			
+				
+			}else{
+				$('#subida').show();
+			}
+			
+			
 			
 			dropzoneOptions.maxFiles = 1;
 			dropzoneOptions.acceptedFiles = 'image/*,application/pdf,.psd,text/csv,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';

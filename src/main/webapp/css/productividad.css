@@ -1,0 +1,127 @@
+.contenedor_botones_superiores{
+	margin:0 auto;
+	width:35%;
+	height:30px;
+	margin-bottom:10px;
+}
+@media(max-width: 997px){
+	.contenedor_botones_superiores{width:100%;}
+}
+.boton_sup{
+	text-align:center;
+	color:gray;
+	border-bottom:4px solid gray;
+}
+.boton_sup.activo{
+	color:#40bcd8;
+	border-bottom:4px solid #40bcd8;
+}
+.boton_sup:hover{
+	color:#40bcd8;
+	border-bottom:4px solid #40bcd8;
+}
+#asignar{
+	width:200px !important;
+}
+#filtros{
+	width:200px !important;
+	background-image:url('../img/botones/filtro.svg');
+	background-repeat:no-repeat;
+	background-position:left;
+}
+
+
+.guardar{
+	background-image:url('../img/botones/guardar.svg');
+	background-size:21px;
+	background-position:center;
+	background-repeat:no-repeat;
+}
+
+.altura1 {
+    min-height: 350px;
+    height: auto;
+}
+
+.altura2{
+	min-height: 521px;
+    height: min-content;
+}
+
+.titulo_detalle_md_20 {
+    font-size: 0.9em;
+    color: #071B36;
+    font-weight: bold;
+}
+
+.contenido_cajas_20 {
+    font-size: 0.7em;
+    color: #717171;
+}
+
+.contenido_cajas_20_azul {
+    font-size: 0.7em;
+    color: #071B36;
+    font-weight: 600;
+}
+
+.fechaInicialCalendario {
+	width: 251px;
+    height: 31px;
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border: 1px solid #a29e9e;
+    font-size: 14px;
+    margin-left: 0px;
+    background-image: url(../img/icon-calendar-n.svg);
+    background-position: 4%;
+    background-repeat: no-repeat;
+    background-size: 20px;
+    background-origin: initial;
+    padding-left: 45px;
+    cursor: pointer;
+}
+
+.bton_clip{
+	background-image: url(../img/paper_clip.png);
+    background-position: 4%;
+    background-repeat: no-repeat;
+    background-size: 20px;
+    background-origin: initial;
+    width: 25px;
+    height: 25px;
+
+}
+
+.bton_views{
+	background-image: url(../img/views_icon.png);
+    background-position: 4%;
+    background-repeat: no-repeat;
+    background-size: 20px;
+    background-origin: initial;
+    width: 25px;
+    height: 25px;
+
+}
+
+.caja {
+    padding-top: 1px;
+    padding-left: 1px;
+    text-align: center;
+    margin-right: 5px;
+    font-size: 9px;
+    width: 14px;
+    height: 14px;
+    -moz-border-radius: 30%;
+    -webkit-border-radius: 30%;
+    border-radius: 30%;
+    color: white;
+    line-height: 1;
+    border: 1px solid rgb(201, 201, 201);
+}
+
+.float_left {
+    position: relative;
+    float: left;
+}

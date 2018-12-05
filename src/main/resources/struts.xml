@@ -59,6 +59,11 @@
 			<result>jsp/aprobadas.jsp</result>
 		</action>
 		
+		<action name="productividad">
+			<result>jsp/productividad.jsp</result>
+		</action>
+		
+		
 		<action name="">
 			<result>jsp/mensajes_historial.jsp</result>
 		</action>
@@ -310,7 +315,6 @@
        	method = "getObtenerRadiosEstatus">
     </action>          	
     
-    
     <!-- ===== END- LOCALIZADOR === -->
     
       	<action name = "DashboardGeneralAction" class="com.tiendas.neto.action.DashboardGeneralAction"
@@ -422,7 +426,36 @@
          		method = "editarPerfilesUsuarioAction">
     </action>
     <!--  ********************** TERMINA CONF PERFILES ******************** -->		
-      	
+      
+          <!-- ===== LEVANTAMIENTO === -->
+    
+    <action name ="sendLevantamiento" 
+   	   class = "com.tiendas.neto.action.Levantamiento" 
+   	   method = "execute">
+   	  <result name = "success">jsp/levantamiento.jsp</result>
+   	</action>
+   	
+   	<action name ="consultaCabeceroMd" 
+   	   class = "com.tiendas.neto.action.Levantamiento" 
+   	   method = "consultaCabeceMD">
+   	</action>
+   	
+  	<action name ="subeArchivoPdf" 
+    	class = "com.tiendas.neto.action.Levantamiento" 
+    	method = "subeArchivo">
+     </action>
+     
+     <action name ="guardarDatosLevan" 
+    	class = "com.tiendas.neto.action.Levantamiento" 
+    	method = "guardarDatosLevantamiento">
+     </action>
+    
+     <action name ="evaluaLevantamiento" 
+    	class = "com.tiendas.neto.action.Levantamiento" 
+    	method = "evaluaLevantamiento">
+     </action>
+    
+    
 	</package>
 	
 </struts>

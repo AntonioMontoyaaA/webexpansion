@@ -36,6 +36,11 @@
 						<c:if test="${permisos['PRIVILEGIO.MENU.VOKSE.18']}">
 							<li id="configuracionMenu" class="nav-item"><a id="idconfiguracion" class="nav-link blanco t12" href="configuracion"> Configuración</a></li>						
 						</c:if> 
+						
+<%-- 						<c:if test="${permisos['PRIVILEGIO.MENU.VOKSE.18']}"> --%>
+<!-- 							<li id="productividadMenu" class="nav-item"><a id="idproductividad" class="nav-link blanco t12" href="productividad">Productividad</a>  -->
+<%-- 						</c:if> --%>
+						
 							<!--  <li id="aprobadasMenu" class="nav-item" style="display: none;"><a id="idaprobadas" class="nav-link blanco t12" href="aprobadas">Aprobadas</a></li>	-->									
 					</ul>
 					

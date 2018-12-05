@@ -39,6 +39,9 @@
 .radio{
 	background-image:url('../img/botones/radios.svg');
 }
+.tienda{
+	background-image:url('../img/MD.png');
+}
 .refresh{
 	background-image:url('../img/botones/b_refresh.svg');
 	background-size:120% !important;
@@ -970,3 +973,23 @@ font-weight:normal;
     font-size: 13px;
 }
 /*-------------FIN NOTIFICACIONES 2.0---------------*/
+
+.btnGris{
+	color: white;
+    background-color: #CCC;
+}
+
+.btnAzul{
+	background-color: #071B36;
+    color: white;
+}
+
+.btnGris, .btnAzul{
+    width: 80px;
+    height: 25px;
+    margin: 15px;
+    line-height: 25px;
+    font-size: 12px;
+	border-radius: 2px;
+	cursor: pointer;
+}

@@ -22,9 +22,9 @@
 </head>
 <body>
 
-	<%--<c:forEach var="permiso" items="${permisos}">
-    	<input type="hidden" class="permisos_detalleMd" value="${permiso}">
-    </c:forEach> --%>
+	<c:forEach var="perfil" items="${usr.perfil.perfilesxusuario}">
+    	<input type="hidden" class="perfiles_usuario" value="${perfil.perfilid}">
+    </c:forEach> 
     
     <input type="hidden" id="perfil_usuario" value="${usr.perfil.perfilesxusuario[0].perfilid}">
     <input type="hidden" id="areaUsuario" value="${usr.perfil.areasxpuesto[0].areaId}">
@@ -45,6 +45,9 @@
 					<div class="col-lg-10 col-10" id="flujo"></div>
 					
 					<div class="botones">
+						
+						<button id="btnLevantamiento" class="btn desp tienda" style="display: none" type="button"></button>				 
+					
 						<button id="btnRadios" class="btn desp radio" type="button"></button>
 						<button id="mensajesMD" onclick="muestraChatXMd();" class="btn desp mensajes" type="button"></button>
 						<button id="botondescarga" class="btn desp descarga sin_permiso" type="button"></button>
@@ -598,6 +601,10 @@
 	<input type="hidden" name="mdIdChat" id="mdIdChat" value=""/>
 	<input type="hidden" name="nombreMdChat" id="nombreMdChat" value=""/>
 	<input type="hidden" name="tipoMdChat" id="tipoMdChat" value=""/>
+</form>
+
+<form action='sendLevantamiento'  id="cabeceroMd" method="post">
+	<input type="hidden" name="mdIdlevantamiento" id="mdIdlevantamiento" value=""/>
 </form>
 
 <!-- --------------------------------------- -->

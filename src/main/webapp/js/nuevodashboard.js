@@ -876,10 +876,10 @@ function redirige(valor, estatusId, estatusMd){
 		}
 		if(value.value=="PRIVILEGIO.MENU.VOKSE.8=true"){ //asignadas
 			if ($(valor).is(".verde")){
-				window.location.href='asignadas';
+				window.location.href='asignadas?fiNivelCallAction='+estatusId;
 			}
 			if ($(valor).is(".rojo")){
-				window.location.href='asignadas';
+				window.location.href='?fiNivelCallAction='+estatusId;
 			}
 		}
 	});

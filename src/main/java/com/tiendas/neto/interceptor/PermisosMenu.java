@@ -19,6 +19,7 @@ public class PermisosMenu {
 		permisosMenu.put("aprobadas"  , "PRIVILEGIO.MENU.VOKSE.16");
 		permisosMenu.put("configuracion", "PRIVILEGIO.MENU.VOKSE.18");
 		permisosMenu.put("configuracionPerfiles", "PRIVILEGIO.MENU.VOKSE.18");
+		permisosMenu.put("productividad", "PRIVILEGIO.MENU.VOKSE.18");
 	};
 	
 }

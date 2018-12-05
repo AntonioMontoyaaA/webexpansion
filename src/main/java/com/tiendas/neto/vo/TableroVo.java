@@ -54,6 +54,11 @@ public class TableroVo implements Serializable {
 	private String comiteEstatus;
 	private String ceco;
 	private String cecoEstatus;
+	
+	private String levantamiento;
+	private String levantamientoEstatus;
+	private String levantamientoVobo;
+	private String levantamientoVoboEstatus;
 	/**
 	 * @return the mdId
 	 */
@@ -605,6 +610,30 @@ public class TableroVo implements Serializable {
 	 */
 	public void setCecoEstatus(String cecoEstatus) {
 		this.cecoEstatus = cecoEstatus;
+	}
+	public String getLevantamiento() {
+		return levantamiento;
+	}
+	public void setLevantamiento(String levantamiento) {
+		this.levantamiento = levantamiento;
+	}
+	public String getLevantamientoVobo() {
+		return levantamientoVobo;
+	}
+	public void setLevantamientoVobo(String levantamientoVobo) {
+		this.levantamientoVobo = levantamientoVobo;
+	}
+	public String getLevantamientoEstatus() {
+		return levantamientoEstatus;
+	}
+	public void setLevantamientoEstatus(String levantamientoEstatus) {
+		this.levantamientoEstatus = levantamientoEstatus;
+	}
+	public String getLevantamientoVoboEstatus() {
+		return levantamientoVoboEstatus;
+	}
+	public void setLevantamientoVoboEstatus(String levantamientoVoboEstatus) {
+		this.levantamientoVoboEstatus = levantamientoVoboEstatus;
 	}
 
 }

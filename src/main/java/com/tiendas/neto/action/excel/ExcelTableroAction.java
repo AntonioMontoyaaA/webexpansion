@@ -39,11 +39,14 @@ public class ExcelTableroAction extends ExpansionAction {
 		try {
 	        String datos = request.getParameter("datos");
 	        JSONObject jsonObj = new JSONObject(datos);
-	       
+	        
+	  
 	        List<TableroVo> listaMemorias = new ArrayList<TableroVo>();
 	        JSONArray array = jsonObj.getJSONArray("detalleTablero");
+
 	        for(int i = 0 ; i < array.length() ; i++) {
 	        	TableroVo memoria = new TableroVo();
+
 	        	memoria.setMdId(array.getJSONObject(i).getLong("MDID"));
 	        	memoria.setFechaGerenteExpansion(array.getJSONObject(i).getJSONObject("GERENTE_EXP").getString("fechaValidacion"));
 	        	memoria.setFechaRecepcionMd(array.getJSONObject(i).getJSONObject("FECHARECEPCION").getString("fechaValidacion"));
@@ -89,13 +92,16 @@ public class ExcelTableroAction extends ExpansionAction {
 	        	memoria.setDoctos(array.getJSONObject(i).getJSONObject("CARGADATOS").getString("fechaValidacion"));
 	        	memoria.setDoctosEstatus(array.getJSONObject(i).getJSONObject("CARGADATOS").getString("validacion"));
 	        	memoria.setCeco(array.getJSONObject(i).getJSONObject("CCO").getString("fechaValidacion"));
-	        	memoria.setCecoEstatus(array.getJSONObject(i).getJSONObject("CCO").getString("validacion"));
+	        	memoria.setCecoEstatus(array.getJSONObject(i).getJSONObject("CCO").getString("validacion"));	    
+	        	memoria.setLevantamiento(array.getJSONObject(i).getJSONObject("LEVANTAMIENTO").getString("fechaValidacion"));
+	        	memoria.setLevantamientoEstatus(array.getJSONObject(i).getJSONObject("LEVANTAMIENTO").getString("validacion"));
+
 	        	listaMemorias.add(memoria);
 	        }
 	        
-	        CreaExcelTablero excelCreator = new CreaExcelTablero();
-	        HSSFWorkbook workbook = excelCreator.createWorkbook(listaMemorias);
 	        
+	        CreaExcelTablero excelCreator = new CreaExcelTablero();	        
+	        HSSFWorkbook workbook = excelCreator.createWorkbook(listaMemorias);
 	        
 	        response.setContentType("application/vnd.ms-excel");
 			response.setHeader("Content-Disposition", "attachment; filename=" + "TableroExpansion_"+ new SimpleDateFormat("yyMMddHHmmss").format(new Date())+ ".xls");

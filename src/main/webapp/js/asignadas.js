@@ -1,6 +1,21 @@
 var datosExcel = "";
+var nivelparametro = "";
 
 $(function(){
+	
+	var params = {};
+
+	if (location.search) {
+	    var parts = location.search.substring(1).split('&');
+
+	    for (var i = 0; i < parts.length; i++) {
+	        var nv = parts[i].split('=');
+	        if (!nv[0]) continue;
+	        params[nv[0]] = nv[1] || true;
+	        nivelparametro = nv[1];
+	    }
+	}
+	
 	$('#idasignadas').addClass('resaltado');
 	inicializaCalendarios();
 	if($( "#datepicker1").val()!='')
@@ -14,6 +29,7 @@ $(function(){
 		$("#datos").val(JSON.stringify(datosExcel));
 		$("#submitBotonAsignadas").click();
 	});
+	
 	
 });
 
@@ -46,7 +62,8 @@ function refreshAsignadas() {
 function creatabla(){
 	
 	invocarJSONServiceAction("asignadas_info", 
-				{'fechaConsulta': $( "#datepicker1").val()}, 
+				{'fechaConsulta': $( "#datepicker1").val()
+				, 'fiNivelCallAction' : nivelparametro}, 
 				'obtieneMdsResponse', 
 				function() {
 					//Funcion de error

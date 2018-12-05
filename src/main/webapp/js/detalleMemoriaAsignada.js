@@ -12,6 +12,7 @@ var mdId="";
 
 var predialImg;
 var fechaPredial;
+var arrEstatusPermiso;
 
 var SCORE_ANTERIOR = 1;
 var SCORE_NUEVO = 2
@@ -80,6 +81,11 @@ $(function(){
 	});
 
 	permisos_perfil();
+	
+	$("#btnLevantamiento").click(function() {
+		$("#mdIdlevantamiento").val(mdId);
+		$("#cabeceroMd").submit();
+	});
 });
 
 function imprimeInfoRadio() {
@@ -592,6 +598,11 @@ function buscaDetalleMD(mdId) {
 		} else {
 			pintaFlujo(data);
 			
+			/* == VER BOTON LEVANTAMIENTO ==*/
+			if(data.muestralevantamiento == 1){
+				$("#btnLevantamiento").show();				
+			}
+			
 			$("#botondescarga").click(function(){
 				descargaExcel(data);
 			});
@@ -600,6 +611,14 @@ function buscaDetalleMD(mdId) {
 			ARCHIVOS_MD = new Array();
 			
 			parseaEstatus(data.estatusActuales);
+			
+			
+				arrEstatusPermiso = new Array();
+				
+				$.each(data.estatusActuales, function(){
+					arrEstatusPermiso[this.nivelEstatusId] = this.nivelEstatusId;
+				});
+			
 			
 			$("#mdIdAutorizacion").val(mdId);
 			ESTATUS_FINALIZA_MD = -1;
@@ -980,7 +999,7 @@ function buscaDetalleMD(mdId) {
 			}
 			
 			validaAutorizacion();
-			
+			autorizaDuplica();
 		}
 	}
 }
@@ -1747,6 +1766,12 @@ function consultaScore(){
 			$('#score_card').modal('show');
 		}
 		}
+}
+
+function autorizaDuplica(){
+	if(arrEstatusPermiso[28] == 28){
+		$("#divAutorizacion").hide();
+	}
 }
 
 function muestraPredial() {

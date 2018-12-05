@@ -277,7 +277,8 @@ function initTablaMemoriasTablero(nombreDiv, datosDesgloseMemorias, nombreTabla)
 					'<th class="gris negrita t12 fblanco">VoBo inicial operaciones</th>' +
 					'<th class="gris negrita t12 fblanco">Conteo auditor</th>' +
 					'<th class="gris negrita t12 fblanco">Pregestor&iacute;a autorizada</th>' +
-					'<th class="gris negrita t12 fblanco">Levantamiento realizado</th>' +
+					'<th class="gris negrita t12 fblanco">Levantamiento</th>' +
+					'<th class="gris negrita t12 fblanco">Layout</th>' +
 					'<th class="gris negrita t12 fblanco">VoBo layout operaciones</th>' +
 					'<th class="gris negrita t12 center fblanco">Presupuesto construcci&oacute;n</th>' +
 					'<th class="gris negrita t12 center fblanco">Presupuesto auditor&iacute;a</th>' +
@@ -315,12 +316,13 @@ function initTablaMemoriasTablero(nombreDiv, datosDesgloseMemorias, nombreTabla)
 				           {"sClass":"tablero_celda", "bSearchable":false},
 				           {"sClass":"tablero_celda","bSearchable":false},
 				           {"sClass":"tablero_celda", "bSearchable":false},
+				           {"sClass":"tablero_celda","bSearchable":false},
+				           {"sClass":"tablero_celda", "bSearchable":false},
 				           {"sClass":"tablero_celda", "bSearchable":false},
 				           {"sClass":"tablero_celda", "bSearchable":false},
 				           {"sClass":"tablero_celda", "bSearchable":false},
 				           {"sClass":"tablero_celda","bSearchable":false},
 				           {"sClass":"tablero_celda","bSearchable":false},
-				           {"sClass":"tablero_celda", "bSearchable":false},
 				           {"sClass":"tablero_celda","bSearchable":false},
 				           {"sClass":"tablero_celda", "bSearchable":false},
 				           {"sClass":"tablero_celda", "bSearchable":false},

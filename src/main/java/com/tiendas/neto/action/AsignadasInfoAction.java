@@ -37,6 +37,7 @@ public class AsignadasInfoAction extends ExpansionAction implements SessionAware
 	public String execute() throws Exception {
 		String respuesta="";
 		String fechaConsulta = ServletActionContext.getRequest().getParameter("fechaConsulta");
+		String fiEstatusNivel = ServletActionContext.getRequest().getParameter("fiNivelCallAction");
 		UsuarioLoginVO usuario = null;
 		String numeroEmpleado = null;
 		int puestoId = 0;
@@ -47,6 +48,11 @@ public class AsignadasInfoAction extends ExpansionAction implements SessionAware
 		if(usuarioSesion.getAttribute("submodulos")!=null) {
 			submodulos=(String) usuarioSesion.getAttribute("submodulos");
 		}
+		
+		if(fiEstatusNivel != null && !fiEstatusNivel.trim().equals("")) {
+			submodulos = fiEstatusNivel;
+		}
+		
 		usuario = (UsuarioLoginVO) usuarioSesion.getAttribute("usr");
 		
 		try {

@@ -921,6 +921,23 @@ function documentacion(data){
 		});
 	}
 	
+	if(eval(data)["seguimiento"]["CARGA LAYOUT CONSTRUCCION"] != undefined
+			&& eval(data)["seguimiento"]["CARGA LAYOUT CONSTRUCCION"] != null){
+		
+		ARCHIVOS_MD[layout] = new Array();
+		$.each(eval(data)["seguimiento"]["CARGA LAYOUT CONSTRUCCION"], function(i,item){
+
+			ARCHIVOS_MD[layout].push(new Archivo(
+					item.nombreArchivo,
+					item.url,
+					item.estatus,
+					item.autor,
+					null, 
+					null)
+			);
+		});
+	}
+	
 	if(eval(data)["seguimiento"]["PRESUPUESTO CONSTRUCCION"] != undefined
 			&& eval(data)["seguimiento"]["PRESUPUESTO CONSTRUCCION"] != null){
 		

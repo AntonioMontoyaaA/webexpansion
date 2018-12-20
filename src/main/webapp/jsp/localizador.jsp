@@ -333,7 +333,7 @@
 	<script	src="${pageContext.request.contextPath}/js/localizador.js" type="text/javascript"></script>
 	<script src="${pageContext.request.contextPath}/js/jquery/jquery.ui.datepicker-es.js"></script>
 	<script	src="${pageContext.request.contextPath}/js/jquery/jquery.fileDownload.js" type="text/javascript"></script>
-	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCuFdkYUDivTv_TrR4RZMWP1NYCA0MK2YM&callback=initMap">
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCaefWW3pvU6WKZKiVFD6OwyGoWIgZLyS0&callback=initMap">
 	    </script>
 	
 	</body>

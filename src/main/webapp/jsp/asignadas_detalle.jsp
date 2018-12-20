@@ -93,7 +93,7 @@
 			</div>
 			</div>
 			<div class="col-12" id="map"></div>
-				<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCuFdkYUDivTv_TrR4RZMWP1NYCA0MK2YM">
+				<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCaefWW3pvU6WKZKiVFD6OwyGoWIgZLyS0">
 				</script>
 			</div>
 		</div>

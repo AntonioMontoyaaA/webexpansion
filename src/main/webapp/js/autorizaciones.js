@@ -915,7 +915,7 @@ function documentacion(data){
 					item.url,
 					item.estatus,
 					item.autor,
-					null, 
+					item.fechaSubida, 
 					null)
 			);
 		});
@@ -932,7 +932,7 @@ function documentacion(data){
 					item.url,
 					item.estatus,
 					item.autor,
-					null, 
+					item.fechaSubida, 
 					null)
 			);
 		});

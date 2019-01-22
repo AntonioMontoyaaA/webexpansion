@@ -40,10 +40,16 @@ public class TableroVo implements Serializable {
 	private double ventaEstimada;
 	private String contratoFirmado;
 	private String contratoFirmadoEstatus;
+	private String en_obra;
+	private String en_obraEstatus;
+	private String tienda_abierta;
+	private String tienda_abiertaEstatus;
 	private String inicioObra;
 	private String inicioObraEstatus;
 	private String finObra;
+	private String finObraEstatus;
 	private String inauguracion;
+	private String inauguracionEstatus;
 	private String inauguracionObjetivo;
 	private String jefeExpansion;
 	private String gerenteExpansion;
@@ -635,5 +641,42 @@ public class TableroVo implements Serializable {
 	public void setLevantamientoVoboEstatus(String levantamientoVoboEstatus) {
 		this.levantamientoVoboEstatus = levantamientoVoboEstatus;
 	}
+	public String getFinObraEstatus() {
+		return finObraEstatus;
+	}
+	public void setFinObraEstatus(String finObraEstatus) {
+		this.finObraEstatus = finObraEstatus;
+	}
+	public String getInauguracionEstatus() {
+		return inauguracionEstatus;
+	}
+	public void setInauguracionEstatus(String inauguracionEstatus) {
+		this.inauguracionEstatus = inauguracionEstatus;
+	}
+	public String getEn_obra() {
+		return en_obra;
+	}
+	public void setEn_obra(String en_obra) {
+		this.en_obra = en_obra;
+	}
+	public String getEn_obraEstatus() {
+		return en_obraEstatus;
+	}
+	public void setEn_obraEstatus(String en_obraEstatus) {
+		this.en_obraEstatus = en_obraEstatus;
+	}
+	public String getTienda_abierta() {
+		return tienda_abierta;
+	}
+	public void setTienda_abierta(String tienda_abierta) {
+		this.tienda_abierta = tienda_abierta;
+	}
+	public String getTienda_abiertaEstatus() {
+		return tienda_abiertaEstatus;
+	}
+	public void setTienda_abiertaEstatus(String tienda_abiertaEstatus) {
+		this.tienda_abiertaEstatus = tienda_abiertaEstatus;
+	}
+	
 
 }

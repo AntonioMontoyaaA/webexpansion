@@ -411,29 +411,29 @@ public class CreaExcelTablero {
                 cellDatos.setCellValue(new HSSFRichTextString(""));
             }
             cellDatos = rowDatos.createCell(29);
-            if(listaMemorias.get(i).getFinObra() != null && !listaMemorias.get(i).getFinObra().trim().equals("") && !listaMemorias.get(i).getFinObra().trim().equals("null") ) {
+            if(!listaMemorias.get(i).getEn_obra().trim().equals("") && listaMemorias.get(i).getEn_obra() != null && !listaMemorias.get(i).getEn_obraEstatus().equals("NO")) {
             	cellDatos.setCellStyle(datosCellStyleFecha);
-                cellDatos.setCellValue(formatter.parse(listaMemorias.get(i).getFinObra()));
+                cellDatos.setCellValue(formatter.parse(listaMemorias.get(i).getEn_obra()));
             } else {
             	cellDatos.setCellStyle(datosCellStyleNormal);
                 cellDatos.setCellValue(new HSSFRichTextString(""));
             }
             cellDatos = rowDatos.createCell(30);
-            if(!listaMemorias.get(i).getInauguracion().trim().equals("") && listaMemorias.get(i).getInauguracion() != null) {
+            if(!listaMemorias.get(i).getTienda_abierta().trim().equals("") && listaMemorias.get(i).getTienda_abierta() != null && !listaMemorias.get(i).getTienda_abiertaEstatus().equals("NO")) {
             	cellDatos.setCellStyle(datosCellStyleFecha);
-                cellDatos.setCellValue(formatter.parse(listaMemorias.get(i).getInauguracion()));
+                cellDatos.setCellValue(formatter.parse(listaMemorias.get(i).getTienda_abierta()));
             } else {
             	cellDatos.setCellStyle(datosCellStyleNormal);
                 cellDatos.setCellValue(new HSSFRichTextString(""));
             }
-            cellDatos = rowDatos.createCell(31);
+            /*cellDatos = rowDatos.createCell(31);
             if(!listaMemorias.get(i).getInauguracionObjetivo().trim().equals("") && listaMemorias.get(i).getInauguracionObjetivo() != null) {
             	cellDatos.setCellStyle(datosCellStyleFecha);
                 cellDatos.setCellValue(formatter.parse(listaMemorias.get(i).getInauguracionObjetivo()));
             } else {
             	cellDatos.setCellStyle(datosCellStyleNormal);
                 cellDatos.setCellValue(new HSSFRichTextString(""));
-            }
+            }*/
         }
         
 		}catch(Exception e) {

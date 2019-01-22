@@ -81,9 +81,11 @@ public class ExcelTableroAction extends ExpansionAction {
 	        	memoria.setContratoFirmadoEstatus(array.getJSONObject(i).getJSONObject("FIRMA_CONTRATO").getString("validacion"));
 	        	memoria.setInicioObra(array.getJSONObject(i).getJSONObject("INICIO_OBRA").getString("fechaValidacion"));
 	        	memoria.setInicioObraEstatus(array.getJSONObject(i).getJSONObject("INICIO_OBRA").getString("validacion"));
-	        	memoria.setFinObra(array.getJSONObject(i).getString("ESTIMADO_FINOBRA"));
-	        	memoria.setInauguracion(array.getJSONObject(i).getString("ESTIMADO_APERTURA"));
-	        	memoria.setInauguracionObjetivo(array.getJSONObject(i).getString("INAUGURACIONINICIAL"));
+	        	memoria.setEn_obra(array.getJSONObject(i).getJSONObject("EN_OBRA").getString("fechaValidacion"));
+	        	memoria.setEn_obraEstatus(array.getJSONObject(i).getJSONObject("EN_OBRA").getString("validacion"));
+	        	memoria.setTienda_abierta(array.getJSONObject(i).getJSONObject("TIENDA_ABIERTA").getString("fechaValidacion"));
+	        	memoria.setTienda_abiertaEstatus(array.getJSONObject(i).getJSONObject("TIENDA_ABIERTA").getString("validacion"));
+	        	//memoria.setInauguracionObjetivo(array.getJSONObject(i).getString("INAUGURACIONINICIAL"));
 	        	memoria.setJefeExpansion(array.getJSONObject(i).getString("JEFEEXP"));
 	        	memoria.setGerenteExpansion(array.getJSONObject(i).getString("GERENTEEXP"));
 	        	memoria.setRegional(array.getJSONObject(i).getString("REGIONAL"));

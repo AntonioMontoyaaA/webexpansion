@@ -730,19 +730,71 @@ function creatabla(){
 				} else {
 					datosMemorias[i][23] = "<span class='text_sin_atencion'>---</span>";
 				}
-				
-				if(resultadoTablero[i].ESTIMADO_FINOBRA != undefined) {
-					datosMemorias[i][24] = "<span class=''>" + resultadoTablero[i].ESTIMADO_FINOBRA + "</span>";
+				if(resultadoTablero[i].EN_OBRA != undefined) {
+					if(resultadoTablero[i].EN_OBRA.fechaValidacion != undefined) {
+						var claseEstatus = "";
+						if(resultadoTablero[i].EN_OBRA.validacion == "NO") {
+							claseEstatus = "text_sin_atencion";
+						} else if(resultadoTablero[i].EN_OBRA.estatus == "EN TIEMPO") {
+							claseEstatus = "text_en_tiempo";
+						} else if(resultadoTablero[i].EN_OBRA.estatus == "ATRASADA") {
+							claseEstatus = "text_atrasada";
+							esMdAtrasada = true;
+						} else if(resultadoTablero[i].EN_OBRA.estatus == "RECHAZADA") {
+							claseEstatus = "text_rechazada";
+						}
+						
+						if(resultadoTablero[i].EN_OBRA.estatus == "ATRASADA") {
+							cadenaAtraso += "&ATR_INICOBA";
+							esMdAtrasada = true;
+						}
+						datosMemorias[i][24] = "<span class='" + claseEstatus + "'>" + resultadoTablero[i].EN_OBRA.fechaValidacion + "</span>";
+					} else {
+						datosMemorias[i][24] = "<span class='text_sin_atencion'>---</span>";
+					}
 				} else {
 					datosMemorias[i][24] = "<span class='text_sin_atencion'>---</span>";
 				}
 				
-				if(resultadoTablero[i].ESTIMADO_APERTURA != undefined) {
-					datosMemorias[i][25] = "<span class=''>" + resultadoTablero[i].ESTIMADO_APERTURA + "</span>";
+				if(resultadoTablero[i].TIENDA_ABIERTA != undefined) {
+					if(resultadoTablero[i].TIENDA_ABIERTA.fechaValidacion != undefined) {
+						var claseEstatus = "";
+						if(resultadoTablero[i].TIENDA_ABIERTA.validacion == "NO") {
+							claseEstatus = "text_sin_atencion";
+						} else if(resultadoTablero[i].TIENDA_ABIERTA.estatus == "EN TIEMPO") {
+							claseEstatus = "text_en_tiempo";
+						} else if(resultadoTablero[i].TIENDA_ABIERTA.estatus == "ATRASADA") {
+							claseEstatus = "text_atrasada";
+							esMdAtrasada = true;
+						} else if(resultadoTablero[i].TIENDA_ABIERTA.estatus == "RECHAZADA") {
+							claseEstatus = "text_rechazada";
+						}
+						
+						if(resultadoTablero[i].TIENDA_ABIERTA.estatus == "ATRASADA") {
+							cadenaAtraso += "&ATR_INICOBA";
+							esMdAtrasada = true;
+						}
+						datosMemorias[i][25] = "<span class='" + claseEstatus + "'>" + resultadoTablero[i].TIENDA_ABIERTA.fechaValidacion + "</span>";
+					} else {
+						datosMemorias[i][25] = "<span class='text_sin_atencion'>---</span>";
+					}
 				} else {
 					datosMemorias[i][25] = "<span class='text_sin_atencion'>---</span>";
 				}
 				
+				
+				/*if(resultadoTablero[i].ESTIMADO_FINOBRA != undefined) {
+					datosMemorias[i][24] = "<span class=''>" + resultadoTablero[i].ESTIMADO_FINOBRA + "</span>";
+				} else {
+					datosMemorias[i][24] = "<span class='text_sin_atencion'>---</span>";
+				}
+				*/
+				/*if(resultadoTablero[i].ESTIMADO_APERTURA != undefined) {
+					datosMemorias[i][25] = "<span class=''>" + resultadoTablero[i].ESTIMADO_APERTURA + "</span>";
+				} else {
+					datosMemorias[i][25] = "<span class='text_sin_atencion'>---</span>";
+				}
+				*/
 				if(resultadoTablero[i].INAUGURACIONINICIAL != undefined) {
 					datosMemorias[i][26] = "<span class=''>" + resultadoTablero[i].INAUGURACIONINICIAL + "</span>";
 				} else {
@@ -1127,6 +1179,48 @@ function creatabla(){
 								} else {
 									var mensaje = "ATENCIÓN: Este estatus no ha sido validado.";
 									cargaMensajeModal('INICIO DE OBRA', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
+								}
+								break;
+								
+							case 24:
+								if(resultadoTablero[i].EN_OBRA.validacion == "SI") {
+									usuario = resultadoTablero[i].EN_OBRA.usuario != null ? resultadoTablero[i].EN_OBRA.usuario : '-';
+									
+									if(resultadoTablero[i].EN_OBRA.estatus == "RECHAZADA") {
+										mensaje = "¿Quién rechazó? ";
+										motivoRechazo = "Motivo de rechazo: " + resultadoTablero[i].EN_OBRA.motivoRechazo;
+									} else {
+										mensaje = "¿Quién autorizó? ";
+									}
+									mensaje += usuario + "<br/>" +
+											"Del área: " + resultadoTablero[i].EN_OBRA.Area + "<br/>" +
+											"En la fecha: " +  resultadoTablero[i].EN_OBRA.fechaValidacion + "<br />" +
+											motivoRechazo;
+									cargaMensajeModal('FIN DE OBRA', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_EXITO, null);
+								} else {
+									var mensaje = "ATENCIÓN: Este estatus no ha sido validado.";
+									cargaMensajeModal('FIN DE OBRA', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
+								}
+								break;
+								
+							case 25:
+								if(resultadoTablero[i].TIENDA_ABIERTA.validacion == "SI") {
+									usuario = resultadoTablero[i].TIENDA_ABIERTA.usuario != null ? resultadoTablero[i].TIENDA_ABIERTA.usuario : '-';
+									
+									if(resultadoTablero[i].TIENDA_ABIERTA.estatus == "RECHAZADA") {
+										mensaje = "¿Quién rechazó? ";
+										motivoRechazo = "Motivo de rechazo: " + resultadoTablero[i].TIENDA_ABIERTA.motivoRechazo;
+									} else {
+										mensaje = "¿Quién autorizó? ";
+									}
+									mensaje += usuario + "<br/>" +
+											"Del área: " + resultadoTablero[i].TIENDA_ABIERTA.Area + "<br/>" +
+											"En la fecha: " +  resultadoTablero[i].TIENDA_ABIERTA.fechaValidacion + "<br />" +
+											motivoRechazo;
+									cargaMensajeModal('INAUGURACION', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_EXITO, null);
+								} else {
+									var mensaje = "ATENCIÓN: Este estatus no ha sido validado.";
+									cargaMensajeModal('INAUGURACION', mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
 								}
 								break;
 						};

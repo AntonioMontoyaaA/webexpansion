@@ -850,7 +850,7 @@ function creatabla(){
 						$( '#refuse' ).removeClass("activado");
 						$( '#time' ).removeClass("activado");
 						$( '#change' ).removeClass("activado");
-						$("#tablaMemoriasTablero tr").find("td.imagen").removeClass(clase); console.log("llego hasta aca");
+						$("#tablaMemoriasTablero tr").find("td.imagen").removeClass(clase);
 						clase="";
 						
 				}

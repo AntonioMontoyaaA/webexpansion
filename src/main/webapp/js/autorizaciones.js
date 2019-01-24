@@ -14,7 +14,7 @@ var dropzoneOptions = {
         dictRemoveFile: 'Eliminar archivo', 
         dictMaxFilesExceeded: 'Solo puedes agregar {{maxFiles}} archivo',
         paramName: "file",
-        maxFilesize: 5, //MB
+        maxFilesize: 10, //MB
         autoProcessQueue: false,
         uploadMultiple: false,
         addRemoveLinks: true,

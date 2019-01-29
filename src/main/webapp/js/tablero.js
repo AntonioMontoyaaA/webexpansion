@@ -24,6 +24,7 @@ var TRM_GES			= 14;
 var INICOBA		    = 15;
 var ENOBRA			= 26;
 var INGTDA			= 16;
+var LEVANT			= 27;
 
 
 var togSrc = [
@@ -119,9 +120,11 @@ function dibujaEstatus(resumen) {
             } else if(resumen[i].estatusid == INICOBA) {
                 busqueda = "INICOBA";
             } else if(resumen[i].estatusid == INGTDA) {
-                busqueda = "INGTDA";
+                busqueda = "TABIERTA";
             } else if(resumen[i].estatusid == ENOBRA) {
-                busqueda = "&_&";
+                busqueda = "ENOBRA";
+            } else if(resumen[i].estatusid == LEVANT) {
+                busqueda = "LEVANTAMIENTO";
             }
             
             var busquedaCadena = "";
@@ -398,7 +401,7 @@ function creatabla(){
 						}
 						
 						if(resultadoTablero[i].LEVANTAMIENTO.estatus == "ATRASADA") {
-							cadenaAtraso += "&ATR_VOBOLAY";
+							cadenaAtraso += "&ATR_LEVANTAMIENTO";
 							esMdAtrasada = true;
 						}
 						datosMemorias[i][11] = "<span class='" + claseEstatus + "'>" + resultadoTablero[i].LEVANTAMIENTO.fechaValidacion + "</span>";
@@ -745,7 +748,7 @@ function creatabla(){
 						}
 						
 						if(resultadoTablero[i].EN_OBRA.estatus == "ATRASADA") {
-							cadenaAtraso += "&ATR_INICOBA";
+							cadenaAtraso += "&ATR_ENOBRA";
 							esMdAtrasada = true;
 						}
 						datosMemorias[i][24] = "<span class='" + claseEstatus + "'>" + resultadoTablero[i].EN_OBRA.fechaValidacion + "</span>";
@@ -771,7 +774,7 @@ function creatabla(){
 						}
 						
 						if(resultadoTablero[i].TIENDA_ABIERTA.estatus == "ATRASADA") {
-							cadenaAtraso += "&ATR_INICOBA";
+							cadenaAtraso += "&ATR_TABIERTA";
 							esMdAtrasada = true;
 						}
 						datosMemorias[i][25] = "<span class='" + claseEstatus + "'>" + resultadoTablero[i].TIENDA_ABIERTA.fechaValidacion + "</span>";

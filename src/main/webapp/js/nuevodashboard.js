@@ -153,7 +153,7 @@ if(datos.Diciembre!="undefined"){
 	        enabled: true
 	    },
 	    xAxis: {
-	        categories: ['Ene','Feb','Mar','Abr','Mayo','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
+	        categories: ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
 	        labels: {
 	             style: {
 	                 color: 'white'

@@ -72,8 +72,12 @@ var inicioObra = 8;
 var predial = 9;
 var doctosContrato = 10;
 var fechaSimple = 11;
+var agua = 12;
+var luz = 13;
+var informePreauditoria = 14;
 
 var ACCION_REALIZADA;
+var ACCION_REALIZADA_CONTEO;
 var FILE_B64 = '';
 var FILE_Type = '';
 var strArchivos;
@@ -203,10 +207,12 @@ function finalizacionMDAutorizada(){
 		if(area.tipoArchivo == sinArchivos || area.tipoArchivo == comite){ //Autorizacion simple
 			mensajeConfirmacion('¿Est\u00e1s seguro de finalizar?', 0);
 		}else if(area.tipoArchivo == segundoConteo){ //Segundo conteo
-			if(ACCION_REALIZADA)
-				mensajeConfirmacion('¿Est\u00e1s seguro de finalizar?', 0);
-			else
+			if(ACCION_REALIZADA_CONTEO && ACCION_REALIZADA)
+				mensajeConfirmacion('¿Est\u00e1s seguro de finalizar?', 1);
+			else if(!ACCION_REALIZADA_CONTEO)
 				mensajeAlerta('Agrega el promedio peatonal');
+			else if(!ACCION_REALIZADA)
+				mensajeAlerta('Agrega tu informe de auditor\u00eda');
 				
 		}else if(area.tipoArchivo == layout){ // layout
 			
@@ -334,6 +340,39 @@ function validaAutorizacion(){
 			$('#preConteos').show();
 			ACCION_REALIZADA =  false;
 			generaAutorizacionSimple(area);
+			
+			$('#archivos').removeClass('col-lg-10');
+			$('#archivos').addClass('col-lg-7');
+			$('#archivos').html('<div class="selecciona">...</div>');
+			
+			$('#subida').show();
+			dropzoneOptions.maxFiles = 1;
+			dropzoneOptions.acceptedFiles = 'image/*,application/pdf,.psd';
+			dropzoneOptions.accept = function(file, done){
+						                reader = new FileReader();
+						                reader.onload = handleReaderLoad;
+						                reader.readAsDataURL(file);
+						                
+						                FILE_B64 = '';
+						                FILE_Type = '';
+						                
+						                function handleReaderLoad(evt) {
+						                	FILE_B64 = evt.target.result;
+						                	FILE_Type = file.type;
+						                	
+						                	ACCION_REALIZADA = true;
+						                }
+						                done();
+						            };
+
+	        uploader = document.querySelector('#uploader');
+			dropzone = new Dropzone(uploader, dropzoneOptions);
+			
+			tipoArchivo = 8;
+        	tipoServicio = 14;
+        	prefijo = 'PREAUDIT';
+        	
+			$('#manejadorArchivos').show();
 		
 		}else if(area.tipoArchivo == layout){// Layout
 			$('#msjFinalizacion').html('¿Finalizar MD?');
@@ -697,7 +736,19 @@ function finalizaConCargaPrevia(){
     			'respSubeArchivo', 
     			function() {},
     			function() {});
-	}else{
+	} else if(tipoServicio == 14){//PRE AUDITORIA
+    	invocarJSONServiceAction("subeArchivo", 
+				{'mdId': mdId,
+    			'nombreArchivo': nombreArchivo,
+    			'archivo': FILE_B64,
+    			'formato': formato,
+				'tipoServicio' : tipoServicio,
+				'tipoArchivo': tipoArchivo,
+				'fecha': fecha},
+				'respSubeArchivo', 
+				function() {},
+				function() {});
+	} else{
 		invocarJSONServiceAction("subeArchivo", 
 				{'mdId': mdId,
 				'nombreArchivo': nombreArchivo,
@@ -880,7 +931,7 @@ function guardaConteoAuditor(total){
 		}else{
 			$('#promedioConteosAuditoria').html(total);
 			$("#totalConteoAuditor").val('');
-			ACCION_REALIZADA = true;
+			ACCION_REALIZADA_CONTEO = true;
 		}
 	}
 }
@@ -902,6 +953,47 @@ function documentacion(data){
 				data.superficie.fechaPredial + ' ' +  data.superficie.horaPredial, 
 				null,
 		));
+	}
+	
+	if(data.superficie.agua != undefined && data.superficie.agua.trim() != "") {
+		ARCHIVOS_MD[agua] = new Array();
+		ARCHIVOS_MD[agua].push(new Archivo(
+				'Agua ',
+				data.superficie.agua,
+				1,
+				$("#creadorMd").html(), 
+				data.superficie.fechaAgua + ' ' +  data.superficie.horaAgua, 
+				null,
+		));
+	}
+	
+	if(data.superficie.luz != undefined && data.superficie.luz.trim() != "") {
+		ARCHIVOS_MD[luz] = new Array();
+		ARCHIVOS_MD[luz].push(new Archivo(
+				'Luz ',
+				data.superficie.luz,
+				1,
+				$("#creadorMd").html(), 
+				data.superficie.fechaLuz + ' ' +  data.superficie.horaLuz, 
+				null,
+		));
+	}
+	
+	if(eval(data)["seguimiento"]["PREAUDITORIA AUDITORIA"] != undefined
+			&& eval(data)["seguimiento"]["PREAUDITORIA AUDITORIA"] != null){
+		
+		ARCHIVOS_MD[informePreauditoria] = new Array();
+		$.each(eval(data)["seguimiento"]["PREAUDITORIA AUDITORIA"], function(i,item){
+
+			ARCHIVOS_MD[informePreauditoria].push(new Archivo(
+					item.nombreArchivo,
+					item.url,
+					item.estatus,
+					item.autor,
+					item.fechaSubida, 
+					null)
+			);
+		});
 	}
 	
 	if(eval(data)["seguimiento"]["LEVANTAMIENTO CONSTRUCCION"] != undefined
@@ -1041,6 +1133,9 @@ function dibujaArchivos(){
 	nombres[contrato] = 'CONTRATO';
 	nombres[predial] = 'PREDIAL';
 	nombres[doctosContrato] = 'DOCUMENTOS SITIO';
+	nombres[agua] = 'AGUA';
+	nombres[luz] = 'LUZ';
+	nombres[informePreauditoria] = 'INFORMES PRE-AUDITORIA';
 	
 	if(Object.size(ARCHIVOS_MD) > 0){
 		strArchivos = {};

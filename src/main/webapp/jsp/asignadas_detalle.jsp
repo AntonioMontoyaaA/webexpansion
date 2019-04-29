@@ -163,12 +163,15 @@
 				<div class="row divs_p galeria_main">
 					<div class="div_galeria col-lg-12 menupr_estilos fblanco">
 						<div class="row titulo_seccion">
-							<div class="col-lg-8 col-6">
+							<div class="col-lg-6 col-4">
 								<span class="titulo_detalle_md_20">SUPERFICIE</span>
 							</div>
 							<div class="col-lg-2 col-2">
 								<input type="checkbox" class="form-check-input esquina" id="esquina"  onclick="return false;">
     							<label class="contenido_cajas_20 esquina" for="esquina">Local en esquina</label>
+							</div>
+							<div class="col-lg-2 col-2">
+								<span id="drenaje" class="contenido_cajas_20">---</span>
 							</div>
 							<div class="col-lg-2 col-4">
 								<div id="modulo3Edita" class="float_right" style="display: none;">
@@ -266,6 +269,65 @@
 									</div>
 									<div class="col-lg-6" style="text-align: left;">
 										<span id="horaVistaLateral2" class="footerDetalleMd">---</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row div_header_sub">
+							
+							<div class="col-lg-4">
+								<div class="col-lg-12" style="padding:0;">
+									<span class="contenido_cajas_20">ENTORNO 1</span>
+								</div>
+								<div class="col-lg-12" style="padding:0;">
+									<img class="imagenModal" id="vistaEntorno1Md" alt="ENTORNO 1"
+										style="width: 100%; max-height: 300" src="img/cargando_imagen.gif"
+										onclick="modalImage(this)" />
+								</div>
+								<div class="row div_bottom">
+									<div class="col-lg-6" style="text-align: right;">
+										<span id="fechaVistaEntorno1" class="footerDetalleMd">---</span>
+									</div>
+									<div class="col-lg-6" style="text-align: left;">
+										<span id="horaVistaEntorno1" class="footerDetalleMd">---</span>
+									</div>
+								</div>
+							</div>
+							
+							<div class="col-lg-4">
+								<div class="col-lg-12" style="padding:0;">
+									<span class="contenido_cajas_20">ENTORNO 2</span>
+								</div>
+								<div class="col-lg-12" style="padding:0;">
+									<img class="imagenModal" id="vistaEntorno2Md"
+										alt="ENTORNO 2" style="width: 100%; max-height: 300"
+										src="img/cargando_imagen.gif" onclick="modalImage(this)" />
+								</div>
+								<div class="row div_bottom">
+									<div class="col-lg-6" style="text-align: right;">
+										<span id="fechaVistaEntorno2" class="footerDetalleMd">---</span>
+									</div>
+									<div class="col-lg-6" style="text-align: left;">
+										<span id="horaVistaEntorno2" class="footerDetalleMd">---</span>
+									</div>
+								</div>
+							</div>
+							
+							<div class="col-lg-4">
+								<div class="col-lg-12" style="padding:0;">
+									<span class="contenido_cajas_20">ENTORNO 3</span>
+								</div>
+								<div class="col-lg-12" style="padding:0;">
+									<img class="imagenModal" id="vistaEntorno3Md" alt="LATERAL 2"
+										style="width: 100%; max-height: 300" src="img/cargando_imagen.gif"
+										onclick="modalImage(this)" />
+								</div>
+								<div class="row div_bottom">
+									<div class="col-lg-6" style="text-align: right;">
+										<span id="fechaVistaEntorno3" class="footerDetalleMd">---</span>
+									</div>
+									<div class="col-lg-6" style="text-align: left;">
+										<span id="horaVistaEntorno3" class="footerDetalleMd">---</span>
 									</div>
 								</div>
 							</div>

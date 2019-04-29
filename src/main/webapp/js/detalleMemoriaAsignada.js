@@ -282,6 +282,12 @@ function inicializaModulosEdicion(modulos, datosSitio, datosPropietario, general
 					$("#esquina_edit").prop('checked', true);
 				}
 				
+				if(superficie.drenaje != undefined && superficie.drenaje) {
+					$("#drenaje").html("SITIO CON DRENAJE");
+				} else {
+					$("#drenaje").html("SITIO SIN DRENAJE");
+				}
+				
 				$("#puntosSuperficie").text(superficie.puntos);
 				$("#frenteMd").val(formatear(superficie.frente, true));
 				$("#profundidadMd").val(formatear(superficie.profundidad, true));
@@ -294,6 +300,12 @@ function inicializaModulosEdicion(modulos, datosSitio, datosPropietario, general
 				$("#vistaLateral2Md").attr("src", superficie.lateral2);
 				$("#fechaVistaLateral2").text(superficie.fechaLateral2);
 				$("#horaVistaLateral2").text(superficie.horaLateral2);
+				
+				if(superficie.entorno1 != undefined) {
+					$("#vistaEntorno1Md").attr("src", superficie.entorno1);
+					$("#fechaVistaEntorno1").text(superficie.fechaEntorno1);
+					$("#horaVistaEntorno1").text(superficie.horaEntorno1);
+				}
 				
 			}
 			break;
@@ -773,6 +785,36 @@ function buscaDetalleMD(mdId) {
 				$("#fechaVistaLateral2").text(data.superficie.fechaLateral2);
 				$("#horaVistaLateral2").text(data.superficie.horaLateral2);
 				
+				if(data.superficie.entorno1 != undefined && data.superficie.entorno1 != "") {
+					$("#vistaEntorno1Md").attr("src", data.superficie.entorno1);
+					$("#fechaVistaEntorno1").text(data.superficie.fechaEnt1);
+					$("#horaVistaEntorno1").text(data.superficie.horaEnt1);
+				} else {
+					$("#vistaEntorno1Md").attr("src", "img/no_imagen.png");
+					$("#fechaVistaEntorno1").text("---");
+					$("#horaVistaEntorno1").text("---");
+				}
+				
+				if(data.superficie.entorno2 != undefined && data.superficie.entorno2 != "") {
+					$("#vistaEntorno2Md").attr("src", data.superficie.entorno2);
+					$("#fechaVistaEntorno2").text(data.superficie.fechaEnt2);
+					$("#horaVistaEntorno2").text(data.superficie.horaEnt2);
+				} else {
+					$("#vistaEntorno2Md").attr("src", "img/no_imagen.png");
+					$("#fechaVistaEntorno2").text("---");
+					$("#horaVistaEntorno2").text("---");
+				}
+				
+				if(data.superficie.entorno3 != undefined && data.superficie.entorno3 != "") {
+					$("#vistaEntorno3Md").attr("src", data.superficie.entorno3);
+					$("#fechaVistaEntorno3").text(data.superficie.fechaEnt3);
+					$("#horaVistaEntorno3").text(data.superficie.horaEnt3);
+				} else {
+					$("#vistaEntorno3Md").attr("src", "img/no_imagen.png");
+					$("#fechaVistaEntorno3").text("---");
+					$("#horaVistaEntorno3").text("---");
+				}
+				
 				//predial
 //				if(data.superficie.predial != undefined && data.superficie.predial.trim() != "") {
 //					$("#muestraPredial").show();
@@ -785,6 +827,11 @@ function buscaDetalleMD(mdId) {
 				//nuevos valores
 				if(data.superficie.esquina==true){
 					$('#esquina').prop('checked', true);
+				}
+				if(data.superficie.drenaje != undefined && data.superficie.drenaje) {
+					$("#drenaje").html("SITIO CON DRENAJE");
+				} else {
+					$("#drenaje").html("SITIO SIN DRENAJE");
 				}
 				var contentPopSuperficie ='<div class="row" style="padding-top:3px;">' + 
 				   '<div class="col-6"><span class="t14 blanco">Frente mínimo:</span></div>' +

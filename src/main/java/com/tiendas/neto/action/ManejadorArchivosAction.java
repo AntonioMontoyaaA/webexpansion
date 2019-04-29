@@ -59,6 +59,13 @@ public class ManejadorArchivosAction
 			tiendaId = ServletActionContext.getRequest().getParameter("tiendaId");
 		}else if(tipoServicio.equals("11")){//VENTA
 			monto = ServletActionContext.getRequest().getParameter("monto");
+		}else if(tipoServicio.equals("14")) {
+			nombreArchivo = ServletActionContext.getRequest().getParameter("nombreArchivo");
+			archivo = ServletActionContext.getRequest().getParameter("archivo");
+			formato = ServletActionContext.getRequest().getParameter("formato");
+			tipoArchivo = ServletActionContext.getRequest().getParameter("tipoArchivo");
+			monto = "";
+			acc = "";
 		}else {
 			nombreArchivo = ServletActionContext.getRequest().getParameter("nombreArchivo");
 			archivo = ServletActionContext.getRequest().getParameter("archivo");
@@ -78,7 +85,7 @@ public class ManejadorArchivosAction
 			if(usuario == null){
 				RespuestaVo respuestaVo = new RespuestaVo();
 				respuestaVo.setCodigo(501);
-				respuestaVo.setMensaje("Error en la sesión");
+				respuestaVo.setMensaje("Error en la sesiï¿½n");
 				sendJSONObjectToResponse(respuestaVo);
 				
 			}else{
@@ -282,7 +289,7 @@ public class ManejadorArchivosAction
 			if(usuario == null){
 				RespuestaVo respuestaVo = new RespuestaVo();
 				respuestaVo.setCodigo(501);
-				respuestaVo.setMensaje("Error en la sesión");
+				respuestaVo.setMensaje("Error en la sesiï¿½n");
 				sendJSONObjectToResponse(respuestaVo);
 				
 			}else{
@@ -351,7 +358,7 @@ public class ManejadorArchivosAction
 			if(usuario == null){
 				RespuestaVo respuestaVo = new RespuestaVo();
 				respuestaVo.setCodigo(501);
-				respuestaVo.setMensaje("Error en la sesión");
+				respuestaVo.setMensaje("Error en la sesiï¿½n");
 				sendJSONObjectToResponse(respuestaVo);
 				
 			}else{
@@ -534,7 +541,7 @@ public class ManejadorArchivosAction
 			if(usuario == null){
 				RespuestaVo respuestaVo = new RespuestaVo();
 				respuestaVo.setCodigo(501);
-				respuestaVo.setMensaje("Error en la sesión");
+				respuestaVo.setMensaje("Error en la sesiï¿½n");
 				sendJSONObjectToResponse(respuestaVo);
 				
 			}else{
@@ -605,7 +612,7 @@ public class ManejadorArchivosAction
 			if(usuario == null){
 				RespuestaVo respuestaVo = new RespuestaVo();
 				respuestaVo.setCodigo(501);
-				respuestaVo.setMensaje("Error en la sesión");
+				respuestaVo.setMensaje("Error en la sesiï¿½n");
 				sendJSONObjectToResponse(respuestaVo);
 				
 			}else{

@@ -331,13 +331,13 @@ function saveDatosLevantamiento(tipo_guardado){
 													rutapoligonal       : poligono,
 													rutafachada         : fotoFachada,
 													rutaarchivo			: levantamientofile,
-													fachadasyExt		: JSON.stringify(v.fachadasyExt),
-													interioresYAreaP	: JSON.stringify(v.interioresYAreaP),
-													losas				: JSON.stringify(v.losas),
-													varios				: JSON.stringify(v.varios),
-													resumenyVobo		: JSON.stringify(v.resumenyVobo),
-													ReestriccionesProp  : JSON.stringify(v.ReestriccionesProp),
-													VoboGral: v.VoboGral,
+													fachadasyExt		: "",
+													interioresYAreaP	: "",
+													losas				: "",
+													varios				: "",
+													resumenyVobo		: "",
+													ReestriccionesProp  : "",
+													VoboGral: "",
 													comentarios:"....",
 													tipofinaliza: tipo_guardado
 												},
@@ -739,7 +739,7 @@ function setterFormCabe(d , e){
 /* -- SETTER FACHADAS -- */
 function setterFormFachada(d , e){
 	
-	setterCheck(vfe.vAvP[0], d.avPrincipal, e);
+	/*setterCheck(vfe.vAvP[0], d.avPrincipal, e);
 	setterCheck(vfe.vCor[0], d.cortinasyPostigos, e);
 	setterCheck(vfe.vEsBas[0], d.espacioBastidor, e);
 	setterCheck(vfe.vEsBan[0], d.buenEdoBanquetas, e);
@@ -747,12 +747,12 @@ function setterFormFachada(d , e){
 	vfe.vCom.val(d.comentarios);
 	if(!e){
 		addReadOnly(vfe.vCom);
-	}
+	}*/
 }
 
 /* -- SETTER INTERIORES -- */
 function setterFormInterio(d , e){
-	setterCheck(via.vECC[0], d.buenEdoColumnas, e); //*--
+	/*setterCheck(via.vECC[0], d.buenEdoColumnas, e); //*--
 	setterCheck(via.vEsP[0], d.buenEdoPisos, e);    //*--
 	setterRadio(via.vEpr[0], d.estructuraP, e);
 	setterRadio(via.vTPi[0], d.piso, e);
@@ -762,12 +762,12 @@ function setterFormInterio(d , e){
 	via.veCom.val(d.comentarios);
 	if(!e){
 		addReadOnly(via.veCom);
-	}
+	}*/
 }
 
 /* -- SETTER LOSAS -- */
 function setterFormLosaTech(d, e){
-	setterRadio(vlc.vTlos[0], d.tipoLosa, e);
+	/*setterRadio(vlc.vTlos[0], d.tipoLosa, e);
 	setterCheck(vlc.velos[0], d.buenEdoLosa, e);    
 	setterCheck(vlc.vNsup[0], d.nivelSuperior, e);
 	setterCheck(vlc.vColCe[0], d.columnasCentrales, e);
@@ -776,12 +776,12 @@ function setterFormLosaTech(d, e){
 	vlc.veCom.val(d.comentarios);
 	if(!e){
 		addReadOnly(vlc.veCom);		
-	}
+	}*/
 }
 
 /* -- SETTER VARIOS -- */
 function setterFormVarios(d, e){
-	var de = d.elementosDemoliciones[0];
+	/*var de = d.elementosDemoliciones[0];
 	setterCheck(vvl.v_vdre[0],  d.drenaje, e);
 	setterCheck(vvl.v_vreg[0],  d.registros, e);    
 	setterCheck(vvl.v_vAin[0],  d.AguaIndependiente, e);
@@ -796,13 +796,13 @@ function setterFormVarios(d, e){
 	vvl.veCom.val(d.comentarios);
 	if(!e){
 		addReadOnly(vvl.veCom); 			
-	}
+	}*/
 }
 
 
 /* -- SETTER RESTRICCIONES -- */
 function setterFormRetricciones(d , e){
-	setterRadio(vraa.vFact[0], d.condicionesArrendador, e);	
+	/*setterRadio(vraa.vFact[0], d.condicionesArrendador, e);	
 	setterCheck(vraa.v_restr[0],  d.condicionesArrendador, e);
 	
 	vraa.vERc.val(d.comentarios);
@@ -810,12 +810,12 @@ function setterFormRetricciones(d , e){
 	if(!e){
 		addReadOnly(vraa.vERc); 
 		addReadOnly(vraa.veCom); 			
-	}
+	}*/
 }
 
 /* -- SETTER RESUMENvobo -- */
 function setterFormResuVoBo(d,e){
-	setterRadio(vrvb.vSade[0], d.seguridadAdecuacion, e);
+	/*setterRadio(vrvb.vSade[0], d.seguridadAdecuacion, e);
 	setterRadio(vrvb.vTade[0], d.tipoAdecuacion, e);
 	setterCheck(vrvb.vAAI[0],  d.arrendadorAmortiza, e);	
 	setterCheck(vrvb.vAire[0],  d.aireAcondicionado, e);	
@@ -824,7 +824,7 @@ function setterFormResuVoBo(d,e){
 	vrvb.veCom.val(d.comentarios);
 	if(!e){
 		addReadOnly(vrvb.veCom); 			
-	}
+	}*/
 }
 
 
@@ -842,7 +842,7 @@ function campoObligatorio(esoObligatorio){
 	var levantamientofile   = ($("#div_fileLVANT").val()  != undefined && $("#div_fileLVANT").val().trim() != "") ? false : true;
 	
 	if(isEmpty_){
-		cargaMensajeModal("LEVANTAMIENTO","El área y nombre del jefe de contrucción son obligatorios.", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+		cargaMensajeModal("LEVANTAMIENTO","El área y nombre del jefe de construcción son obligatorios.", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
 		return true;
 	}	else if(esoObligatorio && (levantamientofile || fotoFachada || poligono ||cedulaAlcanc )){
 		cargaMensajeModal("LEVANTAMIENTO","Completar la carga de documentos.", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
@@ -986,6 +986,7 @@ function redireccionaAsignadas() {
 
 /*-- DATOS JSON ALTA --*/
 function getValueObject(){
+	/*
 	refreshJsonHtml();
 	
 	v = {	 				
@@ -1049,7 +1050,7 @@ function getValueObject(){
 			    comentarios : "" 
 			  	
 			 };
-	
+	*/
 	//console.log(v);
 }
 

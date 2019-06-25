@@ -629,3 +629,7 @@ Left
 	width: 100%;
 	line-height: 30px;
 }
+
+.highcharts-root {
+      height: 268px !important;
+}

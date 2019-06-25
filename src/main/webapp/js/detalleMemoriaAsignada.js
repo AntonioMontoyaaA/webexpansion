@@ -960,39 +960,61 @@ function buscaDetalleMD(mdId) {
 			if(data.construccion != undefined && data.construccion.factores.EXPANSION != undefined) {
 				var htmlFactores = "";
 				var condicionesGeneralesLocal = "";
+				var htmlChecklist = "";
 				if(data.construccion.factores.EXPANSION.length > 0) {
 					for(var i = 0; i < data.construccion.factores.EXPANSION.length; i++) {
 						if(data.construccion.factores.EXPANSION[i].nivelId > 2 
 								&& data.construccion.factores.EXPANSION[i].nivelId < 6) {
 							condicionesGeneralesLocal = data.construccion.factores.EXPANSION[i].nombreFactor
 						} else {
-							htmlFactores += '<img style="padding-left: 10px;" src="img/icono_factor.png"/><span class="contenido_cajas_20 sangria_cuerpo">' + 
+							if(data.construccion.factores.EXPANSION[i].nivelId < 6) {
+								htmlFactores += '<img style="padding-left: 10px;" src="img/icono_factor.png"/><span class="contenido_cajas_20 sangria_cuerpo">' + 
 								data.construccion.factores.EXPANSION[i].nombreFactor + '</span><br/><div style="overflow-y: auto;">';
 							
-							if(data.construccion.factores.EXPANSION[i].subfactores!=undefined)
-								for(var j = 0; j < data.construccion.factores.EXPANSION[i].subfactores.length; j++) {
-									var imgSubfactor = "";
+								if(data.construccion.factores.EXPANSION[i].subfactores!=undefined)
+									for(var j = 0; j < data.construccion.factores.EXPANSION[i].subfactores.length; j++) {
+										var imgSubfactor = "";
 									
-									switch(data.construccion.factores.EXPANSION[i].subfactores[j].subFactorId) {
-									case 1:
-										imgSubfactor = '<img class="sangria_cuerpo" src="img/subfactores/local_bodega.svg" style="width: 40px;"/>';
-										break;
-									case 2:
-										imgSubfactor = '<img class="sangria_cuerpo" src="img/subfactores/acceso_cd.svg" style="width: 40px;"/>';
-										break;
-									case 3:
-										imgSubfactor = '<img class="sangria_cuerpo" src="img/subfactores/sin_goteras.svg" style="width: 40px;"/>';
-										break;
-									case 4:
-										imgSubfactor = '<img class="sangria_cuerpo" src="img/subfactores/sin_grietas.svg" style="width: 40px;"/>';
-										break;
-									};
-									htmlFactores += '<div class="subfactores_20">' + imgSubfactor + '<br/><span class="contenido_subfactores_20 sangria_cuerpo">' + data.construccion.factores.EXPANSION[i].subfactores[j].nombre + '</span></div>';
+										switch(data.construccion.factores.EXPANSION[i].subfactores[j].subFactorId) {
+										case 1:
+											imgSubfactor = '<img class="sangria_cuerpo" src="img/subfactores/local_bodega.svg" style="width: 40px;"/>';
+											break;
+										case 2:
+											imgSubfactor = '<img class="sangria_cuerpo" src="img/subfactores/acceso_cd.svg" style="width: 40px;"/>';
+											break;
+										case 3:
+											imgSubfactor = '<img class="sangria_cuerpo" src="img/subfactores/sin_goteras.svg" style="width: 40px;"/>';
+											break;
+										case 4:
+											imgSubfactor = '<img class="sangria_cuerpo" src="img/subfactores/sin_grietas.svg" style="width: 40px;"/>';
+											break;
+										};
+										htmlFactores += '<div class="subfactores_20">' + imgSubfactor + '<br/><span class="contenido_subfactores_20 sangria_cuerpo">' + data.construccion.factores.EXPANSION[i].subfactores[j].nombre + '</span></div>';
+									}
+								htmlFactores += "</div>";
+							}
+							if(data.construccion.factores.EXPANSION[i].nivelId >= 6 && data.construccion.factores.EXPANSION[i].nivelId <= 13) {
+								var check = "";
+								var conflicto = "";
+								if(data.construccion.factores.EXPANSION[i].valor == '1') {
+									check = '✓';
+								} else {
+									check = '✗';
 								}
-							htmlFactores += "</div>";
+								if(data.construccion.factores.EXPANSION[i].nivelId == 13 && data.construccion.factores.EXPANSION[i].subfactores != undefined 
+										&& data.construccion.factores.EXPANSION[i].subfactores.length > 0) {
+									conflicto = "(" + data.construccion.factores.EXPANSION[i].subfactores[0].comentario + ")";
+								} else {
+									conflicto = "";
+								}
+								htmlChecklist += '<div class="row">' +
+													'<span class="contenido_cajas_20 ">' + check + " " + data.construccion.factores.EXPANSION[i].nombreFactor + " " + conflicto  + '</span><br/>'+
+												'</div>';
+							}
 						}
 					}
 					$("#factoresConstruccion").html(htmlFactores);
+					$("#checklistSitio").html(htmlChecklist);
 					$("#condicionesGeneralesEstatus").html('<img style="padding-right: 10px;" src="img/icono_factor.png"/>' + condicionesGeneralesLocal);
 					$("#puntosConstruccion").text(data.construccion.puntos);
 				} else {
@@ -1147,7 +1169,7 @@ function cargaMacroUbicacion(nombres, objetivo, reales) {
 		    polar: true,
 		    type: 'area',
 		    spacingTop: -60,
-		    spacingBottom: 20,
+		    spacingBottom: -70,
 		  },
 
 		  title: {
@@ -1155,7 +1177,7 @@ function cargaMacroUbicacion(nombres, objetivo, reales) {
 		  },
 
 		  pane: {
-		    size: '50%'
+		    size: '80%'
 		  },
 
 		  xAxis: {
@@ -1209,7 +1231,7 @@ function cargaMicroUbicacion(nombres, objetivo, reales) {
 		    polar: true,
 		    type: 'area',
 		    spacingTop: -60,
-		    spacingBottom: 20
+		    spacingBottom: -60
 		  },
 
 		  title: {
@@ -1217,7 +1239,7 @@ function cargaMicroUbicacion(nombres, objetivo, reales) {
 		  },
 
 		  pane: {
-		    size: '50%'
+		    size: '75%'
 		  },
 
 		  xAxis: {

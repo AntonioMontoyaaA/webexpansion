@@ -163,15 +163,12 @@
 				<div class="row divs_p galeria_main">
 					<div class="div_galeria col-lg-12 menupr_estilos fblanco">
 						<div class="row titulo_seccion">
-							<div class="col-lg-6 col-4">
+							<div class="col-lg-8 col-6">
 								<span class="titulo_detalle_md_20">SUPERFICIE</span>
 							</div>
 							<div class="col-lg-2 col-2">
 								<input type="checkbox" class="form-check-input esquina" id="esquina"  onclick="return false;">
     							<label class="contenido_cajas_20 esquina" for="esquina">Local en esquina</label>
-							</div>
-							<div class="col-lg-2 col-2">
-								<span id="drenaje" class="contenido_cajas_20">---</span>
 							</div>
 							<div class="col-lg-2 col-4">
 								<div id="modulo3Edita" class="float_right" style="display: none;">
@@ -513,36 +510,49 @@
 				<div class="row">
 					<div id="factoresConstruccion" class="col-lg-12 col-12" style=""></div>
 				</div>
-				<div class="row padding_top_botom_10" style="padding-top: 30px;">
-					<div class="col-lg-6 col-6">
-						<span class="titulo_detalle_md_20 sangria_cuerpo">Condiciones</span><br/>
-						<span id="condicionesGeneralesEstatus" class="contenido_cajas_20 sangria_doble_cuerpo">---</span><br/>
+				<div class="row">
+					<div class="col-lg-8 col-8">
+						<div class="row padding_top_botom_10" style="padding-top: 30px;">
+							<div class="col-lg-6 col-6">
+								<span class="titulo_detalle_md_20 sangria_cuerpo">Condiciones</span><br/>
+								<span id="condicionesGeneralesEstatus" class="contenido_cajas_20 sangria_doble_cuerpo">---</span><br/>
+							</div>
+							<div class="col-lg-6 col-6">
+								<span class="titulo_detalle_md_20 sangria_cuerpo">Amortizaci&oacute;n</span><br/>
+								<span id="amortizacion" class="contenido_cajas_20 sangria_doble_cuerpo">---</span><br/>
+							</div>
+						</div>
+						<div class="row padding_top_botom_10">
+							<div class="col-lg-6 col-6">
+								<span class="titulo_detalle_md_20 sangria_cuerpo">Renta</span><br/>
+								<span id="montoRenta" class="contenido_cajas_20 sangria_doble_cuerpo">---</span><br/>
+							</div>
+							<div class="col-lg-6 col-6">
+								<span class="titulo_detalle_md_20 sangria_cuerpo">Tiempo de amortizaci&oacute;n</span><br/>
+								<span id="tiempoAmortizacion" class="contenido_cajas_20 sangria_doble_cuerpo">---</span><br/>
+							</div>
+						</div>
+						<div class="row padding_top_botom_10">
+							<div class="col-lg-6 col-6">
+								<span class="titulo_detalle_md_20 sangria_cuerpo">Disponibilidad</span><br/>
+								<div id="disponibilidad" class="contenido_cajas_20 sangria_doble_cuerpo">---</div><br/>
+							</div>
+							<div class="col-lg-6 col-6">
+								<span class="titulo_detalle_md_20 sangria_cuerpo">Periodo de gracia</span><br/>
+								<span id="periodoGracia" class="contenido_cajas_20 sangria_doble_cuerpo">---</span><br/>
+							</div>
+						</div>
 					</div>
-					<div class="col-lg-6 col-6">
-						<span class="titulo_detalle_md_20 sangria_cuerpo">Amortizaci&oacute;n</span><br/>
-						<span id="amortizacion" class="contenido_cajas_20 sangria_doble_cuerpo">---</span><br/>
+					<div class="col-lg-4 col-4">
+						<div class="row padding_top_botom_10">
+							<span class="titulo_detalle_md_20 sangria_cuerpo">Checklist</span><br/>
+						</div>
+						<div id="checklistSitio">
+						</div>
 					</div>
 				</div>
-				<div class="row padding_top_botom_10">
-					<div class="col-lg-6 col-6">
-						<span class="titulo_detalle_md_20 sangria_cuerpo">Renta</span><br/>
-						<span id="montoRenta" class="contenido_cajas_20 sangria_doble_cuerpo">---</span><br/>
-					</div>
-					<div class="col-lg-6 col-6">
-						<span class="titulo_detalle_md_20 sangria_cuerpo">Tiempo de amortizaci&oacute;n</span><br/>
-						<span id="tiempoAmortizacion" class="contenido_cajas_20 sangria_doble_cuerpo">---</span><br/>
-					</div>
-				</div>
-				<div class="row padding_top_botom_10">
-					<div class="col-lg-6 col-6">
-						<span class="titulo_detalle_md_20 sangria_cuerpo">Disponibilidad</span><br/>
-						<div id="disponibilidad" class="contenido_cajas_20 sangria_doble_cuerpo">---</div><br/>
-					</div>
-					<div class="col-lg-6 col-6">
-						<span class="titulo_detalle_md_20 sangria_cuerpo">Periodo de gracia</span><br/>
-						<span id="periodoGracia" class="contenido_cajas_20 sangria_doble_cuerpo">---</span><br/>
-					</div>
-				</div>
+				
+				
 			</div>
 			</div>
 		</div>
@@ -585,7 +595,7 @@
 					</div>
 				</div>
 				<div class="row div_header_sub">
-					<div class="col-lg-12"><div id="contenedorFlujoPeatonal" style="width: 100%; height: 68%; margin: 0 auto"></div></div>
+					<div class="col-lg-12"><div id="contenedorFlujoPeatonal" style="width: 100%; height: 48%; margin: 0 auto"></div></div>
 				</div>
 			</div>
 		</div>

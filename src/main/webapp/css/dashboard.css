@@ -324,3 +324,9 @@ overflow-y:hidden;
 	position:relative;
 	 float:right;
 }
+.highcharts-root {
+	height: 330px !important;
+}
+.highcharts-container  {
+	height: 330px !important;
+}

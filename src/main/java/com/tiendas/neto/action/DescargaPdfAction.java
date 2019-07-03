@@ -19,7 +19,9 @@ import com.google.gson.reflect.TypeToken;
 import com.tiendas.neto.dao.Expansionlog;
 import com.tiendas.neto.singleton.SingletonProperties;
 import com.tiendas.neto.vo.Conteos;
+import com.tiendas.neto.vo.FactorVo;
 import com.tiendas.neto.vo.MarcadoresVO;
+import com.tiendas.neto.vo.Subfactor;
 
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -57,14 +59,10 @@ public class DescargaPdfAction extends ExpansionAction{
 	private String pdfvistaLateral1Md;
 	private String pdfvistaLateral2Md;
 	
-	private String pdffactor;
 	private String pdfsubfactores;
-	private String pdfsubfactoresdesc;
 	private String generalidades_checkList;
 
-	private String pdfcomentarios;
-	private String pdftipo;
-	
+	private String pdfcomentarios;	
 	private String pdfrenta;
 	private String pdfamortizacion;
 	private String pdfdisponibilidad;
@@ -150,29 +148,11 @@ public class DescargaPdfAction extends ExpansionAction{
 	public void setPdfgracia(String pdfgracia) {
 		this.pdfgracia = pdfgracia;
 	}
-	public String getPdftipo() {
-		return pdftipo;
-	}
-	public void setPdftipo(String pdftipo) {
-		this.pdftipo = pdftipo;
-	}
-	public String getPdfsubfactoresdesc() {
-		return pdfsubfactoresdesc;
-	}
-	public void setPdfsubfactoresdesc(String pdfsubfactoresdesc) {
-		this.pdfsubfactoresdesc = pdfsubfactoresdesc;
-	}
 	public String getGeneralidades_checkList() {
 		return generalidades_checkList;
 	}
 	public void setGeneralidades_checkList(String generalidades_checkList) {
 		this.generalidades_checkList = generalidades_checkList;
-	}
-	public String getPdffactor() {
-		return pdffactor;
-	}
-	public void setPdffactor(String pdffactor) {
-		this.pdffactor = pdffactor;
 	}
 	public String getPdfsubfactores() {
 		return pdfsubfactores;
@@ -306,9 +286,8 @@ public class DescargaPdfAction extends ExpansionAction{
 		parameters.put("vistaLateral1Md", pdfvistaLateral1Md);
 		parameters.put("vistaLateral2Md", pdfvistaLateral2Md);
 		
-		parameters.put("condicion", urlimagenes+pdffactor+".png");
-		parameters.put("condiciondesc", pdffactor);
-		parameters.put("tipo", pdftipo);
+		parameters.put("imagenCheck", urlimagenes+"check.png");
+		parameters.put("imagenNoCheck", urlimagenes+"nocheck.png");
 		parameters.put("comentarios", pdfcomentarios);
 		
 		parameters.put("renta", pdfrenta);
@@ -363,34 +342,101 @@ public class DescargaPdfAction extends ExpansionAction{
 		
 		
 		// -------------------------- calculo de imagenes de subfactores
-	
-		String[] subfactores=pdfsubfactores.split(",");
-		String[] subfactoresdesc=pdfsubfactoresdesc.split(",");
-		String[] checkList=generalidades_checkList.split(",");
+		Type listTypeFactor = new TypeToken<List<FactorVo>>(){}.getType();
+		List<FactorVo> listaFactor = (List<FactorVo>) gson.fromJson(pdfsubfactores, listTypeFactor);
+		
+		int nivelId, contadorLista = 1, valor = 0, contadorSubfactores = 1;
+		String nombreFactor= "";
+		
+		
+		for (FactorVo elem : listaFactor) {
+			nivelId = Integer.parseInt(elem.getNivelId());
+			nombreFactor = elem.getNombreFactor();
+			
+			if(nivelId == 1 || nivelId == 2) {
+				parameters.put("tipo", nombreFactor);
 				
-		int imagen=1;
-		if(pdftipo.equals("SOLO TERRENO")) {
-			parameters.put("imagen"+imagen, urlimagenes+"TERRENO.png");
-			imagen++;
-		}
-		for(int i=0;i<subfactores.length;i++) {
-			if(subfactores[i] != "" && subfactores[i].length() > 0) {
-				if(Integer.parseInt(subfactores[i]) <= 5) {
-					parameters.put("imagen"+imagen, urlimagenes+"subfactor"+subfactores[i]+".png");
-					parameters.put("imagendesc"+imagen, subfactoresdesc[i]);
-					imagen++;
+				if(nivelId == 1) {
+					parameters.put("imagen"+contadorSubfactores, urlimagenes+"TERRENO.png");
+					contadorSubfactores++;
+				}
+			}
+			if(nivelId > 2 && nivelId < 6) {
+				parameters.put("condicion", urlimagenes+nombreFactor + ".png");
+				parameters.put("condiciondesc", nombreFactor);
+			}
+			if(nivelId > 5 && nivelId < 17) {
+				String cadenaSubfactor="";
+				
+				if(elem.getValor() != null) {
+					valor = Integer.parseInt(elem.getValor());
+				}
+				if (elem.getSubfactores() != null && elem.getSubfactores().length > 0) {
+					for (Subfactor sub : elem.getSubfactores()) {
+						cadenaSubfactor += sub.getComentario()+ " ";
+					}
+					cadenaSubfactor=" ("+cadenaSubfactor+")";
+				}
+				
+				if(valor == 1) {
+					parameters.put("checkList" + contadorLista, "si "+nombreFactor +cadenaSubfactor);
+				}
+				if(valor == 0){
+					parameters.put("checkList" + contadorLista, "no "+nombreFactor +cadenaSubfactor);
+				}
+				contadorLista ++;
+			}else {
+				if (elem.getSubfactores() != null && elem.getSubfactores().length > 0) {
+					for (Subfactor sub : elem.getSubfactores()) {
+						parameters.put("imagen" + contadorSubfactores, urlimagenes + "subfactor" + sub.getSubFactorId() + ".png");
+						parameters.put("imagendesc" + contadorSubfactores, sub.getNombre());
+						contadorSubfactores++;
+					}
 				}
 			}
 		}
 		
-		for(int i=1;i <= checkList.length;i++) {
-			if(checkList[i-1].length() > 0) {
-				parameters.put("checkList" + i, checkList[i-1]);
-			}
-		}
-		parameters.put("imagenCheck", urlimagenes+"check.png");
-		parameters.put("imagenNoCheck", urlimagenes+"nocheck.png");
 		
+//		parameters.put("tipo", pdftipo);
+//		parameters.put("condicion", urlimagenes+pdffactor+".png");
+//		parameters.put("condiciondesc", pdffactor);
+
+//		String[] subfactores=pdfsubfactores.split(",");
+//		String[] subfactoresdesc=pdfsubfactoresdesc.split(",");
+//		String[] checkList=generalidades_checkList.split(",");
+//		int imagen=1;
+//		if(pdftipo.equals("SOLO TERRENO")) {
+//			parameters.put("imagen"+imagen, urlimagenes+"TERRENO.png");
+//			imagen++;
+//		}
+//		for(int i=0;i<subfactores.length;i++) {
+//			System.out.println(subfactores[i]);
+//			if(subfactores[i] != "" && subfactores[i].length() > 0) {
+//				if(Integer.parseInt(subfactores[i]) <= 5) {
+//					parameters.put("imagen"+imagen, urlimagenes+"subfactor"+subfactores[i]+".png");
+//					parameters.put("imagendesc"+imagen, subfactoresdesc[i]);
+//					imagen++;
+//				}
+//			}
+//		}
+//		
+//		for(int i=1;i <= checkList.length;i++) {
+//			if(checkList[i-1].length() > 0) {
+//				parameters.put("checkList" + i, checkList[i-1]);
+//			}
+//		}
+//		parameters.put("imagenCheck", urlimagenes+"check.png");
+//		parameters.put("imagenNoCheck", urlimagenes+"nocheck.png");
+//		
+//		List<CheckListPdf> lista= new ArrayList<CheckListPdf>();
+//		
+//		for (String elem : checkList) {
+//			CheckListPdf objeto=new CheckListPdf();
+//			objeto.setCheck(elem.substring(0,2));
+//			objeto.setDescripcion(elem.substring(3));
+//			lista.add(objeto);
+//		}
+//		parameters.put("lista", lista);
 		
 		
 		
@@ -399,10 +445,10 @@ public class DescargaPdfAction extends ExpansionAction{
 		
 		
 //			 JasperCompileManager.compileReportToFile(url+"pag5.jrxml", url+"pag5.jasper");
-//			 JasperCompileManager.compileReportToFile(url+"pag4.jrxml", url+"pag4.jasper");
-//			 JasperCompileManager.compileReportToFile(url+"pag3.jrxml", url+"pag3.jasper");
-//			 JasperCompileManager.compileReportToFile(url+"pag2.jrxml", url+"pag2.jasper");
-//			 JasperCompileManager.compileReportToFile(url+"pag1.jrxml", url+"pag1.jasper");
+			 JasperCompileManager.compileReportToFile(url+"pag4.jrxml", url+"pag4.jasper");
+			 JasperCompileManager.compileReportToFile(url+"pag3.jrxml", url+"pag3.jasper");
+			 JasperCompileManager.compileReportToFile(url+"pag2.jrxml", url+"pag2.jasper");
+			 JasperCompileManager.compileReportToFile(url+"pag1.jrxml", url+"pag1.jasper");
 			
 			JasperPrint print = JasperFillManager.fillReport(url+"pag1.jasper", parameters);
 			

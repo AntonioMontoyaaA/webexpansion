@@ -49,32 +49,34 @@ function descargaExcel(data){
 	$('#pdfurlmapa_pag3').val(listas_url);
 
 //para pag4 PDF
+	$('#pdfsubfactores').val(JSON.stringify(data.construccion.factores.EXPANSION));
 	
-	var subfactores=[];+"los marcadores"
-	var subfactoresdesc=[];
+//	var subfactores=[];+"los marcadores"
+//	var subfactoresdesc=[];
 	
-	for(var s=0;s<data.construccion.factores.EXPANSION.length;s++){
-		var nivelId=data.construccion.factores.EXPANSION[s].nivelId;
-		
-		if(data.construccion.factores.EXPANSION[s].subfactores!=undefined && data.construccion.factores.EXPANSION[s].subfactores.length > 0 ){
-			for(var i=0;i<data.construccion.factores.EXPANSION[s].subfactores.length;i++){
-				subfactores[i]=data.construccion.factores.EXPANSION[s].subfactores[i].subFactorId;
-				subfactoresdesc[i]=data.construccion.factores.EXPANSION[s].subfactores[i].nombre;
-			}
-		}
-		
-		if(nivelId=="3"||nivelId=="4"||nivelId=="5"){
-			$('#pdffactor').val(data.construccion.factores.EXPANSION[s].nombreFactor);
-		}
-		if(nivelId=="1"||nivelId=="2"){
-			$('#pdftipo').val(data.construccion.factores.EXPANSION[s].nombreFactor);
-		}
-		
-	}
-	
-	$('#pdfsubfactores').val(subfactores);
-	$('#pdfsubfactoresdesc').val(subfactoresdesc);
-	
+//	for(var s=0; s < data.construccion.factores.EXPANSION.length; s++){
+//		var arreglo = data.construccion.factores.EXPANSION[s];
+//		var nivelId = arreglo.nivelId;
+//		
+//		if(arreglo.subfactores != undefined && arreglo.subfactores.length > 0 ){
+//			for(var i = 0; i < arreglo.subfactores.length; i ++){
+//				var arregloSubfactor = arreglo.subfactores[i];
+//				
+//				subfactores[i] = arregloSubfactor.subFactorId;
+//				subfactoresdesc[i] = arregloSubfactor.nombre;
+//			}
+//		}
+//		if(nivelId=="3"||nivelId=="4"||nivelId=="5"){
+//			$('#pdffactor').val(arreglo.nombreFactor);
+//		}
+//		if(nivelId=="1"||nivelId=="2"){
+//			$('#pdftipo').val(arreglo.nombreFactor);
+//		}
+//	}
+//	
+//	$('#pdfsubfactores').val(subfactores);
+//	$('#pdfsubfactoresdesc').val(subfactoresdesc);
+//	
 	
 	//generalidades
 	$('#pdfrenta').val(data.generalidades.renta);

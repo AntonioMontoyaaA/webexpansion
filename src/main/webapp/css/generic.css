@@ -63,8 +63,26 @@
 #edit{
 	background-image:url('../img/botones/w_editar.svg');
 }
+#despausar {
+	background-image:url('../img/botones/despausar_md.svg');
+}
+#reactivar {
+	background-image:url('../img/botones/reactivar_md.svg');
+}
 .edit_tabla{
 	background-image:url('../img/botones/w_editar.svg');
+	background-position:right;
+	background-repeat: no-repeat;
+	background-size:25px !important;
+}
+.despausar_tabla{
+	background-image:url('../img/botones/despausar_md.svg');
+	background-position:right;
+	background-repeat: no-repeat;
+	background-size:25px !important;
+}
+.reactivar_tabla{
+	background-image:url('../img/botones/reactivar_md.svg');
 	background-position:right;
 	background-repeat: no-repeat;
 	background-size:25px !important;

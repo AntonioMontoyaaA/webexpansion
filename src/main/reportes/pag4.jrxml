@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporte" language="groovy" pageWidth="612" pageHeight="792" whenNoDataType="AllSectionsNoDetail" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="0" bottomMargin="0" uuid="e6ca9d26-e7c8-40d0-97fa-ad51b73c0344">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="796"/>
+	<subDataset name="Dataset1" uuid="0eaf6f69-915c-43da-9db7-9feca3f278ba">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+	</subDataset>
+	<subDataset name="Dataset2" uuid="ef8ccd33-18c5-49a0-8cb8-568788ce0236">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+	</subDataset>
 	<parameter name="mdId" class="java.lang.String"/>
 	<parameter name="nombreMd" class="java.lang.String"/>
 	<parameter name="categoriaMd" class="java.lang.String"/>
@@ -48,6 +58,16 @@
 	<parameter name="disponibilidad" class="java.lang.String"/>
 	<parameter name="tiempo_amortizacion" class="java.lang.String"/>
 	<parameter name="gracia" class="java.lang.String"/>
+	<parameter name="checkList1" class="java.lang.String"/>
+	<parameter name="checkList2" class="java.lang.String"/>
+	<parameter name="checkList3" class="java.lang.String"/>
+	<parameter name="checkList4" class="java.lang.String"/>
+	<parameter name="checkList5" class="java.lang.String"/>
+	<parameter name="checkList6" class="java.lang.String"/>
+	<parameter name="checkList7" class="java.lang.String"/>
+	<parameter name="checkList8" class="java.lang.String"/>
+	<parameter name="imagenCheck" class="java.lang.String"/>
+	<parameter name="imagenNoCheck" class="java.lang.String"/>
 	<field name="field1" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
@@ -58,129 +78,254 @@
 	<columnHeader>
 		<band height="576" splitType="Stretch">
 			<line>
-				<reportElement x="343" y="18" width="249" height="1" forecolor="#CCCCCC" uuid="76065375-93ed-4f9f-9772-b972f8f14681"/>
+				<reportElement x="352" y="18" width="239" height="1" forecolor="#CCCCCC" uuid="76065375-93ed-4f9f-9772-b972f8f14681">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
 			</line>
 			<line>
-				<reportElement x="-21" y="19" width="249" height="1" forecolor="#CCCCCC" uuid="c016efb1-8710-4213-81e3-1d8a592a8bc9"/>
+				<reportElement x="-21" y="19" width="239" height="1" forecolor="#CCCCCC" uuid="c016efb1-8710-4213-81e3-1d8a592a8bc9">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
 			</line>
 			<staticText>
-				<reportElement x="228" y="9" width="115" height="20" forecolor="#000033" uuid="ed0193f3-101d-4779-8264-5dea21fc33fa"/>
+				<reportElement x="224" y="9" width="120" height="20" forecolor="#000033" uuid="ed0193f3-101d-4779-8264-5dea21fc33fa">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[CONSTRUCCION]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="26" y="309" width="196" height="20" forecolor="#999999" uuid="f0524a3a-40f8-4230-935e-69ecd8fb30b0"/>
+				<reportElement x="26" y="199" width="196" height="20" forecolor="#999999" uuid="f0524a3a-40f8-4230-935e-69ecd8fb30b0"/>
 				<textElement>
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[CONDICIONES GENERALES]]></text>
 			</staticText>
 			<image scaleImage="RealSize" onErrorType="Blank">
-				<reportElement x="68" y="87" width="40" height="40" uuid="a7539c54-6cf2-4520-bc80-648838c7454d"/>
+				<reportElement x="45" y="76" width="30" height="30" isRemoveLineWhenBlank="true" uuid="a7539c54-6cf2-4520-bc80-648838c7454d">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
 				<imageExpression><![CDATA[$P{imagen1}]]></imageExpression>
 			</image>
 			<image scaleImage="RealSize" onErrorType="Blank">
-				<reportElement x="191" y="87" width="40" height="40" uuid="865962c1-66d2-4ac5-bf72-d1b628a533e8"/>
+				<reportElement x="179" y="76" width="30" height="30" isRemoveLineWhenBlank="true" uuid="865962c1-66d2-4ac5-bf72-d1b628a533e8">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
 				<imageExpression><![CDATA[$P{imagen2}]]></imageExpression>
 			</image>
 			<image scaleImage="RealSize" onErrorType="Blank">
-				<reportElement x="321" y="87" width="40" height="40" uuid="86c76b95-b2bb-4551-8416-befad2d92524"/>
+				<reportElement x="316" y="76" width="30" height="30" isRemoveLineWhenBlank="true" uuid="86c76b95-b2bb-4551-8416-befad2d92524">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
 				<imageExpression><![CDATA[$P{imagen3}]]></imageExpression>
 			</image>
 			<image scaleImage="RealSize" onErrorType="Blank">
-				<reportElement x="452" y="87" width="40" height="40" uuid="155e094e-394d-457b-a283-16fcbd620f7f"/>
+				<reportElement x="450" y="76" width="30" height="30" isRemoveLineWhenBlank="true" uuid="155e094e-394d-457b-a283-16fcbd620f7f">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
 				<imageExpression><![CDATA[$P{imagen4}]]></imageExpression>
 			</image>
 			<textField isBlankWhenNull="true">
-				<reportElement x="26" y="136" width="120" height="29" uuid="0b145e9a-c3d3-439c-a3ee-45dd8c3f92ea"/>
+				<reportElement x="0" y="106" width="120" height="29" isRemoveLineWhenBlank="true" uuid="0b145e9a-c3d3-439c-a3ee-45dd8c3f92ea"/>
 				<textElement textAlignment="Center">
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{imagendesc1}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="153" y="136" width="120" height="29" uuid="50821604-c442-427d-becc-9f8179eed520"/>
+				<reportElement x="134" y="106" width="120" height="29" isRemoveLineWhenBlank="true" uuid="50821604-c442-427d-becc-9f8179eed520"/>
 				<textElement textAlignment="Center">
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{imagendesc2}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="282" y="136" width="120" height="29" uuid="ac2c5065-461c-42cf-ae28-fcab1b0a9b59"/>
+				<reportElement x="271" y="106" width="120" height="29" isRemoveLineWhenBlank="true" uuid="ac2c5065-461c-42cf-ae28-fcab1b0a9b59"/>
 				<textElement textAlignment="Center">
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{imagendesc3}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="413" y="136" width="120" height="29" uuid="a029f4c7-9caf-4ef5-9653-d5d2fad07cbc"/>
+				<reportElement x="405" y="106" width="120" height="29" isRemoveLineWhenBlank="true" uuid="a029f4c7-9caf-4ef5-9653-d5d2fad07cbc"/>
 				<textElement textAlignment="Center">
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{imagendesc4}]]></textFieldExpression>
 			</textField>
 			<image scaleImage="RealSize">
-				<reportElement x="68" y="348" width="40" height="40" uuid="f7e58e98-f3ac-4e1d-a3ba-182fc2b5d994"/>
+				<reportElement x="104" y="228" width="40" height="40" uuid="f7e58e98-f3ac-4e1d-a3ba-182fc2b5d994"/>
 				<imageExpression><![CDATA[$P{condicion}]]></imageExpression>
 			</image>
 			<textField isBlankWhenNull="true">
-				<reportElement x="26" y="397" width="120" height="20" uuid="32169d20-a311-4e0a-b54d-ce37da4ab77c"/>
+				<reportElement x="62" y="277" width="120" height="20" uuid="32169d20-a311-4e0a-b54d-ce37da4ab77c"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$P{condiciondesc}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="26" y="50" width="210" height="20" isRemoveLineWhenBlank="true" forecolor="#999999" uuid="8fd65283-c605-4cfe-8891-05ce4924dc72"/>
+				<reportElement x="26" y="36" width="210" height="20" isRemoveLineWhenBlank="true" forecolor="#999999" uuid="8fd65283-c605-4cfe-8891-05ce4924dc72"/>
 				<textElement>
 					<font size="14" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{tipo}]]></textFieldExpression>
 			</textField>
 			<image scaleImage="RealSize" onErrorType="Blank">
-				<reportElement x="68" y="173" width="40" height="40" isRemoveLineWhenBlank="true" uuid="552ad0d4-e499-427d-ab76-aaba76d2f340"/>
+				<reportElement x="46" y="140" width="30" height="30" isRemoveLineWhenBlank="true" uuid="552ad0d4-e499-427d-ab76-aaba76d2f340">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
 				<imageExpression><![CDATA[$P{imagen5}]]></imageExpression>
 			</image>
 			<textField isBlankWhenNull="true">
-				<reportElement x="153" y="222" width="120" height="29" isRemoveLineWhenBlank="true" uuid="f5e1a4b6-9e0a-4bd4-9eb1-f3a810ea40f4"/>
+				<reportElement x="135" y="170" width="120" height="29" isRemoveLineWhenBlank="true" uuid="f5e1a4b6-9e0a-4bd4-9eb1-f3a810ea40f4"/>
 				<textElement textAlignment="Center">
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{imagendesc6}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="413" y="222" width="120" height="29" isRemoveLineWhenBlank="true" uuid="ff0a624b-1279-4061-81f2-3b9cb7bc57a9"/>
-				<textElement textAlignment="Center">
-					<font size="10"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{imagendesc8}]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement x="26" y="222" width="120" height="29" isRemoveLineWhenBlank="true" uuid="1ec050c9-6ac0-4cff-995a-68002ac79769"/>
+				<reportElement x="1" y="170" width="120" height="29" isRemoveLineWhenBlank="true" uuid="1ec050c9-6ac0-4cff-995a-68002ac79769"/>
 				<textElement textAlignment="Center">
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{imagendesc5}]]></textFieldExpression>
 			</textField>
 			<image scaleImage="RealSize" onErrorType="Blank">
-				<reportElement x="452" y="173" width="40" height="40" isRemoveLineWhenBlank="true" uuid="587c024b-16af-46fd-b93f-df2ce5552f2d"/>
-				<imageExpression><![CDATA[$P{imagen8}]]></imageExpression>
-			</image>
-			<image scaleImage="RealSize" onErrorType="Blank">
-				<reportElement x="191" y="173" width="40" height="40" isRemoveLineWhenBlank="true" uuid="625c4eca-3e27-4017-a637-cf00295b41af"/>
+				<reportElement x="180" y="140" width="30" height="30" isRemoveLineWhenBlank="true" uuid="625c4eca-3e27-4017-a637-cf00295b41af">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
 				<imageExpression><![CDATA[$P{imagen6}]]></imageExpression>
 			</image>
-			<image scaleImage="RealSize" onErrorType="Blank">
-				<reportElement x="321" y="173" width="40" height="40" isRemoveLineWhenBlank="true" uuid="900560cf-4f7b-43e8-a73c-5241d3ffceeb"/>
-				<imageExpression><![CDATA[$P{imagen7}]]></imageExpression>
-			</image>
-			<textField isBlankWhenNull="true">
-				<reportElement x="282" y="222" width="120" height="29" isRemoveLineWhenBlank="true" uuid="dc2c256e-d1a9-404a-8ad4-61c8e9f55525"/>
-				<textElement textAlignment="Center">
-					<font size="10"/>
+			<staticText>
+				<reportElement x="290" y="198" width="181" height="21" forecolor="#999999" uuid="36526b7d-7d4a-4d76-ae5c-1680a247c457">
+					<printWhenExpression><![CDATA[$P{checkList1}.equals(null)? false : true]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font size="14" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{imagendesc7}]]></textFieldExpression>
+				<text><![CDATA[CHECK LIST]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="290" y="229" width="271" height="21" isRemoveLineWhenBlank="true" uuid="36e2764a-87e5-47e4-a42d-ede4f3ed712d">
+					<printWhenExpression><![CDATA[$P{checkList1}.equals(null)? false : true]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{checkList1}.substring(3)]]></textFieldExpression>
 			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="290" y="251" width="271" height="21" isRemoveLineWhenBlank="true" uuid="1f88c729-6fad-43fb-a61c-f07af9ec72f2"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{checkList2}.substring(3)]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="290" y="273" width="271" height="21" isRemoveLineWhenBlank="true" uuid="10e11ad8-9196-48bd-88f4-08edb1b1a7ae"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{checkList3}.substring(3)]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="290" y="295" width="271" height="21" isRemoveLineWhenBlank="true" uuid="10c39f4c-1c30-4e8e-90db-30648d03eada"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{checkList4}.substring(3)]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="290" y="317" width="271" height="21" isRemoveLineWhenBlank="true" uuid="74e41e69-4f65-4dc7-a795-b0c61cd2750a"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{checkList5}.substring(3)]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="290" y="339" width="271" height="21" isRemoveLineWhenBlank="true" uuid="32c81e60-1fab-4768-abda-2e0fffc988eb"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{checkList6}.substring(3)]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="290" y="361" width="271" height="21" isRemoveLineWhenBlank="true" uuid="4aaed1d6-4bf3-456d-ad83-577c7e4c6e52"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{checkList7}.substring(3)]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="290" y="383" width="271" height="37" isRemoveLineWhenBlank="true" uuid="3d895754-64a4-4c4a-aa06-33c756f6d554"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{checkList8}.substring(3)]]></textFieldExpression>
+			</textField>
+			<image scaleImage="RealSize" onErrorType="Blank">
+				<reportElement x="269" y="229" width="10" height="15" isRemoveLineWhenBlank="true" uuid="464e91cc-39cf-4dd7-bcc1-d3a5308ec067">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<printWhenExpression><![CDATA[$P{checkList1}.equals(null)? false : true]]></printWhenExpression>
+				</reportElement>
+				<imageExpression><![CDATA[$P{checkList1}.substring(0,2).equals("si")? $P{imagenCheck} : $P{imagenNoCheck}]]></imageExpression>
+			</image>
+			<image scaleImage="RealSize" onErrorType="Blank">
+				<reportElement x="269" y="251" width="10" height="15" isRemoveLineWhenBlank="true" uuid="eefe0cf1-3edb-474e-9c8c-28f8016e9288">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<printWhenExpression><![CDATA[$P{checkList2}.equals(null)? false : true]]></printWhenExpression>
+				</reportElement>
+				<imageExpression><![CDATA[$P{checkList2}.substring(0,2).equals("si")? $P{imagenCheck} : $P{imagenNoCheck}]]></imageExpression>
+			</image>
+			<image scaleImage="RealSize" onErrorType="Blank">
+				<reportElement x="270" y="273" width="10" height="15" isRemoveLineWhenBlank="true" uuid="fc5c13ec-844f-485d-bd10-cc63ef981bf8">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<printWhenExpression><![CDATA[$P{checkList3}.equals(null)? false : true]]></printWhenExpression>
+				</reportElement>
+				<imageExpression><![CDATA[$P{checkList3}.substring(0,2).equals("si")? $P{imagenCheck} : $P{imagenNoCheck}]]></imageExpression>
+			</image>
+			<image scaleImage="RealSize" onErrorType="Blank">
+				<reportElement x="270" y="295" width="10" height="15" isRemoveLineWhenBlank="true" uuid="da351dce-4d40-4ad6-9f97-382412ad4a0d">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<printWhenExpression><![CDATA[$P{checkList4}.equals(null)? false : true]]></printWhenExpression>
+				</reportElement>
+				<imageExpression><![CDATA[$P{checkList4}.substring(0,2).equals("si")? $P{imagenCheck} : $P{imagenNoCheck}]]></imageExpression>
+			</image>
+			<image scaleImage="RealSize" onErrorType="Blank">
+				<reportElement x="270" y="317" width="10" height="15" isRemoveLineWhenBlank="true" uuid="7c64e077-1490-451d-86a2-705840ac5f55">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<printWhenExpression><![CDATA[$P{checkList5}.equals(null)? false : true]]></printWhenExpression>
+				</reportElement>
+				<imageExpression><![CDATA[$P{checkList5}.substring(0,2).equals("si")? $P{imagenCheck} : $P{imagenNoCheck}]]></imageExpression>
+			</image>
+			<image scaleImage="RealSize" onErrorType="Blank">
+				<reportElement x="270" y="339" width="10" height="15" isRemoveLineWhenBlank="true" uuid="54a31d0e-1659-4785-b525-1f94217f761f">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<printWhenExpression><![CDATA[$P{checkList6}.equals(null)? false : true]]></printWhenExpression>
+				</reportElement>
+				<imageExpression><![CDATA[$P{checkList6}.substring(0,2).equals("si")? $P{imagenCheck} : $P{imagenNoCheck}]]></imageExpression>
+			</image>
+			<image scaleImage="RealSize" onErrorType="Blank">
+				<reportElement x="270" y="361" width="10" height="15" isRemoveLineWhenBlank="true" uuid="3026575d-c593-4bee-bb14-5bbd54ca4d4a">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<printWhenExpression><![CDATA[$P{checkList7}.equals(null)? false : true]]></printWhenExpression>
+				</reportElement>
+				<imageExpression><![CDATA[$P{checkList7}.substring(0,2).equals("si")? $P{imagenCheck} : $P{imagenNoCheck}]]></imageExpression>
+			</image>
+			<image scaleImage="RealSize" onErrorType="Blank">
+				<reportElement x="270" y="383" width="10" height="15" isRemoveLineWhenBlank="true" uuid="2e3d5e90-56ab-430e-88aa-27026dcb6668">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<printWhenExpression><![CDATA[$P{checkList8}.equals(null)? false : true]]></printWhenExpression>
+				</reportElement>
+				<imageExpression><![CDATA[$P{checkList8}.substring(0,2).equals("si")? $P{imagenCheck} : $P{imagenNoCheck}]]></imageExpression>
+			</image>
 		</band>
 	</columnHeader>
 </jasperReport>

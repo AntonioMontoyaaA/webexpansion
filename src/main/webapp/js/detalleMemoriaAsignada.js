@@ -961,6 +961,7 @@ function buscaDetalleMD(mdId) {
 				var htmlFactores = "";
 				var condicionesGeneralesLocal = "";
 				var htmlChecklist = "";
+				var generalidades_checkList="";
 				if(data.construccion.factores.EXPANSION.length > 0) {
 					for(var i = 0; i < data.construccion.factores.EXPANSION.length; i++) {
 						if(data.construccion.factores.EXPANSION[i].nivelId > 2 
@@ -995,11 +996,14 @@ function buscaDetalleMD(mdId) {
 							}
 							if(data.construccion.factores.EXPANSION[i].nivelId >= 6 && data.construccion.factores.EXPANSION[i].nivelId <= 13) {
 								var check = "";
+								var descCheck="";
 								var conflicto = "";
 								if(data.construccion.factores.EXPANSION[i].valor == '1') {
 									check = '✓';
+									descCheck= 'si';
 								} else {
 									check = '✗';
+									descCheck= 'no';
 								}
 								if(data.construccion.factores.EXPANSION[i].nivelId == 13 && data.construccion.factores.EXPANSION[i].subfactores != undefined 
 										&& data.construccion.factores.EXPANSION[i].subfactores.length > 0) {
@@ -1008,13 +1012,15 @@ function buscaDetalleMD(mdId) {
 									conflicto = "";
 								}
 								htmlChecklist += '<div class="row">' +
-													'<span class="contenido_cajas_20 ">' + check + " " + data.construccion.factores.EXPANSION[i].nombreFactor + " " + conflicto  + '</span><br/>'+
+													'<span class="contenido_cajas_20 ">' + check + " " + data.construccion.factores.EXPANSION[i].nombreFactor + " " + conflicto  + '</span>'+
 												'</div>';
+								generalidades_checkList +=  descCheck + " "+data.construccion.factores.EXPANSION[i].nombreFactor + " " + conflicto + ",";
 							}
 						}
 					}
 					$("#factoresConstruccion").html(htmlFactores);
 					$("#checklistSitio").html(htmlChecklist);
+					$("#generalidades_checkList").val(generalidades_checkList);
 					$("#condicionesGeneralesEstatus").html('<img style="padding-right: 10px;" src="img/icono_factor.png"/>' + condicionesGeneralesLocal);
 					$("#puntosConstruccion").text(data.construccion.puntos);
 				} else {
@@ -1354,6 +1360,7 @@ function cargaFlujoPeatonal(colores,rows) {
 	    chart: {
 	        type: 'column',
 	        backgroundColor: '#FFF',
+	        height: 280
 	    },
 	    legend:false,
 	    title: {

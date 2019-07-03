@@ -3,6 +3,7 @@ package com.tiendas.neto.action;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import java.util.Map;
@@ -59,6 +60,8 @@ public class DescargaPdfAction extends ExpansionAction{
 	private String pdffactor;
 	private String pdfsubfactores;
 	private String pdfsubfactoresdesc;
+	private String generalidades_checkList;
+
 	private String pdfcomentarios;
 	private String pdftipo;
 	
@@ -158,6 +161,12 @@ public class DescargaPdfAction extends ExpansionAction{
 	}
 	public void setPdfsubfactoresdesc(String pdfsubfactoresdesc) {
 		this.pdfsubfactoresdesc = pdfsubfactoresdesc;
+	}
+	public String getGeneralidades_checkList() {
+		return generalidades_checkList;
+	}
+	public void setGeneralidades_checkList(String generalidades_checkList) {
+		this.generalidades_checkList = generalidades_checkList;
 	}
 	public String getPdffactor() {
 		return pdffactor;
@@ -357,27 +366,43 @@ public class DescargaPdfAction extends ExpansionAction{
 	
 		String[] subfactores=pdfsubfactores.split(",");
 		String[] subfactoresdesc=pdfsubfactoresdesc.split(",");
-		
+		String[] checkList=generalidades_checkList.split(",");
+				
 		int imagen=1;
 		if(pdftipo.equals("SOLO TERRENO")) {
 			parameters.put("imagen"+imagen, urlimagenes+"TERRENO.png");
 			imagen++;
 		}
 		for(int i=0;i<subfactores.length;i++) {
-			if(subfactores[i]!="") {
-			parameters.put("imagen"+imagen, urlimagenes+"subfactor"+subfactores[i]+".png");
-			parameters.put("imagendesc"+imagen, subfactoresdesc[i]);
-			imagen++;
+			if(subfactores[i] != "" && subfactores[i].length() > 0) {
+				if(Integer.parseInt(subfactores[i]) <= 5) {
+					parameters.put("imagen"+imagen, urlimagenes+"subfactor"+subfactores[i]+".png");
+					parameters.put("imagendesc"+imagen, subfactoresdesc[i]);
+					imagen++;
+				}
 			}
 		}
+		
+		for(int i=1;i <= checkList.length;i++) {
+			if(checkList[i-1].length() > 0) {
+				parameters.put("checkList" + i, checkList[i-1]);
+			}
+		}
+		parameters.put("imagenCheck", urlimagenes+"check.png");
+		parameters.put("imagenNoCheck", urlimagenes+"nocheck.png");
+		
+		
+		
+		
+		
 		//----------------------------
 		
 		
-			/* JasperCompileManager.compileReportToFile(url+"pag5.jrxml", url+"pag5.jasper");
-			 JasperCompileManager.compileReportToFile(url+"pag4.jrxml", url+"pag4.jasper");
-			 JasperCompileManager.compileReportToFile(url+"pag3.jrxml", url+"pag3.jasper");
-			 JasperCompileManager.compileReportToFile(url+"pag2.jrxml", url+"pag2.jasper");
-			 JasperCompileManager.compileReportToFile(url+"pag1.jrxml", url+"pag1.jasper");*/
+//			 JasperCompileManager.compileReportToFile(url+"pag5.jrxml", url+"pag5.jasper");
+//			 JasperCompileManager.compileReportToFile(url+"pag4.jrxml", url+"pag4.jasper");
+//			 JasperCompileManager.compileReportToFile(url+"pag3.jrxml", url+"pag3.jasper");
+//			 JasperCompileManager.compileReportToFile(url+"pag2.jrxml", url+"pag2.jasper");
+//			 JasperCompileManager.compileReportToFile(url+"pag1.jrxml", url+"pag1.jasper");
 			
 			JasperPrint print = JasperFillManager.fillReport(url+"pag1.jasper", parameters);
 			

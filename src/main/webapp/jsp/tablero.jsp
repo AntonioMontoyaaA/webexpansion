@@ -81,6 +81,8 @@
                     
                 	<button class="btn desp sin_permiso" id="time" type="button"></button>
   					<button class="btn desp sin_permiso" id="edit" type="button"></button>
+  					<button class="btn desp sin_permiso" id="despausar" type="button"></button>
+  					<button class="btn desp sin_permiso" id="reactivar" type="button"></button>
   					<button class="btn desp sin_permiso" id="pause" type="button"></button>
   					<button class="btn desp sin_permiso" id="refuse" type="button"></button>
   					<button class="btn desp sin_permiso" id="change" type="button"></button>

@@ -508,13 +508,13 @@ function estadoEvaluaform(statsEval,d){
 		    			e = false;
 		    		}
 	    		 
-	    		 setterFormCabeOnlyRead(e);
-	    		setterFormFachadaOnlyRead(e);
-	    		setterFormInterioOnlyRead(e);
-	    		setterFormLosaTechOnlyRead(e);
-	    		setterFormVariosOnlyRead(e);
-	    		setterFormRetriccionesOnlyRead(e);
-	    		setterFormResuVoBoOnlyRead(e);    	
+	    		 //setterFormCabeOnlyRead(e);
+	    		//setterFormFachadaOnlyRead(e);
+	    		//setterFormInterioOnlyRead(e);
+	    		//setterFormLosaTechOnlyRead(e);
+	    		//setterFormVariosOnlyRead(e);
+	    		//setterFormRetriccionesOnlyRead(e);
+	    		//setterFormResuVoBoOnlyRead(e);    	
 	    		 
 	    	 }
 	    	
@@ -597,13 +597,13 @@ function estadoEvaluaform(statsEval,d){
 		    			e = false;
 		    		}
 	    		 
-	    		 setterFormCabeOnlyRead(e);
-	    		setterFormFachadaOnlyRead(e);
-	    		setterFormInterioOnlyRead(e);
-	    		setterFormLosaTechOnlyRead(e);
-	    		setterFormVariosOnlyRead(e);
-	    		setterFormRetriccionesOnlyRead(e);
-	    		setterFormResuVoBoOnlyRead(e);    	
+	    		 //setterFormCabeOnlyRead(e);
+	    		//setterFormFachadaOnlyRead(e);
+	    		//setterFormInterioOnlyRead(e);
+	    		//setterFormLosaTechOnlyRead(e);
+	    		//setterFormVariosOnlyRead(e);
+	    		//setterFormRetriccionesOnlyRead(e);
+	    		//setterFormResuVoBoOnlyRead(e);    	
 	    		 
 	    	 }
 	        break;
@@ -637,16 +637,16 @@ function estadoEvaluaform(statsEval,d){
 
 function levantamientoPendiente(){
 	var e = false;
-	addReadOnly(vcb.v_jCns);
+	/*addReadOnly(vcb.v_jCns);
 	addReadOnly(vcb.v_aRen);
 	addReadOnly(vcb.v_fdlto);
-	 setterFormCabeOnlyRead(e);
-		setterFormFachadaOnlyRead(e);
-		setterFormInterioOnlyRead(e);
-		setterFormLosaTechOnlyRead(e);
-		setterFormVariosOnlyRead(e);
-		setterFormRetriccionesOnlyRead(e);
-		setterFormResuVoBoOnlyRead(e); 
+	setterFormCabeOnlyRead(e);
+	setterFormFachadaOnlyRead(e);
+	setterFormInterioOnlyRead(e);
+	setterFormLosaTechOnlyRead(e);
+	setterFormVariosOnlyRead(e);
+	setterFormRetriccionesOnlyRead(e);
+	setterFormResuVoBoOnlyRead(e);*/ 
 }
 
 function cargarImagenes(d,evalua){
@@ -922,21 +922,21 @@ function setterRadio(element, v, edita){
 
 
 /* == CHECKED READONLY ==*/
-function setterCheckOnlyRead(element, edita){
+/*function setterCheckOnlyRead(element, edita){
 	if(edita == false){
 		element.setAttribute('readonly',true);		
 	}
 	
-}
+}*/
 
 /* == RADIO READONLY ==*/
-function setterRadioOnlyRead(element,  edita){
+/*function setterRadioOnlyRead(element,  edita){
 	if(!edita){
 		element.querySelectorAll("input").forEach(function(inputRadio) {
 			inputRadio.setAttribute('disabled',true);
 		});			
 	}
-}
+}*/
 
 
 
@@ -1058,17 +1058,17 @@ function getValueObject(){
 
 
 /* -- SETTER HEAD -- */
-function setterFormCabeOnlyRead( e){
+/*function setterFormCabeOnlyRead( e){
 
 	if(!e){
 		addReadOnly(vcb.v_jCns);
 		addReadOnly(vcb.v_aRen);
 		addReadOnly(vcb.v_fdlto);			
 	}
-}
+}*/
 
 /* -- SETTER FACHADAS -- */
-function setterFormFachadaOnlyRead( e){
+/*function setterFormFachadaOnlyRead( e){
 	
 	setterCheckOnlyRead(vfe.vAvP[0] , e);
 	setterCheckOnlyRead(vfe.vCor[0] , e);
@@ -1078,10 +1078,10 @@ function setterFormFachadaOnlyRead( e){
 	if(!e){
 		addReadOnly(vfe.vCom);
 	}
-}
+}*/
 
 /* -- SETTER INTERIORES -- */
-function setterFormInterioOnlyRead( e){
+/*function setterFormInterioOnlyRead( e){
 	setterCheckOnlyRead(via.vECC[0],  e); //*--
 	setterCheckOnlyRead(via.vEsP[0],  e);    //*--
 	setterRadioOnlyRead(via.vEpr[0],  e);
@@ -1092,10 +1092,10 @@ function setterFormInterioOnlyRead( e){
 	if(!e){
 		addReadOnly(via.veCom);
 	}
-}
+}*/
 
 /* -- SETTER LOSAS -- */
-function setterFormLosaTechOnlyRead( e){
+/*function setterFormLosaTechOnlyRead( e){
 	setterRadioOnlyRead(vlc.vTlos[0], e);
 	setterCheckOnlyRead(vlc.velos[0],  e);    
 	setterCheckOnlyRead(vlc.vNsup[0],  e);
@@ -1105,10 +1105,10 @@ function setterFormLosaTechOnlyRead( e){
 	if(!e){
 		addReadOnly(vlc.veCom);		
 	}
-}
+}*/
 
 /* -- SETTER VARIOS -- */
-function setterFormVariosOnlyRead( e){
+/*function setterFormVariosOnlyRead( e){
 
 	setterCheckOnlyRead(vvl.v_vdre[0],  e);
 	setterCheckOnlyRead(vvl.v_vreg[0],  e);    
@@ -1125,11 +1125,11 @@ function setterFormVariosOnlyRead( e){
 	if(!e){
 		addReadOnly(vvl.veCom); 			
 	}
-}
+}*/
 
 
 /* -- SETTER RESTRICCIONES -- */
-function setterFormRetriccionesOnlyRead( e){
+/*function setterFormRetriccionesOnlyRead( e){
 	setterRadioOnlyRead(vraa.vFact[0],  e);	
 	setterCheckOnlyRead(vraa.v_restr[0],  e);
 	
@@ -1137,10 +1137,10 @@ function setterFormRetriccionesOnlyRead( e){
 		addReadOnly(vraa.vERc); 
 		addReadOnly(vraa.veCom); 			
 	}
-}
+}*/
 
 /* -- SETTER RESUMENvobo -- */
-function setterFormResuVoBoOnlyRead(e){
+/*function setterFormResuVoBoOnlyRead(e){
 	setterRadioOnlyRead(vrvb.vSade[0], e);
 	setterRadioOnlyRead(vrvb.vTade[0], e);
 	setterCheckOnlyRead(vrvb.vAAI[0],  e);
@@ -1149,4 +1149,4 @@ function setterFormResuVoBoOnlyRead(e){
 	if(!e){
 		addReadOnly(vrvb.veCom); 			
 	}
-}
+}*/

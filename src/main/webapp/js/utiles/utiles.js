@@ -736,6 +736,8 @@ function validaCelular(value){
 function permisos_perfil(){
 	$('#time').hide;
 	$('#edit').hide;
+	$('#despausar').hide;
+	$('#reactivar').hide;
 	$('#pause').hide;
 	$('#refuse').hide;
 	$('#change').hide;
@@ -759,6 +761,12 @@ function permisos_perfil(){
 		}
 		if(value.value=="PRIVILEGIO.MENU.VOKSE.503=true"){
 			$('#edit').removeClass('sin_permiso');
+		}
+		if(value.value=="PRIVILEGIO.MENU.VOKSE.503=true"){
+			$('#despausar').removeClass('sin_permiso');
+		}
+		if(value.value=="PRIVILEGIO.MENU.VOKSE.503=true"){
+			$('#reactivar').removeClass('sin_permiso');
 		}
 		if(value.value=="PRIVILEGIO.MENU.VOKSE.504=true"){
 			$('#pause').removeClass('sin_permiso');

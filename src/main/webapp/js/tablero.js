@@ -5,6 +5,8 @@ var DETALLE_MD = 3;
 var EDITA_MD = 4;
 var ESTATUS_PAUSA_MD = 21;
 var ESTATUS_CANCELADAS_MD = 17;
+var ESTATUS_DESPAUSA_MD = 2
+var ESTATUS_REACTIVA_MD = 1;
 var mdIdEstatus = 0;
 
 
@@ -236,6 +238,8 @@ function creatabla(){
 			cargaMensajeModal('Memorias descriptivas', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
 			$('#time').hide;
 			$('#edit').hide;
+			$('#despausar').hide;
+			$('#reactivar').hide;
 			$('#pause').hide;
 			$('#refuse').hide;
 			$('#change').hide;
@@ -252,11 +256,22 @@ function creatabla(){
 				$("#refuse").show();
 				$("#edit").show();
 				$("#change").show();
+				$("#despausar").hide();
+				$("#reactivar").hide();
 			} else {
 				$("#pause").hide();
 				$("#refuse").hide();
 				$("#edit").hide();
 				$("#change").hide();
+				$("#reactivar").hide();
+				$("#despausar").hide();
+				
+			}
+			if(tipoTabla == 3) {
+				$("#despausar").show();
+			}
+			if(tipoTabla == 0) {
+				$("#reactivar").show();
 			}
 			var datosMemorias = new Array();
 			
@@ -839,6 +854,12 @@ function creatabla(){
 						if(clase=="edit_tabla"){
 							editarMD(nombreMd, mdId);
 						}
+						if(clase=="despausar_tabla"){
+							despausarMD(nombreMd, mdId);
+						}
+						if(clase=="reactivar_tabla"){
+							reactivarMD(nombreMd, mdId);
+						}
 						if(clase=="pause_tabla"){
 							pausarMD(nombreMd, mdId);
 						}
@@ -849,6 +870,8 @@ function creatabla(){
 							cambiarStatusMD(nombreMd, mdId);
 						}
 						$( '#edit' ).removeClass("activado");
+						$( '#despausar' ).removeClass("activado");
+						$( '#reactivar' ).removeClass("activado");
 						$( '#pause' ).removeClass("activado");
 						$( '#refuse' ).removeClass("activado");
 						$( '#time' ).removeClass("activado");
@@ -1313,6 +1336,8 @@ $( '#time' ).click(function() {
 		$( '#time' ).addClass("activado");
 		
 		$( '#edit' ).removeClass("activado");
+		$( '#despausar' ).removeClass("activado");
+		$( '#reactivar' ).removeClass("activado");
 		$( '#pause' ).removeClass("activado");
 		$( '#refuse' ).removeClass("activado");
 		$( '#change' ).removeClass("activado");
@@ -1335,6 +1360,40 @@ $( '#edit' ).click(function() {
 	else{
 		clase="";
 		$( '#edit' ).removeClass("activado");
+	}
+});
+$( '#despausar' ).click(function() {
+	if(clase!="despausar_tabla"){
+		clase="despausar_tabla";
+		$( '#despausar' ).addClass("activado");
+		
+		$( '#edit' ).removeClass("activado");
+		$( '#reactivar' ).removeClass("activado");
+		$( '#time' ).removeClass("activado");
+		$( '#pause' ).removeClass("activado");
+		$( '#refuse' ).removeClass("activado");
+		$( '#change' ).removeClass("activado");
+	}
+	else{
+		clase="";
+		$( '#despausar' ).removeClass("activado");
+	}
+});
+$( '#reactivar' ).click(function() {
+	if(clase!="reactivar_tabla"){
+		clase="reactivar_tabla";
+		$( '#reactivar' ).addClass("activado");
+		
+		$( '#edit' ).removeClass("activado");
+		$( '#despausar' ).removeClass("activado");
+		$( '#time' ).removeClass("activado");
+		$( '#pause' ).removeClass("activado");
+		$( '#refuse' ).removeClass("activado");
+		$( '#change' ).removeClass("activado");
+	}
+	else{
+		clase="";
+		$( '#reactivar' ).removeClass("activado");
 	}
 });
 $( '#pause' ).click(function() {
@@ -1396,6 +1455,18 @@ function editarMD(nombreMd, mdId){
     $("#detalleMemoriaAsignadaAction").submit();
 }
 // -------------------------------------------------- FUNCIONES
+function despausarMD(nombreMd, mdId){
+	mdIdEstatus = mdId;
+    cargaMensajeModal('TABLERO', 
+            '¿Está seguro de despausar la MD?',
+            TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, despausaMdAction);
+}
+function reactivarMD(nombreMd, mdId){
+	mdIdEstatus = mdId;
+    cargaMensajeModal('TABLERO', 
+            '¿Está seguro de reactivar la MD?',
+            TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, reactivaMdAction);
+}
 function pausarMD(nombreMd, mdId){
 	mdIdEstatus = mdId;
     cargaMensajeModal('TABLERO', 
@@ -1412,6 +1483,60 @@ function cambiarStatusMD(nombreMd, mdId){
     cargaMensajeModal('TABLERO', 
             '¿Está seguro de cambiar el estatus de la MD?',
             TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, '');
+}
+
+function despausaMdAction() {
+    invocarJSONServiceAction("accion__modifica_md_action", 
+            {'mdId': mdIdEstatus,
+            'tipoReactivacion': ESTATUS_DESPAUSA_MD
+            }, 
+            'accionMdResponse', 
+            function() {
+                //Funcion de error
+                
+                cierraLoading();
+            },
+            function() {
+                //Función al finalizar
+                
+                cierraLoading();
+            });
+
+    accionMdResponse = function( data ) {
+        if(data.codigo != 200) {
+            cargaMensajeModal('DESPAUSA MD', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
+        } else {
+            cargaMensajeModal('DESPAUSA MD', "Memoria descriptiva despausada con éxito", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_EXITO, null);
+            creatabla();
+        }
+    }
+}
+
+function reactivaMdAction() {
+    invocarJSONServiceAction("accion__modifica_md_action", 
+            {'mdId': mdIdEstatus,
+            'tipoReactivacion': ESTATUS_REACTIVA_MD
+            }, 
+            'accionMdResponse', 
+            function() {
+                //Funcion de error
+                
+                cierraLoading();
+            },
+            function() {
+                //Función al finalizar
+                
+                cierraLoading();
+            });
+
+    accionMdResponse = function( data ) {
+        if(data.codigo != 200) {
+            cargaMensajeModal('REACTIVA MD', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
+        } else {
+            cargaMensajeModal('REACTIVA MD', "Memoria descriptiva reactivada con éxito", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_EXITO, null);
+            creatabla();
+        }
+    }
 }
 
 function pausaMdAction() {

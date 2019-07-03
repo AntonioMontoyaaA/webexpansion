@@ -595,7 +595,7 @@
 					</div>
 				</div>
 				<div class="row div_header_sub">
-					<div class="col-lg-12"><div id="contenedorFlujoPeatonal" style="width: 100%; height: 48%; margin: 0 auto"></div></div>
+					<div class="col-lg-12"><div id="contenedorFlujoPeatonal" style="width: 100%; height: 100%; margin: 0 auto"></div></div>
 				</div>
 			</div>
 		</div>
@@ -718,6 +718,7 @@
 	<input type="hidden" name="pdfgracia" id="pdfgracia">
 	
 	<input type="hidden" name="pdfconteos" id="pdfconteos">
+	<input type="hidden" name="generalidades_checkList" id="generalidades_checkList">
 
 	<input type="submit" id="submitBotonDescargaPdf" style="display:none" />
 </form>

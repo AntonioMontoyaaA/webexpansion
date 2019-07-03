@@ -56,7 +56,7 @@ function descargaExcel(data){
 	for(var s=0;s<data.construccion.factores.EXPANSION.length;s++){
 		var nivelId=data.construccion.factores.EXPANSION[s].nivelId;
 		
-		if(data.construccion.factores.EXPANSION[s].subfactores!=undefined){
+		if(data.construccion.factores.EXPANSION[s].subfactores!=undefined && data.construccion.factores.EXPANSION[s].subfactores.length > 0 ){
 			for(var i=0;i<data.construccion.factores.EXPANSION[s].subfactores.length;i++){
 				subfactores[i]=data.construccion.factores.EXPANSION[s].subfactores[i].subFactorId;
 				subfactoresdesc[i]=data.construccion.factores.EXPANSION[s].subfactores[i].nombre;
@@ -71,6 +71,7 @@ function descargaExcel(data){
 		}
 		
 	}
+	
 	$('#pdfsubfactores').val(subfactores);
 	$('#pdfsubfactoresdesc').val(subfactoresdesc);
 	
@@ -84,6 +85,8 @@ function descargaExcel(data){
 	
 	//conteos peatonales
 	$('#pdfconteos').val(JSON.stringify(data.flujoPeatonal.EXPANSION.conteos));
+	
+	//$('#generalidades_checkList').val(); // detalleMemoriaAsignada.js linea 1022
 	
 	
 	$('#submitBotonDescargaPdf').click();

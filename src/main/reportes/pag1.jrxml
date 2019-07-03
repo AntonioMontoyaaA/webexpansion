@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporte" language="groovy" pageWidth="612" pageHeight="792" whenNoDataType="AllSectionsNoDetail" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="0" bottomMargin="0" uuid="55dae605-5544-4296-8512-86d36cda5221">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="318"/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="net.sf.jasperreports.components.map.key" value="AIzaSyCaefWW3pvU6WKZKiVFD6OwyGoWIgZLyS0"/>
+	<subDataset name="Dataset1" uuid="77e667ad-9209-4e39-b5a2-5aca1551b2c8">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+	</subDataset>
 	<parameter name="mdId" class="java.lang.String"/>
 	<parameter name="nombreMd" class="java.lang.String"/>
 	<parameter name="categoriaMd" class="java.lang.String"/>
@@ -60,6 +66,16 @@
 	<parameter name="urlmapa" class="java.lang.String"/>
 	<parameter name="urlmapa_pag3" class="java.lang.String"/>
 	<parameter name="urlmapa_pag1" class="java.lang.String"/>
+	<parameter name="checkList1" class="java.lang.String"/>
+	<parameter name="checkList2" class="java.lang.String"/>
+	<parameter name="checkList3" class="java.lang.String"/>
+	<parameter name="checkList4" class="java.lang.String"/>
+	<parameter name="checkList5" class="java.lang.String"/>
+	<parameter name="checkList6" class="java.lang.String"/>
+	<parameter name="checkList7" class="java.lang.String"/>
+	<parameter name="checkList8" class="java.lang.String"/>
+	<parameter name="imagenCheck" class="java.lang.String"/>
+	<parameter name="imagenNoCheck" class="java.lang.String"/>
 	<background>
 		<band height="792" splitType="Stretch">
 			<rectangle>
@@ -337,6 +353,36 @@
 				</subreportParameter>
 				<subreportParameter name="urlmapa_pag3">
 					<subreportParameterExpression><![CDATA[$P{urlmapa_pag3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="checkList1">
+					<subreportParameterExpression><![CDATA[$P{checkList1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="checkList2">
+					<subreportParameterExpression><![CDATA[$P{checkList2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="checkList3">
+					<subreportParameterExpression><![CDATA[$P{checkList3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="checkList4">
+					<subreportParameterExpression><![CDATA[$P{checkList4}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="checkList5">
+					<subreportParameterExpression><![CDATA[$P{checkList5}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="checkList6">
+					<subreportParameterExpression><![CDATA[$P{checkList6}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="checkList7">
+					<subreportParameterExpression><![CDATA[$P{checkList7}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="checkList8">
+					<subreportParameterExpression><![CDATA[$P{checkList8}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="imagenCheck">
+					<subreportParameterExpression><![CDATA[$P{imagenCheck}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="imagenNoCheck">
+					<subreportParameterExpression><![CDATA[$P{imagenNoCheck}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{url_subreport} + "pag2.jasper"]]></subreportExpression>

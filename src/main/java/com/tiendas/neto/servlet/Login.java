@@ -178,7 +178,7 @@ public class Login  extends HttpServlet {
                 sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
             }
             //Get complete hashed password in hex format
-            System.out.println(sb.toString());
+            //System.out.println(sb.toString());
             return sb.toString();
         }
         catch (NoSuchAlgorithmException e)

@@ -330,3 +330,13 @@ overflow-y:hidden;
 .highcharts-container  {
 	height: 330px !important;
 }
+.horizontalLine {
+    position: absolute;
+    width: 1px;
+    height: 89px;
+    top: 54px;
+    left: 44px;
+    /* bottom: 1px; */
+    background-color: #FFF;
+    transform: rotate(90deg);
+}

@@ -318,8 +318,13 @@ function cargaDashboard(){
 		for(var i=0;i<filtrados.length;i++){
 			if(i<filtrados.length-1){
 				if(filtrados[i].prioridad==filtrados[i+1].prioridad){
-					descripcion_arreglo.push(2);
-					i++;
+					if(filtrados[i].prioridad==filtrados[i+2].prioridad){
+						descripcion_arreglo.push(3);
+						i += 2;
+					} else {
+						descripcion_arreglo.push(2);
+						i++;
+					}
 				}
 				else{
 					descripcion_arreglo.push(1);
@@ -355,8 +360,13 @@ function cargaDashboard(){
 			for(var i=0;i<filtrados.length;i++){
 				if(i<filtrados.length-1){
 					if(filtrados[i].prioridad==filtrados[i+1].prioridad){
-						descripcion_arreglo.push(2);
-						i++;
+						if(filtrados[i].prioridad==filtrados[i+2].prioridad){
+							descripcion_arreglo.push(3);
+							i += 2;
+						} else {
+							descripcion_arreglo.push(2);
+							i++;
+						}
 					}
 					else{
 						descripcion_arreglo.push(1);
@@ -383,8 +393,13 @@ function cargaDashboard(){
 			for(var i=0;i<filtrados.length;i++){
 				if(i<filtrados.length-1){
 					if(filtrados[i].prioridad==filtrados[i+1].prioridad){
-						descripcion_arreglo.push(2);
-						i++;
+						if(filtrados[i].prioridad==filtrados[i+2].prioridad){
+							descripcion_arreglo.push(3);
+							i += 2;
+						} else {
+							descripcion_arreglo.push(2);
+							i++;
+						}
 					}
 					else{
 						descripcion_arreglo.push(1);
@@ -411,8 +426,13 @@ function cargaDashboard(){
 			for(var i=0;i<filtrados.length;i++){
 				if(i<filtrados.length-1){
 					if(filtrados[i].prioridad==filtrados[i+1].prioridad){
-						descripcion_arreglo.push(2);
-						i++;
+						if(filtrados[i].prioridad==filtrados[i+2].prioridad){
+							descripcion_arreglo.push(3);
+							i += 2;
+						} else {
+							descripcion_arreglo.push(2);
+							i++;
+						}
 					}
 					else{
 						descripcion_arreglo.push(1);
@@ -664,6 +684,55 @@ function pintaActivas(arreglo,filtrados){
 			
 			cont++;
 		}
+		if(arreglo[i]==3){
+			var cadenas2= filtrados[cont+1].estatus.replace('VALIDACION','VOBO').split('-',2);
+			var cant2= "";
+			var color2="";
+			var estatusId2 = filtrados[cont+1].estatusid;
+			var cadenas3= filtrados[cont+2].estatus.replace('VALIDACION','VOBO').split('-',2);
+			var cant3= "";
+			var color3="";
+			var estatusId3 = filtrados[cont+2].estatusid;
+			
+			if(filtrados[cont+1].totalSum!=undefined){
+				cant2=filtrados[cont+1].totalSum;
+			}else{
+				cant2=filtrados[cont+1].total;
+			}
+			if(filtrados[cont+2].totalSum!=undefined){
+				cant3=filtrados[cont+2].totalSum;
+			}else{
+				cant3=filtrados[cont+2].total;
+			}
+			
+			if(existe_submodulo2==true || existe_modulo==false && filtrados[cont+1].areaValidacion==$('#areaId').val() && perfil!='3'){
+				color2="verde cursor";
+				submodulos_global.push(filtrados[cont+1].estatusid);
+			}
+			else{
+				color2="blanco";
+				if(perfil=='3'){
+					color2="blanco cursor";
+					submodulos_global.push(filtrados[cont+1].estatusid);
+				}
+			}
+			if(existe_submodulo2==true || existe_modulo==false && filtrados[cont+2].areaValidacion==$('#areaId').val() && perfil!='3'){
+				color3="verde cursor";
+				submodulos_global.push(filtrados[cont+2].estatusid);
+			}
+			else{
+				color3="blanco";
+				if(perfil=='3'){
+					color3="blanco cursor";
+					submodulos_global.push(filtrados[cont+2].estatusid);
+				}
+			}
+			
+			
+			html=html+triple(cadenas[1] ,cant ,cadenas[0],color ,cadenas2[1] ,cant2 ,cadenas2[0], color2, estatusId, estatusId2,estatusId3, MDS_ACTIVAS,cadenas3[1] ,cant3 ,cadenas3[0],color3);	
+			
+			cont += 2;
+		}
 		cont++;
 	}
 	EnviaSubmodulosAction(submodulos_global);
@@ -753,6 +822,55 @@ function pintaAtrasadas(arreglo,filtrados){
 			
 			cont++;
 		}
+		if(arreglo[i]==3){
+			var cadenas2= filtrados[cont+1].estatus.replace('VALIDACION','VOBO').split('-',2);
+			var cant2= "";
+			var color2="";
+			var estatusId2 = filtrados[cont+1].estatusid;
+			var cadenas3= filtrados[cont+2].estatus.replace('VALIDACION','VOBO').split('-',2);
+			var cant3= "";
+			var color3="";
+			var estatusId3 = filtrados[cont+2].estatusid;
+			
+			if(filtrados[cont+1].totalSum!=undefined){
+				cant2=filtrados[cont+1].totalSum;
+			}else{
+				cant2=filtrados[cont+1].total;
+			}
+			if(filtrados[cont+2].totalSum!=undefined){
+				cant3=filtrados[cont+2].totalSum;
+			}else{
+				cant3=filtrados[cont+2].total;
+			}
+			
+			if(existe_submodulo2==true || existe_modulo==false && filtrados[cont+1].areaValidacion==$('#areaId').val() && perfil!='3'){
+				color2="rojo cursor";
+				submodulos_global.push(filtrados[cont+1].estatusid);
+			}
+			else{
+				color2="blanco";
+				if(perfil=='3'){
+					color2="blanco cursor";
+					submodulos_global.push(filtrados[cont+1].estatusid);
+				}
+			}
+			if(existe_submodulo2==true || existe_modulo==false && filtrados[cont+2].areaValidacion==$('#areaId').val() && perfil!='3'){
+				color3="rojo cursor";
+				submodulos_global.push(filtrados[cont+2].estatusid);
+			}
+			else{
+				color3="blanco";
+				if(perfil=='3'){
+					color3="blanco cursor";
+					submodulos_global.push(filtrados[cont+2].estatusid);
+				}
+			}
+			
+			
+			html=html+triple(cadenas[1] ,cant ,cadenas[0],color ,cadenas2[1] ,cant2 ,cadenas2[0], color2, estatusId, estatusId2,estatusId3, MDS_ATRASADAS,cadenas3[1] ,cant3 ,cadenas3[0],color3);	
+			
+			cont += 2;
+		}
 		cont++;
 	}
 	EnviaSubmodulosAction(submodulos_global);
@@ -827,6 +945,55 @@ function pintaCanceladas(arreglo,filtrados){
 			
 			cont++;
 		}
+		if(arreglo[i]==3){
+			var cadenas2= filtrados[cont+1].estatus.replace('VALIDACION','VOBO').split('-',2);
+			var cant2= "";
+			var color2="";
+			var estatusId2 = filtrados[cont+1].estatusid;
+			var cadenas3= filtrados[cont+2].estatus.replace('VALIDACION','VOBO').split('-',2);
+			var cant3= "";
+			var color3="";
+			var estatusId3 = filtrados[cont+2].estatusid;
+			
+			if(filtrados[cont+1].totalSum!=undefined){
+				cant2=filtrados[cont+1].totalSum;
+			}else{
+				cant2=filtrados[cont+1].total;
+			}
+			if(filtrados[cont+2].totalSum!=undefined){
+				cant3=filtrados[cont+2].totalSum;
+			}else{
+				cant3=filtrados[cont+2].total;
+			}
+			
+			if(existe_submodulo2==true || existe_modulo==false && filtrados[cont+1].areaValidacion==$('#areaId').val() && perfil!='3'){
+				color2="cgris cursor";
+				submodulos_global.push(filtrados[cont+1].estatusid);
+			}
+			else{
+				color2="blanco";
+				if(perfil=='3'){
+					color2="blanco cursor";
+					submodulos_global.push(filtrados[cont+1].estatusid);
+				}
+			}
+			if(existe_submodulo2==true || existe_modulo==false && filtrados[cont+2].areaValidacion==$('#areaId').val() && perfil!='3'){
+				color3="cgris cursor";
+				submodulos_global.push(filtrados[cont+2].estatusid);
+			}
+			else{
+				color3="blanco";
+				if(perfil=='3'){
+					color3="blanco cursor";
+					submodulos_global.push(filtrados[cont+2].estatusid);
+				}
+			}
+			
+			
+			html=html+triple(cadenas[1] ,cant ,cadenas[0],color ,cadenas2[1] ,cant2 ,cadenas2[0], color2, estatusId, estatusId2,estatusId3, MDS_CANCELADAS,cadenas3[1] ,cant3 ,cadenas3[0],color3);	
+			
+			cont += 2;
+		}
 		cont++;
 	}
 	EnviaSubmodulosAction(submodulos_global);
@@ -858,6 +1025,29 @@ function doble(x1,x2,x3,color1,  y1,y2,y3,color2,estatusId,estatusId2, estatusMd
 	
 	'<div class="negrita '+color2+' titulo_hex_doble" style="bottom:57"  onclick="redirige(this,' + estatusId2 + ',' + estatusMd + ')">'+y1+'</div>'+
 	'<div class="'+color2+' pie_hex_doble" style="bottom:10"  onclick="redirige(this,' + estatusId2 + ',' + estatusMd + ')">'+y3+'</div>'+
+	'</div>';
+}
+function triple(x1,x2,x3,color1,  y1,y2,y3,color2,estatusId,estatusId2,estatusId3, estatusMd, z1,z2,z3,color3){
+	return '<div class="simple" style="padding:9px 5px;">'+
+	'<div class="lineadoble fazul" style="height: 200px;top: 25px;">'+
+	'<div class="doble" style="bottom: 100px;    z-index: 99;">'+
+	'<div class="hexa '+color1+'" style="height: 45px;margin: 65px auto;" onclick="redirige(this,' + estatusId + ',' + estatusMd + ')">'+
+	'<div class="negrita blanco cont_hex_doble" style="top: 6px;font-size: 20px;">'+y2+'</div>'+
+	'</div><div class="hexa '+color2+'" style="height: 45px;margin: 32px auto;" onclick="redirige(this, ' + estatusId2 + ',' + estatusMd + ')">'+
+		'<div class="negrita blanco cont_hex_doble" style="top: 6px;font-size: 20px;">'+x2+'</div>'+
+	'</div><div class="hexa '+color3+'" style="height: 45px;margin: 47px auto;" onclick="redirige(this, ' + estatusId3 + ',' + estatusMd + ')">'+
+		'<div class="negrita blanco cont_hex_doble" style="top: 6px;font-size: 20px;">'+z2+'</div>'+
+	'</div></div>'+
+	'<div class="horizontalLine"></div>'+
+	'</div>'+
+	'<div class="negrita '+color2+' titulo_hex_doble" style="bottom:205; left: 55px;font-size: 9px;"  onclick="redirige(this,' + estatusId2 + ',' + estatusMd + ')">'+y1+'</div>'+
+	'<div class="'+color2+' pie_hex_doble"  style="bottom:195;font-size: 9px;"  onclick="redirige(this,' + estatusId2 + ',' + estatusMd + ')">'+y3+'</div>'+
+	
+	'<div class="negrita '+color1+' titulo_hex_doble" style="bottom:192;font-size: 9px;"  onclick="redirige(this,' + estatusId + ',' + estatusMd + ')">'+x1+'</div>'+
+	'<div class="'+color1+' pie_hex_doble" style="bottom:160;font-size: 9px;"  onclick="redirige(this,' + estatusId + ',' + estatusMd + ')">'+x3+'</div>'+
+	
+	'<div class="negrita '+color3+' titulo_hex_doble" style="bottom:175;font-size: 9px;"  onclick="redirige(this,' + estatusId3 + ',' + estatusMd + ')">'+z1+'</div>'+
+	'<div class="'+color3+' pie_hex_doble" style="bottom:140;font-size: 9px;"  onclick="redirige(this,' + estatusId3 + ',' + estatusMd + ')">'+z3+'</div>'+
 	'</div>';
 }
 function inicio(){

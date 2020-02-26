@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.struts2.ServletActionContext;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.tiendas.neto.action.ExpansionAction;
@@ -97,7 +98,36 @@ public class ExcelTableroAction extends ExpansionAction {
 	        	memoria.setCecoEstatus(array.getJSONObject(i).getJSONObject("CCO").getString("validacion"));	    
 	        	memoria.setLevantamiento(array.getJSONObject(i).getJSONObject("LEVANTAMIENTO").getString("fechaValidacion"));
 	        	memoria.setLevantamientoEstatus(array.getJSONObject(i).getJSONObject("LEVANTAMIENTO").getString("validacion"));
-
+	        	
+	        	
+	        	 if (array.getJSONObject(i).has("ASIGNACIONFECHACITA") && 
+	        			 !array.getJSONObject(i).isNull("ASIGNACIONFECHACITA")) {
+	        		 memoria.setCitaLevantamiento(array.getJSONObject(i).getJSONObject("ASIGNACIONFECHACITA").getString("fechaValidacion"));
+				     memoria.setCitaLevantamientoEstatus(array.getJSONObject(i).getJSONObject("ASIGNACIONFECHACITA").getString("validacion"));
+	        	 } else {
+	        		 memoria.setCitaLevantamiento("");
+				     memoria.setCitaLevantamientoEstatus("");
+	        	 }
+	        	 
+	        	 
+	        	 if (array.getJSONObject(i).has("CORRECCIONCONSTRUCCION") && 
+	        			 !array.getJSONObject(i).isNull("CORRECCIONCONSTRUCCION")) {
+	        		 memoria.setCorreccionConstruccion(array.getJSONObject(i).getJSONObject("CORRECCIONCONSTRUCCION").getString("fechaValidacion"));
+				     memoria.setCorreccionConstruccionEstatus(array.getJSONObject(i).getJSONObject("CORRECCIONCONSTRUCCION").getString("validacion"));
+	        	 } else {
+	        		 memoria.setCorreccionConstruccion("");
+				     memoria.setCorreccionConstruccionEstatus("");
+	        	 }
+	        	 
+	        	 
+	        	 if (array.getJSONObject(i).has("CORRECCIONEXPANSION") && 
+	        			 !array.getJSONObject(i).isNull("CORRECCIONEXPANSION")) {
+	        		 memoria.setCorreccionExpansion(array.getJSONObject(i).getJSONObject("CORRECCIONEXPANSION").getString("fechaValidacion"));
+				     memoria.setCorreccionExpansionEstatus(array.getJSONObject(i).getJSONObject("CORRECCIONEXPANSION").getString("validacion"));
+	        	 } else {
+	        		 memoria.setCorreccionExpansion("");
+				     memoria.setCorreccionExpansionEstatus("");
+	        	 }
 	        	listaMemorias.add(memoria);
 	        }
 	        

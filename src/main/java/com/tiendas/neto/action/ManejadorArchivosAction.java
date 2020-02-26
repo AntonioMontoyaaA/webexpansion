@@ -131,6 +131,22 @@ public class ManejadorArchivosAction
 					
 					response = client.newCall(request).execute();
 					respuesta = response.body().string();
+				}else if(tipoServicio.equals("15")){
+					builder = new Builder()
+							.add("usuarioId", numeroEmpleado)
+							.add("mdId", mdId)
+							.add("tipoServicio", tipoServicio)
+							.add("fecha", monto + " 00:00:00")
+							.add("monto", monto);
+					
+					body = builder.build();
+					request = new Request.Builder()
+						.url(sp.getPropiedad("guardadocsmontos"))
+						.post(body)
+						.build();
+					
+					response = client.newCall(request).execute();
+					respuesta = response.body().string();
 				}else {
 					if(monto.isEmpty())
 						monto = "''";

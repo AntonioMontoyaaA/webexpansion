@@ -453,6 +453,28 @@ function cargaDashboard(){
 };	
 }
 
+function buscaMdsPorEstatus(tipo, estatus) {
+	invocarJSONServiceAction("buscaMdsPorEstatus", 
+			{'tipo':tipo, 'estatus': estatus}, 
+			'buscaMdsPorEstatusResponse', 
+			function() {
+				//Funcion de error
+				cierraLoading();
+			},
+			function() {
+				//Función al finalizar}
+				cierraLoading();
+			});
+
+	buscaMdsPorEstatusResponse = function( data ) {
+		if(data.codigo != 200){
+			cargaMensajeModal('DASHBOARD', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
+		} else if(data.codigo == 200){
+			console.log("Regresa del action");
+		}
+	}
+}
+
 
 function armaGraficas(data){
 	var meses=["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
@@ -617,6 +639,7 @@ function pintaActivas(arreglo,filtrados){
 	for(var i=0;i<arreglo.length;i++){
 		var existe_submodulo=false;
 		var existe_submodulo2=false;
+		var existe_submodulo3 = false;
 		
 		$.each($(".permisos_sub"),function(index, value){
 			if(value.value=='PRIVILEGIO.MENU.VOKSE.16=true'){
@@ -628,6 +651,14 @@ function pintaActivas(arreglo,filtrados){
 			if(arreglo[i]==2){
 				if(value.value=='PRIVILEGIO.SUBMENU.VOKSE.16,'+filtrados[cont+1].estatusid+'=true'){
 					existe_submodulo2=true;
+				}
+			}
+			if(arreglo[i]==3){
+				if(value.value=='PRIVILEGIO.SUBMENU.VOKSE.16,'+filtrados[cont+1].estatusid+'=true'){
+					existe_submodulo2=true;
+				}
+				if(value.value=='PRIVILEGIO.SUBMENU.VOKSE.16,'+filtrados[cont+2].estatusid+'=true'){
+					existe_submodulo3=true;
 				}
 			}
 			
@@ -716,7 +747,7 @@ function pintaActivas(arreglo,filtrados){
 					submodulos_global.push(filtrados[cont+1].estatusid);
 				}
 			}
-			if(existe_submodulo2==true || existe_modulo==false && filtrados[cont+2].areaValidacion==$('#areaId').val() && perfil!='3'){
+			if(existe_submodulo3==true || existe_modulo==false && filtrados[cont+2].areaValidacion==$('#areaId').val() && perfil!='3'){
 				color3="verde cursor";
 				submodulos_global.push(filtrados[cont+2].estatusid);
 			}
@@ -753,6 +784,7 @@ function pintaAtrasadas(arreglo,filtrados){
 	for(var i=0;i<arreglo.length;i++){
 		var existe_submodulo=false;
 		var existe_submodulo2=false;
+		var existe_submodulo3 = false;
 		
 		$.each($(".permisos_sub"),function(index, value){
 			if(value.value=='PRIVILEGIO.MENU.VOKSE.16=true'){
@@ -764,6 +796,14 @@ function pintaAtrasadas(arreglo,filtrados){
 			if(arreglo[i]==2){
 				if(value.value=='PRIVILEGIO.SUBMENU.VOKSE.16,'+filtrados[cont+1].estatusid+'=true'){
 					existe_submodulo2=true;
+				}
+			}
+			if(arreglo[i]==3){
+				if(value.value=='PRIVILEGIO.SUBMENU.VOKSE.16,'+filtrados[cont+1].estatusid+'=true'){
+					existe_submodulo2=true;
+				}
+				if(value.value=='PRIVILEGIO.SUBMENU.VOKSE.16,'+filtrados[cont+2].estatusid+'=true'){
+					existe_submodulo3=true;
 				}
 			}
 			
@@ -854,7 +894,7 @@ function pintaAtrasadas(arreglo,filtrados){
 					submodulos_global.push(filtrados[cont+1].estatusid);
 				}
 			}
-			if(existe_submodulo2==true || existe_modulo==false && filtrados[cont+2].areaValidacion==$('#areaId').val() && perfil!='3'){
+			if(existe_submodulo3==true || existe_modulo==false && filtrados[cont+2].areaValidacion==$('#areaId').val() && perfil!='3'){
 				color3="rojo cursor";
 				submodulos_global.push(filtrados[cont+2].estatusid);
 			}
@@ -890,6 +930,7 @@ function pintaCanceladas(arreglo,filtrados){
 	for(var i=0;i<arreglo.length;i++){
 		var existe_submodulo=false;
 		var existe_submodulo2=false;
+		var existe_submodulo3 = false;
 		
 		$.each($(".permisos_sub"),function(index, value){
 			if(value.value=='PRIVILEGIO.MENU.VOKSE.16=true'){
@@ -901,6 +942,14 @@ function pintaCanceladas(arreglo,filtrados){
 			if(arreglo[i]==2){
 				if(value.value=='PRIVILEGIO.SUBMENU.VOKSE.16,'+filtrados[cont+1].estatusid+'=true'){
 					existe_submodulo2=true;
+				}
+			}
+			if(arreglo[i]==3){
+				if(value.value=='PRIVILEGIO.SUBMENU.VOKSE.16,'+filtrados[cont+1].estatusid+'=true'){
+					existe_submodulo2=true;
+				}
+				if(value.value=='PRIVILEGIO.SUBMENU.VOKSE.16,'+filtrados[cont+2].estatusid+'=true'){
+					existe_submodulo3=true;
 				}
 			}
 			
@@ -977,7 +1026,7 @@ function pintaCanceladas(arreglo,filtrados){
 					submodulos_global.push(filtrados[cont+1].estatusid);
 				}
 			}
-			if(existe_submodulo2==true || existe_modulo==false && filtrados[cont+2].areaValidacion==$('#areaId').val() && perfil!='3'){
+			if(existe_submodulo3==true || existe_modulo==false && filtrados[cont+2].areaValidacion==$('#areaId').val() && perfil!='3'){
 				color3="cgris cursor";
 				submodulos_global.push(filtrados[cont+2].estatusid);
 			}
@@ -1031,17 +1080,17 @@ function triple(x1,x2,x3,color1,  y1,y2,y3,color2,estatusId,estatusId2,estatusId
 	return '<div class="simple" style="padding:9px 5px;">'+
 	'<div class="lineadoble fazul" style="height: 200px;top: 25px;">'+
 	'<div class="doble" style="bottom: 100px;    z-index: 99;">'+
-	'<div class="hexa '+color1+'" style="height: 45px;margin: 65px auto;" onclick="redirige(this,' + estatusId + ',' + estatusMd + ')">'+
+	'<div class="hexa '+color2+'" style="height: 45px;margin: 65px auto;" onclick="redirige(this,' + estatusId2 + ',' + estatusMd + ')">'+
 	'<div class="negrita blanco cont_hex_doble" style="top: 6px;font-size: 20px;">'+y2+'</div>'+
-	'</div><div class="hexa '+color2+'" style="height: 45px;margin: 32px auto;" onclick="redirige(this, ' + estatusId2 + ',' + estatusMd + ')">'+
+	'</div><div class="hexa '+color1+'" style="height: 45px;margin: 32px auto;" onclick="redirige(this, ' + estatusId + ',' + estatusMd + ')">'+
 		'<div class="negrita blanco cont_hex_doble" style="top: 6px;font-size: 20px;">'+x2+'</div>'+
 	'</div><div class="hexa '+color3+'" style="height: 45px;margin: 47px auto;" onclick="redirige(this, ' + estatusId3 + ',' + estatusMd + ')">'+
 		'<div class="negrita blanco cont_hex_doble" style="top: 6px;font-size: 20px;">'+z2+'</div>'+
 	'</div></div>'+
 	'<div class="horizontalLine"></div>'+
 	'</div>'+
-	'<div class="negrita '+color2+' titulo_hex_doble" style="bottom:205; left: 55px;font-size: 9px;"  onclick="redirige(this,' + estatusId2 + ',' + estatusMd + ')">'+y1+'</div>'+
-	'<div class="'+color2+' pie_hex_doble"  style="bottom:195;font-size: 9px;"  onclick="redirige(this,' + estatusId2 + ',' + estatusMd + ')">'+y3+'</div>'+
+	'<div class="negrita '+color2+' titulo_hex_doble" style="bottom:205; left: 55px;font-size: 9px;z-index: 99;"  onclick="redirige(this,' + estatusId2 + ',' + estatusMd + ')">'+y1+'</div>'+
+	'<div class="'+color2+' pie_hex_doble"  style="bottom:195;font-size: 9px;z-index: 99;"  onclick="redirige(this,' + estatusId2 + ',' + estatusMd + ')">'+y3+'</div>'+
 	
 	'<div class="negrita '+color1+' titulo_hex_doble" style="bottom:192;font-size: 9px;"  onclick="redirige(this,' + estatusId + ',' + estatusMd + ')">'+x1+'</div>'+
 	'<div class="'+color1+' pie_hex_doble" style="bottom:160;font-size: 9px;"  onclick="redirige(this,' + estatusId + ',' + estatusMd + ')">'+x3+'</div>'+

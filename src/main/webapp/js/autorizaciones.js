@@ -75,6 +75,7 @@ var fechaSimple = 11;
 var agua = 12;
 var luz = 13;
 var informePreauditoria = 14;
+var fechaCita = 15;
 
 var ACCION_REALIZADA;
 var ACCION_REALIZADA_CONTEO;
@@ -145,7 +146,10 @@ function inicializaFlujoAutorizaciones(){
 	flujoAutorizaciones[15] = new Estatus(15, [15], 'Inicio de obra');
 	flujoAutorizaciones[26] = new Estatus(26, [26], 'Confirmacion fin de obra');
 	flujoAutorizaciones[16] = new Estatus(16, [16], 'Confirmacion Inauguracion');
-	flujoAutorizaciones[28] = new Estatus(28, [28], 'Validacion de levantamiento');
+	//flujoAutorizaciones[28] = new Estatus(28, [28], 'Validacion de levantamiento');
+	flujoAutorizaciones[28] = new Estatus(28, [28], 'Corrección expansión');
+	flujoAutorizaciones[29] = new Estatus(29, [29], 'Corrección construcción');
+	flujoAutorizaciones[30] = new Estatus(30, [30], 'Asignación cita Expansión');
 	
 	flujoAutorizaciones[3].agregaArea(areaExpansion, new Area(areaExpansion, todosRechazos, sinArchivos));
 	
@@ -179,13 +183,17 @@ function inicializaFlujoAutorizaciones(){
 	
 	flujoAutorizaciones[24].agregaArea(areaFinanzas, new Area(areaFinanzas, sinRechazo, ceco));
 	
-	flujoAutorizaciones[14].agregaArea(areaGestoria, new Area(areaGestoria, rechazoDefinitivo, sinArchivos));
+	flujoAutorizaciones[14].agregaArea(areaGestoria, new Area(areaGestoria, todosRechazos, sinArchivos));
 	
 	flujoAutorizaciones[15].agregaArea(areaConstruccion, new Area(areaConstruccion, sinRechazo, inicioObra));
 	
 	flujoAutorizaciones[26].agregaArea(areaConstruccion, new Area(areaConstruccion, sinRechazo, fechaSimple));
 	
 	flujoAutorizaciones[16].agregaArea(areaCalidadOperativa, new Area(areaCalidadOperativa, sinRechazo, fechaSimple));
+	
+	//nuevos estatus 24/02/2020
+	flujoAutorizaciones[30].agregaArea(areaExpansion, new Area(areaExpansion, sinRechazo, fechaCita));
+	//flujoAutorizaciones[28].agregaArea(areaExpansion, new Area(areaExpansion, sinRechazo, fechaCita));
 }
 
 function parseaEstatus(estatus){
@@ -296,6 +304,12 @@ function finalizacionMDAutorizada(){
 				tipoServicio = 13;
 				mensajeConfirmacion('¿Est\u00e1s seguro de confirmar la inauguracion en ' + monto + '?', 1);
 			}
+		}else if(area.tipoArchivo == fechaCita){ //Fecha cita levantamiento
+			monto = $("#simpleDate").val();
+			
+			
+			tipoServicio = 15;
+			mensajeConfirmacion('¿Est\u00e1s seguro de confirmar la fecha de cita el ' + monto + '?', 1);
 		}
 	}
 }
@@ -525,11 +539,22 @@ function validaAutorizacion(){
 			generaAutorizacionObra(area);
 		}else if(area.tipoArchivo == fechaSimple){// Fin de obra e inauguracion
 			generaAutorizacionFechaSimple(area);
+		}else if(area.tipoArchivo == fechaCita){// Fecha de cita
+			generaAutorizacionFechaCita(area);
 		}
 	}
 	
 	dibujaArchivos();
 
+}
+
+function generaAutorizacionFechaCita(area) {
+	$('#msjFinalizacion').html('¿Confirmar fecha de levantamiento?');
+	$('#fechaSimple').show();
+	inicializaCalendario('simpleDate', 0);
+	$('.tituloAutorizacion').html('Confirma la fecha de levantamiento')
+		
+	generaAutorizacionSimple(area);
 }
 
 function generaAutorizacionFechaSimple(area){

@@ -277,6 +277,7 @@ function initTablaMemoriasTablero(nombreDiv, datosDesgloseMemorias, nombreTabla)
 					'<th class="gris negrita t12 fblanco">VoBo inicial operaciones</th>' +
 					'<th class="gris negrita t12 fblanco">Conteo auditor</th>' +
 					'<th class="gris negrita t12 fblanco">Pregestor&iacute;a autorizada</th>' +
+					'<th class="gris negrita t12 fblanco">Cita Levantamiento</th>' +
 					'<th class="gris negrita t12 fblanco">Levantamiento</th>' +
 					'<th class="gris negrita t12 fblanco">Layout</th>' +
 					'<th class="gris negrita t12 fblanco">VoBo layout operaciones</th>' +
@@ -289,6 +290,8 @@ function initTablaMemoriasTablero(nombreDiv, datosDesgloseMemorias, nombreTabla)
 					'<th class="gris negrita t12 fblanco">Contrato firmado</th>' +
 					'<th class="gris negrita t12 fblanco">CECO</th>' +
 					'<th class="gris negrita t12 fblanco">Gestor&iacute;a</th>' +
+					'<th class="gris negrita t12 fblanco">Correcci&oacute;n Construcci&oacute;n</th>' +
+					'<th class="gris negrita t12 fblanco">Correcci&oacute;n Expansi&oacute;n</th>' +
 					'<th class="gris negrita t12 fblanco">Inicio obra</th>' +
 					'<th class="gris negrita t12 fblanco">Fin obra</th>' +
 					'<th class="gris negrita t12 fblanco">Inauguraci&oacute;n</th>' +
@@ -321,9 +324,12 @@ function initTablaMemoriasTablero(nombreDiv, datosDesgloseMemorias, nombreTabla)
 				           {"sClass":"tablero_celda", "bSearchable":false},
 				           {"sClass":"tablero_celda", "bSearchable":false},
 				           {"sClass":"tablero_celda", "bSearchable":false},
+				           {"sClass":"tablero_celda", "bSearchable":false},
 				           {"sClass":"tablero_celda","bSearchable":false},
 				           {"sClass":"tablero_celda","bSearchable":false},
 				           {"sClass":"tablero_celda","bSearchable":false},
+				           {"sClass":"tablero_celda", "bSearchable":false},
+				           {"sClass":"tablero_celda", "bSearchable":false},
 				           {"sClass":"tablero_celda", "bSearchable":false},
 				           {"sClass":"tablero_celda", "bSearchable":false},
 				           {"sClass":"tablero_celda", "bSearchable":false},
@@ -342,7 +348,7 @@ function initTablaMemoriasTablero(nombreDiv, datosDesgloseMemorias, nombreTabla)
 			"sPaginationType": "full_numbers",
 			"oLanguage": idiomaEspanolTablero,
 			"bLengthChange":false,
-			"iDisplayLength":1000,
+			"iDisplayLength":2000,
 			 "bScrollCollapse": false,
 			 "sScrollY": "70vh",
 			 "fixedColumns":   {
@@ -354,7 +360,7 @@ function initTablaMemoriasTablero(nombreDiv, datosDesgloseMemorias, nombreTabla)
 									"sClass": "center",
 									"aTargets": [ 0,1 ]
 			 					},{ "sType": 'numeric', "aTargets": [7] },
-			 					{ "sType": 'extract-date', "aTargets": [2,3,8,10,11,12,15,17,18,19,20,21,22,23,24,25] }
+			 					{ "sType": 'extract-date', "aTargets": [2,3,8,10,11,12,17,19,20,21,22,23,24,25,26,27,29,30] }
 			 			]
 	});	
 	

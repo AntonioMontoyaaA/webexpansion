@@ -380,6 +380,10 @@
     	<!--  ********************** NUEVO DASHBOARD ******************** -->
       	 	<action name = "cargaProcesoAction" class="com.tiendas.neto.action.DashboardGeneralAction"
       	 method = "cargaProcesoAction"/>
+      	 
+      	 <action name = "buscaMdsPorEstatus" class="com.tiendas.neto.action.BuscaMdsPorEstatusAction"
+      	 method = "execute"/>
+      	 
         
       	 <!-- ************************************ ACCIONES SEGUIMIENTO ******* -->
       	<!-- ****************************** DESCARGA DE PDF**************************************** -->

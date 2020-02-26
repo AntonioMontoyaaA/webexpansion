@@ -23,6 +23,8 @@ public class TableroVo implements Serializable {
 	private int conteoAuditor;
 	private String pregestoriaAutorizada;
 	private String pregestoriaAutorizadaEstatus;
+	private String citaLevantamiento;
+	private String citaLevantamientoEstatus;
 	private String levantamientoRealizado;
 	private String levantamientoRealizadoEstatus;
 	private String voboLayoutOperaciones;
@@ -35,6 +37,10 @@ public class TableroVo implements Serializable {
 	private double montoAuditoria;
 	private String gestoria;
 	private String gestoriaEstatus;
+	private String correccionConstruccion;
+	private String correccionConstruccionEstatus;
+	private String correccionExpansion;
+	private String correccionExpansionEstatus;
 	private String voboFinalOperaciones;
 	private String voboFinalOperacionesEstatus;
 	private double ventaEstimada;
@@ -65,6 +71,29 @@ public class TableroVo implements Serializable {
 	private String levantamientoEstatus;
 	private String levantamientoVobo;
 	private String levantamientoVoboEstatus;
+	
+	private int voboAnalistaDias;
+	private int voboInicialDias;
+	private int voboPregestoriaDias;
+	private int voboPreauditoriaDias;
+	private int voboCitaLevantDias;
+	private int levantamientoDias;
+	private int cargaLayoutDias;
+	private int voboLayoutDias;
+	private int pptoConstrDias;
+	private int pptoAuditDias;
+	private int voboFinalDias;
+	private int comiteDias;
+	private int cargaDoctosDias;
+	private int contratoFirmadoDias;
+	private int cecoDias;
+	private int tramitesDias;
+	private int correccionConstrDias;
+	private int correccionExpansDias;
+	private int inicioObraDias;
+	private int obraDias;
+	private int tiendaAbiertaDias;
+	
 	/**
 	 * @return the mdId
 	 */
@@ -677,6 +706,169 @@ public class TableroVo implements Serializable {
 	public void setTienda_abiertaEstatus(String tienda_abiertaEstatus) {
 		this.tienda_abiertaEstatus = tienda_abiertaEstatus;
 	}
+	public String getCitaLevantamiento() {
+		return citaLevantamiento;
+	}
+	public void setCitaLevantamiento(String citaLevantamiento) {
+		this.citaLevantamiento = citaLevantamiento;
+	}
+	public String getCitaLevantamientoEstatus() {
+		return citaLevantamientoEstatus;
+	}
+	public void setCitaLevantamientoEstatus(String citaLevantamientoEstatus) {
+		this.citaLevantamientoEstatus = citaLevantamientoEstatus;
+	}
+	public String getCorreccionConstruccion() {
+		return correccionConstruccion;
+	}
+	public void setCorreccionConstruccion(String correccionConstruccion) {
+		this.correccionConstruccion = correccionConstruccion;
+	}
+	public String getCorreccionConstruccionEstatus() {
+		return correccionConstruccionEstatus;
+	}
+	public void setCorreccionConstruccionEstatus(String correccionConstruccionEstatus) {
+		this.correccionConstruccionEstatus = correccionConstruccionEstatus;
+	}
+	public String getCorreccionExpansion() {
+		return correccionExpansion;
+	}
+	public void setCorreccionExpansion(String correccionExpansion) {
+		this.correccionExpansion = correccionExpansion;
+	}
+	public String getCorreccionExpansionEstatus() {
+		return correccionExpansionEstatus;
+	}
+	public void setCorreccionExpansionEstatus(String correccionExpansionEstatus) {
+		this.correccionExpansionEstatus = correccionExpansionEstatus;
+	}
+	public int getVoboAnalistaDias() {
+		return voboAnalistaDias;
+	}
+	public void setVoboAnalistaDias(int voboAnalistaDias) {
+		this.voboAnalistaDias = voboAnalistaDias;
+	}
+	public int getVoboInicialDias() {
+		return voboInicialDias;
+	}
+	public void setVoboInicialDias(int voboInicialDias) {
+		this.voboInicialDias = voboInicialDias;
+	}
+	public int getVoboPregestoriaDias() {
+		return voboPregestoriaDias;
+	}
+	public void setVoboPregestoriaDias(int voboPregestoriaDias) {
+		this.voboPregestoriaDias = voboPregestoriaDias;
+	}
+	public int getVoboPreauditoriaDias() {
+		return voboPreauditoriaDias;
+	}
+	public void setVoboPreauditoriaDias(int voboPreauditoriaDias) {
+		this.voboPreauditoriaDias = voboPreauditoriaDias;
+	}
+	public int getVoboCitaLevantDias() {
+		return voboCitaLevantDias;
+	}
+	public void setVoboCitaLevantDias(int voboCitaLevantDias) {
+		this.voboCitaLevantDias = voboCitaLevantDias;
+	}
+	public int getLevantamientoDias() {
+		return levantamientoDias;
+	}
+	public void setLevantamientoDias(int levantamientoDias) {
+		this.levantamientoDias = levantamientoDias;
+	}
+	public int getCargaLayoutDias() {
+		return cargaLayoutDias;
+	}
+	public void setCargaLayoutDias(int cargaLayoutDias) {
+		this.cargaLayoutDias = cargaLayoutDias;
+	}
+	public int getVoboLayoutDias() {
+		return voboLayoutDias;
+	}
+	public void setVoboLayoutDias(int voboLayoutDias) {
+		this.voboLayoutDias = voboLayoutDias;
+	}
+	public int getPptoConstrDias() {
+		return pptoConstrDias;
+	}
+	public void setPptoConstrDias(int pptoConstrDias) {
+		this.pptoConstrDias = pptoConstrDias;
+	}
+	public int getPptoAuditDias() {
+		return pptoAuditDias;
+	}
+	public void setPptoAuditDias(int pptoAuditDias) {
+		this.pptoAuditDias = pptoAuditDias;
+	}
+	public int getVoboFinalDias() {
+		return voboFinalDias;
+	}
+	public void setVoboFinalDias(int voboFinalDias) {
+		this.voboFinalDias = voboFinalDias;
+	}
+	public int getComiteDias() {
+		return comiteDias;
+	}
+	public void setComiteDias(int comiteDias) {
+		this.comiteDias = comiteDias;
+	}
+	public int getCargaDoctosDias() {
+		return cargaDoctosDias;
+	}
+	public void setCargaDoctosDias(int cargaDoctosDias) {
+		this.cargaDoctosDias = cargaDoctosDias;
+	}
+	public int getContratoFirmadoDias() {
+		return contratoFirmadoDias;
+	}
+	public void setContratoFirmadoDias(int contratoFirmadoDias) {
+		this.contratoFirmadoDias = contratoFirmadoDias;
+	}
+	public int getCecoDias() {
+		return cecoDias;
+	}
+	public void setCecoDias(int cecoDias) {
+		this.cecoDias = cecoDias;
+	}
+	public int getTramitesDias() {
+		return tramitesDias;
+	}
+	public void setTramitesDias(int tramitesDias) {
+		this.tramitesDias = tramitesDias;
+	}
+	public int getCorreccionConstrDias() {
+		return correccionConstrDias;
+	}
+	public void setCorreccionConstrDias(int correccionConstrDias) {
+		this.correccionConstrDias = correccionConstrDias;
+	}
+	public int getCorreccionExpansDias() {
+		return correccionExpansDias;
+	}
+	public void setCorreccionExpansDias(int correccionExpansDias) {
+		this.correccionExpansDias = correccionExpansDias;
+	}
+	public int getInicioObraDias() {
+		return inicioObraDias;
+	}
+	public void setInicioObraDias(int inicioObraDias) {
+		this.inicioObraDias = inicioObraDias;
+	}
+	public int getObraDias() {
+		return obraDias;
+	}
+	public void setObraDias(int obraDias) {
+		this.obraDias = obraDias;
+	}
+	public int getTiendaAbiertaDias() {
+		return tiendaAbiertaDias;
+	}
+	public void setTiendaAbiertaDias(int tiendaAbiertaDias) {
+		this.tiendaAbiertaDias = tiendaAbiertaDias;
+	}
+	
 	
 
 }

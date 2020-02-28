@@ -829,3 +829,51 @@ jQuery.extend(jQuery.fn.dataTableExt.oSort, {
         return ((a < b) ? 1 : ((a > b) ? -1 : 0));
     }
 });
+
+function initTablaMdsXestatusArea(nombreDiv, data, nombreTabla){
+		
+	$("#" + nombreDiv).html(
+			   
+			'<table cellpadding="0" style= "width:auto" cellspacing="0" border="0px"  class="row-border stripe hover" id="' + nombreTabla + '" >' +
+			'<thead>'  +
+				'<tr style="cursor: pointer;border-top: 0px; border-bottom: 0px;">' +
+					'<th class="gris negrita t14" style= "width:16%" >MD ID</th>'  +
+					'<th class="gris negrita t14" style= "width:16%" >Nombre MD</th>' +
+					'<th class="gris negrita t14" style= "width:16%" >Región</th>' +
+					'<th class="gris negrita t14" style= "width:16%" >Fecha de inicio</br> de estatus</th>' +
+					'<th class="gris negrita t14" style= "width:16%" >Fecha de </br>visto bueno</th>' +
+					'<th class="gris negrita t14" style= "width:16%" >Días de </br>validación</th>' +
+				
+				'</tr>'+
+			'</thead>' +
+			'<tbody>'  +			
+            '</tbody>' +
+        '</table>');
+			
+		tabla = $("#" + nombreTabla).dataTable(
+				{"aaData": data,
+					"aoColumns": [
+						   	   {"sClass":"padding","bSearchable":true},
+					           {"bSearchable":true},
+					           {"bSearchable":true},
+					           {"bSearchable":true},
+					           {"bSearchable":true},
+					           {"bSearchable":true }],		
+					          
+					           "bJQueryUI": false,
+								"order": [],
+								"sPaginationType": "full_numbers",
+								"oLanguage": idiomaEspanolGeneral,
+								"bLengthChange":false,
+								"iDisplayLength":1000,
+								 "bScrollCollapse": false,
+								 "sScrollY": "40vh",
+								 "aoColumnDefs": [ {
+										"sClass": "center",
+										"aTargets": [ 0,2 ]
+								}]		 
+	});	
+		$("#" + nombreTabla + "_DTTT_container").hide();
+		$("#" + nombreTabla + "_paginate").hide();
+		$("#" + nombreTabla + "_filter").hide();
+}

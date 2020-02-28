@@ -25,46 +25,87 @@
 	<div class="row padding_p" style="padding-top:0px;">
 	<div class="col-lg-12 titulo blanco t12 negrita" id="nombrePerfil">
 	</div>
-		<div class="col-lg-8">
+		<div class="col-lg-2">
 <!-- PROGRESO GENERAL DE AREAS  -->	
-		<div class="row divs_p">
-		<div class="col-lg-4 menupr_estilos fazul">
-			<div class="row cabecera">	
-					<span class="blanco negrita t18">ACTIVAS</span>
-			</div>
-			<div id="container_activas" class="cursor"></div>
-			
-			<div class="col-12 info">
-				<span class="t26"  style="color: #3FB961;" id="total_activas">0</span>
-				<div class="float_right blanco"><img class="icono_medida" src="img/w_activas.svg"></div>
-			</div>		 
-		</div>
-		<div class="col-lg-4 menupr_estilos fazul">
-			<div class="row cabecera">	
-					<span class="blanco negrita t18">ATRASADAS</span>
-			</div>
-			<div id="container_atrasadas"  class="cursor"></div>
-			
-			<div class="col-12 info">
-				<span class="t26" style="color: #C93535;" id="total_atrasadas">0</span>
-				<div class="float_right blanco"><img class="icono_medida" src="img/w_atrasadas.svg"></div>
-			</div>		 
-		</div>
-		<div class="col-lg-4 menupr_estilos fazul">
-			<div class="row cabecera">	
-					<span class="blanco negrita t18">CANCELADAS</span>
-			</div>
-			<div id="container_canceladas" class="cursor"></div>
-			
-			<div class="col-12 info">
-				<span class="t26" style="color: #657488;" id="total_canceladas">0</span>
-				<div class="float_right blanco"><img class="icono_medida" src="img/w_canceladas.svg"></div>
-			</div>		 
-		</div>
-	
-		</div>
+		<div class="divs_p row" style= " height: 100%; display: flex;  justify-content: space-between;
+        ">
+        <div class="menupr_estilos fazul" style="display: flex; flex-direction: column; align-items: center;">
+            <div class="row cabecera">  
+                    <span class="blanco negrita " style= "font-size: 1rem;">ACTIVAS</span>
+            </div>
+<!--             <div id="container_activas" class="cursor"></div> -->
+            
+            <div class="info cursor" id="container_activas">
+                <div class="float_left blanco" style="padding-right: 15px;"><img class="icono_medida_dashb" src="img/w_activas.svg"></div>
+                <span class="t26"  style="color: #3FB961;" id="total_activas">0</span>
+                
+            </div>         
+        </div>
+        <div class="menupr_estilos fazul" style="display: flex; flex-direction: column; align-items: center;">
+            <div class="row cabecera">  
+                    <span class="blanco negrita " style= "font-size: 1rem;">ATRASADAS</span>
+            </div>
+<!--             <div id="container_atrasadas"  class="cursor"></div> -->
+            
+            <div class="info cursor" id="container_atrasadas">
+                <div class="float_left blanco"  style="padding-right: 15px;"><img class="icono_medida_dashb" src="img/w_atrasadas.svg"></div>
+                <span class="t26" style="color: #C93535;" id="total_atrasadas">0</span>
+                </div>         
+        </div>
+        <div class="menupr_estilos fazul" style="display: flex; flex-direction: column; align-items: center;">
+            <div class="row cabecera">  
+                    <span class="blanco negrita" style= "font-size: 1rem;">CANCELADAS</span>
+            </div>
+<!--             <div id="container_canceladas" class="cursor"></div> -->
+            
+            <div class="info cursor" id="container_canceladas">
+                <div class="float_left blanco"  style="padding-right: 15px;"><img class="icono_medida_dashb" src="img/w_canceladas.svg"></div>
+                <span class="t26" style="color: #657488;" id="total_canceladas">0</span>
+            </div>         
+        </div>
+    
+        </div>
 <!-- FIN PROGRESO GENERAL DE AREAS -->
 		</div>	
+		<div class="col-lg-6" style="min-width: 410px;">
+            <div class="center">
+                <span class= "blanco negrita t18">ATRASOS POR ESTATUS</span>
+            </div>
+            
+            <div  style="overflow: auto; max-height: 370px; margin-bottom: 20px;">
+            <div style= "padding-left: 215px; display: flex; flex-direction: row;">
+                <div class="center" style="width: 50%; min-width: 180px;">
+                    <span class="blanco" id="mes_anterior" style = "font-size: 13px;"></span>
+                </div>
+                <div class="center" style="width: 50%;  min-width: 180px;">
+                    <span class="blanco" id="anio_anterior" style = "font-size: 13px;"></span>
+                </div>
+            </div>
+            <div style="display: flex; flex-direction: row;">
+                <div style="min-width: 215px; width: 24%;">
+                    <div id="listaAtrasos" style= "padding-top: 10px;" ></div>
+                </div>
+                <div style="width: calc(100% - 215px); display: flex; flex-direction: row;">
+                    <div class="col-6 center" style="width: 50%;  min-width: 180px; display:flex; flex-direction: row;">
+<%--                             <span class="blanco t14" id="mes_anterior"></span> --%>
+<!--                             <div id="container_ultimo_mes_izq"  style="width: 50%; " ></div> -->
+                            <div id="container_ultimo_mes" ></div>
+                    </div>
+                    <div class="col-6 center" style="width:50%;  min-width: 180px;  display:flex; flex-direction: row;">
+<%--                         <span class="blanco t14" id="anio_anterior"></span> --%>
+                            
+                            <div id="container_ultimo_anio" style = " position: relative;"  >
+                                
+                            </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+                
+            </div>
+        
+        </div>
 		<div class="col-lg-4 ">
 		<div class="row divs_p" style="padding-bottom:0">
 <!-- PLAN APERTURA MENSUAL -->	
@@ -104,6 +145,28 @@
 		</div>
 		</div>
 		</div>
+		<div id="modal" class="modal_">
+    
+        <div id="contenedor-modal">
+             <span class="closeModal">&times;</span>
+            
+            <div class= "modal-header">
+                <div class="t18 blanco negrita" id="captionModal" style= "display: flex; align-items: center;"></div>
+            
+            </div>
+            
+            <div class= "modal-body">
+<!--                             <div style="width:100%; color: #FFFFFF; height: -webkit-fill-available;">mensaje</div> -->
+                <div class="col-lg-12 menupr_estilos fblanco tabla_container">
+                    <!--Tabla-->
+                    <div id="DivTabla"></div>
+                </div>            
+            </div>
+        </div>
+    
+    
+</div>
+		
 		
 		
 	</div>
@@ -136,6 +199,9 @@
 	<script	src="${pageContext.request.contextPath}/highcharts/js/modules/data.js"></script>
 	<script	src="${pageContext.request.contextPath}/highcharts/js/modules/exporting.js"></script>
 	<script	src="${pageContext.request.contextPath}/highcharts/js/modules/export-data.js"></script>
+	<script src="${pageContext.request.contextPath}/DataTable/js/jquery.dataTables.min.js"></script>
+    <script  src="${pageContext.request.contextPath}/js/tablas.js"></script>
+    <script  src="${pageContext.request.contextPath}/js/jquery/jquery-ui.js"></script>
 	<%-- <script	src="${pageContext.request.contextPath}/js/dashboard.js"></script> --%>
 	</body>
 </html>

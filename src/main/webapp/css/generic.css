@@ -584,7 +584,7 @@ span.azul{
 	color:#071B36;
 }
 .rojo {
-	color:#f32c2c;
+    color:#f32c2c;
 }
 .negro{
 	color:black;
@@ -627,7 +627,7 @@ span.gris{
 	-moz-border-radius: 2px 2px 2px 2px;
 	-webkit-border-radius: 2px 2px 2px 2px;
 	border: 0px solid #000000;
-
+	height: 33%;
 }
 .padding_p{
 	padding-left:7px;

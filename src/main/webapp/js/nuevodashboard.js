@@ -7,6 +7,8 @@ var MDS_ACTIVAS = 1
 var MDS_ATRASADAS = 2;
 var MDS_CANCELADAS = 0;
 
+var atrasosXestatus = []; // grafica de ultimo mes y ultimo año
+var lstNivelAtrasos = [];
 $(function(){
 		$('#iddashboard').addClass('resaltado'); //resalta en el header
 		perfil=$('#perfil_usuario').val();
@@ -226,9 +228,9 @@ if(datos.Diciembre!="undefined"){
 	    	},
 	    plotOptions: {
 	        column: {
-	        	//stacking: 'normal'
-	        	pointPadding: 0.2,
-	            borderWidth: 0
+//	        	stacking: 'normal',
+                pointPadding: 0.2,
+                borderWidth: 0
 	        }
 	    },
 	    series: [{
@@ -303,8 +305,10 @@ function cargaDashboard(){
 		$('#total_activas').text(data.totales);
 		$('#total_atrasadas').text(data.atrasadas);
 		$('#total_canceladas').text(data.canceladas);
-		
-		armaGraficas(data);
+		$('#mes_anterior').text(data.atrasosxEstatusArea.actual);
+		$('#anio_anterior').text(data.atrasosxEstatusArea.anterior);
+//		armaGraficas(data);
+		armaListaGrafica(data.atrasosxEstatusArea.estatusArea);
 // ----------------------- ARMA DIAGRAMA DE FLUJO -------------------------
 		var descripcion_arreglo=[];
 		var original=data.nivelEstatusActivos;
@@ -320,6 +324,8 @@ function cargaDashboard(){
 		for(var i=0;i<filtrados.length;i++){
 			if(i<filtrados.length-1){
 				if(filtrados[i].prioridad==filtrados[i+1].prioridad){
+//					descripcion_arreglo.push(2);
+//					i++;
 					if(filtrados[i].prioridad==filtrados[i+2].prioridad){
 						descripcion_arreglo.push(3);
 						i += 2;
@@ -362,6 +368,8 @@ function cargaDashboard(){
 			for(var i=0;i<filtrados.length;i++){
 				if(i<filtrados.length-1){
 					if(filtrados[i].prioridad==filtrados[i+1].prioridad){
+//						descripcion_arreglo.push(2);
+//						i++;
 						if(filtrados[i].prioridad==filtrados[i+2].prioridad){
 							descripcion_arreglo.push(3);
 							i += 2;
@@ -395,12 +403,14 @@ function cargaDashboard(){
 			for(var i=0;i<filtrados.length;i++){
 				if(i<filtrados.length-1){
 					if(filtrados[i].prioridad==filtrados[i+1].prioridad){
+//						descripcion_arreglo.push(2);
+//						i++;
 						if(filtrados[i].prioridad==filtrados[i+2].prioridad){
 							descripcion_arreglo.push(3);
-							i += 2;
-						} else {
-							descripcion_arreglo.push(2);
-							i++;
+							 i += 2;
+						 } else {
+							 descripcion_arreglo.push(2);
+							 i++;
 						}
 					}
 					else{
@@ -428,12 +438,14 @@ function cargaDashboard(){
 			for(var i=0;i<filtrados.length;i++){
 				if(i<filtrados.length-1){
 					if(filtrados[i].prioridad==filtrados[i+1].prioridad){
+//						descripcion_arreglo.push(2);
+//						i++;
 						if(filtrados[i].prioridad==filtrados[i+2].prioridad){
 							descripcion_arreglo.push(3);
 							i += 2;
 						} else {
 							descripcion_arreglo.push(2);
-							i++;
+						    i++;
 						}
 					}
 					else{
@@ -473,8 +485,9 @@ function buscaMdsPorEstatus(tipo, estatus) {
 			cargaMensajeModal('DASHBOARD', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
 		} else if(data.codigo == 200){
 			console.log("Regresa del action");
+			
 		}
-	}
+	   }
 }
 
 
@@ -642,7 +655,6 @@ function pintaActivas(arreglo,filtrados){
 		var existe_submodulo=false;
 		var existe_submodulo2=false;
 		var existe_submodulo3 = false;
-		
 		$.each($(".permisos_sub"),function(index, value){
 			if(value.value=='PRIVILEGIO.MENU.VOKSE.16=true'){
 				existe_modulo=true;
@@ -663,7 +675,6 @@ function pintaActivas(arreglo,filtrados){
 					existe_submodulo3=true;
 				}
 			}
-			
 		});
 		
 		var cadenas=filtrados[cont].estatus.replace('VALIDACION','VOBO').split('-',2);
@@ -924,7 +935,7 @@ function pintaAtrasadas(arreglo,filtrados){
 
 function pintaCanceladas(arreglo,filtrados){
 	$('#proceso').hide();
-	html=inicio();
+	html=inicio(); 
 	var cont=0;
 	var existe_modulo=false;
 	var submodulos_global=[];
@@ -1142,4 +1153,246 @@ function EnviaSubmodulosAction(submodulos_global){
 			null,
 			null);
 	cierraLoading(); 
+}
+
+//------------------------- lista de graficas -----------------
+function armaListaGrafica(data){
+//	$('#listaAtrasos')
+	html = '';
+	var height_span = (100/data.length) + '%';
+	for(var i = 0; i < data.length;  i++){
+		var elem =  data[i];
+		
+		lstNivelAtrasos.push(elem.nivelEstatusArea)
+		atrasosXestatus.push(elem.nivelEstatusAreaId);
+		html = html + '<span class="span_lista">' + elem.nivelEstatusArea + ' ('+ elem.diasConf+')'+ '</span>';
+	}
+	
+	$('#listaAtrasos').html(html);
+//	console.log(arrAux)
+	var elementList = document.getElementById('listaAtrasos').getElementsByTagName('span');
+	for (var i = 0; i < elementList.length; i++) {
+		elementList[i].style.height = height_span;
+
+	}
+	graficaUltimoMes(data);	
+}
+
+function graficaUltimoMes(data){
+	var arrayRojoMes = [];
+	var arrayVerdeMes = []
+	var arrayRojoAnio = [];
+	var arrayVerdeAnio=[];
+	var negMes = false;
+	var negAnio = false;
+
+	for (var i = 0; i < data.length; i++) {
+		elem= data[i];
+		if(elem.diasAtraso > elem.diasConf){
+			var e = elem.diasAtraso  != 0 ? elem.diasAtraso * (-1) : 0;
+			arrayRojoMes.push(e);
+			arrayVerdeMes.push(0);
+			negMes = true;
+
+		}else if(elem.diasAtraso <= elem.diasConf ){
+			
+			arrayVerdeMes.push(elem.diasAtraso );
+			arrayRojoMes.push(0);
+		}
+		
+		if(elem.diasAtrasoAnt > elem.diasConf){
+			var e = elem.diasAtrasoAnt != 0 ? elem.diasAtrasoAnt * (-1) : 0;
+			arrayRojoAnio.push(e);
+			arrayVerdeAnio.push(0);
+			negAnio = true;
+		}else if(elem.diasAtrasoAnt <= elem.diasConf ){
+			arrayVerdeAnio.push(elem.diasAtrasoAnt);
+			arrayRojoAnio.push(0);
+			
+		}
+	}
+	
+	pintaGraficaAreas('container_ultimo_mes', arrayVerdeMes, arrayRojoMes, 1 , negMes);
+	pintaGraficaAreas('container_ultimo_anio', arrayVerdeAnio, arrayRojoAnio, 2, negAnio);
+	
+}
+
+function pintaGraficaAreas(id, arrayVerde, arrayRojo, tipo, neg){
+	console.log(arrayVerde,arrayRojo, tipo)
+	var list = lstNivelAtrasos;
+	var statusId =  atrasosXestatus
+	Highcharts.chart(id, {
+	    chart: {
+	        type: 'bar',
+	        backgroundColor: '#071B36',
+	        height: 'auto',
+	        width:'180'
+	    },
+	     title: {
+	    text: null
+	  },
+
+	  xAxis: {
+		 categories: list,
+	    title: {
+	      text: null
+	    },
+	    labels: {
+	      enabled: false
+
+	    }
+	  },
+	  yAxis: {
+
+	    gridLineWidth: 0.1,
+	    title: {
+	      text: null,
+	      align: 'high'
+	    },
+	    labels: {
+	      overflow: 'justify',
+	      enabled: false
+
+	    }
+	  },
+	  tooltip: {
+		  pointFormat: ' <b>{this.point.category }</b>',
+	  },
+	  
+	  plotOptions: {
+	    bar: {
+	      dataLabels: {
+	        enabled: true
+	      }
+	    },
+	    series: {
+	    	 
+	       dataLabels: {
+	    	x:0,
+	    	y: 0,
+	        zIndex: 6,
+	       formatter: function() {
+	       	if(this.point.y == 0){
+	        
+	        	return '';
+	        }else{
+	        	x = Math.abs(this.point.y);
+	          
+	          return x;
+	        }
+	       	
+	       },
+	      
+	        style: {
+	          
+	          textOutline: '0px contrast',
+	          fontSize:  '10px',
+	          color:'#FFFFFF',
+	          fontWeight: '200',
+	          
+	        }
+	      },
+	      cursor:'pointer',
+          point: {
+              events: {
+                  click: function () {
+                      var id = statusId[this.index];
+                      var nivel = this.category;	
+                      var tipoString = tipo == 1 ? ' Último mes' : ' Último año';
+                      buscaMdsPorEstatus(tipo, id, nivel, tipoString)
+                  }
+              }
+          }
+	    }
+	  },
+	  legend: {
+	    enabled: false,
+
+	  },
+	  exporting: {
+	    enabled: false
+	  },
+	  credits: {
+	    enabled: false
+	  },
+
+	    series: [{
+	        color: '#C93535',
+//	        data: [4,3,2,1, 0, 0, 0, 0,1,9,3,2, 0, 0, 0, 0, 0, 1, 3]
+            data:arrayRojo
+
+	    }, {
+	        color: '#3FB961',
+//	        data: [0,0,0,0,-1,-1,-1,-4,0,0,0,0,0,-1,-1,-1,-10,0, 0, 0]
+	        data: arrayVerde
+	    }]
+	});
+	var svgRect = 	document.getElementById(id).getElementsByTagName('div')[0].getElementsByTagName('svg')[0];
+	svgRect.getElementsByTagName('g')[2].style.display = 'none'
+
+}
+
+
+
+function buscaMdsPorEstatus(tipo, estatus , nivel, tipoString) {
+    invocarJSONServiceAction("buscaMdsPorEstatus", 
+            {'tipo':tipo, 'estatus': estatus}, 
+            'buscaMdsPorEstatusResponse', 
+            function() {
+                //Funcion de error
+                cierraLoading();
+            },
+            function() {
+                //Función al finalizar}
+                cierraLoading();
+            });
+    buscaMdsPorEstatusResponse = function( data ) {
+        if(data.codigo != 200){
+            cargaMensajeModal('DASHBOARD', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
+        } else if(data.codigo == 200){
+            console.log("Regresa del action");
+            var resultados = data.datosNivelEstatus;
+            var datos = new Array();
+            
+            for( var i = 0 ; i < resultados.length; i++){// datos para tabla Usuarios
+				datos[i] = new Array();	 	 		 			 
+				datos[i][0] = resultados[i].MDID; 
+				datos[i][1] = resultados[i].NOMBRESITIO; 
+				datos[i][2] = resultados[i].REGION; 
+				datos[i][3] = resultados[i].FECHAINICIO;
+				datos[i][4] = resultados[i].FECHAFIN;
+				datos[i][5] = resultados[i].DIASEVALUACION;
+								
+			 }
+            modalImage(nivel, tipoString);
+
+            initTablaMdsXestatusArea('DivTabla', datos, 'tabla');
+   		
+        }
+       
+    }
+   
+}
+
+function modalImage(nombre, tipo){
+	
+	modal = document.getElementById('modal');
+//	modalImg = document.getElementById('imageModal');
+	captionText = document.getElementById('captionModal');
+	
+	modal.style.display = "flex";
+	$('body').css('overflow','hidden');
+	
+    captionText.innerHTML = nombre+ ' - ' + '<span class= "blanco t14">&nbsp' + tipo+ '</span>';
+	
+    
+    closeModal();
+}
+
+function closeModal(){
+	span = document.getElementsByClassName("closeModal")[0];
+	span.onclick = function() { 
+		$('body').css('overflow','auto');
+		modal.style.display = "none";
+	}
 }

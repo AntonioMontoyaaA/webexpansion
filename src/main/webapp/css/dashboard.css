@@ -70,8 +70,9 @@ g .highcharts-legend-item rect{
 .highcharts-point{
 	width:13px;
 }
+
 #container_apmensual .highcharts-point{
-	width:15px;
+	width:13px;
 }
 #container_apmensual{
 	height: 30%;

@@ -1,7 +1,11 @@
 var AUTORIZA_MODULO			= 1;
 var RECHAZA_MODULO			= 0;
+var doctosExpansion			= '';
 
-var ESTATUS_FINALIZA_MD = -1;
+var ESTATUS_FINALIZA_MD 		= -1;
+var ESTATUS_DOCTO_AUTORIZADO 	= 1;
+
+var tipoArchivoDoctosCorrExpan = 0;
 
 Dropzone.autoDiscover = false;
 var uploader;
@@ -76,6 +80,8 @@ var agua = 12;
 var luz = 13;
 var informePreauditoria = 14;
 var fechaCita = 15;
+var correccionExpansion = 16;
+var correccionConstruccion = 16;
 
 var ACCION_REALIZADA;
 var ACCION_REALIZADA_CONTEO;
@@ -137,7 +143,7 @@ function inicializaFlujoAutorizaciones(){
 	flujoAutorizaciones[11] = new Estatus(11, [11], 'Presupuesto Auditoria');
 	flujoAutorizaciones[12] = new Estatus(12, [12], 'Vobo final Operaciones');
 	flujoAutorizaciones[22] = new Estatus(22, [22], 'Comite');
-	flujoAutorizaciones[23] = new Estatus(23, [22], 'Comite');
+	flujoAutorizaciones[23] = new Estatus(23, [30], 'Carga de documentos');
 	flujoAutorizaciones[18] = new Estatus(18, [18], 'Correccion de layout');
 	flujoAutorizaciones[19] = new Estatus(19, [19], 'Correccion de presupuesto Construccion');
 	flujoAutorizaciones[13] = new Estatus(13, [13], 'Contrato firmado');
@@ -175,8 +181,8 @@ function inicializaFlujoAutorizaciones(){
 	flujoAutorizaciones[12].agregaArea(areaOperaciones, new Area(areaOperaciones, todosRechazos, venta));
 	
 	flujoAutorizaciones[22].agregaArea(areaOperaciones, new Area(areaOperaciones, todosRechazos, comite));
-	flujoAutorizaciones[23].agregaArea(areaOperaciones, new Area(areaOperaciones, todosRechazos, comite));
-	flujoAutorizaciones[28].agregaArea(areaOperaciones, new Area(areaOperaciones, todosRechazos, comite));
+	flujoAutorizaciones[23].agregaArea(areaExpansion, new Area(areaExpansion, sinRechazo, correccionExpansion));
+	//flujoAutorizaciones[28].agregaArea(areaOperaciones, new Area(areaOperaciones, todosRechazos, comite));
 	
 	
 	flujoAutorizaciones[13].agregaArea(areaGestoria, new Area(areaGestoria, todosRechazos, contrato));
@@ -193,7 +199,8 @@ function inicializaFlujoAutorizaciones(){
 	
 	//nuevos estatus 24/02/2020
 	flujoAutorizaciones[30].agregaArea(areaExpansion, new Area(areaExpansion, sinRechazo, fechaCita));
-	//flujoAutorizaciones[28].agregaArea(areaExpansion, new Area(areaExpansion, sinRechazo, fechaCita));
+	flujoAutorizaciones[28].agregaArea(areaExpansion, new Area(areaExpansion, sinRechazo, correccionExpansion));
+	flujoAutorizaciones[29].agregaArea(areaConstruccion, new Area(areaConstruccion, sinRechazo, correccionConstruccion));
 }
 
 function parseaEstatus(estatus){
@@ -305,6 +312,21 @@ function finalizacionMDAutorizada(){
 				mensajeConfirmacion('¿Est\u00e1s seguro de confirmar la inauguracion en ' + monto + '?', 1);
 			}
 		}else if(area.tipoArchivo == fechaCita){ //Fecha cita levantamiento
+			monto = $("#simpleDate").val();
+			
+			
+			tipoServicio = 15;
+			mensajeConfirmacion('¿Est\u00e1s seguro de confirmar la fecha de cita el ' + monto + '?', 1);
+		} else if(area.tipoArchivo == correccionExpansion){ //Correccion Expansion
+			
+			if(ACCION_REALIZADA)
+				mensajeConfirmacion('¿Est\u00e1s seguro de finalizar?', 1);
+			else
+				mensajeAlerta('Agrega el documento pendiente');
+			
+			
+			
+		} else if(area.tipoArchivo == correccionConstruccion){ //Correccion Construccion
 			monto = $("#simpleDate").val();
 			
 			
@@ -541,6 +563,78 @@ function validaAutorizacion(){
 			generaAutorizacionFechaSimple(area);
 		}else if(area.tipoArchivo == fechaCita){// Fecha de cita
 			generaAutorizacionFechaCita(area);
+		}else if(area.tipoArchivo == correccionExpansion){// Correccion expansión | Carga de documentos
+			generaAutorizacionSimple(area);
+			$('#msjFinalizacion').html('¿Finalizar MD?');
+			$("#cargaDoctos").show();
+			
+			var doctosPendientes = '<ul>';
+			
+			if(doctosExpansion != undefined && doctosExpansion.documentos != undefined) {
+				for(var i = 0; i < doctosExpansion.documentos.length; i++) {
+					if(doctosExpansion.documentos[i].solicitudWeb == 1 && doctosExpansion.documentos[i].solicitudPorRechazo == 0) {
+						doctosPendientes += '<li><span class="negrita azul"> ' + doctosExpansion.documentos[i].nombreArchivo + '</span></li>';
+					} else if(doctosExpansion.documentos[i].solicitudWeb == 1 && doctosExpansion.documentos[i].solicitudPorRechazo == 1) {
+						doctosPendientes += '<li><span class="negrita rojo"> ' + doctosExpansion.documentos[i].nombreArchivo + ' (rechazado)</span></li>';
+						tipoArchivoDoctosCorrExpan = doctosExpansion.documentos[i].archivoId;
+					}
+				}
+			}
+			doctosPendientes += '</ul>';
+			$('#listaDoctos').html(doctosPendientes);
+			
+			$('#tipoArchivos').html('<div class="selecciona">No hay carpetas generadas</div>');
+			
+			$('#archivos').removeClass('col-lg-10');
+			$('#archivos').addClass('col-lg-7');
+			$('#archivos').html('<div class="selecciona">...</div>');
+			
+			/* == VISTA CARGA ARCHIVO ==*/
+			if(ESTATUS_MD == 23){
+				
+				$.each($(".perfiles_usuario"), function(index,obj){ 
+					if(obj.value == 13){ 
+						$('#subida').show();
+					}
+				});			
+				
+			}else{
+				$('#subida').show();
+			}
+			
+			
+			
+			dropzoneOptions.maxFiles = 1;
+			dropzoneOptions.acceptedFiles = 'image/*,application/pdf,.psd';
+			dropzoneOptions.accept = function(file, done){
+						                reader = new FileReader();
+						                reader.onload = handleReaderLoad;
+						                reader.readAsDataURL(file);
+						                
+						                FILE_B64 = '';
+						                FILE_Type = '';
+						                
+						                function handleReaderLoad(evt) {
+						                	FILE_B64 = evt.target.result;
+						                	FILE_Type = file.type;
+						                	
+						                	ACCION_REALIZADA = true;
+						                }
+						                done();
+						            };
+
+	        uploader = document.querySelector('#uploader');
+			dropzone = new Dropzone(uploader, dropzoneOptions);
+			
+			tipoArchivo = 6;
+        	tipoServicio = 9;
+        	prefijo = 'DOCTO';
+        	
+			$('#manejadorArchivos').show();
+			
+			
+		} else if(area.tipoArchivo == correccionConstruccion){ //Corrección construcción
+			
 		}
 	}
 	
@@ -773,7 +867,23 @@ function finalizaConCargaPrevia(){
 				'respSubeArchivo', 
 				function() {},
 				function() {});
-	} else{
+	} else if(tipoServicio == 9) {
+		invocarJSONServiceAction("subeArchivo", 
+				{'mdId': mdId,
+				'nombreArchivo': nombreArchivo,
+				'archivo': FILE_B64,
+				'formato': formato,
+				'tipoArchivo': tipoArchivo,
+				'tipoServicio' : tipoServicio,
+				'fecha': fecha,
+				'monto': monto,
+				'acc' : acc,
+				'archivoId': tipoArchivoDoctosCorrExpan,
+				'archivos': JSON.stringify(doctosExpansion)},
+				'respSubeArchivo', 
+				function() {},
+				function() {});
+	} else {
 		invocarJSONServiceAction("subeArchivo", 
 				{'mdId': mdId,
 				'nombreArchivo': nombreArchivo,
@@ -965,6 +1075,10 @@ function descargaArchivo(carpeta, archivo){
 	window.open(ARCHIVOS_MD[carpeta][archivo].url);
 }
 
+function agregaDoctos(doctos) {
+	this.doctosExpansion = doctos;
+}
+
 function documentacion(data){
 	
 	ARCHIVOS_MD =  {};
@@ -1144,6 +1258,7 @@ function documentacion(data){
 						}
 					}
 				}
+				return false;//Solo imprime el objeto 0 de la lista, el más actual
 		});
 	}
 }

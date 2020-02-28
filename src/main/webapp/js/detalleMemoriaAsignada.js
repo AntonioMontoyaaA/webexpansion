@@ -2,6 +2,8 @@ var PRIMER_HORARIO_CONTEO	=	1;
 var SEGUNDO_HORARIO_CONTEO	=	2;
 var TERCER_HORARIO_CONTEO	=	3;
 
+var ESTATUS_DOCTO_AUTORIZADO =  1;
+
 var TIPOMD = -1;
 
 var DETALLE_MD_ASIGNADAS = 1;
@@ -623,7 +625,21 @@ function buscaDetalleMD(mdId) {
 			ARCHIVOS_MD = new Array();
 			
 			parseaEstatus(data.estatusActuales);
-			
+			if(eval(data)["seguimiento"]["CARGA DOCUMENTOS EXPANSION"] != undefined) {
+				//Obtiene el objeto con estatus = 1
+				var doctoModifica = '';
+				var array = eval(data)["seguimiento"]["CARGA DOCUMENTOS EXPANSION"];
+				/*for(var i = 0; i < array.length; i++) {
+					if(array[i].estatus == ESTATUS_DOCTO_AUTORIZADO) {
+						doctoModifica = array[i];
+						break;
+					}
+				}*/
+				//Solo se enviara el objeto más actual
+				if(array.length > 0) {
+					agregaDoctos(array[0]);
+				}
+			}
 			
 				arrEstatusPermiso = new Array();
 				

@@ -43,6 +43,20 @@
 							</select>
 						</div>
 						
+						<div id="cargaDoctos" class="row subtituloIconos azul" style="display: none;">
+							<span class="negrita azul tituloAutorizacion" style="padding-left: 10px;">Debes volver a subir el documento resaltado en rojo de la siguiente lista:</span>
+							<div id="listaDoctos" style="padding-left: 10px;max-height: 100px; overflow-y: auto;">
+								<span class="negrita azul">Predial</span><br>
+								<span class="negrita azul">Carga de docto 1</span><br>
+								<span class="negrita azul">Carga de docto 2</span><br>
+								<span class="negrita azul">Carga de docto 3</span><br>
+								<span class="negrita azul">Carga de docto 4</span><br>
+								<span class="negrita azul">Carga de docto 4</span><br>
+								<span class="negrita azul">Carga de docto 4</span><br>
+								<span class="negrita azul">Carga de docto 4</span><br>
+							</div>
+						</div>
+						
 						<div id="fechaSimple" class="row subtituloIconos azul" style="display: none;">
 							<span class="negrita azul tituloAutorizacion">Confirma la fecha de finalización de obra</span>
 							<input style="border: 1px solid #071B36" id="simpleDate" readonly type="text" class="fechaInicialCalendario" placeholder="dd/MM/yyyy">

@@ -1,6 +1,8 @@
 package com.tiendas.neto.action;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +21,8 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.interceptor.ParameterNameAware;
 import com.tiendas.neto.dao.Expansionlog;
 import com.tiendas.neto.singleton.SingletonProperties;
+import com.tiendas.neto.vo.DocumentosVO;
+import com.tiendas.neto.vo.Fcurl;
 import com.tiendas.neto.vo.RespuestaVo;
 import com.tiendas.neto.vo.UsuarioLoginVO;
 
@@ -36,6 +40,8 @@ public class ManejadorArchivosAction
 	protected Map<String, Object> session ;
 	Expansionlog elog = new Expansionlog();
 	SingletonProperties sp = SingletonProperties.getInstancia();
+	
+	private static final int ESTATUS_AUTORIZADO = 1;
 	
 	public void subeArchivo() throws Exception{
 		String respuesta="";
@@ -147,7 +153,438 @@ public class ManejadorArchivosAction
 					
 					response = client.newCall(request).execute();
 					respuesta = response.body().string();
-				}else {
+				}else if(tipoServicio.equals("9")){ //Carga doctos en corrección de expansión
+					JSONObject doctosExpansion = new JSONObject(ServletActionContext.getRequest().getParameter("archivos"));
+					int archivoId = Integer.parseInt(ServletActionContext.getRequest().getParameter("archivoId"));
+					
+					
+					
+					if(monto.isEmpty())
+						monto = "''";
+					
+					builder = new Builder()
+							.add("mdId", mdId)
+							.add("nombreArc", nombreArchivo)
+							.add("archivo", archivo)
+							.add("formato", formato)
+							.add("tipoArchivo", tipoArchivo)
+							.add("fecha", fecha)
+							.add("usuarioId", numeroEmpleado);
+						
+						body = builder.build();
+						request = new Request.Builder()
+							.url(sp.getPropiedad("cloudinarySet"))
+							.post(body)
+							.build();
+						
+						response = client.newCall(request).execute();
+						respuesta = response.body().string();
+						
+						String url = obtieneURL(respuesta);
+						
+						DocumentosVO documentosVO = new DocumentosVO();
+						JSONArray listaDoctos = doctosExpansion.getJSONArray("documentos");
+						for(int i = 0; i < listaDoctos.length(); i++) {
+							int doctoId = listaDoctos.getJSONObject(i).getInt("archivoId");
+							
+							switch (doctoId) {
+							case 1:
+								ArrayList<Fcurl> listaFcurl1 = new ArrayList<Fcurl>();
+								if(doctoId == archivoId) {
+									DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+									Fcurl curl = new Fcurl();
+									curl.setFecha(LocalDateTime.now().format(formatter));
+									curl.setNombreArchivo(nombreArchivo);
+									curl.setUrl(url);
+									listaFcurl1.add(curl);
+									
+								} else {
+									
+									JSONArray arraySub = listaDoctos.getJSONObject(i).getJSONArray("archivos");
+									
+									for(int j = 0; j < arraySub.length(); j++) {
+										Fcurl curl = new Fcurl();
+										curl.setFecha(arraySub.getJSONObject(j).getString("fecha"));
+										curl.setNombreArchivo(arraySub.getJSONObject(j).getString("nombreArchivo"));
+										curl.setUrl(arraySub.getJSONObject(j).getString("url"));
+										listaFcurl1.add(curl);
+									}
+								}
+								documentosVO.setFcurl1(listaFcurl1);
+								documentosVO.setNombreCurl1(listaDoctos.getJSONObject(i).getString("nombreArchivo"));
+								documentosVO.setFcurl1Id(listaDoctos.getJSONObject(i).getInt("archivoId"));
+								break;
+							case 2:
+								ArrayList<Fcurl> listaFcurl2 = new ArrayList<Fcurl>();
+								if(doctoId == archivoId) {
+									DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+									Fcurl curl = new Fcurl();
+									curl.setFecha(LocalDateTime.now().format(formatter));
+									curl.setNombreArchivo(nombreArchivo);
+									curl.setUrl(url);
+									listaFcurl2.add(curl);
+									
+								} else {
+									
+									JSONArray arraySub = listaDoctos.getJSONObject(i).getJSONArray("archivos");
+									
+									for(int j = 0; j < arraySub.length(); j++) {
+										Fcurl curl = new Fcurl();
+										curl.setFecha(arraySub.getJSONObject(j).getString("fecha"));
+										curl.setNombreArchivo(arraySub.getJSONObject(j).getString("nombreArchivo"));
+										curl.setUrl(arraySub.getJSONObject(j).getString("url"));
+										listaFcurl2.add(curl);
+									}
+								}
+								documentosVO.setFcurl2(listaFcurl2);
+								documentosVO.setNombreCurl2(listaDoctos.getJSONObject(i).getString("nombreArchivo"));
+								documentosVO.setFcurl2Id(listaDoctos.getJSONObject(i).getInt("archivoId"));
+								break;
+							case 3:
+								ArrayList<Fcurl> listaFcurl3 = new ArrayList<Fcurl>();
+								if(doctoId == archivoId) {
+									DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+									Fcurl curl = new Fcurl();
+									curl.setFecha(LocalDateTime.now().format(formatter));
+									curl.setNombreArchivo(nombreArchivo);
+									curl.setUrl(url);
+									listaFcurl3.add(curl);
+									
+								} else {
+									
+									JSONArray arraySub = listaDoctos.getJSONObject(i).getJSONArray("archivos");
+									
+									for(int j = 0; j < arraySub.length(); j++) {
+										Fcurl curl = new Fcurl();
+										curl.setFecha(arraySub.getJSONObject(j).getString("fecha"));
+										curl.setNombreArchivo(arraySub.getJSONObject(j).getString("nombreArchivo"));
+										curl.setUrl(arraySub.getJSONObject(j).getString("url"));
+										listaFcurl3.add(curl);
+									}
+								}
+								documentosVO.setFcurl3(listaFcurl3);
+								documentosVO.setNombreCurl3(listaDoctos.getJSONObject(i).getString("nombreArchivo"));
+								documentosVO.setFcurl3Id(listaDoctos.getJSONObject(i).getInt("archivoId"));
+								break;
+							case 4:
+								ArrayList<Fcurl> listaFcurl4 = new ArrayList<Fcurl>();
+								if(doctoId == archivoId) {
+									DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+									Fcurl curl = new Fcurl();
+									curl.setFecha(LocalDateTime.now().format(formatter));
+									curl.setNombreArchivo(nombreArchivo);
+									curl.setUrl(url);
+									listaFcurl4.add(curl);
+									
+								} else {
+									
+									JSONArray arraySub = listaDoctos.getJSONObject(i).getJSONArray("archivos");
+									
+									for(int j = 0; j < arraySub.length(); j++) {
+										Fcurl curl = new Fcurl();
+										curl.setFecha(arraySub.getJSONObject(j).getString("fecha"));
+										curl.setNombreArchivo(arraySub.getJSONObject(j).getString("nombreArchivo"));
+										curl.setUrl(arraySub.getJSONObject(j).getString("url"));
+										listaFcurl4.add(curl);
+									}
+								}
+								documentosVO.setFcurl4(listaFcurl4);
+								documentosVO.setNombreCurl4(listaDoctos.getJSONObject(i).getString("nombreArchivo"));
+								documentosVO.setFcurl4Id(listaDoctos.getJSONObject(i).getInt("archivoId"));
+								break;
+							case 5:
+								ArrayList<Fcurl> listaFcurl5 = new ArrayList<Fcurl>();
+								if(doctoId == archivoId) {
+									DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+									Fcurl curl = new Fcurl();
+									curl.setFecha(LocalDateTime.now().format(formatter));
+									curl.setNombreArchivo(nombreArchivo);
+									curl.setUrl(url);
+									listaFcurl5.add(curl);
+									
+								} else {
+									
+									JSONArray arraySub = listaDoctos.getJSONObject(i).getJSONArray("archivos");
+									
+									for(int j = 0; j < arraySub.length(); j++) {
+										Fcurl curl = new Fcurl();
+										curl.setFecha(arraySub.getJSONObject(j).getString("fecha"));
+										curl.setNombreArchivo(arraySub.getJSONObject(j).getString("nombreArchivo"));
+										curl.setUrl(arraySub.getJSONObject(j).getString("url"));
+										listaFcurl5.add(curl);
+									}
+								}
+								documentosVO.setFcurl5(listaFcurl5);
+								documentosVO.setNombreCurl5(listaDoctos.getJSONObject(i).getString("nombreArchivo"));
+								documentosVO.setFcurl5Id(listaDoctos.getJSONObject(i).getInt("archivoId"));
+								break;
+							case 6:
+								ArrayList<Fcurl> listaFcurl6 = new ArrayList<Fcurl>();
+								if(doctoId == archivoId) {
+									DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+									Fcurl curl = new Fcurl();
+									curl.setFecha(LocalDateTime.now().format(formatter));
+									curl.setNombreArchivo(nombreArchivo);
+									curl.setUrl(url);
+									listaFcurl6.add(curl);
+									
+								} else {
+									
+									JSONArray arraySub = listaDoctos.getJSONObject(i).getJSONArray("archivos");
+									
+									for(int j = 0; j < arraySub.length(); j++) {
+										Fcurl curl = new Fcurl();
+										curl.setFecha(arraySub.getJSONObject(j).getString("fecha"));
+										curl.setNombreArchivo(arraySub.getJSONObject(j).getString("nombreArchivo"));
+										curl.setUrl(arraySub.getJSONObject(j).getString("url"));
+										listaFcurl6.add(curl);
+									}
+								}
+								documentosVO.setFcurl6(listaFcurl6);
+								documentosVO.setNombreCurl6(listaDoctos.getJSONObject(i).getString("nombreArchivo"));
+								documentosVO.setFcurl6Id(listaDoctos.getJSONObject(i).getInt("archivoId"));
+								break;
+							case 7:
+								ArrayList<Fcurl> listaFcurl7 = new ArrayList<Fcurl>();
+								if(doctoId == archivoId) {
+									DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+									Fcurl curl = new Fcurl();
+									curl.setFecha(LocalDateTime.now().format(formatter));
+									curl.setNombreArchivo(nombreArchivo);
+									curl.setUrl(url);
+									listaFcurl7.add(curl);
+									
+								} else {
+									
+									JSONArray arraySub = listaDoctos.getJSONObject(i).getJSONArray("archivos");
+									
+									for(int j = 0; j < arraySub.length(); j++) {
+										Fcurl curl = new Fcurl();
+										curl.setFecha(arraySub.getJSONObject(j).getString("fecha"));
+										curl.setNombreArchivo(arraySub.getJSONObject(j).getString("nombreArchivo"));
+										curl.setUrl(arraySub.getJSONObject(j).getString("url"));
+										listaFcurl7.add(curl);
+									}
+								}
+								documentosVO.setFcurl7(listaFcurl7);
+								documentosVO.setNombreCurl7(listaDoctos.getJSONObject(i).getString("nombreArchivo"));
+								documentosVO.setFcurl7Id(listaDoctos.getJSONObject(i).getInt("archivoId"));
+								break;
+							case 8:
+								ArrayList<Fcurl> listaFcurl8 = new ArrayList<Fcurl>();
+								if(doctoId == archivoId) {
+									DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+									Fcurl curl = new Fcurl();
+									curl.setFecha(LocalDateTime.now().format(formatter));
+									curl.setNombreArchivo(nombreArchivo);
+									curl.setUrl(url);
+									listaFcurl8.add(curl);
+									
+								} else {
+									
+									JSONArray arraySub = listaDoctos.getJSONObject(i).getJSONArray("archivos");
+									
+									for(int j = 0; j < arraySub.length(); j++) {
+										Fcurl curl = new Fcurl();
+										curl.setFecha(arraySub.getJSONObject(j).getString("fecha"));
+										curl.setNombreArchivo(arraySub.getJSONObject(j).getString("nombreArchivo"));
+										curl.setUrl(arraySub.getJSONObject(j).getString("url"));
+										listaFcurl8.add(curl);
+									}
+								}
+								documentosVO.setFcurl8(listaFcurl8);
+								documentosVO.setNombreCurl8(listaDoctos.getJSONObject(i).getString("nombreArchivo"));
+								documentosVO.setFcurl8Id(listaDoctos.getJSONObject(i).getInt("archivoId"));
+								break;
+							case 9:
+								ArrayList<Fcurl> listaFcurl9 = new ArrayList<Fcurl>();
+								if(doctoId == archivoId) {
+									DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+									Fcurl curl = new Fcurl();
+									curl.setFecha(LocalDateTime.now().format(formatter));
+									curl.setNombreArchivo(nombreArchivo);
+									curl.setUrl(url);
+									listaFcurl9.add(curl);
+									
+								} else {
+									
+									JSONArray arraySub = listaDoctos.getJSONObject(i).getJSONArray("archivos");
+									
+									for(int j = 0; j < arraySub.length(); j++) {
+										Fcurl curl = new Fcurl();
+										curl.setFecha(arraySub.getJSONObject(j).getString("fecha"));
+										curl.setNombreArchivo(arraySub.getJSONObject(j).getString("nombreArchivo"));
+										curl.setUrl(arraySub.getJSONObject(j).getString("url"));
+										listaFcurl9.add(curl);
+									}
+								}
+								documentosVO.setFcurl9(listaFcurl9);
+								documentosVO.setNombreCurl9(listaDoctos.getJSONObject(i).getString("nombreArchivo"));
+								documentosVO.setFcurl9Id(listaDoctos.getJSONObject(i).getInt("archivoId"));
+								break;
+							case 10:
+								ArrayList<Fcurl> listaFcurl10 = new ArrayList<Fcurl>();
+								if(doctoId == archivoId) {
+									DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+									Fcurl curl = new Fcurl();
+									curl.setFecha(LocalDateTime.now().format(formatter));
+									curl.setNombreArchivo(nombreArchivo);
+									curl.setUrl(url);
+									listaFcurl10.add(curl);
+									
+								} else {
+									
+									JSONArray arraySub = listaDoctos.getJSONObject(i).getJSONArray("archivos");
+									
+									for(int j = 0; j < arraySub.length(); j++) {
+										Fcurl curl = new Fcurl();
+										curl.setFecha(arraySub.getJSONObject(j).getString("fecha"));
+										curl.setNombreArchivo(arraySub.getJSONObject(j).getString("nombreArchivo"));
+										curl.setUrl(arraySub.getJSONObject(j).getString("url"));
+										listaFcurl10.add(curl);
+									}
+								}
+								documentosVO.setFcurl10(listaFcurl10);
+								documentosVO.setNombreCurl10(listaDoctos.getJSONObject(i).getString("nombreArchivo"));
+								documentosVO.setFcurl10Id(listaDoctos.getJSONObject(i).getInt("archivoId"));
+								break;
+							case 11:
+								ArrayList<Fcurl> listaFcurl11 = new ArrayList<Fcurl>();
+								if(doctoId == archivoId) {
+									DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+									Fcurl curl = new Fcurl();
+									curl.setFecha(LocalDateTime.now().format(formatter));
+									curl.setNombreArchivo(nombreArchivo);
+									curl.setUrl(url);
+									listaFcurl11.add(curl);
+									
+								} else {
+									
+									JSONArray arraySub = listaDoctos.getJSONObject(i).getJSONArray("archivos");
+									
+									for(int j = 0; j < arraySub.length(); j++) {
+										Fcurl curl = new Fcurl();
+										curl.setFecha(arraySub.getJSONObject(j).getString("fecha"));
+										curl.setNombreArchivo(arraySub.getJSONObject(j).getString("nombreArchivo"));
+										curl.setUrl(arraySub.getJSONObject(j).getString("url"));
+										listaFcurl11.add(curl);
+									}
+								}
+								documentosVO.setFcurl11(listaFcurl11);
+								documentosVO.setNombreCurl11(listaDoctos.getJSONObject(i).getString("nombreArchivo"));
+								documentosVO.setFcurl11Id(listaDoctos.getJSONObject(i).getInt("archivoId"));
+								break;
+							case 12:
+								ArrayList<Fcurl> listaFcurl12 = new ArrayList<Fcurl>();
+								if(doctoId == archivoId) {
+									DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+									Fcurl curl = new Fcurl();
+									curl.setFecha(LocalDateTime.now().format(formatter));
+									curl.setNombreArchivo(nombreArchivo);
+									curl.setUrl(url);
+									listaFcurl12.add(curl);
+									
+								} else {
+									
+									JSONArray arraySub = listaDoctos.getJSONObject(i).getJSONArray("archivos");
+									
+									for(int j = 0; j < arraySub.length(); j++) {
+										Fcurl curl = new Fcurl();
+										curl.setFecha(arraySub.getJSONObject(j).getString("fecha"));
+										curl.setNombreArchivo(arraySub.getJSONObject(j).getString("nombreArchivo"));
+										curl.setUrl(arraySub.getJSONObject(j).getString("url"));
+										listaFcurl12.add(curl);
+									}
+								}
+								documentosVO.setFcurl12(listaFcurl12);
+								documentosVO.setNombreCurl12(listaDoctos.getJSONObject(i).getString("nombreArchivo"));
+								documentosVO.setFcurl12Id(listaDoctos.getJSONObject(i).getInt("archivoId"));
+								break;
+							case 13:
+								ArrayList<Fcurl> listaFcurl13 = new ArrayList<Fcurl>();
+								if(doctoId == archivoId) {
+									DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+									Fcurl curl = new Fcurl();
+									curl.setFecha(LocalDateTime.now().format(formatter));
+									curl.setNombreArchivo(nombreArchivo);
+									curl.setUrl(url);
+									listaFcurl13.add(curl);
+									
+								} else {
+									
+									JSONArray arraySub = listaDoctos.getJSONObject(i).getJSONArray("archivos");
+									
+									for(int j = 0; j < arraySub.length(); j++) {
+										Fcurl curl = new Fcurl();
+										curl.setFecha(arraySub.getJSONObject(j).getString("fecha"));
+										curl.setNombreArchivo(arraySub.getJSONObject(j).getString("nombreArchivo"));
+										curl.setUrl(arraySub.getJSONObject(j).getString("url"));
+										listaFcurl13.add(curl);
+									}
+								}
+								documentosVO.setFcurl13(listaFcurl13);
+								documentosVO.setNombreCurl13(listaDoctos.getJSONObject(i).getString("nombreArchivo"));
+								documentosVO.setFcurl13Id(listaDoctos.getJSONObject(i).getInt("archivoId"));
+								break;
+							case 14:
+								ArrayList<Fcurl> listaFcurl14 = new ArrayList<Fcurl>();
+								if(doctoId == archivoId) {
+									DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+									Fcurl curl = new Fcurl();
+									curl.setFecha(LocalDateTime.now().format(formatter));
+									curl.setNombreArchivo(nombreArchivo);
+									curl.setUrl(url);
+									listaFcurl14.add(curl);
+									
+								} else {
+									
+									JSONArray arraySub = listaDoctos.getJSONObject(i).getJSONArray("archivos");
+									
+									for(int j = 0; j < arraySub.length(); j++) {
+										Fcurl curl = new Fcurl();
+										curl.setFecha(arraySub.getJSONObject(j).getString("fecha"));
+										curl.setNombreArchivo(arraySub.getJSONObject(j).getString("nombreArchivo"));
+										curl.setUrl(arraySub.getJSONObject(j).getString("url"));
+										listaFcurl14.add(curl);
+									}
+								}
+								documentosVO.setFcurl14(listaFcurl14);
+								documentosVO.setNombreCurl14(listaDoctos.getJSONObject(i).getString("nombreArchivo"));
+								documentosVO.setFcurl14Id(listaDoctos.getJSONObject(i).getInt("archivoId"));
+								break;
+							};
+						}
+						//Crea objetivo de tipo FCurl para cada hoja
+						
+						
+						
+						
+						if(url == null) {
+							elog.info("subeLayout", "ManejadorArchivosAction", "No se subio la imagen", respuesta);
+							sendJSONObjectToResponse(respuesta);
+						}else {
+							String json = new Gson().toJson(documentosVO);
+		                    json = "[" + json + "]";
+							builder = new Builder()
+										.add("usuarioId", numeroEmpleado)
+										.add("mdId", mdId)
+										.add("tipoServicio", tipoServicio)
+										.add("fecha", fecha)
+										.add("documentos", json);
+							
+							body = builder.build();
+							request = new Request.Builder()
+								.url(sp.getPropiedad("guardadocsmontos"))
+								.post(body)
+								.build();
+							
+							response = client.newCall(request).execute();
+							respuesta = response.body().string();
+							//respuesta = setURLToResponse(respuesta, url);
+							
+							
+						}
+				} else {
 					if(monto.isEmpty())
 						monto = "''";
 					
@@ -218,8 +655,9 @@ public class ManejadorArchivosAction
 			
 			RespuestaVo respuestaVo = new RespuestaVo();
 			respuestaVo.setCodigo(404);
-			respuestaVo.setMensaje("Error al conectarse al servidor");
+			respuestaVo.setMensaje("Error al conectarse al servidor " + e.getMessage());
 			sendJSONObjectToResponse(respuestaVo);
+			e.printStackTrace();
 		}
 	}
 	

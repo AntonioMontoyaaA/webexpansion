@@ -226,41 +226,43 @@ if(datos.Diciembre!="undefined"){
 	    	},
 	    plotOptions: {
 	        column: {
-	        	stacking: 'normal'
+	        	//stacking: 'normal'
+	        	pointPadding: 0.2,
+	            borderWidth: 0
 	        }
 	    },
 	    series: [{
 	        name: 'Objetivo',
 	        color: 'white',
 	        data: [
-	        	ene_plan - ene_est - ene_real,
-	        	feb_plan - feb_est -  feb_real,
-	        	mar_plan - mar_est -  mar_real,
-	        	abr_plan - abr_est -  abr_real,
-	        	may_plan - may_est -  may_real,
-	        	jun_plan - jun_est -  jun_real,
-	        	jul_plan - jul_est -  jul_real,
-	        	ago_plan - ago_est -  ago_real,
-	        	sep_plan - sep_est -  sep_real,
-	        	oct_plan - oct_est -  oct_real,
-	        	nov_plan - nov_est -  nov_real,
-	        	dic_plan - dic_est -  dic_real]
+	        	ene_plan,
+	        	feb_plan,
+	        	mar_plan,
+	        	abr_plan,
+	        	may_plan,
+	        	jun_plan,
+	        	jul_plan,
+	        	ago_plan,
+	        	sep_plan,
+	        	oct_plan,
+	        	nov_plan,
+	        	dic_plan]
 	    	},{
 		        name: 'Estimado',
 		        color: '#3FB961',
 		        data: [
-		        	ene_est - ene_real,
-		        	feb_est - feb_real,
-		        	mar_est - mar_real,
-		        	abr_est - abr_real,
-		        	may_est - may_real,
-		        	jun_est - jun_real,
-		        	jul_est - jul_real,
-		        	ago_est - ago_real,
-		        	sep_est - sep_real,
-		        	oct_est - oct_real,
-		        	nov_est - nov_real,
-		        	dic_est - dic_real]
+		        	ene_est,
+		        	feb_est,
+		        	mar_est,
+		        	abr_est,
+		        	may_est,
+		        	jun_est,
+		        	jul_est,
+		        	ago_est,
+		        	sep_est,
+		        	oct_est,
+		        	nov_est,
+		        	dic_est]
 		    },{
 		    	name: 'Aperturas',
 		    	color: '#40BCD8',

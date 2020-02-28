@@ -80,7 +80,7 @@
   					</form>
   					</div>
 				</div>
-			<div class="col-lg-12 p_cabecera">
+			<div class="col-lg-12 p_cabecera" style="display: none;">
 				<span class="blanco negrita estilo_dato t22" id="suma">0</span><span class="blanco estilo_info t14"> TIENDAS</span>
 			</div>
 			</div>	

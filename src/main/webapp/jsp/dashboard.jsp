@@ -12,6 +12,8 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/generic.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/dashboard.css" />	
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/tablas.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/jquery-ui.css" />
 	
 <title>Dashboard</title>
 </head>

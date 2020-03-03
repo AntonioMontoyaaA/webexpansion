@@ -31,7 +31,7 @@
 <!-- PROGRESO GENERAL DE AREAS  -->	
 		<div class="divs_p row" style= " height: 100%; display: flex;  justify-content: space-between;
         ">
-        <div class="menupr_estilos fazul" style="display: flex; flex-direction: column; align-items: center;">
+        <div class="menupr_estilos fazul" style="display: flex; flex-direction: column; align-items: center;width: 100%;">
             <div class="row cabecera">  
                     <span class="blanco negrita " style= "font-size: 1rem;">ACTIVAS</span>
             </div>
@@ -43,7 +43,7 @@
                 
             </div>         
         </div>
-        <div class="menupr_estilos fazul" style="display: flex; flex-direction: column; align-items: center;">
+        <div class="menupr_estilos fazul" style="display: flex; flex-direction: column; align-items: center;width: 100%;">
             <div class="row cabecera">  
                     <span class="blanco negrita " style= "font-size: 1rem;">ATRASADAS</span>
             </div>
@@ -54,7 +54,7 @@
                 <span class="t26" style="color: #C93535;" id="total_atrasadas">0</span>
                 </div>         
         </div>
-        <div class="menupr_estilos fazul" style="display: flex; flex-direction: column; align-items: center;">
+        <div class="menupr_estilos fazul" style="display: flex; flex-direction: column; align-items: center;width: 100%;">
             <div class="row cabecera">  
                     <span class="blanco negrita" style= "font-size: 1rem;">CANCELADAS</span>
             </div>

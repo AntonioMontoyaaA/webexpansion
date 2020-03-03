@@ -98,7 +98,7 @@ g .highcharts-legend-item rect{
 	height:35px;
 }
 .icono_medida_dashb{
-	height:50px;
+	height:35px;
 }
 /* estilos del diagrama de proceso*/
 .simple{
@@ -426,7 +426,7 @@ overflow-y:hidden;
 .modal_{
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    z-index: 100; /* Sit on top */
     left: 0;
     top: 0;
     width: 100%; /* Full width */

@@ -1169,11 +1169,11 @@ function documentacion(data){
 		});
 	}
 	
-	if(eval(data)["seguimiento"]["PRESUPUESTO CONSTRUCCION"] != undefined
-			&& eval(data)["seguimiento"]["PRESUPUESTO CONSTRUCCION"] != null){
+	if(eval(data)["seguimiento"]["PRESUPUESTO CONSTRUCCIÓN CONSTRUCCION"] != undefined
+			&& eval(data)["seguimiento"]["PRESUPUESTO CONSTRUCCIÓN CONSTRUCCION"] != null){
 		
 		ARCHIVOS_MD[presupuesto] = new Array();
-		$.each(eval(data)["seguimiento"]["PRESUPUESTO CONSTRUCCION"], function(i,item){
+		$.each(eval(data)["seguimiento"]["PRESUPUESTO CONSTRUCCIÓN CONSTRUCCION"], function(i,item){
 			
 			ARCHIVOS_MD[presupuesto].push(new Archivo(
 					item.nombreArchivo,
@@ -1202,10 +1202,10 @@ function documentacion(data){
 		});
 	}
 	
-	if(eval(data)["seguimiento"]["PRESUPUESTO AUDITORIA"] != undefined
-			&& eval(data)["seguimiento"]["PRESUPUESTO AUDITORIA"] != null){
+	if(eval(data)["seguimiento"]["PRESUPUESTO AUDITORIA AUDITORIA"] != undefined
+			&& eval(data)["seguimiento"]["PRESUPUESTO AUDITORIA AUDITORIA"] != null){
 		
-		$.each(eval(data)["seguimiento"]["PRESUPUESTO AUDITORIA"], function(i,item){
+		$.each(eval(data)["seguimiento"]["PRESUPUESTO AUDITORIA AUDITORIA"], function(i,item){
 			
 			ARCHIVOS_MD[presupuesto].push(new Archivo(
 					item.nombreArchivo,

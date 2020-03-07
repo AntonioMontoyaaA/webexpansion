@@ -41,6 +41,7 @@ var areaAuditoria = 4;
 var areaOperaciones = 5;
 var areaFinanzas = 6;
 var areaCalidadOperativa = 7;
+var areaLegal = 12;
 
 var AREA_USUARIO;
 var PUESTO;
@@ -185,7 +186,7 @@ function inicializaFlujoAutorizaciones(){
 	//flujoAutorizaciones[28].agregaArea(areaOperaciones, new Area(areaOperaciones, todosRechazos, comite));
 	
 	
-	flujoAutorizaciones[13].agregaArea(areaGestoria, new Area(areaGestoria, todosRechazos, contrato));
+	flujoAutorizaciones[13].agregaArea(areaLegal, new Area(areaLegal, todosRechazos, contrato));
 	
 	flujoAutorizaciones[24].agregaArea(areaFinanzas, new Area(areaFinanzas, sinRechazo, ceco));
 	
@@ -1218,11 +1219,11 @@ function documentacion(data){
 		});
 	}
 	
-	if(eval(data)["seguimiento"]["CONTRATO FIRMADO GESTORIA"] != undefined
-			&& eval(data)["seguimiento"]["CONTRATO FIRMADO GESTORIA"] != null){
+	if(eval(data)["seguimiento"]["CONTRATO FIRMADO LEGAL"] != undefined
+			&& eval(data)["seguimiento"]["CONTRATO FIRMADO LEGAL"] != null){
 		
 		ARCHIVOS_MD[contrato] = new Array();
-		$.each(eval(data)["seguimiento"]["CONTRATO FIRMADO GESTORIA"], function(i,item){
+		$.each(eval(data)["seguimiento"]["CONTRATO FIRMADO LEGAL"], function(i,item){
 
 			ARCHIVOS_MD[contrato].push(new Archivo(
 					item.nombreArchivo,

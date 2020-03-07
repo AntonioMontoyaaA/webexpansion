@@ -9,6 +9,7 @@ var MDS_CANCELADAS = 0;
 
 var atrasosXestatus = []; // grafica de ultimo mes y ultimo año
 var lstNivelAtrasos = [];
+var arrayAtrasoxAreas = [];
 $(function(){
 		$('#iddashboard').addClass('resaltado'); //resalta en el header
 		perfil=$('#perfil_usuario').val();
@@ -140,7 +141,8 @@ if(datos.Diciembre!="undefined"){
 	Highcharts.chart('container_apmensual', {
 	    chart: {
 	        type: 'column',
-	   		backgroundColor: '#071B36'
+	   		backgroundColor: '#071B36',
+	   		height: '150'
 	    },
 	    exporting: {
 	        enabled: false
@@ -231,7 +233,11 @@ if(datos.Diciembre!="undefined"){
 //	        	stacking: 'normal',
                 pointPadding: 0.2,
                 borderWidth: 0
+	        },
+	        series: {
+	        	 pointWidth:13
 	        }
+	      
 	    },
 	    series: [{
 	        name: 'Objetivo',
@@ -309,6 +315,10 @@ function cargaDashboard(){
 		$('#anio_anterior').text(data.atrasosxEstatusArea.anterior);
 //		armaGraficas(data);
 		armaListaGrafica(data.atrasosxEstatusArea.estatusArea);
+		
+//********************* Método del servicio de grafica de días de atraso por áreas 
+//		creaGraficaAtrasoXarea();
+		obtieneatrasosxdias(1,0);
 // ----------------------- ARMA DIAGRAMA DE FLUJO -------------------------
 		var descripcion_arreglo=[];
 		var original=data.nivelEstatusActivos;
@@ -544,7 +554,11 @@ function armaGraficas(data){
 		    plotOptions: {
 		        column: {
 		        	stacking: 'normal'
+		        },
+		        series:{
+		        	 pointWidth: 13
 		        }
+			    
 		    },
 		    series: [{
 			    	name: 'Activas',
@@ -588,7 +602,11 @@ function armaGraficas(data){
 		    plotOptions: {
 		        column: {
 		        	stacking: 'normal'
+		        },
+		        series: {
+		        	 pointWidth: 13
 		        }
+		      
 		    },
 		    series: [{
 			    	name: 'Atrasadas',
@@ -632,7 +650,11 @@ function armaGraficas(data){
 		    plotOptions: {
 		        column: {
 		        	stacking: 'normal'
+		        },
+		        series: {
+		        	 pointWidth: 13
 		        }
+		      
 		    },
 		    series: [{
 			    	name: 'Canceladas',
@@ -1155,7 +1177,7 @@ function EnviaSubmodulosAction(submodulos_global){
 	cierraLoading(); 
 }
 
-//------------------------- lista de graficas -----------------
+//------------------------- lista de graficas ultimo mes, ultimo año-----------------
 function armaListaGrafica(data){
 //	$('#listaAtrasos')
 	html = '';
@@ -1175,14 +1197,14 @@ function armaListaGrafica(data){
 		elementList[i].style.height = height_span;
 
 	}
-	graficaUltimoMes(data);	
+	filtraDiasAtraso(data);	
 }
 
-function graficaUltimoMes(data){
+function filtraDiasAtraso(data){
 	var arrayRojoMes = [];
 	var arrayVerdeMes = []
 	var arrayRojoAnio = [];
-	var arrayVerdeAnio=[];
+	var arrayVerdeAnio = [];
 	var negMes = false;
 	var negAnio = false;
 
@@ -1190,6 +1212,7 @@ function graficaUltimoMes(data){
 		elem= data[i];
 		if(elem.diasAtraso > elem.diasConf){
 			var e = elem.diasAtraso  != 0 ? elem.diasAtraso * (-1) : 0;
+			
 			arrayRojoMes.push(e);
 			arrayVerdeMes.push(0);
 			negMes = true;
@@ -1201,32 +1224,33 @@ function graficaUltimoMes(data){
 		}
 		
 		if(elem.diasAtrasoAnt > elem.diasConf){
-			var e = elem.diasAtrasoAnt != 0 ? elem.diasAtrasoAnt * (-1) : 0;
-			arrayRojoAnio.push(e);
+			var eAnt = elem.diasAtrasoAnt != 0 ? elem.diasAtrasoAnt * (-1) : 0;
+			
+			arrayRojoAnio.push(eAnt);
 			arrayVerdeAnio.push(0);
 			negAnio = true;
 		}else if(elem.diasAtrasoAnt <= elem.diasConf ){
+			
 			arrayVerdeAnio.push(elem.diasAtrasoAnt);
 			arrayRojoAnio.push(0);
 			
 		}
 	}
 	
-	pintaGraficaAreas('container_ultimo_mes', arrayVerdeMes, arrayRojoMes, 1 , negMes);
-	pintaGraficaAreas('container_ultimo_anio', arrayVerdeAnio, arrayRojoAnio, 2, negAnio);
-	
+//	graficasVerticales(arrayVerdeAnio, arrayRojoAnio, arrayVerdeMes,arrayRojoMes );
+	graficaUltimoMes( arrayVerdeMes, arrayRojoMes);
+	graficaUltimoAnio(arrayVerdeAnio, arrayRojoAnio);
 }
 
-function pintaGraficaAreas(id, arrayVerde, arrayRojo, tipo, neg){
-	console.log(arrayVerde,arrayRojo, tipo)
+function graficaUltimoMes(arrayVerdeMes,arrayRojoMes ){
 	var list = lstNivelAtrasos;
 	var statusId =  atrasosXestatus
-	Highcharts.chart(id, {
+	Highcharts.chart('container_ultimo_mes', {
 	    chart: {
 	        type: 'bar',
 	        backgroundColor: '#071B36',
-	        height: 'auto',
-	        width:'180'
+//	        height: '330',
+	       
 	    },
 	     title: {
 	    text: null
@@ -1286,7 +1310,7 @@ function pintaGraficaAreas(id, arrayVerde, arrayRojo, tipo, neg){
 	        style: {
 	          
 	          textOutline: '0px contrast',
-	          fontSize:  '10px',
+	          fontSize:  '8px',
 	          color:'#FFFFFF',
 	          fontWeight: '200',
 	          
@@ -1298,11 +1322,14 @@ function pintaGraficaAreas(id, arrayVerde, arrayRojo, tipo, neg){
                   click: function () {
                       var id = statusId[this.index];
                       var nivel = this.category;	
-                      var tipoString = tipo == 1 ? ' Último mes' : ' Último año';
-                      buscaMdsPorEstatus(tipo, id, nivel, tipoString)
+                     
+                      buscaMdsPorEstatus(1, id, nivel, ' Último mes')
                   }
               }
-          }
+          },
+	       pointWidth: 13
+	       
+	      
 	    }
 	  },
 	  legend: {
@@ -1319,18 +1346,216 @@ function pintaGraficaAreas(id, arrayVerde, arrayRojo, tipo, neg){
 	    series: [{
 	        color: '#C93535',
 //	        data: [4,3,2,1, 0, 0, 0, 0,1,9,3,2, 0, 0, 0, 0, 0, 1, 3]
-            data:arrayRojo
+            data:arrayRojoMes
 
 	    }, {
 	        color: '#3FB961',
 //	        data: [0,0,0,0,-1,-1,-1,-4,0,0,0,0,0,-1,-1,-1,-10,0, 0, 0]
-	        data: arrayVerde
-	    }]
+	        data: arrayVerdeMes
+	    }],
+	    responsive: {
+	        rules: [{
+	            condition: {
+	                maxWidth: '305',
+	                minWidth: '140'
+	            },
+	            chartOptions: {
+	                legend: {
+	                    align: 'center',
+	                    verticalAlign: 'bottom',
+	                    layout: 'horizontal'
+	                },
+	                yAxis: {
+	                    labels: {
+	                        align: 'left',
+	                        x: 0,
+	                        y: -5
+	                    },
+	                    title: {
+	                        text: null
+	                    }
+	                },
+	                subtitle: {
+	                    text: null
+	                },
+	                credits: {
+	                    enabled: false
+	                }
+	            }
+	        }]
+	    }
 	});
-	var svgRect = 	document.getElementById(id).getElementsByTagName('div')[0].getElementsByTagName('svg')[0];
-	svgRect.getElementsByTagName('g')[2].style.display = 'none'
 
+	var svgRect = 	document.getElementById('container_ultimo_mes').getElementsByTagName('div')[0].getElementsByTagName('svg')[0];
+
+	svgRect.getElementsByTagName('g')[2].style.display = 'none';
+	
+	 for (var i = 0; i < svgRect.getElementsByTagName('g')[9].getElementsByTagName('g').length; i++) {
+		  var e =svgRect.getElementsByTagName('g')[9].getElementsByTagName('g')[i];
+		  if(e.getElementsByTagName('text')[0].getElementsByTagName('tspan').length > 0){
+		      e.getElementsByTagName('text')[0].getElementsByTagName('tspan')[0].y.baseVal[0].value = '11';
+		      e.getElementsByTagName('text')[0].getElementsByTagName('tspan')[1].y.baseVal[0].value = '11';
+		  }
+	 }
 }
+
+function graficaUltimoAnio(arrayVerdeAnio, arrayRojoAnio){
+	var list = lstNivelAtrasos;
+	var statusId =  atrasosXestatus;
+	
+	Highcharts.chart('container_ultimo_anio', {
+	    chart: {
+	        type: 'bar',
+	        backgroundColor: '#071B36',
+//	        height: '330',
+	    },
+	     title: {
+	    text: null
+	  },
+
+	  xAxis: {
+		 categories: list,
+	    title: {
+	      text: null
+	    },
+	    labels: {
+	      enabled: false
+
+	    }
+	  },
+	  yAxis: {
+
+	    gridLineWidth: 0.1,
+	    title: {
+	      text: null,
+	      align: 'high'
+	    },
+	    labels: {
+	      overflow: 'justify',
+	      enabled: false
+
+	    }
+	  },
+	  tooltip: {
+		  pointFormat: ' <b>{this.point.category }</b>',
+	  },
+	  
+	  plotOptions: {
+	    bar: {
+	      dataLabels: {
+	        enabled: true
+	      }
+	    },
+	    series: {
+	    	 
+	       dataLabels: {
+	    	x:0,
+	    	y: 0,
+	        zIndex: 6,
+	       formatter: function() {
+	       	if(this.point.y == 0){
+	        
+	        	return '';
+	        }else{
+	        	x = Math.abs(this.point.y);
+	          
+	          return x;
+	        }
+	       	
+	       },
+	      
+	        style: {
+	          
+	          textOutline: '0px contrast',
+	          fontSize:  '8px',
+	          color:'#FFFFFF',
+	          fontWeight: '200',
+	          
+	        }
+	      },
+	      cursor:'pointer',
+          point: {
+              events: {
+                  click: function () {
+                      var id = statusId[this.index];
+                      var nivel = this.category;	
+                      buscaMdsPorEstatus(2, id, nivel, ' Último año')
+                  }
+              }
+          },
+	      pointWidth: 13
+
+	      
+	    }
+	  },
+	  legend: {
+	    enabled: false,
+
+	  },
+	  exporting: {
+	    enabled: false
+	  },
+	  credits: {
+	    enabled: false
+	  },
+
+	    series: [{
+	        color: '#C93535',
+//	        data: [4,3,2,1, 0, 0, 0, 0,1,9,3,2, 0, 0, 0, 0, 0, 1, 3]
+            data:arrayRojoAnio
+
+	    }, {
+	        color: '#3FB961',
+//	        data: [0,0,0,0,-1,-1,-1,-4,0,0,0,0,0,-1,-1,-1,-10,0, 0, 0]
+	        data: arrayVerdeAnio
+	    }],
+	    
+	    responsive: {
+	        rules: [{
+	            condition: {
+	                maxWidth: '305',
+	                minWidth: '140'
+	            },
+	            chartOptions: {
+	                legend: {
+	                    align: 'center',
+	                    verticalAlign: 'bottom',
+	                    layout: 'horizontal'
+	                },
+	                yAxis: {
+	                    labels: {
+	                        align: 'left',
+	                        x: 0,
+	                        y: -5
+	                    },
+	                    title: {
+	                        text: null
+	                    }
+	                },
+	                subtitle: {
+	                    text: null
+	                },
+	                credits: {
+	                    enabled: false
+	                }
+	            }
+	        }]
+	    }
+	});
+	var svgRectA = 	document.getElementById('container_ultimo_anio').getElementsByTagName('div')[0].getElementsByTagName('svg')[0];
+
+	svgRectA.getElementsByTagName('g')[2].style.display = 'none';
+	
+	 for (var i = 0; i < svgRectA.getElementsByTagName('g')[9].getElementsByTagName('g').length; i++) {
+		  var e =svgRectA.getElementsByTagName('g')[9].getElementsByTagName('g')[i];
+		  if(e.getElementsByTagName('text')[0].getElementsByTagName('tspan').length > 0){
+		      e.getElementsByTagName('text')[0].getElementsByTagName('tspan')[0].y.baseVal[0].value = '13';
+		      e.getElementsByTagName('text')[0].getElementsByTagName('tspan')[1].y.baseVal[0].value = '13';
+		  }
+		
+	}
+}
+
 
 
 
@@ -1350,7 +1575,7 @@ function buscaMdsPorEstatus(tipo, estatus , nivel, tipoString) {
         if(data.codigo != 200){
             cargaMensajeModal('DASHBOARD', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
         } else if(data.codigo == 200){
-            console.log("Regresa del action");
+        
             var resultados = data.datosNivelEstatus;
             var datos = new Array();
             
@@ -1364,7 +1589,10 @@ function buscaMdsPorEstatus(tipo, estatus , nivel, tipoString) {
 				datos[i][5] = resultados[i].DIASEVALUACION;
 								
 			 }
-            modalImage(nivel, tipoString);
+            
+            nombre = nivel + ' - ' + '<span class= "blanco t14">&nbsp' + tipoString+ '</span>';
+            
+            modalTabla(nombre);
 
             initTablaMdsXestatusArea('DivTabla', datos, 'tabla');
    		
@@ -1374,7 +1602,7 @@ function buscaMdsPorEstatus(tipo, estatus , nivel, tipoString) {
    
 }
 
-function modalImage(nombre, tipo){
+function modalTabla(nombre){
 	
 	modal = document.getElementById('modal');
 //	modalImg = document.getElementById('imageModal');
@@ -1383,8 +1611,7 @@ function modalImage(nombre, tipo){
 	modal.style.display = "flex";
 	$('body').css('overflow','hidden');
 	
-    captionText.innerHTML = nombre+ ' - ' + '<span class= "blanco t14">&nbsp' + tipo+ '</span>';
-	
+    captionText.innerHTML = nombre;	
     
     closeModal();
 }
@@ -1396,3 +1623,280 @@ function closeModal(){
 		modal.style.display = "none";
 	}
 }
+
+function creaGraficaAtrasoXarea(array){
+	Highcharts.chart('container_grafica_atrasos', {
+	    chart: {
+	    	backgroundColor: '#071B36',
+	        type: 'column',
+	        height: '230',
+	         events: {     
+	            click: function(e) {
+	              console.log("index", this.hoverPoint.x);
+	              var intervalo = this.hoverPoint.x;
+	              var txt = '';
+	              	           
+	              if(intervalo == 6){
+	            	  intervalo = 10;
+	              }else if(intervalo == 7){
+	            	  intervalo = 20;
+	              }
+	              
+	              buscaMdsXdiasAtrasos( 2,intervalo) ;
+	            }
+	          },
+	          cursor: 'pointer',
+	    
+	    
+	    },
+	    title: {
+	        text: null,
+	    },
+	   legend: {
+	        itemStyle: {
+	            color: '#FFFFFF',
+	            fontSize: '8px',
+	        	fontWeight: 'normal',
+	        },
+	
+	    },
+	    exporting: {
+		    enabled: false
+		  },
+		  credits: {
+		    enabled: false
+		  },
+	    xAxis: {
+	    	className: 'highcharts-color-0',
+	    	fontSize:'8px',
+	        categories: [
+	            'En tiempo',
+	            '1 día',
+	            '2 días',
+	            '3 días',
+	            '4 días',
+	            '+5 días',
+	            '+10 días',
+	            '+20 días'
+	        ],
+	        crosshair: true,
+	        labels: {
+	            style: {
+	                color: '#FFFFFF'
+	            }
+	        },
+	     
+	    },
+	    yAxis: {
+	    	gridLineWidth: 0.2,
+	    	title: {
+	            text: 'Días de atraso',
+	            style: {
+	                color: '#FFFFFF'
+	            }
+	        },
+	        labels: {
+	            style: {
+	                color: '#FFFFFF'
+	            }
+	        }
+	    },
+	    tooltip: {
+	    	useHTML: true,
+	        shared: true,
+	    	   formatter: function() {
+	    	  
+	    		   for (var i = 0; i < this.points.length; i++) {
+	    			   var res = '';
+	    			   	var b  = '';
+	    			    var a  =  '<span style="font-size:10px;">'+ this.points[i].key +'</span><table>';
+	    			    for (var j = 0; j < this.points.length; j++) {
+	    			    	let c = '<tr><td style="color:'+this.points[j].color+'; font-size: 8px;">'+ this.points[j].series.name +' </td>'+
+		   	              '<td style= "font-size: 8px;"><b> '+ this.points[j].point.y +'</b></td></tr>';
+		   	              	a = a + c;
+		   	              }
+	    			    res = a + '</table>' ;
+	    			    	
+		    	         return res;
+	    		
+	   			}
+  		  
+	    	},
+	    },
+	    plotOptions: {
+	    	column: {
+	            pointPadding: 0,
+	            borderWidth: 0,
+	         
+	        },
+	        series:{
+	        	  point: {
+		              events: {
+		                  click: function () {
+		                     console.log('-');
+		                     var intervalo = this.x;
+			                  if(intervalo == 6){
+			   	            	  intervalo = 10;
+			   	              }else if(intervalo == 7){
+			   	            	  intervalo = 20;
+			   	              }
+		                     buscaMdsXdiasAtrasos(2, intervalo) ;
+		                  }
+		              }
+		          },
+	        }
+	    },
+
+	    series: array
+	});
+}
+function obtieneatrasosxdias(tipo, intervalo) {
+    invocarJSONServiceAction("obtieneAtrasosXdias", 
+    		{'tipoServicio': tipo, 'intervalo': intervalo}, 
+            'obtieneAtrasosXdiasResponse', 
+            function() {
+                //Funcion de error
+                cierraLoading();
+            },
+            function() {
+                //Función al finalizar}
+                cierraLoading();
+            });
+    obtieneAtrasosXdiasResponse = function( data ) {
+        if(data.codigo != 200){
+            cargaMensajeModal('DASHBOARD', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
+        } else if(data.codigo == 200){
+            console.log("Regresa del action", data.datos);
+            filtraAtrasosxdias(data.datos);
+        }
+    }
+}
+
+function filtraAtrasosxdias(datos){
+    
+    var arrayAreas = [];
+    for (var i = 0; i < datos.length; i++) {
+		var elem = datos[i];
+		var rep;
+		if(arrayAreas.length > 0){
+			rep = false;
+			for (var j = 0; j < arrayAreas.length; j++) {
+				var area = arrayAreas[j];
+				
+				if(elem.AREAVALIDACION == area){
+					rep =  true;
+				}
+			}
+		}else{
+			arrayAreas.push(elem.AREAVALIDACION);
+		}
+		if(!rep && rep != undefined){
+			arrayAreas.push(elem.AREAVALIDACION);
+		}	
+		   
+	}
+    console.log(arrayAreas);
+    
+    var arrayTodasAreas = [];
+   
+		for (var j = 0; j < arrayAreas.length; j++) {
+			var area = arrayAreas[j];
+	    	var arrAux = [];
+	    	var cont0 = 0;
+	    	var cont1 = 0;
+	    	var cont2 = 0;
+	    	var cont3 = 0;
+	    	var cont4 = 0;
+	    	var cont5 = 0;
+	    	var cont10 = 0;
+	    	var cont20 = 0;
+	    	
+	    	  for (var i = 0; i < datos.length; i++) {
+	    	    	var elem = datos[i];
+
+					if(elem.AREAVALIDACION == area){
+						if(elem.DIASINTERVALO == 0){
+			    			cont0 =  cont0 + elem.NUMMDS;
+			    		}else if(elem.DIASINTERVALO == 1){
+			    			cont1 =  cont1 + elem.NUMMDS;
+			    		}else if(elem.DIASINTERVALO == 2){
+			    			cont2 =  cont2 + elem.NUMMDS;
+			    		}else if(elem.DIASINTERVALO == 3){
+			    			cont3 =  cont3 + elem.NUMMDS;
+			    		}else if(elem.DIASINTERVALO == 4){
+			    			cont4 =  cont4 + elem.NUMMDS;
+			    		}else if(elem.DIASINTERVALO == 5){
+			    			cont5 =  cont5 + elem.NUMMDS;
+			    		}else if(elem.DIASINTERVALO == 10){
+			    			cont10 =  cont10 + elem.NUMMDS;
+			    		}else if(elem.DIASINTERVALO == 20 ){
+			    			cont20 =  cont20 + elem.NUMMDS;
+			    		}
+					}
+					
+	    	  }
+	    	  var objArea = {
+	    			  color: getRandomColor(),
+	    			  name : area,
+	    			  data : [cont0, cont1, cont2, cont3, cont4, cont5, cont10, cont20]
+	    	  }
+	    	  arrayTodasAreas.push(objArea);
+		}
+		
+	console.log(arrayTodasAreas);
+	arrayAtrasoxAreas = arrayTodasAreas;
+	creaGraficaAtrasoXarea(arrayTodasAreas);
+  
+}
+
+function getRandomColor() { 
+	color = "hsl(" + Math.random() * 360 + ", 50%, 65%)"; 
+	return color; 
+	
+	} 
+
+
+function buscaMdsXdiasAtrasos( tipo, nivel) {
+	invocarJSONServiceAction("obtieneAtrasosXdias", 
+    		{'tipoServicio': tipo, 'intervalo': nivel}, 
+            'obtieneAtrasosXdiasResponse', 
+            function() {
+                //Funcion de error
+                cierraLoading();
+            },
+            function() {
+                //Función al finalizar}
+                cierraLoading();
+            });
+    
+	obtieneAtrasosXdiasResponse = function( data ) {
+    	console.log(data);
+        if(data.codigo != 200){
+            cargaMensajeModal('DASHBOARD', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
+        } else if(data.codigo == 200){
+        
+            var resultados = data.datos;
+            var datos = new Array();
+            var nbsp = '&nbsp;&nbsp;&nbsp;&nbsp;'
+            for( var i = 0 ; i < resultados.length; i++){
+            	datos[i] = new Array();	 	 		 			 
+				datos[i][0] = resultados[i].MDID; 
+				datos[i][1] = resultados[i].NOMBRESITIO; 
+				datos[i][2] = resultados[i].FECHAINICIO; 
+				datos[i][3] = resultados[i].AREAVALIDACION;
+				datos[i][4] = resultados[i].NIVELESTATUSAREA;
+				datos[i][5] = nbsp + resultados[i].FIDIASCONF + nbsp;
+				datos[i][6] = nbsp + resultados[i].DIASEVALUACION + nbsp;
+				datos[i][7] = nbsp + resultados[i].DIASATRASO + nbsp;
+								
+			 }
+            var title = nivel == 0 ? 'En tiempo' : nivel == 1 ? 'Más de '+ nivel + ' día de atraso' :  'Más de '+ nivel + ' días de atraso';
+            modalTabla(title);
+
+            tablaMdsXAtrasosXdia('DivTabla', datos, 'tabla02');
+   		}
+       
+    }
+   
+}
+

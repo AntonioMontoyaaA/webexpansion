@@ -106,7 +106,7 @@ table{
 }
 
 .estrellaPuntuacionDetalle {
-	margin-top: 2px;
+	margin-top: 2px;solo 
     margin-left: 8px;
     width: 18px;
 }
@@ -149,4 +149,15 @@ span.seccion{
 
 .height_30 {
 	height: 30px;
+}
+
+
+.cursor_modal{
+	cursor:default;
+}
+
+.padding_{
+	    padding: 0 10px;
+/* 	    width: 80px !important; */
+	    height: 43px;
 }

@@ -74,7 +74,8 @@ function initTablaMemoriasAutorizadas(nombreDiv, datosDesgloseVenta, nombreTabla
 	
 	tablaMemoriasAutorizadas = $("#" + nombreTabla).dataTable(
 			{"aaData": datosDesgloseVenta,
-				"aoColumns": [{"sClass":"izquierda padding","bSearchable":true},
+				"aoColumns": [
+						   {"sClass":"izquierda padding","bSearchable":true},
 				           {"bSearchable":true},
 				           {"sClass":"izquierda","bSearchable":true},
 				           {"bSearchable":true},
@@ -383,7 +384,7 @@ function initTablaMemoriasAprobadas(nombreDiv, datos, nombreTabla){
 					'<th class="gris negrita t14">Fecha compromiso</th>' +
 					'<th class="gris negrita t14">Motivo</th>' +
 					'<th class="oculto">id</th>' +
-				'</tr>'+
+				'</tr>'+	
 			'</thead>' +
 			'<tbody>'  +			
             '</tbody>' +
@@ -853,12 +854,62 @@ function initTablaMdsXestatusArea(nombreDiv, data, nombreTabla){
 		tabla = $("#" + nombreTabla).dataTable(
 				{"aaData": data,
 					"aoColumns": [
-						   	   {"sClass":"padding","bSearchable":true},
-					           {"bSearchable":true},
-					           {"bSearchable":true},
-					           {"bSearchable":true},
-					           {"bSearchable":true},
-					           {"bSearchable":true }],		
+						   	   {"sClass":"padding cursor_modal", "bSearchable":true},
+					           {"sClass":"padding cursor_modal", "bSearchable":true},
+					           {"sClass":"padding cursor_modal", "bSearchable":true},
+					           {"sClass":"padding cursor_modal", "bSearchable":true},
+					           {"sClass":"padding cursor_modal", "bSearchable":true},
+					           {"sClass":"padding cursor_modal", "bSearchable":true }],		
+					          
+					           "bJQueryUI": false,
+								"order": [],
+								"sPaginationType": "full_numbers",
+								"oLanguage": idiomaEspanolGeneral,
+								"bLengthChange":false,
+								"iDisplayLength":1000,
+								 "bScrollCollapse": false,
+								 "sScrollY": "40vh",
+								 "aoColumnDefs": [ {
+										"sClass": "center",
+										"aTargets": [ 0,2 ]
+								}]		 
+	});	
+		$("#" + nombreTabla + "_DTTT_container").hide();
+		$("#" + nombreTabla + "_paginate").hide();
+		$("#" + nombreTabla + "_filter").hide();
+}
+
+function tablaMdsXAtrasosXdia(nombreDiv, data, nombreTabla){
+	$("#" + nombreDiv).html(
+			   
+			'<table cellpadding="0"  cellspacing="0" border="0px"  class="row-border stripe hover" id="' + nombreTabla + '" >' +
+			'<thead>'  +
+				'<tr style="cursor: pointer;border-top: 0px; border-bottom: 0px;">' +
+					'<th class="gris negrita padding_ t11" >MD ID</th>'  +
+					'<th class="gris negrita t11" >Nombre MD</th>' +
+					'<th class="gris negrita padding_ t11" >Fecha </br> inicio</th>' +
+					'<th class="gris negrita padding_ t11" >Área</th>' +
+					'<th class="gris negrita padding_ t11" >Estatus</th>' +
+					'<th class="gris negrita padding_ t11" >Días </br>conf.</th>' +
+					'<th class="gris negrita padding_ t11" >Días</br>Valid.</th>' +
+					'<th class="gris negrita padding_ t11" >Días</br>atraso</th>' +
+				'</tr>'+
+			'</thead>' +
+			'<tbody>'  +			
+            '</tbody>' +
+        '</table>');
+			
+		tabla = $("#" + nombreTabla).dataTable(
+				{"aaData": data,
+					"aoColumns": [
+						   	   {"sClass":"t11 padding_ cursor_modal","bSearchable":true},
+					           {"sClass":"t11 cursor_modal","bSearchable":true},
+					           {"sClass":"t11 padding_ cursor_modal","bSearchable":true},
+					           {"sClass":"t11 padding_ cursor_modal","bSearchable":true},
+					           {"sClass":"t11 padding_ cursor_modal","bSearchable":true},
+					           {"sClass":"t11 cursor_modal","bSearchable":true},
+					           {"sClass":"t11 cursor_modal","bSearchable":true},
+					           {"sClass":"t11 cursor_modal","bSearchable":true }],
 					          
 					           "bJQueryUI": false,
 								"order": [],

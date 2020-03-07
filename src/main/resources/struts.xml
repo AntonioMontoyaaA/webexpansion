@@ -384,6 +384,9 @@
       	 <action name = "buscaMdsPorEstatus" class="com.tiendas.neto.action.BuscaMdsPorEstatusAction"
       	 method = "execute"/>
       	 
+      	 <action name = "obtieneAtrasosXdias" class="com.tiendas.neto.action.ObtieneAtrasosXdias"
+         method = "execute"/>
+      	 
         
       	 <!-- ************************************ ACCIONES SEGUIMIENTO ******* -->
       	<!-- ****************************** DESCARGA DE PDF**************************************** -->

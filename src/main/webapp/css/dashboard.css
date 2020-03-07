@@ -67,9 +67,9 @@ g .highcharts-legend-item rect{
 .highcharts-point, .highcharts-tick{
 	 stroke-width: 0; 
 }
-.highcharts-point{
-	width:13px;
-}
+/* .highcharts-point{ */
+/* 	width:13px; */
+/* } */
 #container_apmensual .highcharts-point{
 	width:13px;
 }
@@ -82,7 +82,8 @@ g .highcharts-legend-item rect{
 }
 
 #container_activas, #container_atrasadas, #container_canceladas{
-	height: 25%;
+/* 	height: 25%; */
+	height: 70px !important;
 	margin: 0 auto;
 }
 #container_activas .highcharts-axis-labels, #container_activas .highcharts-yaxis-labels {
@@ -98,14 +99,14 @@ g .highcharts-legend-item rect{
 	height:35px;
 }
 .icono_medida_dashb{
-	height:35px;
+	height:30px;
 }
 /* estilos del diagrama de proceso*/
 .simple{
 	position: relative;
 	float:left;
 	background:transparent;
-	
+	height:100%
 }
 .doble{
 	position: relative;
@@ -136,7 +137,8 @@ g .highcharts-legend-item rect{
 	border-radius: 3px;
 }
 #proceso{
-overflow-y:hidden;
+	overflow-y:hidden;
+	height: calc(100% - 35px);
 }
 .titulo_hex{
 	height:30;
@@ -347,12 +349,12 @@ overflow-y:hidden;
 	position:relative;
 	 float:right;
 }
-.highcharts-root {
-	height: 330px !important;
-}
-.highcharts-container  {
-	height: 330px !important;
-}
+/* .highcharts-root { */
+/* 	height: 330px  */
+/* } */
+/* .highcharts-container  { */
+/* 	height: 330px  */
+/* } */
 
 .horizontalLine {
 	position: absolute;
@@ -363,6 +365,13 @@ overflow-y:hidden;
     /* bottom: 1px; */
     background-color: #FFF;
     transform: rotate(90deg);
+}
+
+._btn-dash{
+	display: flex; 
+	flex-direction: column; 
+	align-items: center; 
+	padding-top: 10px;
 }
 /*------------------------------------------- modal -----------------------------------------------*/
 
@@ -426,7 +435,7 @@ overflow-y:hidden;
 .modal_{
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 100; /* Sit on top */
+    z-index: 9999; /* Sit on top */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
@@ -494,7 +503,8 @@ overflow-y:hidden;
     }
 }
 
-.dataTables_scroll{
-    min-width: 680px;
-    overflow: auto;
-}
+/* .dataTables_scroll{ */
+/*     min-width: 680px; */
+/*     overflow: auto; */
+/* } */
+

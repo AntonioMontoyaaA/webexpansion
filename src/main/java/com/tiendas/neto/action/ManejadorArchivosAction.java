@@ -184,13 +184,13 @@ public class ManejadorArchivosAction
 						String url = obtieneURL(respuesta);
 						
 						List<DocumentosVO> listaDocumentos = new ArrayList<DocumentosVO>();
-						DocumentosVO doctoWS = new DocumentosVO();
 						JSONArray listaDoctos = doctosExpansion.getJSONArray("documentos");
 						
 						for(int i = 0; i < listaDoctos.length(); i++) {
 							int doctoId = listaDoctos.getJSONObject(i).getInt("archivoId");
 							
 							List<DocumentoHoja> listaHojasNuevas = new ArrayList<DocumentoHoja>();
+							DocumentosVO doctoWS = new DocumentosVO();
 							
 							if(doctoId == archivoId) {
 								DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
@@ -223,7 +223,7 @@ public class ManejadorArchivosAction
 							sendJSONObjectToResponse(respuesta);
 						}else {
 							String json = new Gson().toJson(listaDocumentos);
-		                    json = "[" + json + "]";
+		                    
 							builder = new Builder()
 										.add("usuarioId", numeroEmpleado)
 										.add("mdId", mdId)

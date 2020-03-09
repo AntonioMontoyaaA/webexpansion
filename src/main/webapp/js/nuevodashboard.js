@@ -795,7 +795,7 @@ function pintaActivas(arreglo,filtrados){
 			}
 			
 			
-			html=html+triple(cadenas[1] ,cant ,cadenas[0],color ,cadenas2[1] ,cant2 ,cadenas2[0].replace('CORRECCIÓN',''), color2, estatusId, estatusId2,estatusId3, MDS_ACTIVAS,cadenas3[1] ,cant3 ,cadenas3[0].replace('CORRECCIÓN',''),color3);	
+			html=html+triple(cadenas[1] ,cant ,cadenas[0],color ,cadenas2[1] ,cant2 ,cadenas2[0], color2, estatusId, estatusId2,estatusId3, MDS_ACTIVAS,cadenas3[1] ,cant3 ,cadenas3[0],color3);	
 			
 			cont += 2;
 		}
@@ -942,7 +942,7 @@ function pintaAtrasadas(arreglo,filtrados){
 			}
 			
 			
-			html=html+triple(cadenas[1] ,cant ,cadenas[0],color ,cadenas2[1] ,cant2 ,cadenas2[0].replace('CORRECCIÓN',''), color2, estatusId, estatusId2,estatusId3, MDS_ATRASADAS,cadenas3[1] ,cant3 ,cadenas3[0].replace('CORRECCIÓN',''),color3);	
+			html=html+triple(cadenas[1] ,cant ,cadenas[0],color ,cadenas2[1] ,cant2 ,cadenas2[0], color2, estatusId, estatusId2,estatusId3, MDS_ATRASADAS,cadenas3[1] ,cant3 ,cadenas3[0],color3);	
 			
 			cont += 2;
 		}
@@ -1074,7 +1074,7 @@ function pintaCanceladas(arreglo,filtrados){
 			}
 			
 			
-			html=html+triple(cadenas[1] ,cant ,cadenas[0],color ,cadenas2[1] ,cant2 ,cadenas2[0].replace('CORRECCIÓN',''), color2, estatusId, estatusId2,estatusId3, MDS_CANCELADAS,cadenas3[1] ,cant3 ,cadenas3[0].replace('CORRECCIÓN',''),color3);	
+			html=html+triple(cadenas[1] ,cant ,cadenas[0],color ,cadenas2[1] ,cant2 ,cadenas2[0], color2, estatusId, estatusId2,estatusId3, MDS_CANCELADAS,cadenas3[1] ,cant3 ,cadenas3[0],color3);	
 			
 			cont += 2;
 		}
@@ -1124,13 +1124,13 @@ function triple(x1,x2,x3,color1,  y1,y2,y3,color2,estatusId,estatusId2,estatusId
 	'</div></div>'+
 	'<div class="horizontalLine"></div>'+
 	'</div>'+
-	'<div class="negrita '+color2+' titulo_hex_doble" style="bottom:205; left: 55px;font-size: 9px;z-index: 99;"  onclick="redirige(this,' + estatusId2 + ',' + estatusMd + ')"></div>'+
+	'<div class="negrita '+color2+' titulo_hex_doble" style="bottom:205; left: 55px;font-size: 9px;z-index: 99;"  onclick="redirige(this,' + estatusId2 + ',' + estatusMd + ')">'+y1+'</div>'+
 	'<div class="'+color2+' pie_hex_doble"  style="bottom:195;font-size: 9px;z-index: 99;"  onclick="redirige(this,' + estatusId2 + ',' + estatusMd + ')">'+y3+'</div>'+
 	
 	'<div class="negrita '+color1+' titulo_hex_doble" style="bottom:192;font-size: 9px;"  onclick="redirige(this,' + estatusId + ',' + estatusMd + ')">'+x1+'</div>'+
 	'<div class="'+color1+' pie_hex_doble" style="bottom:160;font-size: 9px;"  onclick="redirige(this,' + estatusId + ',' + estatusMd + ')">'+x3+'</div>'+
 	
-	'<div class="negrita '+color3+' titulo_hex_doble" style="bottom:175;font-size: 9px;"  onclick="redirige(this,' + estatusId3 + ',' + estatusMd + ')"></div>'+
+	'<div class="negrita '+color3+' titulo_hex_doble" style="bottom:175;font-size: 9px;"  onclick="redirige(this,' + estatusId3 + ',' + estatusMd + ')">'+z1+'</div>'+
 	'<div class="'+color3+' pie_hex_doble" style="bottom:140;font-size: 9px;"  onclick="redirige(this,' + estatusId3 + ',' + estatusMd + ')">'+z3+'</div>'+
 	'</div>';
 }
@@ -1187,16 +1187,12 @@ function armaListaGrafica(data){
 		
 		lstNivelAtrasos.push(elem.nivelEstatusArea)
 		atrasosXestatus.push(elem.nivelEstatusAreaId);
-		html = html + '<span class="span_lista">' + elem.nivelEstatusArea + ' ('+ elem.diasConf+')'+ '</span>';
+		html = html + '<div class="span_lista" >' + '<span class= "span_dias" > ( '+ elem.diasConf+' ) </span>' + elem.nivelEstatusArea + '</div>';
 	}
 	
 	$('#listaAtrasos').html(html);
 //	console.log(arrAux)
-	var elementList = document.getElementById('listaAtrasos').getElementsByTagName('span');
-	for (var i = 0; i < elementList.length; i++) {
-		elementList[i].style.height = height_span;
-
-	}
+	var elementList = document.getElementById('listaAtrasos').getElementsByTagName('div');
 	filtraDiasAtraso(data);	
 }
 
@@ -1242,14 +1238,14 @@ function filtraDiasAtraso(data){
 	graficaUltimoAnio(arrayVerdeAnio, arrayRojoAnio);
 }
 
-function graficaUltimoMes(arrayVerdeMes,arrayRojoMes ){
+function graficaUltimoMes(arrayVerdeMes,arrayRojoMes, alto ){
 	var list = lstNivelAtrasos;
 	var statusId =  atrasosXestatus
 	Highcharts.chart('container_ultimo_mes', {
 	    chart: {
 	        type: 'bar',
 	        backgroundColor: '#071B36',
-//	        height: '330',
+	        height: '325',
 	       
 	    },
 	     title: {
@@ -1285,6 +1281,7 @@ function graficaUltimoMes(arrayVerdeMes,arrayRojoMes ){
 	  
 	  plotOptions: {
 	    bar: {
+	      pointPadding: 10,
 	      dataLabels: {
 	        enabled: true
 	      }
@@ -1292,9 +1289,7 @@ function graficaUltimoMes(arrayVerdeMes,arrayRojoMes ){
 	    series: {
 	    	 
 	       dataLabels: {
-	    	x:0,
-	    	y: 0,
-	        zIndex: 6,
+	    	zIndex: 6,
 	       formatter: function() {
 	       	if(this.point.y == 0){
 	        
@@ -1407,7 +1402,7 @@ function graficaUltimoAnio(arrayVerdeAnio, arrayRojoAnio){
 	    chart: {
 	        type: 'bar',
 	        backgroundColor: '#071B36',
-//	        height: '330',
+	        height: '325',
 	    },
 	     title: {
 	    text: null
@@ -1441,6 +1436,7 @@ function graficaUltimoAnio(arrayVerdeAnio, arrayRojoAnio){
 	  },
 	  
 	  plotOptions: {
+		pointPadding: 3,
 	    bar: {
 	      dataLabels: {
 	        enabled: true

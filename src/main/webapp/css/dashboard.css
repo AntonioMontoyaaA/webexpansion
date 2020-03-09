@@ -225,6 +225,12 @@ g .highcharts-legend-item rect{
     display: flex;
     color: white !important;
 }
+.span_dias{
+	width: 40px; 
+	display: flex; 
+	justify-content: flex-end; 
+	padding-right: 10px;
+}
 /*-----------------------------------*/
 @media (max-width: 576px) {
 	#container{display:none;}
@@ -503,8 +509,8 @@ g .highcharts-legend-item rect{
     }
 }
 
-/* .dataTables_scroll{ */
-/*     min-width: 680px; */
-/*     overflow: auto; */
-/* } */
+.dataTables_scroll{
+    min-width: 680px;
+    overflow: auto;
+}
 

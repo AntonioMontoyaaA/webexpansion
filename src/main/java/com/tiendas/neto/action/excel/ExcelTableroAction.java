@@ -56,54 +56,88 @@ public class ExcelTableroAction extends ExpansionAction {
 	        	memoria.setRegion(array.getJSONObject(i).getString("REGION"));
 	        	memoria.setCategoria(array.getJSONObject(i).getString("CATEGORIA"));
 	        	memoria.setPuntuacion(array.getJSONObject(i).getInt("PUNTOSTOTALES"));
+	        	
 	        	memoria.setVoboInicialOperaciones(array.getJSONObject(i).getJSONObject("PRE_OPERACIONES").getString("fechaValidacion"));
 	        	memoria.setVoboInicialOperacionesEstatus(array.getJSONObject(i).getJSONObject("PRE_OPERACIONES").getString("validacion"));
+	        	memoria.setVoboInicialDias(array.getJSONObject(i).getJSONObject("PRE_OPERACIONES").getInt("diasValidacion"));
+	        	
 	        	memoria.setConteoAuditor(array.getJSONObject(i).getInt("CONTEOAUDITOR"));
 	        	memoria.setFechaConteoAuditor(array.getJSONObject(i).getJSONObject("PRE_AUDITORIA").getString("fechaValidacion"));
 	        	memoria.setFechaConteoAuditorEstatus(array.getJSONObject(i).getJSONObject("PRE_AUDITORIA").getString("validacion"));
+	        	memoria.setVoboPreauditoriaDias(array.getJSONObject(i).getJSONObject("PRE_AUDITORIA").getInt("diasValidacion"));
+	        	
 	        	memoria.setPregestoriaAutorizada(array.getJSONObject(i).getJSONObject("PRE_GESTORIA").getString("fechaValidacion"));
 	        	memoria.setPregestoriaAutorizadaEstatus(array.getJSONObject(i).getJSONObject("PRE_GESTORIA").getString("validacion"));
+	        	memoria.setVoboPregestoriaDias(array.getJSONObject(i).getJSONObject("PRE_GESTORIA").getInt("diasValidacion"));
+	        	
 	        	memoria.setLevantamientoRealizado(array.getJSONObject(i).getJSONObject("PRE_CONSTRUCCION").getString("fechaValidacion"));
 	        	memoria.setLevantamientoRealizadoEstatus(array.getJSONObject(i).getJSONObject("PRE_CONSTRUCCION").getString("validacion"));
+	        	memoria.setCargaLayoutDias(array.getJSONObject(i).getJSONObject("PRE_CONSTRUCCION").getInt("diasValidacion"));
+	        	
 	        	memoria.setVoboLayoutOperaciones(array.getJSONObject(i).getJSONObject("VOBO_LAYOUT").getString("fechaValidacion"));
 	        	memoria.setVoboLayoutOperacionesEstatus(array.getJSONObject(i).getJSONObject("VOBO_LAYOUT").getString("validacion"));
+	        	memoria.setVoboLayoutDias(array.getJSONObject(i).getJSONObject("VOBO_LAYOUT").getInt("diasValidacion"));
+	        	
 	        	memoria.setFechaPptoConstruccion(array.getJSONObject(i).getJSONObject("JSONPTOOBRA").getString("fechaValidacion"));
 	        	memoria.setFechaPptoConstruccionEstatus(array.getJSONObject(i).getJSONObject("JSONPTOOBRA").getString("validacion"));
 	        	memoria.setMontoConstruccion(array.getJSONObject(i).getDouble("PRESUPUESTO_OBRA"));
+	        	memoria.setPptoConstrDias(array.getJSONObject(i).getJSONObject("JSONPTOOBRA").getInt("diasValidacion"));
+	        	
 	        	memoria.setFechaPptoAuditoria(array.getJSONObject(i).getJSONObject("JSONPTOAUDITORIA").getString("fechaValidacion"));
 	        	memoria.setFechaPptoAuditoriaEstatus(array.getJSONObject(i).getJSONObject("JSONPTOAUDITORIA").getString("validacion"));
 	        	memoria.setMontoAuditoria(array.getJSONObject(i).getDouble("PRESUPUESTO_AUDITORIA"));
+	        	memoria.setPptoAuditDias(array.getJSONObject(i).getJSONObject("JSONPTOAUDITORIA").getInt("diasValidacion"));
+	        	
 	        	memoria.setGestoria(array.getJSONObject(i).getJSONObject("TRAMITES").getString("fechaValidacion"));
 	        	memoria.setGestoriaEstatus(array.getJSONObject(i).getJSONObject("TRAMITES").getString("validacion"));
+	        	memoria.setTramitesDias(array.getJSONObject(i).getJSONObject("TRAMITES").getInt("diasValidacion"));
+	        	
 	        	memoria.setVoboFinalOperaciones(array.getJSONObject(i).getJSONObject("VOBOFNL_OPERACIONES").getString("fechaValidacion"));
 	        	memoria.setVoboFinalOperacionesEstatus(array.getJSONObject(i).getJSONObject("VOBOFNL_OPERACIONES").getString("validacion"));
 	        	memoria.setVentaEstimada(array.getJSONObject(i).getDouble("MONTOVNT"));
+	        	memoria.setVoboFinalDias(array.getJSONObject(i).getJSONObject("VOBOFNL_OPERACIONES").getInt("diasValidacion"));
+	        	
 	        	memoria.setContratoFirmado(array.getJSONObject(i).getJSONObject("FIRMA_CONTRATO").getString("fechaValidacion"));
 	        	memoria.setContratoFirmadoEstatus(array.getJSONObject(i).getJSONObject("FIRMA_CONTRATO").getString("validacion"));
+	        	memoria.setContratoFirmadoDias(array.getJSONObject(i).getJSONObject("FIRMA_CONTRATO").getInt("diasValidacion"));
+	        	
 	        	memoria.setInicioObra(array.getJSONObject(i).getJSONObject("INICIO_OBRA").getString("fechaValidacion"));
 	        	memoria.setInicioObraEstatus(array.getJSONObject(i).getJSONObject("INICIO_OBRA").getString("validacion"));
+	        	memoria.setInicioObraDias(array.getJSONObject(i).getJSONObject("INICIO_OBRA").getInt("diasValidacion"));
+	        	
 	        	memoria.setEn_obra(array.getJSONObject(i).getJSONObject("EN_OBRA").getString("fechaValidacion"));
 	        	memoria.setEn_obraEstatus(array.getJSONObject(i).getJSONObject("EN_OBRA").getString("validacion"));
+	        	memoria.setObraDias(array.getJSONObject(i).getJSONObject("EN_OBRA").getInt("diasValidacion"));
+	        	
 	        	memoria.setTienda_abierta(array.getJSONObject(i).getJSONObject("TIENDA_ABIERTA").getString("fechaValidacion"));
 	        	memoria.setTienda_abiertaEstatus(array.getJSONObject(i).getJSONObject("TIENDA_ABIERTA").getString("validacion"));
-	        	//memoria.setInauguracionObjetivo(array.getJSONObject(i).getString("INAUGURACIONINICIAL"));
+	        	memoria.setTiendaAbiertaDias(array.getJSONObject(i).getJSONObject("TIENDA_ABIERTA").getInt("diasValidacion"));
+	        	
 	        	memoria.setJefeExpansion(array.getJSONObject(i).getString("JEFEEXP"));
 	        	memoria.setGerenteExpansion(array.getJSONObject(i).getString("GERENTEEXP"));
 	        	memoria.setRegional(array.getJSONObject(i).getString("REGIONAL"));
+	        	
 	        	memoria.setComite(array.getJSONObject(i).getJSONObject("COMITE").getString("fechaValidacion"));
 	        	memoria.setComiteEstatus(array.getJSONObject(i).getJSONObject("COMITE").getString("validacion"));
+	        	memoria.setComiteDias(array.getJSONObject(i).getJSONObject("COMITE").getInt("diasValidacion"));
+	        	
 	        	memoria.setDoctos(array.getJSONObject(i).getJSONObject("CARGADATOS").getString("fechaValidacion"));
 	        	memoria.setDoctosEstatus(array.getJSONObject(i).getJSONObject("CARGADATOS").getString("validacion"));
+	        	memoria.setCargaDoctosDias(array.getJSONObject(i).getJSONObject("CARGADATOS").getInt("diasValidacion"));
+	        	
 	        	memoria.setCeco(array.getJSONObject(i).getJSONObject("CCO").getString("fechaValidacion"));
-	        	memoria.setCecoEstatus(array.getJSONObject(i).getJSONObject("CCO").getString("validacion"));	    
+	        	memoria.setCecoEstatus(array.getJSONObject(i).getJSONObject("CCO").getString("validacion"));
+	        	memoria.setCecoDias(array.getJSONObject(i).getJSONObject("CCO").getInt("diasValidacion"));
+	        	
 	        	memoria.setLevantamiento(array.getJSONObject(i).getJSONObject("LEVANTAMIENTO").getString("fechaValidacion"));
 	        	memoria.setLevantamientoEstatus(array.getJSONObject(i).getJSONObject("LEVANTAMIENTO").getString("validacion"));
-	        	
+	        	memoria.setLevantamientoDias(array.getJSONObject(i).getJSONObject("CCO").getInt("diasValidacion"));
 	        	
 	        	 if (array.getJSONObject(i).has("ASIGNACIONFECHACITA") && 
 	        			 !array.getJSONObject(i).isNull("ASIGNACIONFECHACITA")) {
 	        		 memoria.setCitaLevantamiento(array.getJSONObject(i).getJSONObject("ASIGNACIONFECHACITA").getString("fechaValidacion"));
 				     memoria.setCitaLevantamientoEstatus(array.getJSONObject(i).getJSONObject("ASIGNACIONFECHACITA").getString("validacion"));
+				     memoria.setVoboCitaLevantDias(array.getJSONObject(i).getJSONObject("ASIGNACIONFECHACITA").getInt("diasValidacion"));
 	        	 } else {
 	        		 memoria.setCitaLevantamiento("");
 				     memoria.setCitaLevantamientoEstatus("");
@@ -114,6 +148,7 @@ public class ExcelTableroAction extends ExpansionAction {
 	        			 !array.getJSONObject(i).isNull("CORRECCIONCONSTRUCCION")) {
 	        		 memoria.setCorreccionConstruccion(array.getJSONObject(i).getJSONObject("CORRECCIONCONSTRUCCION").getString("fechaValidacion"));
 				     memoria.setCorreccionConstruccionEstatus(array.getJSONObject(i).getJSONObject("CORRECCIONCONSTRUCCION").getString("validacion"));
+				     memoria.setCorreccionConstrDias(array.getJSONObject(i).getJSONObject("CORRECCIONCONSTRUCCION").getInt("diasValidacion"));
 	        	 } else {
 	        		 memoria.setCorreccionConstruccion("");
 				     memoria.setCorreccionConstruccionEstatus("");
@@ -124,6 +159,7 @@ public class ExcelTableroAction extends ExpansionAction {
 	        			 !array.getJSONObject(i).isNull("CORRECCIONEXPANSION")) {
 	        		 memoria.setCorreccionExpansion(array.getJSONObject(i).getJSONObject("CORRECCIONEXPANSION").getString("fechaValidacion"));
 				     memoria.setCorreccionExpansionEstatus(array.getJSONObject(i).getJSONObject("CORRECCIONEXPANSION").getString("validacion"));
+				     memoria.setCorreccionExpansDias(array.getJSONObject(i).getJSONObject("CORRECCIONEXPANSION").getInt("diasValidacion"));
 	        	 } else {
 	        		 memoria.setCorreccionExpansion("");
 				     memoria.setCorreccionExpansionEstatus("");

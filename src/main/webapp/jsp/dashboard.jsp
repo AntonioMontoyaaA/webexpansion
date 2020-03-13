@@ -73,24 +73,24 @@
                 <span class= "blanco negrita t18">ATRASOS POR ESTATUS</span>
             </div>
             
-            <div  style="overflow: auto; max-height: 370px; margin-bottom: 20px;">
-            <div style= "padding-left: 195px; display: flex; flex-direction: row;">
-                <div class="center" style="width: 50%; min-width: 160px;">
+            <div  style="margin-bottom: 20px;">
+            <div style= "padding-left: 210px; display: flex; flex-direction: row;">
+                <div class="center" style="width: 50%; min-width: 145px;">
                     <span class="blanco" id="mes_anterior" style = "font-size: 13px;"></span>
                 </div>
-                <div class="center" style="width: 50%;  min-width: 160px;">
+                <div class="center" style="width: 50%;  min-width: 145px;">
                     <span class="blanco" id="anio_anterior" style = "font-size: 13px;"></span>
                 </div>
             </div>
-            <div style="display: flex; flex-direction: row;">
-                <div style="min-width: 195px; width: 24%;">
+            <div style="display: flex; flex-direction: row; max-height: 360px; overflow-y: auto; ">
+                <div style="min-width: 215px; ">
                     <div id="listaAtrasos" style= "padding-top: 10px;" ></div>
                 </div>
-                <div style="width: calc(100% - 205px); display: flex; flex-direction: row;">
-                    <div class="col-6 center" style="width: 50%;  min-width: 160px; display:flex; flex-direction: row;">
+                <div style="width: calc(100% - 215px); display: flex; flex-direction: row;">
+                    <div class="col-6 center" style="width: 50%;  min-width: 145px; display:flex; flex-direction: row; padding: 0">
                             <div id="container_ultimo_mes" style= "display:flex; width:100%; justify-content: center;" ></div>
                     </div>
-                    <div class="col-6 center" style="width:50%;  min-width: 160px;  display:flex; flex-direction: row;">
+                    <div class="col-6 center" style="width:50%;  min-width: 145px;  display:flex; flex-direction: row;">
                             <div id="container_ultimo_anio" style= "display:flex; width:100%; justify-content: center;" ></div>
                     </div>
                 </div>

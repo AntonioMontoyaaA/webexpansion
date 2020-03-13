@@ -288,6 +288,8 @@ function initTablaMemoriasTablero(nombreDiv, datosDesgloseMemorias, nombreTabla)
 					'<th class="gris negrita t12 center fblanco">Venta estimada</th>' +
 					'<th class="gris negrita t12 fblanco">Comité</th>' +
 					'<th class="gris negrita t12 fblanco">Carga<br/>Doctos</th>' +
+					'<th class="gris negrita t12 fblanco">Pre Contrato</th>' +
+					'<th class="gris negrita t12 fblanco">Entrega Contrato</th>' +
 					'<th class="gris negrita t12 fblanco">Contrato firmado</th>' +
 					'<th class="gris negrita t12 fblanco">CECO</th>' +
 					'<th class="gris negrita t12 fblanco">Gestor&iacute;a</th>' +
@@ -329,6 +331,8 @@ function initTablaMemoriasTablero(nombreDiv, datosDesgloseMemorias, nombreTabla)
 				           {"sClass":"tablero_celda","bSearchable":false},
 				           {"sClass":"tablero_celda","bSearchable":false},
 				           {"sClass":"tablero_celda","bSearchable":false},
+				           {"sClass":"tablero_celda", "bSearchable":false},
+				           {"sClass":"tablero_celda", "bSearchable":false},
 				           {"sClass":"tablero_celda", "bSearchable":false},
 				           {"sClass":"tablero_celda", "bSearchable":false},
 				           {"sClass":"tablero_celda", "bSearchable":false},

@@ -220,13 +220,16 @@ g .highcharts-legend-item rect{
 }
 .span_lista{
 	font-size: 10px;
-/*     height: 15px; */
+/*     height: 13px; */
     align-items: center;
     display: flex;
     color: white !important;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 .span_dias{
-	width: 40px; 
+	min-width: 40px; 
 	display: flex; 
 	justify-content: flex-end; 
 	padding-right: 10px;

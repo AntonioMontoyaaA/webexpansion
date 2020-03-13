@@ -59,6 +59,24 @@ public class CreaExcelTablero {
         sheet.setColumnWidth(33, 6000);
         sheet.setColumnWidth(34, 6000);
         sheet.setColumnWidth(35, 6000);
+        sheet.setColumnWidth(36, 6000);
+        sheet.setColumnWidth(37, 6000);
+        sheet.setColumnWidth(38, 6000);
+        sheet.setColumnWidth(39, 6000);
+        sheet.setColumnWidth(40, 6000);
+        sheet.setColumnWidth(41, 6000);
+        sheet.setColumnWidth(42, 6000);
+        sheet.setColumnWidth(43, 6000);
+        sheet.setColumnWidth(44, 6000);
+        sheet.setColumnWidth(45, 6000);
+        sheet.setColumnWidth(46, 6000);
+        sheet.setColumnWidth(47, 6000);
+        sheet.setColumnWidth(48, 6000);
+        sheet.setColumnWidth(49, 6000);
+        sheet.setColumnWidth(50, 6000);
+        sheet.setColumnWidth(51, 6000);
+        sheet.setColumnWidth(52, 6000);
+        sheet.setColumnWidth(53, 6000);
 
                 
         HSSFFont tituloHeader0 = wb.createFont();
@@ -481,7 +499,7 @@ public class CreaExcelTablero {
                 
                 cellDatos = rowDatos.createCell(24);
                 cellDatos.setCellStyle(datosCellStyleNormal);
-                cellDatos.setCellValue(listaMemorias.get(i).getVoboLayoutOperaciones());
+                cellDatos.setCellValue(listaMemorias.get(i).getVoboLayoutDias());
             } else {
             	cellDatos.setCellStyle(datosCellStyleNormal);
                 cellDatos.setCellValue(new HSSFRichTextString(""));

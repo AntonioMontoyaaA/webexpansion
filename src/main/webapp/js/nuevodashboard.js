@@ -1402,7 +1402,7 @@ function graficaUltimoAnio(arrayVerdeAnio, arrayRojoAnio){
 	    chart: {
 	        type: 'bar',
 	        backgroundColor: '#071B36',
-	        height: '325',
+	        //height: '325',
 	    },
 	     title: {
 	    text: null
@@ -1510,7 +1510,8 @@ function graficaUltimoAnio(arrayVerdeAnio, arrayRojoAnio){
 	        rules: [{
 	            condition: {
 	                maxWidth: '305',
-	                minWidth: '140'
+	                minWidth: '140',
+	                minHeight: '300'
 	            },
 	            chartOptions: {
 	                legend: {
@@ -1884,9 +1885,9 @@ function buscaMdsXdiasAtrasos( tipo, nivel) {
 				datos[i][2] = resultados[i].FECHAINICIO; 
 				datos[i][3] = resultados[i].AREAVALIDACION;
 				datos[i][4] = resultados[i].NIVELESTATUSAREA;
-				datos[i][5] = nbsp + resultados[i].FIDIASCONF + nbsp;
-				datos[i][6] = nbsp + resultados[i].DIASEVALUACION + nbsp;
-				datos[i][7] = nbsp + resultados[i].DIASATRASO + nbsp;
+				datos[i][5] =  resultados[i].FIDIASCONF ;
+				datos[i][6] =  resultados[i].DIASEVALUACION ;
+				datos[i][7] =  resultados[i].DIASATRASO ;
 								
 			 }
             var title = nivel == 0 ? 'En tiempo' : nivel == 1 ? 'Más de '+ nivel + ' día de atraso' :  'Más de '+ nivel + ' días de atraso';

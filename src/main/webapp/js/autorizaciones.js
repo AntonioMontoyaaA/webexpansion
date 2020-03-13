@@ -83,6 +83,7 @@ var informePreauditoria = 14;
 var fechaCita = 15;
 var correccionExpansion = 16;
 var correccionConstruccion = 16;
+var preContrato = 17;
 
 var ACCION_REALIZADA;
 var ACCION_REALIZADA_CONTEO;
@@ -157,6 +158,8 @@ function inicializaFlujoAutorizaciones(){
 	flujoAutorizaciones[28] = new Estatus(28, [28], 'Corrección expansión');
 	flujoAutorizaciones[29] = new Estatus(29, [29], 'Corrección construcción');
 	flujoAutorizaciones[30] = new Estatus(30, [30], 'Asignación cita Expansión');
+	flujoAutorizaciones[31] = new Estatus(31, [31], 'Pre contrato firmado')
+	flujoAutorizaciones[32] = new Estatus(32, [32], 'Entrega de contrato')
 	
 	flujoAutorizaciones[3].agregaArea(areaExpansion, new Area(areaExpansion, todosRechazos, sinArchivos));
 	
@@ -202,6 +205,10 @@ function inicializaFlujoAutorizaciones(){
 	flujoAutorizaciones[30].agregaArea(areaExpansion, new Area(areaExpansion, sinRechazo, fechaCita));
 	flujoAutorizaciones[28].agregaArea(areaExpansion, new Area(areaExpansion, sinRechazo, correccionExpansion));
 	flujoAutorizaciones[29].agregaArea(areaConstruccion, new Area(areaConstruccion, sinRechazo, correccionConstruccion));
+	
+	//nuevos estatus solicitud de legal 11/03/2020
+	flujoAutorizaciones[31].agregaArea(areaLegal, new Area(areaLegal, rechazoParcial, preContrato));
+	flujoAutorizaciones[32].agregaArea(areaExpansion, new Area(areaExpansion, sinRechazo, sinArchivos));
 }
 
 function parseaEstatus(estatus){
@@ -274,6 +281,12 @@ function finalizacionMDAutorizada(){
 			}
 				
 			
+		}else if(area.tipoArchivo == preContrato){ //Pre-Contrato
+			if(ACCION_REALIZADA)
+				mensajeConfirmacion('¿Est\u00e1s seguro de finalizar?', 1);
+			else
+				mensajeAlerta('Agrega el archivo del pre contrato');
+
 		}else if(area.tipoArchivo == contrato){ //Contrato
 			if(ACCION_REALIZADA)
 				mensajeConfirmacion('¿Est\u00e1s seguro de finalizar?', 1);
@@ -636,6 +649,44 @@ function validaAutorizacion(){
 			
 		} else if(area.tipoArchivo == correccionConstruccion){ //Corrección construcción
 			
+		} else if(area.tipoArchivo == preContrato){ //Pre-Contrato
+			generaAutorizacionSimple(area);
+			
+			$('#tipoArchivos').html('<div class="selecciona">No hay carpetas generadas</div>');
+			
+			$('#archivos').removeClass('col-lg-10');
+			$('#archivos').addClass('col-lg-7');
+			$('#archivos').html('<div class="selecciona">...</div>');
+			
+			$('#subida').show();
+			
+			dropzoneOptions.maxFiles = 1;
+			dropzoneOptions.acceptedFiles = 'image/*,application/pdf,.psd';
+			dropzoneOptions.accept = function(file, done){
+						                reader = new FileReader();
+						                reader.onload = handleReaderLoad;
+						                reader.readAsDataURL(file);
+						                
+						                FILE_B64 = '';
+						                FILE_Type = '';
+						                
+						                function handleReaderLoad(evt) {
+						                	FILE_B64 = evt.target.result;
+						                	FILE_Type = file.type;
+						                	
+						                	ACCION_REALIZADA = true;
+						                }
+						                done();
+						            };
+
+	        uploader = document.querySelector('#uploader');
+			dropzone = new Dropzone(uploader, dropzoneOptions);
+			
+			tipoArchivo = 5;
+        	tipoServicio = 16;
+        	prefijo = 'PRE-CTO';
+        	
+			$('#manejadorArchivos').show();
 		}
 	}
 	
@@ -1236,6 +1287,23 @@ function documentacion(data){
 		});
 	}
 	
+	if(eval(data)["seguimiento"]["PRECONTRATO LEGAL"] != undefined
+			&& eval(data)["seguimiento"]["PRECONTRATO LEGAL"] != null){
+		
+		ARCHIVOS_MD[preContrato] = new Array();
+		$.each(eval(data)["seguimiento"]["PRECONTRATO LEGAL"], function(i,item){
+
+			ARCHIVOS_MD[preContrato].push(new Archivo(
+					item.nombreArchivo,
+					item.url,
+					item.estatus,
+					item.autor,
+					item.fechaSubida, 
+					null)
+			);
+		});
+	}
+	
 	if(eval(data)["seguimiento"]["CARGA DOCUMENTOS EXPANSION"] != undefined
 			&& eval(data)["seguimiento"]["CARGA DOCUMENTOS EXPANSION"] != null){
 		
@@ -1277,6 +1345,7 @@ function dibujaArchivos(){
 	nombres[agua] = 'AGUA';
 	nombres[luz] = 'LUZ';
 	nombres[informePreauditoria] = 'INFORMES PRE-AUDITORIA';
+	nombres[preContrato] = 'PRE CONTRATO';
 	
 	if(Object.size(ARCHIVOS_MD) > 0){
 		strArchivos = {};

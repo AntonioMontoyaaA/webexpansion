@@ -53,11 +53,16 @@
 		</div>
 			
 			
-		<span class="mr-sm-2" onclick="showNotificaciones()">
-			<img src="img/web_AVISOS.png"  style="margin-bottom:12px;">
-			<div id="alerta_circulo"></div>
+		<span class="mr-sm-2" onclick="showNotificaciones(1)">
+			<img  class= "cursor" id= "bell_verde"  style="margin-bottom:12px;">
+			<div id="alerta_circulo_verde"></div>
 		</span>
-		&nbsp;
+<!-- 		&nbsp; -->
+		<span class="mr-sm-2" onclick="showNotificaciones(2)">
+			<img class= "cursor" id= "bell_rojo"  style="margin-bottom:12px;">
+			<div id="alerta_circulo_rojo"></div>
+		</span>
+<!-- 		&nbsp; -->
 		
 		<span class="my-2 my-sm-0"><a id="perfil" tabindex="0" role="tooltip" data-toggle="popover" data-trigger="focus" data-placement="bottom"
 		 data-template='<div class="popover1">
@@ -165,11 +170,22 @@
       			<div  class="modal-body" id="cuerpo_modal" style="background-color: #FFF">
       				<div class="segmentoNotificaciones">
       					<div class="tituloNotificaciones azul negrita t18">Notificaciones</div>
-      					<div class="tituloNotificaciones grisNot t12 leidos">Marcar todos como leídos</div>
+      						<!-- <div class="tituloNotificaciones grisNot t12 leidos">Marcar todos como leídos</div>-->
       				</div>
-      				<div class="segmentoNotificaciones" style="text-align: center;">
-      					<label id="notMsjs" class="opcionNotificacion grisNot t14">MENSAJES</label>
-      					<label id="notAvis" class="opcionNotificacion grisNot t14">AVISOS</label>
+      				<div class="segmentoNotificaciones1" style="text-align: center; display: none;">
+      					<label id="not01" class="opcionNotificacion grisNot t14">Autorizadas</label>
+      					<label id="not02" class="opcionNotificacion grisNot t14">Pausadas</label>
+      				</div>
+      				<div class="segmentoNotificaciones2" style="text-align: center; display: none;">
+      					<label id="not03" class="opcionNotificacion grisNot t14">Canceladas</label>
+      					<label id="not04" class="opcionNotificacion grisNot t14">Rechazadas</label>
+      					<div class="drop">
+						  <select name="slct" id="select" class= "s_drop" onchange="ShowSelectedItem()">
+						    <option class= "drop_option" value="1">Semana</option>
+						    <option class= "drop_option" value="2">Mes</option>
+						    <option class= "drop_option" value="3">Año</option>
+						  </select>
+						</div>
       				</div>
       				<div class="segmentoNotificaciones" id="divisionAvisos" style="display: none; text-align: center;">
       					<label rel="0" class="divAvisos opcionNotificacion grisNot t11">AUTORIZADAS</label>

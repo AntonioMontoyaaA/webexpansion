@@ -89,8 +89,8 @@
 							
 							</div>
 							
-							<div class="col-lg-3" id="subida" style="height: 300px; overflow: auto; display: none;">
-								<form action="/uploadLayout" class="dropzone" id="uploader"></form>
+							<div class="col-lg-3" id="subida" style="height: 300px;  display: none;">
+								<form action="/uploadLayout" class="dropzone" id="uploader" style="overflow: auto; display: flex; align-items: center; padding: 0;"></form>
 							</div>
 						</div>
 					</div>

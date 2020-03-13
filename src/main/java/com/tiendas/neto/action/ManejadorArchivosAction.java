@@ -15,15 +15,17 @@ import org.apache.struts2.interceptor.SessionAware;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.interceptor.ParameterNameAware;
 import com.tiendas.neto.dao.Expansionlog;
 import com.tiendas.neto.singleton.SingletonProperties;
+import com.tiendas.neto.vo.DoctosLayoutVo;
 import com.tiendas.neto.vo.DocumentoHoja;
 import com.tiendas.neto.vo.DocumentosVO;
-import com.tiendas.neto.vo.Fcurl;
 import com.tiendas.neto.vo.RespuestaVo;
 import com.tiendas.neto.vo.UsuarioLoginVO;
 
@@ -243,6 +245,80 @@ public class ManejadorArchivosAction
 							
 							
 						}
+				} else if(tipoServicio.equals("1")){
+					ObjectMapper mapper = new ObjectMapper();		
+					String list = ServletActionContext.getRequest().getParameter("listLayout");
+					DoctosLayoutVo[] objLyt = mapper.readValue(list, DoctosLayoutVo[].class);
+					
+					String url = null;
+					
+					JsonObject objUrl = new JsonObject();
+					JsonObject objNomb = new JsonObject();
+										
+					for (DoctosLayoutVo layout : objLyt) {
+						mdId = layout.getMdId();
+						fecha = layout.getFecha();
+						builder = new Builder()
+								.add("mdId", layout.getMdId())
+								.add("nombreArc", layout.getNombreArchivo())
+								.add("archivo", layout.getArchivo())
+								.add("formato",  layout.getFormato())
+								.add("tipoArchivo", layout.getTipoArchivo())
+								.add("fecha", layout.getFecha())
+								.add("usuarioId", numeroEmpleado);
+							
+							body = builder.build();
+							request = new Request.Builder()
+								.url(sp.getPropiedad("cloudinarySet"))
+								.post(body)
+								.build();
+							
+							response = client.newCall(request).execute();
+							respuesta = response.body().string();
+							
+							url = obtieneURL(respuesta);
+							
+							if(layout.getFormato().equals("dwg")) {
+								objUrl.addProperty("urllayoutdwg", url);
+								objNomb.addProperty("nombreArchivodwg", "LAYOUTDWG");
+							}
+						
+							else if(layout.getFormato().equals("pdf")) {
+								objUrl.addProperty("urllayout", url);	
+								objNomb.addProperty("nombreArchivo", "LAYOUT");
+							}		 
+						}
+					
+					JsonArray arrUrl = new JsonArray();
+					arrUrl.add(objUrl); // JsonPrimitive, JsonObject o JsonArray
+					
+					JsonArray arrNom = new JsonArray();
+					arrNom.add(objNomb);
+					
+					if(objUrl.get("urllayoutdwg").equals(null) || objUrl.get("urllayout").equals(null)){
+						elog.info("subeLayout", "ManejadorArchivosAction", "No se subio la imagen", respuesta);
+						sendJSONObjectToResponse(respuesta);
+					}else {
+						String jsonUrl = new Gson().toJson(arrUrl);
+						String jsonNom = new Gson().toJson(arrNom);
+						builder = new Builder()
+									.add("usuarioId", numeroEmpleado)
+									.add("mdId", mdId)
+									.add("urlArchivo", jsonUrl)
+									.add("nombreArchivo", jsonNom)
+									.add("tipoServicio", tipoServicio)
+									.add("fecha", fecha);
+						
+						body = builder.build();
+						request = new Request.Builder()
+							.url(sp.getPropiedad("guardadocsmontos"))
+							.post(body)
+							.build();
+						
+						response = client.newCall(request).execute();
+						respuesta = response.body().string();
+						respuesta = setURLToResponse(respuesta,jsonUrl );						
+					}
 				} else {
 					if(monto.isEmpty())
 						monto = "''";
@@ -770,6 +846,32 @@ public class ManejadorArchivosAction
 			respuestaVo.setCodigo(404);
 			respuestaVo.setMensaje("Error al conectarse al servidor");
 			sendJSONObjectToResponse(respuestaVo);
+		}
+	}
+	
+	public class fileLayout {
+		private String urlLayoutDwg;
+		private String urlLayoutPdf;
+		
+		public fileLayout(String urlLayoutDwg, String urlLayoutPdf) {
+			this.urlLayoutDwg = urlLayoutDwg;
+			this.urlLayoutPdf = urlLayoutPdf;
+		}
+		
+		public void setNombre(String urlLayoutDwg) {
+			this.urlLayoutDwg = urlLayoutDwg;
+		}
+		
+		public void setUrl(String urlLayoutPdf) {
+			this.urlLayoutPdf = urlLayoutPdf;
+		}
+		
+		public String getUrlLayoutDwg() {
+			return urlLayoutDwg;
+		}
+		
+		public String getUrlLayoutPdf() {
+			return urlLayoutPdf;
 		}
 	}
 }

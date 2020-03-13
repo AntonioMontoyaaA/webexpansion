@@ -212,64 +212,115 @@ function salir(){
 
 var notificaciones="";
 
-function showNotificaciones(){
+function showNotificaciones(tipo){
 	
-	$('.opcionNotificacion').removeClass('notificacionActivada');
-	$('#notMsjs').addClass('notificacionActivada');
-	$('#divisionAvisos').hide();
-	
-	dibujaNotificaciones(AR_MENSAJES);
-	
-	$('#modal_notificaciones').modal('show');
-	
-	$('#notMsjs').unbind('click');
-	$('#notMsjs').click(function(){
-		if(!$('#notMsjs').hasClass('notificacionActivada')){// Sino se esta mostrando
-			$('#notAvis').removeClass('notificacionActivada');
-			$('#notMsjs').addClass('notificacionActivada');
-			$('#divisionAvisos').hide();
-			$('.leidos').show();
-			dibujaNotificaciones(AR_MENSAJES);
-		}
-	});
-	
-	$('#notAvis').unbind('click');
-	$('#notAvis').click(function(){
-		if(!$('#notAvis').hasClass('notificacionActivada')){// Sino se esta mostrando
-			$('.opcionNotificacion').removeClass('notificacionActivada');
-			$('#notAvis').addClass('notificacionActivada');
-			$('#divisionAvisos').show();
-			$('.leidos').hide();
-			
-			$('#divisionAvisos').find('.opcionNotificacion').first().addClass('notificacionActivadaTurquesa');
-			dibujaNotificaciones(AR_AVISOS[0]);
-			
-			$('.divAvisos').unbind('click');
-			$('.divAvisos').click(function(){
-				if(!$(this).hasClass('notificacionActivadaTurquesa')){// Sino se esta mostrando
-					$('.divAvisos').removeClass('notificacionActivadaTurquesa');
-					$(this).addClass('notificacionActivadaTurquesa');
-					
-					dibujaNotificaciones(AR_AVISOS[$(this).attr('rel')]);
-				}
-			});
-		}
-	});
-	
-	$('.leidos').unbind('click');
-	$('.leidos').click(function(){
-		mds = '';
+	if(tipo == 1){
+		$('.segmentoNotificaciones1').show();
+		$('.segmentoNotificaciones2').hide();
+		$('.opcionNotificacion').removeClass('notificacionActivada');
+		$('#not01').addClass('notificacionActivada');
+		$('#divisionAvisos').hide();
+		dibujaNotificaciones(AR_MENSAJES);
 		
-		for (var i = 0; i < AR_MENSAJES.length; i++) {
-			if(i < AR_MENSAJES.length -1)
-				mds += AR_MENSAJES[i].mdId +',';
-			else
-				mds += AR_MENSAJES[i].mdId;
-		}
+		$('#modal_notificaciones').modal('show');
 		
-		$('#modal_notificaciones').modal('hide');
-		marcarMensajeLeido(2, mds, true);
-	});
+		$('#not01').unbind('click');
+		$('#not01').click(function(){
+			if(!$('#not01').hasClass('notificacionActivada')){// Sino se esta mostrando
+				$('#not02').removeClass('notificacionActivada');
+				$('#not01').addClass('notificacionActivada');
+				$('#divisionAvisos').hide();
+				$('.leidos').show();
+				dibujaNotificaciones(AR_MENSAJES);
+			}
+		});
+		
+		$('#not02').unbind('click');
+		$('#not02').click(function(){
+			if(!$('#not02').hasClass('notificacionActivada')){// Sino se esta mostrando
+				$('.opcionNotificacion').removeClass('notificacionActivada');
+				$('#not02').addClass('notificacionActivada');
+				$('.divAvisos').unbind('click');
+				$('.divAvisos').click(function(){
+					if(!$(this).hasClass('notificacionActivadaTurquesa')){// Sino se esta mostrando
+						$('.divAvisos').removeClass('notificacionActivadaTurquesa');
+						$(this).addClass('notificacionActivadaTurquesa');
+						
+						dibujaNotificaciones(AR_AVISOS[$(this).attr('rel')]);
+					}
+				});
+			}
+		});
+		
+		$('.leidos').unbind('click');
+		$('.leidos').click(function(){
+			mds = '';
+			
+			for (var i = 0; i < AR_MENSAJES.length; i++) {
+				if(i < AR_MENSAJES.length -1)
+					mds += AR_MENSAJES[i].mdId +',';
+				else
+					mds += AR_MENSAJES[i].mdId;
+			}
+			
+			$('#modal_notificaciones').modal('hide');
+			marcarMensajeLeido(2, mds, true);
+		});
+	}else if(tipo ==2){
+		$('.segmentoNotificaciones1').hide();
+		$('.segmentoNotificaciones2').show();
+		$('.opcionNotificacion').removeClass('notificacionActivada');
+		$('#not03').addClass('notificacionActivada');
+		$('#divisionAvisos').hide();
+		dibujaNotificaciones(AR_MENSAJES);
+		
+		$('#modal_notificaciones').modal('show');
+		
+		$('#not03').unbind('click');
+		$('#not03').click(function(){
+			if(!$('#not03').hasClass('notificacionActivada')){// Sino se esta mostrando
+				$('#not04').removeClass('notificacionActivada');
+				$('#not03').addClass('notificacionActivada');
+				$('#divisionAvisos').hide();
+				$('.leidos').show();
+				dibujaNotificaciones(AR_MENSAJES);
+			}
+		});
+		
+		$('#not04').unbind('click');
+		$('#not04').click(function(){
+			if(!$('#not04').hasClass('notificacionActivada')){// Sino se esta mostrando
+				$('.opcionNotificacion').removeClass('notificacionActivada');
+				$('#not04').addClass('notificacionActivada');
+				
+				$('.divAvisos').unbind('click');
+				$('.divAvisos').click(function(){
+					if(!$(this).hasClass('notificacionActivadaTurquesa')){// Sino se esta mostrando
+						$('.divAvisos').removeClass('notificacionActivadaTurquesa');
+						$(this).addClass('notificacionActivadaTurquesa');
+						
+						dibujaNotificaciones(AR_AVISOS[$(this).attr('rel')]);
+					}
+				});
+			}
+		});
+		
+		$('.leidos').unbind('click');
+		$('.leidos').click(function(){
+			mds = '';
+			
+			for (var i = 0; i < AR_MENSAJES.length; i++) {
+				if(i < AR_MENSAJES.length -1)
+					mds += AR_MENSAJES[i].mdId +',';
+				else
+					mds += AR_MENSAJES[i].mdId;
+			}
+			
+			$('#modal_notificaciones').modal('hide');
+			marcarMensajeLeido(2, mds, true);
+		});
+	}
+	
 }
 
 function dibujaNotificaciones(ar){
@@ -364,21 +415,33 @@ var AR_MENSAJES;
 var AR_AVISOS;
 var TOTAL_NOTIFICACIONES;
 
-function actualizaTotalNotificaciones(total){
-	TOTAL_NOTIFICACIONES += parseInt(total);
-	
-	if(TOTAL_NOTIFICACIONES > 0){
-		$('#alerta_circulo').text(TOTAL_NOTIFICACIONES);
-		$('#alerta_circulo').show();
+function actualizaTotalNotificaciones(totalVerde, totalRojo){
+	var TOTAL_VERDE = parseInt(totalVerde);
+	var TOTAL_ROJO = parseInt(totalRojo);
+	if(TOTAL_VERDE > 0){
+		$('#alerta_circulo_verde').text(TOTAL_VERDE);
+		$('#alerta_circulo_verde').show();
+		$('#bell_verde')[0].src='img/web_AVISOS.png'; 
+	} else{
+		$('#alerta_circulo_verde').hide();
+		$('#bell_verde')[0].src = 'img/bell_verde.svg';
+	}
+	if(TOTAL_ROJO > 0){
+		$('#alerta_circulo_rojo').text(TOTAL_ROJO);
+		$('#alerta_circulo_rojo').show();
+		$('#bell_rojo')[0].src='img/web_AVISOS.png';
 	}else{
-		$('#alerta_circulo').hide();
-	}	
+		$('#alerta_circulo_rojo').hide();
+		$('#bell_rojo')[0].src = 'img/bell_roja.svg';
+	}
+	
+	
 }
 
 function consultaNotificaciones(){
 	
 	 TOTAL_NOTIFICACIONES = 0;
-	 actualizaTotalNotificaciones(0);
+	 actualizaTotalNotificaciones(TOTAL_NOTIFICACIONES,TOTAL_NOTIFICACIONES);
 	 
 	 invocarJSONServiceAction("notificaciones", 
 				{'tipoComentario':2,
@@ -398,7 +461,7 @@ function consultaNotificaciones(){
 	 
 		if(data.codigo == 200){
 			
-			actualizaTotalNotificaciones(data.totalNotificaciones);
+			actualizaTotalNotificaciones(data.totalNotificaciones, data.totalNotificaciones);
 			
 			AR_MENSAJES = new Array();
 			$.each(data.notificaciones, function(){
@@ -433,7 +496,7 @@ function consultaNotificaciones(){
 			total += parseInt(data.totalNotificacionesRe);
 			total += parseInt(data.totalNotificaciones);
 			
-			actualizaTotalNotificaciones(total);
+			actualizaTotalNotificaciones(total, total);
 			
 			AR_AVISOS = {};
 			arrayAvisos = [data.notificaciones, data.notificacionesCan, data.notificacionesRe];
@@ -705,8 +768,7 @@ function validaEmail(value){
 	if(value.value.trim() === ""){
 		$(value).removeClass("inputerror");
 		$(value).addClass("inputform");		
-	}else
-	if (regexpEmail.test(value.value) !== true ){
+	}else if (regexpEmail.test(value.value) !== true ){
 		$(value).removeClass("inputform");
 		$(value).addClass("inputerror");
 	}else{
@@ -781,4 +843,10 @@ function permisos_perfil(){
 			$('#botondescarga').removeClass('sin_permiso');
 		}
 	});
+}
+
+function ShowSelectedItem(){
+	var cod = $('#select')[0].value;
+	console.log(cod)
+	
 }

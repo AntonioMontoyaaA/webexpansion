@@ -25,7 +25,31 @@ var dropzoneOptions = {
         removedfile: function(file) {
         	FILE_B64 = '';
         	FILE_Type = '';
-        	ACCION_REALIZADA = false;
+        	if(tipoArchivo  != '' && tipoArchivo == 2){
+        		pdf = false; dwg = false;
+        		for (var i = 0; i < filesLayout.length; i++) {
+        			var f = filesLayout[i];
+        			if(file.name ==  f.name){
+        				filesLayout.splice(i, 1);
+        			}
+				}
+        		
+        		for (var j = 0; j < filesLayout.length; j++) {
+        			var f = filesLayout[j];
+					if(f.FILE_Type == 'application/pdf'){
+						pdf = true;
+					}else if(f.FILE_Type == 'image/dwg'){
+						dwg = true;
+					}
+				}
+        		if(pdf && dwg){
+        			ACCION_REALIZADA = true;
+        		}else{
+        			ACCION_REALIZADA = false;
+        		}
+        	}else{
+        		ACCION_REALIZADA = false;
+        	}
         	var _ref;
         	  
         	return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
@@ -103,6 +127,7 @@ var SOLO_CONSULTA = false;
 
 var MOTIVO_RECHAZO_SELECCIONADO;
 var COMENTARIO_RECHAZO;
+var filesLayout = [];
 
 $(function(){
 	
@@ -239,10 +264,33 @@ function finalizacionMDAutorizada(){
 				
 		}else if(area.tipoArchivo == layout){ // layout
 			
-			if(ACCION_REALIZADA)
-				mensajeConfirmacion('¿Est\u00e1s seguro de finalizar?', 1);
-			else
-				mensajeAlerta('Agrega el archivo de layout');
+			if(filesLayout.length == 0){
+				mensajeAlerta('Agregar archivos de layout');
+			}else{
+				var pdf = false; var dwg = false; var contDwg = 0; 	var contPdf = 0;
+				
+				for(var i=0; i< filesLayout.length; i++){
+					f =  filesLayout[i]
+					if(f.FILE_Type == 'image/dwg'){
+						dwg = true
+						contDwg = contDwg + 1;
+					}else if(f.FILE_Type == 'application/pdf'){
+						pdf = true;
+						contPdf = contPdf + 1;
+					}
+				}
+				if(pdf && dwg && contPdf == 1 && contDwg == 1){
+					ACCION_REALIZADA = true;
+					mensajeConfirmacion('¿Est\u00e1s seguro de finalizar?', 1);
+				}else{
+					var txt = !pdf && contPdf == 0 ? 'Falta archivo pdf' : 
+							  !dwg && contDwg == 0 ? 'Falta archivo dwg' :
+							  contPdf > 1 || contDwg > 1  ? 'Solo se necesita un archivo PDF y un DWG ': '';
+					ACCION_REALIZADA = false;
+					mensajeAlerta(txt)
+				}
+				
+			}
 		}else if (area.tipoArchivo == presupuesto) {//presupuestos
 			if(!ACCION_REALIZADA)
 				mensajeAlerta('Agrega el archivo de presupuesto');
@@ -450,8 +498,8 @@ function validaAutorizacion(){
 			
 			
 			
-			dropzoneOptions.maxFiles = 1;
-			dropzoneOptions.acceptedFiles = 'image/*,application/pdf,.psd';
+			dropzoneOptions.preventDuplicates = true;
+			dropzoneOptions.acceptedFiles = 'application/pdf,.dwg';
 			dropzoneOptions.accept = function(file, done){
 						                reader = new FileReader();
 						                reader.onload = handleReaderLoad;
@@ -460,12 +508,67 @@ function validaAutorizacion(){
 						                FILE_B64 = '';
 						                FILE_Type = '';
 						                
+						                
 						                function handleReaderLoad(evt) {
 						                	FILE_B64 = evt.target.result;
-						                	FILE_Type = file.type;
+						                	if(file.type == '' ){
+						                		FILE_Type = 'image/dwg';
+						                	}else{
+						                		FILE_Type = file.type;	
+						                	}
+						                	var arc = {
+						                		FILE_Type: FILE_Type,
+						                		FILE_B64: FILE_B64,
+						                		name : file.name
+						                	}
+						                	dropzoneOptions.dictMaxFilesExceeded =  file.name
+						                	filesLayout.push(arc)
 						                	
 						                	ACCION_REALIZADA = true;
 						                }
+						               Dropzone.prototype.isFileExist = function(file) {
+						                    var i;
+						                    if(this.files.length > 0) {
+						                      for(i = 0; i < this.files.length; i++) {
+						                        if(this.files[i].name === file.name 
+						                          && this.files[i].size === file.size 
+						                          && this.files[i].lastModifiedDate.toString() === file.lastModifiedDate.toString())
+						                         {
+						                             return true;
+						                         }
+						                      }
+						                    }
+						                    return false;
+						                  };
+						           Dropzone.prototype.addFile = function(file) {
+						                    file.upload = {
+						                      progress: 0,
+						                      total: file.size,
+						                      bytesSent: 0
+						                    };
+						                    if (this.options.preventDuplicates && this.isFileExist(file)) {
+						                      mensajeAlerta("Archivo duplicado");
+						                      return;
+						                    }
+						                    this.files.push(file);
+						                    file.status = Dropzone.ADDED;
+						                    this.emit("addedfile", file);
+						                    this._enqueueThumbnail(file);
+						                    return this.accept(file, (function(_this) {
+						                      return function(error) {
+						                        if (error) {
+						                          file.accepted = false;
+						                          _this._errorProcessing([file], error);
+						                        } else {
+						                          file.accepted = true;
+						                          if (_this.options.autoQueue) {
+						                            _this.enqueueFile(file);
+						                          }
+						                        }
+						                        return _this._updateMaxFilesReachedClass();
+						                      };
+						                    })(this));
+						                  };
 						                done();
 						            };
 
@@ -935,6 +1038,31 @@ function finalizaConCargaPrevia(){
 				'respSubeArchivo', 
 				function() {},
 				function() {});
+	} else if(tipoServicio == 1) {
+		var listLayout = [];
+		for (var i = 0; i < filesLayout.length; i++) {
+			var f = filesLayout[i];
+			var type = f.FILE_Type.split('/')[1];
+			var nom = type == 'pdf' ? nombreArchivo : 'LYTDWG' + mdId; 
+			var f = {
+					mdId: mdId,
+					nombreArchivo: nom,
+					archivo : f.FILE_B64,
+					formato :type,
+					tipoArchivo: tipoArchivo,
+					tipoServicio: tipoServicio,
+					fecha: fecha,
+					monto: monto,
+					acc: acc
+            	}
+			 listLayout.push(f);
+			}
+		invocarJSONServiceAction("subeArchivo", 
+				{'tipoServicio': tipoServicio,
+				'listLayout' : JSON.stringify(listLayout)},
+				'respSubeArchivo', 
+				function() {},
+				function() {});
 	} else {
 		invocarJSONServiceAction("subeArchivo", 
 				{'mdId': mdId,
@@ -1216,8 +1344,17 @@ function documentacion(data){
 					item.estatus,
 					item.autor,
 					item.fechaSubida, 
-					null)
-			);
+					null));
+			
+			if(item.urllayoutdwg != undefined) {
+				ARCHIVOS_MD[layout].push(new Archivo(
+						item.nombreArchivo + " - FORMATO DWG",
+						item.urllayoutdwg,
+						item.estatus,
+						item.autor,
+						item.fechaSubida, 
+						null));
+			}
 		});
 	}
 	

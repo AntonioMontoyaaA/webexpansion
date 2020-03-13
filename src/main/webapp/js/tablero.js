@@ -258,6 +258,7 @@ function creatabla(){
 			$('#pause').hide;
 			$('#refuse').hide;
 			$('#change').hide;
+			$('#layoutUp').hide;
 			$('#descargaExcelTablero').hide;
 			initTablaMemoriasTablero('DivTablaTablero', 0, 'tablaMemoriasTablero');
 		} else {
@@ -271,6 +272,7 @@ function creatabla(){
 				$("#refuse").show();
 				$("#edit").show();
 				$("#change").show();
+				$('#layoutUp').show();
 				$("#despausar").hide();
 				$("#reactivar").hide();
 			} else {
@@ -280,6 +282,7 @@ function creatabla(){
 				$("#change").hide();
 				$("#reactivar").hide();
 				$("#despausar").hide();
+				$('#layoutUp').hide();
 				
 			}
 			if(tipoTabla == 3) {
@@ -1025,6 +1028,7 @@ function creatabla(){
 						$( '#reactivar' ).removeClass("activado");
 						$( '#pause' ).removeClass("activado");
 						$( '#refuse' ).removeClass("activado");
+						$( '#layoutUp' ).removeClass("activado");
 						$( '#time' ).removeClass("activado");
 						$( '#change' ).removeClass("activado");
 						$("#tablaMemoriasTablero tr").find("td.imagen").removeClass(clase);
@@ -1593,6 +1597,7 @@ $( '#time' ).click(function() {
 		$( '#reactivar' ).removeClass("activado");
 		$( '#pause' ).removeClass("activado");
 		$( '#refuse' ).removeClass("activado");
+		$( '#layoutUp' ).removeClass("activado");
 		$( '#change' ).removeClass("activado");
 	}
 	else{
@@ -1609,6 +1614,7 @@ $( '#edit' ).click(function() {
 		$( '#pause' ).removeClass("activado");
 		$( '#refuse' ).removeClass("activado");
 		$( '#change' ).removeClass("activado");
+		$( '#layoutUp' ).removeClass("activado");
 	}
 	else{
 		clase="";
@@ -1626,6 +1632,7 @@ $( '#despausar' ).click(function() {
 		$( '#pause' ).removeClass("activado");
 		$( '#refuse' ).removeClass("activado");
 		$( '#change' ).removeClass("activado");
+		$( '#layoutUp' ).removeClass("activado");
 	}
 	else{
 		clase="";
@@ -1643,6 +1650,7 @@ $( '#reactivar' ).click(function() {
 		$( '#pause' ).removeClass("activado");
 		$( '#refuse' ).removeClass("activado");
 		$( '#change' ).removeClass("activado");
+		$( '#layoutUp' ).removeClass("activado");
 	}
 	else{
 		clase="";
@@ -1658,6 +1666,7 @@ $( '#pause' ).click(function() {
 		$( '#time' ).removeClass("activado");
 		$( '#refuse' ).removeClass("activado");
 		$( '#change' ).removeClass("activado");
+		$( '#layoutUp' ).removeClass("activado");
 	}
 	else{
 		$( '#pause' ).removeClass("activado");

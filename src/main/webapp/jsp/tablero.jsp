@@ -86,6 +86,7 @@
   					<button class="btn desp sin_permiso" id="pause" type="button"></button>
   					<button class="btn desp sin_permiso" id="refuse" type="button"></button>
   					<button class="btn desp sin_permiso" id="change" type="button"></button>
+  					<button class="btn desp sin_permiso" id="layoutUp" type="button"></button>
                 </form>
             	
             </div> 

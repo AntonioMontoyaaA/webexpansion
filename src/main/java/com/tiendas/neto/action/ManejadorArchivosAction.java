@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -100,7 +101,7 @@ public class ManejadorArchivosAction
 			}else{
 				String numeroEmpleado = String.valueOf(usuario.getPerfil().getNumeroEmpleado());
 				
-				final OkHttpClient client = new OkHttpClient();
+				OkHttpClient client = new OkHttpClient();
 				
 				Builder builder;
 				RequestBody body;
@@ -245,7 +246,7 @@ public class ManejadorArchivosAction
 							
 							
 						}
-				} else if(tipoServicio.equals("1")){
+				} else if(tipoServicio.equals("1") || tipoServicio.equals("17")){
 					ObjectMapper mapper = new ObjectMapper();		
 					String list = ServletActionContext.getRequest().getParameter("listLayout");
 					DoctosLayoutVo[] objLyt = mapper.readValue(list, DoctosLayoutVo[].class);
@@ -297,7 +298,12 @@ public class ManejadorArchivosAction
 					
 					if(objUrl.get("urllayoutdwg").equals(null) || objUrl.get("urllayout").equals(null)){
 						elog.info("subeLayout", "ManejadorArchivosAction", "No se subio la imagen", respuesta);
-						sendJSONObjectToResponse(respuesta);
+						RespuestaVo respuestaVo = new RespuestaVo();
+						respuestaVo.setCodigo(404);
+						respuestaVo.setMensaje("Error al guardar el archivo, intente nuevamente ");
+						
+						String re = new Gson().toJson(respuestaVo);
+						respuesta = setURLToResponse(re, "" );
 					}else {
 						String jsonUrl = new Gson().toJson(arrUrl);
 						String jsonNom = new Gson().toJson(arrNom);

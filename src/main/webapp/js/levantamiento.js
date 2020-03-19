@@ -44,7 +44,6 @@ $(function(){
 		$(".fileUpload").click(function(){ descargaArchivo(this);});
 		$(".drop_file").click(function(){
 			$(this.parentElement.children[2]).trigger("click");
-			//console.log(this);
 		});
 		
 		$("input.var_pdfUpload").change(function (evt) {
@@ -294,7 +293,6 @@ function cargaLevantamiento(){
 			});
 	
 	responseConsultaCaberoMd = function(d){
-		//console.log(d);
 		if(d.codigo == 200){
 			vcb.valNombre.html(d.nombresitio.toUpperCase());
 			vcb.valRegion.html(d.region);
@@ -424,7 +422,6 @@ function estadoEvaluaform(statsEval,d){
 	switch(statsEval) {
 	    case _VPENDIENT:
 	    	//code block
-	    	//console.log("1 :: "+statsEval);
 	    	
 	    	AREA_USUARIO = $("#areaUsuario").val(); 
 	    	showModulosForm();
@@ -465,7 +462,6 @@ function estadoEvaluaform(statsEval,d){
 	        break;
 	    case VRECHAZADO:
 	    	//code block -- onlyRead
-	    	//console.log("2 :: "+statsEval);
 	    	if(!esEvalua){
 				inicializaCalendarios($("#var_fdFecha"));
 			}
@@ -521,7 +517,6 @@ function estadoEvaluaform(statsEval,d){
 	        break;
 	    case VACEPTADO:
 	    	//code block
-	    	//console.log("3 :: "+statsEval);
 	    	$("#val_upload_levant").hide();
 	    	$("#bton_enviarRevision").hide();
 	    	$("#btn_guardarLevanta").hide();
@@ -555,7 +550,6 @@ function estadoEvaluaform(statsEval,d){
 	        
 	    case VPENDIENTE2:
 	    	//code block -- onlyRead
-	    	//console.log("4 :: "+statsEval);
 	    	
 	    	$("#mdIdAutorizacion").val( $("#idMd").val());
 	    	$("#mdId").val($("#idMd").val());
@@ -610,7 +604,6 @@ function estadoEvaluaform(statsEval,d){
 	       
 	    case MD_PROCESOOBRA:
 	    	//code block
-	    	//console.log("5 :: "+statsEval);
 	    	AREA_USUARIO = $("#areaUsuario").val(); 
 	    	$("#var_msjMdObra").html("NO SE CUENTA CON EL LEVANTAMIENTO, YA QUE FUE IMPLEMENTADO DESPU&Eacute;S DE LA CARGA DE LA MD ACTUAL");
 	    	$("#val_upload_levant").hide();
@@ -628,7 +621,6 @@ function estadoEvaluaform(statsEval,d){
 	    default:
 	    	$("#val_upload_levant").hide();
 	    	$("#btn_guardarLevanta").hide();
-	    	//console.log("6 :: "+statsEval);
 	        //code block
 		}
 	
@@ -1051,7 +1043,6 @@ function getValueObject(){
 			  	
 			 };
 	*/
-	//console.log(v);
 }
 
 

@@ -203,8 +203,6 @@ function progSemanal(){
 		cargaMensajeModal('DASHBOARD ', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
 		}
 	if(data.codigo==200) {
-		console.log("*** ENTRA A DATOS ***");
-		
 		if($('#opcion_historial').val()=="0"){
 			$('#titulo_historial').text('Progreso Diario');
 		}

@@ -246,7 +246,7 @@ function botonNext(){
 	var mes=$('#mes_select').val();
 	var año=$('#año_select').val();
 	
-	console.log(mes+" "+ año)
+	//console.log(mes+" "+ año)
 	
 	if(mes<=12){
 		mes++;
@@ -739,7 +739,7 @@ function enviaDatos(){
 		}
 	}
 	
-	console.log(cadenaEnviar);
+	//console.log(cadenaEnviar);
 	invocarJSONServiceAction("enviaDatos",
 			{
 				"tareaxAreaId":$('#tipo_evento').val(),

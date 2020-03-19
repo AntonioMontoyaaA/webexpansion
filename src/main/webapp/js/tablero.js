@@ -33,6 +33,61 @@ var CORRECCONSTR	= 29;
 var PRECONTRATO		= 31;
 var ENTREGACONTRATO = 32;
 
+var tipoArchivoLayout = 2;
+var tipoServicioLayout = 17;
+var mdIdCambioLayout;
+var nombreArchivo = 'LYT_UPT';
+
+Dropzone.autoDiscover = false;
+var uploader;
+var dropzone;
+var filesLayout = [];
+var dropzoneOptions = {
+        dictDefaultMessage: 'Arrastra aqui el archivo o da clic para buscarlo en tu equipo',
+        dictFallbackMessage: 'Tu explorador no es compatible, actualizalo',
+        dictFileTooBig: 'El archivo es muy grande {{filesize}}, el limite es {{maxFilesize}} MB',
+        dictInvalidFileType: 'Archivo no permitido',
+        dictRemoveFile: 'Eliminar archivo', 
+        dictMaxFilesExceeded: 'Solo puedes agregar {{maxFiles}} archivo',
+        paramName: "file",
+        maxFilesize: 10, //MB
+        autoProcessQueue: false,
+        uploadMultiple: false,
+        addRemoveLinks: true,
+        removedfile: function(file) {
+        	FILE_B64 = '';
+        	FILE_Type = '';
+        	if(tipoArchivo  != '' && tipoArchivo == 2){
+        		pdf = false; dwg = false;
+        		for (var i = 0; i < filesLayout.length; i++) {
+        			var f = filesLayout[i];
+        			if(file.name ==  f.name){
+        				filesLayout.splice(i, 1);
+        			}
+				}
+        		
+        		for (var j = 0; j < filesLayout.length; j++) {
+        			var f = filesLayout[j];
+					if(f.FILE_Type == 'application/pdf'){
+						pdf = true;
+					}else if(f.FILE_Type == 'image/dwg'){
+						dwg = true;
+					}
+				}
+        		if(pdf && dwg){
+        			ACCION_REALIZADA = true;
+        		}else{
+        			ACCION_REALIZADA = false;
+        		}
+        	}else{
+        		ACCION_REALIZADA = false;
+        	}
+        	var _ref;
+        	  
+        	return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
+        }
+    };
+
 
 var togSrc = [
     "../img/arrowDown.png",
@@ -1023,6 +1078,9 @@ function creatabla(){
 						if(clase=="change_tabla"){
 							cambiarStatusMD(nombreMd, mdId);
 						}
+						if(clase=="layout_tabla"){
+							subeLayoutMD(nombreMd, mdId);
+						}
 						$( '#edit' ).removeClass("activado");
 						$( '#despausar' ).removeClass("activado");
 						$( '#reactivar' ).removeClass("activado");
@@ -1031,6 +1089,7 @@ function creatabla(){
 						$( '#layoutUp' ).removeClass("activado");
 						$( '#time' ).removeClass("activado");
 						$( '#change' ).removeClass("activado");
+						$( '#status' ).removeClass("activado");
 						$("#tablaMemoriasTablero tr").find("td.imagen").removeClass(clase);
 						clase="";
 						
@@ -1682,6 +1741,7 @@ $( '#refuse' ).click(function() {
 		$( '#pause' ).removeClass("activado");
 		$( '#time' ).removeClass("activado");
 		$( '#change' ).removeClass("activado");
+		$( '#layoutUp' ).removeClass("activado");
 	}
 	else{
 		$( '#refuse' ).removeClass("activado");
@@ -1697,9 +1757,26 @@ $( '#change' ).click(function() {
 		$( '#pause' ).removeClass("activado");
 		$( '#refuse' ).removeClass("activado");
 		$( '#time' ).removeClass("activado");
+		$( '#layoutUp' ).removeClass("activado");
 	}
 	else{
 		$( '#change' ).removeClass("activado");
+		clase="";
+	}
+});
+$( '#layoutUp' ).click(function() {
+	if(clase!="layout_tabla"){
+		clase="layout_tabla";
+		$( '#layoutUp' ).addClass("activado");
+		
+		$( '#refuse' ).removeClass("activado");
+		$( '#edit' ).removeClass("activado");
+		$( '#pause' ).removeClass("activado");
+		$( '#time' ).removeClass("activado");
+		$( '#change' ).removeClass("activado");
+	}
+	else{
+		$( '#layoutUp' ).removeClass("activado");
 		clase="";
 	}
 });
@@ -1742,9 +1819,108 @@ function rechazarMD(nombreMd, mdId){
             TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, rechazaMdAction);
 }
 function cambiarStatusMD(nombreMd, mdId){
-    cargaMensajeModal('TABLERO', 
-            '¿Está seguro de cambiar el estatus de la MD?',
-            TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, '');
+	cargaModalDrop('TABLERO', 
+            'Selecciona el nuevo estatus de la MD',
+             mdId);
+}
+function subeLayoutMD(nombreMd, mdId) {
+	//Muestra modal
+	
+	mdIdCambioLayout = mdId;
+	$('#subida').show();
+	
+	dropzoneOptions.preventDuplicates = true;
+	dropzoneOptions.acceptedFiles = 'application/pdf,.dwg';
+	dropzoneOptions.accept = function(file, done){
+				                reader = new FileReader();
+				                reader.onload = handleReaderLoad;
+				                reader.readAsDataURL(file);
+				                
+				                FILE_B64 = '';
+				                FILE_Type = '';
+				                
+				                
+				                function handleReaderLoad(evt) {
+				                	FILE_B64 = evt.target.result;
+				                	if(file.type == '' ){
+				                		FILE_Type = 'image/dwg';
+				                	}else{
+				                		FILE_Type = file.type;	
+				                	}
+				                	var arc = {
+				                		FILE_Type: FILE_Type,
+				                		FILE_B64: FILE_B64,
+				                		name : file.name
+				                	}
+				                	dropzoneOptions.dictMaxFilesExceeded =  file.name
+				                	filesLayout.push(arc)
+				                	
+				                	ACCION_REALIZADA = true;
+				                }
+				               Dropzone.prototype.isFileExist = function(file) {
+				                    var i;
+				                    if(this.files.length > 0) {
+				                      for(i = 0; i < this.files.length; i++) {
+				                        if(this.files[i].name === file.name 
+				                          && this.files[i].size === file.size 
+				                          && this.files[i].lastModifiedDate.toString() === file.lastModifiedDate.toString())
+				                         {
+				                             return true;
+				                         }
+				                      }
+				                    }
+				                    return false;
+				                  };
+				           Dropzone.prototype.addFile = function(file) {
+				                    file.upload = {
+				                      progress: 0,
+				                      total: file.size,
+				                      bytesSent: 0
+				                    };
+				                    if (this.options.preventDuplicates && this.isFileExist(file)) {
+				                      mensajeAlerta("Archivo duplicado");
+				                      return;
+				                    }
+				                    this.files.push(file);
+				                    file.status = Dropzone.ADDED;
+				                    this.emit("addedfile", file);
+				                    this._enqueueThumbnail(file);
+				                    return this.accept(file, (function(_this) {
+				                      return function(error) {
+				                        if (error) {
+				                          file.accepted = false;
+				                          _this._errorProcessing([file], error);
+				                        } else {
+				                          file.accepted = true;
+				                          if (_this.options.autoQueue) {
+				                            _this.enqueueFile(file);
+				                          }
+				                        }
+				                        return _this._updateMaxFilesReachedClass();
+				                      };
+				                    })(this));
+				                  };
+				                done();
+				            };
+
+    uploader = document.querySelector('#uploader');
+	dropzone = new Dropzone(uploader, dropzoneOptions);
+	
+	tipoArchivo = 2;
+	tipoServicio = 1;
+	prefijo = 'LYT';
+	
+	$('#manejadorArchivos').show();
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	modalTabla('CARGA LAYOUT MD: ' + nombreMd);
 }
 
 function despausaMdAction() {
@@ -1853,4 +2029,154 @@ function rechazaMdAction() {
             creatabla();
         }
     }
+}
+
+function modalTabla(nombre){
+	
+	modal = document.getElementById('modal');
+//	modalImg = document.getElementById('imageModal');
+	captionText = document.getElementById('captionModal');
+	$('#mensajeErrorLayoutUp').text('---');
+	$('#mensajeErrorLayoutUp').hide();
+	$('#mensajeLoadingLayoutUp').hide();
+	
+	modal.style.display = "flex";
+	$('body').css('overflow','hidden');
+	
+    captionText.innerHTML = nombre;	
+    
+    closeModal();
+}
+
+function closeModal(){
+	span = document.getElementsByClassName("closeModal")[0];
+	span.onclick = function() { 
+		$('body').css('overflow','auto');
+		modal.style.display = "none";
+		if(dropzone != undefined)
+			dropzone.destroy();
+	}
+}
+
+$( '#botonModalAceptar' ).click(function() {
+	var listLayout = [];
+	var fecha = new Date().format("dd/mm/yyyy H:MM:ss");
+	
+	if(filesLayout.length > 0) {
+		
+		$('#mensajeErrorLayoutUp').text('---');
+		$('#mensajeErrorLayoutUp').hide();
+		$('#mensajeLoadingLayoutUp').show();
+		
+		var banderaExistePdf = false;
+		var banderaExisteDwg = false;
+		for (var i = 0; i < filesLayout.length; i++) {
+			var f = filesLayout[i];
+			var type = f.FILE_Type.split('/')[1];
+			var nom = type == 'pdf' ? nombreArchivo : 'LYTDWG' + mdIdCambioLayout; 
+			var f = {
+					mdId: mdIdCambioLayout,
+					nombreArchivo: nom,
+					archivo : f.FILE_B64,
+					formato :type,
+					tipoArchivo: tipoArchivoLayout,
+					tipoServicio: tipoServicioLayout,
+					fecha: fecha,
+					monto: '',
+					acc: ''
+	        	}
+			 listLayout.push(f);
+			
+			if(type == 'pdf' || type == 'PDF') {
+				banderaExistePdf = true;
+			}
+			if(type == 'dwg' || type == 'DWG') {
+				banderaExisteDwg = true;
+			}
+		}
+		
+		if(banderaExisteDwg && banderaExistePdf) {
+			
+			$('body').css('overflow','auto');
+			modal.style.display = "none";
+			
+			if(dropzone != undefined)
+				dropzone.destroy();
+			
+			invocarJSONServiceAction("subeArchivo", 
+					{'tipoServicio': tipoServicioLayout,
+					'listLayout' : JSON.stringify(listLayout)},
+					'respSubeArchivo', 
+					function() {},
+					function() {});
+			
+			respSubeArchivo = function(data){
+				$('#mensajeLoadingLayoutUp').hide();
+				cierraLoading();
+				
+				if(data.codigo != 200){	
+					//$('#mensajeErrorLayoutUp').text('Ocurrio un error, favor de reintentarlo');
+					//$('#mensajeErrorLayoutUp').show();
+					//$('#mensajeLoadingLayoutUp').hide();
+					cargaMensajeModal('CARGA DE LAYOUT', 'Error al cargar el layout', TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR);
+				} else {
+					cargaMensajeModal('CARGA DE LAYOUT', 'Carga de layout exitoso', TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_EXITO, null);
+				}
+			}
+		} else if(!banderaExisteDwg) {
+			$('#mensajeErrorLayoutUp').text('Debes cargar un archivo en formato DWG');
+			$('#mensajeErrorLayoutUp').show();
+			$('#mensajeLoadingLayoutUp').hide();
+		} else if(!banderaExistePdf) {
+			$('#mensajeErrorLayoutUp').text('Debes cargar un archivo en formato PDF');
+			$('#mensajeErrorLayoutUp').show();
+			$('#mensajeLoadingLayoutUp').hide();
+		}
+		
+		
+	} else {
+		$('#mensajeErrorLayoutUp').text('Debes cargar un archivo DWG y un PDF');
+		$('#mensajeErrorLayoutUp').show();
+		$('#mensajeLoadingLayoutUp').hide();
+	}
+});
+
+/*----------------------------------- Modal droplist */
+function cargaModalDrop(titulo, descripcionMensaje,  mdId) {
+	$("#tituloMensaje").text(titulo);
+	$("#descripcionMensaje").html(descripcionMensaje);
+	$("#mensajeHeader").css("background", "#071B36");
+		
+	//invocacion de Action
+	
+	$("#modal_drop").modal('show');
+}
+function ShowSelectedItem(){
+	var cod = $('#select_modal')[0].value;
+	console.log(cod)
+		
+ invocarJSONServiceAction("accion_md_action", 
+            {'mdId': mdId,
+            'estatusvalidacion': cod
+            }, 
+            'accionMdResponse', 
+            function() {
+                //Funcion de error
+                
+                cierraLoading();
+            },
+            function() {
+                //Función al finalizar
+                
+                cierraLoading();
+            });
+    accionMdResponse = function( data ) {
+        if(data.codigo != 200) {
+            cargaMensajeModal('EDITA MD', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
+        } else {
+            cargaMensajeModal('EDITA MD', "Memoria descriptiva cancelada con éxito", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_EXITO, null);
+            creatabla();
+        }
+    }
+	
 }

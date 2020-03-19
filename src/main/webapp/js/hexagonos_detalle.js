@@ -80,5 +80,4 @@ function pintaFlujo(data){
 }
 function muestra_proceso(valor){
 	seleccionado=$(valor).attr('id');
-	console.log('seleccionado'+ seleccionado);
 }

@@ -181,16 +181,11 @@
       					<label id="not04" class="opcionNotificacion grisNot t14">Rechazadas</label>
       					<div class="drop">
 						  <select name="slct" id="select" class= "s_drop" onchange="ShowSelectedItem()">
-						    <option class= "drop_option" value="1">Semana</option>
-						    <option class= "drop_option" value="2">Mes</option>
-						    <option class= "drop_option" value="3">Año</option>
+						    <option class= "drop_option" value="2">Semana</option>
+						    <option class= "drop_option" value="3">Mes</option>
+						    <option class= "drop_option" value="4">Año</option>
 						  </select>
 						</div>
-      				</div>
-      				<div class="segmentoNotificaciones" id="divisionAvisos" style="display: none; text-align: center;">
-      					<label rel="0" class="divAvisos opcionNotificacion grisNot t11">AUTORIZADAS</label>
-      					<label rel="1" class="divAvisos opcionNotificacion grisNot t11">CANCELADAS</label>
-      					<label rel="2" class="divAvisos opcionNotificacion grisNot t11">RECHAZADAS</label>
       				</div>
       				<div class="contenedorNotificaciones">
       				</div>

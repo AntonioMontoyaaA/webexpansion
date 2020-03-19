@@ -555,7 +555,7 @@ function actualizaAsignacion(){
 	});
 	
 	if(perfiles!="" && usuarios!=""){
-		console.log("perfiles "+perfiles + " usuarios "+usuarios);
+		//console.log("perfiles "+perfiles + " usuarios "+usuarios);
 	invocarJSONServiceAction("asignarUsuarioPerfilAction", 
 			{'perfilIds': perfiles,
 			'usrsActualizaPerfil': usuarios}, 
@@ -598,14 +598,12 @@ function guardaActualizacionPerfiles(){
 		var info = new Object();
 		
 		if($('#'+value.id).is( ":checked" )){
-			console.log("checked");
 			cadena=value.id.split('_');
 			info.perfilId = cadena[0];
 		    info.estatus = "1";
 		   
 		}else{
 			cadena=value.id.split('_');
-			console.log("no checked");
 			info.perfilId = cadena[0];
 		    info.estatus = "0";
 		}

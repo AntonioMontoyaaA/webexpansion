@@ -166,21 +166,26 @@ public class NotificacionesAction extends ExpansionAction{
 		
 		String tipoComentario = ServletActionContext.getRequest().getParameter("tipoComentario");
 		String propiedad = ServletActionContext.getRequest().getParameter("propiedad");
+		String tipoServicio = ServletActionContext.getRequest().getParameter("tipoServicio");
+		String periodo = ServletActionContext.getRequest().getParameter("periodo");
 		try {
 			if(usuario == null){
 				RespuestaVo respuestaVo = new RespuestaVo();
 				respuestaVo.setCodigo(501);
-				respuestaVo.setMensaje("Error en la sesión");
+				respuestaVo.setMensaje("Error en la sesiï¿½n");
 				sendJSONObjectToResponse(respuestaVo);
 				
 			}else{
 				String numeroEmpleado = String.valueOf(usuario.getPerfil().getNumeroEmpleado());
 				
+				String p = periodo == null ? "" : periodo;
 				final OkHttpClient client = new OkHttpClient();
 				
 				Builder builder = new Builder()
 					.add("usuarioId", numeroEmpleado)
-					.add("tipoComentario", tipoComentario);
+					.add("tipoComentario", tipoComentario)
+					.add("tipoServicio", tipoServicio)
+					.add("periodo", p);
 				
 				RequestBody body = builder.build();
 				Request request = new Request.Builder()
@@ -222,7 +227,7 @@ public class NotificacionesAction extends ExpansionAction{
 			if(usuario == null){
 				RespuestaVo respuestaVo = new RespuestaVo();
 				respuestaVo.setCodigo(501);
-				respuestaVo.setMensaje("Error en la sesión");
+				respuestaVo.setMensaje("Error en la sesiï¿½n");
 				sendJSONObjectToResponse(respuestaVo);
 				
 			}else{

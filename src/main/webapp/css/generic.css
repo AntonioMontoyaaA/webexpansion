@@ -127,6 +127,15 @@
 #layoutUp.activado, #layoutUp.activado:hover{
 	background-color:#071B36;
 }
+.layout_tabla{
+	background-image:url('../img/botones/w_layout.svg');
+	background-position:right;
+	background-repeat: no-repeat;
+	background-size:25px !important;
+}
+#status{
+	background-image:url('../img/botones/status.svg');
+}
 .change_tabla{
 	background-image:url('../img/botones/w_regresarStatus.svg');
 	background-position:right;
@@ -964,10 +973,12 @@ font-weight:normal;
 }
 
 .contenedorNotificaciones{
-	height: 75%;
-    max-height: 75%;
+	max-height: 550px;
     width: 100%;
-    overflow: auto;
+/*     overflow: auto; */
+    min-height: 120px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .notificacionActivada{

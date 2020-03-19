@@ -74,6 +74,18 @@ var ene_plan=0, ene_real=0, feb_plan=0, feb_real=0, mar_plan=0, mar_real=0, abr_
 var jun_plan=0, jun_real=0, jul_plan=0, jul_real=0, ago_plan=0, ago_real=0, sep_plan=0, sep_real=0, oct_plan=0, oct_real=0;
 var nov_plan=0, nov_real=0, dic_plan=0, dic_real=0, ene_est=0, feb_est=0, mar_est=0, abr_est=0, may_est=0, jun_est=0, jul_est=0;
 var ago_est=0, sep_est=0, oct_est=0, nov_est=0, dic_est=0;
+var ene_calc = 0;
+var feb_calc = 0;
+var mar_calc = 0;
+var abr_calc = 0;
+var may_calc = 0;
+var jun_calc = 0;
+var jul_calc = 0;
+var ago_calc = 0;
+var sep_calc = 0;
+var oct_calc = 0;
+var nov_calc = 0;
+var dic_calc = 0;
 
 $('#suma').text(data.totalAperturas);
 
@@ -81,61 +93,73 @@ if(datos.Enero!="undefined"){
 	ene_plan=datos.Enero.plan;
 	ene_real=datos.Enero.real;
 	ene_est=datos.Enero.estimado;
+	ene_calc = datos.Enero.calculado;
 }
 if(datos.Febrero!="undefined"){
 	feb_plan=datos.Febrero.plan;
 	feb_real=datos.Febrero.real;
 	feb_est=datos.Febrero.estimado;
+	feb_calc = datos.Febrero.calculado;
 }
 if(datos.Marzo!="undefined"){
 	mar_plan=datos.Marzo.plan;
 	mar_real=datos.Marzo.real;
 	mar_est=datos.Marzo.estimado;
+	mar_calc = datos.Marzo.calculado;
 }
 if(datos.Abril!="undefined"){
 	abr_plan=datos.Abril.plan;
 	abr_real=datos.Abril.real;
 	abr_est=datos.Abril.estimado;
+	abr_calc = datos.Abril.calculado;
 }
 if(datos.Mayo!="undefined"){
 	may_plan=datos.Mayo.plan;
 	may_real=datos.Mayo.real;
 	may_est=datos.Mayo.estimado;
+	may_calc = datos.Mayo.calculado;
 }
 if(datos.Junio!="undefined"){
 	jun_plan=datos.Junio.plan;
 	jun_real=datos.Junio.real;
 	jun_est=datos.Junio.estimado;
+	jun_calc = datos.Junio.calculado;
 }
 if(datos.Julio!="undefined"){
 	jul_plan=datos.Julio.plan;
 	jul_real=datos.Julio.real;
 	jul_est=datos.Julio.estimado;
+	jul_calc = datos.Julio.calculado;
 }
 if(datos.Agosto!="undefined"){
 	ago_plan=datos.Agosto.plan;
 	ago_real=datos.Agosto.real;
 	ago_est=datos.Agosto.estimado;
+	ago_calc = datos.Agosto.calculado;
 }
 if(datos.Septiembre!="undefined"){
 	sep_plan=datos.Septiembre.plan;
 	sep_real=datos.Septiembre.real;
 	sep_est=datos.Septiembre.estimado;
+	sep_calc = datos.Septiembre.calculado;
 }
 if(datos.Octubre!="undefined"){
 	oct_plan=datos.Octubre.plan;
 	oct_real=datos.Octubre.real;
 	oct_est=datos.Octubre.estimado;
+	oct_calc = datos.Octubre.calculado;
 }
 if(datos.Noviembre!="undefined"){
 	nov_plan=datos.Noviembre.plan;
 	nov_real=datos.Noviembre.real;
 	nov_est=datos.Noviembre.estimado;
+	nov_calc = datos.Noviembre.calculado;
 }
 if(datos.Diciembre!="undefined"){
 	dic_plan=datos.Diciembre.plan;
 	dic_real=datos.Diciembre.real;
 	dic_est=datos.Diciembre.estimado;
+	dic_calc = datos.Diciembre.calculado;
 }
 	
 	Highcharts.chart('container_apmensual', {
@@ -181,40 +205,40 @@ if(datos.Diciembre!="undefined"){
 	    		   text = this.x;
 	    		   
 	    		   if(text=="Ene") {
-	    	         return ('<b>Objetivo:</b> '+ene_plan+'<br><b>Estimado: </b> '+ene_est+'<br><b>Real: </b> '+ene_real);
+	    	         return ('<b>Objetivo:</b> '+ene_plan+'<br><b>Estimado: </b> '+ene_est+'<br><b>Real: </b> '+ene_real+'<br><b>Pronóstico: </b> '+ene_calc);
 	    	       } 
 	    		   if(text=="Feb") {
-	    			   return ('<b>Objetivo:</b> '+feb_plan+'<br><b>Estimado: </b> '+feb_est+'<br><b>Real: </b> '+feb_real);
+	    			   return ('<b>Objetivo:</b> '+feb_plan+'<br><b>Estimado: </b> '+feb_est+'<br><b>Real: </b> '+feb_real+'<br><b>Pronóstico: </b> '+feb_calc);
 		    	    }
 	    		   if(text=="Mar") {
-	    			   return ('<b>Objetivo:</b> '+mar_plan+'<br><b>Estimado: </b> '+mar_est+'<br><b>Real: </b> '+mar_real);
+	    			   return ('<b>Objetivo:</b> '+mar_plan+'<br><b>Estimado: </b> '+mar_est+'<br><b>Real: </b> '+mar_real+'<br><b>Pronóstico: </b> '+mar_calc);
 		    	    }
 	    		   if(text=="Abr") {
-	    			   return ('<b>Objetivo:</b> '+abr_plan+'<br><b>Estimado: </b> '+abr_est+'<br><b>Real: </b> '+abr_real);
+	    			   return ('<b>Objetivo:</b> '+abr_plan+'<br><b>Estimado: </b> '+abr_est+'<br><b>Real: </b> '+abr_real+'<br><b>Pronóstico: </b> '+abr_calc);
 		    	    }
 	    		   if(text=="May") {
-	    			   return ('<b>Objetivo:</b> '+may_plan+'<br><b>Estimado: </b> '+may_est+'<br><b>Real: </b> '+may_real);
+	    			   return ('<b>Objetivo:</b> '+may_plan+'<br><b>Estimado: </b> '+may_est+'<br><b>Real: </b> '+may_real+'<br><b>Pronóstico: </b> '+may_calc);
 		    	    }
 	    		   if(text=="Jun") {
-	    			   return ('<b>Objetivo:</b> '+jun_plan+'<br><b>Estimado: </b> '+jun_est+'<br><b>Real: </b> '+jun_real);
+	    			   return ('<b>Objetivo:</b> '+jun_plan+'<br><b>Estimado: </b> '+jun_est+'<br><b>Real: </b> '+jun_real+'<br><b>Pronóstico: </b> '+jun_calc);
 		    	    }
 	    		   if(text=="Jul") {
-	    			   return ('<b>Objetivo:</b> '+jul_plan+'<br><b>Estimado: </b> '+jul_est+'<br><b>Real: </b> '+jul_real);
+	    			   return ('<b>Objetivo:</b> '+jul_plan+'<br><b>Estimado: </b> '+jul_est+'<br><b>Real: </b> '+jul_real+'<br><b>Pronóstico: </b> '+jul_calc);
 		    	    }
 	    		   if(text=="Ago") {
-	    			   return ('<b>Objetivo:</b> '+ago_plan+'<br><b>Estimado: </b> '+ago_est+'<br><b>Real: </b> '+ago_real);
+	    			   return ('<b>Objetivo:</b> '+ago_plan+'<br><b>Estimado: </b> '+ago_est+'<br><b>Real: </b> '+ago_real+'<br><b>Pronóstico: </b> '+ago_calc);
 		    	    }
 	    		   if(text=="Sep") {
-	    			   return ('<b>Objetivo:</b> '+sep_plan+'<br><b>Estimado: </b> '+sep_est+'<br><b>Real: </b> '+sep_real);
+	    			   return ('<b>Objetivo:</b> '+sep_plan+'<br><b>Estimado: </b> '+sep_est+'<br><b>Real: </b> '+sep_real+'<br><b>Pronóstico: </b> '+sep_calc);
 		    	    }
 	    		   if(text=="Oct") {
-	    			   return ('<b>Objetivo:</b> '+oct_plan+'<br><b>Estimado: </b> '+oct_est+'<br><b>Real: </b> '+oct_real);
+	    			   return ('<b>Objetivo:</b> '+oct_plan+'<br><b>Estimado: </b> '+oct_est+'<br><b>Real: </b> '+oct_real+'<br><b>Pronóstico: </b> '+oct_calc);
 		    	    }
 	    		   if(text=="Nov") {
-	    			   return ('<b>Objetivo:</b> '+nov_plan+'<br><b>Estimado: </b> '+nov_est+'<br><b>Real: </b> '+nov_real);
+	    			   return ('<b>Objetivo:</b> '+nov_plan+'<br><b>Estimado: </b> '+nov_est+'<br><b>Real: </b> '+nov_real+'<br><b>Pronóstico: </b> '+nov_calc);
 		    	    }
 	    		   if(text=="Dic") {
-	    			   return ('<b>Objetivo:</b> '+dic_plan+'<br><b>Estimado: </b> '+dic_est+'<br><b>Real: </b>'+dic_real);
+	    			   return ('<b>Objetivo:</b> '+dic_plan+'<br><b>Estimado: </b> '+dic_est+'<br><b>Real: </b>'+dic_real+'<br><b>Pronóstico: </b> '+dic_calc);
 		    	    }
 	    		   
 	    	      /* var text = '';
@@ -271,6 +295,21 @@ if(datos.Diciembre!="undefined"){
 		        	oct_est,
 		        	nov_est,
 		        	dic_est]
+		    },{
+		    	name: 'Estimado + Atraso',
+		    	color: '#FF741D',
+		    	data: [ene_calc,
+		    		feb_calc,
+		    		mar_calc,
+		    		abr_calc,
+		    		may_calc,
+		    		jun_calc,
+		    		jul_calc,
+		    		ago_calc,
+		    		sep_calc,
+		    		oct_calc,
+		    		nov_calc,
+		    		dic_calc]
 		    },{
 		    	name: 'Aperturas',
 		    	color: '#40BCD8',
@@ -494,7 +533,6 @@ function buscaMdsPorEstatus(tipo, estatus) {
 		if(data.codigo != 200){
 			cargaMensajeModal('DASHBOARD', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
 		} else if(data.codigo == 200){
-			console.log("Regresa del action");
 			
 		}
 	   }
@@ -1191,7 +1229,6 @@ function armaListaGrafica(data){
 	}
 	
 	$('#listaAtrasos').html(html);
-//	console.log(arrAux)
 	var elementList = document.getElementById('listaAtrasos').getElementsByTagName('div');
 	filtraDiasAtraso(data);	
 }
@@ -1551,6 +1588,13 @@ function graficaUltimoAnio(arrayVerdeAnio, arrayRojoAnio){
 		  }
 		
 	}
+	 elementList = document.getElementById('listaAtrasos').getElementsByTagName('div');
+	 
+	 height_span = (document.getElementById('container_ultimo_anio').clientHeight - elementList.length ) / elementList.length 
+	 
+	 for (var i = 0; i < elementList.length; i++) {
+		 elementList[i].style.height = height_span;
+	 }
 }
 
 
@@ -1629,7 +1673,6 @@ function creaGraficaAtrasoXarea(array){
 	        height: '230',
 	         events: {     
 	            click: function(e) {
-	              console.log("index", this.hoverPoint.x);
 	              var intervalo = this.hoverPoint.x;
 	              var txt = '';
 	              	           
@@ -1730,7 +1773,6 @@ function creaGraficaAtrasoXarea(array){
 	        	  point: {
 		              events: {
 		                  click: function () {
-		                     console.log('-');
 		                     var intervalo = this.x;
 			                  if(intervalo == 6){
 			   	            	  intervalo = 10;
@@ -1763,7 +1805,6 @@ function obtieneatrasosxdias(tipo, intervalo) {
         if(data.codigo != 200){
             cargaMensajeModal('DASHBOARD', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
         } else if(data.codigo == 200){
-            console.log("Regresa del action", data.datos);
             filtraAtrasosxdias(data.datos);
         }
     }
@@ -1792,7 +1833,6 @@ function filtraAtrasosxdias(datos){
 		}	
 		   
 	}
-    console.log(arrayAreas);
     
     var arrayTodasAreas = [];
    
@@ -1843,7 +1883,6 @@ function filtraAtrasosxdias(datos){
 	    	  arrayTodasAreas.push(objArea);
 		}
 		
-	console.log(arrayTodasAreas);
 	arrayAtrasoxAreas = arrayTodasAreas;
 	creaGraficaAtrasoXarea(arrayTodasAreas);
   
@@ -1870,7 +1909,6 @@ function buscaMdsXdiasAtrasos( tipo, nivel) {
             });
     
 	obtieneAtrasosXdiasResponse = function( data ) {
-    	console.log(data);
         if(data.codigo != 200){
             cargaMensajeModal('DASHBOARD', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
         } else if(data.codigo == 200){

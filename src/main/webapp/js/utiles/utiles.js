@@ -7,9 +7,18 @@ var TIPO_ESTATUS_EXITO		= 2;
 
 var funcionEvalSi			= "";
 
+var AR_AUTORIZADAS;
+var AR_PAUSADAS;
+var AR_CANCEL;
+var AR_RECHAZADAS ;
+var totalVerde = 0;
+var totalRojo = 0;
+var tipoPeriodo = 2; // 1 día  / 2 Semana / 3 Mes / 4 Año
+var statusId;
+
 $(function(){
 	actionsPerfiles();
-	consultaNotificaciones();
+	consultaNotificaciones(tipoPeriodo);
 	popover();
 	mueveReloj();
 	$('#buscador').val('');
@@ -44,7 +53,16 @@ function invocarJSONServiceAction(nombreAction, parametros, successFunction, err
 	
 	funcionSuccess = function redireccionarMenuEj(respuesta)
 	{
-		if (respuesta.codigo == 501) {
+		if(respuesta == undefined || respuesta.codigo == undefined) {
+			try{
+				cierraLoading();
+			}
+			catch (err){
+				//-- No estaba bloqueado
+			}
+			
+			cargaMensajeModal('ERROR', 'Error en la comunicacion con el servidor', TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR) 
+		} else if (respuesta.codigo == 501) {
 			try{
 				cierraLoading();
 			}
@@ -213,14 +231,14 @@ function salir(){
 var notificaciones="";
 
 function showNotificaciones(tipo){
-	
+	dibujaNotificaciones([]);
 	if(tipo == 1){
 		$('.segmentoNotificaciones1').show();
 		$('.segmentoNotificaciones2').hide();
 		$('.opcionNotificacion').removeClass('notificacionActivada');
 		$('#not01').addClass('notificacionActivada');
 		$('#divisionAvisos').hide();
-		dibujaNotificaciones(AR_MENSAJES);
+		dibujaNotificaciones(AR_AUTORIZADAS);
 		
 		$('#modal_notificaciones').modal('show');
 		
@@ -231,7 +249,7 @@ function showNotificaciones(tipo){
 				$('#not01').addClass('notificacionActivada');
 				$('#divisionAvisos').hide();
 				$('.leidos').show();
-				dibujaNotificaciones(AR_MENSAJES);
+				dibujaNotificaciones(AR_AUTORIZADAS);
 			}
 		});
 		
@@ -240,39 +258,15 @@ function showNotificaciones(tipo){
 			if(!$('#not02').hasClass('notificacionActivada')){// Sino se esta mostrando
 				$('.opcionNotificacion').removeClass('notificacionActivada');
 				$('#not02').addClass('notificacionActivada');
-				$('.divAvisos').unbind('click');
-				$('.divAvisos').click(function(){
-					if(!$(this).hasClass('notificacionActivadaTurquesa')){// Sino se esta mostrando
-						$('.divAvisos').removeClass('notificacionActivadaTurquesa');
-						$(this).addClass('notificacionActivadaTurquesa');
-						
-						dibujaNotificaciones(AR_AVISOS[$(this).attr('rel')]);
-					}
-				});
+				dibujaNotificaciones(AR_PAUSADAS);
 			}
-		});
-		
-		$('.leidos').unbind('click');
-		$('.leidos').click(function(){
-			mds = '';
-			
-			for (var i = 0; i < AR_MENSAJES.length; i++) {
-				if(i < AR_MENSAJES.length -1)
-					mds += AR_MENSAJES[i].mdId +',';
-				else
-					mds += AR_MENSAJES[i].mdId;
-			}
-			
-			$('#modal_notificaciones').modal('hide');
-			marcarMensajeLeido(2, mds, true);
 		});
 	}else if(tipo ==2){
 		$('.segmentoNotificaciones1').hide();
 		$('.segmentoNotificaciones2').show();
 		$('.opcionNotificacion').removeClass('notificacionActivada');
 		$('#not03').addClass('notificacionActivada');
-		$('#divisionAvisos').hide();
-		dibujaNotificaciones(AR_MENSAJES);
+		dibujaNotificaciones(AR_CANCEL);
 		
 		$('#modal_notificaciones').modal('show');
 		
@@ -283,7 +277,7 @@ function showNotificaciones(tipo){
 				$('#not03').addClass('notificacionActivada');
 				$('#divisionAvisos').hide();
 				$('.leidos').show();
-				dibujaNotificaciones(AR_MENSAJES);
+				dibujaNotificaciones(AR_CANCEL);
 			}
 		});
 		
@@ -292,32 +286,8 @@ function showNotificaciones(tipo){
 			if(!$('#not04').hasClass('notificacionActivada')){// Sino se esta mostrando
 				$('.opcionNotificacion').removeClass('notificacionActivada');
 				$('#not04').addClass('notificacionActivada');
-				
-				$('.divAvisos').unbind('click');
-				$('.divAvisos').click(function(){
-					if(!$(this).hasClass('notificacionActivadaTurquesa')){// Sino se esta mostrando
-						$('.divAvisos').removeClass('notificacionActivadaTurquesa');
-						$(this).addClass('notificacionActivadaTurquesa');
-						
-						dibujaNotificaciones(AR_AVISOS[$(this).attr('rel')]);
-					}
-				});
+				dibujaNotificaciones(AR_RECHAZADAS);
 			}
-		});
-		
-		$('.leidos').unbind('click');
-		$('.leidos').click(function(){
-			mds = '';
-			
-			for (var i = 0; i < AR_MENSAJES.length; i++) {
-				if(i < AR_MENSAJES.length -1)
-					mds += AR_MENSAJES[i].mdId +',';
-				else
-					mds += AR_MENSAJES[i].mdId;
-			}
-			
-			$('#modal_notificaciones').modal('hide');
-			marcarMensajeLeido(2, mds, true);
 		});
 	}
 	
@@ -329,15 +299,6 @@ function dibujaNotificaciones(ar){
 	
 	$.each(ar, function(){
 		
-		if(this.estatus == 0){
-			htmlNotificaciones += '<div class="notificacion notificacionLeida" id="' + this.mdId + '" rel="' + this.tipo + '">'
-										+ '<div class="titulos">'
-											+ '<div class="tituloNotificacion">' + this.titulo + '</div>'
-											+ '<div class="subtituloNotificacion">' + this.subtitulo + '</div>'
-										+ '</div>'
-										+ '<div class="fechaNotificacion">' + this.fecha + '</div>'
-								+ '</div>';
-		}else{
 			htmlNotificaciones += '<div class="notificacion" id="' + this.mdId + '" rel="' + this.tipo + '">'
 										+ '<div class="titulos">'
 											+ '<div class="tituloNotificacion azul">' + this.titulo + '</div>'
@@ -345,7 +306,6 @@ function dibujaNotificaciones(ar){
 										+ '</div>'
 										+ '<div class="fechaNotificacion">' + this.fecha + '</div>'
 								+ '</div>';
-		}
 		
 	});
 	
@@ -357,32 +317,14 @@ function dibujaNotificaciones(ar){
 	$('.notificacion').unbind('click');
 	$('.notificacion').click(function(){
 		
-		tipoNot = $(this).attr('rel');
 		id = $(this).attr('id');
 		nombre = $(this).find('.tituloNotificacion').html();
+			
+		$("#nombreMd").val(nombre);
+		$("#mdId").val(id);
+		$("#tipoMd").val('0');
+		$("#detalleMemoriaAsignadaAction").submit();
 		
-		if(tipoNot == 2){ //Mensaje
-			if(!$(this).hasClass('notificacionLeida')){// Sino esta leida
-				$(this).addClass('notificacionLeida');
-				
-				$(this).find('.tituloNotificacion').removeClass('azul');
-				$(this).find('.subtituloNotificacion').removeClass('azulTurquesa');
-				
-				marcarMensajeLeido(tipoNot, id);
-			}
-
-			$("#mdIdChat").val(id);
-			$("#nombreMdChat").val(nombre);
-			$("#chatPorMd").submit();
-			
-		}else{ //Aviso
-			marcarMensajeLeido(tipoNot, id);
-			
-			$("#nombreMd").val(nombre);
-			$("#mdId").val(id);
-			$("#tipoMd").val('0');
-			$("#detalleMemoriaAsignadaAction").submit();
-		}
 	});
 }
 
@@ -411,10 +353,6 @@ Notificacion = function(mdId, titulo, subtitulo, fecha, estatus, tipo){
 	this.tipo = tipo;
 };
 
-var AR_MENSAJES;
-var AR_AVISOS;
-var TOTAL_NOTIFICACIONES;
-
 function actualizaTotalNotificaciones(totalVerde, totalRojo){
 	var TOTAL_VERDE = parseInt(totalVerde);
 	var TOTAL_ROJO = parseInt(totalRojo);
@@ -438,88 +376,102 @@ function actualizaTotalNotificaciones(totalVerde, totalRojo){
 	
 }
 
-function consultaNotificaciones(){
-	
-	 TOTAL_NOTIFICACIONES = 0;
-	 actualizaTotalNotificaciones(TOTAL_NOTIFICACIONES,TOTAL_NOTIFICACIONES);
-	 
+function consultaNotificaciones(periodo){
 	 invocarJSONServiceAction("notificaciones", 
-				{'tipoComentario':2,
-				'propiedad' : 'notificacionesMensajes'}, 
-				'asignaMensajes', 
+				{'tipoComentario':3, 
+				'propiedad' : 'notificacionesAvisos',
+				'tipoServicio' : 2, // tipoServicio:  2 para canceladas/rechazadas
+				'periodo' : periodo},
+				'asignaRojos', 
 				null,
 				null);
 	 
 	 invocarJSONServiceAction("notificaciones", 
 				{'tipoComentario':3,
-				'propiedad' : 'notificacionesAvisos'}, 
-				'asignaAvisos', 
+				'propiedad' : 'notificacionesAvisos',
+				'tipoServicio' : 1,
+				'periodo' : ""
+				}, 
+				'asignaVerde', 
 				null,
 				null);
+	 actualizaTotalNotificaciones(totalVerde, totalRojo);
 	 
-	 asignaMensajes = function(data) {
-	 
+	 asignaRojos = function(data) {
+		
 		if(data.codigo == 200){
 			
-			actualizaTotalNotificaciones(data.totalNotificaciones, data.totalNotificaciones);
+		totalRojo =  data.totalNotificacionesR + data.totalNotificacionesC;
 			
-			AR_MENSAJES = new Array();
-			$.each(data.notificaciones, function(){
-				
-				subtitulo = this.numMensajes + ' mensajes';
-				estatus = 0;
-				
-				if(this.numMensajesNuevos > 0){
-					estatus = 1;
-					subtitulo = this.numMensajesNuevos + ' mensajes nuevos';
-				}
+			AR_CANCEL = new Array();
+			$.each(data.notificacionesC, function(){
 				
 				e = new Notificacion(
 						this.mdId,
 						'MD ' + this.nombreSitio,
-						subtitulo,
+						this.comentario,
 						this.fecha,
-						estatus,
-						2
+						'',''
 				);
 				
-				AR_MENSAJES.push(e);
+				AR_CANCEL.push(e);
 			});
+			
+			AR_RECHAZADAS = new Array();
+			$.each(data.notificacionesR, function(){
+				
+				e = new Notificacion(
+						this.mdId,
+						'MD ' + this.nombreSitio,
+						this.comentario,
+						this.fecha,
+						'', ''
+				);
+				
+				AR_RECHAZADAS.push(e);
+			});
+			actualizaTotalNotificaciones(totalVerde, totalRojo);
 		}
 	};
 	
-	asignaAvisos = function(data) {
-		 
+	asignaVerde = function(data) {
+		
 		if(data.codigo == 200){
-			
-			total = parseInt(data.totalNotificacionesCan);
-			total += parseInt(data.totalNotificacionesRe);
-			total += parseInt(data.totalNotificaciones);
-			
-			actualizaTotalNotificaciones(total, total);
-			
-			AR_AVISOS = {};
-			arrayAvisos = [data.notificaciones, data.notificacionesCan, data.notificacionesRe];
-			
-			$.each(arrayAvisos, function(i, item){
+			totalVerde = data.totalNotificaciones + data.totalNotificacionesP;
+			total = parseInt(totalVerde);
+	     		AR_PAUSADAS = new Array();
 				
-				AR_AVISOS[i] = new Array();
-				
-				$.each(item, function(){
+				$.each(data.notificacionesP, function(){
 					e = new Notificacion(
 							this.mdId,
 							'MD ' + this.nombreSitio,
 							this.comentario,
 							this.fecha,
-							1,
-							3
+							'',''
+							
 					);
-					
-					AR_AVISOS[i].push(e);
+		
+					AR_PAUSADAS.push(e);
 				});
+		
+			
+			AR_AUTORIZADAS = new Array();
+			
+			$.each(data.notificaciones, function(){
+				
+				e = new Notificacion(
+						this.mdId,
+						'MD ' + this.nombreSitio,
+						this.comentario,
+						this.fecha,
+						'', ''						
+				);
+				
+				AR_AUTORIZADAS.push(e);
 			});
+			actualizaTotalNotificaciones(totalVerde, totalRojo);
 		}
-	};
+	};	
 }
 
 /* == ACTUALIZAR DATOS PERFIL ==*/
@@ -842,11 +794,83 @@ function permisos_perfil(){
 		if(value.value == "PRIVILEGIO.MENU.VOKSE.507=true"){
 			$('#botondescarga').removeClass('sin_permiso');
 		}
+		if(value.value=="PRIVILEGIO.MENU.VOKSE.508=true"){
+			$('#layoutUp').removeClass('sin_permiso');
+		}
 	});
 }
 
 function ShowSelectedItem(){
 	var cod = $('#select')[0].value;
 	console.log(cod)
+	tipoPeriodo = cod;
 	
+	$('.drop')[0].getElementsByTagName('select')[0].style.background= '#E5E5E5';
+	$('#modal_notificaciones')[0]
+		.getElementsByTagName('div')[0]
+		.getElementsByTagName('div')[0]
+		.getElementsByTagName('div')[0]
+		.style.background = '#E5E5E5';
+	consultaPeriodo(tipoPeriodo);
+	
+}
+function consultaPeriodo(periodo){
+	 invocarJSONServiceAction("notificaciones", 
+				{'tipoComentario':3,
+				'propiedad' : 'notificacionesAvisos',
+				'tipoServicio' : 2, // tipoServicio:  2 para canceladas/rechazadas
+				'periodo': periodo }, 
+				'asignaRojos', 
+				null,
+				null);
+	 
+	 
+	 asignaRojos = function(data) {
+		
+		if(data.codigo == 200){
+			
+		totalRojo =  data.totalNotificacionesR + data.totalNotificacionesC;
+			
+			AR_CANCEL = new Array();
+			$.each(data.notificacionesC, function(){
+				
+				e = new Notificacion(
+						this.mdId,
+						'MD ' + this.nombreSitio,
+						this.comentario,
+						this.fecha,
+						'',''
+				);
+				
+				AR_CANCEL.push(e);
+			});
+			
+			AR_RECHAZADAS = new Array();
+			$.each(data.notificacionesR, function(){
+				
+				e = new Notificacion(
+						this.mdId,
+						'MD ' + this.nombreSitio,
+						this.comentario,
+						this.fecha,
+						'', ''
+				);
+				
+				AR_RECHAZADAS.push(e);
+			});
+			console.log("periodo: ", tipoPeriodo)
+		}
+		cierraLoading();
+		$('.drop')[0].getElementsByTagName('select')[0].style.background= '';
+		$('#modal_notificaciones')[0]
+			.getElementsByTagName('div')[0]
+			.getElementsByTagName('div')[0]
+			.getElementsByTagName('div')[0]
+			.style.background = '#FFF';
+		if($('#not03').hasClass('notificacionActivada')){// Sino se esta mostrando
+			dibujaNotificaciones(AR_CANCEL);
+		}else{
+			dibujaNotificaciones(AR_RECHAZADAS);
+		}
+	};
 }

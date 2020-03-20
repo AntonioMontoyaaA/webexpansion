@@ -205,40 +205,40 @@ if(datos.Diciembre!="undefined"){
 	    		   text = this.x;
 	    		   
 	    		   if(text=="Ene") {
-	    	         return ('<b>Objetivo:</b> '+ene_plan+'<br><b>Estimado: </b> '+ene_est+'<br><b>Real: </b> '+ene_real+'<br><b>Pronóstico: </b> '+ene_calc);
+	    	         return ('<b>Objetivo:</b> '+ene_plan+'<br><b>Estimado: </b> '+ene_est+'<br><b>Estimado+Atraso: </b> '+ene_calc+'<br>Aperturas: <b></b> '+ene_real);
 	    	       } 
 	    		   if(text=="Feb") {
-	    			   return ('<b>Objetivo:</b> '+feb_plan+'<br><b>Estimado: </b> '+feb_est+'<br><b>Real: </b> '+feb_real+'<br><b>Pronóstico: </b> '+feb_calc);
+	    			   return ('<b>Objetivo:</b> '+feb_plan+'<br><b>Estimado: </b> '+feb_est+'<br><b>Estimado+Atraso: </b> '+feb_calc+'<br><b>Aperturas: </b> '+feb_real);
 		    	    }
 	    		   if(text=="Mar") {
-	    			   return ('<b>Objetivo:</b> '+mar_plan+'<br><b>Estimado: </b> '+mar_est+'<br><b>Real: </b> '+mar_real+'<br><b>Pronóstico: </b> '+mar_calc);
+	    			   return ('<b>Objetivo:</b> '+mar_plan+'<br><b>Estimado: </b> '+mar_est+'<br><b>Estimado+Atraso: </b> '+mar_calc+'<br><b>Aperturas: </b> '+mar_real);
 		    	    }
 	    		   if(text=="Abr") {
-	    			   return ('<b>Objetivo:</b> '+abr_plan+'<br><b>Estimado: </b> '+abr_est+'<br><b>Real: </b> '+abr_real+'<br><b>Pronóstico: </b> '+abr_calc);
+	    			   return ('<b>Objetivo:</b> '+abr_plan+'<br><b>Estimado: </b> '+abr_est+'<br><b>Estimado+Atraso: </b> '+abr_calc+'<br><b>Aperturas: </b> '+abr_real);
 		    	    }
 	    		   if(text=="May") {
-	    			   return ('<b>Objetivo:</b> '+may_plan+'<br><b>Estimado: </b> '+may_est+'<br><b>Real: </b> '+may_real+'<br><b>Pronóstico: </b> '+may_calc);
+	    			   return ('<b>Objetivo:</b> '+may_plan+'<br><b>Estimado: </b> '+may_est+'<br><b>Estimado+Atraso: </b> '+may_calc+'<br><b>Aperturas: </b> '+may_real);
 		    	    }
 	    		   if(text=="Jun") {
-	    			   return ('<b>Objetivo:</b> '+jun_plan+'<br><b>Estimado: </b> '+jun_est+'<br><b>Real: </b> '+jun_real+'<br><b>Pronóstico: </b> '+jun_calc);
+	    			   return ('<b>Objetivo:</b> '+jun_plan+'<br><b>Estimado: </b> '+jun_est+'<br><b>Estimado+Atraso: </b> '+jun_calc+'<br><b>Aperturas: </b> '+jun_real);
 		    	    }
 	    		   if(text=="Jul") {
-	    			   return ('<b>Objetivo:</b> '+jul_plan+'<br><b>Estimado: </b> '+jul_est+'<br><b>Real: </b> '+jul_real+'<br><b>Pronóstico: </b> '+jul_calc);
+	    			   return ('<b>Objetivo:</b> '+jul_plan+'<br><b>Estimado: </b> '+jul_est+'<br><b>Estimado+Atraso: </b> '+jul_calc+'<br><b>Aperturas: </b> '+jul_real);
 		    	    }
 	    		   if(text=="Ago") {
-	    			   return ('<b>Objetivo:</b> '+ago_plan+'<br><b>Estimado: </b> '+ago_est+'<br><b>Real: </b> '+ago_real+'<br><b>Pronóstico: </b> '+ago_calc);
+	    			   return ('<b>Objetivo:</b> '+ago_plan+'<br><b>Estimado: </b> '+ago_est+'<br><b>Estimado+Atraso: </b> '+ago_calc+'<br><b>Aperturas: </b> '+ago_real);
 		    	    }
 	    		   if(text=="Sep") {
-	    			   return ('<b>Objetivo:</b> '+sep_plan+'<br><b>Estimado: </b> '+sep_est+'<br><b>Real: </b> '+sep_real+'<br><b>Pronóstico: </b> '+sep_calc);
+	    			   return ('<b>Objetivo:</b> '+sep_plan+'<br><b>Estimado: </b> '+sep_est+'<br><b>Estimado+Atraso: </b> '+sep_calc+'<br><b>Aperturas: </b> '+sep_real);
 		    	    }
 	    		   if(text=="Oct") {
-	    			   return ('<b>Objetivo:</b> '+oct_plan+'<br><b>Estimado: </b> '+oct_est+'<br><b>Real: </b> '+oct_real+'<br><b>Pronóstico: </b> '+oct_calc);
+	    			   return ('<b>Objetivo:</b> '+oct_plan+'<br><b>Estimado: </b> '+oct_est+'<br><b>Estimado+Atraso: </b> '+oct_calc+'<br><b>Aperturas: </b> '+oct_real);
 		    	    }
 	    		   if(text=="Nov") {
-	    			   return ('<b>Objetivo:</b> '+nov_plan+'<br><b>Estimado: </b> '+nov_est+'<br><b>Real: </b> '+nov_real+'<br><b>Pronóstico: </b> '+nov_calc);
+	    			   return ('<b>Objetivo:</b> '+nov_plan+'<br><b>Estimado: </b> '+nov_est+'<br><b>Estimado+Atraso: </b> '+nov_calc+'<br><b>Aperturas: </b> '+nov_real);
 		    	    }
 	    		   if(text=="Dic") {
-	    			   return ('<b>Objetivo:</b> '+dic_plan+'<br><b>Estimado: </b> '+dic_est+'<br><b>Real: </b>'+dic_real+'<br><b>Pronóstico: </b> '+dic_calc);
+	    			   return ('<b>Objetivo:</b> '+dic_plan+'<br><b>Estimado: </b> '+dic_est+'<br><b>Estimado+Atraso: </b>'+dic_calc+'<br><b>Aperturas: </b> '+dic_real);
 		    	    }
 	    		   
 	    	      /* var text = '';
@@ -1613,7 +1613,7 @@ function buscaMdsPorEstatus(tipo, estatus , nivel, tipoString) {
             },
             function() {
                 //Función al finalizar}
-                //cierraLoading();
+                cierraLoading();
             });
     buscaMdsPorEstatusResponse = function( data ) {
         if(data.codigo != 200){
@@ -1908,7 +1908,7 @@ function buscaMdsXdiasAtrasos( tipo, nivel) {
             },
             function() {
                 //Función al finalizar}
-                //cierraLoading();
+                cierraLoading();
             });
     
 	obtieneAtrasosXdiasResponse = function( data ) {

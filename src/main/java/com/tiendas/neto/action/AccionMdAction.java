@@ -79,4 +79,102 @@ public class AccionMdAction extends ExpansionAction implements SessionAware, Par
 		 }
 		return null;
 	}
+	
+	public String obtieneNivelEstatusCambiarMd() throws Exception {
+		String respuesta="";
+		UsuarioLoginVO usuario = null;
+		HttpSession usuarioSesion = ServletActionContext.getRequest().getSession();
+		usuario = (UsuarioLoginVO) usuarioSesion.getAttribute("usr");
+		
+		try {
+			if(usuario != null) {
+				String mdId = ServletActionContext.getRequest().getParameter("mdId");
+				
+				final OkHttpClient client = new OkHttpClient();
+				FormBody.Builder formBuilder = new FormBody.Builder()
+				 .add("mdId", mdId)
+				 .add("usuarioId", String.valueOf(usuario.getPerfil().getNumeroEmpleado()));
+				
+				
+				 RequestBody formBody = formBuilder.build();
+				 Request request = new Request.Builder()
+						 .url(sp.getPropiedad("obtieneNivelEstatusCambiarMd"))
+		                 .post(formBody)
+		                 .build();
+				
+				 Response response = client.newCall(request).execute();
+				 respuesta = response.body().string();
+				 HttpServletResponse responseHttp = ServletActionContext.getResponse();
+				 responseHttp.setContentType("application/json");
+				 responseHttp.setCharacterEncoding("UTF-8");
+				 responseHttp.getWriter().write(respuesta); 
+			} else {
+				RespuestaVo respuestaVo = new RespuestaVo();
+				respuestaVo.setCodigo(501);
+				respuestaVo.setMensaje("Error en la sesión");
+				sendJSONObjectToResponse(respuestaVo);
+				return null;
+			}
+		} catch (Exception e) {
+			String clase  ="clase: "+ new String (Thread.currentThread().getStackTrace()[1].getClassName());	
+			String metodo ="metodo: "+ new String (Thread.currentThread().getStackTrace()[1].getMethodName());
+			elog.error(clase,metodo,e + ""); 
+			
+			RespuestaVo respuestaVo = new RespuestaVo();
+			respuestaVo.setCodigo(404);
+			respuestaVo.setMensaje("Error al conectarse al servidor");
+			sendJSONObjectToResponse(respuestaVo);
+		 }
+		return null;
+	}
+	
+	public String cambiaEstatusMDtodos() throws Exception {
+		String respuesta="";
+		UsuarioLoginVO usuario = null;
+		HttpSession usuarioSesion = ServletActionContext.getRequest().getSession();
+		usuario = (UsuarioLoginVO) usuarioSesion.getAttribute("usr");
+	
+		try {
+			if(usuario != null) {
+				String mdId = ServletActionContext.getRequest().getParameter("mdId");
+				String nivelEstatusAreaId = ServletActionContext.getRequest().getParameter("nivelEstatusAreaId");
+			
+				final OkHttpClient client = new OkHttpClient();
+				FormBody.Builder formBuilder = new FormBody.Builder()
+						.add("mdId", mdId)
+						.add("usuarioId", String.valueOf(usuario.getPerfil().getNumeroEmpleado()))
+						.add("nivelEstatusAreaId", nivelEstatusAreaId);
+			
+			
+				RequestBody formBody = formBuilder.build();
+				Request request = new Request.Builder()
+					 .url(sp.getPropiedad("cambiaestatusmdtodos"))
+	                 .post(formBody)
+	                 .build();
+			
+				Response response = client.newCall(request).execute();
+				respuesta = response.body().string();
+				HttpServletResponse responseHttp = ServletActionContext.getResponse();
+				responseHttp.setContentType("application/json");
+				responseHttp.setCharacterEncoding("UTF-8");
+				responseHttp.getWriter().write(respuesta); 
+			} else {
+				RespuestaVo respuestaVo = new RespuestaVo();
+				respuestaVo.setCodigo(501);
+				respuestaVo.setMensaje("Error en la sesión");
+				sendJSONObjectToResponse(respuestaVo);
+				return null;
+			}
+		} catch (Exception e) {
+			String clase  ="clase: "+ new String (Thread.currentThread().getStackTrace()[1].getClassName());	
+			String metodo ="metodo: "+ new String (Thread.currentThread().getStackTrace()[1].getMethodName());
+			elog.error(clase,metodo,e + ""); 
+		
+			RespuestaVo respuestaVo = new RespuestaVo();
+			respuestaVo.setCodigo(404);
+			respuestaVo.setMensaje("Error al conectarse al servidor");
+			sendJSONObjectToResponse(respuestaVo);
+		}
+		return null;
+	}
 }

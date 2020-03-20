@@ -345,6 +345,16 @@
                method = "execute">
            <result name = "success">jsp/aprobadas.jsp</result>
         </action>
+        <action name = "accion_obtiene_nivel_md_status"
+               class = "com.tiendas.neto.action.AccionMdAction"
+               method = "obtieneNivelEstatusCambiarMd">
+           <result name = "success">jsp/aprobadas.jsp</result>
+        </action>
+         <action name = "accion_modifica_md_status"
+             class = "com.tiendas.neto.action.AccionMdAction"
+             method = "cambiaEstatusMDtodos">
+       	  <result name = "success">jsp/aprobadas.jsp</result>
+        </action>
       	 <action name = "accion__modifica_md_action"
                class = "com.tiendas.neto.action.DespausaReactivaMdAction"
                method = "execute">

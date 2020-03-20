@@ -1122,3 +1122,11 @@ font-weight:normal;
 .drop_option:hover {
   color: #EDEDED;
 }
+#descripcionMensajeEstatus {
+    color: #616161;
+    font-family: sans-serif;
+    font-size: 18px;
+    display: table-cell;
+    vertical-align: middle;
+    padding-bottom: 1rem;
+}

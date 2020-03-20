@@ -1819,7 +1819,8 @@ function rechazarMD(nombreMd, mdId){
             TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, rechazaMdAction);
 }
 function cambiarStatusMD(nombreMd, mdId){
-	cargaModalDrop('TABLERO', 
+	mdIdEstatus = mdId;
+	cargaModalDrop(nombreMd, 
             'Selecciona el nuevo estatus de la MD',
              mdId);
 }
@@ -2143,21 +2144,53 @@ $( '#botonModalAceptar' ).click(function() {
 
 /*----------------------------------- Modal droplist */
 function cargaModalDrop(titulo, descripcionMensaje,  mdId) {
-	$("#tituloMensaje").text(titulo);
-	$("#descripcionMensaje").html(descripcionMensaje);
+	$("#tituloMensajeEstatus").text(titulo);
+	$("#descripcionMensajeEstatus").html(descripcionMensaje);
 	$("#mensajeHeader").css("background", "#071B36");
-		
-	//invocacion de Action
 	
-	$("#modal_drop").modal('show');
+	invocarJSONServiceAction("accion_obtiene_nivel_md_status", 
+            {'mdId': mdId }, 
+            'accionEstatusMdResponse', 
+            function() {
+                //Funcion de error
+                
+                cierraLoading();
+            },
+            function() {
+                //Función al finalizar
+                
+                cierraLoading();
+            });
+	accionEstatusMdResponse = function( data ) {
+        if(data.codigo != 200) {
+            cargaMensajeModal('ESTATUS MD', 'Error al obtener el estatus, intenta nuevamente', TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
+        } else {
+        	console.log(data);
+        	if(data.nivelesEstatusArea.length > 0){
+        		html = '';
+            	for(var i = 0; i < data.nivelesEstatusArea.length;  i++){
+            		var elem =  data.nivelesEstatusArea[i];
+            		
+            		html = html + '<option class= "drop_option" value="'+ elem.NIVELESTATUAREAID 
+            					+ '">' + elem.NIVELESTATUSAREA + '</option>';
+            	}
+            	
+            	$('#select_modal').html(html);
+            	$("#modal_drop").modal('show');
+        	}else{
+                cargaMensajeModal('ESTATUS MD', 'El estatus de la MD no puede ser modificado', TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
+        	}
+        	
+        }
+    }	
+	
 }
 function ShowSelectedItem(){
 	var cod = $('#select_modal')[0].value;
-	console.log(cod)
-		
- invocarJSONServiceAction("accion_md_action", 
-            {'mdId': mdId,
-            'estatusvalidacion': cod
+	
+ invocarJSONServiceAction("accion_modifica_md_status", 
+            {'mdId': mdIdEstatus,
+          	 'nivelEstatusAreaId' : cod
             }, 
             'accionMdResponse', 
             function() {
@@ -2172,9 +2205,10 @@ function ShowSelectedItem(){
             });
     accionMdResponse = function( data ) {
         if(data.codigo != 200) {
-            cargaMensajeModal('EDITA MD', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
+            cargaMensajeModal('CAMBIO DE ESTATUS MD', 'Error al modificar el estatus, intenta nuevamente', TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR, null);
         } else {
-            cargaMensajeModal('EDITA MD', "Memoria descriptiva cancelada con éxito", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_EXITO, null);
+        	$("#modal_drop").modal('hide');
+            cargaMensajeModal('CAMBIO DE ESTATUS MD', "Estatus actualizado con éxito", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_EXITO, null);
             creatabla();
         }
     }

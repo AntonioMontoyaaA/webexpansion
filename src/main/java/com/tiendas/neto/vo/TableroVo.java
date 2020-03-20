@@ -72,6 +72,12 @@ public class TableroVo implements Serializable {
 	private String levantamientoVobo;
 	private String levantamientoVoboEstatus;
 	
+	private String preContrato;
+	private String preContratoEstatus;
+	private String entregaContrato;
+	private String entregaContratoEstatus;
+	
+	
 	private int voboAnalistaDias;
 	private int voboInicialDias;
 	private int voboPregestoriaDias;
@@ -93,6 +99,8 @@ public class TableroVo implements Serializable {
 	private int inicioObraDias;
 	private int obraDias;
 	private int tiendaAbiertaDias;
+	private int preContratoDias;
+	private int entregaContratoDias;
 	
 	/**
 	 * @return the mdId
@@ -867,6 +875,78 @@ public class TableroVo implements Serializable {
 	}
 	public void setTiendaAbiertaDias(int tiendaAbiertaDias) {
 		this.tiendaAbiertaDias = tiendaAbiertaDias;
+	}
+	/**
+	 * @return the preContrato
+	 */
+	public String getPreContrato() {
+		return preContrato;
+	}
+	/**
+	 * @param preContrato the preContrato to set
+	 */
+	public void setPreContrato(String preContrato) {
+		this.preContrato = preContrato;
+	}
+	/**
+	 * @return the preContratoEstatus
+	 */
+	public String getPreContratoEstatus() {
+		return preContratoEstatus;
+	}
+	/**
+	 * @param preContratoEstatus the preContratoEstatus to set
+	 */
+	public void setPreContratoEstatus(String preContratoEstatus) {
+		this.preContratoEstatus = preContratoEstatus;
+	}
+	/**
+	 * @return the entregaContrato
+	 */
+	public String getEntregaContrato() {
+		return entregaContrato;
+	}
+	/**
+	 * @param entregaContrato the entregaContrato to set
+	 */
+	public void setEntregaContrato(String entregaContrato) {
+		this.entregaContrato = entregaContrato;
+	}
+	/**
+	 * @return the entregaContratoEstatus
+	 */
+	public String getEntregaContratoEstatus() {
+		return entregaContratoEstatus;
+	}
+	/**
+	 * @param entregaContratoEstatus the entregaContratoEstatus to set
+	 */
+	public void setEntregaContratoEstatus(String entregaContratoEstatus) {
+		this.entregaContratoEstatus = entregaContratoEstatus;
+	}
+	/**
+	 * @return the preContratoDias
+	 */
+	public int getPreContratoDias() {
+		return preContratoDias;
+	}
+	/**
+	 * @param preContratoDias the preContratoDias to set
+	 */
+	public void setPreContratoDias(int preContratoDias) {
+		this.preContratoDias = preContratoDias;
+	}
+	/**
+	 * @return the entregaContratoDias
+	 */
+	public int getEntregaContratoDias() {
+		return entregaContratoDias;
+	}
+	/**
+	 * @param entregaContratoDias the entregaContratoDias to set
+	 */
+	public void setEntregaContratoDias(int entregaContratoDias) {
+		this.entregaContratoDias = entregaContratoDias;
 	}
 	
 	

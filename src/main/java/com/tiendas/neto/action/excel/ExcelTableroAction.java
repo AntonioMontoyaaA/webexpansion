@@ -131,7 +131,7 @@ public class ExcelTableroAction extends ExpansionAction {
 	        	
 	        	memoria.setLevantamiento(array.getJSONObject(i).getJSONObject("LEVANTAMIENTO").getString("fechaValidacion"));
 	        	memoria.setLevantamientoEstatus(array.getJSONObject(i).getJSONObject("LEVANTAMIENTO").getString("validacion"));
-	        	memoria.setLevantamientoDias(array.getJSONObject(i).getJSONObject("CCO").getInt("diasValidacion"));
+	        	memoria.setLevantamientoDias(array.getJSONObject(i).getJSONObject("LEVANTAMIENTO").getInt("diasValidacion"));
 	        	
 	        	 if (array.getJSONObject(i).has("ASIGNACIONFECHACITA") && 
 	        			 !array.getJSONObject(i).isNull("ASIGNACIONFECHACITA")) {
@@ -163,6 +163,26 @@ public class ExcelTableroAction extends ExpansionAction {
 	        	 } else {
 	        		 memoria.setCorreccionExpansion("");
 				     memoria.setCorreccionExpansionEstatus("");
+	        	 }
+	        	 
+	        	 if (array.getJSONObject(i).has("PRECONTRATO") && 
+	        			 !array.getJSONObject(i).isNull("PRECONTRATO")) {
+	        		 memoria.setPreContrato(array.getJSONObject(i).getJSONObject("PRECONTRATO").getString("fechaValidacion"));
+				     memoria.setPreContratoEstatus(array.getJSONObject(i).getJSONObject("PRECONTRATO").getString("validacion"));
+				     memoria.setPreContratoDias(array.getJSONObject(i).getJSONObject("PRECONTRATO").getInt("diasValidacion"));
+	        	 } else {
+	        		 memoria.setPreContrato("");
+				     memoria.setPreContratoEstatus("");
+	        	 }
+	        	 
+	        	 if (array.getJSONObject(i).has("ENTREGACONTRATO") && 
+	        			 !array.getJSONObject(i).isNull("ENTREGACONTRATO")) {
+	        		 memoria.setEntregaContrato(array.getJSONObject(i).getJSONObject("ENTREGACONTRATO").getString("fechaValidacion"));
+				     memoria.setEntregaContratoEstatus(array.getJSONObject(i).getJSONObject("ENTREGACONTRATO").getString("validacion"));
+				     memoria.setEntregaContratoDias(array.getJSONObject(i).getJSONObject("ENTREGACONTRATO").getInt("diasValidacion"));
+	        	 } else {
+	        		 memoria.setEntregaContrato("");
+				     memoria.setEntregaContratoEstatus("");
 	        	 }
 	        	listaMemorias.add(memoria);
 	        }

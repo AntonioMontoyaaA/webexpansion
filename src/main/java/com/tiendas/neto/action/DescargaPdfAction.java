@@ -254,6 +254,7 @@ public class DescargaPdfAction extends ExpansionAction{
 	public String exportPdf() throws Exception{
 		String url=System.getProperty("jboss.server.config.dir")+"/expansion/reportes/";
 		String urlimagenes=System.getProperty("jboss.server.config.dir")+"/expansion/reportes/imagenes/";
+		String pdfnombreMdCadena = pdfnombreMd.replace(',', ' ').replace('.', ' ');
 		//String url=System.getProperty("jboss.server.config.dir")+File.separator+"expansion"+File.separator+"reportes"+File.separator;
 		//String urlimagenes=System.getProperty("jboss.server.config.dir")+File.separator+"expansion"+File.separator+"reportes"+File.separator+"imagenes"+File.separator;
 		
@@ -266,7 +267,7 @@ public class DescargaPdfAction extends ExpansionAction{
 		parameters.put("url_subreport", url);
 	//	parameters.put("urlweb", urlweb);
 		parameters.put("mdId", pdfmdId);
-		parameters.put("nombreMd", pdfnombreMd);
+		parameters.put("nombreMd", pdfnombreMdCadena);
 		parameters.put("categoriaMd", pdfcategoriaMd);
 		parameters.put("puntos", pdfpuntos);
 		parameters.put("direccion", pdfdireccion);
@@ -455,7 +456,7 @@ public class DescargaPdfAction extends ExpansionAction{
 			HttpServletRequest request=ServletActionContext.getRequest();
 			HttpServletResponse response=ServletActionContext.getResponse();
 			response.setContentType("application/pdf");
-			response.setHeader("Content-Disposition", "attachment; filename=" + pdfnombreMd+" reporte.pdf");
+			response.setHeader("Content-Disposition", "attachment; filename=" + pdfnombreMdCadena +" reporte.pdf");
 			OutputStream outStream = response.getOutputStream();
 			JasperExportManager.exportReportToPdfStream(print, outStream);
 			outStream.flush();

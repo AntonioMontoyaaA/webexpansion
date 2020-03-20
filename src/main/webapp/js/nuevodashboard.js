@@ -55,7 +55,7 @@ function AperturaMensual(){
 			},
 			function() {
 				//Función al finalizar}
-				cierraLoading();
+				//cierraLoading();
 			});
 
 	obtieneResponse = function( data ) {
@@ -339,7 +339,7 @@ function cargaDashboard(){
 			},
 			function() {
 				//Función al finalizar}
-				cierraLoading();
+				//cierraLoading();
 			});
 
 	obtieneResponseProceso = function( data ) {
@@ -509,7 +509,7 @@ function cargaDashboard(){
 			$('#proceso').css('min-width',size_total);
 			$('.simple').css('width',size);
 		});
-		
+		cierraLoading();
 		
 // ----------------------  ARMA DIAGRAMA DE FLUJO FIN ---------------------------------
 	}
@@ -526,7 +526,7 @@ function buscaMdsPorEstatus(tipo, estatus) {
 			},
 			function() {
 				//Función al finalizar}
-				cierraLoading();
+				//cierraLoading();
 			});
 
 	buscaMdsPorEstatusResponse = function( data ) {
@@ -845,6 +845,7 @@ function pintaActivas(arreglo,filtrados){
 	$('.hexa').css('background-image','url("img/hexaverde.svg")');
 	
 	$('#proceso').fadeIn();
+	cierraLoading();
 }
 function pintaAtrasadas(arreglo,filtrados){
 	$('#proceso').hide();
@@ -991,6 +992,7 @@ function pintaAtrasadas(arreglo,filtrados){
 	$('.hexa').css('background-image','url("img/hexarojo.svg")');
 	
 	$('#proceso').fadeIn();
+	cierraLoading();
 }
 
 function pintaCanceladas(arreglo,filtrados){
@@ -1122,6 +1124,7 @@ function pintaCanceladas(arreglo,filtrados){
 	$('#proceso').html(html);
 	$('.hexa').css('background-image','url("img/hexagris.svg")');
 	$('#proceso').fadeIn();
+	cierraLoading();
 }
 
 function simple(titulo,cant,pie,color,estatusId, estatusMd){
@@ -1212,7 +1215,7 @@ function EnviaSubmodulosAction(submodulos_global){
 			null, 
 			null,
 			null);
-	cierraLoading(); 
+	//cierraLoading(); 
 }
 
 //------------------------- lista de graficas ultimo mes, ultimo año-----------------
@@ -1610,7 +1613,7 @@ function buscaMdsPorEstatus(tipo, estatus , nivel, tipoString) {
             },
             function() {
                 //Función al finalizar}
-                cierraLoading();
+                //cierraLoading();
             });
     buscaMdsPorEstatusResponse = function( data ) {
         if(data.codigo != 200){
@@ -1799,7 +1802,7 @@ function obtieneatrasosxdias(tipo, intervalo) {
             },
             function() {
                 //Función al finalizar}
-                cierraLoading();
+                //cierraLoading();
             });
     obtieneAtrasosXdiasResponse = function( data ) {
         if(data.codigo != 200){
@@ -1905,7 +1908,7 @@ function buscaMdsXdiasAtrasos( tipo, nivel) {
             },
             function() {
                 //Función al finalizar}
-                cierraLoading();
+                //cierraLoading();
             });
     
 	obtieneAtrasosXdiasResponse = function( data ) {

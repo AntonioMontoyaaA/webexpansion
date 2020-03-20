@@ -133,7 +133,7 @@
             </div>
         </div>
     	</div>
-    	<div class="modal" id="modal_drop" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    	<div class="modal" id="modal_drop" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" style= "padding-right: 0;">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
 	      <div class="modal-header blanco" id="mensajeHeader" style="padding-top:7px; padding-bottom:7px;">
@@ -145,11 +145,9 @@
 	      <div class="modal-body">
 	       <div id="descripcionMensajeEstatus">---</div>
        			<div class="drop">
-				  <select name="slct" id="select_modal" class= "s_drop" >
-				    <option class= "drop_option" value="6">Levantamiento</option>
-					 <option class= "drop_option" value="27">Carga de Layout</option>
-				  </select>
-				</div>
+				  <div class="drop" style = "height: 80px; align-items: flex-start; justify-content: center;">
+				  	<select name="slct" id="select_modal" class= "s_drop" style = "width: auto; background-position: 100% center;"></select>
+				  </div>
 	      </div>
 	      <div class="modal-footer" style="justify-content: center; border:0;">
 	        <button type="button" onclick= "ShowSelectedItem()" class="btn fazul blanco" id="botonMensajeAceptarEstatus" style="width: 100px; height: 30px; padding-top: 2px; cursor: pointer;">Guardar</button>

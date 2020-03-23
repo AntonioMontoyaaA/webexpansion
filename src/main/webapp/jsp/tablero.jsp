@@ -150,7 +150,7 @@
 			  	</div>
 	      </div>
 	      <div class="modal-footer" style="justify-content: center; border:0;">
-	        <button type="button" onclick= "ShowSelectedItem()" class="btn fazul blanco" id="botonMensajeAceptarEstatus" style="width: 100px; height: 30px; padding-top: 2px; cursor: pointer;">Guardar</button>
+	        <button type="button" onclick= "ShowSelectedItemCambioMds()" class="btn fazul blanco" id="botonMensajeAceptarEstatus" style="width: 100px; height: 30px; padding-top: 2px; cursor: pointer;">Guardar</button>
 	      </div>
 	    </div>
 	  </div>

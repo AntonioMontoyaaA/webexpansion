@@ -2185,7 +2185,7 @@ function cargaModalDrop(titulo, descripcionMensaje,  mdId) {
     }	
 	
 }
-function ShowSelectedItem(){
+function ShowSelectedItemCambioMds(){
 	var cod = $('#select_modal')[0].value;
 	
  invocarJSONServiceAction("accion_modifica_md_status", 

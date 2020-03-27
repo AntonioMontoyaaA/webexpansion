@@ -507,9 +507,10 @@ a.links{
 
 
 .custom-toggler .navbar-toggler-icon {
-background-image: url('https://mdbootstrap.com/img/svg/hamburger7.svg?color=0069ac');
-
+	background-image: url('../img/menu_hamburguer.svg');
+	background-color: #FFFFFF;
 }
+
 .navbar_fondo{
 	background: #071B36;
 	padding:0rem 0rem;

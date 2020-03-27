@@ -30,7 +30,7 @@
 		<div class="col-lg-2 col-md-3"  id="contenedor_lista"></div>	
 		<div class="col-lg-10 col-md-9" id="cuadro_chat">
 <!-- Jefe de expansión -->
-			<div class="col-lg-12 menupr_estilos fondo_chat">
+			<div class="col-lg-12 menupr_estilos fondo_chat" style="height: 70%;">
 			<div class="row cabecera" style="width:100%;">
 				<div class="col-lg-9 col-md-8"  style="height:40px;">
 					<span class="azul negrita t14" id="subtitulo_chat"></span>

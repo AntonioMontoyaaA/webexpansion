@@ -365,7 +365,7 @@ function initTablaMemoriasTablero(nombreDiv, datosDesgloseMemorias, nombreTabla)
 									"sClass": "center",
 									"aTargets": [ 0,1 ]
 			 					},{ "sType": 'numeric', "aTargets": [7] },
-			 					{ "sType": 'extract-date', "aTargets": [2,3,8,10,11,12,17,19,20,21,22,23,24,25,26,27,29,30] }
+			 					{ "sType": 'extract-date', "aTargets": [2,3,8,10,11,12,13,14,17,19,20,21,22,23,24,25,26,27,28,29,30,31] }
 			 			]
 	});	
 	
@@ -689,6 +689,104 @@ function initTablaAsignarPerfiles(nombreDiv, datosDesglose, nombreTabla){
 	$("#" + nombreTabla + "_filter").hide();
 }
 
+function initTablaMdsXestatusArea(nombreDiv, data, nombreTabla){
+	
+	$("#" + nombreDiv).html(
+			   
+			'<table cellpadding="0" style= "width:auto" cellspacing="0" border="0px"  class="row-border stripe hover" id="' + nombreTabla + '" >' +
+			'<thead>'  +
+				'<tr style="cursor: pointer;border-top: 0px; border-bottom: 0px;">' +
+					'<th class="gris negrita t14" style= "width:16%" >MD ID</th>'  +
+					'<th class="gris negrita t14" style= "width:16%" >Nombre MD</th>' +
+					'<th class="gris negrita t14" style= "width:16%" >Región</th>' +
+					'<th class="gris negrita t14" style= "width:16%" >Fecha de inicio</br> de estatus</th>' +
+					'<th class="gris negrita t14" style= "width:16%" >Fecha de </br>visto bueno</th>' +
+					'<th class="gris negrita t14" style= "width:16%" >Días de </br>validación</th>' +
+				
+				'</tr>'+
+			'</thead>' +
+			'<tbody>'  +			
+            '</tbody>' +
+        '</table>');
+			
+		tabla = $("#" + nombreTabla).dataTable(
+				{"aaData": data,
+					"aoColumns": [
+						   	   {"sClass":"padding cursor_modal", "bSearchable":true},
+					           {"sClass":"padding cursor_modal", "bSearchable":true},
+					           {"sClass":"padding cursor_modal", "bSearchable":true},
+					           {"sClass":"padding cursor_modal", "bSearchable":true},
+					           {"sClass":"padding cursor_modal", "bSearchable":true},
+					           {"sClass":"padding cursor_modal", "bSearchable":true }],		
+					          
+					           "bJQueryUI": false,
+								"order": [],
+								"sPaginationType": "full_numbers",
+								"oLanguage": idiomaEspanolGeneral,
+								"bLengthChange":false,
+								"iDisplayLength":1000,
+								 "bScrollCollapse": false,
+								 "sScrollY": "40vh",
+								 "aoColumnDefs": [ {
+										"sClass": "center",
+										"aTargets": [ 0,2 ]
+								},{ "sType": 'extract-date', "aTargets": [3,4] }]		 
+	});	
+		$("#" + nombreTabla + "_DTTT_container").hide();
+		$("#" + nombreTabla + "_paginate").hide();
+		$("#" + nombreTabla + "_filter").hide();
+}
+
+function tablaMdsXAtrasosXdia(nombreDiv, data, nombreTabla){
+	$("#" + nombreDiv).html(
+			   
+			'<table cellpadding="0"  cellspacing="0" border="0px"  class="row-border stripe hover" id="' + nombreTabla + '" >' +
+			'<thead>'  +
+				'<tr style="cursor: pointer;border-top: 0px; border-bottom: 0px;">' +
+					'<th class="gris negrita padding_ t11" >MD ID</th>'  +
+					'<th class="gris negrita t11" >Nombre MD</th>' +
+					'<th class="gris negrita padding_ t11" >Fecha </br> inicio</th>' +
+					'<th class="gris negrita padding_ t11" >Área</th>' +
+					'<th class="gris negrita padding_ t11" >Estatus</th>' +
+					'<th class="gris negrita padding_ t11" >Días </br>conf.</th>' +
+					'<th class="gris negrita padding_ t11" >Días</br>Valid.</th>' +
+					'<th class="gris negrita padding_ t11" >Días</br>atraso</th>' +
+				'</tr>'+
+			'</thead>' +
+			'<tbody>'  +			
+            '</tbody>' +
+        '</table>');
+			
+		tabla = $("#" + nombreTabla).dataTable(
+				{"aaData": data,
+					"aoColumns": [
+						   	   {"sClass":"t11 padding_ cursor_modal","bSearchable":true},
+					           {"sClass":"t11 cursor_modal","bSearchable":true},
+					           {"sClass":"t11 padding_ cursor_modal","bSearchable":true},
+					           {"sClass":"t11 padding_ cursor_modal","bSearchable":true},
+					           {"sClass":"t11 padding_ cursor_modal","bSearchable":true},
+					           {"sClass":"t11 cursor_modal","bSearchable":true},
+					           {"sClass":"t11 cursor_modal","bSearchable":true},
+					           {"sClass":"t11 cursor_modal","bSearchable":true }],
+					          
+					           "bJQueryUI": false,
+								"order": [],
+								"sPaginationType": "full_numbers",
+								"oLanguage": idiomaEspanolGeneral,
+								"bLengthChange":false,
+								"iDisplayLength":1000,
+								 "bScrollCollapse": false,
+								 "sScrollY": "40vh",
+								 "aoColumnDefs": [ {
+										"sClass": "center",
+										"aTargets": [ 0,2 ]
+								},{ "sType": 'extract-date', "aTargets": [2] }]		 
+	});	
+		$("#" + nombreTabla + "_DTTT_container").hide();
+		$("#" + nombreTabla + "_paginate").hide();
+		$("#" + nombreTabla + "_filter").hide();
+}
+
 var idiomaEspanolGeneral = {
 	    "sEmptyTable":     "<div style='padding:10px; color:red; font-size:13px;'>No existen registros</div>",
 	    "sInfo":           'Totales: <b>_TOTAL_</b>',
@@ -823,7 +921,14 @@ var idiomaEspanolTablero = {
 
 jQuery.extend(jQuery.fn.dataTableExt.oSort, {
     "extract-date-pre": function(value) {
-        var date = $(value).text();
+        var date = '';
+        
+        if(value.indexOf("span") != -1) {
+        	date = $(value).text();
+        } else {
+        	date = value;
+        }
+        	
         date = date.split('/');
         return Date.parse(date[1] + '/' + date[0] + '/' + date[2])
     },
@@ -834,101 +939,3 @@ jQuery.extend(jQuery.fn.dataTableExt.oSort, {
         return ((a < b) ? 1 : ((a > b) ? -1 : 0));
     }
 });
-
-function initTablaMdsXestatusArea(nombreDiv, data, nombreTabla){
-		
-	$("#" + nombreDiv).html(
-			   
-			'<table cellpadding="0" style= "width:auto" cellspacing="0" border="0px"  class="row-border stripe hover" id="' + nombreTabla + '" >' +
-			'<thead>'  +
-				'<tr style="cursor: pointer;border-top: 0px; border-bottom: 0px;">' +
-					'<th class="gris negrita t14" style= "width:16%" >MD ID</th>'  +
-					'<th class="gris negrita t14" style= "width:16%" >Nombre MD</th>' +
-					'<th class="gris negrita t14" style= "width:16%" >Región</th>' +
-					'<th class="gris negrita t14" style= "width:16%" >Fecha de inicio</br> de estatus</th>' +
-					'<th class="gris negrita t14" style= "width:16%" >Fecha de </br>visto bueno</th>' +
-					'<th class="gris negrita t14" style= "width:16%" >Días de </br>validación</th>' +
-				
-				'</tr>'+
-			'</thead>' +
-			'<tbody>'  +			
-            '</tbody>' +
-        '</table>');
-			
-		tabla = $("#" + nombreTabla).dataTable(
-				{"aaData": data,
-					"aoColumns": [
-						   	   {"sClass":"padding cursor_modal", "bSearchable":true},
-					           {"sClass":"padding cursor_modal", "bSearchable":true},
-					           {"sClass":"padding cursor_modal", "bSearchable":true},
-					           {"sClass":"padding cursor_modal", "bSearchable":true},
-					           {"sClass":"padding cursor_modal", "bSearchable":true},
-					           {"sClass":"padding cursor_modal", "bSearchable":true }],		
-					          
-					           "bJQueryUI": false,
-								"order": [],
-								"sPaginationType": "full_numbers",
-								"oLanguage": idiomaEspanolGeneral,
-								"bLengthChange":false,
-								"iDisplayLength":1000,
-								 "bScrollCollapse": false,
-								 "sScrollY": "40vh",
-								 "aoColumnDefs": [ {
-										"sClass": "center",
-										"aTargets": [ 0,2 ]
-								}]		 
-	});	
-		$("#" + nombreTabla + "_DTTT_container").hide();
-		$("#" + nombreTabla + "_paginate").hide();
-		$("#" + nombreTabla + "_filter").hide();
-}
-
-function tablaMdsXAtrasosXdia(nombreDiv, data, nombreTabla){
-	$("#" + nombreDiv).html(
-			   
-			'<table cellpadding="0"  cellspacing="0" border="0px"  class="row-border stripe hover" id="' + nombreTabla + '" >' +
-			'<thead>'  +
-				'<tr style="cursor: pointer;border-top: 0px; border-bottom: 0px;">' +
-					'<th class="gris negrita padding_ t11" >MD ID</th>'  +
-					'<th class="gris negrita t11" >Nombre MD</th>' +
-					'<th class="gris negrita padding_ t11" >Fecha </br> inicio</th>' +
-					'<th class="gris negrita padding_ t11" >Área</th>' +
-					'<th class="gris negrita padding_ t11" >Estatus</th>' +
-					'<th class="gris negrita padding_ t11" >Días </br>conf.</th>' +
-					'<th class="gris negrita padding_ t11" >Días</br>Valid.</th>' +
-					'<th class="gris negrita padding_ t11" >Días</br>atraso</th>' +
-				'</tr>'+
-			'</thead>' +
-			'<tbody>'  +			
-            '</tbody>' +
-        '</table>');
-			
-		tabla = $("#" + nombreTabla).dataTable(
-				{"aaData": data,
-					"aoColumns": [
-						   	   {"sClass":"t11 padding_ cursor_modal","bSearchable":true},
-					           {"sClass":"t11 cursor_modal","bSearchable":true},
-					           {"sClass":"t11 padding_ cursor_modal","bSearchable":true},
-					           {"sClass":"t11 padding_ cursor_modal","bSearchable":true},
-					           {"sClass":"t11 padding_ cursor_modal","bSearchable":true},
-					           {"sClass":"t11 cursor_modal","bSearchable":true},
-					           {"sClass":"t11 cursor_modal","bSearchable":true},
-					           {"sClass":"t11 cursor_modal","bSearchable":true }],
-					          
-					           "bJQueryUI": false,
-								"order": [],
-								"sPaginationType": "full_numbers",
-								"oLanguage": idiomaEspanolGeneral,
-								"bLengthChange":false,
-								"iDisplayLength":1000,
-								 "bScrollCollapse": false,
-								 "sScrollY": "40vh",
-								 "aoColumnDefs": [ {
-										"sClass": "center",
-										"aTargets": [ 0,2 ]
-								}]		 
-	});	
-		$("#" + nombreTabla + "_DTTT_container").hide();
-		$("#" + nombreTabla + "_paginate").hide();
-		$("#" + nombreTabla + "_filter").hide();
-}

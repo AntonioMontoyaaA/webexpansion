@@ -51,32 +51,33 @@ public class LocalizadorRadiosAction extends ExpansionAction implements  Session
 				String jsonRadiosLocalizados = ServletActionContext.getRequest().getParameter("radiosLocalizados");
 
 				final OkHttpClient client = new OkHttpClient.Builder()
-				        .connectTimeout(40, TimeUnit.SECONDS)
-				        .readTimeout(40, TimeUnit.SECONDS)
-				        .writeTimeout(40, TimeUnit.SECONDS)
+				        .connectTimeout(150, TimeUnit.SECONDS)
+				        .readTimeout(150, TimeUnit.SECONDS)
+				        .writeTimeout(150, TimeUnit.SECONDS)
 				        .build();
+
 
 				FormBody.Builder formBuilder = new FormBody.Builder()
 				 .add("usuarioId", numeroEmpleado)
-				 .add("arregloRadio", jsonRadiosLocalizados);
+				 .add("arreglo", jsonRadiosLocalizados);
 
 				 RequestBody formBody = formBuilder.build();
 	
 				 Request request = new Request.Builder()
-						 .url(sp.getPropiedad("obtieneRadiosGuardaRadios"))
+						 .url(sp.getPropiedad("localizador.guardasitiospropuesta"))
 		                 .post(formBody)
 		                 .build();
 
 				 Response response = client.newCall(request).execute();
 				 respuesta = response.body().string();
 				 
+
 				 HttpServletResponse response2 = ServletActionContext.getResponse();
 					response2.setContentType("application/json");
 					response2.setCharacterEncoding("UTF-8");
 					response2.getWriter().write(respuesta);
 				
 
-					
 			}
 		}catch(Exception ex) {
 			String clase  ="clase: "+ new String (Thread.currentThread().getStackTrace()[1].getClassName());	
@@ -402,6 +403,245 @@ public class LocalizadorRadiosAction extends ExpansionAction implements  Session
 
 		return null;
 	}
+	
+	public String getEstadosCiudades()throws Exception{
+		
+		session();
+		
+		try {
+			
+			if(usuario == null){
+				RespuestaVo respuestaVo = new RespuestaVo();
+				respuestaVo.setCodigo(501);
+				respuestaVo.setMensaje("Error en la sesión");
+				sendJSONObjectToResponse(respuestaVo);
+				
+				return null;
+			}else{
+
+				final OkHttpClient client = new OkHttpClient();
+				FormBody.Builder formBuilder = new FormBody.Builder()
+				 .add("usuarioId", numeroEmpleado);
+				
+				 RequestBody formBody = formBuilder.build();
+				 Request request = new Request.Builder()
+						 .url(sp.getPropiedad("localizador.obtieneestadosciudad"))
+		                 .post(formBody)
+		                 .build();
+				
+				 Response response = client.newCall(request).execute();
+				 respuesta = response.body().string();
+				 
+
+				 HttpServletResponse response2 = ServletActionContext.getResponse();
+					response2.setContentType("application/json");
+					response2.setCharacterEncoding("UTF-8");
+					response2.getWriter().write(respuesta);
+			 }	
+					//elog.error(clase,metodo,ex + "", "ID empleado: " + usuario.getPerfil().getNumeroEmpleado(), "Fecha consulta: " );
+			}catch(Exception ex) {
+				String clase  ="clase: "+ new String (Thread.currentThread().getStackTrace()[1].getClassName());	
+				String metodo ="metodo: "+ new String (Thread.currentThread().getStackTrace()[1].getMethodName());
+				elog.error(clase,metodo,ex + "", "ID empleado: " + usuario.getPerfil().getNumeroEmpleado(), "Fecha consulta: " ); 			
+			}
+	
+			return null;
+		
+	}
+	
+	public String getEstados()throws Exception{
+		
+		session();
+		
+		try {
+			
+			if(usuario == null){
+				RespuestaVo respuestaVo = new RespuestaVo();
+				respuestaVo.setCodigo(501);
+				respuestaVo.setMensaje("Error en la sesión");
+				sendJSONObjectToResponse(respuestaVo);
+				
+				return null;
+			}else{
+
+				final OkHttpClient client = new OkHttpClient();
+				FormBody.Builder formBuilder = new FormBody.Builder()
+				 .add("usuarioId", numeroEmpleado);
+				
+				 RequestBody formBody = formBuilder.build();
+				 Request request = new Request.Builder()
+						 .url(sp.getPropiedad("localizador.obtieneestados"))
+		                 .post(formBody)
+		                 .build();
+				
+				 Response response = client.newCall(request).execute();
+				 respuesta = response.body().string();
+				 
+
+				 HttpServletResponse response2 = ServletActionContext.getResponse();
+					response2.setContentType("application/json");
+					response2.setCharacterEncoding("UTF-8");
+					response2.getWriter().write(respuesta);
+			 }	
+					//elog.error(clase,metodo,ex + "", "ID empleado: " + usuario.getPerfil().getNumeroEmpleado(), "Fecha consulta: " );
+			}catch(Exception ex) {
+				String clase  ="clase: "+ new String (Thread.currentThread().getStackTrace()[1].getClassName());	
+				String metodo ="metodo: "+ new String (Thread.currentThread().getStackTrace()[1].getMethodName());
+				elog.error(clase,metodo,ex + "", "ID empleado: " + usuario.getPerfil().getNumeroEmpleado(), "Fecha consulta: " ); 			
+			}
+	
+			return null;
+		
+	}
+	
+	public String getRecalcularGeneradores()throws Exception{		
+		
+		String radioId = ServletActionContext.getRequest().getParameter("radioId");
+		
+		session();
+
+		try {
+			if(usuario == null){
+				RespuestaVo respuestaVo = new RespuestaVo();
+				respuestaVo.setCodigo(501);
+				respuestaVo.setMensaje("Error en la sesión");
+				sendJSONObjectToResponse(respuestaVo);
+				
+				return null;
+			}else{
+				
+				final OkHttpClient client = new OkHttpClient();
+				FormBody.Builder formBuilder = new FormBody.Builder()
+				 .add("usuarioId", 	numeroEmpleado)
+				 .add("radioId", 	radioId);
+				
+				 RequestBody formBody = formBuilder.build();
+				 Request request = new Request.Builder()
+						 .url(sp.getPropiedad("localizador.reprocesoGenRadio"))
+		                 .post(formBody)
+		                 .build();
+				
+				 Response response = client.newCall(request).execute();
+				 respuesta = response.body().string();
+				 
+				 
+				 HttpServletResponse response2 = ServletActionContext.getResponse();
+					response2.setContentType("application/json");
+					response2.setCharacterEncoding("UTF-8");
+					response2.getWriter().write(respuesta);
+					
+			}
+				//elog.error(clase,metodo,ex + "", "ID empleado: " + usuario.getPerfil().getNumeroEmpleado(), "Fecha consulta: " );
+		}catch(Exception ex) {
+			String clase  ="clase: "+ new String (Thread.currentThread().getStackTrace()[1].getClassName());	
+			String metodo ="metodo: "+ new String (Thread.currentThread().getStackTrace()[1].getMethodName());
+			elog.error(clase,metodo,ex + "", "ID empleado: " + usuario.getPerfil().getNumeroEmpleado(), "Fecha consulta: " ); 			
+		}
+
+		return null;
+	}
+	
+	public String getAnillosCiudad()throws Exception{		
+		
+		String idEstado = ServletActionContext.getRequest().getParameter("idEstado");
+		String nombreAnillo = ServletActionContext.getRequest().getParameter("nombreAnillo");
+		String fechaIni = ServletActionContext.getRequest().getParameter("fechaIni");
+		String fechaFin = ServletActionContext.getRequest().getParameter("fechaFin");
+		String estatusId = ServletActionContext.getRequest().getParameter("estatusId");
+		
+		session();
+
+		try {
+			if(usuario == null){
+				RespuestaVo respuestaVo = new RespuestaVo();
+				respuestaVo.setCodigo(501);
+				respuestaVo.setMensaje("Error en la sesión");
+				sendJSONObjectToResponse(respuestaVo);
+				
+				return null;
+			}else{
+				
+				final OkHttpClient client = new OkHttpClient();
+				FormBody.Builder formBuilder = new FormBody.Builder()
+				 .add("usuarioId", 	numeroEmpleado)
+				 .add("estadoId", 	idEstado)
+				 .add("NombreSitio", nombreAnillo)
+				 .add("fechaIni", 	fechaIni)
+				 .add("fechaFin", 	fechaFin)
+				 .add("estatus",   	estatusId);
+				
+				 RequestBody formBody = formBuilder.build();
+				 Request request = new Request.Builder()
+						 .url(sp.getPropiedad("localizador.obtieneAnillosxfiltros"))
+		                 .post(formBody)
+		                 .build();
+				
+				 Response response = client.newCall(request).execute();
+				 respuesta = response.body().string();
+				 
+
+				 HttpServletResponse response2 = ServletActionContext.getResponse();
+					response2.setContentType("application/json");
+					response2.setCharacterEncoding("UTF-8");
+					response2.getWriter().write(respuesta);
+					
+			}
+				//elog.error(clase,metodo,ex + "", "ID empleado: " + usuario.getPerfil().getNumeroEmpleado(), "Fecha consulta: " );
+		}catch(Exception ex) {
+			String clase  ="clase: "+ new String (Thread.currentThread().getStackTrace()[1].getClassName());	
+			String metodo ="metodo: "+ new String (Thread.currentThread().getStackTrace()[1].getMethodName());
+			elog.error(clase,metodo,ex + "", "ID empleado: " + usuario.getPerfil().getNumeroEmpleado(), "Fecha consulta: " ); 			
+		}
+
+		return null;
+	}
+	
+	public String autorizarAnillos()throws Exception{	
+		String idAnillo = ServletActionContext.getRequest().getParameter("idAnillo");
+		String valorSolicitud = ServletActionContext.getRequest().getParameter("valorSolicitud");
+		
+		session();
+
+		try {
+			
+			if(usuario == null){
+				RespuestaVo respuestaVo = new RespuestaVo();
+				respuestaVo.setCodigo(501);
+				respuestaVo.setMensaje("Error en la sesión");
+				sendJSONObjectToResponse(respuestaVo);
+				
+				return null;
+			}else{
+				
+			final OkHttpClient client = new OkHttpClient();
+			FormBody.Builder formBuilder = new FormBody.Builder()
+			 .add("usuarioId", numeroEmpleado)
+			 .add("radioId", idAnillo)
+			 .add("valorSolicitud", valorSolicitud);
+			
+			 RequestBody formBody = formBuilder.build();
+			 Request request = new Request.Builder()
+					 .url(sp.getPropiedad("localizador.autorizarAnillo"))
+	                 .post(formBody)
+	                 .build();
+			
+			 Response response = client.newCall(request).execute();
+			 respuesta = response.body().string();
+			 HttpServletResponse response2 = ServletActionContext.getResponse();
+				response2.setContentType("application/json");
+				response2.setCharacterEncoding("UTF-8");
+				response2.getWriter().write(respuesta);
+			}
+				//elog.error(clase,metodo,ex + "", "ID empleado: " + usuario.getPerfil().getNumeroEmpleado(), "Fecha consulta: " );
+		}catch(Exception ex) {
+			String clase  ="clase: "+ new String (Thread.currentThread().getStackTrace()[1].getClassName());	
+			String metodo ="metodo: "+ new String (Thread.currentThread().getStackTrace()[1].getMethodName());
+			elog.error(clase,metodo,ex + "", "ID empleado: " + usuario.getPerfil().getNumeroEmpleado(), "Fecha consulta: " ); 			
+		}
+
+		return null;
+	}
+
 	
 	
 	void session() {

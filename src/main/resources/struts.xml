@@ -315,6 +315,29 @@
        	method = "getObtenerRadiosEstatus">
     </action>          	
     
+     <action name = "obtenerEstadosCidudades" 
+	  	class = "com.tiendas.neto.action.LocalizadorRadiosAction" 
+	  	method = "getEstadosCiudades" />
+    
+     <action name = "obtieneAnillosxfiltros" 
+	  	class = "com.tiendas.neto.action.LocalizadorRadiosAction" 
+	  	method = "getAnillosCiudad" />
+        
+         <action name = "obtenerEstados" 
+	  	class = "com.tiendas.neto.action.LocalizadorRadiosAction" 
+	  	method = "getEstados" />
+	  	
+	  	 <action name = "recalcularGeneradoresComp" 
+	  	class = "com.tiendas.neto.action.LocalizadorRadiosAction" 
+	  	method = "getRecalcularGeneradores" />
+         
+         	 <action name = "autorizarAnillos" 
+	  	class = "com.tiendas.neto.action.LocalizadorRadiosAction" 
+	  	method = "autorizarAnillos" />
+            
+            
+            
+    
     <!-- ===== END- LOCALIZADOR === -->
     
       	<action name = "DashboardGeneralAction" class="com.tiendas.neto.action.DashboardGeneralAction"

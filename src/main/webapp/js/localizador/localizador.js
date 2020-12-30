@@ -14,8 +14,9 @@ var earthRadii = {
         fr: 31705.3408
     };
 
+
 var boundsAsig;
-var bounds;
+var bounds; 
 var boundsRutaTodos;
 var boundsRadiosEstatus;
 var boundsMds;
@@ -32,11 +33,39 @@ var MdsArray = [];
 var markerId = 0;
 var radioSeleccionado;
 var objArrayEmployee;
-var iconMarke = {NUEVO : "img/icon-marker-new.svg",ASIGNADO: "img/markers_NA.svg", EN_PROCESO: "img/icon-marker-proceso.svg", CONCLUIDO: "img/icon-marker-concluido.svg",
-			     CANCELADO:"img/icon-marker-cancelado.svg", SELECTED:"img/markers_RADIOblue.svg",HERE: 'img/markers_NA.svg', MD : 'img/icon_conMD.svg' }; //img/markers_MD.svg
+var icon_Mds = "img/localizador/pin/icon-pin-md.png";
+var iconMarke = { NUEVO : "img/icon-marker-new.svg",
+				  ASIGNADO: "img/markers_NA.svg", 
+				  EN_PROCESO: "img/icon-marker-proceso.svg", 
+				  CONCLUIDO: "img/icon-marker-concluido.svg",
+			      CANCELADO:"img/icon-marker-cancelado.svg", 
+			      SELECTED:"img/markers_RADIOblue.svg",
+			      HERE: 'img/markers_NA.svg', 
+			      MD : 'img/icon_conMD.svg' }; 
 
+var iconMarkeGenerador = {  100001   : "img/localizador/pin/pin_templo.svg", 		// IGLESIA
+							100002  : "img/localizador/pin/pin_hospital.svg", 	 		// HOSPITAL		
+							100003	: "img/localizador/pin/pin_escuela.svg",  	// ESCUELA
+							100004	: "img/localizador/pin/pin_mercado.svg",  	// MERCADO
+							100005	: "img/localizador/pin/pin_ofgobierno.svg",  	// OFICINA DE GOBIERNO
+							100006	: "img/localizador/pin/pin_panaderia.svg",  	// PANADERIA
+							100007 	: 'img/localizador/pin/pin_tortilleria.svg', 			// TORTILLERIA
+							100008	: 'img/localizador/pin/pin_abarrotes.svg', 			// ABARROTES
+							100009	: 'img/localizador/pin/pin_carniceria.svg', 			// CARNICERIA
+							100010 	: "img/localizador/pin/pin_polleria.svg",	    // POLLERIA
+							100011	: "img/localizador/pin/pin_recauderia.svg"};			// RECAUDERIA
+				      	  	
+var iconMarkeCompetencias = {  100001   : "img/localizador/pin/pin_3b.svg", 		// 3b
+								100002  : "img/localizador/pin/pin_aurrera_express.svg", 	 	    // Bodega express
+								100011	: "img/localizador/pin/pin_aurrera.svg"};			// mi bodega
+  	  	
 
-var PANT_OPCION   = {ALTARADIOS : 0, ASIGNARRADIOS : 1, LOCALIZACION : 2, MISMDS : 3, RADIOSXMD : 4};
+var PANT_OPCION   = {	ALTARADIOS : 0,
+						ASIGNARRADIOS : 1, 
+						LOCALIZACION : 2, 
+						MISMDS : 3, 
+						RADIOSXMD : 4};
+
 var colors = {NUEVO:"#FFC300", ASIGNADO:"gray" ,EN_PROCESO : "#00bf5f",  CONCLUIDO : "#007fff", CANCELADO : "#ff5656"};
 
 
@@ -46,6 +75,7 @@ var idRadioDesAsignar = -1;
 /* == MDS RADIOS X MDS == */
 var ARRAYOBJGERENTES;
 var ARRAYOBJJEFES;
+var ARRAYOBJESTADOS;
 
 
 /* === LOCALIZACION RUTA === */
@@ -72,6 +102,10 @@ $(function(){
 	$('#btonGuardarRadios').click(function(){ guardaRadiosLocalizados();});
 	$('#btonCancelarRadios').click(function(){$("#xlf").val(""); $(".contentPopUpInfo").hide(); $(".contentPopUpInfoMD").hide(); clearMarkers();});
 	$("#btnAsignarRadio").click(function(){ asignarRadio(1);});
+	$("#btnConsultaAnillos").click(function(){ getAnillosXFiltros();});
+	$("#btnConsultaAnillosConsulta").click(function(){ getAnillosXConsulta();});
+	
+	
 	$("#download_plantillaRadios").click(function(){ download_ejemplo(); });
 	$("#btnRemovelAsign").click(function(){ closePopUpInfo();  var selet = {value:0};	radiosUsuario(selet); });
 	
@@ -88,21 +122,20 @@ $(function(){
 	
 	/*-- ver MD's --*/
 	$("#btnVerMds").click(function(){ getObtenerMDs();});
-	
-	
-	/* === RADIOS POR MDS ===*/
-	$("#check_nuevos").change(function(){clearMapsRadiosMDs(this.value);    pintarMarkersMaps(this.value,this.checked);}); 
-	$("#check_asignados").change(function(){clearMapsRadiosMDs(this.value); pintarMarkersMaps(this.value,this.checked);});
-	$("#check_proceso").change(function(){clearMapsRadiosMDs(this.value);   pintarMarkersMaps(this.value,this.checked);}); 
-	$("#check_concluido").change(function(){clearMapsRadiosMDs(this.value); pintarMarkersMaps(this.value,this.checked);});
-	$("#check_cancelado").change(function(){clearMapsRadiosMDs(this.value); pintarMarkersMaps(this.value,this.checked);}); 
-
-	$("#check_MdsRadios").change(function(){verMdsAutorizadasMaps(); });
 	$(".btn_infoClose").click(function(){closePopUpInfo();});
 	
 	/* == UBICACION TIEMPO REAL ==*/
 	$("#datepicker1").change(function(){validaFechaConsultada(2);});
 	$('#select_employeeLocalizar').change(function(){ validaFechaConsultada(2); ESTATUS_CONSULTA = false;});
+	
+	
+	/* == INICAR CHOSEN ==*/
+	setTimeout(function(){$('.chosen-select').chosen( { width: '100%' } );},100);
+	getObtenerEstados();
+	getObtenerEmpleados($('#select_employee'),2);
+	
+	
+	$('#verRadiosEstatus').trigger('click');
 	
 });
 
@@ -146,25 +179,24 @@ function showOptionAction(){
     clearMarkers();
     
     if(element_call.id == "asignarRadio"){
-    	getRadiosLocalizados();
-    	getObtenerEmpleados($('#select_employee'),2);
     	$("#select_employee").val(-1);
+    	
+    	/* ==== FILTROS Consulta de anillos === */
+    	llenarComboBoxEstados($('#comboBox_estado'),1);
+    	
+    	var dateHoy = new Date();
+    	var FECHA_HOY2 = $.datepicker.formatDate('dd/mm/yy',dateHoy);
+    	$("#datepicker2").val(FECHA_HOY2);
+
     }
     
     /* === VER MIS MDS ===*/
     if(element_call.id == "verMds"){
     	if(ARRAYOBJGERENTES == undefined || Object.keys(ARRAYOBJGERENTES).length < 0){
     		getObtenerEmpleadosGerentes();    		
+    		
     	}else{
-    		
-    		$('#select_employeeMDJefes').html("");
-    		$('#select_employeeMDJefes').append($('<option>', {
-    			value: "0",
-    			text :"Seleccionar jefe"
-    		}));
-    		
-    		$("#select_employeeMDGere").val(0);
-    		$("#select_employeeMDJefes").val(0);
+
     		
     	}
     }
@@ -184,7 +216,6 @@ function showOptionAction(){
     
 	    /*=== INIT VER RADIOS CON MDS ===*/
 	    if(element_call.id == "verRadiosEstatus"){
-	    	getObtenerRadiosXMDs();
 	    	$("#check_nuevos").prop("checked",true);
 	    	$("#check_asignados").prop("checked",true);
 	    	$("#check_proceso").prop("checked",false);
@@ -192,17 +223,22 @@ function showOptionAction(){
 	    	$("#check_cancelado").prop("checked",false);
 	    	$("#check_MdsRadios").prop("checked",false);
 	
+        	var dateHoy3 = new Date();
+        	var FECHA_HOY3 = $.datepicker.formatDate('dd/mm/yy',dateHoy3);
+        	$("#datepicker3").val(FECHA_HOY3);
 	    }
 	    
 	    
 	    /* =============== CLEAN MAP MARKERS =========*/
 		clearMapsRadiosMDsBuscar(arrayRadios_4);
 		clearMapsRadiosMDsBuscar(arrayMds_4);
-		directionsDisplay.setDirections({routes: []});
 		quitarPinUbicacionActual();
 		cleanMapRutas();
 		clearMapsMds(MdsArray);
 		cleanMapRutasAllJefes();
+		pintarMdsAnillos(radioSeleccionado,null);
+		pintarGeneradores(radioSeleccionado,null);
+		pintarCompetencias(radioSeleccionado,null);
 		
 		ESTATUS_CONSULTA = false; 
 		positionMapInit();
@@ -210,52 +246,6 @@ function showOptionAction(){
 		$(".contentPopUpInfoMD").hide();
 		$("#xlf").val("");
    }
-
-/* ---------- Consume WS GUARDA RADIOS --------*/
-function guardaRadiosLocalizados(){
-	cargaLoading();
-
-	 if(Object.keys(objArray).length <= 0){
-		 cierraLoading();
-		 cargaMensajeModal("Localizador", "Sin radios para guardar.", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
-		 return false;
-	 }
-
-	 Object.keys(objArray).forEach(function (key){
-		 var lonRadio_ = objArray[key].longRadio==undefined? 500: objArray[key].longRadio;
-		 var idZona_ = objArray[key].idZona==undefined? "Sin asignar": objArray[key].idZona;
-		 radiosArray.push(new RadiosLocalizados(objArray[key].coordenada.lat, objArray[key].coordenada.lng, idZona_, objArray[key].infoMarker,lonRadio_));
-	});
-
-	invocarJSONServiceAction("guardarRadiosLocalizados",{"radiosLocalizados" :  JSON.stringify(radiosArray)},
-			'responseGuardarLocalizados',
-			function() {
-				//Funcion de error
-				cargaMensajeModal("Localizador","Error en el servicio guardar radios localizados.", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
-				clearMarkers();
-				//cierraLoading();
-			},
-			function() {
-				//Función al finalizar
-				cierraLoading();
-			});
-
-	responseGuardarLocalizados = function(data){
-		if(data.codigo == 403){
-			cargaMensajeModal("Localizador","Revisar el registro de la fila "+data.jsonError.indexXSLX+" <br>"+ data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
-		}else{
-			cargaMensajeModal("Localizador",data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
-		}
-
-		clearMarkers();
-		closePopUpInfo();
-		radiosArray = [];
-	}
-}
-
-
-
-
 
 
 /* =================== PAINT MARKERS GOOGLE MAPS  ==================*/
@@ -292,81 +282,6 @@ function initMap() {
 }
 
 
-/* ---------- Adds a marker to the map. --------*/
-function addMarker(obj, map) {
-	
-	var icon = {
-			url: iconMarke.NUEVO, // url
-			scaledSize: new google.maps.Size(35, 35)// scaled size
-		};
-	
-  var marker = new google.maps.Marker({
-    position: obj.coordenada,
-    //draggable: true,
-    animation: google.maps.Animation.DROP,
-    map: map,
-    id : obj.idMarker,
-    icon : icon
-  });
-
-  google.maps.event.addListener(marker, 'dragend', function (evt) {
-	  var center = new CoordenadaClass(evt.latLng.lat(), evt.latLng.lng());
-	  objArray[obj.idMarker].circle = crearCirculo(center,colors.NUEVO);
-
-	    //document.getElementById('current').innerHTML = '<p>Marker dropped: Current Lat: ' + evt.latLng.lat().toFixed(3) + ' Current Lng: ' + evt.latLng.lng().toFixed(3) + '</p>';
-	});
-
-  marker.addListener("dblclick", function() {
-	    deleteObjMarkerMap(obj.idMarker);
-	});
-
-  marker.addListener("click", function() {
-  	/*if(infowindow == undefined){
-    	infowindow =  new  google.maps.InfoWindow({ content: crearInfoRadioLocalizado(obj)  });
-		  infowindow.open(map,marker);
-      radioSeleccionado = objArray[obj.idMarker];
-  	}else{
-  		if(radioSeleccionado.idMarker != obj.idMarker){
-  			infowindow.close();
-  			infowindow = new  google.maps.InfoWindow({ content: crearInfoRadioLocalizado(obj) });
-  			infowindow.open(map,marker);
-        radioSeleccionado = objArray[obj.idMarker];
-  		}
-  	}*/
-	  
-		 if (marker.getAnimation() !== null) {
-	          marker.setAnimation(null);
-	          $(".contentPopUpInfo").hide();
-	          map.setZoom(12);
-
-	        } else {
-	          if(radioSeleccionado != undefined && radioSeleccionado != null)
-	        	  radioSeleccionado.marker.setAnimation(null);
-	          
-	          
-	          marker.setAnimation(google.maps.Animation.BOUNCE);
-	          setTimeout(function(){marker.setAnimation(google.maps.Animation.BOUNCE);},1100);
-	          radioSeleccionado = objArray[obj.idMarker];
-	          verInformacionRadio(radioSeleccionado, PANT_OPCION.ALTARADIOS);	  
-	          map.setCenter(new google.maps.LatLng(radioSeleccionado.coordenada.lat , radioSeleccionado.coordenada.lng));
-	          map.setZoom(15);
-	          $(".contentPopUpInfo").show();
-	        }
-	  
-  	
-	});
-
-	google.maps.event.addListener(marker, 'dragstart', function (evt) {
-		objArray[obj.idMarker].circle.setMap(null);
-	});
-
-  bounds.extend(marker.position);
-  
-	obj.marker   = marker;
-	obj.circle   = crearCirculo(obj.coordenada,colors.NUEVO,obj.infoMarker.fcRadio);
-	markerId++;
-
-}
 
 /* ---------- toggleBounce  --------*/
 function toggleBounce() {
@@ -381,14 +296,13 @@ function toggleBounce() {
 /* ---------- Crear Radio  --------*/
 function crearCirculo(location,color, radius){
 
-	//radius = parseFloat(document.getElementById('radiusInput').value)
 	if(radius == undefined || radius == null || radius == ""){
 		radius = 500;		
 	}else 
 		if(radius < 500){
 			radius = 500;
 		}
-	
+
     radius = (radius / earthRadii['mt']) * earthRadii['mt']
 
 	 return new google.maps.Circle({
@@ -406,8 +320,10 @@ function crearCirculo(location,color, radius){
 
 
 function positionMapInit(){
-	 map.setZoom(6);
-	 map.setCenter( {lat: 19.356703, lng: -99.276124});
+	if(map != null && map != undefined){
+		map.setZoom(6);
+		map.setCenter( {lat: 19.356703, lng: -99.276124});		
+	}
 }
 
 function validaValorObj(valor){
@@ -427,33 +343,6 @@ function validaValorObjRadio(valor){
 }
 
 
-/* ----------- Crear Radios con XSL-X -----------*/
-function pintarCirculosXslx(arrayDatosRadios){
-	clearMarkers();
-	bounds = new google.maps.LatLngBounds();
-	
-
-	
-	arrayDatosRadios.forEach(function(element,index){
-		if(index != 0 && index != 1){
-			objArray[markerId] = new RadiosClass(element[2],
-												new  CoordenadaClass(parseFloat(element[0]),parseFloat(element[1])), markerId);
-
-			objArray[markerId].setInfoMarker(new InfoRadiosLocalizados(element[3],element[4],element[5],element[6],element[7],
-												 element[8],element[9],element[10],element[11],element[12],
-												 element[13],element[14],element[15], element[16],
-												 element[17], element[18],element[19],element[20],index+1 ));
-
-			addMarker(objArray[markerId], map);
-		}
-	});
-	
-	
-	if(Object.keys(objArray).length <= 0){
-		 return false;
-	 }
-	map.fitBounds(bounds);
-}
 
 /* ------  Cant Radios -------*/
 function getSizeRadios(){
@@ -463,20 +352,21 @@ function getSizeRadios(){
 /* -------------  Clear Map Radios --------------*/
 function clearMarkers(){
 	
+	$("#div-asignacion-anillo").hide();
+	
 	if(getSizeRadios() > 0){
 		cargaLoading();
 		Object.keys(objArray).forEach(function(key){
-			deleteObjMarkerMap(objArray[key].idMarker);
+			deleteObjMarkerMap(objArray[key].id);
 		});
 		
 		if(radioSeleccionado != undefined)
-			radioSeleccionado.idMarker = -1 ;
+			radioSeleccionado.id = -1 ;
 		
 		positionMapInit();
 		objArray = {};
 		radiosArray = [];
 		setTimeout(function(){cierraLoading();},400);	
-		markerId = 0;
 	}
   }
 
@@ -484,6 +374,16 @@ function clearMarkers(){
 function deleteObjMarkerMap(markerId){
 	objArray[markerId].marker.setMap(null);
 	objArray[markerId].circle.setMap(null);
+
+	if(objArray[markerId].generadores != undefined &&
+			objArray[markerId].generadores.length > 0 ){
+		if(objArray[markerId].generadores != undefined){
+			objArray[markerId].generadores.forEach(function(generador,index){
+				generador.marker.setMap(null);
+			});			
+		}
+	}
+	
 	delete objArray[markerId];
 }
 
@@ -509,6 +409,7 @@ function RadiosClass(idZona,coordenada, idMarker,marker, circle, estatusId, usua
 	this.NombreUsr  = NombreUsr; 
 	this.longRadio;
 	this.infoMarker;
+	this.generadoresMarker = [];
 
 	//**** Getter Setter
 	this.getEstatus = function (){
@@ -546,6 +447,9 @@ function RadiosClass(idZona,coordenada, idMarker,marker, circle, estatusId, usua
 	}
 	
 	
+	this.addGeneradoresMarker = function (generadoresMarker){
+		this.generadoresMarker.push(generadoresMarker);
+	}
 }
 
 /* -- class --*/
@@ -638,10 +542,6 @@ var process_wb = (function() {
 var setfmt = window.setfmt = function setfmt() { if(global_wb) process_wb(global_wb); };
 
 var do_file = (function() {
-
-
-	      	
-	
 	var rABS = typeof FileReader !== "undefined" && (FileReader.prototype||{}).readAsBinaryString;
  	var use_worker = typeof Worker !== 'undefined';
 
@@ -772,11 +672,11 @@ var do_file = (function() {
 		};
       
 	  var marker = new google.maps.Marker({
-		    position: obj.coordenada,
+		    position: obj.objCoordenadas,
 		    draggable: false,
 		    animation: google.maps.Animation.DROP,
 		    map: map,
-		    id : obj.idMarker,
+		    id : obj.id,
 		    icon : icon
 		  }); 
 	  
@@ -785,27 +685,48 @@ var do_file = (function() {
 		 if (marker.getAnimation() !== null) {
 	          marker.setAnimation(null);
 	          $(".contentPopUpInfo").hide();
+	          $("#div-asignacion-anillo").hide();
+	          
+	          
 	         // map.fitBounds(boundsAsig);
 	          map.setZoom(12);
-	          
+	          pintarGeneradores(obj,null);
+	          pintarMdsAnillos(obj,null);
+	          obj.circle.setMap(null);
 	        } else {
-	          if(radioSeleccionado != undefined && radioSeleccionado != null)
+	          if(radioSeleccionado != undefined && radioSeleccionado != null){
 	        	  radioSeleccionado.marker.setAnimation(null);
+	        	  pintarGeneradores(radioSeleccionado,null);
+	        	  pintarMdsAnillos(radioSeleccionado,null);
+	          }
 
+	          
 	          marker.setAnimation(google.maps.Animation.BOUNCE);
 	          setTimeout(function(){marker.setAnimation(google.maps.Animation.BOUNCE);},1100);
-	          radioSeleccionado = objArray[obj.idMarker];
+	          radioSeleccionado = objArray[obj.id];
 	          verInformacionRadio(radioSeleccionado, PANT_OPCION.ASIGNARRADIOS);	  
-	          map.setCenter(new google.maps.LatLng(radioSeleccionado.coordenada.lat , radioSeleccionado.coordenada.lng));
-	          map.setZoom(15);
+	          map.setCenter(new google.maps.LatLng(radioSeleccionado.lat , radioSeleccionado.lng));
+	          map.setZoom(16);
+	          
+	          var estatusId = parseInt(obj.estatusId);
+
 	          $(".contentPopUpInfo").show();
+	          
+	          if(estatusId == 2 || estatusId == 3 || estatusId == 5 ){
+	        	  $("#div-asignacion-anillo").hide();	        	 	        	  
+	          }else{
+	        	  $("#div-asignacion-anillo").show();
+	          }
+	          
+	          
+	          obj.circle.setMap(map);
+	          pintarGeneradores(obj,map);
 	        }
-    	
+
 	});
 
 	 boundsGeneral = boundsAsig;
 		obj.marker   = marker;
-		obj.circle   = crearCirculo(obj.coordenada, colorCicle, obj.infoMarker.fcRadio);
 		markerId++;
 }
 
@@ -824,26 +745,25 @@ function cancelarSelecRadio(){
 	}
 	
 function desAsignarRadio(){
-	 cargaMensajeModal("Localizador", "¿Estás seguro que deseas desasignar el radio ?", TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, asignarRadio);
+	 cargaMensajeModal("Localizador", "¿Estás seguro que deseas quitar la asignación del radio?", TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, asignarRadio);
 }
 
 	/* ---------- Consume WS Empleados --------*/
 	function asignarRadio(tipoAction){
-		
 		
 		if(tipoAction == 1){
 			idRadioDesAsignar = -1;
 		}else if(tipoAction == 2){
 			
 		}
-		
+
 		cargaLoading();
 		var valorAsigna = 1;
 		var idJefeExpansion = $("#select_employee option:selected").val();
-		var idRadioAginar   =  radioSeleccionado == undefined ? undefined :  radioSeleccionado.idMarker;
+		var idRadioAginar   =  radioSeleccionado == undefined ? undefined :  radioSeleccionado.id;
 
-		if(objArray[idRadioDesAsignar] != undefined && objArray[idRadioDesAsignar].estatusId == 2){
-			valorAsigna = objArray[idRadioDesAsignar].estatusId == 2? 2 : 1;
+		if(objArray[idRadioDesAsignar] != undefined && (objArray[idRadioDesAsignar].estatusId == 2 || objArray[idRadioDesAsignar].estatusId == 3)){
+			valorAsigna = (objArray[idRadioDesAsignar].estatusId == 2 || objArray[idRadioDesAsignar].estatusId == 3)? 2 : 1;
 			idRadioAginar = idRadioDesAsignar;
 		}else{
 			
@@ -874,7 +794,7 @@ function desAsignarRadio(){
 				function() {
 					//Funcion de error
 					cargaMensajeModal("Localizador","Error en el servicio obtener radios asignados.", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
-					//cierraLoading();
+					cierraLoading();
 				},
 				function() {
 					//Función al finalizar
@@ -884,8 +804,11 @@ function desAsignarRadio(){
 		responseAsignacionRadio = function(data){
 			cleanRadiosDispoAsignados();
 			cargaMensajeModal("Localizador",data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
-			getRadiosLocalizados();
+			getAnillosXConsulta();
+			
 		}
+		
+		
 		$("#select_employee").val(-1);
 		$(".btn_infoClose").trigger("click");
 	}
@@ -934,94 +857,30 @@ function desAsignarRadio(){
 				        text : item.usuario
 				    }));
 			});
+			
+			 $(elementId).trigger("chosen:updated");
+			 
 		}
 	}
 
 
 	/* ---------- Consume WS Radios por asignar --------*/
 	function getRadiosLocalizados(){
-		cargaLoading();
-		invocarJSONServiceAction("obtieneRadiosLocalizados",{},
-				'responseRadiosLocalizados_',
-				function() {
-					//Funcion de error
-					cargaMensajeModal("Localizador","Error en el servicio consultar radios localizados.", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
-					clearMarkers();
-					//cierraLoading();
-				},
-				function() {
-					//Función al finalizar
-				});
 
-		responseRadiosLocalizados_ = function(data){
-			clearMarkers();
-			if(data.codigo == 205){
-				cargaMensajeModal("Localizador",data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
-				return false;
-			}
-				
-			radiosArray = [];
-			boundsAsig = new google.maps.LatLngBounds();
-			data.radios.forEach(function(element,index){
-
-				//RadiosClass(idZona,coordenada, idMarker,marker, circle,idEstatus,idUsuario)
-				objArray[element.radioId] = new RadiosClass(element.zona.trim(),
-													new  CoordenadaClass(parseFloat(element.latitud),parseFloat(element.longitud)),
-													element.radioId,
-													null,
-													null,
-													element.estatusId,
-													element.usuarioId,
-													element.NombreUsr );
-				
-				//objArray[element.radioId].setLongRadio(element.longRadio);
-				
-				if(element.datosRadio != undefined && element.datosRadio!= null){
-					var infoRadios = element.datosRadio;
-					objArray[element.radioId].setInfoMarker(new InfoRadiosLocalizados(infoRadios.fcEstrategia, infoRadios.fcPoblacionTotal, infoRadios.fcPea, infoRadios.fcViviendas, infoRadios.fcNse,
-																					  infoRadios.fcMercados, infoRadios.fcEscuelas, infoRadios.fcHospitales, infoRadios.fcTemplos, infoRadios.fcCallePrin,
-																					  infoRadios.fcCalle1, infoRadios.fcCalle2, infoRadios.fcSitio, infoRadios.fcRadio,
-																					  infoRadios.fcCedis, infoRadios.fcDistancia, infoRadios.fcTipot, infoRadios.fcTiempo
-																						));					
-				}
-
-				addMarkerAsigna(objArray[element.radioId], map);			
-			});
-
-			map.fitBounds(boundsAsig);
-			setTimeout(function(){cierraLoading();},500);
-		}
 	}
 
 /* === MOSTRAR SOLO CIRCULOS ===*/
 function radiosUsuario(select){
 
-	 if(Object.keys(objArray).length <= 0){
-		 cierraLoading();
-		 return false;
-	 }
-
-	 Object.keys(objArray).forEach(function (key){
-		 if(select.value  == -1){
-			 if( objArray[key].marker.getMap() == null && objArray[key].circle.getMap() == null){
-				 addMarkerAsigna( objArray[key] , map);
-			 } 
-		 }else{
-			 if( objArray[key].usuarioId == select.value &&  objArray[key].estatusId == 2){	 
-				 if( objArray[key].marker.getMap() == null && objArray[key].circle.getMap() == null){
-					 addMarkerAsigna( objArray[key] , map);
-				 } 
-			 }else{
-				 if(objArray[key].estatusId == 1){
-					 //**		 
-				 }else if(objArray[key].estatusId == 2){
-					 objArray[key].marker.setMap(null);
-					 objArray[key].circle.setMap(null);	
-				 }
-			 }
-		 }
- 
-	});
+	
+	if(select.value == 0 || select.value == -1){
+		$("#btnAsignarRadio").hide();
+		$("#btnRemovelAsign").hide();
+	}else{
+		$("#btnAsignarRadio").show();
+		$("#btnRemovelAsign").show();
+	}
+	
 }
 
 
@@ -1045,12 +904,6 @@ function cleanRadiosDispoAsignados(){
  
 	});
 }
-
-
-
-
-
-
 
 
 
@@ -1361,6 +1214,8 @@ function inicializaCalendarios() {
 	
 	var dateHoy = new Date();
 	var FECHA_HOY = $.datepicker.formatDate('dd/mm/yy',dateHoy);
+	var FECHA_HOY2 = $.datepicker.formatDate('dd/mm/yy',dateHoy);
+	var FECHA_HOY3 = $.datepicker.formatDate('dd/mm/yy',dateHoy);
 	
 	$( "#datepicker1").datepicker({
 		maxDate:0,
@@ -1368,15 +1223,43 @@ function inicializaCalendarios() {
 		showOn: 'both',
 		showAnim: 'slideDown',
         buttonImageOnly: false,
-        //buttonImage: 'img/calendar_icon.png',
         onClose: function( selectedDate ) {
 			var date = $(this).datepicker('getDate');			
 			var endDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+			
+			$( "#datepicker3" ).datepicker( "option", "minDate", selectedDate );
         }
 	});
 	
 	$("#datepicker1").datepicker.dateFormat = 'dd/MM/yy';
 	$("#datepicker1").val(FECHA_HOY);
+	
+	
+	
+	$( "#datepicker2").datepicker({
+		maxDate:0,
+		autoSize : true,
+		showOn: 'both',
+		showAnim: 'slideDown',
+        buttonImageOnly: false,
+        onClose: function( selectedDate ) {
+			var date = $(this).datepicker('getDate');			
+			var endDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+			
+			$( "#datepicker3" ).datepicker( "option", "minDate", selectedDate );
+        }
+	});
+
+	$( "#datepicker3").datepicker({
+		maxDate:0,
+		autoSize : true,
+		showOn: 'both',
+		showAnim: 'slideDown',
+        buttonImageOnly: false,
+	});
+	
+	$("#datepicker3").datepicker.dateFormat = 'dd/MM/yy';
+	$("#datepicker3").val(FECHA_HOY3);
 }
 
 
@@ -1458,18 +1341,23 @@ function getObtenerMDs(){
 			});
 
 	responseMdsAutorizadas = function(data){
-		//console.log(data);
-		if(data.codigo == 400 || data.codigo == 205){
+		if(data.codigo == 400 || data.codigo == 205 || data.codigo == 403 || data.Arreglo == undefined){
 			cargaMensajeModal("Localizador",data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
 			return false;
 		}
 
 		bounds = new google.maps.LatLngBounds();
 		data.Arreglo.forEach(function(element, i){
+			
 			element.arrayMD.forEach(function(item,y){
-				var objMd = new MdsPorRadio(item.categoria, item.direccion, item.jefeId, item.latitud, item.longitud, item.mdId, item.nombreJefe, item.nombreSitio, item.propietario);
-				MdsArray[item.mdId] = objMd;
-				addMarkerMDs(MdsArray[item.mdId], map,bounds,MdsArray);
+				var objMd = new MdsPorRadio(item.categoria, item.direccion, element.jefeId, item.latitud, item.longitud, item.mdId, item.nombreJefe, item.nombreSitio, item.propietario);
+				objMd.id = item.mdId+""+element.jefeId;
+				
+				if(MdsArray[objMd.id] == undefined ){
+					MdsArray[objMd.id] = objMd;
+					addMarkerMDs(MdsArray[objMd.id], map,bounds,MdsArray);
+				}
+				
 			});
 		});
 		
@@ -1484,11 +1372,21 @@ function getObtenerMDs(){
 
 
 function clearMapsMds(array_){
-	Object.keys(array_).forEach(function(key){
-		array_[key].marker.setMap(null);
+	Object.keys(MdsArray).forEach(function(key){
+		MdsArray[key].marker.setMap(null);
+		removeItemFromArr(MdsArray , key);
 	});
-	array_ = [];	
+	MdsArray = [];	
 }
+
+function removeItemFromArr ( arr, item ) {
+    var i = arr.indexOf( item );
+ 
+    if ( i !== -1 ) {
+        arr.splice( i, 1 );
+    }
+}
+
 
 function pintarMdsMaps(md_){
 	
@@ -1528,8 +1426,6 @@ function getObtenerEmpleadosGerentes(){
 			});
 
 	llenarComboEmpleados = function(data){
-		
-		//console.log(data);
 		if(data.codigo == 400){
 			cargaMensajeModal("Localizador",data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
 			return false;
@@ -1544,6 +1440,9 @@ function getObtenerEmpleadosGerentes(){
 			        text : item.gerente
 			    }));
 		});
+		
+		setTimeout(function(){ $("#select_employeeMDGere").trigger('chosen:updated'); },100);
+		
 	}
 }
 	
@@ -1576,6 +1475,8 @@ function cargarJefesXGerente(element){
 			}
 		});
 	}
+	
+	setTimeout(function(){ $("#select_employeeMDJefes").trigger('chosen:updated'); },100);
 }
 	
 /* == VER DETALLE MD ===*/
@@ -1586,10 +1487,6 @@ function obtieneDetalleMd(nombreMd, mdId) {
 	$("#detalleMemoriaAsignadaAction").submit();
 }
 	
-	
-	
-
-
 	
 
 /* ============================  CONSULTA RADIOS POR ESTATUS =====================================*/
@@ -1623,8 +1520,7 @@ function obtieneDetalleMd(nombreMd, mdId) {
 				});
 
 		responseRadiosMds = function(data){
-			
-			//console.log(data);
+
 			if(data.codigo == 400){
 				cargaMensajeModal("Localizador",data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
 				return false;
@@ -1801,11 +1697,11 @@ function addMarkerEstatus(obj, map) {
 		};
       
 	  var marker = new google.maps.Marker({
-		    position: obj.coordenada,
+		    position: obj.objCoordenadas,
 		    draggable: false,
 		    animation: google.maps.Animation.DROP,
 		    map: map,
-		    id : obj.idMarker,
+		    id : obj.id,
 		    icon: icono,
 			map_icon_label: '<span class="map-icon map-icon-point-of-interest"></span>'
 		  }); 
@@ -1817,22 +1713,56 @@ function addMarkerEstatus(obj, map) {
 		 if (marker.getAnimation() !== null) {
 	          marker.setAnimation(null);
 	          $(".contentPopUpInfo").hide();
-	          //map.fitBounds(boundsRadiosEstatus);
-	          map.setZoom(12);
+	          $("#div-asignacion-anillo").hide();
+	          map.fitBounds(boundsGeneral);
 	          
+	          pintarGeneradores(obj,null);
+	          pintarMdsAnillos(obj, null);
+	          pintarCompetencias(radioSeleccionado,null);
+	          obj.circle.setMap(null);
 	        } else {
-	          if(radioSeleccionado != undefined && radioSeleccionado != null && radioSeleccionado.idMarker != obj.idMarker)
+	          if(radioSeleccionado != undefined && radioSeleccionado != null && radioSeleccionado.id != obj.id){
 	        	  radioSeleccionado.marker.setAnimation(null);
+	        	  radioSeleccionado.circle.setMap(null);
+	        	  pintarGeneradores(radioSeleccionado,null);
+	        	  pintarMdsAnillos(radioSeleccionado, null);
+	        	  pintarCompetencias(radioSeleccionado,null);
+	          }
 	          
 	          
-	          radioSeleccionado = arrayRadios_4[obj.idMarker];
+	          radioSeleccionado = obj;
 	          verInformacionRadio(radioSeleccionado,  PANT_OPCION.RADIOSXMD);	  
-	          map.setCenter(new google.maps.LatLng(radioSeleccionado.coordenada.lat , radioSeleccionado.coordenada.lng));
-	          map.setZoom(15);
-	          $(".contentPopUpInfoMD").hide();
+	          map.setCenter(new google.maps.LatLng(radioSeleccionado.lat , radioSeleccionado.lng));
+	          map.setZoom(16);
+	          
+	          var estatusId = parseInt(obj.estatusId);
+	          
+	          if(estatusId == 2 || estatusId == 3 || estatusId == 5 ){
+	        	  $("#div-asignacion-anillo").hide();	        	 	        	  
+	          }else{
+	        	  $("#div-asignacion-anillo").show();
+	        	  $('#select_employee').val(0);
+	        	  $('#select_employee').trigger("chosen:updated");
+	        	  $("#btnAsignarRadio").hide();
+	      		  $("#btnRemovelAsign").hide();
+	          }
+	          
+	          
+	          $("#btonRecalculaGeneradores").unbind();
+	          $("#btonRecalculaGeneradores").bind();
+	          $("#btonRecalculaGeneradores").click(function(){ 
+	        	  recalcularGeneradoresComp(obj);
+	          });
+	          
+	          
 	          $(".contentPopUpInfo").show();
+	          pintarGeneradores(obj,map);
+	          pintarMdsAnillos(obj,map);
+	          pintarCompetencias(obj,map);
+	          
 	          
 	          marker.setAnimation(google.maps.Animation.BOUNCE);
+	          obj.circle.setMap(map);
 	          setTimeout(function(){marker.setAnimation(google.maps.Animation.BOUNCE);},1100);
 	          
 	        }
@@ -1842,92 +1772,75 @@ function addMarkerEstatus(obj, map) {
 	 
 	 boundsRadiosEstatus.extend(marker.position);
 		obj.marker   = marker;
-		obj.circle   = crearCirculo(obj.coordenada, colorCicle, obj.infoMarker.fcRadio);
-		markerId++;
-		
+		obj.circle   = crearCirculo(obj.objCoordenadas, colorCicle, obj.anillo);
+		obj.circle.setMap(null);
+
 		boundsGeneral = boundsRadiosEstatus;
 }
 
 
+function recalcularGeneradoresComp(obj){
 
+	cargaLoading();
+	invocarJSONServiceAction("recalcularGeneradoresComp",{radioId : obj.id},
+			'response',
+			function() {
+				//Funcion de error
+				cargaMensajeModal("Localizador","Error en el servicio para recalcular competenecias y genereadores.", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+			},
+			function() {
+				//Función al finalizar
+				cierraLoading();
+			});
+
+	response = function(data){
+		if(data.codigo == 400){
+			cargaMensajeModal("Localizador",data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+		}else{
+			cargaMensajeModal("Localizador",data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+		}
+		
+		getAnillosXConsulta();
+	}
+}
 
 
 function closePopUpInfo(){	
 	
 	if(radioSeleccionado != undefined && radioSeleccionado != null && radioSeleccionado.marker.getAnimation() !== null){
    	  	radioSeleccionado.marker.setAnimation(null);
+   		
+   	  	if(radioSeleccionado.circle != undefined)
+   			radioSeleccionado.circle.setMap(null);
+   		
+   		pintarGeneradores(radioSeleccionado, null);
+   	    pintarMdsAnillos(radioSeleccionado,null);
+   	    pintarCompetencias(radioSeleccionado,null);
+   		
    	  	radioSeleccionado = null;
    	  	$(".contentPopUpInfo").hide();
    	  	$(".contentPopUpInfoMD").hide();
-   	  	//map.fitBounds(boundsGeneral);
-   	  	map.setZoom(12);
+   	  	$("#div-asignacion-anillo").hide();
+   	 
+   	  	map.fitBounds(boundsGeneral);
+   	  	//map.setZoom(12);
      }
 	
 }
-	
-	
-function verInformacionRadio(obj, vista_opcion){
-	
-	if(obj.infoMarker == undefined){
-		cargaMensajeModal("Localizador","La información del radio no se esta disponible.", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
-		return false;
-	}
-	
-	if(obj.infoMarker == undefined){
-		return "Sin información del radio.";
-	}
-	
-	$("#infoTituloPopUp").html(validaValorObj(obj.infoMarker.fcSitio)+ ', '+obj.idZona);
-	$("#infoCoordenadas").html(obj.coordenada.lat+' , '+obj.coordenada.lng);
-	$("#infoEstrategias").html(validaValorObj(obj.infoMarker.fcEstrategia));
-	$("#infoEstatus").html(estatusRadios(obj.estatusId));
-	
-	
-	$("#infoTotalPoblacion").html(validaValorObj(obj.infoMarker.fcPoblacionTotal));
-	$("#infoPEA").html(validaValorObj(obj.infoMarker.fcPea));
-	$("#infoViviendas").html(validaValorObj(obj.infoMarker.fcViviendas));
-	$("#infoNSE").html(validaValorObj(obj.infoMarker.fcNse));
-	
-	$("#infoMercados").html(validaValorObj(obj.infoMarker.fcMercados));
-	$("#infoEscuelas").html(validaValorObj(obj.infoMarker.fcEscuelas));
-	$("#infoHospitales").html(validaValorObj(obj.infoMarker.fcHospitales));
-	$("#infoTemplos").html(validaValorObj(obj.infoMarker.fcTemplos));
-	
-	$("#infoCalle_p").html(validaValorObj(obj.infoMarker.fcCallePrin));
-	$("#infoCalle_1").html(validaValorObj(obj.infoMarker.fcCalle1));
-	$("#infoCalle_2").html(validaValorObj(obj.infoMarker.fcCalle2));
-	$("#infoColonia").html(validaValorObj(obj.infoMarker.fcCedis));
-	
-	$("#infoDistancia").html(validaValorObj(obj.infoMarker.fcDistancia));
-	$("#infoTipo").html(validaValorObj(obj.infoMarker.fcTipot));
-	$("#infoTiempo").html(validaValorObj(obj.infoMarker.fcTiempo));
 
-	if(vista_opcion == 0){
-		$("#infoEstatus").html("Nuevo");
-	}
+function mostrarVistaSeccion(){
+	$("#contenido-vista-a").hide();
+	$("#contenido-vista-b").hide();
+	
+	if($("#option-vista-a").is(":checked"))
+		$("#contenido-vista-a").show();
 
-	var usuarioAsignado = "";
-	$("#divContentInfoRadio").children("div#divInfoAsinacion").html("");
-	
-	if(obj.estatusId == 2 && (obj.usuarioId != undefined && obj.usuarioId != "")){
-		if(vista_opcion == 1){
-			usuarioAsignado = '<div id="divInfoAsinacion"> <h6 class="subtitleInfo left_float">Asignado : </h6>  <h6 id="infoJefeAsignado" class="subtitleInfo infoValue" >'+obj.NombreUsr+'</h6>'+
-			'<button type="button" id="btonDescAsig" value="'+obj.idMarker+'" class="btonCenterPosition btn back_btonOrange btn_aceptar">Quitar asignación </button><br><br></div>';			
-		}else{
-			usuarioAsignado = '<div id="divInfoAsinacion"> <h6 class="subtitleInfo left_float">Asignado : </h6>  <h6 id="infoJefeAsignado" class="subtitleInfo infoValue" >'+obj.NombreUsr+'</h6><br></div>';
-		}
-		
-		$("#divContentInfoRadio").append(usuarioAsignado);
-	}else{
-		$("#divContentInfoRadio").children("div#divInfoAsinacion").html("");
-	}
-	
-	setTimeout(function(){
-		$("#btonDescAsig").unbind();
-		$("#btonDescAsig").click(function(){desAsignarRadio(); idRadioDesAsignar = this.value; });    		
-	},250);
+	if($("#option-vista-b").is(":checked"))
+		$("#contenido-vista-b").show();	
 }
 	
+
+
 function estatusRadios(estatus){
 	var estatusRadio;
 	
@@ -1958,7 +1871,7 @@ function addMarkerMDs(obj, map,bounds_, array_ ) {
 	    draggable: false,
 	    animation: google.maps.Animation.DROP,
 	    map: map,
-	    id : obj.mdId,
+	    id : obj.id,
 	    icon : icon
 	  }); 
   
@@ -1972,11 +1885,10 @@ function addMarkerMDs(obj, map,bounds_, array_ ) {
           map.setZoom(12);
           
         } else {
-	          if(radioSeleccionado != undefined && radioSeleccionado != null && radioSeleccionado.idMarker != obj.idMarker)
+	          if(radioSeleccionado != undefined && radioSeleccionado != null && radioSeleccionado.id != obj.id)
 	        	  radioSeleccionado.marker.setAnimation(null); 
 	          
-	          
-	          radioSeleccionado = array_[obj.mdId];
+	          radioSeleccionado = array_[obj.id];
 	          verInfoMd(radioSeleccionado);	  
 	          
 	          map.setCenter(new google.maps.LatLng(radioSeleccionado.latitud , radioSeleccionado.longitud));
@@ -1991,7 +1903,6 @@ function addMarkerMDs(obj, map,bounds_, array_ ) {
 
   	boundsGeneral = bounds_;
 	obj.marker   = marker;
-	markerId++;
 }
 
 function verInfoMd(obj){
@@ -2032,3 +1943,382 @@ function verInfoMd(obj){
 		this.propietario = propietario;
 		this.marker = marker;
 	}	
+	
+	
+	
+/* === ACTUALIZACCION 2020 =======*/	
+	
+	function getObtenerEstados( ){
+		cargaLoading();
+		invocarJSONServiceAction("obtenerEstados",{},
+				'llenarComboBox',
+				function() {
+					//Funcion de error
+					cargaMensajeModal("Localizador","Error en el servicio obtener estados y ciudades.", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+				},
+				function() {
+					//Función al finalizar
+					cierraLoading();
+				});
+
+		llenarComboBox = function(data){
+			if(data.codigo == 400){
+				cargaMensajeModal("Localizador",data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+			}else{
+				ARRAYOBJESTADOS = data.salida;
+			}
+			
+			
+				llenarComboBoxEstados($("#comboBox_estado"),2);
+				llenarComboBoxEstados($("#comboBox_estadoCons"),2);
+			}
+		}
+
+/* ---------- Consume WS Estados ciudades --------*/
+function getObtenerEstadosCiudades(tipoConsulta, elementId){
+	cargaLoading();
+	invocarJSONServiceAction("obtenerEstadosCidudades",{},
+			'llenarComboBox',
+			function() {
+				//Funcion de error
+				cargaMensajeModal("Localizador","Error en el servicio obtener estados y ciudades.", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+			},
+			function() {
+				//Función al finalizar
+				cierraLoading();
+			});
+
+	llenarComboBox = function(data){
+		if(data.codigo == 400){
+			cargaMensajeModal("Localizador",data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+		}else{
+			ARRAYOBJESTADOS = data.datos;
+		}
+	}
+	
+	if(tipoConsulta == 2){
+		llenarComboBoxEstados(elementId,2);
+	}
+}
+
+/* ---------- Combo Box Estados --------*/	
+function llenarComboBoxEstados(elementId,tipoConsulta){
+	cargaLoading();
+
+	elementId.html("");
+	
+	if(ARRAYOBJESTADOS == undefined || ARRAYOBJESTADOS == null || ARRAYOBJESTADOS.size >= 0){
+		if(tipoConsulta == 1){
+			getObtenerEstados();
+		}else{
+			elementId.empty().append('<option selected="selected" value="-1">Sin resultados</option>')
+		}
+		
+	} else{
+		elementId.empty().append('<option selected="selected" value="-1">Selecione un estado </option>')
+		ARRAYOBJESTADOS.forEach(function(item, i){
+			elementId.append($('<option>', {
+			        value: item.id,
+			        text : item.nombre
+			    }));
+		});
+	}
+	setTimeout(function(){ $(elementId).trigger('chosen:updated'); },100);
+}
+
+/* ---------- Combo Box Ciudades --------*/	
+function llenarComboBoxCiudades(elementId, indexId){
+	cargaLoading();
+
+	elementId.html("");
+	
+	if(ARRAYOBJESTADOS == undefined || ARRAYOBJESTADOS == null || ARRAYOBJESTADOS.size >= 0){
+		if(tipoConsulta == 1){
+			getObtenerEstadosCiudades(2, elementId);
+		}else{
+			elementId.empty().append('<option selected="selected" value="-1">Sin resultados</option>')
+		}
+		
+	} else{
+		elementId.empty().append('<option selected="selected" value="-1">Selecione una ciudad </option>')
+		ARRAYOBJESTADOS.forEach(function(item, i){
+			if(item.id == indexId){
+				
+				item.ciudades.forEach(function(itemy, y){
+					elementId.append($('<option>', {
+				        value: itemy.FIMUNICIPIOID,
+				        text : itemy.FCDESCRIPCION
+				    }));
+				    
+			  });
+				
+			}
+		});
+	}
+	setTimeout(function(){ $(elementId).trigger('chosen:updated'); },100);
+	cierraLoading();
+}
+
+
+function getAnillosXConsulta(){
+
+	var nombreAnillo 	= $("#anilloNombreCons").val();
+	var fechaAnilloInit     = $("#datepicker1").val();
+	var fechaAnilloFin     = $("#datepicker3").val();
+	
+	var idEstado     	= $("#comboBox_estadoCons").val();
+	var estatusId       = 0;
+	
+	var nuevo 		= $("#check_nuevos").is(":checked");
+	var asginado 	= $("#check_asignados").is(":checked");
+	var proceso 	= $("#check_proceso").is(":checked");
+	var concluido 	= $("#check_concluido").is(":checked");
+	var cancelado 	= $("#check_cancelado").is(":checked");
+	var mds 		= $("#check_MdsRadios").is(":checked");
+
+	nuevo 		= nuevo? 1 : 0;
+	asginado 	= asginado? 1 : 0;
+	proceso 	= proceso? 1 : 0;
+	concluido 	= concluido? 1 : 0;
+	cancelado 	= cancelado? 1 : 0;
+	mds 		= mds? 1 : 0;
+
+	var ESTATUS_RADIO = [{Nuevo : nuevo, Asignado: asginado ,  Enproceso:proceso ,  Concluido : concluido,  Cancelado :  cancelado, mds : mds }];
+	
+	getAnillosXApi( nombreAnillo,fechaAnilloInit, fechaAnilloFin, idEstado, ESTATUS_RADIO);
+	
+	  $(".contentPopUpInfo").hide();
+      $("#div-asignacion-anillo").hide();
+
+}
+
+function getAnillosXFiltros(){
+	var nombreAnillo 	= $("#anilloNombreCons").val();
+	var fechaAnillo     = $("#datepicker3").val();
+	var idEstado     	= $("#comboBox_estado").val();
+	var estatusId       = 0;
+	
+	var ESTATUS_RADIO = { nuevo: "1" };
+	getAnillosXApi(nombreAnillo, fechaAnillo, idEstado, estatusId);
+}
+
+
+/* ---------- Consultar Anillos generados automaticamente --------*/	
+function getAnillosXApi( nombreAnillo, fechaAnilloInit, fechaAnilloFin , idEstado, estatusId){
+	cargaLoading();
+
+	if( idEstado == -1 ){
+		cierraLoading();
+		cargaMensajeModal("Localizador","Seleccione un estado.", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+		return false;}
+		
+	invocarJSONServiceAction("obtieneAnillosxfiltros"
+							,{ idEstado 	: idEstado,
+							   nombreAnillo : nombreAnillo,
+							   fechaIni  	: fechaAnilloInit,
+							   fechaFin  	: fechaAnilloFin,
+							   estatusId    :  JSON.stringify(estatusId) },
+			'response',
+			function() {
+
+				cargaMensajeModal("Localizador","Error en el servicio consultar radios localizados.", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+				clearMarkers();
+				pintarGeneradores(radioSeleccionado,null);
+				pintarMdsAnillos(radioSeleccionado,null);
+				 pintarCompetencias(radioSeleccionado,null);
+				//cierraLoading();
+			},
+			function() {
+				//Función al finalizar
+			});
+
+	response = function(data){
+		pintarCompetencias(radioSeleccionado,null);
+		pintarGeneradores(radioSeleccionado,null);
+		pintarMdsAnillos(radioSeleccionado,null);
+		clearMarkers();
+		if( data.codigo == 205 || data.codigo == 400 || data.codigo == 403 || data.radios == undefined){
+			cierraLoading();
+			cargaMensajeModal("Localizador",data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+			return false;
+		}
+			
+		radiosArray = [];
+		boundsAsig = new google.maps.LatLngBounds();
+		data.radios.forEach(function(element,index){
+
+		coordenadas = new  CoordenadaClass(parseFloat(element.latitud),parseFloat(element.longitud));
+		
+		radio = new ClassRadios();
+			radio.id 				= element.radioId;
+			radio.sitio  			= element.nombre;
+			radio.anillo 			= element.longRadio;
+			radio.lat    			= element.latitud;
+			radio.lng 				= element.longitud;
+			radio.infoSitio 		= element.datosRadio;
+			radio.estatusId         = element.estatusId;
+			radio.estatus           = element.estatus;
+			radio.UsrAsignado       = element.UsrAsignado;
+			radio.usrAsignadoId     = element.usrAsignadoId;
+			radio.visitasRadio      = element.visitasRadio;
+			radio.fechaAsignado     = element.fechaAsignado;
+			radio.rechazado         = element.rechazado;
+			radio.totalUE           = element.totalUE;
+			
+			radio.objCoordenadas 	= coordenadas;
+
+			/* Crear pines MDs */
+			if(element.mds.length > 0){
+				radio.mds     = element.mds;
+				
+				radio.mds.forEach(function(md,index){
+					crearMarkerMdsAnillo(md);
+				});				
+			}
+			
+			/* Crear pines COMPETENCIA */
+			if(element.competencia.length > 0){
+				radio.competencia 	= element.competencia;
+				radio.competencia.forEach(function(competencia,index){
+					crearMarkerCompetencias(competencia);
+				});				
+			}
+			
+			objArray[element.radioId] = radio;
+			addMarkerEstatus(objArray[element.radioId], map);		
+			
+			/* Crear pines GENERADORES */
+			if(element.generadores.length > 0){
+				radio.generadores 	= element.generadores;
+				
+				radio.generadores.forEach(function(generador,index){
+					crearMarkerGenerador(generador);
+				});
+			}
+		});
+
+		map.fitBounds(boundsGeneral);
+		setTimeout(function(){cierraLoading();},500);
+	}
+}
+
+function crearMarkerCompetencias(obj){
+	var iconCompetencia = {
+		    url:  iconMarkeCompetencias[obj.competenciaId], // url
+		    scaledSize: new google.maps.Size(40, 40), // scaled size
+		    origin: new google.maps.Point(0,0), // origin
+		    anchor: new google.maps.Point(0, 0) // anchor
+		};
+	
+	 var marker = new google.maps.Marker({
+		    position: new google.maps.LatLng(obj.latitud, obj.longitud),
+		    draggable: false,
+		    map: null,
+		    title:  obj.generador,
+			icon : iconCompetencia,
+		  });
+	 
+	 obj.marker = marker
+}
+
+
+function crearMarkerMdsAnillo(obj){
+	
+	
+	var icon = {
+		    url: "img/markers_MD.svg", // url
+		    scaledSize: new google.maps.Size(45, 45), // scaled size
+		    origin: new google.maps.Point(0,0), // origin
+		    anchor: new google.maps.Point(0, 0) // anchor
+		};
+	
+	 var marker = new google.maps.Marker({
+		    position: new google.maps.LatLng(obj.latitud, obj.longitud),
+		    draggable: false,
+		    map: null,
+		    title:  obj.nombre,
+			icon : icon,
+		  }); 
+	 
+	 marker.addListener("click",  function(){
+		 obtieneDetalleMd(obj.nombre,obj.MdId);
+	 });
+	 
+	 
+	 obj.marker = marker
+}
+
+function crearMarkerGenerador(obj){
+	
+	
+	var icon = {
+		    url:  iconMarkeGenerador[obj.generadorId], // url
+		    scaledSize: new google.maps.Size(45, 45), // scaled size
+		    origin: new google.maps.Point(0,0), // origin
+		    anchor: new google.maps.Point(0, 0) // anchor
+		};
+
+	 var marker = new google.maps.Marker({
+		    position: new google.maps.LatLng(obj.latitud, obj.longitud),
+		    draggable: false,
+		    map: null,
+		    title:  obj.generador,
+			icon : icon
+		  }); 
+	 obj.marker = marker
+}
+
+function pintarCompetencias(obj,thisMap){
+	if(obj == null || obj.competencia == null || obj.competencia.length <= 0){
+		return false;
+	}
+	obj.competencia.forEach(function(competencia,index){
+		competencia.marker.setMap(thisMap);
+	});
+}
+
+	
+function pintarGeneradores(obj,thisMap){
+	
+	
+	if(obj == null || obj.generadores == null || obj.generadores.length <= 0){
+		return false;
+	}
+	obj.generadores.forEach(function(generador,index){
+		generador.marker.setMap(thisMap);
+	});
+}
+
+function pintarMdsAnillos(obj,thisMap){
+	if(obj == null || obj.mds == null || obj.mds.length <= 0){
+		return false;
+	}
+	
+	obj.mds.forEach(function(md,index){
+		md.marker.setMap(thisMap);
+	});
+}
+
+
+
+function pintarGeneradoresFiltro(arrayBbj,thisMap, generadorId){
+	if(arrayBbj == null || arrayBbj <= 0){
+		return false;
+	}
+	
+	
+	arrayBbj.forEach(function(obj,index){
+		if(obj.generadorId == generadorId){
+			obj.marker.setMap(thisMap);			
+		}
+	});
+}
+
+
+
+
+
+
+
+
+	

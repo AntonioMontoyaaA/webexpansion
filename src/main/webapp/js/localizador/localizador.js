@@ -76,6 +76,7 @@ var idRadioDesAsignar = -1;
 var ARRAYOBJGERENTES;
 var ARRAYOBJJEFES;
 var ARRAYOBJESTADOS;
+var ARRAYSITIOS;
 
 
 /* === LOCALIZACION RUTA === */
@@ -1707,7 +1708,7 @@ function addMarkerEstatus(obj, map) {
 		  }); 
 	  
 	  if(pintar)
-	  marker.setMap(null);
+		  marker.setMap(null);
 	
 	 marker.addListener("click",  function(){
 		 if (marker.getAnimation() !== null) {
@@ -1770,12 +1771,13 @@ function addMarkerEstatus(obj, map) {
 	 });
 
 	 
-	 boundsRadiosEstatus.extend(marker.position);
+	 boundsGeneral.extend(marker.position);
 		obj.marker   = marker;
 		obj.circle   = crearCirculo(obj.objCoordenadas, colorCicle, obj.anillo);
 		obj.circle.setMap(null);
 
-		boundsGeneral = boundsRadiosEstatus;
+		
+		//boundsGeneral = boundsRadiosEstatus;
 }
 
 
@@ -1831,12 +1833,19 @@ function closePopUpInfo(){
 function mostrarVistaSeccion(){
 	$("#contenido-vista-a").hide();
 	$("#contenido-vista-b").hide();
+	$("#seccionDatos1").hide();
+	$("#seccionDatos2").hide();
 	
-	if($("#option-vista-a").is(":checked"))
-		$("#contenido-vista-a").show();
+	if($("#option-vista-a").is(":checked")){
+		$("#contenido-vista-a").show();	
+		$("#seccionDatos1").show();
+	}
 
-	if($("#option-vista-b").is(":checked"))
-		$("#contenido-vista-b").show();	
+	if($("#option-vista-b").is(":checked")){
+		$("#contenido-vista-b").show();		
+		$("#seccionDatos2").show();
+	}
+	
 }
 	
 
@@ -1962,10 +1971,55 @@ function verInfoMd(obj){
 				});
 
 		llenarComboBox = function(data){
+
 			if(data.codigo == 400){
 				cargaMensajeModal("Localizador",data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
 			}else{
 				ARRAYOBJESTADOS = data.salida;
+				
+				var sitiosSearch =  $("#listaSitios").html("");				
+				ARRAYSITIOS = new Array();
+				
+				(data.radios).forEach(function(item, i){
+					ARRAYSITIOS[item.nombre]  = item;
+					sitiosSearch.append('<option >'+item.nombre+'</option>');
+				});
+				
+				
+				 $('#anilloNombreCons').keyup(function(){
+					 if(ARRAYSITIOS[$('#anilloNombreCons').val()] != undefined && ARRAYSITIOS[$('#anilloNombreCons').val()] != null){
+						 $("#comboBox_estadoCons").val(ARRAYSITIOS[$('#anilloNombreCons').val()].estado);
+						 $("#datepicker1").val(ARRAYSITIOS[$('#anilloNombreCons').val()].fecha);
+						 $("#datepicker3").val(ARRAYSITIOS[$('#anilloNombreCons').val()].fecha);
+						 setTimeout(function(){ $("#comboBox_estadoCons").trigger('chosen:updated'); },100);
+						 limpiarChecks();
+						 
+						 var estatusID = Number.parseInt(ARRAYSITIOS[$('#anilloNombreCons').val()].estatus);
+						 
+						 switch(estatusID){
+							 case 1:
+							 	$("#check_nuevos").prop("checked",true);
+							 break;
+							 case 2:
+							 	$("#check_asignados").prop("checked",true);
+							 break;
+							 case 3:
+							 	$("#check_proceso").prop("checked",true);
+							 break;
+							 case 4:
+							 	$("#check_concluido").prop("checked",true);
+							 break;
+							 case 5:
+							 	$("#check_cancelado").prop("checked",true);
+							 break;
+							 case 6:
+							 	$("#check_MdsRadios").prop("checked",true);
+							 break;
+						 }
+					    	
+						 
+					 }
+				}); 
 			}
 			
 			
@@ -1974,6 +2028,14 @@ function verInfoMd(obj){
 			}
 		}
 
+function limpiarChecks(){
+	$("#check_nuevos").prop("checked",false);
+ 	$("#check_asignados").prop("checked",false);
+ 	$("#check_proceso").prop("checked",false);
+ 	$("#check_concluido").prop("checked",false);
+ 	$("#check_cancelado").prop("checked",false);
+ 	$("#check_MdsRadios").prop("checked",false);
+}	
 /* ---------- Consume WS Estados ciudades --------*/
 function getObtenerEstadosCiudades(tipoConsulta, elementId){
 	cargaLoading();
@@ -2133,6 +2195,15 @@ function getAnillosXApi( nombreAnillo, fechaAnilloInit, fechaAnilloFin , idEstad
 			});
 
 	response = function(data){
+		map = null;
+		map = new google.maps.Map(document.getElementById('map'), {
+		    zoom: 6,
+		    center: {lat: 19.356703, lng: -99.276124}
+		  });
+		
+		boundsGeneral = new google.maps.LatLngBounds(); 
+		
+		
 		pintarCompetencias(radioSeleccionado,null);
 		pintarGeneradores(radioSeleccionado,null);
 		pintarMdsAnillos(radioSeleccionado,null);
@@ -2145,7 +2216,46 @@ function getAnillosXApi( nombreAnillo, fechaAnilloInit, fechaAnilloFin , idEstad
 			
 		radiosArray = [];
 		boundsAsig = new google.maps.LatLngBounds();
+		
+		var estatusN = 0;
+		var estatusA = 0;
+		var estatusP = 0;
+		var estatusS = 0;
+		var estatusC = 0;
+		var estatusM = 0;
+		
+		$("#estatusN").html("");
+		$("#estatusA").html("");
+		$("#estatusP").html("");
+		$("#estatusS").html("");
+		$("#estatusC").html("");
+		$("#estatusM").html("");
+		
+		
 		data.radios.forEach(function(element,index){
+			
+			 var estatusID = Number.parseInt(element.estatusId);
+			 
+			 switch(estatusID){
+				 case 1:
+					 estatusN++;
+				 break;
+				 case 2:
+					 estatusA++;
+				 break;
+				 case 3:
+					 estatusP++;
+				 break;
+				 case 4:
+					 estatusS++;
+				 break;
+				 case 5:
+					 estatusC++;
+				 break;
+				 case 6:
+					 estatusM++;
+				 break;
+			 }
 
 		coordenadas = new  CoordenadaClass(parseFloat(element.latitud),parseFloat(element.longitud));
 		
@@ -2197,7 +2307,23 @@ function getAnillosXApi( nombreAnillo, fechaAnilloInit, fechaAnilloFin , idEstad
 			}
 		});
 
+//		estatusN >0 ? $("#estatusN").html("("+estatusN+")") : false;
+//		estatusA >0 ? $("#estatusA").html("("+estatusA+")") : false;
+//		estatusP >0 ? $("#estatusP").html("("+estatusP+")") : false;
+//		estatusS >0 ? $("#estatusS").html("("+estatusS+")") : false;
+//		estatusC >0 ? $("#estatusC").html("("+estatusC+")") : false;
+//		estatusM >0 ? $("#estatusM").html("("+estatusM+")") : false;
+
+		  $("#estatusN").html("(99,999)");
+		  $("#estatusA").html("(99,999)");
+		  $("#estatusP").html("(99,999)");
+		  $("#estatusS").html("(99,999)");
+		  $("#estatusC").html("(99,999)");
+		  $("#estatusM").html("(99,999)");
+
+		
 		map.fitBounds(boundsGeneral);
+	    map.panToBounds(boundsGeneral); 
 		setTimeout(function(){cierraLoading();},500);
 	}
 }
@@ -2314,6 +2440,9 @@ function pintarGeneradoresFiltro(arrayBbj,thisMap, generadorId){
 	});
 }
 
+function OnSearch (input) {
+    alert ("The current value of the search field is\n" + input.value);
+}
 
 
 

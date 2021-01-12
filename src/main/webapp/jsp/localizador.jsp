@@ -96,8 +96,12 @@
 			 	
 			 	<div class="contentDetalle  hidden">
 
+					<input type="search" style="margin-bottom: 5px;" class="input-transparent"  id="anilloNombreCons"  list="listaSitios" placeholder="Nombre del radio"  required/>
+					<datalist id="listaSitios">
+					</datalist>
 					
-					<input type="text" style="margin-bottom: 5px;" class="input-transparent"  id="anilloNombreCons" placeholder="Nombre del radio" />
+					
+					
 					
 				   <div id="comboMotivos" style="padding-bottom: 3px; padding-top: 3px;">
 				     <select id="comboBox_estadoCons" data-placeholder="Seleccionar estado" class="chosen-select"  style="width: 100%;"  tabindex="2">
@@ -110,21 +114,21 @@
 				    <span class="text-etiqueta">Fecha fin :</span>
 				   <input type="text" style="margin-bottom: 10px;  margin-top: 4px;" class="fechaInicialCalendario" readonly id="datepicker3"/>
 				    
-					<div class="contentDetalle" style="float: left; padding-right: 2%;">
+					<div class="contentDetalle" style=" padding-right: 2%;">
 						<input id="check_nuevos" type="checkbox" style="margin-bottom: 10px;" name="nuevo"    class="spanText" value="1" checked> 
-						<span id="spand_nuevo" class="negrita t14 spanText_" >Nuevos</span>  <br>
+						<span id="spand_nuevo" class="negrita t14 spanText_" >Nuevos <span id="estatusN"></span></span>  <br>
 						<input id="check_proceso" type="checkbox" style="margin-bottom: 10px;" name="enproceso"   class="spanText" value="3" checked>
-						<span id="spand_proceso" class="negrita t14 spanText_ " >En proceso</span> <br>
+						<span id="spand_proceso" class="negrita t14 spanText_ " >En proceso <span id="estatusP"></span></span> <br>
 						<input id="check_cancelado" type="checkbox" style="margin-bottom: 10px;" name="cancelado" class="spanText" value="5" checked> 
-						<span id="spand_cancelado" class=" negrita t14 spanText_" >Cancelado</span>  <br>
-					</div>
-					<div class="contentDetalle" style="padding-left: 2%;">
+						<span id="spand_cancelado" class=" negrita t14 spanText_" >Cancelado <span id="estatusC"></span></span>  <br>
+<!-- 					</div> -->
+<!-- 					<div class="contentDetalle" style="padding-left: 2%;"> -->
 						<input id="check_asignados" type="checkbox" style="margin-bottom: 10px;" name="asignado" class="spanText" value="2" checked> 
-						<span id="spand_asignado" class="negrita t14 spanText_" >Asignados</span> <br>						  
+						<span id="spand_asignado" class="negrita t14 spanText_" >Asignados <span id="estatusA"></span></span> <br>						  
 						<input id="check_concluido" type="checkbox" style="margin-bottom: 10px;" name="concluido" class="spanText" value="4" checked> 
-						<span id="spand_concluido" class="negrita t14 spanText_ " >Sin sitios</span><br> 
+						<span id="spand_concluido" class="negrita t14 spanText_ " >Sin sitios <span id="estatusS"></span></span><br> 
 						<input id="check_MdsRadios" type="checkbox" style="margin-bottom: 10px;" name="conmds" class="spanText" value="1">  		 
-						<span id="spand_mds" class=" negrita t14 spanText_" >Con MD's</span> <br>
+						<span id="spand_mds" class=" negrita t14 spanText_" >Con MD's <span id="estatusM"></span></span> <br>
 					</div>
 					
 					
@@ -173,21 +177,22 @@
 		<div class="hidden contentPopUpInfo col-sm-12 offset-sm-0 col-md-12 offset-md-0 col-lg-11 offset-lg-1 col-xl-11 offset-xl-1" id="" >
 		
 			<!-- titulo sitio -->	
-			<div class="row"  >
-				<div class="col-11 pt-2 text-center">
+			<div class="row" style="border-bottom: 1px solid #686868;" >
+				<div class="col-11 pt-1 pb-1 text-center">
 					<span id="infoTituloPopUp" class="t14 titulo_info"></span>
 				</div>
 				<div class="col-1">
-					<h4 id="bton_infoClose" class="infoValue btn_infoClose" >x</h4>
+				<img id="bton_infoClose" class="infoValue btn_infoClose" class="img-tamanio-info-demografica" id=""   src="img/localizador/close-icon.png"> 
+					
 				</div>
 			</div>
 			
 			<!-- INFORMACION DEL SITIO -->	
-			<div class="row pb-2">
-				<div class="col-12 etiqueta-white-l">
-					<div class="row container"  >
+			<div class="row pb-1">
+				<div class="col-12 pl-3 pr-0 etiqueta-white-l">
+					<div class="row pr-0 container"  >
 					<c:if test="${permisos['PRIVILEGIO.SUBMENU.VOKSE.12,6']}">
-						<div id="tipo-solicitud-autorizacion" class="col-4 pb-1  pl-0 pr-0  etiqueta-white-l solicitud-rechazo-anillo">
+						<div id="tipo-solicitud-autorizacion" class="col-4 pb-1 pt-2  pl-0 pr-0  etiqueta-white-l solicitud-rechazo-anillo">
 							-
 						</div>
 						<div class="col-4 pb-1 etiqueta-white-l solicitud-rechazo-anillo">
@@ -201,7 +206,7 @@
 					<div class="col-2 etiqueta-white-l"></div>
 									   <!-- ASIGNAR RADIO -->
 					<c:if test="${permisos['PRIVILEGIO.SUBMENU.VOKSE.12,2']}">
-							<div class="col-12 pl-0" id="divContentInfoRadio"></div>
+							<div class="col-12 pl-0 pt-2" id="divContentInfoRadio"></div>
 					 </c:if>
 					
 					<div class="col-5 etiqueta-white-l">	
@@ -225,65 +230,80 @@
 				</div>
 			</div>
 				
-				
-				
-				<div class="etiqueta-size-colum etiqueta-white-l"> Coordenadas: </div>
-				<div class="col-9 etiqueta-white-l">
-					<span id="infoCoordenadas"  > - </span>
-				</div>
-				
-				<div class="etiqueta-size-colum etiqueta-white-l"> Radio: </div>
-				<div class="col-9 etiqueta-white-l">
-					<span id="infoRadio"  > - </span>
-				</div>
-				
-				<div class="etiqueta-size-colum etiqueta-white-l"> URL: </div>
-				<div id="infoUrl"  class="col-9 etiqueta-white-l">
+				<!-- DATOS DE SITIO 1 -->
+				<div id="seccionDatos1" class="row col-12">
+
+					<div class="col-4 etiqueta-white-l text-center"> Radio: <span class="infoRadio"  > - </span></div>
+					<div class="col-5 p-0 etiqueta-white-l text-center"> Estatus: <span class="infoEstatus"  > - </span></div>
+					<div class="col-3 p-0 etiqueta-white-l"> No. visitas: <span id="infoNoVisitas"  > - </span></div>
 					
 				</div>
+				<!-- FIN datos sitio  -->
+
 				
-				<div class="etiqueta-size-colum etiqueta-white-l"> Estatus: </div>
-				<div class="col-9 etiqueta-white-l">
-						<span id="infoEstatus"  > - </span>
+				<!-- DATOS DE SITIO 2 -->
+				<div id="seccionDatos2" class="row col-12 p-0 pl-3">
+					<div class="etiqueta-size-colum etiqueta-white-l"> Coordenadas: </div>
+					<div class="col-9 etiqueta-white-l">
+						<span id="infoCoordenadas"  > - </span>
+					</div>
+					
+<!-- 					<div class="etiqueta-size-colum etiqueta-white-l"> Radio: </div> -->
+<!-- 					<div class="col-9 etiqueta-white-l"> -->
+<!-- 						<span class="infoRadio"  > - </span> -->
+<!-- 					</div> -->
+					
+					<div class="etiqueta-size-colum etiqueta-white-l"> URL: </div>
+					<div id="infoUrl"  class="col-9 etiqueta-white-l">
+						
+					</div>
+					
+<!-- 					<div class="etiqueta-size-colum etiqueta-white-l"> Estatus: </div> -->
+<!-- 					<div class="col-9 etiqueta-white-l"> -->
+<!-- 							<span class="infoEstatus"  > - </span> -->
+<!-- 					</div> -->
+					
+					<div class="etiqueta-size-colum etiqueta-white-l"> Calle principal: </div>
+					<div class="col-9 etiqueta-white-l">
+							<span id="infoCalle"  > - </span>
+					</div>
+					
+					<div class="etiqueta-size-colum etiqueta-white-l"> Entre calle 1: </div>
+					<div class="col-9 etiqueta-white-l">
+						<span id="infoCalle1"  > - </span>
+					</div>
+					
+					<div class="etiqueta-size-colum etiqueta-white-l"> Entre calle 2: </div>
+					<div class="col-9 etiqueta-white-l">
+						<span id="infoCalle2"  > - </span>
+					</div>
+					
+					<div class="etiqueta-size-colum etiqueta-white-l"> Colonia: </div>
+					<div class="col-9 etiqueta-white-l">
+						<span id="infoColonia"  > - </span>
+					</div>
+					
+					<div class="etiqueta-size-colum etiqueta-white-l"> Municipio: </div>
+					<div class="col-9 etiqueta-white-l">
+						<span id="infoMunicipio"  > - </span>
+					</div>
+					
+<!-- 					<div class="etiqueta-size-colum etiqueta-white-l"> No. visitas: </div> -->
+<!-- 					<div class="col-9 etiqueta-white-l"> -->
+<!-- 						<span id="infoNoVisitas"  > - </span> -->
+<!-- 					</div> -->
 				</div>
-				
-				<div class="etiqueta-size-colum etiqueta-white-l"> Calle principal: </div>
-				<div class="col-9 etiqueta-white-l">
-						<span id="infoCalle"  > - </span>
-				</div>
-				
-				<div class="etiqueta-size-colum etiqueta-white-l"> Entre calle 1: </div>
-				<div class="col-9 etiqueta-white-l">
-					<span id="infoCalle1"  > - </span>
-				</div>
-				
-				<div class="etiqueta-size-colum etiqueta-white-l"> Entre calle 2: </div>
-				<div class="col-9 etiqueta-white-l">
-					<span id="infoCalle2"  > - </span>
-				</div>
-				
-				<div class="etiqueta-size-colum etiqueta-white-l"> Colonia: </div>
-				<div class="col-9 etiqueta-white-l">
-					<span id="infoColonia"  > - </span>
-				</div>
-				
-				<div class="etiqueta-size-colum etiqueta-white-l"> Municipio: </div>
-				<div class="col-9 etiqueta-white-l">
-					<span id="infoMunicipio"  > - </span>
-				</div>
-				
-				<div class="etiqueta-size-colum etiqueta-white-l"> No. visitas: </div>
-				<div class="col-9 etiqueta-white-l">
-					<span id="infoNoVisitas"  > - </span>
-				</div>
+				<!-- FIN datos sitio  -->
+					
 			</div>
 			
 			
 			<!-- Contenedor Scroll  -->
-			<div class="content-section-overflow pt-0 pb-0 pr-0 pl-0 row">
-				<div id="contenido-vista-a" class="row seccionScrollContent ">
+<!-- 			<div class="content-section-overflow pt-0 pb-0 pr-0 pl-0 row"> -->
+			<div id="contenido-vista-a" class="row seccionScrollContent ">
+				<div class="content-section-overflow pt-0 pb-0 pr-0 pl-0 row">
 					<!-- INFORMACION SOCIO DEMOGRAFICA-->	
-					<div class="col-12"><span class="negrita t14 subTitleInfo">Información Socio demográfica</span></div>
+					<div class="col-12" style="height: 12px;"><span class="negrita t14 subTitleInfo">Información Socio demográfica</span></div>
 				
 					<div class="col-12 etiqueta-white-l"> Edad predominante </div>
 					<div class="col-2 etiqueta-white-l text-center"> <span id="edadMenor1"  > - </span> </div>
@@ -293,12 +313,12 @@
 					<div class="col-2 etiqueta-white-l text-center"> <span id="edadMenor5"  > - </span> </div>
 					<div class="col-2 etiqueta-white-l text-center"> <span id="edadMenor6"  > - </span> </div>
 					
-					<div class="col-2 etiqueta-white-l text-center"> <img class="img-tamanio-info-demografica" id="" style="margin-bottom:5px;" src="img/localizador/icon-menor-18.png"> </div>
-					<div class="col-2 etiqueta-white-l text-center"> <img class="img-tamanio-info-demografica" id="" style="margin-bottom:5px;" src="img/localizador/icon-mayor-20.png"> </div>
-					<div class="col-2 etiqueta-white-l text-center"> <img class="img-tamanio-info-demografica" id="" style="margin-bottom:5px;" src="img/localizador/icon-31-40.png"> </div>
-					<div class="col-2 etiqueta-white-l text-center"> <img class="img-tamanio-info-demografica" id="" style="margin-bottom:5px;" src="img/localizador/icon-41-50.png"> </div>
-					<div class="col-2 etiqueta-white-l text-center"> <img class="img-tamanio-info-demografica" id="" style="margin-bottom:5px;" src="img/localizador/icon-51-60.png"> </div>
-					<div class="col-2 etiqueta-white-l text-center"> <img class="img-tamanio-info-demografica" id="" style="margin-bottom:5px;" src="img/localizador/icon-mayor-60.png"> </div>
+					<div class="col-2 etiqueta-white-l text-center"> <img class="img-tamanio-info-demografica" id=""   src="img/localizador/icon-menor-18.png"> </div>
+					<div class="col-2 etiqueta-white-l text-center"> <img class="img-tamanio-info-demografica" id=""   src="img/localizador/icon-mayor-20.png"> </div>
+					<div class="col-2 etiqueta-white-l text-center"> <img class="img-tamanio-info-demografica" id=""   src="img/localizador/icon-31-40.png"> </div>
+					<div class="col-2 etiqueta-white-l text-center"> <img class="img-tamanio-info-demografica" id=""   src="img/localizador/icon-41-50.png"> </div>
+					<div class="col-2 etiqueta-white-l text-center"> <img class="img-tamanio-info-demografica" id=""   src="img/localizador/icon-51-60.png"> </div>
+					<div class="col-2 etiqueta-white-l text-center"> <img class="img-tamanio-info-demografica" id=""   src="img/localizador/icon-mayor-60.png"> </div>
 					
 					<div class="col-2 etiqueta-white-l text-center">  < - 20 </div>
 					<div class="col-2 etiqueta-white-l text-center"> 21 - 30 </div>
@@ -307,39 +327,39 @@
 					<div class="col-2 etiqueta-white-l text-center"> 51 - 60 </div>
 					<div class="col-2 etiqueta-white-l text-center"> 61 - <  </div>
 
-					<div class="etiqueta-size-colum-2 etiqueta-white-l"> Población total: </div>
-					<div class="col-8 etiqueta-white-l">
-							<span id="poblacion"  > - </span>
-					</div>
+					<div class="col-6 etiqueta-white-l"> Población total: <span id="poblacion"  > - </span></div>
+<!-- 					<div class="col-8 etiqueta-white-l"> -->
+							
+<!-- 					</div> -->
 					
-					<div class="etiqueta-size-colum-2 etiqueta-white-l"> Población flotante: </div>
-					<div class="col-8 etiqueta-white-l">
-						<span id="poblacionFlot"  > - </span>
-					</div>
+					<div class="col-6 etiqueta-white-l"> Población flotante: <span id="poblacionFlot"  > - </span></div>
+<!-- 					<div class="col-8 etiqueta-white-l"> -->
+						
+<!-- 					</div> -->
 					
-					<div class="etiqueta-size-colum-2 etiqueta-white-l"> PEA: </div>
-					<div class="col-8 etiqueta-white-l">
-						<span id="pea"  > - </span>
-					</div>
+					<div class="col-6 etiqueta-white-l"> PEA: <span id="pea"  > - </span></div>
+<!-- 					<div class="col-8 etiqueta-white-l"> -->
+						
+<!-- 					</div> -->
 					
-					<div class="etiqueta-size-colum-2 etiqueta-white-l"> Hogares: </div>
-					<div class="col-8 etiqueta-white-l">
-						<span id="hogares"  > - </span>
-					</div>				
+					<div class="col-6 etiqueta-white-l"> Hogares: <span id="hogares"  > - </span></div>
+<!-- 					<div class="col-8 etiqueta-white-l"> -->
+						
+<!-- 					</div>				 -->
 	
 				
 					<!-- GENERADORES -->	
-					<div class="col-12 pt-2"><span class="negrita t14 subTitleInfo">Generadores</span> 
+					<div class="col-12 pt-1"><span class="negrita t14 subTitleInfo">Generadores</span> 
 						<c:if test="${permisos['PRIVILEGIO.SUBMENU.VOKSE.12,7']}">
 							<button type="button" id="btonRecalculaGeneradores"  class=" btn bton-color-azul btn_aceptar float-right">Recalcular </button>
 					 	</c:if>
 					</div>
 				
-					<div class="col-20-generadores p-0 etiqueta-white-l text-center"> Mercados <input id="check-mercados" type="checkbox" style="margin-bottom: 10px;" name="nuevo"    class="spanText" value="1" checked> </div>
-					<div class="col-20-generadores p-0 etiqueta-white-l text-center"> Escuelas <input id="check-escuela" type="checkbox" style="margin-bottom: 10px;" name="nuevo"    class="spanText" value="1" checked> </div>
-					<div class="col-20-generadores p-0 etiqueta-white-l text-center"> Hospitales <input id="check-hospital" type="checkbox" style="margin-bottom: 10px;" name="nuevo"    class="spanText" value="1" checked> </div>
-					<div class="col-20-generadores p-0 etiqueta-white-l text-center"> Templos <input id="check-templo" type="checkbox" style="margin-bottom: 10px;" name="nuevo"    class="spanText" value="1" checked> </div>
-					<div class="col-20-generadores p-0 etiqueta-white-l text-center"> O. gobierno <input id="check-ofGob" type="checkbox" style="margin-bottom: 10px;" name="nuevo"    class="spanText" value="1" checked> </div>
+					<div class="col-20-generadores p-0 etiqueta-white-l text-center"> Mercados <input id="check-mercados" type="checkbox" style="margin-bottom: 5px;" name="nuevo"    class="spanText" value="1" checked> </div>
+					<div class="col-20-generadores p-0 etiqueta-white-l text-center"> Escuelas <input id="check-escuela" type="checkbox" style="margin-bottom: 5px;" name="nuevo"    class="spanText" value="1" checked> </div>
+					<div class="col-20-generadores p-0 etiqueta-white-l text-center"> Hospitales <input id="check-hospital" type="checkbox" style="margin-bottom: 5px;" name="nuevo"    class="spanText" value="1" checked> </div>
+					<div class="col-20-generadores p-0 etiqueta-white-l text-center"> Templos <input id="check-templo" type="checkbox" style="margin-bottom: 5px;" name="nuevo"    class="spanText" value="1" checked> </div>
+					<div class="col-20-generadores p-0 etiqueta-white-l text-center"> O. gobierno <input id="check-ofGob" type="checkbox" style="margin-bottom: 5px;" name="nuevo"    class="spanText" value="1" checked> </div>
 					
 					
 					<div class="col-20-generadores etiqueta-white-l text-center"> <img class="img-tamanio-info-demografica" id="bell_rojo" style="margin-bottom:0px;" src="img/localizador/icon-mercado.png"> </div>
@@ -355,31 +375,31 @@
 					<div class="col-20-generadores etiqueta-white-l text-center"> <span id="ofiGob"  > - </span> </div>
 						
 					<!-- COMPETENCIAS -->	
-					<div class="col-12 pt-2 pb-2"><span class="negrita t14 subTitleInfo">Competencias</span></div>
-					<div class="col-4 etiqueta-white-l text-center"> <img class="img-tamanio-info-demografica" id="bell_rojo" style="margin-bottom:5px;" src="img/localizador/icon-compe-3b.png"> </div>
-					<div class="col-4 etiqueta-white-l text-center"> <img class="img-tamanio-info-demografica" id="bell_rojo" style="margin-bottom:5px;" src="img/localizador/icon-compe-bod-expres.png"> </div>
-					<div class="col-4 etiqueta-white-l text-center"> <img class="img-tamanio-info-demografica" id="bell_rojo" style="margin-bottom:5px;" src="img/localizador/icon-compe-bod.png"> </div>
+					<div class="col-12 pt-0 pb-0" style="height: 18px;"><span class="negrita t14 subTitleInfo">Competencias</span></div>
+					<div class="col-4 etiqueta-white-l text-center"> <img class="img-tamanio-info-demografica" id="bell_rojo"   src="img/localizador/icon-compe-3b.png"> </div>
+					<div class="col-4 etiqueta-white-l text-center"> <img class="img-tamanio-info-demografica" id="bell_rojo"  src="img/localizador/icon-compe-bod-expres.png"> </div>
+					<div class="col-4 etiqueta-white-l text-center"> <img class="img-tamanio-info-demografica" id="bell_rojo"   src="img/localizador/icon-compe-bod.png"> </div>
 					<div class="col-4 etiqueta-white-l text-center"> <span id="bbb"  > - </span> </div>
 					<div class="col-4 etiqueta-white-l text-center"> <span id="bae"  > - </span> </div>
 					<div class="col-4 etiqueta-white-l text-center"> <span id="miba"  > - </span> </div>
 	
 					<!-- UNIDADES -->	
-					<div class="col-12 pt-1 pb-1 div-unidades-economicas"><span class="negrita t14 subTitleInfo">Unidades Económicas</span></div>
+					<div class="col-12 pt-0 pb-0 div-unidades-economicas" style="height: 12px;"><span class="negrita t14 subTitleInfo">Unidades Económicas</span></div>
 					
-					<div class="col-2 p-0 etiqueta-white-l text-center div-unidades-economicas">Panadería <br><input id="check-panaderia" type="checkbox" style="margin-bottom: 10px;" name="nuevo"    class="spanText" value="1" checked> </div>
-					<div class="col-2 p-0 etiqueta-white-l text-center div-unidades-economicas">Tortillería <br><input id="check-tortilleria" type="checkbox" style="margin-bottom: 10px;" name="nuevo"    class="spanText" value="1" checked> </div>
-					<div class="col-2 p-0 etiqueta-white-l text-center div-unidades-economicas">Abarrotes <br><input id="check-abarrotes" type="checkbox" style="margin-bottom: 10px;" name="nuevo"    class="spanText" value="1" checked> </div>
-					<div class="col-2 p-0 etiqueta-white-l text-center div-unidades-economicas">Carnicería <br><input id="check-carniceria" type="checkbox" style="margin-bottom: 10px;" name="nuevo"    class="spanText" value="1" checked> </div>
-					<div class="col-2 p-0 etiqueta-white-l text-center div-unidades-economicas">Recaudería <br><input id="check-recauderia" type="checkbox" style="margin-bottom: 10px;" name="nuevo"    class="spanText" value="1" checked> </div>
-					<div class="col-2 p-0 etiqueta-white-l text-center div-unidades-economicas">Pollería <br><input id="check-polleria" type="checkbox" style="margin-bottom: 10px;" name="nuevo"    class="spanText" value="1" checked> </div>
+					<div class="col-2 p-0 etiqueta-white-l text-center div-unidades-economicas">Panadería <br><input id="check-panaderia" type="checkbox"   name="nuevo"    class="spanText" value="1" checked> </div>
+					<div class="col-2 p-0 etiqueta-white-l text-center div-unidades-economicas">Tortillería <br><input id="check-tortilleria" type="checkbox"   name="nuevo"    class="spanText" value="1" checked> </div>
+					<div class="col-2 p-0 etiqueta-white-l text-center div-unidades-economicas">Abarrotes <br><input id="check-abarrotes" type="checkbox"  name="nuevo"    class="spanText" value="1" checked> </div>
+					<div class="col-2 p-0 etiqueta-white-l text-center div-unidades-economicas">Carnicería <br><input id="check-carniceria" type="checkbox"  name="nuevo"    class="spanText" value="1" checked> </div>
+					<div class="col-2 p-0 etiqueta-white-l text-center div-unidades-economicas">Recaudería <br><input id="check-recauderia" type="checkbox"   name="nuevo"    class="spanText" value="1" checked> </div>
+					<div class="col-2 p-0 etiqueta-white-l text-center div-unidades-economicas">Pollería <br><input id="check-polleria" type="checkbox"   name="nuevo"    class="spanText" value="1" checked> </div>
 					
 					
-					<div class="col-2 etiqueta-white-l text-center div-unidades-economicas"> <img class="img-tamanio-info-demografica" id="bell_rojo" style="margin-bottom:0px;" src="img/localizador/icon-panaderia.png"> </div>
-					<div class="col-2 etiqueta-white-l text-center div-unidades-economicas"> <img class="img-tamanio-info-demografica" id="bell_rojo" style="margin-bottom:0px;" src="img/localizador/icon-tortilleria.png"> </div>
-					<div class="col-2 etiqueta-white-l text-center div-unidades-economicas"> <img class="img-tamanio-info-demografica" id="bell_rojo" style="margin-bottom:0px;" src="img/localizador/icon-abarrotes.png"> </div>
-					<div class="col-2 etiqueta-white-l text-center div-unidades-economicas"> <img class="img-tamanio-info-demografica" id="bell_rojo" style="margin-bottom:0px;" src="img/localizador/icon-carniceria.png"> </div>
-					<div class="col-2 etiqueta-white-l text-center div-unidades-economicas"> <img class="img-tamanio-info-demografica" id="bell_rojo" style="margin-bottom:0px;" src="img/localizador/icon-recauderia.png"> </div>
-					<div class="col-2 etiqueta-white-l text-center div-unidades-economicas"> <img class="img-tamanio-info-demografica" id="bell_rojo" style="margin-bottom:0px;" src="img/localizador/icon-polleria.png"> </div>
+					<div class="col-2 etiqueta-white-l text-center div-unidades-economicas"> <img class="img-tamanio-info-demografica" id="bell_rojo" src="img/localizador/icon-panaderia.png"> </div>
+					<div class="col-2 etiqueta-white-l text-center div-unidades-economicas"> <img class="img-tamanio-info-demografica" id="bell_rojo"  src="img/localizador/icon-tortilleria.png"> </div>
+					<div class="col-2 etiqueta-white-l text-center div-unidades-economicas"> <img class="img-tamanio-info-demografica" id="bell_rojo" src="img/localizador/icon-abarrotes.png"> </div>
+					<div class="col-2 etiqueta-white-l text-center div-unidades-economicas"> <img class="img-tamanio-info-demografica" id="bell_rojo" src="img/localizador/icon-carniceria.png"> </div>
+					<div class="col-2 etiqueta-white-l text-center div-unidades-economicas"> <img class="img-tamanio-info-demografica" id="bell_rojo" src="img/localizador/icon-recauderia.png"> </div>
+					<div class="col-2 etiqueta-white-l text-center div-unidades-economicas"> <img class="img-tamanio-info-demografica" id="bell_rojo" src="img/localizador/icon-polleria.png"> </div>
 					
 					<div class="col-2 etiqueta-white-l text-center div-unidades-economicas"> <span id="t-PANADERIA"  > - </span></div> 
 					<div class="col-2 etiqueta-white-l text-center div-unidades-economicas"> <span id="t-TORTILLERIA"  > - </span> </div>
@@ -388,23 +408,12 @@
 					<div class="col-2 etiqueta-white-l text-center div-unidades-economicas"> <span id="t-RECAUDERIA"  > - </span> </div>
 					<div class="col-2 etiqueta-white-l text-center div-unidades-economicas"> <span id="t-POLLERIA"  > - </span> </div>
 					
-<!-- 					<div class="etiqueta-size-colum-3 etiqueta-white-l"> Venta y preparación de alimentos: </div> -->
-<!-- 					<div class="col-4 etiqueta-white-l"> -->
-<!-- 						<span id="alimentos"  > - </span> -->
-<!-- 					</div> -->
-					
-<!-- 					<div class="etiqueta-size-colum-3 etiqueta-white-l"> Venta de artículos personales y del hogar: </div> -->
-<!-- 					<div class="col-4 etiqueta-white-l"> -->
-<!-- 						<span id="servicios"  > - </span> -->
-<!-- 					</div> -->
-					
-<!-- 					<div class="etiqueta-size-colum-3 etiqueta-white-l"> Servicios: </div> -->
-<!-- 					<div class="col-4 etiqueta-white-l pb-3"> -->
-<!-- 						<span id="artlsPersoHogar"  > - </span> -->
-<!-- 					</div> -->
+
+				</div>
 				</div>
 				
 				<div id="contenido-vista-b" class="row  seccionScrollContent">
+					<div class="content-section-overflow2 pt-0 pb-0 pr-0 pl-0 row">
 					<div class="col-12 pt-2" style="height: "><span class="negrita t14 subTitleInfo">Ocupaciones</span></div>
 				
 					<!-- OCUPACIONES -->	
@@ -424,11 +433,11 @@
 					<div class="col-6 etiqueta-white-l">Obrero: 		<span id="ocupa_obrer"  > - </span> </div>
 					<div class="col-6 etiqueta-white-l">Otra: 			<span id="ocupa_otra"  > - </span> </div>
 					<div class="col-6 etiqueta-white-l">Jubilado: 		<span id="ocupa_jubil"  > - </span> </div>
-					<div class="col-12 pb-4"> </div>
-
+					<div class="col-12 pb-2"> </div>
+					</div>
 				</div>
 
-			</div> <!-- Fin contenedor Scroll -->			
+<!-- 			</div> Fin contenedor Scroll			 -->
 		</div>	<!-- Fin contenedor principal -->	
 	</div>
 </div>

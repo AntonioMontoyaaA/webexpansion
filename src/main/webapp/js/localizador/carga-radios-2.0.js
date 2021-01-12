@@ -14,6 +14,12 @@ function pintarCirculosXslx(arrayDatosRadios){
 	var filasCadena = [];
 	var indexAux = 0;
 	
+	
+	if(arrayDatosRadios.length <= 2){
+		cargaMensajeModal("Localizador","La plantilla no contiene radios para cargar.", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+		return;
+	}
+	
 	arrayDatosRadios.forEach(function(element,index){
 		
 		if(index != 0 && index != 1){
@@ -301,20 +307,25 @@ function verInformacionRadio(obj, vista_opcion){
 	
 	$("#contenido-vista-a").show();
 	$("#contenido-vista-b").hide();
+	
+	$("#seccionDatos1").show();
+	$("#seccionDatos2").hide();
+	
+	
 
 	/* ==== INFORMACION ====*/	
 	$("#infoTituloPopUp").html(validaValorObj(obj.sitio));
 	$("#infoCoordenadas").html(obj.lat+' , '+obj.lng);
-	$("#infoRadio").html(obj.anillo+' mts.');
+	$(".infoRadio").html(obj.anillo+' mts.');
 	$("#infoUrl").html("");
 	$("#infoUrl").append("<a href='"+ obj.infoSitio.fcUrl+"' target='_blank'> "+ obj.infoSitio.fcUrl+"  </a>");
-	$("#infoEstatus").html(obj.estatus);
+	$(".infoEstatus").html(obj.estatus);
 	$("#infoCalle").html(obj.infoSitio.fcCallePrincipal);
 	$("#infoCalle1").html(obj.infoSitio.fcCalle1);
 	$("#infoCalle2").html(obj.infoSitio.fcCalle2);
 	$("#infoColonia").html(obj.infoSitio.fcColonia);
 	$("#infoMunicipio").html(obj.infoSitio.fcMunicipio);
-	$("#infoNoVisitas").html(obj.visitasRadio);
+	$(".infoNoVisitas").html(obj.visitasRadio);
 	
 	
 	/* ==== INFORMACION ====*/

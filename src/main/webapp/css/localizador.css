@@ -626,6 +626,8 @@ table thead tr{
     font-size: 26px;
     color: red;
     cursor: pointer;
+    height: 25px;
+    margin-top: 6px;
 }
 
 .btn_infoClose:hover {
@@ -637,7 +639,8 @@ table thead tr{
 .titulo_info{
     color: #Fbb110;
     text-align: center;
-    font-size: 18px;	
+    font-size: 20px;
+    font-weight: 600;	
 }
 
 .btn_infoClose {
@@ -708,14 +711,19 @@ table thead tr{
  }
 
 
+
 .tamanioContenedormodal{
 	position : absolute;
 }
     
+.content-section-overflow2{
+	overflow-y: auto;
+    height: calc(100vh - 328px) !important;	
+}
 
 .content-section-overflow{
 	overflow-y: auto;
-    height: calc(100vh - 395px) !important;	
+    height: calc(100vh - 210px) !important;	
 }
 
 .contenedor-grafica-radar{
@@ -739,6 +747,20 @@ table thead tr{
 }
 
 .content-section-overflow::-webkit-scrollbar-track {
+    background: #dfdfdf;
+    border-radius: 8px;
+}
+
+.content-section-overflow2::-webkit-scrollbar {
+    height: 10px;
+}
+
+.content-section-overflow2::-webkit-scrollbar-thumb {
+    background: #FF5722;
+    border-radius: 20px;
+}
+
+.content-section-overflow2::-webkit-scrollbar-track {
     background: #dfdfdf;
     border-radius: 8px;
 }
@@ -877,8 +899,11 @@ table thead tr{
 
 
 .bton-quitar-asignacion{
-	background-color: #f01000;
+    background-color: #e11809;
     color: #ebc6c6;
+    padding: 1px 5px;
+    border-radius: 2px;
+    border-bottom: 1px solid #ff4234;
 }
 
 .text-etiqueta{
@@ -897,7 +922,9 @@ table thead tr{
 
 .bton-color-azul {
     background-color: #0e5dff;
-     color: white; 
+    color: white;
+    border-radius: 2px;
+    padding: 1px 8px;
 }
 
 .col-20-generadores{

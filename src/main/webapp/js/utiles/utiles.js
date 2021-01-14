@@ -16,6 +16,26 @@ var totalRojo = 0;
 var tipoPeriodo = 2; // 1 día  / 2 Semana / 3 Mes / 4 Año
 var statusId;
 
+var ARRAYOBJGERENTES;
+var ARRAYOBJJEFES;
+var androidId;
+var imei;
+var editaImei;
+
+var ARRAYOBJMDS;
+
+//Dropzone.autoDiscover = false;
+var uploader;
+var dropzone;
+var BASE64Upload = "";
+var typeFileExt = "";
+var nameFileExt = "";
+var dropTipo ;
+var MDID;
+
+var elemMD;
+var elemMDAux;
+var aplicaPredial =  false;
 $(function(){
 	actionsPerfiles();
 	consultaNotificaciones(tipoPeriodo);
@@ -43,13 +63,91 @@ $(function(){
 		}
 		cierraMensajeModal();
 	});
+	$("#select_employeeMDGere").change(function(){ cargarJefesXGerente(this, 0);});
+	$("#guardarImei").click(function(){ confirmaGuardadoImei();});
+	$("#select_gerenteMD").change(function(){
+		limpiaModalFotosSelect();
+		cargarJefesXGerente(this, 1); });	
+	$("#select_jefes_fotos").change(function(){ 
+		limpiaModalFotosSelect();
+		cargaMDXUsuario(this); });
+	$("#select_MD").change(function(){
+		
+		limpiaModalFotosSelect();
+		superficiePreconsulta(this)
+		consultaSuperficieMD(this); 
+
+		});
+	
+	$(".img_edit").click(function(){
+		pos =   
+		dropTipo =  $(".drop_file")[$(".img_edit")[this.id].id].id;
+		$("input.var_pdfUpload")[this.id].click()
+	});
+	
+	$(".drop_file").click(function(){
+		dropTipo =  this.id
+		$(this.parentElement.children[1]).trigger("click");
+	});
+	$("input.var_pdfUpload").change(function (evt) {
+		var element = this;		
+	    var tgt = evt.target || window.event.srcElement,
+	        files = tgt.files;
+	    	typeFileExt = files[0].type;
+	    	fileExt = files[0].name.split('.').slice(1, 2).join('.');
+	    	namefileExt = files[0].name.split('.').slice(0, 1).join('.');
+	    // FileReader support
+	    if (FileReader && files && files.length) {
+	        var fr = new FileReader();
+	        fr.onload = function () {
+	        	BASE64Upload = fr.result;
+	        	
+	        }
+	        fr.readAsDataURL(files[0]);
+	        setTimeout(function(){
+				if(BASE64Upload != undefined && BASE64Upload != ""){  
+					cargaMensajeModal("Subir Foto MD","¿Estás seguro de guardar la foto seleccionada? ", TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, fnSubeFoto);
+				}		    	
+			},350);
+	    } else {
+	        // fallback
+	    }
+
+	});	
+	$('input.form-check-input').change(function (evt) {
+		elemMD.esquina = this.checked ? 1 : 0;
+	});
+
+	$("#guardarFotosMD").click(function(){ 
+		 if(elemMD.fondo == 0 || elemMD.fondo == undefined || elemMD.fondo == "") {
+				cargaMensajeModal("Subir Foto MD","Falta llenar campo: PROFUNDIDAD", TIPO_MENSAJE_ACEPTAR , TIPO_ESTATUS_ALERTA, abreModal);
+		 }else if(elemMD.frente == 0 || elemMD.frente == undefined || elemMD.frente == "") {
+				cargaMensajeModal("Subir Foto MD","Falta llenar campo: FRENTE ", TIPO_MENSAJE_ACEPTAR , TIPO_ESTATUS_ALERTA, abreModal);
+		 }else{
+			 let cont = 0;
+			 if(elemMD.imgFrontal != "" && elemMD.imgFrontal != undefined && elemMD.imgLateral1 != "" && elemMD.imgLateral1 != undefined 
+				 && elemMD.imgLateral2 != "" && elemMD.imgLateral2 != undefined  && elemMD.imgEnt1 != "" && elemMD.imgEnt1 != undefined 
+				 && elemMD.imgEnt2 != "" && elemMD.imgEnt2 != undefined && elemMD.imgEnt3 != "" && elemMD.imgEnt3 != undefined ){ 
+				
+				 if(aplicaPredial && (elemMD.imgPredial == "" || elemMD.imgPredial == undefined )){
+					 cargaMensajeModal("Subir Foto MD","Faltan imagenes por cargar", TIPO_MENSAJE_ACEPTAR , TIPO_ESTATUS_ALERTA, abreModal);
+				 }else{
+					 cargaMensajeModal("Subir Foto MD","¿Desea continuar?, esta acción no se puede deshacer", TIPO_MENSAJE_SI_NO , TIPO_ESTATUS_ALERTA, guardaFotosMD);
+				 }
+				 
+			 }else{
+					cargaMensajeModal("Subir Foto MD","Faltan imagenes por cargar", TIPO_MENSAJE_ACEPTAR , TIPO_ESTATUS_ALERTA, abreModal);
+			 }
+		 }
+		
+		
+	});
 });
 
 function invocarJSONServiceAction(nombreAction, parametros, successFunction, errorFunction, completeFunction) {
 	
 	cargaLoading();
 	var path = location.pathname.split("/")[1];
-	nombreAction = "/" + path + "/" + nombreAction;
 	
 	funcionSuccess = function redireccionarMenuEj(respuesta)
 	{
@@ -756,6 +854,8 @@ function permisos_perfil(){
 	$('#refuse').hide;
 	$('#change').hide;
 	$('#descargaExcelTablero').hide;
+	$('#editaIMEI').hide;
+	$('#')
 
 	var permiso=true;
 	$.each($(".permisos_sub"),function(index, value){  // permisos de perfil	
@@ -796,8 +896,10 @@ function permisos_perfil(){
 		}
 		if(value.value=="PRIVILEGIO.MENU.VOKSE.508=true"){
 			$('#layoutUp').removeClass('sin_permiso');
-		}
+		}		
 	});
+	
+	
 }
 
 function ShowSelectedItem(){
@@ -873,4 +975,772 @@ function consultaPeriodo(periodo){
 			dibujaNotificaciones(AR_RECHAZADAS);
 		}
 	};
+}
+
+function getObtenerEmpleadosGerentes(obj){	
+	$(obj.idHtmlGerente).html("");
+	$(obj.idHtmlGerente)
+    .append('<option selected="selected" value="-1">Selecione un gerente </option>');
+	
+	$('#select_employeeMDJefes').html("");
+	$('#select_employeeMDJefes').append($('<option>', {
+			value: "-1",
+			text :"Selecione un jefe"
+		}));	
+	
+	$('#imei_Id').val("");
+	
+	$('#select_MD').append($('<option>', {
+		value: "-1",
+		text :"---"
+	}));	
+ if(ARRAYOBJGERENTES == undefined){
+	 cargaLoading();
+	invocarJSONServiceAction("obtenerEmpleadosGerentes",{},
+			'llenarComboEmpleados',
+			function() {
+				//Funcion de error
+				cargaMensajeModal(obj.cabecero,"Error en el servicio obtener jefes de expansión.", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+				$(obj.idHtmlGerente)
+			    .empty()
+			    .append('<option selected="selected" value="-2">Selecione un gerente </option>')
+			;
+
+			},
+			function() {
+				//Función al finalizar
+				cierraLoading();
+			});
+
+	llenarComboEmpleados = function(data){
+		if(data.codigo == 400){
+			cargaMensajeModal(obj.cabecero,data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+			return false;
+		}
+
+		objArrayEmployee = data;
+		ARRAYOBJGERENTES = objArrayEmployee.usuarios;
+
+		objArrayEmployee.usuarios.forEach(function(item, i){
+			 $(obj.idHtmlGerente).append($('<option>', {
+			        value: item.gerenteId,
+			        text : item.gerenteId +' - '+ item.gerente
+			    }));
+		});
+		
+		setTimeout(function(){ $(obj.idHtmlGerente).trigger('chosen:updated'); },100);
+		
+	}
+ }else{
+	 ARRAYOBJGERENTES.forEach(function(item, i){
+		 $(obj.idHtmlGerente).append($('<option>', {
+		        value: item.gerenteId,
+		        text : item.gerenteId +' - '+ item.gerente
+		    }));
+	});
+	
+	setTimeout(function(){ $(obj.idHtmlGerente).trigger('chosen:updated'); },100);
+ }
+}
+
+function cargarJefesXGerente(element,tipo){
+	var idJefe = '';
+	if(tipo == 0){
+		idJefe = '#select_employeeMDJefes';
+	}else{
+		idJefe = '#select_jefes_fotos';
+	}
+	$(idJefe).html("");
+	$(idJefe).append($('<option>', {
+			value: "-1",
+			text :"Todos los jefes"
+		}));
+	
+	if(ARRAYOBJGERENTES != undefined && Object.keys(ARRAYOBJGERENTES).length > 0){
+		
+		ARRAYOBJGERENTES.forEach(function(item, i){
+			if(element.value === item.gerenteId){
+				item.jefes.forEach(function(itemj, y){
+					$(idJefe).append($('<option>', {
+						value: itemj.jefeId,
+						text : itemj.jefeId  +' - '+ itemj.jefe
+					}));
+				});
+			}else if(element.value == -1){
+				item.jefes.forEach(function(itemj, y){
+					$(idJefe).append($('<option>', {
+						value: itemj.jefeId,
+						text : itemj.jefeId + ' - '+ itemj.jefe
+					}));
+				});
+			}
+		});
+	}
+	
+	setTimeout(function(){ $(idJefe).trigger('chosen:updated'); },100);
+}
+
+/* == GUARDAR ID ==*/
+function modalID(){
+$('#modal_id').modal('show');
+var cabecero = "CAMBIAR IMEI"
+var obj = {
+	cabecero: 	"CAMBIAR IMEI",
+	idHtmlGerente : '#select_employeeMDGere',
+	}
+getObtenerEmpleadosGerentes(obj)
+}
+
+function confirmaGuardadoImei(){
+	if( ($("#select_employeeMDJefes").val() != "-1" || $("#select_employeeMDGere").val() != "-1" ) && $("#imei_Id").val()  != ""){
+		imei = $("#imei_Id").val();
+		var gerenteId = $("#select_employeeMDGere").val();
+		var jefeId = $("#select_employeeMDJefes").val()
+		var id = 0;
+		var nombre = "";
+		
+		if(jefeId != "-1"){
+			id = jefeId;
+			
+			ARRAYOBJGERENTES.forEach(function(item, i){
+				if(gerenteId === item.gerenteId){
+					item.jefes.forEach(function(itemj, y){
+						if(itemj.jefeId == id){
+							nombre = "Jefe: <br> " + itemj.jefe;
+						}
+					});
+				}
+			});
+		}else{
+			id = gerenteId;
+			ARRAYOBJGERENTES.forEach(function(item, i){
+				if(id === item.gerenteId){
+					nombre = "Gerente: <br> " + item.gerente;
+				}
+			});
+		}
+		androidId = id;
+		
+		cargaMensajeModal("Guarda ID android","Estás a punto de modificar el ID del  "+ nombre +", ¿Deseas continuar?", TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, guardaIMEI);
+		
+	
+	}else{
+		cargaMensajeModal("Guarda ID android","Sin cambios para guardar", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+	}
+	
+}
+
+	
+function guardaIMEI(){
+		cargaLoading();
+		invocarJSONServiceAction("guardaIdAndroid",{
+								 'androidId' : imei, 
+								 'usrActualizaId': androidId },
+				'responseGuardaId',
+				function() {
+					//Funcion de error
+					cargaMensajeModal("Guarda ID android","Error en guardar la información", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+				},
+				function() {
+					//Función al finalizar
+					cierraLoading();
+				});
+
+		responseGuardaId = function(data){
+			if(data.codigo == 400){
+				cargaMensajeModal("Guarda ID android",data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+			}else{
+				cargaMensajeModal("Guarda ID android",data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+			}			
+		}	
+}
+
+/* == SUBIR FOTOS MD ==*/
+function subirFotosMD(){
+$('#modal_fotos').modal('show');
+var cabecero = "SUBIR FOTOS MD"
+	var obj = {
+		cabecero: 	cabecero,
+		idHtmlGerente : '#select_gerenteMD',
+		}
+
+		$('#select_jefes_fotos').html("");
+		$('#select_jefes_fotos').append($('<option>', {
+				value: "-1",
+				text :"Selecione un jefe"
+			}));	
+		
+		$('#select_MD').html("");
+		limpiaModalFotosSelect()
+	getObtenerEmpleadosGerentes(obj)
+	
+}
+
+function abreModal(){
+	$('#modal_fotos').modal('show');
+}
+
+function limpiaModalFotosSelect(){	
+	limpiaModalFotos();
+	$("#botonMd").show();
+	$("#botonesMd").hide();
+	$("#contenidoMd").hide()
+	elemMD = undefined;
+	elemMDAux =  undefined;		
+}
+
+function cargaMDXUsuario(){
+	cargaLoading(); 
+	$('#select_MD').html("");
+	$('#select_MD').append($('<option>', {
+			value: "-1",
+			text :"---"
+		}));	
+	invocarJSONServiceAction("obtieneMDS",{
+							 'usuarioGerenteId' : $("#select_gerenteMD").val() , 
+							 'usuarioJefeId': $("#select_jefes_fotos").val()  },
+			'response',
+			function() {
+				//Funcion de error
+				cargaMensajeModal("Obtiene MD´S","Error en obtener la información", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+			},
+			function() {
+				//Función al finalizar
+				cierraLoading();
+			});
+
+	response = function(data){
+		// recibir lista de MDS
+		if(data.codigo == 400){
+			cargaMensajeModal("Obtiene MD´S",data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+		}else{
+
+			objArrayMDs = data;
+			ARRAYOBJMDS =objArrayMDs.mds;
+			if(objArrayMDs.mds != undefined){
+					objArrayMDs.mds.forEach(function(item, i){
+					
+					 $('#select_MD').append($('<option>', {
+					        value: item.mdsId,
+					        text : item.mdsId + " - "+ item.nombreMd 
+					    }));
+				});
+				
+				setTimeout(function(){ $('#select_MD').trigger('chosen:updated'); },100);
+			}else{
+				cargaMensajeModal("Obtiene MD´S",data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+			}
+			
+		}
+		
+	}
+}
+
+function superficiePreconsulta(element){
+	cargaLoading();
+	invocarJSONServiceAction("superficiePreconsulta",{
+		 'mdId': element.value },
+		 'responsePreConsulta',
+	function() {
+		//Funcion de error
+		cargaMensajeModal("Consulta MD's","Error en obtener la información", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+	},
+	function() {
+		//Función al finalizar
+		cierraLoading();
+	});
+	
+	responsePreConsulta = function(data){
+		if(data.codigo == 400){
+			cargaMensajeModal("Consulta MD's",data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+		}else{
+			if(data.aplicaPredial == 1){
+				aplicaPredial = true;
+				$("#div_predial").show();
+			}else{
+				aplicaPredial = false;
+				$("#div_predial").hide();
+			}
+			
+		}
+	}
+}
+
+function consultaSuperficieMD(element){	
+	cargaLoading(); 
+	MDID = element.value;
+	
+	invocarJSONServiceAction("consultaSuperficie",{
+							 'mdId': element.value },
+			'response',
+			function() {
+				//Funcion de error
+				cargaMensajeModal("Consulta MD's","Error en obtener la información", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+			},
+			function() {
+				//Función al finalizar
+				cierraLoading();
+			});
+
+	response = function(data){
+		// recibir lista de MDS
+		if(data.codigo == 400){
+			cargaMensajeModal("Consulta MD's",data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+		}else if( data.codigo == 403){
+			$("#botonMd").hide();
+			$("#botonesMd").show();
+			$("#contenidoMd").show();
+			elemMD = {
+				frente : 0,
+				fondo: 0,
+				total: 0,
+				imgLateral1: "",
+				fechaLateral1: "",
+				imgFrontal: "",
+				fechaFrontal: "",
+				imgLateral2: "",
+				fechaLateral2: "",
+				imgEnt1: "",
+				fechaEnt1: "",
+				imgEnt2: "",
+				fechaEnt2: "",
+				imgEnt3: "",
+				fechaEnt3: "",
+				esquina: 0,
+				imgPredial: "",
+				fechaPredial: ""
+				}
+			elemMDAux = Object.assign({},elemMD);
+			limpiaModalFotos()
+					
+		}else{
+			
+			/* Datos de la superficie */
+			$("#botonMd").hide();
+			$("#botonesMd").show();
+			$("#contenidoMd").show();
+			
+			if(data.niveles != undefined) {
+				 superficie = undefined; // nivel [2]
+				 esquina = { valorreal : 0 }; // nivel[0]
+				 frente = { valorreal : 0 } // nivel[1]
+				data.niveles.forEach(function(item, i){
+					if(item.nombrenivel == "ESQUINA"){
+						esquina = item; 
+					}else if(item.nombrenivel.split(" ")[0] == "FRENTE"){
+						frente = item;
+					}else if(item.imgFrenteId != undefined){
+						superficie = item;
+					}
+				});
+					
+				$("#frenteMd").val(frente.valorreal);
+				$("#profundidadMd").val(superficie.fondo);
+				$("#tamanioTotalMd").html(superficie.valorreal + " mts<sup>2</sup>");
+				if(esquina.valorreal == 1){
+					$('#esquina').prop('checked', true);
+				}else if(esquina.valorreal == 0){
+					$('#esquina').prop('checked', false);
+				}
+				
+				if(superficie.imgFrenteId != ""){
+					$("#vistaFrontalMd").attr("src", superficie.imgFrenteId);
+					$("#vistaFrontalMd").show();
+					$("#0").show();
+					$("#subidaFrontal").hide();
+				}
+				if(superficie.fecha_fente != ""){
+				$("#fechaVistaFrontal").text(new Date(superficie.fecha_fente.split(" ")[0].replaceAll('-', '/')).format("dd/mm/yyyy"));
+				$("#horaVistaFrontal").text(superficie.fecha_fente.split(" ")[1]);
+				}
+				
+				if(superficie.imgLateral1Id != ""){
+					$("#vistaLateral1Md").attr("src", superficie.imgLateral1Id);
+					$("#vistaLateral1Md").show();
+					$("#1").show();
+					$("#subidaLateral1").hide();
+				}
+				if(superficie.fecha_lat1 != ""){
+					$("#fechaVistaLateral1").text(new Date(superficie.fecha_lat1.split(" ")[0].replaceAll('-', '/')).format("dd/mm/yyyy"));
+					$("#horaVistaLateral1").text(superficie.fecha_lat1.split(" ")[1]);
+				}
+								
+				if(superficie.imgLateral2Id != ""){
+					$("#vistaLateral2Md").attr("src", superficie.imgLateral2Id);
+					$("#vistaLateral2Md").show();
+					$("#2").show();
+					$("#subidaLateral2").hide();
+				}
+				if(superficie.fecha_lat2 != ""){
+					$("#fechaVistaLateral2").text(new Date(superficie.fecha_lat2.split(" ")[0].replaceAll('-', '/')).format("dd/mm/yyyy"));
+					$("#horaVistaLateral2").text(superficie.fecha_lat2.split(" ")[1]);
+				}				
+				
+				if(superficie.imgEnt1 != ""){
+					$("#vistaEntorno1Md").attr("src", superficie.imgEnt1);
+					$("#vistaEntorno1Md").show();
+					$("#3").show();
+					$("#subidaEnt1").hide();
+				}
+				if(superficie.fecha_ent1 != ""){
+					$("#fechaVistaEntorno1").text(new Date(superficie.fecha_ent1.split(" ")[0].replaceAll('-', '/')).format("dd/mm/yyyy")); 
+					$("#horaVistaEntorno1").text(superficie.fecha_ent1.split(" ")[1]);
+				}				
+				
+				if(superficie.imgEnt2 != ""){
+					$("#vistaEntorno2Md").attr("src", superficie.imgEnt2);
+					$("#vistaEntorno2Md").show();
+					$("#4").show();
+					$("#subidaEnt2").hide();
+				}
+				if(superficie.fecha_ent2){
+					$("#fechaVistaEntorno2").text(new Date(superficie.fecha_ent2.split(" ")[0].replaceAll('-', '/')).format("dd/mm/yyyy"));
+					$("#horaVistaEntorno2").text( superficie.fecha_ent2.split(" ")[1]);
+				}				
+				
+				if(superficie.imgEnt3 != ""){
+					$("#vistaEntorno3Md").attr("src", superficie.imgEnt3);
+					$("#vistaEntorno3Md").show();
+					$("#5").show();
+					$("#subidaEnt3").hide();
+				}
+				if(superficie.fecha_ent3 != ""){
+					$("#fechaVistaEntorno3").text(new Date(superficie.fecha_ent3.split(" ")[0].replaceAll('-', '/')).format("dd/mm/yyyy"));
+					$("#horaVistaEntorno3").text(superficie.fecha_ent3.split(" ")[1]);
+				}				
+
+				if(superficie.imgPredial != ""){
+					$("#img_predial").attr("src", superficie.imgPredial);
+					$("#img_predial").show();
+					$("#6").show();
+					$("#subidaPredial").hide();
+				}
+				if(superficie.fecha_pred != ""){
+				$("#fechaVistaPredial").text(new Date(superficie.fecha_pred.split(" ")[0].replaceAll('-', '/')).format("dd/mm/yyyy"));
+				$("#horaVistaPredial").text(superficie.fecha_pred.split(" ")[1]);
+				}
+				
+				elemMD = {
+				frente : frente.valorreal,
+				fondo: superficie.fondo,
+				total: superficie.valorreal ,
+				imgLateral1: superficie.imgLateral1Id,
+				fechaLateral1: superficie.fecha_lat1,
+				imgFrontal: superficie.imgFrenteId,
+				fechaFrontal: superficie.fecha_fente,
+				imgLateral2: superficie.imgLateral2Id,
+				fechaLateral2: superficie.fecha_lat2,
+				imgEnt1: superficie.imgEnt1,
+				fechaEnt1: superficie.fecha_ent1,
+				imgEnt2: superficie.imgEnt2,
+				fechaEnt2: superficie.fecha_ent2,
+				imgEnt3: superficie.imgEnt3,
+				fechaEnt3: superficie.fecha_ent3,
+				esquina:esquina.valorreal,
+				imgPredial: superficie.imgPredial,
+				fechaPredial: superficie.fecha_pred
+				}
+				elemMDAux = Object.assign({},elemMD);
+			}else{
+				cargaMensajeModal("Consulta MD's",data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+			}
+			
+		}
+		
+	}
+}
+
+var tamanio=60;
+var grados=0;
+function rotar(valor){
+	if(valor==0){
+		grados=grados-90;
+		$('#imageModal').css('-webkit-transform','rotate('+grados+'deg)');
+	}
+	if(valor==1){
+		grados=grados+90;
+		$('#imageModal').css('-webkit-transform','rotate('+grados+'deg)');
+	}
+	if(valor==2){ //imagen en posicion inicial
+		grados=0;
+		$('#imageModal').css('-webkit-transform','rotate('+grados+'deg)');
+	}
+	if(valor==3){
+		if(tamanio<140){
+			tamanio=tamanio+20;
+		}
+		$('#imageModal').css('width',tamanio+'%');
+	}
+	if(valor==4){
+		if(tamanio>60){
+			tamanio=tamanio-20;
+		}
+		$('#imageModal').css('width',tamanio+'%');
+	}
+}
+
+function fnSubeFoto(){	
+	cargaLoading();
+	var fecha = new Date().format("dd/mm/yyyy H:MM:ss");
+	var fechaAux = new Date().format("yyyy-mm-dd H:MM:ss");
+	
+	var f ;
+
+			var f ;
+			var type = BASE64Upload.split(";")[0].split("/")[1];
+			var nom =  MDID + dropTipo.split("-")[0]; 
+		
+			invocarJSONServiceAction("subeArchivo", 
+					{	'tipoServicio': 2,
+						'mdId': MDID,
+						'nombreArchivo': nom,
+						'archivo' : BASE64Upload,
+						'formato' :type,
+						'tipoArchivo': 1,
+						'fecha': fecha,
+						'monto': '',
+						'acc': ''
+					},
+					'respSubeArchivo', 
+					function() {},
+					function() {});
+			
+			respSubeArchivo = function(data){			
+				
+				if(data.codigo != 200){	
+					cargaMensajeModal('CARGA DE IMAGEN', 'Error al guardar la imagen', TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR);
+				} else {
+					cargaMensajeModal('CARGA DE IMAGEN', 'Carga de imagen exitoso', TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_EXITO, null);
+					url = data.url
+					
+					switch(dropTipo.split("-")[1]){
+					
+					case "0" :						
+						$("#vistaLateral1Md").attr("src", url);
+						$("#vistaLateral1Md").show();
+						$("#0").show();
+						$("#subidaLateral1").hide();
+						
+						$("#fechaVistaLateral1").text(fecha.split(" ")[0]);
+						$("#horaVistaLateral1").text(fecha.split(" ")[1]);
+						elemMD.imgLateral1 = url;
+						elemMD.fechaLateral1 = fechaAux;
+						break;
+						
+					case "1": 
+						$("#vistaFrontalMd").attr("src", url);
+						$("#vistaFrontalMd").show();
+						$("#1").show();
+						$("#subidaFrontal").hide();
+						
+						$("#fechaVistaFrontal").text(fecha.split(" ")[0]);
+						$("#horaVistaFrontal").text(fecha.split(" ")[1]);
+						elemMD.imgFrontal = url;
+						elemMD.fechaFrontal = fechaAux;
+						break;
+						
+					case "2": 
+						$("#vistaLateral2Md").attr("src", url);
+						$("#vistaLateral2Md").show();
+						$("#2").show();
+						$("#subidaLateral2").hide();
+						
+						$("#fechaVistaLateral2").text(fecha.split(" ")[0]);
+						$("#horaVistaLateral2").text(fecha.split(" ")[1]);
+						elemMD.imgLateral2 = url;
+						elemMD.fechaLateral2 = fechaAux;
+						break;
+						
+					case "3": 
+						$("#vistaEntorno1Md").attr("src", url);
+						$("#vistaEntorno1Md").show();
+						$("#3").show();
+						$("#subidaEnt1").hide();
+						
+						$("#fechaVistaEntorno1").text(fecha.split(" ")[0]);
+						$("#horaVistaEntorno1").text(fecha.split(" ")[1]);
+						elemMD.imgEnt1 = url;
+						elemMD.fechaEnt1 = fechaAux;
+						break;
+						
+					case "4": 
+						$("#vistaEntorno2Md").attr("src", url);
+						$("#vistaEntorno2Md").show();
+						$("#4").show();
+						$("#subidaEnt2").hide();
+						
+						$("#fechaVistaEntorno2").text(fecha.split(" ")[0]);
+						$("#horaVistaEntorno2").text(fecha.split(" ")[1]);
+						elemMD.imgEnt2 = url;
+						elemMD.fechaEnt2 = fechaAux;
+						break;
+						
+					case "5": 
+						$("#vistaEntorno3Md").attr("src", url);
+						$("#vistaEntorno3Md").show();
+						$("#5").show();
+						$("#subidaEnt3").hide();
+						
+						$("#fechaVistaEntorno3").text(fecha.split(" ")[0]);
+						$("#horaVistaEntorno3").text(fecha.split(" ")[1]);
+						elemMD.imgEnt3 = url;
+						elemMD.fechaEnt3 = fechaAux;
+						break;
+						
+					case "6": 
+						$("#img_predial").attr("src", url);
+						$("#img_predial").show();
+						$("#6").show();
+						$("#subidaPredial").hide();
+						
+						$("#fechaVistaPredial").text(fecha.split(" ")[0]);
+						$("#horaVistaPredial").text(fecha.split(" ")[1]);
+						elemMD.imgPredial = url;
+						elemMD.fechaPredial = fechaAux;
+						break;
+						
+					}
+				}
+				cierraLoading();
+			}		
+}
+
+
+
+function recalculaTotal(value, tipo){
+	if( tipo == 1){
+		value.value
+		elemMD.frente =  value.value
+		elemMD.total = elemMD.frente  * elemMD.fondo;
+		$("#tamanioTotalMd").html(elemMD.total + " mts<sup>2</sup>");
+	} else if( tipo == 2){
+		elemMD.fondo =  value.value
+		elemMD.total = elemMD.frente  * elemMD.fondo;
+		$("#tamanioTotalMd").html(elemMD.total + " mts<sup>2</sup>");
+	}
+}
+
+function guardaFotosMD(){
+	invocarJSONServiceAction("guardaSuperficie", 
+			{	
+				'mdId': MDID,
+				'frente': elemMD.frente,
+				'fondo': elemMD.fondo,
+				'latitud': " ",
+				'longitud': " ",
+				'imgPredial': elemMD.imgPredial,
+				'fechaPredial': elemMD.fechaPredial,
+				'imgFrenteId': elemMD.imgFrontal,
+				'imgEntorno1Id': elemMD.imgLateral1,
+				'imgEntorno2Id': elemMD.imgLateral2,
+				'imgEnt1': elemMD.imgEnt1,
+				'imgEnt2': elemMD.imgEnt2,
+				'imgEnt3': elemMD.imgEnt3,
+				'fechaFrente': elemMD.fechaFrontal,
+				'fechaEntorno1': elemMD.fechaLateral1, 
+				'fechaEntorno2': elemMD.fechaLateral2,
+				'fechaEnt1': elemMD.fechaEnt1,
+				'fechaEnt2': elemMD.fechaEnt2,
+				'fechaEnt3': elemMD.fechaEnt3,
+				'numTelefono': " ",
+				'versionApp': " ",
+				'esquina': elemMD.esquina,
+				'drenaje': 0
+			},
+			'respSubeArchivo', 
+			function() {},
+			function() {});
+	
+	respSubeArchivo = function(data){
+		
+		cierraLoading();
+		if(data.codigo != 200){	
+			cargaMensajeModal('GUARDAR FOTOS MD', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ERROR);
+		} else {
+			cargaMensajeModal('GUARDAR FOTOS MD', data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_EXITO,cierraModalFotos);
+		}
+	}
+
+}
+
+function limpiaModalFotos(){
+	$('#esquina').prop('checked', false);
+	$('#profundidadMd').val("")
+	$('#frenteMd').val("")
+	$('#tamanioTotalMd').val("")
+	$("#vistaLateral1Md").attr("src", "img/cargando_imagen.gif");
+	$("#vistaLateral1Md").hide();
+	$("#0").hide();
+	$("#subidaLateral1").show();
+	
+	$("#fechaVistaLateral1").text("----");
+	$("#horaVistaLateral1").text("----");
+	 
+	$("#vistaFrontalMd").attr("src", "img/cargando_imagen.gif");
+	$("#vistaFrontalMd").hide();
+	$("#1").hide();
+	$("#subidaFrontal").show();
+	
+	$("#fechaVistaFrontal").text("----");
+	$("#horaVistaFrontal").text("----");
+	 
+	$("#vistaLateral2Md").attr("src", "img/cargando_imagen.gif");
+	$("#vistaLateral2Md").hide();
+	$("#2").hide();
+	$("#subidaLateral2").show();
+	
+	$("#fechaVistaLateral2").text("----");
+	$("#horaVistaLateral2").text("----");
+	 
+	$("#vistaEntorno1Md").attr("src", "img/cargando_imagen.gif");
+	$("#vistaEntorno1Md").hide();
+	$("#3").hide();
+	$("#subidaEnt1").show();
+	
+	$("#fechaVistaEntorno1").text("----");
+	$("#horaVistaEntorno1").text("----");
+	  
+	$("#vistaEntorno2Md").attr("src", "img/cargando_imagen.gif");
+	$("#vistaEntorno2Md").hide();
+	$("#4").hide();
+	$("#subidaEnt2").show();
+	
+	$("#fechaVistaEntorno2").text("----");
+	$("#horaVistaEntorno2").text("----");
+	 
+	$("#vistaEntorno3Md").attr("src", "img/cargando_imagen.gif");
+	$("#vistaEntorno3Md").hide();
+	$("#5").hide();
+	$("#subidaEnt3").show();
+	
+	$("#fechaVistaEntorno3").text("----");
+	$("#horaVistaEntorno3").text("----");
+	
+	$("#img_predial").attr("src", "img/cargando_imagen.gif");
+	$("#img_predial").hide();
+	$("#6").hide();
+	$("#subidaPredial").show();
+	
+	$("#horaVistaPredial").text("----");
+	$("#horaVistaPredial").text("----");
+}
+
+function cierraModalFotos(){
+	$('#modal_fotos').modal('hide');
+}
+
+function verificaCambiosModal(elem){
+	if(elem == 1){
+		if(JSON.stringify(elemMD) != JSON.stringify(elemMDAux)){
+			cargaMensajeModal('GUARDAR FOTOS MD', "Existen cambios sin guardar, ¿Desea continuar?", TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, limpiaModalFotosSelect);
+		}else{
+		
+		}
+	}else if(elem == 0){
+		if(JSON.stringify(elemMD) != JSON.stringify(elemMDAux)){
+		cargaMensajeModal('GUARDAR FOTOS MD', "Existen cambios sin guardar, ¿Desea continuar?", TIPO_MENSAJE_SI_NO, TIPO_ESTATUS_ALERTA, cierraModalFotos); 
+		}else{
+			$('#modal_fotos').modal('hide');
+		}
+	}
 }

@@ -325,6 +325,31 @@ public class ManejadorArchivosAction
 						respuesta = response.body().string();
 						respuesta = setURLToResponse(respuesta,jsonUrl );						
 					}
+				} else if(tipoServicio.equals("2")) {
+					builder = new Builder()
+							.add("mdId", mdId)
+							.add("nombreArc", nombreArchivo)
+							.add("archivo", archivo)
+							.add("formato", formato)
+							.add("tipoArchivo", tipoArchivo)
+							.add("fecha", fecha)
+							.add("usuarioId", numeroEmpleado);
+						
+						body = builder.build();
+						request = new Request.Builder()
+							.url(sp.getPropiedad("cloudinarySet"))
+							.post(body)
+							.build();
+						
+						response = client.newCall(request).execute();
+						respuesta = response.body().string();
+						
+						String url = obtieneURL(respuesta);
+						
+						response = client.newCall(request).execute();
+						respuesta = response.body().string();
+						respuesta = setURLToResponse(respuesta, url);
+						
 				} else {
 					if(monto.isEmpty())
 						monto = "''";

@@ -500,7 +500,33 @@
     	method = "evaluaLevantamiento">
      </action>
     
-    
+    <!-- GUARDA ANDROID ID -->
+	  <action name ="guardaIdAndroid" 
+    	class = "com.tiendas.neto.action.IdAndroAction" 
+    	method = "execute">
+     </action>
+
+    <!-- MODAL FOTOS MD -->
+	  <action name ="obtieneMDS" 
+    	class = "com.tiendas.neto.action.SubeFotosMDAction" 
+    	method = "obtieneMDS">
+     </action>
+     
+     <action name ="consultaSuperficie" 
+    	class = "com.tiendas.neto.action.SubeFotosMDAction" 
+    	method = "consultaSuperficie">
+     </action>
+     
+     <action name ="guardaSuperficie" 
+    	class = "com.tiendas.neto.action.SubeFotosMDAction" 
+    	method = "guardaSuperficie">
+     </action>
+     
+     <action name ="superficiePreconsulta" 
+    	class = "com.tiendas.neto.action.SubeFotosMDAction" 
+    	method = "superficiePreconsulta">
+     </action>
+     
 	</package>
 	
 </struts>

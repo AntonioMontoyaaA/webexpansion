@@ -73,6 +73,8 @@ public class Login  extends HttpServlet {
     				try {
     					sesion = request.getSession();
     					sesion.setAttribute("usr", usuario);
+    					sesion.setAttribute("editaImei", false);
+    					sesion.setAttribute("subeFotosMD", false);
     				} catch (Exception e) {
     					e.printStackTrace();
     				}
@@ -86,6 +88,12 @@ public class Login  extends HttpServlet {
     							MENUVOKSE.put("PRIVILEGIO.SUBMENU.VOKSE."+permiso.getFIMODULOID()+","+permiso.getFISUBMODULO(), true);							
     						}
     					}
+    					if(perfiles.getPerfilid() == 509) {
+    						sesion.setAttribute("editaImei", true);
+    					}
+    					if(perfiles.getPerfilid() == 510) {
+    						sesion.setAttribute("subeFotosMD", true);
+    					}
     				}
 
     				String jspredirect = "";
@@ -97,7 +105,7 @@ public class Login  extends HttpServlet {
     					jspredirect = "/Expansion/tablero";
     				}
 
-    				try {
+    				try {    					
     					sesion.setAttribute("permisos", MENUVOKSE);
     				} catch (Exception e) {
     					e.printStackTrace();

@@ -1,5 +1,13 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet" href="${pageContext.request.contextPath}/css/dropzone/dropzone.css" />
+ <link rel="stylesheet" href="${pageContext.request.contextPath}/css/utiles/modalImages.css" />
+ <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css" />
+ 
+</head>
+
 <nav class="navbar justify-content-between navbar-expand-lg navbar_fondo navbar_borde">
 	<span class="navbar-brand"> <img
 		src="img/logoBlanco.png" style="width:80px;">
@@ -74,9 +82,11 @@
 		data-content="<div>
 		 <div class='t12 negrita azul titulo_avisos'>Opciones</div>
 		 <div id='editaPerfil' class='cursor t12 negrita azul opcionPerfil' style='padding:5px 10px;' onclick='editaPerfil()'>Edita perfil </div>
+		 <c:if test= "${editaImei}"> <div id='editaIMEI' class='cursor t12 negrita azul opcionPerfil' style='padding:5px 10px;' onclick='modalID()'>Cambiar IMEI</div></c:if>
+		 <c:if test= "${subeFotosMD}"> <div id='subirFotos' class='cursor t12 negrita azul opcionPerfil' style='padding:5px 10px;' onclick='subirFotosMD()'>Subir Fotos MD</div></c:if>
 		 <form id='logout' action='Logout'>
 		 <div id='salir' class='cursor t12 negrita azul opcionPerfil' style='padding:5px 10px; margin-bottom:3px;' onclick='salir()'>Cerrar Sesión </div></form>
-		 </div>" >
+		 </div>">
 		 
 		 
 		 <c:choose> 
@@ -194,7 +204,355 @@
   		</div>
 	</div>
 
+<!-- MODAL EDITAR IMEI -->
+<div class="modal fade" id="modal_id" >
+  <div class="modal-dialog" role="document" style= "top: 25%;">
+    <div class="modal-content" style="background:transparent;">
+      <div  class="modal-body px-0 py-0" id="cuerpo_modal">
+     
+
+ 		<div class="col-12 justify-content-center d-flex" style="background-color: #071b36; color: #FFFFFF"><span class="my-3 negrita ">CAMBIAR IMEI</span></div>
+	
+  		<div class="espacio"></div>
+	 	<div class="contentImei px-3 py-3" >
+					
+					<div id="comboMotivos" style="padding-bottom: 15px;" class="row mx-0">
+					<span class="etiqueta negrita px-0 col-2">GERENTE:</span>
+				      	<select style="width: 251px; background: transparent;" id="select_employeeMDGere" class="chosen-select s_drop col-10">
+				      		<option class="drop_option" value="0">Seleccionar gerente</option>
+				      	</select>
+				     </div>
+				     
+				     <div id="comboMotivos" style="padding-bottom: 15px;" class="row mx-0">
+				     	<span class="etiqueta negrita px-0 col-2">JEFE:</span>
+				      	<select style="width: 251px; background: transparent;" id="select_employeeMDJefes"  class="chosen-select s_drop col-10 ">
+				      		<option class="drop_option" value="0">Sin jefes</option>
+				      	</select>
+				     </div>
+				     <div class="col-12 mx-0 row px-0">
+				     <span class="etiqueta negrita col-2 px-0">IMEI:</span>
+					     <div class="col-10 px-0">
+	   		   				<input type="text" class="w-100" maxlength="100" id="imei_Id" autocomplete = "off">
+	   		   			</div>
+				     </div>
+   		   
+		  <div class="row mt-4">
+		        	<div class="col-6 center"><button type="button" id="guardarImei" class="btn boton_datosPerfil t14 btn_modal" data-dismiss="modal">Guardar</button></div>   
+		     		<div class="col-6 center"><button type="button" class="btn boton_datosPerfil t14 btn_modal" data-dismiss="modal">Cerrar</button></div>
+		   </div>
+		</div>
+				
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- SUBIR FOTOS MD-->
+<div class="modal fade" id="modal_fotos" data-backdrop="static" >
+  <div class="modal-dialog-centered modal-dialog" style = "min-width: 1000px !important; margin: 1.75rem auto;">
+    <div class="modal-content" style="background:transparent;">
+      <div  class="modal-body px-0 py-0" id="cuerpo_modal" >
+     
+
+ 		<div class="col-12 justify-content-center d-flex" style="background-color: #071b36; color: #FFFFFF;">
+ 		<span class="my-3 negrita ">SUBIR FOTOS MD</span></div>
+	
+	 	<div class="content px-3 py-4" >		
+		 	<div class="row mx-0 px-0 col-12">
+		 		<div id="comboMotivos" style="padding-bottom: 15px;" class="row mx-0 col">
+					<span class="etiqueta negrita t16 px-0 col-3 ">GERENTE:</span>
+			      	<select style="background: transparent; font-size: 16px;" id="select_gerenteMD" class="chosen-select s_drop col-9" onchange="cargaMDXUsuario()" onclick="verificaCambiosModal(1)">
+			      		<option class="drop_option" value="0">Seleccionar gerente</option>
+			      	</select>
+			     </div>
+			     
+			     <div id="comboMotivos" style="padding-bottom: 15px;" class="row mx-0 col">
+			     	<span class="etiqueta negrita t16 px-0 col-2">JEFE:</span>
+			      	<select style="background: transparent; font-size: 16px;" id="select_jefes_fotos"  class="chosen-select s_drop col-10 " onclick="verificaCambiosModal(1)">
+			      		<option class="drop_option" value="0">Sin jefes</option>
+			      	</select>
+			     </div>
+			     
+			      <div id="comboMotivos" style="padding-bottom: 15px; max-width: 300px;" class="row mx-0 col px-0">
+			     	<span class="etiqueta negrita  t16 px-0 mr-2">MD:</span>
+			      	<select style="background: transparent; font-size: 16px;" id="select_MD"  class="chosen-select s_drop col-9 px-0" onclick="verificaCambiosModal(1)">
+			      		<option class="drop_option" value="0">Sin MD's</option>
+			      	</select>
+			     </div>
+		 	</div>
+		
+			
+   		   <div class="col-lg-12 col-12 " id= "contenidoMd" style="display:none" >
+				<div class="row divs_p galeria_main">
+					<div class="div_galeria col-lg-12 menupr_estilos fblanco">
+						<div class="row titulo_seccion justify-content-end ">
+<!-- 							<div class="col-lg-8 col-6"> -->
+<!-- 								<span class="titulo_detalle_md_20">SUPERFICIE</span> -->
+<!-- 							</div> -->
+							<div class="mr-4 mt-2">
+								<input type="checkbox" class="form-check-input esquina" id="esquina" >
+    							<label class="contenido_cajas_20 esquina" for="esquina" style = "color: #585555">Local en esquina</label>
+							</div>
+<!-- 							<div class="col-lg-2 col-2 text-right"> -->
+<!-- 								<a id="superficieTip" tabindex="0" class="question_mark b_tip" -->
+<!-- 										role="" data-toggle="popover" data-trigger="focus" -->
+<!-- 										data-placement="bottom" data-content=""> <img -->
+<!-- 										style="cursor: pointer;" src="img/question.png"> -->
+<!-- 									</a> -->
+<!-- 							</div> -->
+						</div>
+						<div class="row div_header_sub mb-3" id="modulo3Datos">
+							<div class="col-lg-4">
+								<span class="titulo_detalle_md_20 etiqueta negrita t16 ">FRENTE</span>&nbsp;&nbsp;&nbsp;
+								<input id="frenteMd" type="text" class="text_edita" style ="width: 100px" onkeyup = "recalculaTotal(this, 1)"/> mts</span>
+							</div>
+							<div class="col-lg-4">
+								<span class="titulo_detalle_md_20 etiqueta negrita t16 ">PROFUNDIDAD</span>&nbsp;&nbsp;&nbsp;
+								<input id="profundidadMd" type="text" class="text_edita" style ="width: 56px" onkeyup = "recalculaTotal(this, 2)"/> mts</span>
+							</div>
+							<div class="col-lg-4">
+								<span class="titulo_detalle_md_20 etiqueta negrita t16 ">SUPERFICIE TOTAL</span>&nbsp;&nbsp;&nbsp;
+								<span id="tamanioTotalMd" class="contenido_cajas_20 sangria_cuerpo">---</span>
+							</div>
+						</div>
+						<div  style= "overflow-y: auto; overflow-x: hidden; max-height: 470px" >
+						<div class="row div_header_subs">
+							
+							<div class="col-lg-4">
+								<div class="col-lg-12" style="padding:0;">
+									<span class="contenido_cajas_20">LATERAL 1</span>
+								</div>
+								<div class="col-lg-12" style="padding:0;">
+										<img class="imagenModal" id="vistaLateral1Md" alt="LATERAL 1"
+										style="width: 100%; max-height: 170px; display: none;" src="img/cargando_imagen.gif"
+										onclick="modalImage(this); " />
+										<img class = "img_edit" alt="" src="img/rechaza_mark.png" onclick="" id="0">
+										<div class="pb-1 pt-1"  style="height: 170px;" id="subidaLateral1">
+											<div  file="fileLateral1"  class="drop_file w-100" id= "_lateral1-0" ></div>
+											<input type="file" class="var_pdfUpload" file="fileLateral1" name="del formato de validación"  accept="image/*" style="display: none;">
+										</div>
+								</div>
+								<div class="row div_bottom">
+									<div class="col-lg-6" style="text-align: right;">
+										<span id="fechaVistaLateral1" class="footerDetalleMd t11">---</span>
+									</div>
+									<div class="col-lg-6" style="text-align: left;">
+										<span id="horaVistaLateral1" class="footerDetalleMd t11">---</span>
+									</div>
+								</div>
+							</div>
+							
+							<div class="col-lg-4">
+								<div class="col-lg-12" style="padding:0;">
+									<span class="contenido_cajas_20">VISTA FRONTAL</span>
+								</div>
+								<div class="col-lg-12" style="padding:0;">
+									<img class="imagenModal" id="vistaFrontalMd"
+										alt="VISTA FRONTAL" style="width: 100%; max-height: 170px; display: none;"
+										src="img/cargando_imagen.gif" onclick="modalImage(this)" />
+									<img class = "img_edit" alt="" src="img/rechaza_mark.png" onclick="" id="1">
+									<div class="pb-1 pt-1"  style="height: 170px;" id = "subidaFrontal" >
+											<div file="fileFrontal" class="drop_file w-100" id= "_frontal-1" ></div>
+											<input type="file" class="var_pdfUpload" file="fileFrontal" name="del formato de validación"  accept="image/*" style="display: none;">
+										</div>
+								</div>
+								<div class="row div_bottom">
+									<div class="col-lg-6" style="text-align: right;">
+										<span id="fechaVistaFrontal" class="footerDetalleMd t11">---</span>
+									</div>
+									<div class="col-lg-6" style="text-align: left;">
+										<span id="horaVistaFrontal" class="footerDetalleMd t11">---</span>
+									</div>
+								</div>
+							</div>
+							
+							<div class="col-lg-4">
+								<div class="col-lg-12" style="padding:0;">
+									<span class="contenido_cajas_20">LATERAL 2</span>
+								</div>
+								<div class="col-lg-12" style="padding:0;">
+									<img class="imagenModal" id="vistaLateral2Md" alt="LATERAL 2"
+										style="width: 100%; max-height: 170px; display: none;" src="img/cargando_imagen.gif"
+										onclick="modalImage(this)" />
+									<img class = "img_edit" alt="" src="img/rechaza_mark.png" onclick="" id="2" style ="display: none">
+									<div class="pb-1 pt-1"  style="height: 170px;" id="subidaLateral2">
+											<div file="fileLateral2" class="drop_file w-100" id= "_lateral2-2" ></div>
+											<input type="file" class="var_pdfUpload" file="fileLateral2" name="del formato de validación"  accept="image/*" style="display: none;">
+										</div>
+								</div>
+								<div class="row div_bottom">
+									<div class="col-lg-6" style="text-align: right;">
+										<span id="fechaVistaLateral2" class="footerDetalleMd t11">---</span>
+									</div>
+									<div class="col-lg-6" style="text-align: left;">
+										<span id="horaVistaLateral2" class="footerDetalleMd t11">---</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row div_header_sub my-3">
+							
+							<div class="col-lg-4">
+								<div class="col-lg-12" style="padding:0;">
+									<span class="contenido_cajas_20">ENTORNO 1</span>
+								</div>
+								<div class="col-lg-12" style="padding:0;">
+									<img class="imagenModal" id="vistaEntorno1Md" alt="ENTORNO 1"
+										style="width: 100%; max-height: 170px; display:none;" src="img/cargando_imagen.gif"
+										onclick="modalImage(this)" />
+									<img class = "img_edit" alt="" src="img/rechaza_mark.png" onclick="" id="3" style ="display: none">
+									<div class="pb-1 pt-1"  style="height: 170px;" id= "subidaEnt1" >
+											<div file="entorno1" class="drop_file w-100" id= "_entorno1-3" ></div>
+											<input type="file" class="var_pdfUpload" file="entorno1" name="del formato de validación"  accept="image/*" style="display: none;">
+										</div>
+								</div>
+								<div class="row div_bottom">
+									<div class="col-lg-6" style="text-align: right;">
+										<span id="fechaVistaEntorno1" class="footerDetalleMd t11">---</span>
+									</div>
+									<div class="col-lg-6" style="text-align: left;">
+										<span id="horaVistaEntorno1" class="footerDetalleMd t11">---</span>
+									</div>
+								</div>
+							</div>
+							
+							<div class="col-lg-4">
+								<div class="col-lg-12" style="padding:0;">
+									<span class="contenido_cajas_20">ENTORNO 2</span>
+								</div>
+								<div class="col-lg-12" style="padding:0;">
+									<img class="imagenModal" id="vistaEntorno2Md"
+										alt="ENTORNO 2" style="width: 100%; max-height: 170px; display: none"
+										src="img/cargando_imagen.gif" onclick="modalImage(this)" />
+									<img class = "img_edit" alt="" src="img/rechaza_mark.png" onclick="" id="4" style ="display: none">
+									<div class="pb-1 pt-1"  style="height: 170px;" id= "subidaEnt2"  >
+											<div file="entorno2" class="drop_file w-100" id= "_entorno2-4" ></div>
+											<input type="file" class="var_pdfUpload" file="entorno2" name="del formato de validación"  accept="image/*" style="display: none;">
+										</div>
+								</div>
+								<div class="row div_bottom">
+									<div class="col-lg-6" style="text-align: right;">
+										<span id="fechaVistaEntorno2" class="footerDetalleMd t11">---</span>
+									</div>
+									<div class="col-lg-6" style="text-align: left;">
+										<span id="horaVistaEntorno2" class="footerDetalleMd t11">---</span>
+									</div>
+								</div>
+							</div>
+							
+							<div class="col-lg-4">
+								<div class="col-lg-12" style="padding:0;">
+									<span class="contenido_cajas_20">ENTORNO 3</span>
+								</div>
+								<div class="col-lg-12" style="padding:0;">
+									<img class="imagenModal" id="vistaEntorno3Md" alt="ENTORNO 3"
+										style="width: 100%; max-height: 170px; display: none;" src="img/cargando_imagen.gif"
+										onclick="modalImage(this)" />
+									<img class = "img_edit" alt="" src="img/rechaza_mark.png" onclick="" id="5" style ="display: none">
+									<div class="pb-1 pt-1"  style="height: 170px;" id= "subidaEnt3" >
+											<div file="entorno3" class="drop_file w-100" id= "_entorno3-5" ></div>
+											<input type="file" class="var_pdfUpload" file="entorno3" name="del formato de validación"  accept="image/*" style="display: none;">
+										</div>
+								</div>
+								<div class="row div_bottom">
+									<div class="col-lg-6" style="text-align: right;">
+										<span id="fechaVistaEntorno3" class="footerDetalleMd t11">---</span>
+									</div>
+									<div class="col-lg-6" style="text-align: left;">
+										<span id="horaVistaEntorno3" class="footerDetalleMd t11">---</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row div_header_sub" id="div_predial" style = "display: none">
+							
+							<div class="col-lg-4">
+								
+							</div>
+							
+							<div class="col-lg-4">
+								<div class="col-lg-12" style="padding:0;">
+									<span class="contenido_cajas_20">PREDIAL</span>
+								</div>
+								<div class="col-lg-12" style="padding:0;">
+									<img class="imagenModal" id="img_predial"
+										alt="" style="width: 100%; max-height: 170px; display: none"
+										src="img/cargando_imagen.gif" onclick="modalImage(this)" />
+									<img class = "img_edit" alt="" src="img/rechaza_mark.png" onclick="" id="6" style ="display: none">
+									<div class="pb-1 pt-1"  style="height: 170px;" id= "subidaPredial"  >
+											<div file="entorno2" class="drop_file w-100" id= "_predial-6" ></div>
+											<input type="file" class="var_pdfUpload" file="entorno2" name="del formato de validación"  accept="image/*" style="display: none;">
+										</div>
+								</div>
+								<div class="row div_bottom">
+									<div class="col-lg-6" style="text-align: right;">
+										<span id="fechaVistaPredial" class="footerDetalleMd t11">---</span>
+									</div>
+									<div class="col-lg-6" style="text-align: left;">
+										<span id="horaVistaPredial" class="footerDetalleMd t1">---</span>
+									</div>
+								</div>
+							</div>
+							
+							<div class="col-lg-4">
+							
+							</div>
+						</div>
+					
+						</div>
+						
+					</div>
+					<!-- <div class="div_galeria_dos">Nuevas fotos</div> -->
+				</div>
+			</div>
+
+		
+		  <div class="row" id= "botonesMd" style="display:none" >
+		        	<div class="col-6 center"><button type="button" id="guardarFotosMD" class="btn boton_datosPerfil t14 btn_modal" >Guardar</button></div>   
+		     		<div class="col-6 center"><button type="button" id="close_btn" class="btn boton_datosPerfil t14 btn_modal" onclick="verificaCambiosModal(0)" >Cerrar</button></div>
+		     		<div class="col-6 center"><button type="button" id="close_fotos" data-dismiss="modal" class="btn boton_datosPerfil t14 btn_modal" style="display: none" >Cerrar</button></div>
+		     		
+		   </div>
+		 	<div class="row" id= "botonMd" >
+		        	
+		     		<div class="col-12 center"><button type="button" id="close_fotos" data-dismiss="modal" class="btn boton_datosPerfil t14 btn_modal" >Cerrar</button></div>
+		     		
+		   </div>
+		   
+		</div>
+				
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modalImages" class="modalImagen" style= "z-index: 9999" >
+ <span class="closeModal">&times;</span>
+	<div class="row" style="width:100%;">
+		<div class="col-6">
+			<div class="t18 blanco negrita" id="captionModal"></div>
+		</div>
+		<div class="col-5 right" style="padding-right:30px;">
+			<input type="button" class="btn desp" id="derecha" onclick="rotar(0);">
+			<input type="button" class="btn desp" id="izquierda" onclick="rotar(1);">
+			<input type="button" class="btn desp" id="aumentar" onclick="rotar(3);">
+			<input type="button" class="btn desp" id="disminuir" onclick="rotar(4);">
+		</div>
+	</div>
+	<div id="contenedor-imagen">
+	<div style="width:100%; height: -webkit-fill-available;"><img class="modal-content rotate_left" id="imageModal" ></div>
+	</div>
+	
+</div>
 <c:forEach var="permiso" items="${permisos}">
 	<input type="hidden" class="permisos_sub" value="${permiso}">
 </c:forEach>	
-
+<script src="${pageContext.request.contextPath}/js/dropzone/dropzone.js"></script>
+<script	src="${pageContext.request.contextPath}/js/dropzone/dateFormat.js"></script>
+<script	src="${pageContext.request.contextPath}/js/utiles/modalImages.js"></script>
+   

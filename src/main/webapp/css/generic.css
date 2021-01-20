@@ -1131,3 +1131,86 @@ font-weight:normal;
     vertical-align: middle;
     padding-bottom: 1rem;
 }
+
+.btn_modal{
+	background-color: hsl(214deg 77% 12%);
+    border: 1px solid hsl(206deg 96% 22%);
+    color: hsl(0deg 0% 77%);
+    padding: 3px 10px;
+}
+
+#captionModal{
+	margin-left:10%;
+}
+
+#imageModal {
+	margin-top:80px;
+            -webkit-transition: all .6s ease-in-out;    /* safari - Chrome*/
+            -moz-transition: all .6s ease-in-out;       /* Firefox */
+            -o-transition: all .6s ease-in-out;         /* Opera */
+            transition: all .6s ease-in-out;
+}
+.popover  {
+	background: #AAB8CB;
+	max-width:400px;
+	padding-bottom:5px;
+}
+
+.question_mark {
+	padding-left:2px;
+    cursor: pointer;
+}
+
+
+.drop_file {
+	border: 2px dashed hsl(0deg 0% 73%);
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    padding: 43% 0px 0px;
+    /* text-align: center; */
+    color: hsl(0deg 0% 73%);
+    background-image: url(../img/icon-upload-file.svg);
+    background-repeat: no-repeat;
+    background-size: 48%;
+    background-position: 50% 35px;
+    font-size: 0.7em;
+    height: 100%;    
+}
+
+.file_unfound {
+    padding: 70px 0px 0px;
+    text-align: center;
+    color: #bbb;
+    background-image: url(../img/iconfinder-download.svg);
+    background-repeat: no-repeat;
+    background-size: 50%;
+    background-position: 46% 8px;
+    font-size: 14px;
+    height: 15%;
+}
+
+.file_upload {
+    padding: 70px 0px 0px;
+    text-align: center;
+    color: #157efb;
+    background-image: url(../img/iconfinder-unfound.svg);
+    background-repeat: no-repeat;
+    background-size: 50%;
+    background-position: 46% 8px;
+    font-size: 14px;
+    height: 15%;
+}
+
+.img_edit{
+	right: 5px;
+    border: 1px solid #f77102;
+    top: 5px;
+    padding: 5px;
+    border-radius: 15px;
+    position: absolute;
+}
+
+.t16{
+	font-size: 16px;
+}

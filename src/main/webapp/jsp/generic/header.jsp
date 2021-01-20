@@ -4,8 +4,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/dropzone/dropzone.css" />
  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/utiles/modalImages.css" />
- <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css" />
- 
 </head>
 
 <nav class="navbar justify-content-between navbar-expand-lg navbar_fondo navbar_borde">

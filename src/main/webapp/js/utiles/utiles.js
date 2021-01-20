@@ -855,7 +855,6 @@ function permisos_perfil(){
 	$('#change').hide;
 	$('#descargaExcelTablero').hide;
 	$('#editaIMEI').hide;
-	$('#')
 
 	var permiso=true;
 	$.each($(".permisos_sub"),function(index, value){  // permisos de perfil	

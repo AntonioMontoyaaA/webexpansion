@@ -216,14 +216,14 @@
 					
 					<div id="comboMotivos" style="padding-bottom: 15px;" class="row mx-0">
 					<span class="etiqueta negrita px-0 col-2">GERENTE:</span>
-				      	<select style="width: 251px; background: transparent;" id="select_employeeMDGere" class="chosen-select s_drop col-10">
+				      	<select style="width: 251px; background: transparent;" id="select_employeeMDGereModal" class="chosen-select s_drop col-10">
 				      		<option class="drop_option" value="0">Seleccionar gerente</option>
 				      	</select>
 				     </div>
 				     
 				     <div id="comboMotivos" style="padding-bottom: 15px;" class="row mx-0">
 				     	<span class="etiqueta negrita px-0 col-2">JEFE:</span>
-				      	<select style="width: 251px; background: transparent;" id="select_employeeMDJefes"  class="chosen-select s_drop col-10 ">
+				      	<select style="width: 251px; background: transparent;" id="select_employeeMDJefesModal"  class="chosen-select s_drop col-10 ">
 				      		<option class="drop_option" value="0">Sin jefes</option>
 				      	</select>
 				     </div>
@@ -291,7 +291,7 @@
 <!-- 								<span class="titulo_detalle_md_20">SUPERFICIE</span> -->
 <!-- 							</div> -->
 							<div class="mr-4 mt-2">
-								<input type="checkbox" class="form-check-input esquina" id="esquina" >
+								<input type="checkbox" class="form-check-input esquina" id="esquinaModal" >
     							<label class="contenido_cajas_20 esquina" for="esquina" style = "color: #585555">Local en esquina</label>
 							</div>
 <!-- 							<div class="col-lg-2 col-2 text-right"> -->
@@ -305,18 +305,18 @@
 						<div class="row div_header_sub mb-3" id="modulo3Datos">
 							<div class="col-lg-4">
 								<span class="titulo_detalle_md_20 etiqueta negrita t16 ">FRENTE</span>&nbsp;&nbsp;&nbsp;
-								<input id="frenteMd" type="text" class="text_edita" style ="width: 100px" onkeyup = "recalculaTotal(this, 1)"/> mts</span>
+								<input id="frenteMdModal" type="text" class="text_edita" style ="width: 100px" onkeyup = "recalculaTotal(this, 1)"/> mts</span>
 							</div>
 							<div class="col-lg-4">
 								<span class="titulo_detalle_md_20 etiqueta negrita t16 ">PROFUNDIDAD</span>&nbsp;&nbsp;&nbsp;
-								<input id="profundidadMd" type="text" class="text_edita" style ="width: 56px" onkeyup = "recalculaTotal(this, 2)"/> mts</span>
+								<input id="profundidadMdModal" type="text" class="text_edita" style ="width: 56px" onkeyup = "recalculaTotal(this, 2)"/> mts</span>
 							</div>
 							<div class="col-lg-4">
 								<span class="titulo_detalle_md_20 etiqueta negrita t16 ">SUPERFICIE TOTAL</span>&nbsp;&nbsp;&nbsp;
-								<span id="tamanioTotalMd" class="contenido_cajas_20 sangria_cuerpo">---</span>
+								<span id="tamanioTotalMdModal" class="contenido_cajas_20 sangria_cuerpo">---</span>
 							</div>
 						</div>
-						<div  style= "overflow-y: auto; overflow-x: hidden; max-height: 470px" >
+						<div  style= "overflow-y: auto; overflow-x: hidden; max-height: 480px" >
 						<div class="row div_header_subs">
 							
 							<div class="col-lg-4">
@@ -324,7 +324,7 @@
 									<span class="contenido_cajas_20">LATERAL 1</span>
 								</div>
 								<div class="col-lg-12" style="padding:0;">
-										<img class="imagenModal" id="vistaLateral1Md" alt="LATERAL 1"
+										<img class="imagenModal" id="vistaLateral1MdModal" alt="LATERAL 1"
 										style="width: 100%; max-height: 170px; display: none;" src="img/cargando_imagen.gif"
 										onclick="modalImage(this); " />
 										<img class = "img_edit" alt="" src="img/rechaza_mark.png" onclick="" id="0">
@@ -335,10 +335,10 @@
 								</div>
 								<div class="row div_bottom">
 									<div class="col-lg-6" style="text-align: right;">
-										<span id="fechaVistaLateral1" class="footerDetalleMd t11">---</span>
+										<span id="fechaVistaLateral1Modal" class="footerDetalleMd t11">---</span>
 									</div>
 									<div class="col-lg-6" style="text-align: left;">
-										<span id="horaVistaLateral1" class="footerDetalleMd t11">---</span>
+										<span id="horaVistaLateral1Modal" class="footerDetalleMd t11">---</span>
 									</div>
 								</div>
 							</div>
@@ -348,7 +348,7 @@
 									<span class="contenido_cajas_20">VISTA FRONTAL</span>
 								</div>
 								<div class="col-lg-12" style="padding:0;">
-									<img class="imagenModal" id="vistaFrontalMd"
+									<img class="imagenModal" id="vistaFrontalMdModal"
 										alt="VISTA FRONTAL" style="width: 100%; max-height: 170px; display: none;"
 										src="img/cargando_imagen.gif" onclick="modalImage(this)" />
 									<img class = "img_edit" alt="" src="img/rechaza_mark.png" onclick="" id="1">
@@ -359,10 +359,10 @@
 								</div>
 								<div class="row div_bottom">
 									<div class="col-lg-6" style="text-align: right;">
-										<span id="fechaVistaFrontal" class="footerDetalleMd t11">---</span>
+										<span id="fechaVistaFrontalModal" class="footerDetalleMd t11">---</span>
 									</div>
 									<div class="col-lg-6" style="text-align: left;">
-										<span id="horaVistaFrontal" class="footerDetalleMd t11">---</span>
+										<span id="horaVistaFrontalModal" class="footerDetalleMd t11">---</span>
 									</div>
 								</div>
 							</div>
@@ -372,7 +372,7 @@
 									<span class="contenido_cajas_20">LATERAL 2</span>
 								</div>
 								<div class="col-lg-12" style="padding:0;">
-									<img class="imagenModal" id="vistaLateral2Md" alt="LATERAL 2"
+									<img class="imagenModal" id="vistaLateral2MdModal" alt="LATERAL 2"
 										style="width: 100%; max-height: 170px; display: none;" src="img/cargando_imagen.gif"
 										onclick="modalImage(this)" />
 									<img class = "img_edit" alt="" src="img/rechaza_mark.png" onclick="" id="2" style ="display: none">
@@ -383,10 +383,10 @@
 								</div>
 								<div class="row div_bottom">
 									<div class="col-lg-6" style="text-align: right;">
-										<span id="fechaVistaLateral2" class="footerDetalleMd t11">---</span>
+										<span id="fechaVistaLateral2Modal" class="footerDetalleMd t11">---</span>
 									</div>
 									<div class="col-lg-6" style="text-align: left;">
-										<span id="horaVistaLateral2" class="footerDetalleMd t11">---</span>
+										<span id="horaVistaLateral2Modal" class="footerDetalleMd t11">---</span>
 									</div>
 								</div>
 							</div>
@@ -398,7 +398,7 @@
 									<span class="contenido_cajas_20">ENTORNO 1</span>
 								</div>
 								<div class="col-lg-12" style="padding:0;">
-									<img class="imagenModal" id="vistaEntorno1Md" alt="ENTORNO 1"
+									<img class="imagenModal" id="vistaEntorno1MdModal" alt="ENTORNO 1"
 										style="width: 100%; max-height: 170px; display:none;" src="img/cargando_imagen.gif"
 										onclick="modalImage(this)" />
 									<img class = "img_edit" alt="" src="img/rechaza_mark.png" onclick="" id="3" style ="display: none">
@@ -409,10 +409,10 @@
 								</div>
 								<div class="row div_bottom">
 									<div class="col-lg-6" style="text-align: right;">
-										<span id="fechaVistaEntorno1" class="footerDetalleMd t11">---</span>
+										<span id="fechaVistaEntorno1Modal" class="footerDetalleMd t11">---</span>
 									</div>
 									<div class="col-lg-6" style="text-align: left;">
-										<span id="horaVistaEntorno1" class="footerDetalleMd t11">---</span>
+										<span id="horaVistaEntorno1Modal" class="footerDetalleMd t11">---</span>
 									</div>
 								</div>
 							</div>
@@ -422,7 +422,7 @@
 									<span class="contenido_cajas_20">ENTORNO 2</span>
 								</div>
 								<div class="col-lg-12" style="padding:0;">
-									<img class="imagenModal" id="vistaEntorno2Md"
+									<img class="imagenModal" id="vistaEntorno2MdModal"
 										alt="ENTORNO 2" style="width: 100%; max-height: 170px; display: none"
 										src="img/cargando_imagen.gif" onclick="modalImage(this)" />
 									<img class = "img_edit" alt="" src="img/rechaza_mark.png" onclick="" id="4" style ="display: none">
@@ -433,10 +433,10 @@
 								</div>
 								<div class="row div_bottom">
 									<div class="col-lg-6" style="text-align: right;">
-										<span id="fechaVistaEntorno2" class="footerDetalleMd t11">---</span>
+										<span id="fechaVistaEntorno2Modal" class="footerDetalleMd t11">---</span>
 									</div>
 									<div class="col-lg-6" style="text-align: left;">
-										<span id="horaVistaEntorno2" class="footerDetalleMd t11">---</span>
+										<span id="horaVistaEntorno2Modal" class="footerDetalleMd t11">---</span>
 									</div>
 								</div>
 							</div>
@@ -446,7 +446,7 @@
 									<span class="contenido_cajas_20">ENTORNO 3</span>
 								</div>
 								<div class="col-lg-12" style="padding:0;">
-									<img class="imagenModal" id="vistaEntorno3Md" alt="ENTORNO 3"
+									<img class="imagenModal" id="vistaEntorno3MdModal" alt="ENTORNO 3"
 										style="width: 100%; max-height: 170px; display: none;" src="img/cargando_imagen.gif"
 										onclick="modalImage(this)" />
 									<img class = "img_edit" alt="" src="img/rechaza_mark.png" onclick="" id="5" style ="display: none">
@@ -457,10 +457,10 @@
 								</div>
 								<div class="row div_bottom">
 									<div class="col-lg-6" style="text-align: right;">
-										<span id="fechaVistaEntorno3" class="footerDetalleMd t11">---</span>
+										<span id="fechaVistaEntorno3Modal" class="footerDetalleMd t11">---</span>
 									</div>
 									<div class="col-lg-6" style="text-align: left;">
-										<span id="horaVistaEntorno3" class="footerDetalleMd t11">---</span>
+										<span id="horaVistaEntorno3Modal" class="footerDetalleMd t11">---</span>
 									</div>
 								</div>
 							</div>
@@ -476,7 +476,7 @@
 									<span class="contenido_cajas_20">PREDIAL</span>
 								</div>
 								<div class="col-lg-12" style="padding:0;">
-									<img class="imagenModal" id="img_predial"
+									<img class="imagenModal" id="img_predialModal"
 										alt="" style="width: 100%; max-height: 170px; display: none"
 										src="img/cargando_imagen.gif" onclick="modalImage(this)" />
 									<img class = "img_edit" alt="" src="img/rechaza_mark.png" onclick="" id="6" style ="display: none">
@@ -487,10 +487,10 @@
 								</div>
 								<div class="row div_bottom">
 									<div class="col-lg-6" style="text-align: right;">
-										<span id="fechaVistaPredial" class="footerDetalleMd t11">---</span>
+										<span id="fechaVistaPredialModal" class="footerDetalleMd t11">---</span>
 									</div>
 									<div class="col-lg-6" style="text-align: left;">
-										<span id="horaVistaPredial" class="footerDetalleMd t1">---</span>
+										<span id="horaVistaPredialModal" class="footerDetalleMd t1">---</span>
 									</div>
 								</div>
 							</div>

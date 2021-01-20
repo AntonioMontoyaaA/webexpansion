@@ -63,7 +63,7 @@ $(function(){
 		}
 		cierraMensajeModal();
 	});
-	$("#select_employeeMDGere").change(function(){ cargarJefesXGerente(this, 0);});
+	$("#select_employeeMDGereModal").change(function(){ cargarJefesXGerente(this, 0);});
 	$("#guardarImei").click(function(){ confirmaGuardadoImei();});
 	$("#select_gerenteMD").change(function(){
 		limpiaModalFotosSelect();
@@ -981,8 +981,8 @@ function getObtenerEmpleadosGerentes(obj){
 	$(obj.idHtmlGerente)
     .append('<option selected="selected" value="-1">Selecione un gerente </option>');
 	
-	$('#select_employeeMDJefes').html("");
-	$('#select_employeeMDJefes').append($('<option>', {
+	$('#select_employeeMDJefesModal').html("");
+	$('#select_employeeMDJefesModal').append($('<option>', {
 			value: "-1",
 			text :"Selecione un jefe"
 		}));	
@@ -1045,7 +1045,7 @@ function getObtenerEmpleadosGerentes(obj){
 function cargarJefesXGerente(element,tipo){
 	var idJefe = '';
 	if(tipo == 0){
-		idJefe = '#select_employeeMDJefes';
+		idJefe = '#select_employeeMDJefesModal';
 	}else{
 		idJefe = '#select_jefes_fotos';
 	}
@@ -1085,16 +1085,16 @@ $('#modal_id').modal('show');
 var cabecero = "CAMBIAR IMEI"
 var obj = {
 	cabecero: 	"CAMBIAR IMEI",
-	idHtmlGerente : '#select_employeeMDGere',
+	idHtmlGerente : '#select_employeeMDGereModal',
 	}
 getObtenerEmpleadosGerentes(obj)
 }
 
 function confirmaGuardadoImei(){
-	if( ($("#select_employeeMDJefes").val() != "-1" || $("#select_employeeMDGere").val() != "-1" ) && $("#imei_Id").val()  != ""){
+	if( ($("#select_employeeMDJefesModal").val() != "-1" || $("#select_employeeMDGereModal").val() != "-1" ) && $("#imei_Id").val()  != ""){
 		imei = $("#imei_Id").val();
-		var gerenteId = $("#select_employeeMDGere").val();
-		var jefeId = $("#select_employeeMDJefes").val()
+		var gerenteId = $("#select_employeeMDGereModal").val();
+		var jefeId = $("#select_employeeMDJefesModal").val()
 		var id = 0;
 		var nombre = "";
 		
@@ -1333,90 +1333,90 @@ function consultaSuperficieMD(element){
 					}
 				});
 					
-				$("#frenteMd").val(frente.valorreal);
-				$("#profundidadMd").val(superficie.fondo);
-				$("#tamanioTotalMd").html(superficie.valorreal + " mts<sup>2</sup>");
+				$("#frenteMdModal").val(frente.valorreal);
+				$("#profundidadMdModal").val(superficie.fondo);
+				$("#tamanioTotalMdModal").html(superficie.valorreal + " mts<sup>2</sup>");
 				if(esquina.valorreal == 1){
-					$('#esquina').prop('checked', true);
+					$('#esquinaModal').prop('checked', true);
 				}else if(esquina.valorreal == 0){
-					$('#esquina').prop('checked', false);
+					$('#esquinaModal').prop('checked', false);
 				}
 				
 				if(superficie.imgFrenteId != ""){
-					$("#vistaFrontalMd").attr("src", superficie.imgFrenteId);
-					$("#vistaFrontalMd").show();
+					$("#vistaFrontalMdModal").attr("src", superficie.imgFrenteId);
+					$("#vistaFrontalMdModal").show();
 					$("#0").show();
 					$("#subidaFrontal").hide();
 				}
 				if(superficie.fecha_fente != ""){
-				$("#fechaVistaFrontal").text(new Date(superficie.fecha_fente.split(" ")[0].replaceAll('-', '/')).format("dd/mm/yyyy"));
-				$("#horaVistaFrontal").text(superficie.fecha_fente.split(" ")[1]);
+				$("#fechaVistaFrontalModal").text(new Date(superficie.fecha_fente.split(" ")[0].replaceAll('-', '/')).format("dd/mm/yyyy"));
+				$("#horaVistaFrontalModal").text(superficie.fecha_fente.split(" ")[1]);
 				}
 				
 				if(superficie.imgLateral1Id != ""){
-					$("#vistaLateral1Md").attr("src", superficie.imgLateral1Id);
-					$("#vistaLateral1Md").show();
+					$("#vistaLateral1MdModal").attr("src", superficie.imgLateral1Id);
+					$("#vistaLateral1MdModal").show();
 					$("#1").show();
 					$("#subidaLateral1").hide();
 				}
 				if(superficie.fecha_lat1 != ""){
-					$("#fechaVistaLateral1").text(new Date(superficie.fecha_lat1.split(" ")[0].replaceAll('-', '/')).format("dd/mm/yyyy"));
-					$("#horaVistaLateral1").text(superficie.fecha_lat1.split(" ")[1]);
+					$("#fechaVistaLateral1Modal").text(new Date(superficie.fecha_lat1.split(" ")[0].replaceAll('-', '/')).format("dd/mm/yyyy"));
+					$("#horaVistaLateral1Modal").text(superficie.fecha_lat1.split(" ")[1]);
 				}
 								
 				if(superficie.imgLateral2Id != ""){
-					$("#vistaLateral2Md").attr("src", superficie.imgLateral2Id);
-					$("#vistaLateral2Md").show();
+					$("#vistaLateral2MdModal").attr("src", superficie.imgLateral2Id);
+					$("#vistaLateral2MdModal").show();
 					$("#2").show();
 					$("#subidaLateral2").hide();
 				}
 				if(superficie.fecha_lat2 != ""){
-					$("#fechaVistaLateral2").text(new Date(superficie.fecha_lat2.split(" ")[0].replaceAll('-', '/')).format("dd/mm/yyyy"));
-					$("#horaVistaLateral2").text(superficie.fecha_lat2.split(" ")[1]);
+					$("#fechaVistaLateral2Modal").text(new Date(superficie.fecha_lat2.split(" ")[0].replaceAll('-', '/')).format("dd/mm/yyyy"));
+					$("#horaVistaLateral2Modal").text(superficie.fecha_lat2.split(" ")[1]);
 				}				
 				
 				if(superficie.imgEnt1 != ""){
-					$("#vistaEntorno1Md").attr("src", superficie.imgEnt1);
-					$("#vistaEntorno1Md").show();
+					$("#vistaEntorno1MdModal").attr("src", superficie.imgEnt1);
+					$("#vistaEntorno1MdModal").show();
 					$("#3").show();
 					$("#subidaEnt1").hide();
 				}
 				if(superficie.fecha_ent1 != ""){
-					$("#fechaVistaEntorno1").text(new Date(superficie.fecha_ent1.split(" ")[0].replaceAll('-', '/')).format("dd/mm/yyyy")); 
-					$("#horaVistaEntorno1").text(superficie.fecha_ent1.split(" ")[1]);
+					$("#fechaVistaEntorno1Modal").text(new Date(superficie.fecha_ent1.split(" ")[0].replaceAll('-', '/')).format("dd/mm/yyyy")); 
+					$("#horaVistaEntorno1Modal").text(superficie.fecha_ent1.split(" ")[1]);
 				}				
 				
 				if(superficie.imgEnt2 != ""){
-					$("#vistaEntorno2Md").attr("src", superficie.imgEnt2);
-					$("#vistaEntorno2Md").show();
+					$("#vistaEntorno2MdModal").attr("src", superficie.imgEnt2);
+					$("#vistaEntorno2MdModal").show();
 					$("#4").show();
 					$("#subidaEnt2").hide();
 				}
 				if(superficie.fecha_ent2){
-					$("#fechaVistaEntorno2").text(new Date(superficie.fecha_ent2.split(" ")[0].replaceAll('-', '/')).format("dd/mm/yyyy"));
-					$("#horaVistaEntorno2").text( superficie.fecha_ent2.split(" ")[1]);
+					$("#fechaVistaEntorno2Modal").text(new Date(superficie.fecha_ent2.split(" ")[0].replaceAll('-', '/')).format("dd/mm/yyyy"));
+					$("#horaVistaEntorno2Modal").text( superficie.fecha_ent2.split(" ")[1]);
 				}				
 				
 				if(superficie.imgEnt3 != ""){
-					$("#vistaEntorno3Md").attr("src", superficie.imgEnt3);
-					$("#vistaEntorno3Md").show();
+					$("#vistaEntorno3MdModal").attr("src", superficie.imgEnt3);
+					$("#vistaEntorno3MdModal").show();
 					$("#5").show();
 					$("#subidaEnt3").hide();
 				}
 				if(superficie.fecha_ent3 != ""){
-					$("#fechaVistaEntorno3").text(new Date(superficie.fecha_ent3.split(" ")[0].replaceAll('-', '/')).format("dd/mm/yyyy"));
-					$("#horaVistaEntorno3").text(superficie.fecha_ent3.split(" ")[1]);
+					$("#fechaVistaEntorno3Modal").text(new Date(superficie.fecha_ent3.split(" ")[0].replaceAll('-', '/')).format("dd/mm/yyyy"));
+					$("#horaVistaEntorno3Modal").text(superficie.fecha_ent3.split(" ")[1]);
 				}				
 
 				if(superficie.imgPredial != ""){
-					$("#img_predial").attr("src", superficie.imgPredial);
-					$("#img_predial").show();
+					$("#img_predialModal").attr("src", superficie.imgPredial);
+					$("#img_predialModal").show();
 					$("#6").show();
 					$("#subidaPredial").hide();
 				}
 				if(superficie.fecha_pred != ""){
-				$("#fechaVistaPredial").text(new Date(superficie.fecha_pred.split(" ")[0].replaceAll('-', '/')).format("dd/mm/yyyy"));
-				$("#horaVistaPredial").text(superficie.fecha_pred.split(" ")[1]);
+				$("#fechaVistaPredialModal").text(new Date(superficie.fecha_pred.split(" ")[0].replaceAll('-', '/')).format("dd/mm/yyyy"));
+				$("#horaVistaPredialModal").text(superficie.fecha_pred.split(" ")[1]);
 				}
 				
 				elemMD = {
@@ -1515,85 +1515,85 @@ function fnSubeFoto(){
 					switch(dropTipo.split("-")[1]){
 					
 					case "0" :						
-						$("#vistaLateral1Md").attr("src", url);
-						$("#vistaLateral1Md").show();
+						$("#vistaLateral1MdModal").attr("src", url);
+						$("#vistaLateral1MdModal").show();
 						$("#0").show();
 						$("#subidaLateral1").hide();
 						
-						$("#fechaVistaLateral1").text(fecha.split(" ")[0]);
-						$("#horaVistaLateral1").text(fecha.split(" ")[1]);
+						$("#fechaVistaLateral1Modal").text(fecha.split(" ")[0]);
+						$("#horaVistaLateral1Modal").text(fecha.split(" ")[1]);
 						elemMD.imgLateral1 = url;
 						elemMD.fechaLateral1 = fechaAux;
 						break;
 						
 					case "1": 
-						$("#vistaFrontalMd").attr("src", url);
-						$("#vistaFrontalMd").show();
+						$("#vistaFrontalMdModal").attr("src", url);
+						$("#vistaFrontalMdModal").show();
 						$("#1").show();
 						$("#subidaFrontal").hide();
 						
-						$("#fechaVistaFrontal").text(fecha.split(" ")[0]);
-						$("#horaVistaFrontal").text(fecha.split(" ")[1]);
+						$("#fechaVistaFrontalModal").text(fecha.split(" ")[0]);
+						$("#horaVistaFrontalModal").text(fecha.split(" ")[1]);
 						elemMD.imgFrontal = url;
 						elemMD.fechaFrontal = fechaAux;
 						break;
 						
 					case "2": 
-						$("#vistaLateral2Md").attr("src", url);
-						$("#vistaLateral2Md").show();
+						$("#vistaLateral2MdModal").attr("src", url);
+						$("#vistaLateral2MdModal").show();
 						$("#2").show();
 						$("#subidaLateral2").hide();
 						
-						$("#fechaVistaLateral2").text(fecha.split(" ")[0]);
-						$("#horaVistaLateral2").text(fecha.split(" ")[1]);
+						$("#fechaVistaLateral2Modal").text(fecha.split(" ")[0]);
+						$("#horaVistaLateral2Modal").text(fecha.split(" ")[1]);
 						elemMD.imgLateral2 = url;
 						elemMD.fechaLateral2 = fechaAux;
 						break;
 						
 					case "3": 
-						$("#vistaEntorno1Md").attr("src", url);
-						$("#vistaEntorno1Md").show();
+						$("#vistaEntorno1MdModal").attr("src", url);
+						$("#vistaEntorno1MdModal").show();
 						$("#3").show();
 						$("#subidaEnt1").hide();
 						
-						$("#fechaVistaEntorno1").text(fecha.split(" ")[0]);
-						$("#horaVistaEntorno1").text(fecha.split(" ")[1]);
+						$("#fechaVistaEntorno1Modal").text(fecha.split(" ")[0]);
+						$("#horaVistaEntorno1Modal").text(fecha.split(" ")[1]);
 						elemMD.imgEnt1 = url;
 						elemMD.fechaEnt1 = fechaAux;
 						break;
 						
 					case "4": 
-						$("#vistaEntorno2Md").attr("src", url);
-						$("#vistaEntorno2Md").show();
+						$("#vistaEntorno2MdModal").attr("src", url);
+						$("#vistaEntorno2MdModal").show();
 						$("#4").show();
 						$("#subidaEnt2").hide();
 						
-						$("#fechaVistaEntorno2").text(fecha.split(" ")[0]);
-						$("#horaVistaEntorno2").text(fecha.split(" ")[1]);
+						$("#fechaVistaEntorno2Modal").text(fecha.split(" ")[0]);
+						$("#horaVistaEntorno2Modal").text(fecha.split(" ")[1]);
 						elemMD.imgEnt2 = url;
 						elemMD.fechaEnt2 = fechaAux;
 						break;
 						
 					case "5": 
-						$("#vistaEntorno3Md").attr("src", url);
-						$("#vistaEntorno3Md").show();
+						$("#vistaEntorno3MdModal").attr("src", url);
+						$("#vistaEntorno3MdModal").show();
 						$("#5").show();
 						$("#subidaEnt3").hide();
 						
-						$("#fechaVistaEntorno3").text(fecha.split(" ")[0]);
-						$("#horaVistaEntorno3").text(fecha.split(" ")[1]);
+						$("#fechaVistaEntorno3Modal").text(fecha.split(" ")[0]);
+						$("#horaVistaEntorno3Modal").text(fecha.split(" ")[1]);
 						elemMD.imgEnt3 = url;
 						elemMD.fechaEnt3 = fechaAux;
 						break;
 						
 					case "6": 
-						$("#img_predial").attr("src", url);
-						$("#img_predial").show();
+						$("#img_predialModal").attr("src", url);
+						$("#img_predialModal").show();
 						$("#6").show();
 						$("#subidaPredial").hide();
 						
-						$("#fechaVistaPredial").text(fecha.split(" ")[0]);
-						$("#horaVistaPredial").text(fecha.split(" ")[1]);
+						$("#fechaVistaPredialModal").text(fecha.split(" ")[0]);
+						$("#horaVistaPredialModal").text(fecha.split(" ")[1]);
 						elemMD.imgPredial = url;
 						elemMD.fechaPredial = fechaAux;
 						break;
@@ -1611,11 +1611,11 @@ function recalculaTotal(value, tipo){
 		value.value
 		elemMD.frente =  value.value
 		elemMD.total = elemMD.frente  * elemMD.fondo;
-		$("#tamanioTotalMd").html(elemMD.total + " mts<sup>2</sup>");
+		$("#tamanioTotalMdModal").html(elemMD.total + " mts<sup>2</sup>");
 	} else if( tipo == 2){
 		elemMD.fondo =  value.value
 		elemMD.total = elemMD.frente  * elemMD.fondo;
-		$("#tamanioTotalMd").html(elemMD.total + " mts<sup>2</sup>");
+		$("#tamanioTotalMdModal").html(elemMD.total + " mts<sup>2</sup>");
 	}
 }
 
@@ -1663,65 +1663,65 @@ function guardaFotosMD(){
 }
 
 function limpiaModalFotos(){
-	$('#esquina').prop('checked', false);
-	$('#profundidadMd').val("")
-	$('#frenteMd').val("")
-	$('#tamanioTotalMd').val("")
-	$("#vistaLateral1Md").attr("src", "img/cargando_imagen.gif");
-	$("#vistaLateral1Md").hide();
+	$('#esquinaModal').prop('checked', false);
+	$('#profundidadMdModal').val("")
+	$('#frenteMdModal').val("")
+	$('#tamanioTotalMdModal').val("")
+	$("#vistaLateral1MdModal").attr("src", "img/cargando_imagen.gif");
+	$("#vistaLateral1MdModal").hide();
 	$("#0").hide();
 	$("#subidaLateral1").show();
 	
-	$("#fechaVistaLateral1").text("----");
-	$("#horaVistaLateral1").text("----");
+	$("#fechaVistaLateral1Modal").text("----");
+	$("#horaVistaLateral1Modal").text("----");
 	 
-	$("#vistaFrontalMd").attr("src", "img/cargando_imagen.gif");
-	$("#vistaFrontalMd").hide();
+	$("#vistaFrontalMdModal").attr("src", "img/cargando_imagen.gif");
+	$("#vistaFrontalMdModal").hide();
 	$("#1").hide();
 	$("#subidaFrontal").show();
 	
-	$("#fechaVistaFrontal").text("----");
-	$("#horaVistaFrontal").text("----");
+	$("#fechaVistaFrontalModal").text("----");
+	$("#horaVistaFrontalModal").text("----");
 	 
-	$("#vistaLateral2Md").attr("src", "img/cargando_imagen.gif");
-	$("#vistaLateral2Md").hide();
+	$("#vistaLateral2MdModal").attr("src", "img/cargando_imagen.gif");
+	$("#vistaLateral2MdModal").hide();
 	$("#2").hide();
 	$("#subidaLateral2").show();
 	
-	$("#fechaVistaLateral2").text("----");
-	$("#horaVistaLateral2").text("----");
+	$("#fechaVistaLateral2Modal").text("----");
+	$("#horaVistaLateral2Modal").text("----");
 	 
-	$("#vistaEntorno1Md").attr("src", "img/cargando_imagen.gif");
-	$("#vistaEntorno1Md").hide();
+	$("#vistaEntorno1MdModal").attr("src", "img/cargando_imagen.gif");
+	$("#vistaEntorno1MdModal").hide();
 	$("#3").hide();
 	$("#subidaEnt1").show();
 	
-	$("#fechaVistaEntorno1").text("----");
-	$("#horaVistaEntorno1").text("----");
+	$("#fechaVistaEntorno1Modal").text("----");
+	$("#horaVistaEntorno1Modal").text("----");
 	  
-	$("#vistaEntorno2Md").attr("src", "img/cargando_imagen.gif");
-	$("#vistaEntorno2Md").hide();
+	$("#vistaEntorno2MdModal").attr("src", "img/cargando_imagen.gif");
+	$("#vistaEntorno2MdModal").hide();
 	$("#4").hide();
 	$("#subidaEnt2").show();
 	
-	$("#fechaVistaEntorno2").text("----");
-	$("#horaVistaEntorno2").text("----");
+	$("#fechaVistaEntorno2Modal").text("----");
+	$("#horaVistaEntorno2Modal").text("----");
 	 
-	$("#vistaEntorno3Md").attr("src", "img/cargando_imagen.gif");
-	$("#vistaEntorno3Md").hide();
+	$("#vistaEntorno3MdModal").attr("src", "img/cargando_imagen.gif");
+	$("#vistaEntorno3MdModal").hide();
 	$("#5").hide();
 	$("#subidaEnt3").show();
 	
-	$("#fechaVistaEntorno3").text("----");
-	$("#horaVistaEntorno3").text("----");
+	$("#fechaVistaEntorno3Modal").text("----");
+	$("#horaVistaEntorno3Modal").text("----");
 	
-	$("#img_predial").attr("src", "img/cargando_imagen.gif");
-	$("#img_predial").hide();
+	$("#img_predialModal").attr("src", "img/cargando_imagen.gif");
+	$("#img_predialModal").hide();
 	$("#6").hide();
 	$("#subidaPredial").show();
 	
-	$("#horaVistaPredial").text("----");
-	$("#horaVistaPredial").text("----");
+	$("#horaVistaPredialModal").text("----");
+	$("#horaVistaPredialModal").text("----");
 }
 
 function cierraModalFotos(){

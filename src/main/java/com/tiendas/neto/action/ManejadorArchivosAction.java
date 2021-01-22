@@ -325,7 +325,7 @@ public class ManejadorArchivosAction
 						respuesta = response.body().string();
 						respuesta = setURLToResponse(respuesta,jsonUrl );						
 					}
-				} else if(tipoServicio.equals("2")) {
+				} else if(tipoServicio.equals("102")) {
 					builder = new Builder()
 							.add("mdId", mdId)
 							.add("nombreArc", nombreArchivo)

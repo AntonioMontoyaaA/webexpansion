@@ -1490,7 +1490,7 @@ function fnSubeFoto(){
 			var nom =  MDID + dropTipo.split("-")[0]; 
 		
 			invocarJSONServiceAction("subeArchivo", 
-					{	'tipoServicio': 2,
+					{	'tipoServicio': 102,
 						'mdId': MDID,
 						'nombreArchivo': nom,
 						'archivo' : BASE64Upload,

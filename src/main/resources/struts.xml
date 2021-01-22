@@ -335,6 +335,10 @@
 	  	class = "com.tiendas.neto.action.LocalizadorRadiosAction" 
 	  	method = "autorizarAnillos" />
             
+             <action name = "obtieneTotalRadiosNuevos" 
+	  	class = "com.tiendas.neto.action.LocalizadorRadiosAction" 
+	  	method = "consultaTotalAnillos" />
+            
             
             
     

@@ -1214,3 +1214,28 @@ font-weight:normal;
 .t16{
 	font-size: 16px;
 }
+
+.radios-nuevos-span{
+	background: #F44336;
+    padding: 3px 4px 3px 3px;
+    border-radius: 8px;
+    color: whitesmoke;
+}
+
+
+.radios-nuevos-total{
+	display:none;
+    border-radius: 32px;
+    margin-left: 65px;
+    margin-top: -68px;
+    padding-left: 2px;
+    padding-right: 2px;
+    font-size: 11px;
+    color: #F44336;
+    float: right;
+    position: absolute;
+}
+
+#idlocalizador.resaltado .radios-nuevos-total{
+	display : block !important;
+}

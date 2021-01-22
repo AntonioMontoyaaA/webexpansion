@@ -108,42 +108,55 @@
 				     </select>
 				   </div>
 				   
-				   <span class="text-etiqueta"> Fecha inicio :</span>
-				   <input type="text" style="margin-bottom: 10px;" class="fechaInicialCalendario" readonly id="datepicker1"/>
+				   <div class="row p-0">
+					   <div class="col-4 pr-0 ">
+					    	<span class="text-etiqueta"> Fecha inicio :</span>
+					   </div>
+					   <div class="col-8 p-0">
+					   		<input type="text" style="margin-bottom: 2px; width:90%;" class="fechaInicialCalendario" readonly id="datepicker1"/>
+					   </div>
+					   <div class="col-4 pr-0">
+					   		<span class="text-etiqueta">Fecha fin :</span>
+					   </div>
+					   <div class="col-8 p-0">
+					   		<input type="text" style="margin-bottom: 2px;  margin-top: 2px; width:90%;" class="fechaInicialCalendario" readonly id="datepicker3"/>
+					   </div>
+				    </div>
+				  
+				   
 					
-				    <span class="text-etiqueta">Fecha fin :</span>
-				   <input type="text" style="margin-bottom: 10px;  margin-top: 4px;" class="fechaInicialCalendario" readonly id="datepicker3"/>
 				    
-					<div class="contentDetalle" style=" padding-right: 2%;">
-						<input id="check_nuevos" type="checkbox" style="margin-bottom: 10px;" name="nuevo"    class="spanText" value="1" checked> 
+				   
+					<div class="contentDetalle" style=" padding: 0px;">
+						<input id="check_nuevos" type="checkbox" style="margin-bottom: 2px;" name="nuevo"    class="spanText" value="1" checked> 
 						<span id="spand_nuevo" class="negrita t14 spanText_" >Nuevos <span id="estatusN"></span></span>  <br>
-						<input id="check_proceso" type="checkbox" style="margin-bottom: 10px;" name="enproceso"   class="spanText" value="3" checked>
+						<input id="check_proceso" type="checkbox" style="margin-bottom: 2px;" name="enproceso"   class="spanText" value="3" checked>
 						<span id="spand_proceso" class="negrita t14 spanText_ " >En proceso <span id="estatusP"></span></span> <br>
-						<input id="check_cancelado" type="checkbox" style="margin-bottom: 10px;" name="cancelado" class="spanText" value="5" checked> 
+						<input id="check_cancelado" type="checkbox" style="margin-bottom: 2px;" name="cancelado" class="spanText" value="5" checked> 
 						<span id="spand_cancelado" class=" negrita t14 spanText_" >Cancelado <span id="estatusC"></span></span>  <br>
 <!-- 					</div> -->
 <!-- 					<div class="contentDetalle" style="padding-left: 2%;"> -->
-						<input id="check_asignados" type="checkbox" style="margin-bottom: 10px;" name="asignado" class="spanText" value="2" checked> 
+						<input id="check_asignados" type="checkbox" style="margin-bottom: 2px;" name="asignado" class="spanText" value="2" checked> 
 						<span id="spand_asignado" class="negrita t14 spanText_" >Asignados <span id="estatusA"></span></span> <br>						  
-						<input id="check_concluido" type="checkbox" style="margin-bottom: 10px;" name="concluido" class="spanText" value="4" checked> 
+						<input id="check_concluido" type="checkbox" style="margin-bottom: 2px;" name="concluido" class="spanText" value="4" checked> 
 						<span id="spand_concluido" class="negrita t14 spanText_ " >Sin sitios <span id="estatusS"></span></span><br> 
-						<input id="check_MdsRadios" type="checkbox" style="margin-bottom: 10px;" name="conmds" class="spanText" value="1">  		 
+						<input id="check_MdsRadios" type="checkbox" style="margin-bottom: 2px;" name="conmds" class="spanText" value="1">  		 
 						<span id="spand_mds" class=" negrita t14 spanText_" >Con MD's <span id="estatusM"></span></span> <br>
 					</div>
 					
 					
-					<button type="button" id="btnConsultaAnillosConsulta" class="btn back_5 btn_aceptar"  data-target="#myModal">
+					<button type="button" id="btnConsultaAnillosConsulta" style="margin-left: 25%; margin-top: 5px;" class="btn back_5 btn_aceptar"  data-target="#myModal">
 						Consultar radios
 				   </button>
 
 				   
 				<!-- ASIGNAR RADIO -->
 				<c:if test="${permisos['PRIVILEGIO.SUBMENU.VOKSE.12,2']}">
-						<div  class="hidden pt-4" id="div-asignacion-anillo">
+						<div  class="hidden pt-2" id="div-asignacion-anillo">
 					   	<span id="div-asignar-anillo-expande" class="negrita t14 pl-0 titleDivContent">Asignar radios </span>  <br>
 	
-					  	   <span class="negrita pt-2 t14 spanText">1) Seleccionar radio. </span><br>
-						   <span class="negrita t14 spanText">2) Seleccionar jefe. </span><br>
+					  	   
+						   <span class="negrita t14 spanText">1) Seleccionar jefe. </span><br>
 							
 							<div id="comboMotivos" style="padding-bottom: 3px; padding-top: 3px;">
 						      	<select id="select_employee"  data-placeholder="Seleccionar un jefe" class="chosen-select"  tabindex="2">
@@ -152,7 +165,7 @@
 						    </div>
 						    
 <!-- 							<span class="negrita t14 spanText">3) Click para seleccionar el radio</span><br> -->
-							<span class="negrita t14 spanText">3) Click en  Asignar radio</span>
+							<span class="negrita t14 spanText">2) Click en  Asignar radio</span>
 							<br>
 							<br>
 							
@@ -177,7 +190,7 @@
 		<div class="hidden contentPopUpInfo col-sm-12 offset-sm-0 col-md-12 offset-md-0 col-lg-11 offset-lg-1 col-xl-11 offset-xl-1" id="" >
 		
 			<!-- titulo sitio -->	
-			<div class="row" style="border-bottom: 1px solid #686868;" >
+			<div class="row m-0" style="border-bottom: 1px solid #686868;" >
 				<div class="col-11 pt-1 pb-1 text-center">
 					<span id="infoTituloPopUp" class="t14 titulo_info"></span>
 				</div>
@@ -235,7 +248,7 @@
 
 					<div class="col-4 etiqueta-white-l text-center"> Radio: <span class="infoRadio"  > - </span></div>
 					<div class="col-5 p-0 etiqueta-white-l text-center"> Estatus: <span class="infoEstatus"  > - </span></div>
-					<div class="col-3 p-0 etiqueta-white-l"> No. visitas: <span id="infoNoVisitas"  > - </span></div>
+					<div class="col-3 p-0 etiqueta-white-l"> No. visitas: <span id="infoNoVisitas"  > 0 </span></div>
 					
 				</div>
 				<!-- FIN datos sitio  -->
@@ -349,10 +362,10 @@
 	
 				
 					<!-- GENERADORES -->	
-					<div class="col-12 pt-1"><span class="negrita t14 subTitleInfo">Generadores</span> 
-						<c:if test="${permisos['PRIVILEGIO.SUBMENU.VOKSE.12,7']}">
+					<div class="col-12 pt-1"><span class="negrita t14 subTitleInfo">Generadores <input id="check-tdos-gen" type="checkbox" style="margin-bottom: 5px;" name="nuevo"    class="spanText" value="1" checked></span> 
+<%-- 						<c:if test="${permisos['PRIVILEGIO.SUBMENU.VOKSE.12,7']}"> --%>
 							<button type="button" id="btonRecalculaGeneradores"  class=" btn bton-color-azul btn_aceptar float-right">Recalcular </button>
-					 	</c:if>
+<%-- 					 	</c:if> --%>
 					</div>
 				
 					<div class="col-20-generadores p-0 etiqueta-white-l text-center"> Mercados <input id="check-mercados" type="checkbox" style="margin-bottom: 5px;" name="nuevo"    class="spanText" value="1" checked> </div>
@@ -384,14 +397,14 @@
 					<div class="col-4 etiqueta-white-l text-center"> <span id="miba"  > - </span> </div>
 	
 					<!-- UNIDADES -->	
-					<div class="col-12 pt-0 pb-0 div-unidades-economicas" style="height: 12px;"><span class="negrita t14 subTitleInfo">Unidades Económicas</span></div>
+					<div class="col-12 pt-0 pb-0 div-unidades-economicas" style="height: 12px;"><span class="negrita t14 subTitleInfo">Unidades Económicas <input id="check-tdos-ue" type="checkbox" style="margin-bottom: 5px;" name="nuevo"    class="spanText" value="1" checked></span></div>
 					
-					<div class="col-2 p-0 etiqueta-white-l text-center div-unidades-economicas">Panadería <br><input id="check-panaderia" type="checkbox"   name="nuevo"    class="spanText" value="1" checked> </div>
-					<div class="col-2 p-0 etiqueta-white-l text-center div-unidades-economicas">Tortillería <br><input id="check-tortilleria" type="checkbox"   name="nuevo"    class="spanText" value="1" checked> </div>
-					<div class="col-2 p-0 etiqueta-white-l text-center div-unidades-economicas">Abarrotes <br><input id="check-abarrotes" type="checkbox"  name="nuevo"    class="spanText" value="1" checked> </div>
-					<div class="col-2 p-0 etiqueta-white-l text-center div-unidades-economicas">Carnicería <br><input id="check-carniceria" type="checkbox"  name="nuevo"    class="spanText" value="1" checked> </div>
-					<div class="col-2 p-0 etiqueta-white-l text-center div-unidades-economicas">Recaudería <br><input id="check-recauderia" type="checkbox"   name="nuevo"    class="spanText" value="1" checked> </div>
-					<div class="col-2 p-0 etiqueta-white-l text-center div-unidades-economicas">Pollería <br><input id="check-polleria" type="checkbox"   name="nuevo"    class="spanText" value="1" checked> </div>
+					<div class="col-2 p-0 etiqueta-white-l text-center div-unidades-economicas">Panadería <br><input id="check-panaderia" type="checkbox"   name="nuevo"    class="spanText" value="1" > </div>
+					<div class="col-2 p-0 etiqueta-white-l text-center div-unidades-economicas">Tortillería <br><input id="check-tortilleria" type="checkbox"   name="nuevo"    class="spanText" value="1" > </div>
+					<div class="col-2 p-0 etiqueta-white-l text-center div-unidades-economicas">Abarrotes <br><input id="check-abarrotes" type="checkbox"  name="nuevo"    class="spanText" value="1" > </div>
+					<div class="col-2 p-0 etiqueta-white-l text-center div-unidades-economicas">Carnicería <br><input id="check-carniceria" type="checkbox"  name="nuevo"    class="spanText" value="1" > </div>
+					<div class="col-2 p-0 etiqueta-white-l text-center div-unidades-economicas">Recaudería <br><input id="check-recauderia" type="checkbox"   name="nuevo"    class="spanText" value="1" > </div>
+					<div class="col-2 p-0 etiqueta-white-l text-center div-unidades-economicas">Pollería <br><input id="check-polleria" type="checkbox"   name="nuevo"    class="spanText" value="1" > </div>
 					
 					
 					<div class="col-2 etiqueta-white-l text-center div-unidades-economicas"> <img class="img-tamanio-info-demografica" id="bell_rojo" src="img/localizador/icon-panaderia.png"> </div>
@@ -405,7 +418,7 @@
 					<div class="col-2 etiqueta-white-l text-center div-unidades-economicas"> <span id="t-TORTILLERIA"  > - </span> </div>
 					<div class="col-2 etiqueta-white-l text-center div-unidades-economicas"> <span id="t-ABARROTES"  > - </span> </div>
 					<div class="col-2 etiqueta-white-l text-center div-unidades-economicas"> <span id="t-CARNICERIA"  > - </span> </div>
-					<div class="col-2 etiqueta-white-l text-center div-unidades-economicas"> <span id="t-RECAUDERIA"  > - </span> </div>
+					<div class="col-2 etiqueta-white-l text-center div-unidades-economicas"> <span id="t-RECAUDERIAS"  > - </span> </div>
 					<div class="col-2 etiqueta-white-l text-center div-unidades-economicas"> <span id="t-POLLERIA"  > - </span> </div>
 					
 
@@ -417,23 +430,13 @@
 					<div class="col-12 pt-2" style="height: "><span class="negrita t14 subTitleInfo">Ocupaciones</span></div>
 				
 					<!-- OCUPACIONES -->	
-					<div class=" pt-1 pb-1 contenedor">
+					<div class=" pt-0 pb-0 contenedor">
 						<canvas id="radar_ocupaciones"></canvas>
 					</div>
-					<div class="col-6 etiqueta-white-l">Ama de casa: 	<span id="ocupa_amaCasa"  > - </span> </div>
-					<div class="col-6 etiqueta-white-l">Empresario: 	<span id="ocupa_empre"  > - </span> </div>
-					<div class="col-6 etiqueta-white-l">Desempleado: 	<span id="ocupa_desem"  > - </span> </div>
-					<div class="col-6 etiqueta-white-l">Profesionista:  <span id="ocupa_profe"  > - </span> </div>
-					<div class="col-6 etiqueta-white-l">Ejidatario: 	<span id="ocupa_ejida"  > - </span> </div>
-				  <div class="col-6 etiqueta-white-l">Servidor público: <span id="ocupa_servi"  > - </span> </div>
-					<div class="col-6 etiqueta-white-l">Empleado: 		<span id="ocupa_emple"  > - </span> </div>
-					<div class="col-6 etiqueta-white-l">Emprendedor: 	<span id="ocupa_cuent"  > - </span> </div>
-					<div class="col-6 etiqueta-white-l">Estudiante: 	<span id="ocupa_estud"  > - </span> </div>
-					<div class="col-6 etiqueta-white-l">Jornalero: 		<span id="ocupa_jorna"  > - </span> </div>
-					<div class="col-6 etiqueta-white-l">Obrero: 		<span id="ocupa_obrer"  > - </span> </div>
-					<div class="col-6 etiqueta-white-l">Otra: 			<span id="ocupa_otra"  > - </span> </div>
-					<div class="col-6 etiqueta-white-l">Jubilado: 		<span id="ocupa_jubil"  > - </span> </div>
-					<div class="col-12 pb-2"> </div>
+					
+					<div  id="list-empleos" class="col-12 row"></div>
+
+					<div class="col-12 pb-1"> </div>
 					</div>
 				</div>
 

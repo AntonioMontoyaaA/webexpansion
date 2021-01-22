@@ -261,6 +261,7 @@ function guardaRadiosLocalizados(){
 		clearMarkers();
 		closePopUpInfo();
 		radiosArray = [];
+		getObtenerEstados();
 	}
 }
 
@@ -360,21 +361,73 @@ function verInformacionRadio(obj, vista_opcion){
 	$("#artlsPersoHogar").html(obj.infoSitio.fcVentaArticulos);
 	
 	
+	
+	
 	/* ==== OCUPACIONES ====*/
-	$("#ocupa_amaCasa").html(obj.infoSitio.fcAmaDeCasa);
-	$("#ocupa_desem").html(obj.infoSitio.fcDesempleado);
-	$("#ocupa_ejida").html(obj.infoSitio.fcEjidatario);
-	$("#ocupa_emple").html(obj.infoSitio.fcEmpleado);
-	$("#ocupa_estud").html(obj.infoSitio.fcEstudiante);
-	$("#ocupa_jorna").html(obj.infoSitio.fcJornalero);
-	$("#ocupa_jubil").html(obj.infoSitio.fcJubilado);
-	$("#ocupa_obrer").html(obj.infoSitio.fcObrero);
-	$("#ocupa_empre").html(obj.infoSitio.fcEmpresario);
-	$("#ocupa_profe").html(obj.infoSitio.fcProfesionista);
-	$("#ocupa_servi").html(obj.infoSitio.fcServidorPublico);
-	$("#ocupa_otra").html(obj.infoSitio.fcOtraOcupacion);
-	$("#ocupa_cuent").html(obj.infoSitio.fcTrabajoPorCuenta);
+	var array = new Array();
+	array[0] = new Array();
+	array[0][0] = formatMiles(obj.infoSitio.fcAmaDeCasa);
+	array[0][1] = "Ama de casa";
+	
+	array[1] = new Array();
+	array[1][0] = formatMiles(obj.infoSitio.fcDesempleado);
+	array[1][1] = "Desempleado";
+	
+	array[2] = new Array();
+	array[2][0] = formatMiles(obj.infoSitio.fcEjidatario);
+	array[2][1] = "Ejidatario";
+		
+	array[3] = new Array();
+	array[3][0] = formatMiles(obj.infoSitio.fcEmpleado);
+	array[3][1] = "Empleado";
+		
+	array[4] = new Array();
+	array[4][0] = formatMiles(obj.infoSitio.fcEstudiante);
+	array[4][1] = "Estudiante";
+	
+	array[5] = new Array();
+	array[5][0] = formatMiles(obj.infoSitio.fcJornalero);
+	array[5][1] = "Jornalero";
+	
+	array[6] = new Array();
+	array[6][0] = formatMiles(obj.infoSitio.fcJubilado);
+	array[6][1] = "Jubilado";
+	
+	array[7] = new Array();
+	array[7][0] = formatMiles(obj.infoSitio.fcObrero);
+	array[7][1] = "Obrero";
+	
+	array[8] = new Array();
+	array[8][0] = formatMiles(obj.infoSitio.fcProfesionista);
+	array[8][1] = "Profesionista";
+		
+	array[9] = new Array();
+	array[9][0] = formatMiles(obj.infoSitio.fcServidorPublico);
+	array[9][1] = "Servidor público";
+		
+	array[10] = new Array();
+	array[10][0] = formatMiles(obj.infoSitio.fcOtraOcupacion);
+	array[10][1] = "Otra";
+		
+	array[11] = new Array();
+	array[11][0] = formatMiles(obj.infoSitio.fcTrabajoPorCuenta);
+	array[11][1] = "Emprendedor";
 
+	array[12] = new Array();
+	array[12][0] = formatMiles(obj.infoSitio.fcEmpresario);
+	array[12][1] = "Empresario";
+	
+		
+	
+	array.sort(function(a, b){
+		return b[0]-a[0]
+		});
+	
+	$("#list-empleos").html("");
+	array.forEach(function(obj, i){
+		$("#list-empleos").append('<div class="col-6 etiqueta-white-l">'+obj[1]+': 	<span> '+numberWithCommas(obj[0])+' </span> </div>');
+	});
+	
 	
 	if(vista_opcion == 0 || vista_opcion == undefined){
 		$("#infoEstatus").html("Nuevo");
@@ -422,23 +475,24 @@ function verInformacionRadio(obj, vista_opcion){
 		$("#btonDenegarRechazo").click(function(){ ejecutarAutorizaAnillo(obj, 0); });  
 
 		
+		$("#check-tdos-gen").prop("checked", true);
 		$("#check-mercados").prop("checked", true);
 		$("#check-escuela").prop("checked", true);
 		$("#check-hospital").prop("checked", true);
 		$("#check-templo").prop("checked", true);
 		$("#check-ofGob").prop("checked", true);
 		
-		
-		$("#check-panaderia").prop("checked", true);
-		$("#check-tortilleria").prop("checked", true);
-		$("#check-abarrotes").prop("checked", true);
-		$("#check-carniceria").prop("checked", true);
-		$("#check-recauderia").prop("checked", true);
-		$("#check-polleria").prop("checked", true);
+		$("#check-tdos-ue").prop("checked", false);
+		$("#check-panaderia").prop("checked", false);
+		$("#check-tortilleria").prop("checked", false);
+		$("#check-abarrotes").prop("checked", false);
+		$("#check-carniceria").prop("checked", false);
+		$("#check-recauderia").prop("checked", false);
+		$("#check-polleria").prop("checked", false);
  
 		
 		$("#check-mercados").unbind();
-		$("#check-mercados").click(function(){  
+		$("#check-mercados").change(function(){  
 			var mapChecked = null;
 			if($(this).is(":checked"))
 				mapChecked = map;
@@ -446,7 +500,7 @@ function verInformacionRadio(obj, vista_opcion){
 		}); 
 		
 		$("#check-escuela").unbind();
-		$("#check-escuela").click(function(){  
+		$("#check-escuela").change(function(){  
 			var mapChecked = null;
 			if($(this).is(":checked"))
 				mapChecked = map;
@@ -454,15 +508,16 @@ function verInformacionRadio(obj, vista_opcion){
 		}); 
 		
 		$("#check-hospital").unbind();
-		$("#check-hospital").click(function(){  
+		$("#check-hospital").change(function(){  
 			var mapChecked = null;
 			if($(this).is(":checked"))
 				mapChecked = map;
+			
 			pintarGeneradoresFiltro(obj.generadores, mapChecked, 100002);
 		}); 
 		
 		$("#check-templo").unbind();
-		$("#check-templo").click(function(){  
+		$("#check-templo").change(function(){  
 			var mapChecked = null;
 			if($(this).is(":checked"))
 				mapChecked = map;
@@ -470,7 +525,7 @@ function verInformacionRadio(obj, vista_opcion){
 		}); 
 		
 		$("#check-ofGob").unbind();
-		$("#check-ofGob").click(function(){  
+		$("#check-ofGob").change(function(){  
 			var mapChecked = null;
 			if($(this).is(":checked"))
 				mapChecked = map;
@@ -479,7 +534,7 @@ function verInformacionRadio(obj, vista_opcion){
 		
 		
 		$("#check-panaderia").unbind();
-		$("#check-panaderia").click(function(){  
+		$("#check-panaderia").change(function(){  
 			var mapChecked = null;
 			if($(this).is(":checked"))
 				mapChecked = map;
@@ -487,7 +542,7 @@ function verInformacionRadio(obj, vista_opcion){
 		}); 
 		
 		$("#check-tortilleria").unbind();
-		$("#check-tortilleria").click(function(){  
+		$("#check-tortilleria").change(function(){  
 			var mapChecked = null;
 			if($(this).is(":checked"))
 				mapChecked = map;
@@ -495,7 +550,7 @@ function verInformacionRadio(obj, vista_opcion){
 		}); 
 		
 		$("#check-abarrotes").unbind(); 
-		$("#check-abarrotes").click(function(){  
+		$("#check-abarrotes").change(function(){  
 			var mapChecked = null;
 			if($(this).is(":checked"))
 				mapChecked = map;
@@ -503,7 +558,7 @@ function verInformacionRadio(obj, vista_opcion){
 		}); 
 		
 		$("#check-carniceria").unbind();
-		$("#check-carniceria").click(function(){  
+		$("#check-carniceria").change(function(){  
 			var mapChecked = null;
 			if($(this).is(":checked"))
 				mapChecked = map;
@@ -512,7 +567,7 @@ function verInformacionRadio(obj, vista_opcion){
 		
 		
 		$("#check-recauderia").unbind();
-		$("#check-recauderia").click(function(){  
+		$("#check-recauderia").change(function(){  
 			var mapChecked = null;
 			if($(this).is(":checked"))
 				mapChecked = map;
@@ -520,7 +575,7 @@ function verInformacionRadio(obj, vista_opcion){
 		}); 
 		
 		$("#check-polleria").unbind(); 
-		$("#check-polleria").click(function(){  
+		$("#check-polleria").change(function(){  
 			var mapChecked = null;
 			if($(this).is(":checked"))
 				mapChecked = map;
@@ -528,9 +583,58 @@ function verInformacionRadio(obj, vista_opcion){
 																 
 		});  
 		
+		$("#check-tdos-gen").unbind(); 
+		$("#check-tdos-gen").click(function(){  
+			var mapChecked = null;
+			if($(this).is(":checked"))
+				mapChecked = map;
+			
+			pintarGeneradoresFiltro(obj.generadores, mapChecked, 100004);
+			pintarGeneradoresFiltro(obj.generadores, mapChecked, 100003);
+			pintarGeneradoresFiltro(obj.generadores, mapChecked, 100002);
+			pintarGeneradoresFiltro(obj.generadores, mapChecked, 100001);
+			pintarGeneradoresFiltro(obj.generadores, mapChecked, 100005);
+
+			
+			$("#check-mercados").prop("checked", $(this).is(":checked"));
+			$("#check-escuela").prop("checked", $(this).is(":checked"));
+			$("#check-hospital").prop("checked", $(this).is(":checked"));
+			$("#check-templo").prop("checked", $(this).is(":checked"));
+			$("#check-ofGob").prop("checked", $(this).is(":checked"));	
+			
+			
+			
+		});  
+		 
 		
+		pintarGeneradoresFiltro(obj.generadores, null, 100006);
+		pintarGeneradoresFiltro(obj.generadores, null, 100007);
+		pintarGeneradoresFiltro(obj.generadores, null, 100008);
+		pintarGeneradoresFiltro(obj.generadores, null, 100009);
+		pintarGeneradoresFiltro(obj.generadores, null, 100011);
+		pintarGeneradoresFiltro(obj.generadores, null, 100010);
 		
-		
+		$("#check-tdos-ue").unbind(); 
+		$("#check-tdos-ue").click(function(){  
+			var mapChecked = null;
+			if($(this).is(":checked"))
+				mapChecked = map;
+			
+			pintarGeneradoresFiltro(obj.generadores, mapChecked, 100006);
+			pintarGeneradoresFiltro(obj.generadores, mapChecked, 100007);
+			pintarGeneradoresFiltro(obj.generadores, mapChecked, 100008);
+			pintarGeneradoresFiltro(obj.generadores, mapChecked, 100009);
+			pintarGeneradoresFiltro(obj.generadores, mapChecked, 100011);
+			pintarGeneradoresFiltro(obj.generadores, mapChecked, 100010);
+			
+			$("#check-panaderia").prop("checked", $(this).is(":checked"));
+			$("#check-tortilleria").prop("checked", $(this).is(":checked"));
+			$("#check-abarrotes").prop("checked", $(this).is(":checked"));
+			$("#check-carniceria").prop("checked", $(this).is(":checked"));
+			$("#check-recauderia").prop("checked", $(this).is(":checked"));
+			$("#check-polleria").prop("checked", $(this).is(":checked"));													 
+		});  
+		 
 	},250);
 	
 	ctx = document.getElementById('radar_ocupaciones').getContext('2d');
@@ -545,19 +649,19 @@ function verInformacionRadio(obj, vista_opcion){
 				type: 'radar',
 			    // The data for our dataset
 			    data: {
-			    	labels: ['Ama de casa', // 1
-			    			 'Empresario',  // 2
-			    			 'Desempleado', // 3
-			    			 'Profesionista',  // 4
-			    			 'Ejidatario',   // 5
-			    			 'Servidor público', // 6
-			    			 'Empleado',   // 7
-			    			 'Emprendedor', // 8
-			    			 'Estudiante', // 9
-			    			 'Jornalero',  // 10  
-			    			 'Obrero',     // 11
-			    			 'Jubilado',   // 12
-			    			 'Otra',       // 13
+			    	labels: ['Ama de casa', 	// 1
+			    			 'Empresario',  	// 2
+			    			 'Desempleado', 	// 3
+			    			 'Profesionista',  	// 4
+			    			 'Ejidatario',   	// 5
+			    			 'Servidor público',// 6
+			    			 'Empleado',   		// 7
+			    			 'Emprendedor', 	// 8
+			    			 'Estudiante', 		// 9
+			    			 'Jornalero',  		// 10  
+			    			 'Obrero',     		// 11
+			    			 'Jubilado',   		// 12
+			    			 'Otra',       		// 13
 			    			 ],
 			    			 
 			        datasets: [{
@@ -571,19 +675,19 @@ function verInformacionRadio(obj, vista_opcion){
 		        	    pointBackgroundColor: "#FFC107",
 		        	    pointBorderColor: "rgba(200, 74, 0, 0.6)",
 		        	    pointHoverRadius: 10,
-		        	 data: [ parseFloat(obj.infoSitio.fcAmaDeCasa.replace(/,/g, '')), // 1
-		        			 parseFloat(obj.infoSitio.fcEmpresario.replace(/,/g, '')) , // 2
-		        			 parseFloat(obj.infoSitio.fcDesempleado.replace(/,/g, ''))  	,// 3
-		        			 parseFloat(obj.infoSitio.fcProfesionista.replace(/,/g, ''))  	, // 4
-		        			 parseFloat(obj.infoSitio.fcEjidatario.replace(/,/g, ''))  	, // 5
-		        			 parseFloat(obj.infoSitio.fcServidorPublico.replace(/,/g, ''))  	,// 6
-		        			 parseFloat(obj.infoSitio.fcEmpleado.replace(/,/g, ''))  	, // 7 
-		        			 parseFloat(obj.infoSitio.fcTrabajoPorCuenta.replace(/,/g, ''))  	,  // 8
-		        			 parseFloat(obj.infoSitio.fcEstudiante.replace(/,/g, ''))  	, // 9
-		        			 parseFloat(obj.infoSitio.fcJornalero.replace(/,/g, ''))  	,//  10
-		        			 parseFloat(obj.infoSitio.fcObrero.replace(/,/g, ''))  	, // 11 
-		        			 parseFloat(obj.infoSitio.fcJubilado.replace(/,/g, ''))  	, //12
-		        			 parseFloat(obj.infoSitio.fcOtraOcupacion.replace(/,/g, ''))  	, //13
+		        	 data: [ parseFloat(obj.infoSitio.fcAmaDeCasa.replace(/,/g,'')), 		// 1
+		        			 parseFloat(obj.infoSitio.fcEmpresario.replace(/,/g,'')) , 		// 2
+		        			 parseFloat(obj.infoSitio.fcDesempleado.replace(/,/g,'')), 		// 3
+		        			 parseFloat(obj.infoSitio.fcProfesionista.replace(/,/g,'')),   	// 4
+		        			 parseFloat(obj.infoSitio.fcEjidatario.replace(/,/g, '')), 		// 5
+		        			 parseFloat(obj.infoSitio.fcServidorPublico.replace(/,/g,'')), 	// 6
+		        			 parseFloat(obj.infoSitio.fcEmpleado.replace(/,/g, ''))  	, 	// 7 
+		        			 parseFloat(obj.infoSitio.fcTrabajoPorCuenta.replace(/,/g,'')),	// 8
+		        			 parseFloat(obj.infoSitio.fcEstudiante.replace(/,/g, '')), 		// 9
+		        			 parseFloat(obj.infoSitio.fcJornalero.replace(/,/g, '')),		// 10
+		        			 parseFloat(obj.infoSitio.fcObrero.replace(/,/g, '')), 			// 11 
+		        			 parseFloat(obj.infoSitio.fcJubilado.replace(/,/g, '')), 		// 12
+		        			 parseFloat(obj.infoSitio.fcOtraOcupacion.replace(/,/g, '')), 	// 13
 		        			 ]
 			        }]
 			    },
@@ -792,4 +896,18 @@ function ClassCompetencia(){
 /* ------  TOTAL de Radios -------*/
 function getSizeRadios(){
   return Object.keys(objArray).length;
+}
+
+function formatMiles(numberf){
+	var number = 0;
+	number = parseInt(numberf.replace(",","")) 
+	 return number
+}
+
+function numberWithCommas(x) {
+    x = x.toString();
+    var pattern = /(-?\d+)(\d{3})/;
+    while (pattern.test(x))
+        x = x.replace(pattern, "$1,$2");
+    return x;
 }

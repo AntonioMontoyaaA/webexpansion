@@ -137,8 +137,27 @@ $(function(){
 	
 	
 	$('#verRadiosEstatus').trigger('click');
-	
+	totalAnillosNuevos();
 });
+
+function totalAnillosNuevos(){
+	invocarJSONServiceAction("obtieneTotalRadiosNuevos"
+			,{ },
+		'response',
+		function() {
+		
+		cargaMensajeModal("Localizador","Error en el servicio consultar radios.", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+
+		},
+		function() {
+		//Función al finalizar
+		});
+	
+	response = function(data){
+		$("#radios-nuevos-span").html(data.radios);
+	}
+	
+}
 
 /* === DOWNLOAD PLANTILLA ===*/
 function download_ejemplo(){
@@ -1214,9 +1233,15 @@ function inicializaCalendarios() {
 	$(".ui-datepicker-trigger").hide();
 	
 	var dateHoy = new Date();
+	var dateMesAnt = new Date();
+	dateMesAnt.setDate(dateMesAnt.getDate() - 30);
+	var FECHA_HOYMES = $.datepicker.formatDate('dd/mm/yy',dateMesAnt);
+	
 	var FECHA_HOY = $.datepicker.formatDate('dd/mm/yy',dateHoy);
 	var FECHA_HOY2 = $.datepicker.formatDate('dd/mm/yy',dateHoy);
 	var FECHA_HOY3 = $.datepicker.formatDate('dd/mm/yy',dateHoy);
+	
+	
 	
 	$( "#datepicker1").datepicker({
 		maxDate:0,
@@ -1233,7 +1258,7 @@ function inicializaCalendarios() {
 	});
 	
 	$("#datepicker1").datepicker.dateFormat = 'dd/MM/yy';
-	$("#datepicker1").val(FECHA_HOY);
+	$("#datepicker1").val(FECHA_HOYMES);
 	
 	
 	
@@ -1757,7 +1782,8 @@ function addMarkerEstatus(obj, map) {
 	          
 	          
 	          $(".contentPopUpInfo").show();
-	          pintarGeneradores(obj,map);
+	          pintarSolGeneradores(obj,map);
+	          
 	          pintarMdsAnillos(obj,map);
 	          pintarCompetencias(obj,map);
 	          
@@ -2307,24 +2333,18 @@ function getAnillosXApi( nombreAnillo, fechaAnilloInit, fechaAnilloFin , idEstad
 			}
 		});
 
-//		estatusN >0 ? $("#estatusN").html("("+estatusN+")") : false;
-//		estatusA >0 ? $("#estatusA").html("("+estatusA+")") : false;
-//		estatusP >0 ? $("#estatusP").html("("+estatusP+")") : false;
-//		estatusS >0 ? $("#estatusS").html("("+estatusS+")") : false;
-//		estatusC >0 ? $("#estatusC").html("("+estatusC+")") : false;
-//		estatusM >0 ? $("#estatusM").html("("+estatusM+")") : false;
+		estatusN >0 ? $("#estatusN").html("("+estatusN+")") : false;
+		estatusA >0 ? $("#estatusA").html("("+estatusA+")") : false;
+		estatusP >0 ? $("#estatusP").html("("+estatusP+")") : false;
+		estatusS >0 ? $("#estatusS").html("("+estatusS+")") : false;
+		estatusC >0 ? $("#estatusC").html("("+estatusC+")") : false;
+		estatusM >0 ? $("#estatusM").html("("+estatusM+")") : false;
 
-		  $("#estatusN").html("(99,999)");
-		  $("#estatusA").html("(99,999)");
-		  $("#estatusP").html("(99,999)");
-		  $("#estatusS").html("(99,999)");
-		  $("#estatusC").html("(99,999)");
-		  $("#estatusM").html("(99,999)");
 
-		
 		map.fitBounds(boundsGeneral);
 	    map.panToBounds(boundsGeneral); 
 		setTimeout(function(){cierraLoading();},500);
+		totalAnillosNuevos();
 	}
 }
 
@@ -2415,6 +2435,21 @@ function pintarGeneradores(obj,thisMap){
 	});
 }
 
+function pintarSolGeneradores(obj,thisMap){
+	
+	
+	if(obj == null || obj.generadores == null || obj.generadores.length <= 0){
+		return false;
+	}
+
+	var idg = 0;
+	obj.generadores.forEach(function(generador,ind){
+		idg = generador.generadorId;
+		if(idg == 100004 ||idg == 100003 || idg ==100002 || idg ==100001 || idg ==100005)
+			generador.marker.setMap(thisMap);
+	});
+}
+
 function pintarMdsAnillos(obj,thisMap){
 	if(obj == null || obj.mds == null || obj.mds.length <= 0){
 		return false;
@@ -2431,7 +2466,6 @@ function pintarGeneradoresFiltro(arrayBbj,thisMap, generadorId){
 	if(arrayBbj == null || arrayBbj <= 0){
 		return false;
 	}
-	
 	
 	arrayBbj.forEach(function(obj,index){
 		if(obj.generadorId == generadorId){

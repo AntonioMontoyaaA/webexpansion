@@ -214,14 +214,14 @@
   		<div class="espacio"></div>
 	 	<div class="contentImei px-3 py-3" >
 					
-					<div id="comboMotivos" style="padding-bottom: 15px;" class="row mx-0">
+					<div  style="padding-bottom: 15px;" class="row mx-0">
 					<span class="etiqueta negrita px-0 col-2">GERENTE:</span>
 				      	<select style="width: 251px; background: transparent;" id="select_employeeMDGereModal" class="chosen-select s_drop col-10">
 				      		<option class="drop_option" value="0">Seleccionar gerente</option>
 				      	</select>
 				     </div>
 				     
-				     <div id="comboMotivos" style="padding-bottom: 15px;" class="row mx-0">
+				     <div  style="padding-bottom: 15px;" class="row mx-0">
 				     	<span class="etiqueta negrita px-0 col-2">JEFE:</span>
 				      	<select style="width: 251px; background: transparent;" id="select_employeeMDJefesModal"  class="chosen-select s_drop col-10 ">
 				      		<option class="drop_option" value="0">Sin jefes</option>
@@ -260,21 +260,21 @@
 	
 	 	<div class="content px-3 py-4" >		
 		 	<div class="row mx-0 px-0 col-12">
-		 		<div id="comboMotivos" style="padding-bottom: 15px;" class="row mx-0 col">
+		 		<div  style="padding-bottom: 15px;" class="row mx-0 col">
 					<span class="etiqueta negrita t16 px-0 col-3 ">GERENTE:</span>
 			      	<select style="background: transparent; font-size: 16px;" id="select_gerenteMD" class="chosen-select s_drop col-9" onchange="cargaMDXUsuario()" onclick="verificaCambiosModal(1)">
 			      		<option class="drop_option" value="0">Seleccionar gerente</option>
 			      	</select>
 			     </div>
 			     
-			     <div id="comboMotivos" style="padding-bottom: 15px;" class="row mx-0 col">
+			     <div style="padding-bottom: 15px;" class="row mx-0 col">
 			     	<span class="etiqueta negrita t16 px-0 col-2">JEFE:</span>
 			      	<select style="background: transparent; font-size: 16px;" id="select_jefes_fotos"  class="chosen-select s_drop col-10 " onclick="verificaCambiosModal(1)">
 			      		<option class="drop_option" value="0">Sin jefes</option>
 			      	</select>
 			     </div>
 			     
-			      <div id="comboMotivos" style="padding-bottom: 15px; max-width: 300px;" class="row mx-0 col px-0">
+			      <div style="padding-bottom: 15px; max-width: 300px;" class="row mx-0 col px-0">
 			     	<span class="etiqueta negrita  t16 px-0 mr-2">MD:</span>
 			      	<select style="background: transparent; font-size: 16px;" id="select_MD"  class="chosen-select s_drop col-9 px-0" onclick="verificaCambiosModal(1)">
 			      		<option class="drop_option" value="0">Sin MD's</option>

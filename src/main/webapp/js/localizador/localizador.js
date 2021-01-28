@@ -1727,6 +1727,7 @@ function addMarkerEstatus(obj, map) {
 		    draggable: false,
 		    animation: google.maps.Animation.DROP,
 		    map: map,
+		    title: obj.sitio,
 		    id : obj.id,
 		    icon: icono,
 			map_icon_label: '<span class="map-icon map-icon-point-of-interest"></span>'
@@ -2001,7 +2002,7 @@ function verInfoMd(obj){
 			if(data.codigo == 400){
 				cargaMensajeModal("Localizador",data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
 			}else{
-				ARRAYOBJESTADOS = data.salida;
+				ARRAYOBJESTADOS = data.nuevos;
 				
 				var sitiosSearch =  $("#listaSitios").html("");				
 				ARRAYSITIOS = new Array();

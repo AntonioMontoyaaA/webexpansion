@@ -128,20 +128,42 @@
 				    
 				   
 					<div class="contentDetalle" style=" padding: 0px;">
-						<input id="check_nuevos" type="checkbox" style="margin-bottom: 2px;" name="nuevo"    class="spanText" value="1" checked> 
-						<span id="spand_nuevo" class="negrita t14 spanText_" >Nuevos <span id="estatusN"></span></span>  <br>
-						<input id="check_proceso" type="checkbox" style="margin-bottom: 2px;" name="enproceso"   class="spanText" value="3" checked>
-						<span id="spand_proceso" class="negrita t14 spanText_ " >En proceso <span id="estatusP"></span></span> <br>
-						<input id="check_cancelado" type="checkbox" style="margin-bottom: 2px;" name="cancelado" class="spanText" value="5" checked> 
-						<span id="spand_cancelado" class=" negrita t14 spanText_" >Cancelado <span id="estatusC"></span></span>  <br>
-<!-- 					</div> -->
-<!-- 					<div class="contentDetalle" style="padding-left: 2%;"> -->
-						<input id="check_asignados" type="checkbox" style="margin-bottom: 2px;" name="asignado" class="spanText" value="2" checked> 
-						<span id="spand_asignado" class="negrita t14 spanText_" >Asignados <span id="estatusA"></span></span> <br>						  
-						<input id="check_concluido" type="checkbox" style="margin-bottom: 2px;" name="concluido" class="spanText" value="4" checked> 
-						<span id="spand_concluido" class="negrita t14 spanText_ " >Sin sitios <span id="estatusS"></span></span><br> 
-						<input id="check_MdsRadios" type="checkbox" style="margin-bottom: 2px;" name="conmds" class="spanText" value="1">  		 
-						<span id="spand_mds" class=" negrita t14 spanText_" >Con MD's <span id="estatusM"></span></span> <br>
+						<label class="check-container"> 
+							<span id="spand_nuevo" class="negrita t14 spanText_" > Nuevos <span id="estatusN"></span></span>
+						  <input id="check_nuevos" type="checkbox" checked="checked">
+						  <span class="checkmark"></span>
+						</label>
+						
+						<label class="check-container"> 
+							<span id="spand_proceso" class="negrita t14 spanText_ " >En proceso <span id="estatusP"></span></span>
+						  <input id="check_proceso" type="checkbox" checked="checked">
+						  <span class="checkmark"></span>
+						</label>
+						
+						<label class="check-container"> 
+						  <span id="spand_cancelado" class=" negrita t14 spanText_" >Cancelado <span id="estatusC"></span></span>
+						  <input id="check_cancelado" type="checkbox" checked="checked">
+						  <span class="checkmark"></span>
+						</label>
+						
+						<label class="check-container"> 
+						  <span id="spand_asignado" class="negrita t14 spanText_" >Asignados <span id="estatusA"></span></span>
+						  <input id="check_asignados" type="checkbox" checked="checked">
+						  <span class="checkmark"></span>
+						</label>
+						
+						<label class="check-container"> 
+						  <span id="spand_concluido" class="negrita t14 spanText_ " >Sin sitios <span id="estatusS"></span></span>
+						  <input id="check_concluido" type="checkbox" checked="checked">
+						  <span class="checkmark"></span>
+						</label>
+						
+						<label class="check-container"> 
+						  <span id="spand_mds" class=" negrita t14 spanText_" >Con MD's <span id="estatusM"></span></span>
+						  <input id="check_MdsRadios" type="checkbox" checked="checked">
+						  <span class="checkmark"></span>
+						</label>
+	
 					</div>
 					
 					
@@ -266,7 +288,7 @@
 <!-- 						<span class="infoRadio"  > - </span> -->
 <!-- 					</div> -->
 					
-					<div class="etiqueta-size-colum etiqueta-white-l"> URL: </div>
+					<div class="etiqueta-size-colum etiqueta-white-l"> Ubicación: </div>
 					<div id="infoUrl"  class="col-9 etiqueta-white-l">
 						
 					</div>
@@ -362,17 +384,71 @@
 	
 				
 					<!-- GENERADORES -->	
-					<div class="col-12 pt-1"><span class="negrita t14 subTitleInfo">Generadores <input id="check-tdos-gen" type="checkbox" style="margin-bottom: 5px;" name="nuevo"    class="spanText" value="1" checked></span> 
-<%-- 						<c:if test="${permisos['PRIVILEGIO.SUBMENU.VOKSE.12,7']}"> --%>
+					<div class="col-12 pt-1">
+						 <label class="check-container" style="padding-left: 0px;"> 
+						  <span class="negrita t14 subTitleInfo">
+						  Generadores </span> 
+							  <input id="check-tdos-gen" type="checkbox" checked="checked" style="padding-left: 0px;">
+							  <span class="checkmark" style="left: 90px;"></span>
+						</label>
+						
+<!-- 						 <input id="check-tdos-gen" type="checkbox" style="margin-bottom: 5px;" name="nuevo"    class="spanText" value="1" checked> -->
+						<c:if test="${permisos['PRIVILEGIO.SUBMENU.VOKSE.12,7']}">
 							<button type="button" id="btonRecalculaGeneradores"  class=" btn bton-color-azul btn_aceptar float-right">Recalcular </button>
-<%-- 					 	</c:if> --%>
+					 	</c:if>
 					</div>
 				
-					<div class="col-20-generadores p-0 etiqueta-white-l text-center"> Mercados <input id="check-mercados" type="checkbox" style="margin-bottom: 5px;" name="nuevo"    class="spanText" value="1" checked> </div>
-					<div class="col-20-generadores p-0 etiqueta-white-l text-center"> Escuelas <input id="check-escuela" type="checkbox" style="margin-bottom: 5px;" name="nuevo"    class="spanText" value="1" checked> </div>
-					<div class="col-20-generadores p-0 etiqueta-white-l text-center"> Hospitales <input id="check-hospital" type="checkbox" style="margin-bottom: 5px;" name="nuevo"    class="spanText" value="1" checked> </div>
-					<div class="col-20-generadores p-0 etiqueta-white-l text-center"> Templos <input id="check-templo" type="checkbox" style="margin-bottom: 5px;" name="nuevo"    class="spanText" value="1" checked> </div>
-					<div class="col-20-generadores p-0 etiqueta-white-l text-center"> O. gobierno <input id="check-ofGob" type="checkbox" style="margin-bottom: 5px;" name="nuevo"    class="spanText" value="1" checked> </div>
+				<div class="col-20-generadores text-center p-0">
+					<label class="check-container" style="padding-left: 0px; margin-bottom: 15px;"> 
+					  <span class=" etiqueta-white-l ">
+					  Mercados </span> 
+						  <input id="check-mercados" type="checkbox" checked="checked" style="padding-left: 22px;">
+						  <span class="checkmark" style="left: 48%; top: 20px;"></span>
+					</label>
+				</div>
+				
+				<div class="col-20-generadores text-center p-0">
+					<label class="check-container" style="padding-left: 0px; margin-bottom: 15px;"> 
+					  <span class=" etiqueta-white-l ">
+					  Escuelas </span> 
+						  <input id="check-escuela" type="checkbox" checked="checked" style="padding-left: 0px;">
+						  <span class="checkmark" style="left: 48%; top: 20px;"></span>
+					</label>
+				</div>
+				
+				<div class="col-20-generadores text-center p-0">
+					<label class="check-container" style="padding-left: 0px; margin-bottom: 15px;"> 
+					  <span class=" etiqueta-white-l ">
+					  Hospitales </span> 
+						  <input id="check-hospital" type="checkbox" checked="checked" style="padding-left: 0px;">
+						  <span class="checkmark" style="left: 48%; top: 20px;"></span>
+					</label>
+				</div>
+				
+				<div class="col-20-generadores text-center p-0">
+					<label class="check-container" style="padding-left: 0px; margin-bottom: 15px;"> 
+					  <span class=" etiqueta-white-l ">
+					  Templos </span> 
+						  <input id="check-templo" type="checkbox" checked="checked" style="padding-left: 0px;">
+						  <span class="checkmark" style="left: 48%; top: 20px;"></span>
+					</label>
+				</div>
+				
+				<div class="col-20-generadores text-center p-0">
+					<label class="check-container" style="padding-left: 0px; margin-bottom: 15px;"> 
+					  <span class=" etiqueta-white-l ">
+					  O. gobierno </span> 
+						  <input id="check-ofGob" type="checkbox" checked="checked" style="padding-left: 0px;">
+						  <span class="checkmark" style="left: 48%; top: 20px;"></span>
+					</label>
+				</div>
+				
+		
+<!-- 					<div class="col-20-generadores p-0 etiqueta-white-l text-center"> Mercados <input id="check-mercados" type="checkbox" style="margin-bottom: 5px;" name="nuevo"    class="spanText" value="1" checked> </div> -->
+<!-- 					<div class="col-20-generadores p-0 etiqueta-white-l text-center"> Escuelas <input id="check-escuela" type="checkbox" style="margin-bottom: 5px;" name="nuevo"    class="spanText" value="1" checked> </div> -->
+<!-- 					<div class="col-20-generadores p-0 etiqueta-white-l text-center"> Hospitales <input id="check-hospital" type="checkbox" style="margin-bottom: 5px;" name="nuevo"    class="spanText" value="1" checked> </div> -->
+<!-- 					<div class="col-20-generadores p-0 etiqueta-white-l text-center"> Templos <input id="check-templo" type="checkbox" style="margin-bottom: 5px;" name="nuevo"    class="spanText" value="1" checked> </div> -->
+<!-- 					<div class="col-20-generadores p-0 etiqueta-white-l text-center"> O. gobierno <input id="check-ofGob" type="checkbox" style="margin-bottom: 5px;" name="nuevo"    class="spanText" value="1" checked> </div> -->
 					
 					
 					<div class="col-20-generadores etiqueta-white-l text-center"> <img class="img-tamanio-info-demografica" id="bell_rojo" style="margin-bottom:0px;" src="img/localizador/icon-mercado.png"> </div>
@@ -397,14 +473,93 @@
 					<div class="col-4 etiqueta-white-l text-center"> <span id="miba"  > - </span> </div>
 	
 					<!-- UNIDADES -->	
-					<div class="col-12 pt-0 pb-0 div-unidades-economicas" style="height: 12px;"><span class="negrita t14 subTitleInfo">Unidades Económicas <input id="check-tdos-ue" type="checkbox" style="margin-bottom: 5px;" name="nuevo"    class="spanText" value="1" checked></span></div>
+					<div class="col-12 pt-0 pb-0 div-unidades-economicas" style="height: 12px;">
+<!-- 						<span class="negrita t14 subTitleInfo"> -->
+<!-- 							Unidades Económicas <input id="check-tdos-ue" type="checkbox" style="margin-bottom: 5px;" name="nuevo"    class="spanText" value="1" checked> -->
+<!-- 						</span> -->
+					 	<label class="check-container" style="padding-left: 0px;"> 
+						 <span class="negrita t14 subTitleInfo">
+						   Unidades Económicas 
+						 </span> 
+							  <input id="check-tdos-ue" type="checkbox" checked="checked" style="padding-left: 0px;">
+							  <span class="checkmark" style="left: 150px;"></span>
+						</label>
+					</div>
 					
-					<div class="col-2 p-0 etiqueta-white-l text-center div-unidades-economicas">Panadería <br><input id="check-panaderia" type="checkbox"   name="nuevo"    class="spanText" value="1" > </div>
-					<div class="col-2 p-0 etiqueta-white-l text-center div-unidades-economicas">Tortillería <br><input id="check-tortilleria" type="checkbox"   name="nuevo"    class="spanText" value="1" > </div>
-					<div class="col-2 p-0 etiqueta-white-l text-center div-unidades-economicas">Abarrotes <br><input id="check-abarrotes" type="checkbox"  name="nuevo"    class="spanText" value="1" > </div>
-					<div class="col-2 p-0 etiqueta-white-l text-center div-unidades-economicas">Carnicería <br><input id="check-carniceria" type="checkbox"  name="nuevo"    class="spanText" value="1" > </div>
-					<div class="col-2 p-0 etiqueta-white-l text-center div-unidades-economicas">Recaudería <br><input id="check-recauderia" type="checkbox"   name="nuevo"    class="spanText" value="1" > </div>
-					<div class="col-2 p-0 etiqueta-white-l text-center div-unidades-economicas">Pollería <br><input id="check-polleria" type="checkbox"   name="nuevo"    class="spanText" value="1" > </div>
+				<div class="col-2 text-center p-0">
+					<label class="check-container" style="padding-left: 0px; margin-bottom: 15px;"> 
+					  <span class=" etiqueta-white-l pl-0">
+					 	Panadería </span> 
+						  <input id="check-panaderia" type="checkbox" checked="checked" style="padding-left: 0px;">
+						  <span class="checkmark" style="left: 40%; top: 20px;"></span>
+					</label>
+				</div>
+				
+				<div class="col-2 text-center p-0">
+					<label class="check-container" style="padding-left: 0px; margin-bottom: 15px;"> 
+					  <span class=" etiqueta-white-l pl-0">
+					  Tortillería </span> 
+						  <input id="check-tortilleria" type="checkbox" checked="checked" style="padding-left: 0px;">
+						  <span class="checkmark" style="left: 40%; top: 20px;"></span>
+					</label>
+				</div>
+				
+				<div class="col-2 text-center p-0">
+					<label class="check-container" style="padding-left: 0px; margin-bottom: 15px;"> 
+					  <span class=" etiqueta-white-l pl-0">
+					 Abarrotes </span> 
+						  <input id="check-abarrotes" type="checkbox" checked="checked" style="padding-left: 0px;">
+						  <span class="checkmark" style="left: 40%; top: 20px;"></span>
+					</label>
+				</div>
+				
+				<div class="col-2 text-center p-0">
+					<label class="check-container" style="padding-left: 0px; margin-bottom: 15px;"> 
+					  <span class=" etiqueta-white-l pl-0">
+					 Carnicería </span> 
+						  <input id="check-carniceria" type="checkbox" checked="checked" style="padding-left: 0px;">
+						  <span class="checkmark" style="left: 40%; top: 20px;"></span>
+					</label>
+				</div>
+				
+				<div class="col-2 text-center p-0">
+					<label class="check-container" style="padding-left: 0px; margin-bottom: 15px;"> 
+					  <span class=" etiqueta-white-l pl-0">
+					 Recaudería </span> 
+						  <input id="check-recauderia" type="checkbox" checked="checked" style="padding-left: 0px;">
+						  <span class="checkmark" style="left: 40%; top: 20px;"></span>
+					</label>
+				</div>
+				
+				<div class="col-2 text-center p-0">
+					<label class="check-container" style="padding-left: 0px; margin-bottom: 15px;"> 
+					  <span class=" etiqueta-white-l pl-0">
+					 	Panadería </span> 
+						  <input id="check-polleria" type="checkbox" checked="checked" style="padding-left: 0px;">
+						  <span class="checkmark" style="left: 40%; top: 20px;"></span>
+					</label>
+				</div>
+				
+
+				
+
+				
+				
+				
+				
+				
+
+				
+
+
+
+				
+<!-- 					<div class="col-2 p-0 etiqueta-white-l text-center div-unidades-economicas">Panadería <br><input id="check-panaderia" type="checkbox"   name="nuevo"    class="spanText" value="1" > </div> -->
+<!-- 					<div class="col-2 p-0 etiqueta-white-l text-center div-unidades-economicas">Tortillería <br><input id="check-tortilleria" type="checkbox"   name="nuevo"    class="spanText" value="1" > </div> -->
+<!-- 					<div class="col-2 p-0 etiqueta-white-l text-center div-unidades-economicas">Abarrotes <br><input id="check-abarrotes" type="checkbox"  name="nuevo"    class="spanText" value="1" > </div> -->
+<!-- 					<div class="col-2 p-0 etiqueta-white-l text-center div-unidades-economicas">Carnicería <br><input id="check-carniceria" type="checkbox"  name="nuevo"    class="spanText" value="1" > </div> -->
+<!-- 					<div class="col-2 p-0 etiqueta-white-l text-center div-unidades-economicas">Recaudería <br><input id="check-recauderia" type="checkbox"   name="nuevo"    class="spanText" value="1" > </div> -->
+<!-- 					<div class="col-2 p-0 etiqueta-white-l text-center div-unidades-economicas">Pollería <br><input id="check-polleria" type="checkbox"   name="nuevo"    class="spanText" value="1" > </div> -->
 					
 					
 					<div class="col-2 etiqueta-white-l text-center div-unidades-economicas"> <img class="img-tamanio-info-demografica" id="bell_rojo" src="img/localizador/icon-panaderia.png"> </div>

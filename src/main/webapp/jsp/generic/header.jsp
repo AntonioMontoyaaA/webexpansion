@@ -38,7 +38,7 @@
 						</c:if>
 						<c:if test="${permisos['PRIVILEGIO.MENU.VOKSE.12']}">
 							<li id="localizadorMenu" class="nav-item">
-								<a id="idlocalizador" class="nav-link blanco t12" href="localizador">Geolocation	
+								<a id="idlocalizador" class="nav-link blanco t12" href="localizador">Geolocalización	
 								<div id="radios-nuevos-total" class="radios-nuevos-total">
 									<span id="radios-nuevos-span" class="radios-nuevos-span">0</span>
 								</div>

@@ -145,8 +145,8 @@ function imprimeInfoRadio() {
 		}
 		
 		cadena += "<div class='row'><div class='col-lg-12 col-12'><span class='titulo_detalle_md_20'>" + radioAsignado.nombreRadio + "</span></div></div>" +
-					"<div class='row'><div class='col-lg-12 col-12'><span class='contenido_cajas_20'>Asignado el: " + fechaAsignado + "</span></div></div>" +
-					"<div class='row'><div class='col-lg-6 col-6'><span class='contenido_cajas_20'>Tipo: </span><span class='titulo_detalle_md_20' style='font-size: 0.7em;'>" + radioAsignado.tipoEstrategia + "</span></div>" + 
+					"<div class='row'><div class='col-lg-12 col-12'><span class='contenido_cajas_20'>Asignado el: " + radioAsignado.fechaAsignado + "</span></div></div>" +
+			
 						"<div class='col-lg-6 col-6'><span class='contenido_cajas_20'>Estatus: </span><span class='titulo_detalle_md_20' style='font-size: 0.7em;'>" + radioAsignado.estatusRadio + "</span></div>" +
 					"</div>" +
 					"<div class='row' style='border-bottom: 1px solid #071B36; margin-bottom: 10px;height: 10px;'>&nbsp;</div>" +

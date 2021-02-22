@@ -542,7 +542,7 @@
 				<div class="col-2 text-center p-0">
 					<label class="check-container" style="padding-left: 0px; margin-bottom: 15px;"> 
 					  <span class=" etiqueta-white-l pl-0">
-					 	Panadería </span> 
+					 	Pollería </span> 
 						  <input id="check-polleria" type="checkbox" checked="checked" style="padding-left: 0px;">
 						  <span class="checkmark" style="left: 40%; top: 20px;"></span>
 					</label>

@@ -125,8 +125,19 @@
 				  
 				   
 					
-				    
-				   
+				   <span id="" class="negrita t14 spanText_" >Ver tiendas</span>
+				    <label class="switch ml-2"> 
+                      <input type="checkbox" id="ver-tiendas-map" checked>
+                      <span class="slider round"></span>
+                    </label>
+                    
+                    
+                    <span id="" class="negrita t14 spanText_" >Ver Mds</span>
+                     <label class="switch ml-2"> 
+                      <input type="checkbox" id="ver-mds-map" checked>
+                      <span class="slider round"></span>
+                    </label>
+                    
 					<div class="contentDetalle" style=" padding: 0px;">
 						<label class="check-container"> 
 							<span id="spand_nuevo" class="negrita t14 spanText_" > Nuevos <span id="estatusN"></span></span>
@@ -158,11 +169,11 @@
 						  <span class="checkmark"></span>
 						</label>
 						
-						<label class="check-container"> 
-						  <span id="spand_mds" class=" negrita t14 spanText_" >Con MD's <span id="estatusM"></span></span>
-						  <input id="check_MdsRadios" type="checkbox" checked="checked">
-						  <span class="checkmark"></span>
-						</label>
+<!-- 						<label class="check-container">  -->
+<!-- 						  <span id="spand_mds" class=" negrita t14 spanText_" >Con MD's <span id="estatusM"></span></span> -->
+<!-- 						  <input id="check_MdsRadios" type="checkbox" checked="checked"> -->
+<!-- 						  <span class="checkmark"></span> -->
+<!-- 						</label> -->
 	
 					</div>
 					
@@ -176,18 +187,15 @@
 				<c:if test="${permisos['PRIVILEGIO.SUBMENU.VOKSE.12,2']}">
 						<div  class="hidden pt-2" id="div-asignacion-anillo">
 					   	<span id="div-asignar-anillo-expande" class="negrita t14 pl-0 titleDivContent">Asignar radios </span>  <br>
-	
-					  	   
-						   <span class="negrita t14 spanText">1) Seleccionar jefe. </span><br>
-							
+
 							<div id="comboMotivos" style="padding-bottom: 3px; padding-top: 3px;">
-						      	<select id="select_employee"  data-placeholder="Seleccionar un jefe" class="chosen-select"  tabindex="2">
+						      	<select id="select_employee"  data-placeholder="Seleccionar un gerente" class="chosen-select"  tabindex="2">
 						      		<option value="0">Seleccionar jefe</option>
 						      	</select>
 						    </div>
 						    
 <!-- 							<span class="negrita t14 spanText">3) Click para seleccionar el radio</span><br> -->
-							<span class="negrita t14 spanText">2) Click en  Asignar radio</span>
+
 							<br>
 							<br>
 							

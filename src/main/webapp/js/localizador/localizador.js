@@ -29,6 +29,10 @@ var json_excel;
 var objArray = {};
 var radiosArray = [];
 var MdsArray = [];
+var MdsEstArray = [];
+var TdasEstArray = [];
+
+
 
 var markerId = 0;
 var radioSeleccionado;
@@ -138,6 +142,18 @@ $(function(){
 	
 	$('#verRadiosEstatus').trigger('click');
 	totalAnillosNuevos();
+	
+	$("#ver-tiendas-map").change(function(){
+		var vertiendas = $("#ver-tiendas-map").is(":Checked");
+		fvertiendas(vertiendas);
+	});
+	$("#ver-mds-map").change(function(){
+		var vermds = $("#ver-mds-map").is(":Checked");
+		fvermds(vermds);
+	});
+	
+	
+	
 });
 
 function totalAnillosNuevos(){
@@ -255,6 +271,7 @@ function showOptionAction(){
 		quitarPinUbicacionActual();
 		cleanMapRutas();
 		clearMapsMds(MdsArray);
+		cleanMapMDsTdas();
 		cleanMapRutasAllJefes();
 		pintarMdsAnillos(radioSeleccionado,null);
 		pintarGeneradores(radioSeleccionado,null);
@@ -782,8 +799,13 @@ function desAsignarRadio(){
 		var idJefeExpansion = $("#select_employee option:selected").val();
 		var idRadioAginar   =  radioSeleccionado == undefined ? undefined :  radioSeleccionado.id;
 
-		if(objArray[idRadioDesAsignar] != undefined && (objArray[idRadioDesAsignar].estatusId == 2 || objArray[idRadioDesAsignar].estatusId == 3)){
-			valorAsigna = (objArray[idRadioDesAsignar].estatusId == 2 || objArray[idRadioDesAsignar].estatusId == 3)? 2 : 1;
+		
+		if(idJefeExpansion == undefined || idJefeExpansion == -1 ){
+			idJefeExpansion = objArray[idRadioDesAsignar].usrAsignadoId;
+		}
+		
+		if(objArray[idRadioDesAsignar] != undefined && (objArray[idRadioDesAsignar].estatusId == 2 || objArray[idRadioDesAsignar].estatusId == 3 || objArray[idRadioDesAsignar].estatusId == 1)){
+			valorAsigna = (objArray[idRadioDesAsignar].estatusId == 1 || objArray[idRadioDesAsignar].estatusId == 2 || objArray[idRadioDesAsignar].estatusId == 3)? 2 : 1;
 			idRadioAginar = idRadioDesAsignar;
 		}else{
 			
@@ -800,11 +822,11 @@ function desAsignarRadio(){
 					return false;
 				}
 				
-				if(objArray[idRadioAginar].estatusId == 2){
-					cierraLoading();
-					cargaMensajeModal("Localizador","Seleccione un radio.", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
-					return false;
-				}
+//				if(objArray[idRadioAginar].estatusId == 2 ){
+//					cierraLoading();
+//					cargaMensajeModal("Localizador","Seleccione un radio.", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+//					return false;
+//				}
 		}
 		
 		
@@ -839,11 +861,11 @@ function desAsignarRadio(){
 		cargaLoading();
 		
 
-		invocarJSONServiceAction("obtenerEmpleadosZona",{},
+		invocarJSONServiceAction("obtenergerentesRadios",{},
 				'llenarComboEmpleados',
 				function() {
 					//Funcion de error
-					cargaMensajeModal("Localizador","Error en el servicio obtener jefes de expansión.", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
+					cargaMensajeModal("Localizador","Error en el servicio obtener gerentes de expansión.", TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
 					elementId
 				    .empty()
 				    .append('<option selected="selected" value="">Selecione un jefe </option>')
@@ -856,6 +878,7 @@ function desAsignarRadio(){
 				});
 
 		llenarComboEmpleados = function(data){
+
 			if(data.codigo == 400){
 				cargaMensajeModal("Localizador",data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
 				return false;
@@ -2215,13 +2238,14 @@ function getAnillosXApi( nombreAnillo, fechaAnilloInit, fechaAnilloFin , idEstad
 				pintarGeneradores(radioSeleccionado,null);
 				pintarMdsAnillos(radioSeleccionado,null);
 				 pintarCompetencias(radioSeleccionado,null);
-				//cierraLoading();
+				cierraLoading();
 			},
 			function() {
 				//Función al finalizar
 			});
 
 	response = function(data){
+		
 		map = null;
 		map = new google.maps.Map(document.getElementById('map'), {
 		    zoom: 6,
@@ -2230,11 +2254,12 @@ function getAnillosXApi( nombreAnillo, fechaAnilloInit, fechaAnilloFin , idEstad
 		
 		boundsGeneral = new google.maps.LatLngBounds(); 
 		
-		
+		cleanMapMDsTdas();
 		pintarCompetencias(radioSeleccionado,null);
 		pintarGeneradores(radioSeleccionado,null);
 		pintarMdsAnillos(radioSeleccionado,null);
 		clearMarkers();
+		
 		if( data.codigo == 205 || data.codigo == 400 || data.codigo == 403 || data.radios == undefined){
 			cierraLoading();
 			cargaMensajeModal("Localizador",data.mensaje, TIPO_MENSAJE_ACEPTAR, TIPO_ESTATUS_ALERTA, null);
@@ -2258,6 +2283,27 @@ function getAnillosXApi( nombreAnillo, fechaAnilloInit, fechaAnilloFin , idEstad
 		$("#estatusC").html("");
 		$("#estatusM").html("");
 		
+		
+		var vertiendas = $("#ver-tiendas-map").is(":Checked");
+		var vermds = $("#ver-mds-map").is(":Checked");
+		
+		data.TotalTdas.forEach(function(element,index){
+			var mapaPaint = null;
+			
+			if(vertiendas)
+				mapaPaint = map;
+			
+			crearMarkerTiendasEstado(element,mapaPaint);
+		});
+		
+		data.TotalMds.forEach(function(element,index){
+			var mapaPaint = null;
+			
+			if(vermds)
+				mapaPaint = map;
+			
+			crearMarkerMdsEstado(element, map);
+		});
 		
 		data.radios.forEach(function(element,index){
 			
@@ -2395,6 +2441,60 @@ function crearMarkerMdsAnillo(obj){
 	 obj.marker = marker
 }
 
+function crearMarkerTiendasEstado(obj, pintar){
+	
+	var icon = {
+		   // url: "img/markers_MD.svg", // url
+		    url: "img/localizador/tiendaNeto.png", // url
+		    scaledSize: new google.maps.Size(30, 30), // scaled size
+		    origin: new google.maps.Point(0,0), // origin
+		    anchor: new google.maps.Point(0, 0) // anchor
+		};
+	
+	 var marker = new google.maps.Marker({
+		    position: new google.maps.LatLng(obj.latitud, obj.longitud),
+		    draggable: false,
+		    map: null,
+		    title:  obj.tiendaId +" - "+obj.nombre,
+			icon : icon,
+		  }); 
+	 
+	 marker.addListener("click",  function(){
+//		 obtieneDetalleMd(obj.nombre,obj.MdId);
+	 });
+	 marker.setMap(pintar);
+	 TdasEstArray.push(marker); 
+}
+
+function crearMarkerMdsEstado(obj, pintar){
+	
+	var icon = {
+		    url: "img/localizador/icon_md.png", // url
+		    scaledSize: new google.maps.Size(37, 37), // scaled size
+		    origin: new google.maps.Point(0,0), // origin
+		    anchor: new google.maps.Point(0, 0) // anchor
+		};
+	
+	 var marker = new google.maps.Marker({
+		    position: new google.maps.LatLng(obj.latitud, obj.longitud),
+		    draggable: false,
+		    map: null,
+		    title:  obj.mdId+" - "+obj.nombre,
+			icon : icon,
+		  }); 
+	 
+	 marker.addListener("click",  function(){
+		 obtieneDetalleMd(obj.nombre,obj.mdId);
+	 });
+	 
+	 marker.setMap(pintar);
+	 MdsEstArray.push(marker); 
+}
+
+
+
+
+
 function crearMarkerGenerador(obj){
 	
 	
@@ -2475,6 +2575,49 @@ function pintarGeneradoresFiltro(arrayBbj,thisMap, generadorId){
 	});
 }
 
+
+
+
+function cleanMapMDsTdas(){
+
+	TdasEstArray.forEach(function(element,index){
+		element.setMap(null);
+	});
+	
+	MdsEstArray.forEach(function(element,index){
+		element.setMap(null);
+	});
+	
+	TdasEstArray = [];
+	MdsEstArray = [];
+	
+}
+
+function fvertiendas(mapa){
+	var mapaTda = null;
+	
+	if(mapa){
+		mapaTda = map;
+	}
+	
+	TdasEstArray.forEach(function(element,index){
+		element.setMap(mapaTda);
+	});
+}
+
+function fvermds(mapa){
+	var mapaTda = null;
+	
+	if(mapa){
+		mapaTda = map;
+	}
+	
+	MdsEstArray.forEach(function(element,index){
+		element.setMap(mapaTda);
+	});
+}
+
+
 function OnSearch (input) {
     alert ("The current value of the search field is\n" + input.value);
 }
@@ -2484,5 +2627,3 @@ function OnSearch (input) {
 
 
 
-
-	

@@ -326,7 +326,7 @@ function verInformacionRadio(obj, vista_opcion){
 	$("#infoCalle2").html(obj.infoSitio.fcCalle2);
 	$("#infoColonia").html(obj.infoSitio.fcColonia);
 	$("#infoMunicipio").html(obj.infoSitio.fcMunicipio);
-	$(".infoNoVisitas").html(obj.visitasRadio);
+	$("#infoNoVisitas").html(obj.visitasRadio);
 	
 	
 	/* ==== INFORMACION ====*/
@@ -436,7 +436,7 @@ function verInformacionRadio(obj, vista_opcion){
 	var usuarioAsignado = "";
 	$("#divContentInfoRadio").html("");
 		
-	if( obj.estatusId == 5 || obj.estatusId == 4 || obj.estatusId == 3 || obj.estatusId == 2 && (obj.usrAsignadoId != undefined && obj.usrAsignadoId != "")){
+	if( obj.estatusId == 5 || obj.estatusId == 4 || obj.estatusId == 3 || obj.estatusId == 2 || obj.estatusId == 1 && (obj.UsrAsignado != null && obj.usrAsignadoId != undefined && obj.usrAsignadoId != "None")){
 			usuarioAsignado = '<div id="divInfoAsinacion" style="height: 18px;"> <h6 class="subTitleInfo-asig-anillo left_float">Asignado :  '+obj.UsrAsignado+'</h6>'+
 			'<button type="button" id="btonDescAsig" value="'+obj.id+'" class=" btn bton-quitar-asignacion btn_aceptar float-right">Quitar asignación </button></div> <div id="divFechAsinacion" class="pb-1"><h6 class="subTitleInfo-asig-anillo ">Fecha asignación :  '+obj.fechaAsignado+'</h6></div>';
 		

@@ -281,6 +281,10 @@
 	 <action name = "obtenerEmpleadosZona" 
 	  	class = "com.tiendas.neto.action.LocalizadorRadiosAction" 
 	  	method = "getEmpleadosZona" />
+	  	
+	  	 <action name = "obtenergerentesRadios" 
+	  	class = "com.tiendas.neto.action.LocalizadorRadiosAction" 
+	  	method = "getgerentesRadio" />
          	
      <action name = "asignarRadioLocalizado" 
 	  	class = "com.tiendas.neto.action.LocalizadorRadiosAction" 

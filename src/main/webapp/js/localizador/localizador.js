@@ -47,21 +47,21 @@ var iconMarke = { NUEVO : "img/icon-marker-new.svg",
 			      HERE: 'img/markers_NA.svg', 
 			      MD : 'img/icon_conMD.svg' }; 
 
-var iconMarkeGenerador = {  100001   : "img/localizador/pin/pin_templo.svg", 		// IGLESIA
-							100002  : "img/localizador/pin/pin_hospital.svg", 	 		// HOSPITAL		
-							100003	: "img/localizador/pin/pin_escuela.svg",  	// ESCUELA
-							100004	: "img/localizador/pin/pin_mercado.svg",  	// MERCADO
-							100005	: "img/localizador/pin/pin_ofgobierno.svg",  	// OFICINA DE GOBIERNO
-							100006	: "img/localizador/pin/pin_panaderia.svg",  	// PANADERIA
-							100007 	: 'img/localizador/pin/pin_tortilleria.svg', 			// TORTILLERIA
-							100008	: 'img/localizador/pin/pin_abarrotes.svg', 			// ABARROTES
-							100009	: 'img/localizador/pin/pin_carniceria.svg', 			// CARNICERIA
-							100010 	: "img/localizador/pin/pin_polleria.svg",	    // POLLERIA
-							100011	: "img/localizador/pin/pin_recauderia.svg"};			// RECAUDERIA
+var iconMarkeGenerador = {  100001   : "img/localizador/pin/pin_templo.png", 		// IGLESIA
+							100002  : "img/localizador/pin/pin_hospital.png", 	 		// HOSPITAL		
+							100003	: "img/localizador/pin/pin_escuela.png",  	// ESCUELA
+							100004	: "img/localizador/pin/pin_mercado.png",  	// MERCADO
+							100005	: "img/localizador/pin/pin_ofgobierno.png",  	// OFICINA DE GOBIERNO
+							100006	: "img/localizador/pin/pin_panaderia.png",  	// PANADERIA
+							100007 	: 'img/localizador/pin/pin_tortilleria.png', 			// TORTILLERIA
+							100008	: 'img/localizador/pin/pin_abarrotes.png', 			// ABARROTES
+							100009	: 'img/localizador/pin/pin_carniceria.png', 			// CARNICERIA
+							100010 	: "img/localizador/pin/pin_polleria.png",	    // POLLERIA
+							100011	: "img/localizador/pin/pin_recauderia.png"};			// RECAUDERIA
 				      	  	
-var iconMarkeCompetencias = {  100001   : "img/localizador/pin/pin_3b.svg", 		// 3b
-								100002  : "img/localizador/pin/pin_aurrera_express.svg", 	 	    // Bodega express
-								100011	: "img/localizador/pin/pin_aurrera.svg"};			// mi bodega
+var iconMarkeCompetencias = {  100001   : "img/localizador/pin/pin_3b.png", 		// 3b
+								100002  : "img/localizador/pin/pin_aurrera_express.png", 	 	    // Bodega express
+								100011	: "img/localizador/pin/pin_aurrera.png"};			// mi bodega
   	  	
 
 var PANT_OPCION   = {	ALTARADIOS : 0,
@@ -1807,14 +1807,15 @@ function addMarkerEstatus(obj, map) {
 	          
 	          $(".contentPopUpInfo").show();
 	          pintarSolGeneradores(obj,map);
-	          
-	          pintarMdsAnillos(obj,map);
 	          pintarCompetencias(obj,map);
 	          
 	          
 	          marker.setAnimation(google.maps.Animation.BOUNCE);
 	          obj.circle.setMap(map);
-	          setTimeout(function(){marker.setAnimation(google.maps.Animation.BOUNCE);},1100);
+	          setTimeout(function(){
+	        	  marker.setAnimation(google.maps.Animation.BOUNCE);
+	        	  
+	          },1100);
 	          
 	        }
 		 
@@ -2302,7 +2303,7 @@ function getAnillosXApi( nombreAnillo, fechaAnilloInit, fechaAnilloFin , idEstad
 			if(vermds)
 				mapaPaint = map;
 			
-			crearMarkerMdsEstado(element, map);
+			crearMarkerMdsEstado(element, mapaPaint);
 		});
 		
 		data.radios.forEach(function(element,index){
@@ -2351,13 +2352,13 @@ function getAnillosXApi( nombreAnillo, fechaAnilloInit, fechaAnilloFin , idEstad
 			radio.objCoordenadas 	= coordenadas;
 
 			/* Crear pines MDs */
-			if(element.mds.length > 0){
-				radio.mds     = element.mds;
-				
-				radio.mds.forEach(function(md,index){
-					crearMarkerMdsAnillo(md);
-				});				
-			}
+//			if(element.mds.length > 0){
+//				radio.mds     = element.mds;
+//				
+//				radio.mds.forEach(function(md,index){
+//					crearMarkerMdsAnillo(md);
+//				});				
+//			}
 			
 			/* Crear pines COMPETENCIA */
 			if(element.competencia.length > 0){
@@ -2500,7 +2501,7 @@ function crearMarkerGenerador(obj){
 	
 	var icon = {
 		    url:  iconMarkeGenerador[obj.generadorId], // url
-		    scaledSize: new google.maps.Size(45, 45), // scaled size
+		    scaledSize: new google.maps.Size(40, 40), // scaled size
 		    origin: new google.maps.Point(0,0), // origin
 		    anchor: new google.maps.Point(0, 0) // anchor
 		};

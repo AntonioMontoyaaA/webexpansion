@@ -12,10 +12,25 @@
 	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
 	
 	<package name="user" namespace="/" extends="struts-default">
+		<interceptors>  
+		       <interceptor class="com.tiendas.neto.interceptor.InterceptorAutorizadorPermisos" name="permisosInterceptor"/>  
+		       <interceptor-stack name="permisosStack">  
+			        <interceptor-ref name="permisosInterceptor"/>
+			        <interceptor-ref name="defaultStack"/>   
+			        
+		       </interceptor-stack>
+		 </interceptors>
+		 <default-interceptor-ref name="permisosStack"></default-interceptor-ref>
 		
 		
 		<action name="dashboard">
 			<result>jsp/dashboard.jsp</result>
+		</action>
+		<action name="configuracion">
+			<result>jsp/configuracion_usuario.jsp</result>
+		</action>
+		<action name="configuracionPerfiles">
+			<result>jsp/configuracion_perfiles.jsp</result>
 		</action>
 		<action name="tablero">
 			<result>jsp/tablero.jsp</result>
@@ -35,16 +50,63 @@
 		<action name="agenda">
 			<result>jsp/agenda.jsp</result>
 		</action>
+		
 		<action name="localizador">
 			<result>jsp/localizador.jsp</result>
 		</action>
+		
+		<action name="aprobadas">
+			<result>jsp/aprobadas.jsp</result>
+		</action>
+		
+		<action name="productividad">
+			<result>jsp/productividad.jsp</result>
+		</action>
+		
+		
 		<action name="">
 			<result>jsp/mensajes_historial.jsp</result>
 		</action>
 	</package>
 	
 	<package name="default" namespace="/" extends="struts-default">
-
+	<!-- ************************* RECUPERA CONTRASEÑA ***************************** -->
+	<action name = "recuperaPassAction" 
+         		class = "com.tiendas.neto.action.RecuperaPassAction" 
+         		method = "execute">
+    </action>
+    
+    <action name = "reestablecePassAction" 
+         		class = "com.tiendas.neto.action.ReestablecePassAction" 
+         		method = "execute">
+    </action>
+	
+	<!-- ************************* NOTIFICACIONES ***************************** -->
+	<action name = "notificacionesAction" 
+         		class = "com.tiendas.neto.action.NotificacionesAction" 
+         		method = "execute">
+    </action>
+    <action name = "marcaNotificacionAction" 
+         		class = "com.tiendas.neto.action.NotificacionesAction" 
+         		method = "marcarLeido">
+    </action>
+    
+    <action name = "notificaciones" 
+         	class = "com.tiendas.neto.action.NotificacionesAction" 
+         	method = "notificacionesMensajesAvisos">
+    </action>
+    
+    <action name = "marcaNotificacionLeida" 
+         	class = "com.tiendas.neto.action.NotificacionesAction" 
+         	method = "marcaNotificacionLeida">
+    </action>
+    
+    <!-- ********************************************************************** -->
+		<action name = "EnviaSubmodulosAction" 
+         		class = "com.tiendas.neto.action.EnviaSubmodulosAction" 
+         		method = "execute">
+      	</action>
+      	
 		<action name = "EnviaFechaAction" 
          		class = "com.tiendas.neto.action.EnviaFechaAction" 
          		method = "execute">
@@ -56,8 +118,19 @@
          	<result name = "success">jsp/autorizadas.jsp</result>
       	</action>
       	
+      	<action name = "tablero_info"
+                class = "com.tiendas.neto.action.TableroInfoAction"
+                method = "execute">
+            <result name = "success">jsp/tablero.jsp</result>
+         </action>
+      	
       	<action name = "excelAsignadasAction" 
          		class = "com.tiendas.neto.action.excel.ExcelAsignadasAction" 
+         		method = "execute">
+      	</action>
+      	
+      	<action name = "excelTableroAction" 
+         		class = "com.tiendas.neto.action.excel.ExcelTableroAction" 
          		method = "execute">
       	</action>
       	
@@ -79,10 +152,25 @@
          	<result name = "success">jsp/mensajes_historial.jsp</result>
       	</action>
       	
+      	<action name = "validacionMensajesAction" 
+         		class = "com.tiendas.neto.action.GuardaMensajeAction" 
+         		method = "validacionMensajesAction">
+      	</action>
+      	
       	<action name = "memoria_detalle_x_id" 
          		class = "com.tiendas.neto.action.DetalleMemoriaXIdAction" 
          		method = "execute">
          	<result name = "success">jsp/asignadas_detalle.jsp</result>
+      	</action>
+      	<action name = "consulta_gen_md_nuevo" 
+         		class = "com.tiendas.neto.action.DetalleMemoriaXIdAction" 
+         		method = "consultaGenMDNuevo">
+         	<result name = "success">jsp/asignadas_detalle.jsp</result>
+      	</action>
+      	
+      	<action name = "consultaScoreAction" 
+         		class = "com.tiendas.neto.action.DetalleMemoriaXIdAction" 
+         		method = "consultaScoreAction">
       	</action>
       	
       	<action name ="motivosRechazo" 
@@ -97,7 +185,37 @@
          	<result name = "success">jsp/asignadas_detalle.jsp</result>
       	</action>
       	
-<!-- **********  autorizadas y rechazadas      -->
+      	<action name ="subeArchivo" 
+         		class = "com.tiendas.neto.action.ManejadorArchivosAction" 
+         		method = "subeArchivo">
+         	<result name = "success">jsp/asignadas_detalle.jsp</result>
+      	</action>
+      	
+      	<action name ="subeArchivosGestoria" 
+         		class = "com.tiendas.neto.action.ManejadorArchivosAction" 
+         		method = "subeArchivosGestoria">
+         	<result name = "success">jsp/asignadas_detalle.jsp</result>
+      	</action>
+      	
+      	<action name ="subeObra" 
+         		class = "com.tiendas.neto.action.ManejadorArchivosAction" 
+         		method = "subeObra">
+         	<result name = "success">jsp/asignadas_detalle.jsp</result>
+      	</action>
+      	
+      	<action name ="subeFechaSimple" 
+         		class = "com.tiendas.neto.action.ManejadorArchivosAction" 
+         		method = "subeFechaSimple">
+         	<result name = "success">jsp/asignadas_detalle.jsp</result>
+      	</action>
+      	
+      	<action name ="guardaConteoAuditor" 
+         		class = "com.tiendas.neto.action.ManejadorArchivosAction" 
+         		method = "guardaConteoAuditor">
+         	<result name = "success">jsp/asignadas_detalle.jsp</result>
+      	</action>
+      	
+<!-- **********  autorizadas y rechazadas, aprobadas     -->
 
       <action name = "autorizadas_info" 
          	class = "com.tiendas.neto.action.Autorizadas_RechazadasInfoAction" 
@@ -106,7 +224,33 @@
         <action name = "rechazadas_info" 
          	class = "com.tiendas.neto.action.Autorizadas_RechazadasInfoAction" 
          	method = "execute" />
+         	
+        <action name = "aprobadas_info" 
+         	class = "com.tiendas.neto.action.AprobadasInfoAction" 
+         	method = "execute" />
+         	
+        <action name = "lineaTiempo" 
+         		class = "com.tiendas.neto.action.DetalleMemoriaAsignadaAction" 
+         		method = "execute">
+         	<result name = "success">jsp/lineaTiempo.jsp</result>
+      	</action>
+      	
+      	 <action name = "lineaTiempoMdAction" 
+         		class = "com.tiendas.neto.action.LineaTiempoMdAction" 
+         		method = "execute" />
+         
+          <action name = "comboResponsablesAction" 
+         		class = "com.tiendas.neto.action.LineaTiempoMdAction" 
+         		method = "llenaResponsables" />
          		
+         <action name = "guardaLineaTiempoAction" 
+         		class = "com.tiendas.neto.action.LineaTiempoMdAction" 
+         		method = "guardar" />
+         	
+         <action name = "excelAprobadasAction" 
+         	class = "com.tiendas.neto.action.excel.ExcelAprobadasAction" 
+         	method = "execute" />
+         			
 	    <action name = "excelAutorizadasAction" 
          	class = "com.tiendas.neto.action.excel.ExcelAutorizadasAction" 
          	method = "execute" />
@@ -129,11 +273,86 @@
          	class = "com.tiendas.neto.action.AgendaAction" 
          	method = "obtieneAgenda" />
          	
-         	 <action name = "enviaDatos" 
+         <action name = "enviaDatos" 
          	class = "com.tiendas.neto.action.AgendaAction" 
          	method = "enviaDatos" />
   <!-- ************************************ FIN-AGENDA ******* -->
-   
+  
+     <!-- ===== LOCALIZADOR === -->
+     <action name = "guardarRadiosLocalizados" 
+         	class = "com.tiendas.neto.action.LocalizadorRadiosAction" 
+         	method = "altaRadiosLocalizador" />
+         	
+	 <action name = "obtenerEmpleadosZona" 
+	  	class = "com.tiendas.neto.action.LocalizadorRadiosAction" 
+	  	method = "getEmpleadosZona" />
+	  	
+	  	 <action name = "obtenergerentesRadios" 
+	  	class = "com.tiendas.neto.action.LocalizadorRadiosAction" 
+	  	method = "getgerentesRadio" />
+         	
+     <action name = "asignarRadioLocalizado" 
+	  	class = "com.tiendas.neto.action.LocalizadorRadiosAction" 
+	  	method = "setAsignaRadio" />
+         	
+     <action name = "obtieneRadiosLocalizados" 
+	  	class = "com.tiendas.neto.action.LocalizadorRadiosAction" 
+	  	method = "getRadiosLocalizados" />
+
+	 <action name = "download_format_radius" 
+    	class = "com.tiendas.neto.action.excel.ExcelPlantillaRadios" 
+       	method = "execute">
+    </action>
+      	
+	 <action name = "obtenerEmpleadosGerentes" 
+    	class = "com.tiendas.neto.action.LocalizadorRadiosAction" 
+       	method = "getEmpleadosGerentes">
+    </action>    
+    
+	 <action name = "consultaRutaRecorrida" 
+    	class = "com.tiendas.neto.action.LocalizadorRadiosAction" 
+       	method = "getRutaRecorridaJefe">
+    </action>     
+    
+	 <action name = "obtenerMdsAutorizadas" 
+    	class = "com.tiendas.neto.action.LocalizadorRadiosAction" 
+       	method = "getObtenerMdsAutorizadas">
+    </action>          	
+    
+    <action name = "obtenerRadiosXEstatusMds" 
+    	class = "com.tiendas.neto.action.LocalizadorRadiosAction" 
+       	method = "getObtenerRadiosEstatus">
+    </action>          	
+    
+     <action name = "obtenerEstadosCidudades" 
+	  	class = "com.tiendas.neto.action.LocalizadorRadiosAction" 
+	  	method = "getEstadosCiudades" />
+    
+     <action name = "obtieneAnillosxfiltros" 
+	  	class = "com.tiendas.neto.action.LocalizadorRadiosAction" 
+	  	method = "getAnillosCiudad" />
+        
+         <action name = "obtenerEstados" 
+	  	class = "com.tiendas.neto.action.LocalizadorRadiosAction" 
+	  	method = "getEstados" />
+	  	
+	  	 <action name = "recalcularGeneradoresComp" 
+	  	class = "com.tiendas.neto.action.LocalizadorRadiosAction" 
+	  	method = "getRecalcularGeneradores" />
+         
+         	 <action name = "autorizarAnillos" 
+	  	class = "com.tiendas.neto.action.LocalizadorRadiosAction" 
+	  	method = "autorizarAnillos" />
+            
+             <action name = "obtieneTotalRadiosNuevos" 
+	  	class = "com.tiendas.neto.action.LocalizadorRadiosAction" 
+	  	method = "consultaTotalAnillos" />
+            
+            
+            
+    
+    <!-- ===== END- LOCALIZADOR === -->
+    
       	<action name = "DashboardGeneralAction" class="com.tiendas.neto.action.DashboardGeneralAction"
       	 method = "execute"/>
       	<action name = "DashboardPlanAperturaMAction" class="com.tiendas.neto.action.DashboardPlanAperturaMAction"
@@ -143,13 +362,184 @@
       	 
       	<action name = "MensajeHistorialAction" class="com.tiendas.neto.action.MensajeHistorialAction"
       	 method = "execute"/>
+      	<action name = "obtieneMensajes" class="com.tiendas.neto.action.MensajeHistorialAction"
+      	 method = "obtieneMensajes"/>
       	 
       	 <action name = "Logout" class="com.tiendas.neto.filtros.Logout"
       	 method = "execute">
       	 <result name = "SUCCESS">jsp/login.jsp</result>
       	 </action>
-      	
-      	
+      	 
+      	 <action name = "editaPerfilAction" 
+		   	class = "com.tiendas.neto.action.EditaPerfilAction" 
+	      	method = "guardarDatosPerfil">
+		 </action>          	
+		    
+      	 <!-- ************************************ ACCIONES SEGUIMIENTO ******* -->
+      	 <action name = "accion_md_action"
+               class = "com.tiendas.neto.action.AccionMdAction"
+               method = "execute">
+           <result name = "success">jsp/aprobadas.jsp</result>
+        </action>
+        <action name = "accion_obtiene_nivel_md_status"
+               class = "com.tiendas.neto.action.AccionMdAction"
+               method = "obtieneNivelEstatusCambiarMd">
+           <result name = "success">jsp/aprobadas.jsp</result>
+        </action>
+         <action name = "accion_modifica_md_status"
+             class = "com.tiendas.neto.action.AccionMdAction"
+             method = "cambiaEstatusMDtodos">
+       	  <result name = "success">jsp/aprobadas.jsp</result>
+        </action>
+      	 <action name = "accion__modifica_md_action"
+               class = "com.tiendas.neto.action.DespausaReactivaMdAction"
+               method = "execute">
+           <result name = "success">jsp/aprobadas.jsp</result>
+        </action>
+        <action name = "edita_md_datos_sitio"
+               class = "com.tiendas.neto.action.EditaMdDatosSitioAction"
+               method = "execute">
+           <result name = "success">jsp/aprobadas.jsp</result>
+        </action>
+         <action name = "guardaCreador"
+               class = "com.tiendas.neto.action.ObtieneCreadoresAction"
+               method = "guardaCreador">
+        </action>
+        <action name="listaCreadoresAction"
+        		class = "com.tiendas.neto.action.ObtieneCreadoresAction"
+               	method = "execute">
+        </action>
+         <action name = "edita_md_superficie"
+               class = "com.tiendas.neto.action.EditaMdSuperficieAction"
+               method = "execute">
+        </action>
+        <action name = "edita_md_datos_propietario"
+               class = "com.tiendas.neto.action.EditaMdDatosPropietarioAction"
+               method = "execute">
+           <result name = "success">jsp/aprobadas.jsp</result>
+        </action>
+        <action name = "edita_md_generalidades"
+               class = "com.tiendas.neto.action.EditaGeneralidadesAction"
+               method = "execute">
+           <result name = "success">jsp/aprobadas.jsp</result>
+        </action>
+    	<!--  ********************** NUEVO DASHBOARD ******************** -->
+      	 	<action name = "cargaProcesoAction" class="com.tiendas.neto.action.DashboardGeneralAction"
+      	 method = "cargaProcesoAction"/>
+      	 
+      	 <action name = "buscaMdsPorEstatus" class="com.tiendas.neto.action.BuscaMdsPorEstatusAction"
+      	 method = "execute"/>
+      	 
+      	 <action name = "obtieneAtrasosXdias" class="com.tiendas.neto.action.ObtieneAtrasosXdias"
+         method = "execute"/>
+      	 
+        
+      	 <!-- ************************************ ACCIONES SEGUIMIENTO ******* -->
+      	<!-- ****************************** DESCARGA DE PDF**************************************** -->
+	<action name = "descargaPdfAction" 
+         		class = "com.tiendas.neto.action.DescargaPdfAction" 
+         		method = "exportPdf">
+    </action>
+    <!-- ********************************************************************** -->  
+    
+    <!--  ********************** CONF PERFILES ******************** -->
+     <action name="perfilesAction"
+        		class = "com.tiendas.neto.action.PerfilesAction"
+               	method = "execute">
+     </action>
+     <action name="creaPerfilAction"
+        		class = "com.tiendas.neto.action.CreaPerfilAction"
+               	method = "execute">
+     </action>
+        <action name = "cargaFiltrosAction" 
+         		class = "com.tiendas.neto.action.ConfiguracionUsuarioAction" 
+         		method = "execute">
+    </action>
+     <action name = "buscaUsuariosPerfiles" 
+         		class = "com.tiendas.neto.action.ConfiguracionUsuarioAction" 
+         		method = "buscaUsuariosPerfiles">
+    </action>
+      <action name="eliminaPerfilAction"
+        		class = "com.tiendas.neto.action.CreaPerfilAction"
+               	method = "eliminaPerfilAction">
+     </action>
+     <action name = "validaPuestoJefeAction" 
+         		class = "com.tiendas.neto.action.ConfiguracionUsuarioAction" 
+         		method = "validaPuestoJefeAction">
+    </action>
+    <action name = "nuevoUsuarioAction" 
+         		class = "com.tiendas.neto.action.ConfiguracionUsuarioAction" 
+         		method = "nuevoUsuarioAction">
+    </action>
+    <action name = "listaPerfilesAction" 
+         		class = "com.tiendas.neto.action.ConfiguracionUsuarioAction" 
+         		method = "listaPerfilesAction">
+    </action>
+    <action name = "asignarUsuarioPerfilAction" 
+         		class = "com.tiendas.neto.action.ConfiguracionUsuarioAction" 
+         		method = "asignarUsuarioPerfilAction">
+    </action>
+    <action name = "editarPerfilesUsuarioAction" 
+         		class = "com.tiendas.neto.action.ConfiguracionUsuarioAction" 
+         		method = "editarPerfilesUsuarioAction">
+    </action>
+    <!--  ********************** TERMINA CONF PERFILES ******************** -->		
+      
+          <!-- ===== LEVANTAMIENTO === -->
+    
+    <action name ="sendLevantamiento" 
+   	   class = "com.tiendas.neto.action.Levantamiento" 
+   	   method = "execute">
+   	  <result name = "success">jsp/levantamiento.jsp</result>
+   	</action>
+   	
+   	<action name ="consultaCabeceroMd" 
+   	   class = "com.tiendas.neto.action.Levantamiento" 
+   	   method = "consultaCabeceMD">
+   	</action>
+   	
+  	<action name ="subeArchivoPdf" 
+    	class = "com.tiendas.neto.action.Levantamiento" 
+    	method = "subeArchivo">
+     </action>
+     
+     <action name ="guardarDatosLevan" 
+    	class = "com.tiendas.neto.action.Levantamiento" 
+    	method = "guardarDatosLevantamiento">
+     </action>
+    
+     <action name ="evaluaLevantamiento" 
+    	class = "com.tiendas.neto.action.Levantamiento" 
+    	method = "evaluaLevantamiento">
+     </action>
+    
+    <!-- GUARDA ANDROID ID -->
+	  <action name ="guardaIdAndroid" 
+    	class = "com.tiendas.neto.action.IdAndroAction" 
+    	method = "execute">
+     </action>
+
+    <!-- MODAL FOTOS MD -->
+	  <action name ="obtieneMDS" 
+    	class = "com.tiendas.neto.action.SubeFotosMDAction" 
+    	method = "obtieneMDS">
+     </action>
+     
+     <action name ="consultaSuperficie" 
+    	class = "com.tiendas.neto.action.SubeFotosMDAction" 
+    	method = "consultaSuperficie">
+     </action>
+     
+     <action name ="guardaSuperficie" 
+    	class = "com.tiendas.neto.action.SubeFotosMDAction" 
+    	method = "guardaSuperficie">
+     </action>
+     
+     <action name ="superficiePreconsulta" 
+    	class = "com.tiendas.neto.action.SubeFotosMDAction" 
+    	method = "superficiePreconsulta">
+     </action>
+     
 	</package>
 	
 </struts>

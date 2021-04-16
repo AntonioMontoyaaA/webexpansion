@@ -63,7 +63,7 @@
 }
 
 .div_mapa {
-	height: 500px;
+	height: 775px;
 }
 
 .icono_mapa {
@@ -151,65 +151,56 @@ span.circulo {
 	}
 }
 
-@media ( max-width : 767px) {
-	.div_mapa {
-		height: 500px;
-	}
-	.padding_movil_10 {
-		margin-top: 10px;
-	}
-}
-
 @media ( max-height : 500px) {
-	#mapaZonificacion {
+	#mapaZonificacio {
 		height: 60%;
 	}
 }
 
 @media ( min-height : 500px) {
-	#mapaZonificacion {
+	#mapaZonificacio {
 		height: 69%;
 	}
 }
 
 @media ( min-height : 600px) {
-	#mapaZonificacion {
+	#mapaZonificacio {
 		height: 60%;
 	}
 }
 
 @media ( min-height : 690px) {
-	#mapaZonificacion {
+	#mapaZonificacio {
 		height: 61.5%;
 	}
 }
 
 @media ( min-height : 800px) {
-	#mapaZonificacion {
+	#mapaZonificacio {
 		height: 62%;
 	}
 }
 
 @media ( min-height : 900px) {
-	#mapaZonificacion {
+	#mapaZonificacio {
 		height: 63%;
 	}
 }
 
 @media ( min-height : 1020px) {
-	#mapaZonificacion {
+	#mapaZonificacio {
 		height: 64%;
 	}
 }
 
 @media ( min-height : 1200px) {
-	#mapaZonificacion {
+	#mapaZonificacio {
 		height: 64.5%;
 	}
 }
 
 @media ( min-height : 1300px) {
-	#mapaZonificacion {
+	#mapaZonificacio {
 		height: 65%;
 	}
 }
@@ -1385,8 +1376,8 @@ table thead tr {
 }
 
 .img-tamanio-info-demografica {
-	height: 45px;
-	width: 45px;
+	height: 33;
+	width: 33;
 }
 
 /* INFORMACION SOCIO DEMOGRAFICA */
@@ -1450,7 +1441,7 @@ table thead tr {
 	height: 304%;
 }
 
-#radar_ocupaciones {
+#radar_ocupacione {
 	display: block !important;
 	height: 230px !important;
 	width: 430px !important;
@@ -1781,4 +1772,99 @@ input:checked+.slider:before {
 
 .chosen-container .chosen-results {
 	max-height: 160px !important
+}
+
+.md-nuevo-properties {
+	position: absolute;
+    right: 4em;
+    display: block;
+    width: 400px;
+}
+
+.md-nuevo-radar-ocupaciones-properties{
+	display: block;
+    height: 100%;
+    width: 100%;
+}
+
+.md-nuevo-map-properties {
+	width: 100%;
+	height: 142%;
+	position: relative;
+	float: left;
+	overflow: hidden;
+}
+
+.md-nuevo-transparent-background {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	opacity: 0.85;
+    overflow: auto;
+    background: #000000de;
+    backdrop-filter: blur(7px);
+}
+
+.modal-arrow-filter{
+	filter: brightness(0) invert(1);
+}
+
+.titulo_modal-generadores{
+	font-size: 0.9em;
+    color: #ffffff;
+}
+
+.blanco{
+	color: white;
+}
+
+.subTitleInfo {
+    color: #Fbb110;
+    font-size: 14px;
+    padding-top: 4px;
+}
+
+.md-nuevo-sidebar-properties {
+	/*max-height: 692px;
+	overflow-y: scroll;
+	overflow-x: hidden;*/
+}
+
+@media screen and ( max-width : 767px) {
+	.div_mapa {
+		height: 500px;
+	}
+	.padding_movil_10 {
+		margin-top: 10px;
+	}
+	.md-nuevo-properties {
+		position: absolute;
+		left: 0;
+		width: 100%;
+		right: 0%;
+	}
+	.md-nuevo-map-properties {
+		height: 88%;
+	}
+	.md-nuevo-sidebar-properties {
+		max-height: 437px;
+	}
+	
+	
+	#contenido-vista-a, #contenido-vista-b, #contenido-vista-c{
+		overflow: auto;
+    	height: 396px;
+    	overflow-x: hidden;
+	}
+}
+@media screen and (min-width:768px) and ( max-width : 1075px) {
+	.md-nuevo-properties {
+	width: 410px;
+}
+}
+
+#divNegocios{
+	height: 694px;
 }

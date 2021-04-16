@@ -452,6 +452,21 @@ function verInformacionRadio(obj, vista_opcion){
 	}
 	
 	
+
+		$("#templos").html(0);
+	 $("#hopitales").html(0);
+	 $("#escuelas").html(0);
+	 $("#mercados").html(0);
+	 $("#ofiGob").html(0);
+	 $("#t-PANADERIA").html(0);
+	 $("#t-TORTILLERIA").html(0);
+	 $("#t-ABARROTES").html(0);
+	  $("#t-CARNICERIA").html(0);
+	 $("#t-POLLERIA").html(0);
+	 $("#t-RECAUDERIAS").html(0);
+	 
+	
+	
 	if(obj.totalUE != undefined){
 		$(".div-unidades-economicas").show();
 		

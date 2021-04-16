@@ -29,31 +29,62 @@ var radioAsignado;
  * 
  * 
  */
+var MAPZONIFICACION_RADIOS;
 
- function formatMiles(numberf){
+var circule = new google.maps.Circle({
+	strokeColor: "white",
+	strokeOpacity: 0.5,
+    strokeWeight: .5,
+    fillColor: "#FFC300",
+    fillOpacity: 0.4,
+	map: null,
+	center: null,
+	radius: 500 / 6378100 * 6378100
+});
+
+function formatMiles(numberf) {
 	var number = 0;
-	number = parseInt(numberf.replace(",","")) 
-	 return number
+	number = parseInt(numberf.replace(",", ""))
+	return number
 }
 
 function numberWithCommas(x) {
-    x = x.toString();
-    var pattern = /(-?\d+)(\d{3})/;
-    while (pattern.test(x))
-        x = x.replace(pattern, "$1,$2");
-    return x;
+	x = x.toString();
+	var pattern = /(-?\d+)(\d{3})/;
+	while (pattern.test(x))
+		x = x.replace(pattern, "$1,$2");
+	return x;
 }
 
-function pintarGeneradoresFiltro(arrayBbj,thisMap, generadorId){
-	if(arrayBbj == null || arrayBbj <= 0){
+function pintarGeneradoresFiltro(arrayBbj, thisMap, generadorId) {
+	if (arrayBbj == null || arrayBbj <= 0) {
 		return false;
 	}
-	
-	arrayBbj.forEach(function(obj,index){
-		if(obj.generadorId == generadorId){
-			obj.marker.setMap(thisMap);			
+
+	arrayBbj.forEach(function (obj, index) {
+		if (obj.generadorId == generadorId) {
+			obj.marker.setMap(thisMap);
+			obj.shown = thisMap != null ? true : false;
 		}
 	});
+	var showCircle = false;
+
+	for (index in arrayBbj) {
+		showCircle = arrayBbj[index].shown;
+		if (showCircle)
+			break;
+	}
+
+	if (showCircle && thisMap != null) {
+		circule.setRadius(arrayBbj[0].rad / 6378100 * 6378100);
+		circule.setMap(thisMap);
+		circule.setCenter(arrayBbj[0].mark);
+	} else {
+		circule.setMap(null);
+	}
+
+		pintaRadio(thisMap);		
+
 }
 
 
@@ -71,19 +102,62 @@ var earthRadii = {
 	fr: 31705.3408
 };
 
+var iconSizeNew = 35;
+var iconSizeNewOthers = 30;
 var iconMarkeGenerador = {
-	100001: "img/localizador/pin/pin_templo.png", 		// IGLESIA
-	100002: "img/localizador/pin/pin_hospital.png", 	 		// HOSPITAL		
-	100003: "img/localizador/pin/pin_escuela.png",  	// ESCUELA
-	100004: "img/localizador/pin/pin_mercado.png",  	// MERCADO
-	100005: "img/localizador/pin/pin_ofgobierno.png",  	// OFICINA DE GOBIERNO
-	100006: "img/localizador/pin/pin_panaderia.png",  	// PANADERIA
-	100007: 'img/localizador/pin/pin_tortilleria.png', 			// TORTILLERIA
-	100008: 'img/localizador/pin/pin_abarrotes.png', 			// ABARROTES
-	100009: 'img/localizador/pin/pin_carniceria.png', 			// CARNICERIA
-	100010: "img/localizador/pin/pin_polleria.png",	    // POLLERIA
-	100011: "img/localizador/pin/pin_recauderia.png"
-};			// RECAUDERIA
+	100001: {
+		url: "img/localizador/pin/pin_templo.png", // url
+		scaledSize: new google.maps.Size(iconSizeNew, iconSizeNew), // scaled size
+	},// IGLESIA
+	100002: {
+		url: "img/localizador/pin/pin_hospital.png", // url
+		scaledSize: new google.maps.Size(iconSizeNew, iconSizeNew), // scaled size
+	},// HOSPITAL		
+	100003: {
+		url: "img/localizador/pin/pin_escuela.png", // url
+		scaledSize: new google.maps.Size(iconSizeNew, iconSizeNew), // scaled size
+	},// ESCUELA
+	100004: {
+		url: "img/localizador/pin/pin_mercado.png", // url
+		scaledSize: new google.maps.Size(iconSizeNew, iconSizeNew), // scaled size
+	},// MERCADO
+	100005: {
+		url: "img/localizador/pin/pin_ofgobierno.png", // url
+		scaledSize: new google.maps.Size(iconSizeNew, iconSizeNew), // scaled size
+	},// OFICINA DE GOBIERNO
+	100006: {
+		url: "img/localizador/pin/pin_panaderia.png", // url
+		scaledSize: new google.maps.Size(iconSizeNew, iconSizeNew), // scaled size
+	},// PANADERIA
+	100007: {
+		url: 'img/localizador/pin/pin_tortilleria.png', // url
+		scaledSize: new google.maps.Size(iconSizeNew, iconSizeNew), // scaled size
+	},// TORTILLERIA
+	100008: {
+		url: 'img/localizador/pin/pin_abarrotes.png', // url
+		scaledSize: new google.maps.Size(iconSizeNew, iconSizeNew), // scaled size
+	},// ABARROTES
+	100009: {
+		url: 'img/localizador/pin/pin_carniceria.png', // url
+		scaledSize: new google.maps.Size(iconSizeNew, iconSizeNew), // scaled size
+	},// CARNICERIA
+	100010: {
+		url: "img/localizador/pin/pin_polleria.png", // url
+		scaledSize: new google.maps.Size(iconSizeNew, iconSizeNew), // scaled size
+	},	    // POLLERIA
+	100011: {
+		url: "img/localizador/pin/pin_recauderia.png", // url
+		scaledSize: new google.maps.Size(iconSizeNew, iconSizeNew), // scaled size
+	},// RECAUDERIA
+	"mds": {
+		url: "img/localizador/icon_md.png", // url
+		 scaledSize: new google.maps.Size(33, 32), // scaled size
+	},// RECAUDERIA
+	"tdas": {
+		url: "img/localizador/tiendaNeto.png", // url
+		scaledSize: new google.maps.Size(30, 30), // scaled size
+	}// RECAUDERIA
+};
 
 var iconMarkeCompetencias = {
 	100001: "img/localizador/pin/pin_3b.png", 		// 3b
@@ -659,7 +733,7 @@ function dibujaAreasCompletadas(AREAS) {
 	}
 }
 
-function consultaGenMDNuevo(mdId, mapZona) {
+function consultaGenMDNuevo(mdId, mapZona, markSitio) {
 	cargaLoading();
 
 	invocarJSONServiceAction("consulta_gen_md_nuevo",
@@ -675,8 +749,20 @@ function consultaGenMDNuevo(mdId, mapZona) {
 			cierraLoading();
 		});
 	obtieneGenMDNuevo = function (data) {
-		console.log(data);
 
+		$("#check-tdos-gen").prop("checked", false);
+		$("#check-mercados").prop("checked", false);
+		$("#check-escuela").prop("checked", false);
+		$("#check-hospital").prop("checked", false);
+		$("#check-templo").prop("checked", false);
+		$("#check-ofGob").prop("checked", false);
+		$("#check-tdos-ue").prop("checked", false);
+		$("#check-panaderia").prop("checked", false);
+		$("#check-tortilleria").prop("checked", false);
+		$("#check-abarrotes").prop("checked", false);
+		$("#check-carniceria").prop("checked", false);
+		$("#check-recauderia").prop("checked", false);
+		$("#check-polleria").prop("checked", false);
 		$('#option-vista-a').prop("checked", true);
 
 		$('#option-vista-a').unbind();
@@ -691,22 +777,76 @@ function consultaGenMDNuevo(mdId, mapZona) {
 		$("#contenido-vista-b").hide();
 		$("#contenido-vista-c").hide();
 
+		if (data.codigo != 200){
+			$("#contenido-vista-b").append("<span class='negrita t14 subTitleInfo'>Sin información de Radio.</span>");
+			$("#contenido-vista-c").append("<span class='negrita t14 subTitleInfo'>Sin información de Radio.</span>");
+			$("#contenido-vista-b div").hide();
+			$("#contenido-vista-c div").hide();
+			return;
+		}
+			
+		/**APPEND DIV TO FULL SCREEN MAP
+		 * */
 
-		
-		
-		/* ==== GENERADORES ====*/
-
-		var circule = new google.maps.Circle({
-			strokeColor: "#FF0000",
-			strokeOpacity: 0.8,
-			strokeWeight: 2,
-			fillColor: "#FF0000",
-			fillOpacity: 0.35,
-			map: mapZona,
-			center: mapZona.getCenter(),
-			radius: data.anillo / 6378100 * 6378100
+		$(document).bind('webkitfullscreenchange mozfullscreenchange fullscreenchange', function () {
+			var isFullScreen = document.fullScreen ||
+				document.mozFullScreen ||
+				document.webkitIsFullScreen;
+			if (isFullScreen) {
+				//console.log('fullscreen mode!');
+				mapZona.controls[google.maps.ControlPosition.TOP_RIGHT].push($("#generadoresDivNew").get(0));
+			} else {
+				//console.log('not fullscreen mode!');
+				var elem = mapZona.controls[google.maps.ControlPosition.TOP_RIGHT].pop();
+				//console.log(elem);
+				$(elem).removeAttr("style").prependTo("#generadoresMDContainerNew");
+			}
 		});
 
+
+		/** Pintar otros MD y Tiendas */
+		var otrosMdYTiendas = new Array();
+
+		/**MDS */
+		if (data.mds != undefined) {
+			for (var i = 0; i < data.mds.length; i++) {
+				otrosMdYTiendas.push(
+					{
+						position: new google.maps.LatLng(data.mds[i].latitud, data.mds[i].longitud),
+						type: "mds",
+						name: "MD "+data.mds[i].nombre,
+						id: data.mds[i].mdId
+					});
+			}
+		}
+		/**Tiendas */
+		if (data.tiendas != undefined) {
+			for (var i = 0; i < data.tiendas.length; i++) {
+				otrosMdYTiendas.push(
+					{
+						position: new google.maps.LatLng(data.tiendas[i].latitud, data.tiendas[i].longitud),
+						type: "tdas",
+						name: "Neto "+data.tiendas[i].nombre,
+						id: data.tiendas[i].tiendaId
+					});
+			}
+		}
+		otrosMdYTiendas.forEach(function (obj, index) {
+			var marker = new google.maps.Marker({
+				position: obj.position,
+				icon: iconMarkeGenerador[obj.type],
+				title:  obj.name,
+				map: mapZona
+			});
+			
+			if(obj.type == "mds" &&  mdId != obj.id ){
+				 marker.addListener("click",  function(){
+					 obtieneDetalleMd(obj.name,obj.id);
+				 });
+			}
+		});
+
+		/* ==== GENERADORES ====*/
 
 		$(".infoRadio").html(data.anillo + ' mts.');
 		//$(".infoEstatus").html(data.anillo + ' mts.');
@@ -732,194 +872,211 @@ function consultaGenMDNuevo(mdId, mapZona) {
 			if (data.Totalgen[dato].generadorId == "100005") {//Of Gobierno
 				$("#ofiGob").html(data.Totalgen[dato].total);
 			}
+			
+			if (data.Totalgen[dato].generadorId == "100006") {//Of Gobierno
+				$("#t-PANADERIA").html(data.Totalgen[dato].total);
+			}
+			
+			if (data.Totalgen[dato].generadorId == "100007") {//Of Gobierno
+				$("#t-TORTILLERIA").html(data.Totalgen[dato].total);
+			}
+			
+			if (data.Totalgen[dato].generadorId == "100008") {//Of Gobierno
+				$("#t-ABARROTES").html(data.Totalgen[dato].total);
+			}
+			
+			if (data.Totalgen[dato].generadorId == "100009") {//Of Gobierno
+				$("#t-CARNICERIA").html(data.Totalgen[dato].total);
+			}
+			
+			if (data.Totalgen[dato].generadorId == "100010") {//Of Gobierno
+				$("#t-POLLERIA").html(data.Totalgen[dato].total);
+			}
+			
+
+			if (data.Totalgen[dato].generadorId == "100011") {//Of Gobierno
+				$("#t-RECAUDERIAS").html(data.Totalgen[dato].total);
+			}
+			
 		}
 		var puntosGenNuevos = new Array();
 
 		for (dto in data.generadores) {
+			
 			puntosGenNuevos.push(
 				{
-					generadorId:data.generadores[dto].generadorId,
+					generadorId: data.generadores[dto].generadorId,
 					marker: new google.maps.Marker({
 						position: new google.maps.LatLng(data.generadores[dto].latitud, data.generadores[dto].longitud),
 						icon: iconMarkeGenerador[data.generadores[dto].generadorId],
-					})
+					}),
+					shown: false,
+					rad: data.anillo,
+					mark: markSitio
 				});
 		}
-/**
-		puntosGenNuevos.forEach(function (feature) {
-			var marker = new google.maps.Marker({
-				position: feature.position,
-				icon: iconMarkeGenerador[feature.type],
-			});
-		});
- */
+		
+		
+		/**
+				puntosGenNuevos.forEach(function (feature) {
+					var marker = new google.maps.Marker({
+						position: feature.position,
+						icon: iconMarkeGenerador[feature.type],
+					});
+				});
+		 */
 		/**
 		 * Modificadores de marcadores en mapa
 		 */
-		 setTimeout(function(){
-			
-			$("#check-tdos-ue").prop("checked", false);
-			$("#check-panaderia").prop("checked", false);
-			$("#check-tortilleria").prop("checked", false);
-			$("#check-abarrotes").prop("checked", false);
-			$("#check-carniceria").prop("checked", false);
-			$("#check-recauderia").prop("checked", false);
-			$("#check-polleria").prop("checked", false);
-	 
-			
+		setTimeout(function () {
 			$("#check-mercados").unbind();
-			$("#check-mercados").change(function(){  
+			$("#check-mercados").change(function () {
 				var mapChecked = null;
-				if($(this).is(":checked"))
+				if ($(this).is(":checked"))
 					mapChecked = mapZona;
 				pintarGeneradoresFiltro(puntosGenNuevos, mapChecked, 100004);
-			}); 
-			
+			});
+
 			$("#check-escuela").unbind();
-			$("#check-escuela").change(function(){  
+			$("#check-escuela").change(function () {
 				var mapChecked = null;
-				if($(this).is(":checked"))
+				if ($(this).is(":checked"))
 					mapChecked = mapZona;
 				pintarGeneradoresFiltro(puntosGenNuevos, mapChecked, 100003);
-			}); 
-			
+			});
+
 			$("#check-hospital").unbind();
-			$("#check-hospital").change(function(){  
+			$("#check-hospital").change(function () {
 				var mapChecked = null;
-				if($(this).is(":checked"))
+				if ($(this).is(":checked"))
 					mapChecked = mapZona;
-				
+
 				pintarGeneradoresFiltro(puntosGenNuevos, mapChecked, 100002);
-			}); 
-			
+			});
+
 			$("#check-templo").unbind();
-			$("#check-templo").change(function(){  
+			$("#check-templo").change(function () {
 				var mapChecked = null;
-				if($(this).is(":checked"))
+				if ($(this).is(":checked"))
 					mapChecked = mapZona;
 				pintarGeneradoresFiltro(puntosGenNuevos, mapChecked, 100001);
-			}); 
-			
+			});
+
 			$("#check-ofGob").unbind();
-			$("#check-ofGob").change(function(){  
+			$("#check-ofGob").change(function () {
 				var mapChecked = null;
-				if($(this).is(":checked"))
+				if ($(this).is(":checked"))
 					mapChecked = mapZona;
 				pintarGeneradoresFiltro(puntosGenNuevos, mapChecked, 100005);
-			}); 
-			
-			
+			});
+
+
 			$("#check-panaderia").unbind();
-			$("#check-panaderia").change(function(){  
+			$("#check-panaderia").change(function () {
 				var mapChecked = null;
-				if($(this).is(":checked"))
+				if ($(this).is(":checked"))
 					mapChecked = mapZona;
 				pintarGeneradoresFiltro(puntosGenNuevos, mapChecked, 100006);
-			}); 
-			
+			});
+
 			$("#check-tortilleria").unbind();
-			$("#check-tortilleria").change(function(){  
+			$("#check-tortilleria").change(function () {
 				var mapChecked = null;
-				if($(this).is(":checked"))
+				if ($(this).is(":checked"))
 					mapChecked = mapZona;
 				pintarGeneradoresFiltro(puntosGenNuevos, mapChecked, 100007);
-			}); 
-			
-			$("#check-abarrotes").unbind(); 
-			$("#check-abarrotes").change(function(){  
+			});
+
+			$("#check-abarrotes").unbind();
+			$("#check-abarrotes").change(function () {
 				var mapChecked = null;
-				if($(this).is(":checked"))
+				if ($(this).is(":checked"))
 					mapChecked = mapZona;
 				pintarGeneradoresFiltro(puntosGenNuevos, mapChecked, 100008);
-			}); 
-			
+			});
+
 			$("#check-carniceria").unbind();
-			$("#check-carniceria").change(function(){  
+			$("#check-carniceria").change(function () {
 				var mapChecked = null;
-				if($(this).is(":checked"))
+				if ($(this).is(":checked"))
 					mapChecked = mapZona;
 				pintarGeneradoresFiltro(puntosGenNuevos, mapChecked, 100009);
-			}); 
-			
-			
+			});
+
+
 			$("#check-recauderia").unbind();
-			$("#check-recauderia").change(function(){  
+			$("#check-recauderia").change(function () {
 				var mapChecked = null;
-				if($(this).is(":checked"))
+				if ($(this).is(":checked"))
 					mapChecked = mapZona;
 				pintarGeneradoresFiltro(puntosGenNuevos, mapChecked, 100011);
-			}); 
-			
-			$("#check-polleria").unbind(); 
-			$("#check-polleria").change(function(){  
+			});
+
+			$("#check-polleria").unbind();
+			$("#check-polleria").change(function () {
 				var mapChecked = null;
-				if($(this).is(":checked"))
+				if ($(this).is(":checked"))
 					mapChecked = mapZona;
 				pintarGeneradoresFiltro(puntosGenNuevos, mapChecked, 100010);
-																	 
-			});  
-			
-			$("#check-tdos-gen").unbind(); 
-			$("#check-tdos-gen").click(function(){  
+
+			});
+
+			$("#check-tdos-gen").unbind();
+			$("#check-tdos-gen").click(function () {
 				var mapChecked = null;
-				if($(this).is(":checked"))
+				if ($(this).is(":checked"))
 					mapChecked = mapZona;
-				
+
 				pintarGeneradoresFiltro(puntosGenNuevos, mapChecked, 100004);
 				pintarGeneradoresFiltro(puntosGenNuevos, mapChecked, 100003);
 				pintarGeneradoresFiltro(puntosGenNuevos, mapChecked, 100002);
 				pintarGeneradoresFiltro(puntosGenNuevos, mapChecked, 100001);
 				pintarGeneradoresFiltro(puntosGenNuevos, mapChecked, 100005);
-	
-				
+
+
 				$("#check-mercados").prop("checked", $(this).is(":checked"));
 				$("#check-escuela").prop("checked", $(this).is(":checked"));
 				$("#check-hospital").prop("checked", $(this).is(":checked"));
 				$("#check-templo").prop("checked", $(this).is(":checked"));
-				$("#check-ofGob").prop("checked", $(this).is(":checked"));	
-				
-				
-				
-			});  
-			 
-			
+				$("#check-ofGob").prop("checked", $(this).is(":checked"));
+
+
+				pintaRadio(mapZona);
+			});
+
+
 			pintarGeneradoresFiltro(puntosGenNuevos, null, 100006);
 			pintarGeneradoresFiltro(puntosGenNuevos, null, 100007);
 			pintarGeneradoresFiltro(puntosGenNuevos, null, 100008);
 			pintarGeneradoresFiltro(puntosGenNuevos, null, 100009);
 			pintarGeneradoresFiltro(puntosGenNuevos, null, 100011);
 			pintarGeneradoresFiltro(puntosGenNuevos, null, 100010);
-			
-			$("#check-tdos-ue").unbind(); 
-			$("#check-tdos-ue").click(function(){  
+
+			$("#check-tdos-ue").unbind();
+			$("#check-tdos-ue").click(function () {
 				var mapChecked = null;
-				if($(this).is(":checked"))
+				if ($(this).is(":checked"))
 					mapChecked = mapZona;
-				
+
 				pintarGeneradoresFiltro(puntosGenNuevos, mapChecked, 100006);
 				pintarGeneradoresFiltro(puntosGenNuevos, mapChecked, 100007);
 				pintarGeneradoresFiltro(puntosGenNuevos, mapChecked, 100008);
 				pintarGeneradoresFiltro(puntosGenNuevos, mapChecked, 100009);
 				pintarGeneradoresFiltro(puntosGenNuevos, mapChecked, 100011);
 				pintarGeneradoresFiltro(puntosGenNuevos, mapChecked, 100010);
-				
+
 				$("#check-panaderia").prop("checked", $(this).is(":checked"));
 				$("#check-tortilleria").prop("checked", $(this).is(":checked"));
 				$("#check-abarrotes").prop("checked", $(this).is(":checked"));
 				$("#check-carniceria").prop("checked", $(this).is(":checked"));
 				$("#check-recauderia").prop("checked", $(this).is(":checked"));
-				$("#check-polleria").prop("checked", $(this).is(":checked"));													 
-			});  
-			 
-		},250);
+				$("#check-polleria").prop("checked", $(this).is(":checked"));
+				
+				
+				pintaRadio(mapZona);
+			});
 
-			
-		$("#check-tdos-gen").prop("checked", false);
-		$("#check-mercados").prop("checked", false);
-		$("#check-escuela").prop("checked", false);
-		$("#check-hospital").prop("checked", false);
-		$("#check-templo").prop("checked", false);
-		$("#check-ofGob").prop("checked", false);
+		}, 250);
 
 		/** Fin modificadores */
 
@@ -946,20 +1103,12 @@ function consultaGenMDNuevo(mdId, mapZona) {
 			$("#bbb").html(datosRadio.fcBBB);
 			$("#bae").html(datosRadio.fcBAE);
 			$("#miba").html(datosRadio.fcMIBA);
-			/*
-			$("#t-PANADERIA").html(datosRadio.fcMIBA);
-			$("#t-TORTILLERIA").html(datosRadio.fcMIBA);
-			$("#t-ABARROTES").html(datosRadio.fcMIBA);
-			$("#t-CARNICERIA").html(datosRadio.fcMIBA);
-			$("#t-RECAUDERIAS").html(datosRadio.fcMIBA);
-			$("#t-POLLERIA").html(datosRadio.fcMIBA);
-			*/
-
+			
 			/**
 			 * Hoja 2 Zonificacion
 			 */
 			$("#infoUrl").html("");
-			$("#infoUrl").append("<a href='"+ datosRadio.fcUrl+"' target='_blank'> "+ datosRadio.fcUrl+"  </a>");
+			$("#infoUrl").append("<a href='" + datosRadio.fcUrl + "' target='_blank'> " + datosRadio.fcUrl + "  </a>");
 			//$("#infoCoordenadas").html(obj.lat+' , '+obj.lng);
 			$("#infoCalle").html(datosRadio.fcCallePrincipal);
 			$("#infoCalle1").html(datosRadio.fcCalle1);
@@ -1124,7 +1273,7 @@ function consultaGenMDNuevo(mdId, mapZona) {
 
 			$("#list-empleos").html("");
 			array.forEach(function (obj, i) {
-				$("#list-empleos").append('<div class="col-6 etiqueta-white-l">' + obj[1] + ': 	<span> ' + numberWithCommas(obj[0]) + ' </span> </div>');
+				$("#list-empleos").append('<div class="col-6">' + obj[1] + ': 	<span> ' + numberWithCommas(obj[0]) + ' </span> </div>');
 			});
 
 		}
@@ -1713,13 +1862,16 @@ function datosFlujoPeatonal(flujoPeatonal) {
 }
 
 function muestraGeneradores() {
+	$("#btonEsconderGeneradores").show();
 	$("#divNegociosHeader").hide();
 	$("#divNegocios").slideToggle();
+	
 }
 
 function escondeGeneradores() {
 	$("#divNegocios").slideToggle();
 	$("#divNegociosHeader").show();
+	$("#btonEsconderGeneradores").hide();
 }
 
 function muestraPopAutorizacion() {
@@ -1967,7 +2119,7 @@ function initMap(latitudSitio, longitudSitio, listaCompetencias, listaGeneradore
 
 	var iconos = {
 		"sitio": {
-			icon: 'img/MD.png'
+			icon: 'img/localizador/icon_md.png'
 		},
 		"1": {
 			icon: 'img/competencia/iconos_3b.png'
@@ -1997,7 +2149,8 @@ function initMap(latitudSitio, longitudSitio, listaCompetencias, listaGeneradore
 			icon: 'img/generadores/icono_otros_generadores_c.png'
 		},
 		"10": {
-			icon: 'img/competencia/w_neto.png' //competencia tienda neto
+			//icon: 'img/localizador/tiendaNeto.png' //competencia tienda neto icon: 'img/MD.png'
+				icon: "img/competencia/w_neto.png", // url
 		},
 		"11": {
 			icon: 'img/generadores/recauderia_c.png'
@@ -2069,27 +2222,43 @@ function initMap(latitudSitio, longitudSitio, listaCompetencias, listaGeneradore
 		$("#negocios").text(negocios);
 		$("#negocios_comida").text(negocios_comida);
 	}
-
+	var markSitio = new google.maps.LatLng(latitudSitio, longitudSitio);
 	puntosZonificacion.push(
 		{
-			position: new google.maps.LatLng(latitudSitio, longitudSitio),
+			position: markSitio,
 			type: 'sitio'
 		});
 
 	var mapZonificacion = new google.maps.Map(document.getElementById('mapaZonificacion'), {
-		zoom: 15,
+		zoom: 16,
 		center: myLatLng
 	});
 
+	MAPZONIFICACION_RADIOS = mapZonificacion;
+	
 	puntosZonificacion.forEach(function (feature) {
+		if(feature.type == "sitio")
+			var icon_ = {
+			    url:  iconos[feature.type].icon, // url
+			    //scaledSize: new google.maps.Size(25, 35), // scaled size
+			    scaledSize: new google.maps.Size(33, 32), // scaled size
+			};
+		else	
+			var icon_ = {
+				    url:  iconos[feature.type].icon, // url
+				    scaledSize: new google.maps.Size(25, 25), // scaled size
+				};
+		
+		
+		
 		var marker = new google.maps.Marker({
 			position: feature.position,
-			icon: iconos[feature.type].icon,
+			icon: icon_,
 			map: mapZonificacion
 		});
 	});
 
-	consultaGenMDNuevo($("#mdId").val(), mapZonificacion);
+	consultaGenMDNuevo($("#mdId").val(), mapZonificacion, markSitio);
 
 }
 
@@ -2332,6 +2501,15 @@ function rotar(valor) {
 	}
 }
 
+/* == VER DETALLE MD ===*/
+function obtieneDetalleMd(nombreMd, mdId) {
+	$("#nombreMd2").val(nombreMd);
+	$("#mdId2").val(mdId);
+	$("#tipoMd2").val('5');
+	$("#detalleMemoriaAsignadaActionMD").submit();
+}
+	
+
 function consultaScore() {
 
 	invocarJSONServiceAction("consultaScoreAction",
@@ -2465,6 +2643,32 @@ function mostrarVistaSeccion() {
 	if ($("#option-vista-c").is(":checked")) {
 		$("#contenido-vista-c").show();
 	}
+
+}
+
+function pintaRadio(thisMap){
+	if ($("#check-tdos-gen").is(":checked") ||
+	$("#check-mercados").is(":checked") || 
+	$("#check-escuela").is(":checked") ||
+	$("#check-hospital").is(":checked") ||
+	$("#check-templo").is(":checked") ||
+	$("#check-ofGob").is(":checked") ||
+	$("#check-tdos-ue").is(":checked") ||
+	$("#check-panaderia").is(":checked") ||
+	$("#check-tortilleria").is(":checked") ||
+	$("#check-abarrotes").is(":checked") ||
+	$("#check-carniceria").is(":checked") ||
+	$("#check-recauderia").is(":checked") ||
+	$("#check-polleria").is(":checked")){
+		
+		circule.setMap(MAPZONIFICACION_RADIOS);
+		
+	}else{
+		circule.setMap(null);
+		
+	}
+	
+	
 
 }
 

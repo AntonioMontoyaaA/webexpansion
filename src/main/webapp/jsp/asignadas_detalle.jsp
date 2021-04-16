@@ -133,11 +133,12 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-12" id="map"></div>
+						<div class="col-12" id="map" style="height: 173px !important;"></div>
 						<script async defer
 							src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCaefWW3pvU6WKZKiVFD6OwyGoWIgZLyS0">
 							
 						</script>
+						
 					</div>
 				</div>
 			</div>
@@ -433,651 +434,1038 @@
 								</a>
 							</div>
 						</div>
-						<div class="row div_header_sub">
+						<div id="zonifNew" class="row div_header_sub">
 							<div class="col-lg-12 col-md-12 altura2">
-								<div id="mapaZonificacion"
-									style="width: 100%; height: 85%; position: relative; float: left;"></div>
-							</div>
-							<div id="divNegociosHeader"
-								style="cursor: pointer; position: absolute; left: 68%; display: none;"
-								onclick="muestraGeneradores()">
-								<div class="row"
-									style="float: right; overflow-y: scroll; margin-right: 0px;">
-									<div
-										style="max-height: 50px; overflow: auto; background: #e6e6e6;">
-										<span class="titulo_detalle_md_20" style="padding-left: 30px;">VER
-											DETALLE</span>&nbsp;&nbsp;&nbsp;<img
-											src="${pageContext.request.contextPath}/img/arrowDown.png"
-											style="padding-top: 0px; cursor: pointer; padding-right: 30px;" />
-									</div>
+								<div id="mapaZonificacion" class="md-nuevo-map-properties">
 								</div>
 							</div>
-							<div id="divNegocios"
-								style="position: absolute; left: 68%; display: block">
-								<div class="row" style="background: #FFF;">
-									<div class="col-12 pl-3 pr-0 etiqueta-white-l">
-										<div class="row pr-0 container">
-											<div class="col-5 etiqueta-white-l">
-												<div class="col-lg-2 col-2 cursor"
-													onclick="escondeGeneradores()">
-													<img
-														src="${pageContext.request.contextPath}/img/arrowUp.png"
-														style="padding-top: 10px; cursor: pointer;" />
-												</div>
-											</div>
-											<div class="col-3 etiqueta-white-l">
-												<ul>
-													<li><input type="radio" id="option-vista-a"
-														name="selector" checked> <label
-														for="option-vista-a"></label>
-														<div class="check"></div></li>
-													<li><input type="radio" id="option-vista-b"
-														name="selector"> <label for="option-vista-b"></label>
-														<div class="check">
-															<div class="inside"></div>
-														</div></li>
-													<li><input type="radio" id="option-vista-c"
-														name="selector"> <label for="option-vista-c"></label>
-														<div class="check">
-															<div class="inside"></div>
-														</div></li>
-												</ul>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="row" style="float: right; margin-right: 0px;">
-
-									<!-- Contenedor Scroll  -->
-									<div id="contenido-vista-a" class="back_generadores"
-										style="max-height: 404px; overflow: auto; background: #FFF;">
-										<div
-											class="col-sm-12 offset-sm-0 col-md-12 offset-md-0 col-xl-12 row">
-											<!-- INFORMACION DEL SITIO -->
-											<div class="col-12">
-												<!-- DATOS DE SITIO 1 -->
-												<div id="seccionDatos1" class="row col-12">
-
-													<div class="col-12 etiqueta-white-l">
-														Radio: <span class="infoRadio"> 0 </span>
+							<div id="generadoresMDContainerNew">
+									<div id="generadoresDivNew"  class="container md-nuevo-properties ">
+											<div class="md-nuevo-transparent-background"></div>
+											<div id="divNegocios" class="md-nuevo-sidebar-properties">
+												<div class="row">
+													<div class="col">
+														<div class="row text-center">
+															<!--//Pestañas-->
+															<div class="col-5">
+																<!--//Boton 1-->
+																<input type="radio" id="option-vista-a" name="selector"
+																	checked> <label for="option-vista-a"  class="t12 blanco">Jefe Expansi&oacute;n</label>
+																<div class="check"></div>
+															</div>
+															<div class="col-3">
+																<!--//Boton 2-->
+																<input type="radio" id="option-vista-b" name="selector">
+																<label for="option-vista-b"  class="t12 blanco">Radio</label>
+																<div class="check">
+																	<div class="inside"></div>
+																</div>
+															</div>
+															<div class="col-4">
+																<!--//Boton 3-->
+																<input type="radio" id="option-vista-c" name="selector">
+																<label for="option-vista-c"  class="t12 blanco">Ocupaciones</label>
+																<div class="check">
+																	<div class="inside"></div>
+																</div>
+															</div>
+														</div>
 													</div>
-<!-- 													<div class="col-5 p-0 etiqueta-white-l text-center"> -->
-<%-- 														Estatus: <span class="infoEstatus"> 0 </span> --%>
-<!-- 													</div> -->
-<!-- 													<div class="col-3 p-0 etiqueta-white-l"> -->
-<%-- 														No. visitas: <span id="infoNoVisitas"> 0 </span> --%>
-<!-- 													</div> -->
-
 												</div>
-												<!-- FIN datos sitio  -->
-
+												<div class="col" id="contenido-vista-a">
+													<!--//Contenido A-->
+													<div class="row">
+														<div class="col">
+															<!--//Tipo 1-->
+															<div class="row">
+																<!--//Titulo-->
+																<span class="negrita t14 subTitleInfo">COMPETENCIAS</span>
+															</div>
+															<div class="row text-center">
+															
+																<div class="col">
+																	<!--//Indicador 2-->
+																	<div class="row">
+																		<div class="col">
+																			<!--//Valor-->
+																			<span id="tresBTotal" class="titulo_detalle_md_20 blanco">0</span>
+																		</div>
+																	</div>
+																	<div class="row">
+																		<div class="col">
+																			<!--//Icono-->
+																			<img class="icono_imagen"
+																				src="img/competencia/iconos_3b.png">
+																		</div>
+																	</div>
+																	<div class="row">
+																		<div class="col">
+																			<!--//Texto Descriptivo-->
+																			<span class="t10 blanco">&nbsp;</span>
+																		</div>
+																	</div>
+																</div>
+																<div class="col">
+																	<!--//Indicador 3-->
+																	<div class="row">
+																		<div class="col">
+																			<!--//Valor-->
+																			<span id="expressTotal" class="titulo_detalle_md_20 blanco">0</span>
+																		</div>
+																	</div>
+																	<div class="row">
+																		<div class="col">
+																			<!--//Icono-->
+																			<img class="icono_imagen"
+																				src="img/competencia/iconos_express.png">
+																		</div>
+																	</div>
+																	<div class="row">
+																		<!--//Texto Descriptivo-->
+																		<div class="col">
+																			<span class="t10 blanco">&nbsp;</span>
+																		</div>
+																	</div>
+																</div>
+																<div class="col">
+																	<!--//Indicador 4-->
+																	<div class="row">
+																		<div class="col">
+																			<!--//Valor-->
+																			<span id="oxxoTotal" class="titulo_detalle_md_20 blanco">0</span>
+																		</div>
+																	</div>
+																	<div class="row">
+																		<div class="col">
+																			<!--//Icono-->
+																			<img class="icono_imagen"
+																				src="img/competencia/iconos_oxxo.png">
+																		</div>
+																	</div>
+																	<div class="row">
+																		<!--//Texto Descriptivo-->
+																		<div class="col">
+																			<span class="t10 blanco">&nbsp;</span>
+																		</div>
+																	</div>
+																</div>
+																<div class="col">
+																	<!--//Indicador 5-->
+																	<div class="row">
+																		<div class="col">
+																			<!--//Valor-->
+																			<span id="otrosCTotal" class="titulo_detalle_md_20 blanco">0</span>
+																		</div>
+																	</div>
+																	<div class="row">
+																		<div class="col">
+																			<!--//Icono-->
+																			<img class="icono_imagen"
+																				src="img/competencia/icono_otros_2.png">
+																		</div>
+																	</div>
+																	<div class="row">
+																		<!--//Texto Descriptivo-->
+																		<div class="col">
+																			<span class="t10 blanco">Tienda de abarrotes</span>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+									
+													<div class="row" style="border-top: 1px solid #C9C9C9;">
+														<!--//Separador-->
+													</div>
+									
+													<div class="row">
+														<div class="col">
+															<!--//Tipo 2-->
+															<div class="row">
+																<!--//Titulo-->
+																<span class="negrita t14 subTitleInfo">NEGOCIOS</span>
+															</div>
+															<div class="row text-center">
+																<!--//Indicadores-->
+																<div class="col">
+																	<!--//Indicador 1-->
+																	<div class="row">
+																		<div class="col">
+																			<!--//Valor-->
+																			<span id="tortilleriaTotal" class="titulo_detalle_md_20 blanco">0</span>
+																		</div>
+																	</div>
+																	<div class="row">
+																		<div class="col">
+																			<!--//Icono-->
+																			<img class="icono_imagen"
+																				src="img/generadores/tortilleria.png">
+																		</div>
+																	</div>
+																	<div class="row">
+																		<!--//Texto descriptivo-->
+																		<div class="col">
+																			<span class="t10 blanco">Tortiller&iacute;a</span>
+																		</div>
+																	</div>
+																</div>
+																<div class="col">
+																	<!--//Indicador 2-->
+																	<div class="row">
+																		<div class="col">
+																			<!--//Valor-->
+																			<span id="recauderiaTotal" class="titulo_detalle_md_20 blanco">0</span>
+																		</div>
+									
+																	</div>
+																	<div class="row">
+																		<div class="col">
+																			<!--//Icono-->
+																			<img class="icono_imagen"
+																				src="img/generadores/recauderia.png">
+																		</div>
+																	</div>
+																	<div class="row">
+																		<!--//Texto descriptivo-->
+																		<div class="col">
+																			<span class="t10 blanco">Frutas y verduras</span>
+																		</div>
+																	</div>
+																</div>
+																<div class="col">
+																	<!--//Indicador 3-->
+																	<div class="row">
+																		<div class="col">
+																			<!--//Valor-->
+																			<span id="carniceriaTotal" class="titulo_detalle_md_20 blanco">0</span>
+																		</div>
+																	</div>
+																	<div class="row">
+																		<div class="col">
+																			<!--//Icono-->
+																			<img class="icono_imagen"
+																				src="img/generadores/carniceria.png">
+																		</div>
+																	</div>
+																	<div class="row">
+																		<!--//Texto descriptivo-->
+																		<div class="col">
+																			<span class="t10 blanco">Carnicer&iacute;a</span>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="row" style="border-top: 1px solid #C9C9C9;">
+														<!--//Separador-->
+													</div>
+													<div class="row">
+														<div class="col">
+															<!--//Tipo 3-->
+															<div class="row">
+																<!--//Titulo-->
+																<span class="negrita t14 subTitleInfo">NEGOCIOS DE
+																	COMIDA</span>
+															</div>
+															<div class="row text-center">
+																<!--//Indicadores-->
+																<div class="col">
+																	<!--//Indicador 1-->
+																	<div class="row">
+																		<div class="col">
+																			<!--//Valor-->
+																			<span id="comidaTotal" class="titulo_detalle_md_20 blanco">0</span>
+																		</div>
+																	</div>
+																	<div class="row">
+																		<div class="col">
+																			<!--//Icono-->
+																			<img class="icono_imagen"
+																				src="img/generadores/negociocomida.png">
+																		</div>
+																	</div>
+																	<div class="row">
+																		<!--//Texto descriptivo-->
+																		<div class="col">
+																			<span class="t10 blanco">Negocio de comida</span>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+									
+														<div class="col">
+															<!--//Tipo 4-->
+															<div class="row">
+																<!--//Titulo-->
+																<span class="negrita t14 subTitleInfo">TRANSPORTE
+																	P&Uacute;BLICO</span>
+															</div>
+															<div class="row text-center">
+																<!--//Indicadores-->
+																<div class="col">
+																	<!--//Indicador 1-->
+																	<div class="row">
+																		<div class="col">
+																			<!--//Valor-->
+																			<span id="paradaTotal" class="titulo_detalle_md_20 blanco">0</span>
+																		</div>
+																	</div>
+																	<div class="row">
+																		<div class="col">
+																			<!--//Icono-->
+																			<img class="icono_imagen"
+																				src="img/generadores/parada.png">
+																		</div>
+																	</div>
+																	<div class="row">
+																		<!--//Texto descriptivo-->
+																		<div class="col">
+																			<span class="t10 blanco">Parada de autob&uacute;s</span>
+																		</div>
+																	</div>
+																</div>
+																<div class="col">
+																	<!--//Indicador 2-->
+																	<div class="row">
+																		<div class="col">
+																			<!--//Valor-->
+																			<span id="metroTotal" class="titulo_detalle_md_20 blanco">0</span>
+																		</div>
+																	</div>
+																	<div class="row">
+																		<div class="col">
+																			<!--//Icono-->
+																			<img class="icono_imagen"
+																				src="img/generadores/w_metro.png">
+																		</div>
+																	</div>
+																	<div class="row">
+																		<!--//Texto descriptivo-->
+																		<div class="col">
+																			<span class="t10 blanco">Parada de Metro</span>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="row" style="border-top: 1px solid #C9C9C9;">
+														<!--//Separador-->
+													</div>
+													<div class="row">
+														<div class="col">
+															<!--//Tipo 5-->
+															<div class="row">
+																<!--//Titulo-->
+																<span class="negrita t14 subTitleInfo">MERCADO
+																	P&Uacute;BLICO</span>
+															</div>
+															<div class="row text-center">
+																<!--//Indicadores-->
+																<div class="col">
+																	<!--//Indicador 1-->
+																	<div class="row">
+																		<div class="col">
+																			<!--//Valor-->
+																			<span id="mercadoTotal" class="titulo_detalle_md_20 blanco">0</span>
+																		</div>
+									
+																	</div>
+																	<div class="row">
+																		<div class="col">
+																			<!--//Icono-->
+																			<img class="icono_imagen"
+																				src="img/generadores/mercado.png">
+																		</div>
+																	</div>
+																	<div class="row">
+																		<!--//Texto descriptivo-->
+																		<div class="col">
+																			<span class="t10 blanco">Mercado</span>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+									
+														<div class="col">
+															<!--//Tipo 6-->
+															<div class="row">
+																<!--//Titulo-->
+																<span class="negrita t14 subTitleInfo">TIANGUIS</span>
+															</div>
+															<div class="row text-center">
+																<!--//Indicadores-->
+																<div class="col">
+																	<!--//Indicador 1-->
+																	<div class="row">
+																		<div class="col">
+																			<!--//Valor-->
+																			<span id="tianguisTotal" class="titulo_detalle_md_20 blanco">0</span>
+																		</div>
+																	</div>
+																	<div class="row">
+																		<div class="col">
+																			<!--//Icono-->
+																			<img class="icono_imagen"
+																				src="img/generadores/tianguis.png">
+																		</div>
+																	</div>
+																	<div class="row">
+																		<!--//Texto descriptivo-->
+																		<div class="col">
+																			<span class="t10 blanco">Tianguis</span>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="row" style="border-top: 1px solid #C9C9C9;">
+														<!--//Separador-->
+													</div>
+													<div class="row">
+														<div class="col">
+															<!--//Tipo 7-->
+															<div class="row">
+																<!--//Titulo-->
+																<span class="negrita t14 subTitleInfo">OTROS GENERADORES</span>
+															</div>
+															<div class="row text-center">
+																<!--//Indicadores-->
+																<div class="col">
+																	<!--//Indicador 1-->
+																	<div class="row">
+																		<div class="col">
+																			<!--//Valor-->
+																			<span id="iglesiaTotal" class="titulo_detalle_md_20 blanco">0</span>
+																		</div>
+																	</div>
+																	<div class="row">
+																		<div class="col">
+																			<!--//Icono-->
+																			<img class="icono_imagen"
+																				src="img/generadores/iglesia.png">
+																		</div>
+																	</div>
+																	<div class="row">
+																		<!--//Texto descriptivo-->
+																		<div class="col">
+																			<span class="t10 blanco">Iglesia</span>
+																		</div>
+																	</div>
+																</div>
+																<div class="col">
+																	<!--//Indicador 2-->
+																	<div class="row">
+																		<div class="col">
+																			<!--//Valor-->
+																			<span id="escuelaTotal" class="titulo_detalle_md_20 blanco">0</span>
+																		</div>
+																	</div>
+																	<div class="row">
+																		<div class="col">
+																			<!--//Icono-->
+																			<img class="icono_imagen"
+																				src="img/generadores/escuela.png">
+																		</div>
+																	</div>
+																	<div class="row">
+																		<!--//Texto descriptivo-->
+																		<div class="col">
+																			<span class="t10 blanco">Escuela</span>
+																		</div>
+																	</div>
+																</div>
+																<div class="col">
+																	<!--//Indicador 3-->
+																	<div class="row">
+																		<div class="col">
+																			<!--//Valor-->
+																			<span id="otrosGTotal" class="titulo_detalle_md_20 blanco">0</span>
+																		</div>
+																	</div>
+																	<div class="row">
+																		<div class="col">
+																			<!--//Icono-->
+																			<img class="icono_imagen"
+																				src="img/generadores/icono_otros_generadores.png">
+																		</div>
+																	</div>
+																	<div class="row">
+																		<!--//Texto descriptivo-->
+																		<div class="col">
+																			<span class="t10 blanco">Otros Generadores</span>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div id="contenido-vista-b" class="col">
+													<div class="row">
+														<div class="col">
+															<div class="row text-center" style="font-size: 13px;">
+																<!--Radio-->
+																<div class="col">
+																	<!--Titulo-->
+																	<div class="text-center blanco">Radio:</div>
+																</div>
+																<div class="col">
+																	<!--Valor-->
+																	<span class="infoRadio blanco"> 0 </span>
+																</div>
+															</div>
+															<div class="row">
+																<!--Información Socio Demografica titulo-->
+																<div class="col pt-3 pl-0 pb-2"><span class="negrita t14 subTitleInfo">Información
+																	Socio demográfica</span></div>
+															</div>
+															<div class="row" style="font-size: 13px;">
+																<!--Edad Predominante titulo-->
+																<div class="col"><div class="blanco">Edad predominante</div></div>
+															</div>
+															<div class="row text-center" >
+																<!--Edades-->
+																<div class="col p-0">
+																	<div class="row">
+																		<!--Valor-->
+																		<div class="col blanco" style="font-size: 13px;">
+																			<span id="edadMenor1"> 0 </span>
+																		</div>
+																	</div>
+																	<div class="row">
+																		<!--Icono-->
+																		<div class="col"><img class="img-tamanio-info-demografica" src="img/localizador/icon-menor-18.png"></div>
+																	</div>
+																	<div class="row">
+																		<!--Descripcion-->
+																		<div class="col">
+																			<span class="t10 blanco">&lt; - 20</span>
+																		</div>
+																	</div>
+																</div>
+																<div class="col p-0">
+																	<div class="row">
+																		<!--Valor-->
+																		<div class="col blanco" style="font-size: 13px;"><span id="edadMenor2"> 0 </span></div>
+																	</div>
+																	<div class="row">
+																		<!--Icono-->
+																		<div class="col"><img class="img-tamanio-info-demografica" src="img/localizador/icon-mayor-20.png"></div>
+																	</div>
+																	<div class="row">
+																		<!--Descripcion-->
+																		<div class="col">
+																			<span class="t10 blanco">21 - 30</span>
+																		</div>
+																	</div>
+																</div>
+																<div class="col p-0">
+																	<div class="row">
+																		<!--Valor-->
+																		<div class="col blanco" style="font-size: 13px;"><span id="edadMenor3"> 0 </span></div>
+																	</div>
+																	<div class="row">
+																		<!--Icono-->
+																		<div class="col"><img class="img-tamanio-info-demografica" src="img/localizador/icon-31-40.png"></div>
+																	</div>
+																	<div class="row">
+																		<!--Descripcion-->
+																		<div class="col">
+																			<span class="t10 blanco">31- 40</span>
+																		</div>
+																	</div>
+																</div>
+																<div class="col p-0">
+																	<div class="row">
+																		<!--Valor-->
+																		<div class="col blanco" style="font-size: 13px;"><span id="edadMenor4"> 0 </span></div>
+																	</div>
+																	<div class="row">
+																		<!--Icono-->
+																		<div class="col"><img class="img-tamanio-info-demografica" src="img/localizador/icon-41-50.png"></div>
+																	</div>
+																	<div class="row">
+																		<!--Descripcion-->
+																		<div class="col">
+																			<span class="t10 blanco">41- 50</span>
+																		</div>
+																	</div>
+																</div>
+																<div class="col p-0">
+																	<div class="row">
+																		<!--Valor-->
+																		<div class="col blanco" style="font-size: 13px;"><span id="edadMenor5"> 0 </span></div>
+																	</div>
+																	<div class="row">
+																		<!--Icono-->
+																		<div class="col"><img class="img-tamanio-info-demografica" src="img/localizador/icon-51-60.png"></div>
+																	</div>
+																	<div class="row">
+																		<!--Descripcion-->
+																		<div class="col blanco">
+																			<span class="t10 azul">51 - 60</span>
+																		</div>
+																	</div>
+																</div>
+																<div class="col p-0">
+																	<div class="row">
+																		<!--Valor-->
+																		<div class="col blanco" style="font-size: 13px;"><span id="edadMenor6"> 0 </span></div>
+																	</div>
+																	<div class="row">
+																		<!--Icono-->
+																		<div class="col"><img class="img-tamanio-info-demografica" src="img/localizador/icon-mayor-60.png"></div>
+																	</div>
+																	<div class="row">
+																		<!--Descripcion-->
+																		<div class="col">
+																			<span class="t10 blanco">61 - &lt;</span>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<div class="row text-center" style="font-size: 13px;">
+																<div class="col">
+																	<div class="row">
+																		<div class="col blanco">
+																			<!--Poblacion total Title-->
+																			Poblaci&oacute;n total:
+																			<span id="poblacion"> 0 </span>
+																		</div>
+																		
+																	</div>
+																	<div class="row">
+																		<div class="col blanco">
+																			<!--PEA total Title-->
+																			PEA:
+																			<span id="pea"> 0 </span>
+																		</div>
+																		
+																	</div>
+																</div>
+																<div class="col">
+																	<div class="row">
+																		<div class="col blanco">
+																			<!--Poblacion flotante Title-->
+																			Poblaci&oacute;n flotante:
+																			<span id="poblacionFlot"> 0 </span>
+																		</div>
+																		
+																	</div>
+																	<div class="row">
+																		<div class="col blanco">
+																			<!--Hogares total Title-->
+																			Hogares:
+																			<span id="hogares"> 0 </span>
+																		</div>
+																		
+																	</div>
+																</div>
+															</div>
+															<div class="row" style="border-top: 1px solid #C9C9C9;">
+																<!--//Separador-->
+															</div>
+															<div class="row">
+																<!--Generadores de base-->
+																<div class="col-8 pt-3 pl-0 pb-2">
+																	<!--Generadores Title-->
+																	<span class="negrita t14 subTitleInfo"> Generadores</span>
+																	<input id="check-tdos-gen" type="checkbox" checked="checked" style="margin-top: 4px;"/>
+																</div>
+																<div class="col-4">
+																	<!--Check Todos los generadores-->
+																	
+																</div>
+															</div>
+															<div class="row text-center">
+																<div class="col">
+																	<!--Mercados-->
+																	<div class="row">
+																		<!--check Mercados-->
+																		<div class="col"><input id="check-mercados" type="checkbox" checked="checked"></div>
+																	</div>
+																	<div class="row">
+																		<!--Cant Mercados-->
+																		<div class="col blanco" style="font-size: 13px;"><span id="mercados"> 0 </span></div>
+																	</div>
+																	<div class="row">
+																		<!--Icono Mercados-->
+																		<div class="col"><img class="img-tamanio-info-demografica" style="margin-bottom: 0px;"
+																			src="img/localizador/icon-mercado.png"></div>
+																	</div>
+																	<div class="row">
+																		<!--Desc Mercados-->
+																		<div class="col">
+																			<span class="t10 blanco">Mercados</span>
+																		</div>
+																	</div>
+																</div>
+																<div class="col">
+																	<!--Escuelas-->
+																	<div class="row">
+																		<!--check Escuelas-->
+																		<div class="col"><input id="check-escuela" type="checkbox" checked="checked" style="padding-left: 0px;"></div>
+																	</div>
+																	<div class="row">
+																		<!--Cant Escuelas-->
+																		<div class="col blanco" style="font-size: 13px;"><span id="escuelas"> 0 </span></div>
+																	</div>
+																	<div class="row">
+																		<!--Icono Escuelas-->
+																		<div class="col"><img class="img-tamanio-info-demografica" style="margin-bottom: 0px;"
+																			src="img/localizador/icon-escuela.png"></div>
+																	</div>
+																	<div class="row">
+																		<!--Desc Escuelas-->
+																		<div class="col">
+																			<span class="t10 blanco">Escuelas</span>
+																		</div>
+																	</div>
+																</div>
+																<div class="col">
+																	<!--Hospitales-->
+																	<div class="row">
+																		<!--check Hospitales-->
+																		<div class="col"><input id="check-hospital" type="checkbox" checked="checked" style="padding-left: 0px;"></div>
+																	</div>
+																	<div class="row">
+																		<!--Cant Hospitales-->
+																		<div class="col blanco" style="font-size: 13px;"><span id="hopitales"> 0 </span></div>
+																	</div>
+																	<div class="row">
+																		<!--Icono Hospitales-->
+																		<div class="col"><img class="img-tamanio-info-demografica" style="margin-bottom: 0px;"
+																			src="img/localizador/icon-hospital.png"></div>
+																	</div>
+																	<div class="row">
+																		<!--Desc Hospitales-->
+																		<div class="col">
+																			<span class="t10 blanco">Hospitales</span>
+																		</div>
+																	</div>
+																</div>
+																<div class="col">
+																	<!--Templos-->
+																	<div class="row">
+																		<!--check Templos-->
+																		<div class="col"><input id="check-templo" type="checkbox" checked="checked" style="padding-left: 0px;"></div>
+																	</div>
+																	<div class="row">
+																		<!--Cant Templos-->
+																		<div class="col blanco" style="font-size: 13px;"><span id="templos"> 0 </span></div>
+																	</div>
+																	<div class="row">
+																		<!--Icono Templos-->
+																		<div class="col"><img class="img-tamanio-info-demografica" style="margin-bottom: 0px;"
+																			src="img/localizador/icon-templo.png"></div>
+																	</div>
+																	<div class="row">
+																		<!--Desc Templos-->
+																		<div class="col">
+																			<span class="t10 blanco">Templos</span>
+																		</div>
+																	</div>
+																</div>
+																<div class="col">
+																	<!--Oficinas Gob-->
+																	<div class="row">
+																		<!--check OGob-->
+																		<div class="col"><input id="check-ofGob" type="checkbox" checked="checked" style="padding-left: 0px;"></div>
+																	</div>
+																	<div class="row">
+																		<!--Cant Ogob-->
+																		<div class="col blanco" style="font-size: 13px;"><span id="ofiGob"> 0 </span></div>
+																	</div>
+																	<div class="row">
+																		<!--Icono Ogob-->
+																		<div class="col"><img class="img-tamanio-info-demografica" style="margin-bottom: 0px;"
+																			src="img/localizador/icon-ofgobierno.png"></div>
+																	</div>
+																	<div class="row">
+																		<!--Desc Ogob-->
+																		<div class="col">
+																			<span class="t10 blanco">O. Gobierno</span>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<div class="row">
+																<div class="col pt-3 pl-0 pb-2">
+																	<!--Competencias-->
+																	<span class="negrita t14 subTitleInfo">Competencias</span>
+																</div>
+															</div>
+															<div class="row text-center">
+																<div class="col">
+																	<!--Bbb-->
+																	<div class="row">
+																		<!--Cant BBB-->
+																		<div class="col blanco"><span id="bbb"> 0 </span></div>
+																	</div>
+																	<div class="row">
+																		<!--Icono BBB-->
+																		<div class="col"><img class="img-tamanio-info-demografica" src="img/localizador/icon-compe-3b.png"></div>
+																	</div>
+																</div>
+																<div class="col">
+																	<!--BAE exp-->
+																	<div class="row">
+																		<!--Cant BAE Exp-->
+																		<div class="col blanco"><span id="bae"> 0 </span></div>
+																	</div>
+																	<div class="row">
+																		<!--Icono BAE exp-->
+																		<div class="col"><img class="img-tamanio-info-demografica" src="img/localizador/icon-compe-bod-expres.png"></div>
+																	</div>
+																</div>
+																<div class="col">
+																	<!--MIBA-->
+																	<div class="row">
+																		<!--Cant MIBA-->
+																		<div class="col blanco"><span id="miba"> 0 </span></div>
+																	</div>
+																	<div class="row">
+																		<!--Icono MIBA-->
+																		<div class="col"><img class="img-tamanio-info-demografica" src="img/localizador/icon-compe-bod.png"></div>
+																	</div>
+																</div>
+															</div>
+															<div class="row">
+																<!--Unidades Economicas Titulo-->
+																<div class="col-11 pt-3 pl-0 pb-2">
+																	<span class="negrita t14 subTitleInfo"> Unidades
+																		Econ&oacute;micas </span>
+																		<input id="check-tdos-ue" type="checkbox" checked="checked" style="margin-top: 4px;">
+																</div>
+																<div class="col-1">
+																	
+																</div>
+															</div>
+															<div class="row text-center">
+																<div class="col p-0">
+																	<!--Panaderias-->
+																	<div class="row">
+																		<!--check Panaderias-->
+																		<div class="col"><input id="check-panaderia" type="checkbox" checked="checked" style="padding-left: 0px;"></div>
+																	</div>
+																	<div class="row">
+																		<!--Cant Panaderias-->
+																		<div class="col blanco"><span id="t-PANADERIA"> 0 </span></div>
+																	</div>
+																	<div class="row">
+																		<!--Icono Panaderias-->
+																		<div class="col"><img class="img-tamanio-info-demografica" src="img/localizador/icon-panaderia.png"></div>
+																	</div>
+																	<div class="row">
+																		<!--Desc Panaderias-->
+																		<div class="col blanco">
+																			<span class="t10 blanco">Panader&iacute;as</span>
+																		</div>
+																	</div>
+																</div>
+																<div class="col p-0">
+																	<!--Tortillerias-->
+																	<div class="row">
+																		<!--check Tortillerias-->
+																		<div class="col"><input id="check-tortilleria" type="checkbox" checked="checked" style="padding-left: 0px;"></div>
+																	</div>
+																	<div class="row">
+																		<!--Cant Tortillerias-->
+																		<div class="col blanco"><span id="t-TORTILLERIA"> 0 </span></div>
+																	</div>
+																	<div class="row">
+																		<!--Icono Tortillerias-->
+																		<div class="col"><img class="img-tamanio-info-demografica" src="img/localizador/icon-tortilleria.png"></div>
+																	</div>
+																	<div class="row">
+																		<!--Desc Tortillerias-->
+																		<div class="col">
+																			<span class="t10 blanco">Tortiller&iacute;as</span>
+																		</div>
+																	</div>
+																</div>
+																<div class="col p-0">
+																	<!--Abarrotes-->
+																	<div class="row">
+																		<!--check Abarrotes-->
+																		<div class="col"><input id="check-abarrotes" type="checkbox" checked="checked" style="padding-left: 0px;"></div>
+																	</div>
+																	<div class="row">
+																		<!--Cant Abarrotes-->
+																		<div class="col blanco"><span id="t-ABARROTES"> 0 </span></div>
+																	</div>
+																	<div class="row">
+																		<!--Icono Abarrotes-->
+																		<div class="col"><img class="img-tamanio-info-demografica" src="img/localizador/icon-abarrotes.png"></div>
+																	</div>
+																	<div class="row">
+																		<!--Desc Abarrotes-->
+																		<div class="col">
+																			<span class="t10 blanco">Abarrotes</span>
+																		</div>
+																	</div>
+																</div>
+																<div class="col p-0">
+																	<!--Carnicerias-->
+																	<div class="row">
+																		<!--check Carnicerias-->
+																		<div class="col"><input id="check-carniceria" type="checkbox" checked="checked" style="padding-left: 0px;"></div>
+																	</div>
+																	<div class="row">
+																		<!--Cant Carnicerias-->
+																		<div class="col blanco"><span id="t-CARNICERIA"> 0 </span></div>
+																	</div>
+																	<div class="row">
+																		<!--Icono Carnicerias-->
+																		<div class="col"><img class="img-tamanio-info-demografica" src="img/localizador/icon-carniceria.png"></div>
+																	</div>
+																	<div class="row">
+																		<!--Desc Carnicerias-->
+																		<div class="col">
+																			<span class="t10 blanco">Carnicer&iacute;as </span>
+																		</div>
+																	</div>
+																</div>
+																<div class="col p-0">
+																	<!--Recauderias-->
+																	<div class="row">
+																		<!--check Recauderias-->
+																		<div class="col"><input id="check-recauderia" type="checkbox" checked="checked" style="padding-left: 0px;"></div>
+																	</div>
+																	<div class="row">
+																		<!--Cant Recauderias-->
+																		<div class="col blanco"><span id="t-RECAUDERIAS"> 0 </span></div>
+																	</div>
+																	<div class="row">
+																		<!--Icono Recauderias-->
+																		<div class="col"><img class="img-tamanio-info-demografica" src="img/localizador/icon-recauderia.png"></div>
+																	</div>
+																	<div class="row">
+																		<!--Desc Recauderias-->
+																		<div class="col">
+																			<span class="t10 blanco">Recauder&iacute;as  </span>
+																		</div>
+																	</div>
+																</div>
+																<div class="col p-0">
+																	<!--Pollerias-->
+																	<div class="row">
+																		<!--check Pollerias-->
+																		<div class="col"><input id="check-polleria" type="checkbox" checked="checked" style="padding-left: 0px;"></div>
+																	</div>
+																	<div class="row">
+																		<!--Cant Pollerias-->
+																		<div class="col blanco"><span id="t-POLLERIA"> 0 </span></div>
+																	</div>
+																	<div class="row">
+																		<!--Icono Pollerias-->
+																		<div class="col"><img class="img-tamanio-info-demografica" src="img/localizador/icon-polleria.png"></div>
+																	</div>
+																	<div class="row">
+																		<!--Desc Pollerias-->
+																		<div class="col">
+																			<span class="t10 blanco">Poller&iacute;a  </span>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+									
+												<div id="contenido-vista-c" class="col"
+													style="max-height: 584px;">
+													<div class="row">
+														<div class="col blanco" style="font-size: 13px;">
+															<!--<div class="row">
+																<div class="col">Coordenadas:</div>
+																<div class="col"><span id="infoCoordenadas"> - </span></div>
+															</div>
+															<div class="row">
+																<div class="col">Ubicaci&oacute;n:</div>
+																<div class="col"><span id="infoUrl"> - </span></div>
+															</div>
+															<div class="row">
+																<div class="col">Calle principal:</div>
+																<div class="col"><span id="infoCalle"> - </span></div>
+															</div>
+															<div class="row">
+																<div class="col">Entre calle 1:</div>
+																<div class="col"><span id="infoCalle1"> - </span></div>
+															</div>
+															<div class="row">
+																<div class="col">Entre calle 2:</div>
+																<div class="col"><span id="infoCalle2"> - </span></div>
+															</div>
+															<div class="row">
+																<div class="col">Colonia:</div>
+																<div class="col"><span id="infoColonia"> - </span></div>
+ 															</div> -->
+															<div class="row">
+																<div class="col">Municipio:</div>
+																<div class="col"><span id="infoMunicipio"> - </span></div>
+															</div>
+															<div class="row">
+																<div class="col">
+																	<div class="row">
+																		<!--Titulo-->
+																		<div class="col">
+																			<span class="negrita t14 subTitleInfo">Ocupaciones</span>
+																		</div>
+																	</div>
+																	<div class="row">
+																		<!--Contenedor radar ocupaciones-->
+																		<canvas id="radar_ocupaciones" class="md-nuevo-radar-ocupaciones-properties"></canvas>
+																	</div>
+																</div>
+															</div>
+															<div class="row">
+																<div class="col">
+																	<div id="list-empleos" class="row"></div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
 											</div>
-											<!-- INFORMACION SOCIO DEMOGRAFICA-->
-											<div class="col-12" style="height: 12px;">
-												<span class="negrita t14 subTitleInfo">Información
-													Socio demográfica</span>
+											<div class="row text-center justify-content-center" id="btonEsconderGeneradores" style="cursor: pointer; background: #795548; border: 1px solid #ffffff;">
+												<!--//Ocultar Generadores-->
+												<div class="row" onclick="escondeGeneradores()">
+													<div class="col-10">
+														<span class="titulo_modal-generadores">Ocultar
+															Generadores</span>
+													</div>
+													<div class="col-2"
+														style="padding-top: 10px; padding-bottom: 10px;">
+														<img
+															src="${pageContext.request.contextPath}/img/arrowUp.png"
+															class="md-nuevo-img-pointer modal-arrow-filter" />
+													</div>
+												</div>
 											</div>
-
-											<div class="col-12 etiqueta-white-l">Edad predominante</div>
-											<div class="col-2 etiqueta-white-l text-center">
-												<span id="edadMenor1"> 0 </span>
+											<div class="row text-center justify-content-center" id="divNegociosHeader" style="cursor: pointer; background: #795548; display: none; border: 1px solid #ffffff;
+											box-shadow: 0px 3px 5px #aaaaaa">
+												<!--Mostrar Generadores-->
+												<div class="row" onclick="muestraGeneradores()" >
+													<div class="col-10">
+														<span class="titulo_modal-generadores">Mostrar
+															Generadores</span>
+													</div>
+													<div class="col-2"
+														style="padding-top: 10px; padding-bottom: 10px;">
+														<img
+															src="${pageContext.request.contextPath}/img/arrowDown.png"
+															class="md-nuevo-img-pointer modal-arrow-filter" />
+													</div>
+												</div>
 											</div>
-											<div class="col-2 etiqueta-white-l text-center">
-												<span id="edadMenor2"> 0 </span>
-											</div>
-											<div class="col-2 etiqueta-white-l text-center">
-												<span id="edadMenor3"> 0 </span>
-											</div>
-											<div class="col-2 etiqueta-white-l text-center">
-												<span id="edadMenor4"> 0 </span>
-											</div>
-											<div class="col-2 etiqueta-white-l text-center">
-												<span id="edadMenor5"> 0 </span>
-											</div>
-											<div class="col-2 etiqueta-white-l text-center">
-												<span id="edadMenor6"> 0 </span>
-											</div>
-
-											<div class="col-2 etiqueta-white-l text-center">
-												<img class="img-tamanio-info-demografica" id=""
-													src="img/localizador/icon-menor-18.png">
-											</div>
-											<div class="col-2 etiqueta-white-l text-center">
-												<img class="img-tamanio-info-demografica" id=""
-													src="img/localizador/icon-mayor-20.png">
-											</div>
-											<div class="col-2 etiqueta-white-l text-center">
-												<img class="img-tamanio-info-demografica" id=""
-													src="img/localizador/icon-31-40.png">
-											</div>
-											<div class="col-2 etiqueta-white-l text-center">
-												<img class="img-tamanio-info-demografica" id=""
-													src="img/localizador/icon-41-50.png">
-											</div>
-											<div class="col-2 etiqueta-white-l text-center">
-												<img class="img-tamanio-info-demografica" id=""
-													src="img/localizador/icon-51-60.png">
-											</div>
-											<div class="col-2 etiqueta-white-l text-center">
-												<img class="img-tamanio-info-demografica" id=""
-													src="img/localizador/icon-mayor-60.png">
-											</div>
-
-											<div class="col-2 etiqueta-white-l text-center">< - 20</div>
-											<div class="col-2 etiqueta-white-l text-center">21 - 30</div>
-											<div class="col-2 etiqueta-white-l text-center">31 - 40</div>
-											<div class="col-2 etiqueta-white-l text-center">41 - 50</div>
-											<div class="col-2 etiqueta-white-l text-center">51 - 60</div>
-											<div class="col-2 etiqueta-white-l text-center">61 - <</div>
-
-											<div class="col-6 etiqueta-white-l">
-												Población total: <span id="poblacion"> 0 </span>
-											</div>
-
-											<div class="col-6 etiqueta-white-l">
-												Población flotante: <span id="poblacionFlot"> 0 </span>
-											</div>
-
-
-											<div class="col-6 etiqueta-white-l">
-												PEA: <span id="pea"> 0 </span>
-											</div>
-
-
-											<div class="col-6 etiqueta-white-l">
-												Hogares: <span id="hogares"> 0 </span>
-											</div>
-
-											<!-- GENERADORES -->
-											<div class="col-12 pt-1">
-												<label class="check-container" style="padding-left: 0px;">
-													<span class="negrita t14 subTitleInfo"> Generadores
-												</span> <input id="check-tdos-gen" type="checkbox"
-													checked="checked" style="padding-left: 0px;"> <span
-													class="checkmark" style="left: 90px;"></span>
-												</label>
-											</div>
-
-											<div class="col-20-generadores text-center p-0">
-												<label class="check-container"
-													style="padding-left: 0px; margin-bottom: 15px;"> <span
-													class=" etiqueta-white-l "> Mercados </span> <input
-													id="check-mercados" type="checkbox" checked="checked"
-													style="padding-left: 22px;"> <span
-													class="checkmark" style="left: 48%; top: 20px;"></span>
-												</label>
-											</div>
-
-											<div class="col-20-generadores text-center p-0">
-												<label class="check-container"
-													style="padding-left: 0px; margin-bottom: 15px;"> <span
-													class=" etiqueta-white-l "> Escuelas </span> <input
-													id="check-escuela" type="checkbox" checked="checked"
-													style="padding-left: 0px;"> <span class="checkmark"
-													style="left: 48%; top: 20px;"></span>
-												</label>
-											</div>
-
-											<div class="col-20-generadores text-center p-0">
-												<label class="check-container"
-													style="padding-left: 0px; margin-bottom: 15px;"> <span
-													class=" etiqueta-white-l "> Hospitales </span> <input
-													id="check-hospital" type="checkbox" checked="checked"
-													style="padding-left: 0px;"> <span class="checkmark"
-													style="left: 48%; top: 20px;"></span>
-												</label>
-											</div>
-
-											<div class="col-20-generadores text-center p-0">
-												<label class="check-container"
-													style="padding-left: 0px; margin-bottom: 15px;"> <span
-													class=" etiqueta-white-l "> Templos </span> <input
-													id="check-templo" type="checkbox" checked="checked"
-													style="padding-left: 0px;"> <span class="checkmark"
-													style="left: 48%; top: 20px;"></span>
-												</label>
-											</div>
-
-											<div class="col-20-generadores text-center p-0">
-												<label class="check-container"
-													style="padding-left: 0px; margin-bottom: 15px;"> <span
-													class=" etiqueta-white-l "> O. gobierno </span> <input
-													id="check-ofGob" type="checkbox" checked="checked"
-													style="padding-left: 0px;"> <span class="checkmark"
-													style="left: 48%; top: 20px;"></span>
-												</label>
-											</div>
-
-											<div class="col-20-generadores etiqueta-white-l text-center">
-												<img class="img-tamanio-info-demografica" id="bell_rojo"
-													style="margin-bottom: 0px;"
-													src="img/localizador/icon-mercado.png">
-											</div>
-											<div class="col-20-generadores etiqueta-white-l text-center">
-												<img class="img-tamanio-info-demografica" id="bell_rojo"
-													style="margin-bottom: 0px;"
-													src="img/localizador/icon-escuela.png">
-											</div>
-											<div class="col-20-generadores etiqueta-white-l text-center">
-												<img class="img-tamanio-info-demografica" id="bell_rojo"
-													style="margin-bottom: 0px;"
-													src="img/localizador/icon-hospital.png">
-											</div>
-											<div class="col-20-generadores etiqueta-white-l text-center">
-												<img class="img-tamanio-info-demografica" id="bell_rojo"
-													style="margin-bottom: 0px;"
-													src="img/localizador/icon-templo.png">
-											</div>
-											<div class="col-20-generadores etiqueta-white-l text-center">
-												<img class="img-tamanio-info-demografica" id="bell_rojo"
-													style="margin-bottom: 0px;"
-													src="img/localizador/icon-ofgobierno.png">
-											</div>
-
-											<div class="col-20-generadores etiqueta-white-l text-center">
-												<span id="mercados"> 0 </span>
-											</div>
-											<div class="col-20-generadores etiqueta-white-l text-center">
-												<span id="escuelas"> 0 </span>
-											</div>
-											<div class="col-20-generadores etiqueta-white-l text-center">
-												<span id="hopitales"> 0 </span>
-											</div>
-											<div class="col-20-generadores etiqueta-white-l text-center">
-												<span id="templos"> 0 </span>
-											</div>
-											<div class="col-20-generadores etiqueta-white-l text-center">
-												<span id="ofiGob"> 0 </span>
-											</div>
-
-											<!-- COMPETENCIAS -->
-											<div class="col-12 pt-0 pb-0" style="height: 18px;">
-												<span class="negrita t14 subTitleInfo">Competencias</span>
-											</div>
-											<div class="col-4 etiqueta-white-l text-center">
-												<img class="img-tamanio-info-demografica" id="bell_rojo"
-													src="img/localizador/icon-compe-3b.png">
-											</div>
-											<div class="col-4 etiqueta-white-l text-center">
-												<img class="img-tamanio-info-demografica" id="bell_rojo"
-													src="img/localizador/icon-compe-bod-expres.png">
-											</div>
-											<div class="col-4 etiqueta-white-l text-center">
-												<img class="img-tamanio-info-demografica" id="bell_rojo"
-													src="img/localizador/icon-compe-bod.png">
-											</div>
-											<div class="col-4 etiqueta-white-l text-center">
-												<span id="bbb"> 0 </span>
-											</div>
-											<div class="col-4 etiqueta-white-l text-center">
-												<span id="bae"> 0 </span>
-											</div>
-											<div class="col-4 etiqueta-white-l text-center">
-												<span id="miba"> 0 </span>
-											</div>
-
-											<!-- UNIDADES -->
-											<div class="col-12 pt-0 pb-0 div-unidades-economicas"
-												style="height: 12px;">
-												<label class="check-container" style="padding-left: 0px;">
-													<span class="negrita t14 subTitleInfo"> Unidades
-														Económicas </span> <input id="check-tdos-ue" type="checkbox"
-													checked="checked" style="padding-left: 0px;"> <span
-													class="checkmark" style="left: 150px;"></span>
-												</label>
-											</div>
-
-											<div class="col-2 text-center p-0">
-												<label class="check-container"
-													style="padding-left: 0px; margin-bottom: 15px;"> <span
-													class=" etiqueta-white-l pl-0"> Panadería </span> <input
-													id="check-panaderia" type="checkbox" checked="checked"
-													style="padding-left: 0px;"> <span class="checkmark"
-													style="left: 40%; top: 20px;"></span>
-												</label>
-											</div>
-
-											<div class="col-2 text-center p-0">
-												<label class="check-container"
-													style="padding-left: 0px; margin-bottom: 15px;"> <span
-													class=" etiqueta-white-l pl-0"> Tortillería </span> <input
-													id="check-tortilleria" type="checkbox" checked="checked"
-													style="padding-left: 0px;"> <span class="checkmark"
-													style="left: 40%; top: 20px;"></span>
-												</label>
-											</div>
-
-											<div class="col-2 text-center p-0">
-												<label class="check-container"
-													style="padding-left: 0px; margin-bottom: 15px;"> <span
-													class=" etiqueta-white-l pl-0"> Abarrotes </span> <input
-													id="check-abarrotes" type="checkbox" checked="checked"
-													style="padding-left: 0px;"> <span class="checkmark"
-													style="left: 40%; top: 20px;"></span>
-												</label>
-											</div>
-
-											<div class="col-2 text-center p-0">
-												<label class="check-container"
-													style="padding-left: 0px; margin-bottom: 15px;"> <span
-													class=" etiqueta-white-l pl-0"> Carnicería </span> <input
-													id="check-carniceria" type="checkbox" checked="checked"
-													style="padding-left: 0px;"> <span class="checkmark"
-													style="left: 40%; top: 20px;"></span>
-												</label>
-											</div>
-
-											<div class="col-2 text-center p-0">
-												<label class="check-container"
-													style="padding-left: 0px; margin-bottom: 15px;"> <span
-													class=" etiqueta-white-l pl-0"> Recaudería </span> <input
-													id="check-recauderia" type="checkbox" checked="checked"
-													style="padding-left: 0px;"> <span class="checkmark"
-													style="left: 40%; top: 20px;"></span>
-												</label>
-											</div>
-
-											<div class="col-2 text-center p-0">
-												<label class="check-container"
-													style="padding-left: 0px; margin-bottom: 15px;"> <span
-													class=" etiqueta-white-l pl-0"> Pollería </span> <input
-													id="check-polleria" type="checkbox" checked="checked"
-													style="padding-left: 0px;"> <span class="checkmark"
-													style="left: 40%; top: 20px;"></span>
-												</label>
-											</div>
-											<div
-												class="col-2 etiqueta-white-l text-center div-unidades-economicas">
-												<img class="img-tamanio-info-demografica" id="bell_rojo"
-													src="img/localizador/icon-panaderia.png">
-											</div>
-											<div
-												class="col-2 etiqueta-white-l text-center div-unidades-economicas">
-												<img class="img-tamanio-info-demografica" id="bell_rojo"
-													src="img/localizador/icon-tortilleria.png">
-											</div>
-											<div
-												class="col-2 etiqueta-white-l text-center div-unidades-economicas">
-												<img class="img-tamanio-info-demografica" id="bell_rojo"
-													src="img/localizador/icon-abarrotes.png">
-											</div>
-											<div
-												class="col-2 etiqueta-white-l text-center div-unidades-economicas">
-												<img class="img-tamanio-info-demografica" id="bell_rojo"
-													src="img/localizador/icon-carniceria.png">
-											</div>
-											<div
-												class="col-2 etiqueta-white-l text-center div-unidades-economicas">
-												<img class="img-tamanio-info-demografica" id="bell_rojo"
-													src="img/localizador/icon-recauderia.png">
-											</div>
-											<div
-												class="col-2 etiqueta-white-l text-center div-unidades-economicas">
-												<img class="img-tamanio-info-demografica" id="bell_rojo"
-													src="img/localizador/icon-polleria.png">
-											</div>
-
-											<div
-												class="col-2 etiqueta-white-l text-center div-unidades-economicas">
-												<span id="t-PANADERIA"> 0 </span>
-											</div>
-											<div
-												class="col-2 etiqueta-white-l text-center div-unidades-economicas">
-												<span id="t-TORTILLERIA"> 0 </span>
-											</div>
-											<div
-												class="col-2 etiqueta-white-l text-center div-unidades-economicas">
-												<span id="t-ABARROTES"> 0 </span>
-											</div>
-											<div
-												class="col-2 etiqueta-white-l text-center div-unidades-economicas">
-												<span id="t-CARNICERIA"> 0 </span>
-											</div>
-											<div
-												class="col-2 etiqueta-white-l text-center div-unidades-economicas">
-												<span id="t-RECAUDERIAS"> 0 </span>
-											</div>
-											<div
-												class="col-2 etiqueta-white-l text-center div-unidades-economicas">
-												<span id="t-POLLERIA"> 0 </span>
-											</div>
-
-
-										</div>
 									</div>
-
-									<div id="contenido-vista-b" class="back_generadores"
-										style="max-height: 404px; overflow: auto; background: #FFF;">
-										<div>
-											<!-- DATOS DE SITIO 2 -->
-											<div id="seccionDatos2" class="row col-12 p-0 pl-3">
-												<div class="etiqueta-size-colum etiqueta-white-l">
-													Coordenadas:</div>
-												<div class="col-9 etiqueta-white-l">
-													<span id="infoCoordenadas"> - </span>
-												</div>
-
-												<div class="etiqueta-size-colum etiqueta-white-l">
-													Ubicación:</div>
-												<div id="infoUrl" class="col-9 etiqueta-white-l"></div>
-
-												<div class="etiqueta-size-colum etiqueta-white-l">Calle
-													principal:</div>
-												<div class="col-9 etiqueta-white-l">
-													<span id="infoCalle"> - </span>
-												</div>
-
-												<div class="etiqueta-size-colum etiqueta-white-l">Entre
-													calle 1:</div>
-												<div class="col-9 etiqueta-white-l">
-													<span id="infoCalle1"> - </span>
-												</div>
-
-												<div class="etiqueta-size-colum etiqueta-white-l">Entre
-													calle 2:</div>
-												<div class="col-9 etiqueta-white-l">
-													<span id="infoCalle2"> - </span>
-												</div>
-
-												<div class="etiqueta-size-colum etiqueta-white-l">
-													Colonia:</div>
-												<div class="col-9 etiqueta-white-l">
-													<span id="infoColonia"> - </span>
-												</div>
-
-												<div class="etiqueta-size-colum etiqueta-white-l">
-													Municipio:</div>
-												<div class="col-9 etiqueta-white-l">
-													<span id="infoMunicipio"> - </span>
-												</div>
-											</div>
-											<!-- FIN datos sitio  -->
-											<div class="col-12 pt-2" style="height:">
-												<span class="negrita t14 subTitleInfo">Ocupaciones</span>
-											</div>
-
-											<!-- OCUPACIONES -->
-											<div class=" pt-0 pb-0 contenedor">
-												<canvas id="radar_ocupaciones"></canvas>
-											</div>
-
-											<div id="list-empleos" class="col-12 row"></div>
-
-											<div class="col-12 pb-1"></div>
-										</div>
-									</div>
-
-									<div id="contenido-vista-c" class="row  seccionScrollContent">
-										<div class="back_generadores altura2"
-											style="max-height: 404px; overflow: auto; background: #FFF;">
-
-											<div class="row"
-												style="margin-right: 10px; margin-left: 10px;">
-												<div class="col-lg-10 col-10 titulo_mapa">
-													<span class="titulo_detalle_md_20">COMPETENCIAS</span>
-												</div>
-
-												<div class="icono_mapa">
-													<span id="netoTotal" class="titulo_detalle_md_20"
-														style="padding-right: 5px">0</span><img
-														class="icono_imagen" src="img/competencia/w_neto.png">
-												</div>
-												<div class="icono_mapa">
-													<span id="tresBTotal" class="titulo_detalle_md_20"
-														style="padding-right: 5px">0</span><img
-														class="icono_imagen" src="img/competencia/iconos_3b.png">
-												</div>
-												<div class="icono_mapa">
-													<span id="expressTotal" class="titulo_detalle_md_20"
-														style="padding-right: 5px">0</span><img
-														class="icono_imagen"
-														src="img/competencia/iconos_express.png">
-												</div>
-												<div class="icono_mapa">
-													<span id="oxxoTotal" class="titulo_detalle_md_20"
-														style="padding-right: 5px">0</span><img
-														class="icono_imagen" src="img/competencia/iconos_oxxo.png">
-												</div>
-												<!-- <div class="icono_mapa"><img class="icono_imagen" src="img/competencia/iconos_seven.png"></div>
-							<div class="icono_mapa"><img class="icono_imagen" src="img/competencia/iconos_k.png"></div> -->
-												<div class="icono_mapa">
-													<span id="otrosCTotal" class="titulo_detalle_md_20"
-														style="padding-right: 5px">0</span><img
-														class="icono_imagen"
-														src="img/competencia/icono_otros_2.png"><br> <span
-														class="t10 azul">Tienda de abarrotes</span>
-												</div>
-											</div>
-
-											<div class="row"
-												style="margin-right: 10px; margin-left: 10px;">
-												<div class="col-lg-12 titulo_mapa"
-													style="border-top: 1px solid #C9C9C9;">
-													<span class="titulo_detalle_md_20">NEGOCIOS</span>
-												</div>
-												<div class="icono_mapa">
-													<span id="tortilleriaTotal" class="titulo_detalle_md_20"
-														style="padding-right: 5px">0</span><img
-														class="icono_imagen" src="img/generadores/tortilleria.png"><br>
-													<span class="t10 azul">Tortillería</span>
-												</div>
-												<div class="icono_mapa">
-													<span id="recauderiaTotal" class="titulo_detalle_md_20"
-														style="padding-right: 5px">0</span><img
-														class="icono_imagen" src="img/generadores/recauderia.png"><br>
-													<span class="t10 azul">Frutas y<br> verduras
-													</span>
-												</div>
-												<div class="icono_mapa">
-													<span id="carniceriaTotal" class="titulo_detalle_md_20"
-														style="padding-right: 5px">0</span><img
-														class="icono_imagen" src="img/generadores/carniceria.png"><br>
-													<span class="t10 azul">Carnicería</span>
-												</div>
-											</div>
-
-											<div class="row"
-												style="margin-right: 10px; margin-left: 10px;">
-												<div class="col-lg-12 titulo_mapa"
-													style="border-top: 1px solid #C9C9C9;">
-													<span class="titulo_detalle_md_20">NEGOCIOS DE
-														COMIDA</span>
-												</div>
-												<div class="icono_mapa">
-													<span id="comidaTotal" class="titulo_detalle_md_20"
-														style="padding-right: 5px">0</span><img
-														class="icono_imagen"
-														src="img/generadores/negociocomida.png"><br> <span
-														class="t10 azul">Negocio de<br>comida
-													</span>
-												</div>
-											</div>
-
-											<div class="row"
-												style="margin-right: 10px; margin-left: 10px;">
-												<div class="col-lg-12 titulo_mapa"
-													style="border-top: 1px solid #C9C9C9;">
-													<span class="titulo_detalle_md_20">TRANSPORTE
-														PUBLICO</span>
-												</div>
-												<div class="icono_mapa">
-													<span id="paradaTotal" class="titulo_detalle_md_20"
-														style="padding-right: 5px">0</span><img
-														class="icono_imagen" src="img/generadores/parada.png"><br>
-													<span class="t10 azul">Parada de<br>autobús
-													</span>
-												</div>
-												<div class="icono_mapa">
-													<span id="metroTotal" class="titulo_detalle_md_20"
-														style="padding-right: 5px">0</span><img
-														class="icono_imagen" src="img/generadores/w_metro.png"><br>
-													<span class="t10 azul">Parada de<br>metro
-													</span>
-												</div>
-
-											</div>
-
-											<div class="row"
-												style="margin-right: 10px; margin-left: 10px;">
-												<div class="col-lg-12 titulo_mapa"
-													style="border-top: 1px solid #C9C9C9;">
-													<span class="titulo_detalle_md_20">MERCADO PUBLICO</span>
-												</div>
-												<div class="icono_mapa">
-													<span id="mercadoTotal" class="titulo_detalle_md_20"
-														style="padding-right: 5px">0</span><img
-														class="icono_imagen" src="img/generadores/mercado.png"><br>
-													<span class="t10 azul">Mercado</span>
-												</div>
-											</div>
-
-											<div class="row"
-												style="margin-right: 10px; margin-left: 10px;">
-												<div class="col-lg-12 titulo_mapa"
-													style="border-top: 1px solid #C9C9C9;">
-													<span class="titulo_detalle_md_20">TIANGUIS</span>
-												</div>
-												<div class="icono_mapa">
-													<span id="tianguisTotal" class="titulo_detalle_md_20"
-														style="padding-right: 5px">0</span><img
-														class="icono_imagen" src="img/generadores/tianguis.png"><br>
-													<span class="t10 azul">Tianguis</span>
-												</div>
-
-											</div>
-
-											<div class="row"
-												style="margin-right: 10px; margin-left: 10px;">
-												<div class="col-lg-12 titulo_mapa"
-													style="border-top: 1px solid #C9C9C9;">
-													<span class="titulo_detalle_md_20">OTROS GENERADORES</span>
-												</div>
-												<div class="icono_mapa">
-													<span id="iglesiaTotal" class="titulo_detalle_md_20"
-														style="padding-right: 5px">0</span><img
-														class="icono_imagen" src="img/generadores/iglesia.png"><br>
-													<span class="t10 azul">Iglesia</span>
-												</div>
-												<div class="icono_mapa">
-													<span id="escuelaTotal" class="titulo_detalle_md_20"
-														style="padding-right: 5px">0</span><img
-														class="icono_imagen" src="img/generadores/escuela.png"><br>
-													<span class="t10 azul">Escuela</span>
-												</div>
-												<div class="icono_mapa">
-													<span id="otrosGTotal" class="titulo_detalle_md_20"
-														style="padding-right: 5px">0</span><img
-														class="icono_imagen"
-														src="img/generadores/icono_otros_generadores.png"><br>
-													<span class="t10 azul">Otros<br>generadores
-													</span>
-												</div>
-											</div>
-
-
-										</div>
-									</div>
-								</div>
 							</div>
 						</div>
 					</div>
@@ -1422,7 +1810,13 @@
 		<input type="submit" id="submitBotonDescargaPdf" style="display: none" />
 	</form>
 	<!-- --------------------------------------- -->
-
+	<div class="d-none">
+		<form  target="_blank" action="memoria_detalle" id="detalleMemoriaAsignadaActionMD" method="post">
+			<input type="hidden" name="mdId" id="mdId2" value="">
+			<input type="hidden" name="nombreMd" id="nombreMd2" value="">
+			<input type="hidden" name="tipoMd" id="tipoMd2" value="">
+		</form>
+	</div>
 
 	<div id="modalImages" class="modalImagen">
 		<span class="closeModal">&times;</span>

@@ -295,7 +295,7 @@ function finalizacionMDAutorizada(){
 			if(!ACCION_REALIZADA)
 				mensajeAlerta('Agrega el archivo de presupuesto');
 			else{
-				acc = $('input[type=radio]:checked').val();
+				acc = $('input[type=radio].acc:checked').val();
 				monto = $('#montoPresupuesto').val();
 				
 				if(acc == undefined){
